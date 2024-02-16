@@ -15,6 +15,7 @@ namespace InfastructureLayer.Repositories
 
         public void Update(Warehouse obj)
         {
+            _db.ChangeTracker.Clear();
             _db.Warehouse.Update(obj);
         }
     }

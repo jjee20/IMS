@@ -15,7 +15,8 @@ namespace InfastructureLayer.Repositories
 
         public void Update(GoodsReceivedNote obj)
         {
-            _db.GoodsReceivedNote.Update(obj);
+                _db.ChangeTracker.Clear();
+                _db.GoodsReceivedNote.Update(obj);
         }
     }
 }

@@ -15,7 +15,8 @@ namespace InfastructureLayer.Repositories
 
         public void Update(CashBank obj)
         {
-            _db.CashBank.Update(obj);
+                _db.ChangeTracker.Clear();
+                _db.CashBank.Update(obj);
         }
     }
 }

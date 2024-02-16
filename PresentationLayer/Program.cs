@@ -24,13 +24,10 @@ namespace PresentationLayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-
-            string sqlConnectionString = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
-            
-            var unitOfWork = UnityC.Resolve<IUnitOfWork>(new DependencyOverride(typeof(string), sqlConnectionString));
-
+            var unitOfWork = UnityC.Resolve<IUnitOfWork>();
             ApplicationConfiguration.Initialize();
 
+            //Application.Run(new Form1(unitOfWork));
             IInventoryView mainView = new InventoryView();
             new InventoryPresenter(mainView, unitOfWork);
 

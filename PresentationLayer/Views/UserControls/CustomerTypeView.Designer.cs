@@ -165,8 +165,7 @@
             txtId.AnimateReadOnly = false;
             txtId.BorderStyle = BorderStyle.None;
             txtId.Depth = 0;
-            txtId.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtId.Hint = "Id";
+            txtId.Font = new Font("Microsoft Sans Serif", 12F);
             txtId.LeadingIcon = null;
             txtId.Location = new Point(44, 78);
             txtId.MaxLength = 50;
@@ -176,7 +175,8 @@
             txtId.ReadOnly = true;
             txtId.Size = new Size(284, 50);
             txtId.TabIndex = 6;
-            txtId.Text = "";
+            txtId.TabStop = false;
+            txtId.Text = "0";
             txtId.TrailingIcon = null;
             // 
             // txtDescription
@@ -193,7 +193,7 @@
             txtDescription.Multiline = false;
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(284, 50);
-            txtDescription.TabIndex = 5;
+            txtDescription.TabIndex = 1;
             txtDescription.Text = "";
             txtDescription.TrailingIcon = null;
             // 
@@ -211,7 +211,7 @@
             txtName.Multiline = false;
             txtName.Name = "txtName";
             txtName.Size = new Size(284, 50);
-            txtName.TabIndex = 4;
+            txtName.TabIndex = 0;
             txtName.Text = "";
             txtName.TrailingIcon = null;
             // 

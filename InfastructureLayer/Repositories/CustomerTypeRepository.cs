@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Models;
 using InfastructureLayer.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Services.IRepositories;
 
 namespace InfastructureLayer.Repositories
@@ -14,7 +15,7 @@ namespace InfastructureLayer.Repositories
         }
 
         public void Update(CustomerType obj)
-        {
+        {   _db.ChangeTracker.Clear();
             _db.CustomerType.Update(obj);
         }
     }

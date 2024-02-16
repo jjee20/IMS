@@ -15,7 +15,8 @@ namespace InfastructureLayer.Repositories
 
         public void Update(InvoiceType obj)
         {
-            _db.InvoiceType.Update(obj);
+                _db.ChangeTracker.Clear();
+                _db.InvoiceType.Update(obj);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace InfastructureLayer.Repositories
 
         public void Update(ShipmentType obj)
         {
+            _db.ChangeTracker.Clear();
             _db.ShipmentType.Update(obj);
         }
     }

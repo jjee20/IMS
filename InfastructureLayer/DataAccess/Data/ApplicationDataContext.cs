@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Configuration;
 
 namespace InfastructureLayer.DataAccess.Data
@@ -7,17 +8,6 @@ namespace InfastructureLayer.DataAccess.Data
     public class ApplicationDataContext : DbContext
     {
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString);
-        }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
-        }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Bill> Bill { get; set; }
 
@@ -77,5 +67,18 @@ namespace InfastructureLayer.DataAccess.Data
 
         public DbSet<UserProfile> UserProfile { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging()
+                .UseSqlServer(ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString)
+                      .LogTo(Console.WriteLine, LogLevel.Information);
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            // Customize the ASP.NET Identity model and override the defaults if needed.
+            // For example, you can rename the ASP.NET Identity table names and more.
+            // Add your customizations after calling base.OnModelCreating(builder);
+        }
     }
 }

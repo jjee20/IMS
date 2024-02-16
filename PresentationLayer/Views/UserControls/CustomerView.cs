@@ -1,15 +1,4 @@
-﻿using MaterialSkin;
-using PresentationLayer.Presenters;
-using PresentationLayer.Views.IViews;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using PresentationLayer.Views.IViews;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -30,14 +19,14 @@ namespace PresentationLayer.Views.UserControls
             //Add New
             btnAdd.Click += delegate
             {
-                AddNewEvent?.Invoke(this, EventArgs.Empty);
                 tabPage2.Text = "Add New";
-                if (tabControl1.SelectedTab == tabPage1)
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+                if (tabControl1.TabPages.Contains(tabPage1))
                 {
                     tabControl1.TabPages.Remove(tabPage1);
                     tabControl1.TabPages.Add(tabPage2);
                 }
-                else
+                else if ((tabControl1.TabPages.Contains(tabPage2) && tabPage2.Text == "Edit"))
                 {
                     tabControl1.TabPages.Remove(tabPage2);
                     tabControl1.TabPages.Add(tabPage2);
@@ -63,10 +52,10 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
-                EditEvent?.Invoke(this, EventArgs.Empty);
-                if (tabControl1.SelectedTab == tabPage1)
+                if (tabControl1.TabPages.Contains(tabPage1))
                 {
-                    tabPage2.Text = "Edit Details";
+                    EditEvent?.Invoke(this, EventArgs.Empty);
+                    tabPage2.Text = "Edit";
                     tabControl1.TabPages.Remove(tabPage1);
                     tabControl1.TabPages.Add(tabPage2);
                 }
@@ -93,9 +82,13 @@ namespace PresentationLayer.Views.UserControls
             //Refresh
             btnReturn.Click += delegate
             {
-                RefreshEvent?.Invoke(this, EventArgs.Empty);
-                tabControl1.TabPages.Remove(tabPage2);
-                tabControl1.TabPages.Add(tabPage1);
+                if (!tabControl1.TabPages.Contains(tabPage1))
+                {
+                    RefreshEvent?.Invoke(this, EventArgs.Empty);
+                    tabControl1.TabPages.Remove(tabPage2);
+                    tabControl1.TabPages.Add(tabPage1);
+                }
+                btnReturn.Visible = false;
             };
         }
 
@@ -136,7 +129,7 @@ namespace PresentationLayer.Views.UserControls
             get { return txtRegion.SelectedItem.ToString(); }
             set { txtRegion.Text = value; }
         }
-        public string ZipCode
+    public string ZipCode
         {
             get { return txtZipCode.Text; }
             set { txtZipCode.Text = value; }

@@ -40,6 +40,12 @@ namespace PresentationLayer.Views
                     // Raise the ShowCustomerType event
                     ShowCustomerType?.Invoke(this, EventArgs.Empty);
                 }
+                // Check if the selected tab is the one where you want to raise the event
+                if (tcMain.SelectedTab == tbCustomer)
+                {
+                    // Raise the ShowCustomerType event
+                    ShowCustomer?.Invoke(this, EventArgs.Empty);
+                }
             };
         }
             public TabPage TabControlPage
@@ -47,5 +53,6 @@ namespace PresentationLayer.Views
                 get { return tcMain.SelectedTab; }
             }   
             public event EventHandler ShowCustomerType;  
+            public event EventHandler ShowCustomer;  
     }
 }

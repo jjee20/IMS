@@ -15,6 +15,7 @@ namespace InfastructureLayer.Repositories
 
         public void Update(PurchaseOrder obj)
         {
+            _db.ChangeTracker.Clear();
             _db.PurchaseOrder.Update(obj);
         }
     }

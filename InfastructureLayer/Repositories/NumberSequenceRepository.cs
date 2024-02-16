@@ -18,7 +18,7 @@ namespace InfastructureLayer.Repositories
             return _db.NumberSequence.Any(e => e.NumberSequenceId == id);
         }
         public void Update(NumberSequence obj)
-        {
+        {   _db.ChangeTracker.Clear();
             _db.Entry(obj).State = EntityState.Modified;
         }
     }

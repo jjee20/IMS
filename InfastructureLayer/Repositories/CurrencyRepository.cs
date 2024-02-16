@@ -15,7 +15,8 @@ namespace InfastructureLayer.Repositories
 
         public void Update(Currency obj)
         {
-            _db.Currency.Update(obj);
+                _db.ChangeTracker.Clear();
+                _db.Currency.Update(obj);
         }
     }
 }

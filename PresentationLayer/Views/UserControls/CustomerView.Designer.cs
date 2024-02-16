@@ -182,9 +182,9 @@
             groupBox1.Controls.Add(txtZipCode);
             groupBox1.Controls.Add(txtRegion);
             groupBox1.Font = new Font("Segoe UI", 12F);
-            groupBox1.Location = new Point(457, 35);
+            groupBox1.Location = new Point(109, 213);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(331, 398);
+            groupBox1.Size = new Size(652, 238);
             groupBox1.TabIndex = 16;
             groupBox1.TabStop = false;
             groupBox1.Text = "Address Information";
@@ -210,7 +210,7 @@
             txtBarangay.Name = "txtBarangay";
             txtBarangay.Size = new Size(284, 49);
             txtBarangay.StartIndex = 0;
-            txtBarangay.TabIndex = 7;
+            txtBarangay.TabIndex = 5;
             // 
             // txtMunicipality
             // 
@@ -227,13 +227,13 @@
             txtMunicipality.Hint = "Municipality";
             txtMunicipality.IntegralHeight = false;
             txtMunicipality.ItemHeight = 43;
-            txtMunicipality.Location = new Point(24, 111);
+            txtMunicipality.Location = new Point(24, 103);
             txtMunicipality.MaxDropDownItems = 4;
             txtMunicipality.MouseState = MaterialSkin.MouseState.OUT;
             txtMunicipality.Name = "txtMunicipality";
             txtMunicipality.Size = new Size(284, 49);
             txtMunicipality.StartIndex = 0;
-            txtMunicipality.TabIndex = 8;
+            txtMunicipality.TabIndex = 6;
             // 
             // txtProvince
             // 
@@ -250,13 +250,13 @@
             txtProvince.Hint = "Province";
             txtProvince.IntegralHeight = false;
             txtProvince.ItemHeight = 43;
-            txtProvince.Location = new Point(24, 179);
+            txtProvince.Location = new Point(342, 40);
             txtProvince.MaxDropDownItems = 4;
             txtProvince.MouseState = MaterialSkin.MouseState.OUT;
             txtProvince.Name = "txtProvince";
             txtProvince.Size = new Size(284, 49);
             txtProvince.StartIndex = 0;
-            txtProvince.TabIndex = 9;
+            txtProvince.TabIndex = 7;
             // 
             // txtZipCode
             // 
@@ -266,13 +266,13 @@
             txtZipCode.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtZipCode.Hint = "Zip Code";
             txtZipCode.LeadingIcon = null;
-            txtZipCode.Location = new Point(24, 317);
+            txtZipCode.Location = new Point(182, 166);
             txtZipCode.MaxLength = 50;
             txtZipCode.MouseState = MaterialSkin.MouseState.OUT;
             txtZipCode.Multiline = false;
             txtZipCode.Name = "txtZipCode";
             txtZipCode.Size = new Size(284, 50);
-            txtZipCode.TabIndex = 13;
+            txtZipCode.TabIndex = 9;
             txtZipCode.Text = "";
             txtZipCode.TrailingIcon = null;
             // 
@@ -291,13 +291,13 @@
             txtRegion.Hint = "Region";
             txtRegion.IntegralHeight = false;
             txtRegion.ItemHeight = 43;
-            txtRegion.Location = new Point(24, 247);
+            txtRegion.Location = new Point(342, 103);
             txtRegion.MaxDropDownItems = 4;
             txtRegion.MouseState = MaterialSkin.MouseState.OUT;
             txtRegion.Name = "txtRegion";
             txtRegion.Size = new Size(284, 49);
             txtRegion.StartIndex = 0;
-            txtRegion.TabIndex = 10;
+            txtRegion.TabIndex = 8;
             // 
             // txtContactPerson
             // 
@@ -307,13 +307,13 @@
             txtContactPerson.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtContactPerson.Hint = "Enter contact person";
             txtContactPerson.LeadingIcon = null;
-            txtContactPerson.Location = new Point(133, 383);
+            txtContactPerson.Location = new Point(451, 144);
             txtContactPerson.MaxLength = 50;
             txtContactPerson.MouseState = MaterialSkin.MouseState.OUT;
             txtContactPerson.Multiline = false;
             txtContactPerson.Name = "txtContactPerson";
             txtContactPerson.Size = new Size(284, 50);
-            txtContactPerson.TabIndex = 15;
+            txtContactPerson.TabIndex = 4;
             txtContactPerson.Text = "";
             txtContactPerson.TrailingIcon = null;
             // 
@@ -332,12 +332,12 @@
             txtCustomerType.Hint = "Enter customer type";
             txtCustomerType.IntegralHeight = false;
             txtCustomerType.ItemHeight = 43;
-            txtCustomerType.Location = new Point(133, 173);
+            txtCustomerType.Location = new Point(133, 145);
             txtCustomerType.MaxDropDownItems = 4;
             txtCustomerType.MouseState = MaterialSkin.MouseState.OUT;
             txtCustomerType.Name = "txtCustomerType";
             txtCustomerType.Size = new Size(284, 49);
-            txtCustomerType.StartIndex = 0;
+            txtCustomerType.StartIndex = 1;
             txtCustomerType.TabIndex = 14;
             // 
             // txtEmail
@@ -348,13 +348,13 @@
             txtEmail.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtEmail.Hint = "Enter email";
             txtEmail.LeadingIcon = null;
-            txtEmail.Location = new Point(133, 311);
+            txtEmail.Location = new Point(451, 79);
             txtEmail.MaxLength = 50;
             txtEmail.MouseState = MaterialSkin.MouseState.OUT;
             txtEmail.Multiline = false;
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(284, 50);
-            txtEmail.TabIndex = 12;
+            txtEmail.TabIndex = 3;
             txtEmail.Text = "";
             txtEmail.TrailingIcon = null;
             // 
@@ -366,13 +366,13 @@
             txtPhone.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtPhone.Hint = "Enter phone number";
             txtPhone.LeadingIcon = null;
-            txtPhone.Location = new Point(133, 240);
+            txtPhone.Location = new Point(451, 17);
             txtPhone.MaxLength = 50;
             txtPhone.MouseState = MaterialSkin.MouseState.OUT;
             txtPhone.Multiline = false;
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(284, 50);
-            txtPhone.TabIndex = 11;
+            txtPhone.TabIndex = 2;
             txtPhone.Text = "";
             txtPhone.TrailingIcon = null;
             // 
@@ -381,10 +381,9 @@
             txtId.AnimateReadOnly = false;
             txtId.BorderStyle = BorderStyle.None;
             txtId.Depth = 0;
-            txtId.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtId.Hint = "Id";
+            txtId.Font = new Font("Microsoft Sans Serif", 12F);
             txtId.LeadingIcon = null;
-            txtId.Location = new Point(133, 45);
+            txtId.Location = new Point(133, 17);
             txtId.MaxLength = 50;
             txtId.MouseState = MaterialSkin.MouseState.OUT;
             txtId.Multiline = false;
@@ -392,7 +391,8 @@
             txtId.ReadOnly = true;
             txtId.Size = new Size(284, 50);
             txtId.TabIndex = 6;
-            txtId.Text = "";
+            txtId.TabStop = false;
+            txtId.Text = "Id";
             txtId.TrailingIcon = null;
             // 
             // txtName
@@ -403,13 +403,13 @@
             txtName.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtName.Hint = "Enter name";
             txtName.LeadingIcon = null;
-            txtName.Location = new Point(133, 107);
+            txtName.Location = new Point(133, 79);
             txtName.MaxLength = 50;
             txtName.MouseState = MaterialSkin.MouseState.OUT;
             txtName.Multiline = false;
             txtName.Name = "txtName";
             txtName.Size = new Size(284, 50);
-            txtName.TabIndex = 4;
+            txtName.TabIndex = 0;
             txtName.Text = "";
             txtName.TrailingIcon = null;
             // 

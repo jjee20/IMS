@@ -15,6 +15,7 @@ namespace InfastructureLayer.Repositories
 
         public void Update(UnitOfMeasure obj)
         {
+            _db.ChangeTracker.Clear();
             _db.UnitOfMeasure.Update(obj);
         }
     }

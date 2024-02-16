@@ -15,6 +15,7 @@ namespace InfastructureLayer.Repositories
 
         public void Update(UserProfile obj)
         {
+            _db.ChangeTracker.Clear();
             _db.UserProfile.Update(obj);
         }
     }

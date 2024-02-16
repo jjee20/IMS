@@ -11,12 +11,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Json\barangay.json" />
+    <None Remove="Json\city.json" />
+    <None Remove="Json\philippine_provinces_cities_municipalities_and_barangays_2019v2.json" />
+    <None Remove="Json\province.json" />
+    <None Remove="Json\region.json" />
+    <None Remove="Reports\CustomerReport.rdlc" />
     <None Remove="Reports\CustomerTypeReport.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Json\barangay.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Json\city.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Json\province.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Json\region.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\CustomerReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Reports\CustomerTypeReport.rdlc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
@@ -39,11 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="inventorymanagementsystemDataSet.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>inventorymanagementsystemDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -67,10 +83,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="inventorymanagementsystemDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>inventorymanagementsystemDataSet.Designer.cs</LastGenOutput>
-    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

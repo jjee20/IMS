@@ -2,11 +2,12 @@
 using Microsoft.Reporting.Map.WebForms.BingMaps;
 using Microsoft.Reporting.WinForms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using PresentationLayer.Json.JsonClass;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.IRepositories;
-using static PresentationLayer.Json.Address;
 
 namespace PresentationLayer.Presenters
 {
@@ -25,8 +26,6 @@ namespace PresentationLayer.Presenters
         private List<string> GetProvinceList;
         private List<string> GetRegionList;
 
-        string reportFileName = "philippine_provinces_cities_municipalities_and_barangays_2019v2";
-        string reportDirectory = Path.Combine(Application.StartupPath, "Json");
         public CustomerPresenter(ICustomerView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -59,29 +58,33 @@ namespace PresentationLayer.Presenters
             //Load
 
             LoadAllCustomerList();
+            LoadAllCustomerTypeList();
             LoadAddress();
         }
 
         private void LoadAddress()
         {
-            string reportPath = Path.Combine(reportDirectory, reportFileName);
-            string addressData = File.ReadAllText(reportPath);
-            var regions = JsonConvert.DeserializeObject<Root>(addressData);
-            foreach (var region in regions.Items)
+            string regionreportFileName = "region.json";
+            string provincereportFileName = "province.json";
+            string cityreportFileName = "city.json";
+            string barangayreportFileName = "barangay.json";
+            string reportDirectory = Path.Combine(Application.StartupPath, "Json");
+            string regionreportPath = Path.Combine(reportDirectory, regionreportFileName);
+            string provincereportPath = Path.Combine(reportDirectory, provincereportFileName);
+            string cityreportPath = Path.Combine(reportDirectory, cityreportFileName);
+            string barangayreportPath = Path.Combine(reportDirectory, barangayreportFileName);
+            string regiondata = File.ReadAllText(regionreportPath);
+            string provincedata = File.ReadAllText(provincereportPath);
+            string citydata = File.ReadAllText(cityreportPath);
+            string barangaydata = File.ReadAllText(barangayreportPath);
+            var regions = JsonConvert.DeserializeObject<List<Regions>>(regiondata);
+            var provinces = JsonConvert.DeserializeObject<List<Province>>(provincedata);
+            var cities = JsonConvert.DeserializeObject<List<City>>(citydata);
+            var barangays = JsonConvert.DeserializeObject<List<Barangay>>(barangaydata);
+
+            foreach (var region in regions)
             {
-                GetRegionList.Add(region.Value.ToString());
-                foreach (var province in region.Value.province.province_list)
-                {
-                    GetProvinceList.Add(province.Value.ToString());
-                    foreach (var municipality in province.Value.municipality_list)
-                    {
-                        GetMunicipalityList.Add(municipality.Value.ToString());
-                        foreach (var barangay in municipality.Value.barangay_list)
-                        {
-                            GetBarangayList.Add(barangay);
-                        }
-                    }
-                }
+                GetRegionList.Add(region.RegionName);
             }
         }
 
@@ -97,15 +100,6 @@ namespace PresentationLayer.Presenters
             {
                 _view.Message = "Customer is already added.";
                 return;
-            }
-
-            if(_view.CustomerId == 0)
-            {
-
-            }
-            else
-            {
-
             }
             var model = new Customer()
             {
@@ -226,6 +220,11 @@ namespace PresentationLayer.Presenters
         {
             CustomerList = _unitOfWork.Customer.GetAll(includeProperties: "CustomerType");
             CustomerBindingSource.DataSource = CustomerList;//Set data source.
+        }
+        private void LoadAllCustomerTypeList()
+        {
+            CustomerTypeList = _unitOfWork.CustomerType.GetAll();
+            CustomerTypeBindingSource.DataSource = CustomerTypeList;//Set data source.
         }
     }
 }

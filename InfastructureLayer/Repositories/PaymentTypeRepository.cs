@@ -15,6 +15,7 @@ namespace InfastructureLayer.Repositories
 
         public void Update(PaymentType obj)
         {
+            _db.ChangeTracker.Clear();
             _db.PaymentType.Update(obj);
         }
     }

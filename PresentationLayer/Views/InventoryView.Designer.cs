@@ -31,60 +31,60 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryView));
             tcMain = new MaterialSkin.Controls.MaterialTabControl();
-            tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
+            tbUser = new TabPage();
+            tbDashboard = new TabPage();
             tabPage3 = new TabPage();
             tbCustomerType = new TabPage();
-            tabPage5 = new TabPage();
-            tabPage6 = new TabPage();
-            tabPage7 = new TabPage();
-            tabPage8 = new TabPage();
-            tabPage9 = new TabPage();
-            tabPage10 = new TabPage();
+            tbCustomer = new TabPage();
+            tbSalesType = new TabPage();
+            tbSalesOrder = new TabPage();
+            tbShipment = new TabPage();
+            tbInvoice = new TabPage();
+            tbPaymentReceive = new TabPage();
             tabPage11 = new TabPage();
-            tabPage12 = new TabPage();
-            tabPage13 = new TabPage();
-            tabPage14 = new TabPage();
-            tabPage15 = new TabPage();
-            tabPage16 = new TabPage();
-            tabPage17 = new TabPage();
-            tabPage18 = new TabPage();
+            tbVendorType = new TabPage();
+            tbVendor = new TabPage();
+            tbPurchaseType = new TabPage();
+            tbPurchaseOrder = new TabPage();
+            tbGRN = new TabPage();
+            tbBill = new TabPage();
+            tbPaymentVoucher = new TabPage();
             tabPage19 = new TabPage();
-            tabPage20 = new TabPage();
-            tabPage21 = new TabPage();
-            tabPage22 = new TabPage();
-            tabPage23 = new TabPage();
-            tabPage24 = new TabPage();
+            tbProductType = new TabPage();
+            tbProduct = new TabPage();
+            tbUnitOfMeasure = new TabPage();
+            tbConfiguration = new TabPage();
+            tbUserAndRole = new TabPage();
             imageList1 = new ImageList(components);
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
             // tcMain
             // 
-            tcMain.Controls.Add(tabPage1);
-            tcMain.Controls.Add(tabPage2);
+            tcMain.Controls.Add(tbUser);
+            tcMain.Controls.Add(tbDashboard);
             tcMain.Controls.Add(tabPage3);
             tcMain.Controls.Add(tbCustomerType);
-            tcMain.Controls.Add(tabPage5);
-            tcMain.Controls.Add(tabPage6);
-            tcMain.Controls.Add(tabPage7);
-            tcMain.Controls.Add(tabPage8);
-            tcMain.Controls.Add(tabPage9);
-            tcMain.Controls.Add(tabPage10);
+            tcMain.Controls.Add(tbCustomer);
+            tcMain.Controls.Add(tbSalesType);
+            tcMain.Controls.Add(tbSalesOrder);
+            tcMain.Controls.Add(tbShipment);
+            tcMain.Controls.Add(tbInvoice);
+            tcMain.Controls.Add(tbPaymentReceive);
             tcMain.Controls.Add(tabPage11);
-            tcMain.Controls.Add(tabPage12);
-            tcMain.Controls.Add(tabPage13);
-            tcMain.Controls.Add(tabPage14);
-            tcMain.Controls.Add(tabPage15);
-            tcMain.Controls.Add(tabPage16);
-            tcMain.Controls.Add(tabPage17);
-            tcMain.Controls.Add(tabPage18);
+            tcMain.Controls.Add(tbVendorType);
+            tcMain.Controls.Add(tbVendor);
+            tcMain.Controls.Add(tbPurchaseType);
+            tcMain.Controls.Add(tbPurchaseOrder);
+            tcMain.Controls.Add(tbGRN);
+            tcMain.Controls.Add(tbBill);
+            tcMain.Controls.Add(tbPaymentVoucher);
             tcMain.Controls.Add(tabPage19);
-            tcMain.Controls.Add(tabPage20);
-            tcMain.Controls.Add(tabPage21);
-            tcMain.Controls.Add(tabPage22);
-            tcMain.Controls.Add(tabPage23);
-            tcMain.Controls.Add(tabPage24);
+            tcMain.Controls.Add(tbProductType);
+            tcMain.Controls.Add(tbProduct);
+            tcMain.Controls.Add(tbUnitOfMeasure);
+            tcMain.Controls.Add(tbConfiguration);
+            tcMain.Controls.Add(tbUserAndRole);
             tcMain.Depth = 0;
             tcMain.Dock = DockStyle.Fill;
             tcMain.ImageList = imageList1;
@@ -96,27 +96,27 @@
             tcMain.Size = new Size(1379, 740);
             tcMain.TabIndex = 0;
             // 
-            // tabPage1
+            // tbUser
             // 
-            tabPage1.ImageKey = "user.png";
-            tabPage1.Location = new Point(4, 44);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1371, 692);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "USER PROFILE";
-            tabPage1.UseVisualStyleBackColor = true;
+            tbUser.ImageKey = "user.png";
+            tbUser.Location = new Point(4, 44);
+            tbUser.Name = "tbUser";
+            tbUser.Padding = new Padding(3);
+            tbUser.Size = new Size(1371, 692);
+            tbUser.TabIndex = 0;
+            tbUser.Text = "USER PROFILE";
+            tbUser.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tbDashboard
             // 
-            tabPage2.ImageKey = "dashboard.png";
-            tabPage2.Location = new Point(4, 44);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1371, 692);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "DASHBOARD";
-            tabPage2.UseVisualStyleBackColor = true;
+            tbDashboard.ImageKey = "dashboard.png";
+            tbDashboard.Location = new Point(4, 44);
+            tbDashboard.Name = "tbDashboard";
+            tbDashboard.Padding = new Padding(3);
+            tbDashboard.Size = new Size(1371, 692);
+            tbDashboard.TabIndex = 1;
+            tbDashboard.Text = "DASHBOARD";
+            tbDashboard.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -137,65 +137,65 @@
             tbCustomerType.Text = "Customer Type";
             tbCustomerType.UseVisualStyleBackColor = true;
             // 
-            // tabPage5
+            // tbCustomer
             // 
-            tabPage5.ImageKey = "customer.png";
-            tabPage5.Location = new Point(4, 44);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1371, 692);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "Customer";
-            tabPage5.UseVisualStyleBackColor = true;
+            tbCustomer.ImageKey = "customer.png";
+            tbCustomer.Location = new Point(4, 44);
+            tbCustomer.Name = "tbCustomer";
+            tbCustomer.Size = new Size(1371, 692);
+            tbCustomer.TabIndex = 4;
+            tbCustomer.Text = "Customer";
+            tbCustomer.UseVisualStyleBackColor = true;
             // 
-            // tabPage6
+            // tbSalesType
             // 
-            tabPage6.ImageKey = "setting-2.png";
-            tabPage6.Location = new Point(4, 44);
-            tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(1371, 692);
-            tabPage6.TabIndex = 5;
-            tabPage6.Text = "Sales Type";
-            tabPage6.UseVisualStyleBackColor = true;
+            tbSalesType.ImageKey = "setting-2.png";
+            tbSalesType.Location = new Point(4, 44);
+            tbSalesType.Name = "tbSalesType";
+            tbSalesType.Size = new Size(1371, 692);
+            tbSalesType.TabIndex = 5;
+            tbSalesType.Text = "Sales Type";
+            tbSalesType.UseVisualStyleBackColor = true;
             // 
-            // tabPage7
+            // tbSalesOrder
             // 
-            tabPage7.ImageKey = "sales-order.png";
-            tabPage7.Location = new Point(4, 44);
-            tabPage7.Name = "tabPage7";
-            tabPage7.Size = new Size(1371, 692);
-            tabPage7.TabIndex = 6;
-            tabPage7.Text = "Sales Order";
-            tabPage7.UseVisualStyleBackColor = true;
+            tbSalesOrder.ImageKey = "sales-order.png";
+            tbSalesOrder.Location = new Point(4, 44);
+            tbSalesOrder.Name = "tbSalesOrder";
+            tbSalesOrder.Size = new Size(1371, 692);
+            tbSalesOrder.TabIndex = 6;
+            tbSalesOrder.Text = "Sales Order";
+            tbSalesOrder.UseVisualStyleBackColor = true;
             // 
-            // tabPage8
+            // tbShipment
             // 
-            tabPage8.ImageKey = "shipment.png";
-            tabPage8.Location = new Point(4, 44);
-            tabPage8.Name = "tabPage8";
-            tabPage8.Size = new Size(1371, 692);
-            tabPage8.TabIndex = 7;
-            tabPage8.Text = "Shipment";
-            tabPage8.UseVisualStyleBackColor = true;
+            tbShipment.ImageKey = "shipment.png";
+            tbShipment.Location = new Point(4, 44);
+            tbShipment.Name = "tbShipment";
+            tbShipment.Size = new Size(1371, 692);
+            tbShipment.TabIndex = 7;
+            tbShipment.Text = "Shipment";
+            tbShipment.UseVisualStyleBackColor = true;
             // 
-            // tabPage9
+            // tbInvoice
             // 
-            tabPage9.ImageKey = "invoice.png";
-            tabPage9.Location = new Point(4, 44);
-            tabPage9.Name = "tabPage9";
-            tabPage9.Size = new Size(1371, 692);
-            tabPage9.TabIndex = 8;
-            tabPage9.Text = "Invoice";
-            tabPage9.UseVisualStyleBackColor = true;
+            tbInvoice.ImageKey = "invoice.png";
+            tbInvoice.Location = new Point(4, 44);
+            tbInvoice.Name = "tbInvoice";
+            tbInvoice.Size = new Size(1371, 692);
+            tbInvoice.TabIndex = 8;
+            tbInvoice.Text = "Invoice";
+            tbInvoice.UseVisualStyleBackColor = true;
             // 
-            // tabPage10
+            // tbPaymentReceive
             // 
-            tabPage10.ImageKey = "payment-receive.png";
-            tabPage10.Location = new Point(4, 44);
-            tabPage10.Name = "tabPage10";
-            tabPage10.Size = new Size(1371, 692);
-            tabPage10.TabIndex = 9;
-            tabPage10.Text = "Payment Receive";
-            tabPage10.UseVisualStyleBackColor = true;
+            tbPaymentReceive.ImageKey = "payment-receive.png";
+            tbPaymentReceive.Location = new Point(4, 44);
+            tbPaymentReceive.Name = "tbPaymentReceive";
+            tbPaymentReceive.Size = new Size(1371, 692);
+            tbPaymentReceive.TabIndex = 9;
+            tbPaymentReceive.Text = "Payment Receive";
+            tbPaymentReceive.UseVisualStyleBackColor = true;
             // 
             // tabPage11
             // 
@@ -206,75 +206,75 @@
             tabPage11.Text = "PURCHASE";
             tabPage11.UseVisualStyleBackColor = true;
             // 
-            // tabPage12
+            // tbVendorType
             // 
-            tabPage12.ImageKey = "setting-4.png";
-            tabPage12.Location = new Point(4, 44);
-            tabPage12.Name = "tabPage12";
-            tabPage12.Size = new Size(1371, 692);
-            tabPage12.TabIndex = 11;
-            tabPage12.Text = "Vendor Type";
-            tabPage12.UseVisualStyleBackColor = true;
+            tbVendorType.ImageKey = "setting-4.png";
+            tbVendorType.Location = new Point(4, 44);
+            tbVendorType.Name = "tbVendorType";
+            tbVendorType.Size = new Size(1371, 692);
+            tbVendorType.TabIndex = 11;
+            tbVendorType.Text = "Vendor Type";
+            tbVendorType.UseVisualStyleBackColor = true;
             // 
-            // tabPage13
+            // tbVendor
             // 
-            tabPage13.ImageKey = "vendor.png";
-            tabPage13.Location = new Point(4, 44);
-            tabPage13.Name = "tabPage13";
-            tabPage13.Size = new Size(1371, 692);
-            tabPage13.TabIndex = 12;
-            tabPage13.Text = "Vendor";
-            tabPage13.UseVisualStyleBackColor = true;
+            tbVendor.ImageKey = "vendor.png";
+            tbVendor.Location = new Point(4, 44);
+            tbVendor.Name = "tbVendor";
+            tbVendor.Size = new Size(1371, 692);
+            tbVendor.TabIndex = 12;
+            tbVendor.Text = "Vendor";
+            tbVendor.UseVisualStyleBackColor = true;
             // 
-            // tabPage14
+            // tbPurchaseType
             // 
-            tabPage14.ImageKey = "setting-3.png";
-            tabPage14.Location = new Point(4, 44);
-            tabPage14.Name = "tabPage14";
-            tabPage14.Size = new Size(1371, 692);
-            tabPage14.TabIndex = 13;
-            tabPage14.Text = "Purchase Type";
-            tabPage14.UseVisualStyleBackColor = true;
+            tbPurchaseType.ImageKey = "setting-3.png";
+            tbPurchaseType.Location = new Point(4, 44);
+            tbPurchaseType.Name = "tbPurchaseType";
+            tbPurchaseType.Size = new Size(1371, 692);
+            tbPurchaseType.TabIndex = 13;
+            tbPurchaseType.Text = "Purchase Type";
+            tbPurchaseType.UseVisualStyleBackColor = true;
             // 
-            // tabPage15
+            // tbPurchaseOrder
             // 
-            tabPage15.ImageKey = "purchase-order.png";
-            tabPage15.Location = new Point(4, 44);
-            tabPage15.Name = "tabPage15";
-            tabPage15.Size = new Size(1371, 692);
-            tabPage15.TabIndex = 14;
-            tabPage15.Text = "Purchase Order";
-            tabPage15.UseVisualStyleBackColor = true;
+            tbPurchaseOrder.ImageKey = "purchase-order.png";
+            tbPurchaseOrder.Location = new Point(4, 44);
+            tbPurchaseOrder.Name = "tbPurchaseOrder";
+            tbPurchaseOrder.Size = new Size(1371, 692);
+            tbPurchaseOrder.TabIndex = 14;
+            tbPurchaseOrder.Text = "Purchase Order";
+            tbPurchaseOrder.UseVisualStyleBackColor = true;
             // 
-            // tabPage16
+            // tbGRN
             // 
-            tabPage16.ImageKey = "goods-received-notes.png";
-            tabPage16.Location = new Point(4, 44);
-            tabPage16.Name = "tabPage16";
-            tabPage16.Size = new Size(1371, 692);
-            tabPage16.TabIndex = 15;
-            tabPage16.Text = "Goods Received Note";
-            tabPage16.UseVisualStyleBackColor = true;
+            tbGRN.ImageKey = "goods-received-notes.png";
+            tbGRN.Location = new Point(4, 44);
+            tbGRN.Name = "tbGRN";
+            tbGRN.Size = new Size(1371, 692);
+            tbGRN.TabIndex = 15;
+            tbGRN.Text = "Goods Received Note";
+            tbGRN.UseVisualStyleBackColor = true;
             // 
-            // tabPage17
+            // tbBill
             // 
-            tabPage17.ImageKey = "bill.png";
-            tabPage17.Location = new Point(4, 44);
-            tabPage17.Name = "tabPage17";
-            tabPage17.Size = new Size(1371, 692);
-            tabPage17.TabIndex = 16;
-            tabPage17.Text = "Bill";
-            tabPage17.UseVisualStyleBackColor = true;
+            tbBill.ImageKey = "bill.png";
+            tbBill.Location = new Point(4, 44);
+            tbBill.Name = "tbBill";
+            tbBill.Size = new Size(1371, 692);
+            tbBill.TabIndex = 16;
+            tbBill.Text = "Bill";
+            tbBill.UseVisualStyleBackColor = true;
             // 
-            // tabPage18
+            // tbPaymentVoucher
             // 
-            tabPage18.ImageKey = "payment-voucher.png";
-            tabPage18.Location = new Point(4, 44);
-            tabPage18.Name = "tabPage18";
-            tabPage18.Size = new Size(1371, 692);
-            tabPage18.TabIndex = 17;
-            tabPage18.Text = "Payment Voucher";
-            tabPage18.UseVisualStyleBackColor = true;
+            tbPaymentVoucher.ImageKey = "payment-voucher.png";
+            tbPaymentVoucher.Location = new Point(4, 44);
+            tbPaymentVoucher.Name = "tbPaymentVoucher";
+            tbPaymentVoucher.Size = new Size(1371, 692);
+            tbPaymentVoucher.TabIndex = 17;
+            tbPaymentVoucher.Text = "Payment Voucher";
+            tbPaymentVoucher.UseVisualStyleBackColor = true;
             // 
             // tabPage19
             // 
@@ -285,53 +285,53 @@
             tabPage19.Text = "INVENTORY";
             tabPage19.UseVisualStyleBackColor = true;
             // 
-            // tabPage20
+            // tbProductType
             // 
-            tabPage20.ImageKey = "setting-5.png";
-            tabPage20.Location = new Point(4, 44);
-            tabPage20.Name = "tabPage20";
-            tabPage20.Size = new Size(1371, 692);
-            tabPage20.TabIndex = 19;
-            tabPage20.Text = "Product Type";
-            tabPage20.UseVisualStyleBackColor = true;
+            tbProductType.ImageKey = "setting-5.png";
+            tbProductType.Location = new Point(4, 44);
+            tbProductType.Name = "tbProductType";
+            tbProductType.Size = new Size(1371, 692);
+            tbProductType.TabIndex = 19;
+            tbProductType.Text = "Product Type";
+            tbProductType.UseVisualStyleBackColor = true;
             // 
-            // tabPage21
+            // tbProduct
             // 
-            tabPage21.ImageKey = "product.png";
-            tabPage21.Location = new Point(4, 44);
-            tabPage21.Name = "tabPage21";
-            tabPage21.Size = new Size(1371, 692);
-            tabPage21.TabIndex = 20;
-            tabPage21.Text = "Product";
-            tabPage21.UseVisualStyleBackColor = true;
+            tbProduct.ImageKey = "product.png";
+            tbProduct.Location = new Point(4, 44);
+            tbProduct.Name = "tbProduct";
+            tbProduct.Size = new Size(1371, 692);
+            tbProduct.TabIndex = 20;
+            tbProduct.Text = "Product";
+            tbProduct.UseVisualStyleBackColor = true;
             // 
-            // tabPage22
+            // tbUnitOfMeasure
             // 
-            tabPage22.ImageKey = "unit-of-measure.png";
-            tabPage22.Location = new Point(4, 44);
-            tabPage22.Name = "tabPage22";
-            tabPage22.Size = new Size(1371, 692);
-            tabPage22.TabIndex = 21;
-            tabPage22.Text = "Unit of Measure";
-            tabPage22.UseVisualStyleBackColor = true;
+            tbUnitOfMeasure.ImageKey = "unit-of-measure.png";
+            tbUnitOfMeasure.Location = new Point(4, 44);
+            tbUnitOfMeasure.Name = "tbUnitOfMeasure";
+            tbUnitOfMeasure.Size = new Size(1371, 692);
+            tbUnitOfMeasure.TabIndex = 21;
+            tbUnitOfMeasure.Text = "Unit of Measure";
+            tbUnitOfMeasure.UseVisualStyleBackColor = true;
             // 
-            // tabPage23
+            // tbConfiguration
             // 
-            tabPage23.Location = new Point(4, 44);
-            tabPage23.Name = "tabPage23";
-            tabPage23.Size = new Size(1371, 692);
-            tabPage23.TabIndex = 22;
-            tabPage23.Text = "CONFIGURATION";
-            tabPage23.UseVisualStyleBackColor = true;
+            tbConfiguration.Location = new Point(4, 44);
+            tbConfiguration.Name = "tbConfiguration";
+            tbConfiguration.Size = new Size(1371, 692);
+            tbConfiguration.TabIndex = 22;
+            tbConfiguration.Text = "CONFIGURATION";
+            tbConfiguration.UseVisualStyleBackColor = true;
             // 
-            // tabPage24
+            // tbUserAndRole
             // 
-            tabPage24.Location = new Point(4, 44);
-            tabPage24.Name = "tabPage24";
-            tabPage24.Size = new Size(1371, 692);
-            tabPage24.TabIndex = 23;
-            tabPage24.Text = "USER & ROLE";
-            tabPage24.UseVisualStyleBackColor = true;
+            tbUserAndRole.Location = new Point(4, 44);
+            tbUserAndRole.Name = "tbUserAndRole";
+            tbUserAndRole.Size = new Size(1371, 692);
+            tbUserAndRole.TabIndex = 23;
+            tbUserAndRole.Text = "USER & ROLE";
+            tbUserAndRole.UseVisualStyleBackColor = true;
             // 
             // imageList1
             // 
@@ -389,30 +389,30 @@
         #endregion
 
         private MaterialSkin.Controls.MaterialTabControl tcMain;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage tbUser;
+        private TabPage tbDashboard;
         private ImageList imageList1;
         private TabPage tabPage3;
         private TabPage tbCustomerType;
-        private TabPage tabPage5;
-        private TabPage tabPage6;
-        private TabPage tabPage7;
-        private TabPage tabPage8;
-        private TabPage tabPage9;
-        private TabPage tabPage10;
+        private TabPage tbCustomer;
+        private TabPage tbSalesType;
+        private TabPage tbSalesOrder;
+        private TabPage tbShipment;
+        private TabPage tbInvoice;
+        private TabPage tbPaymentReceive;
         private TabPage tabPage11;
-        private TabPage tabPage12;
-        private TabPage tabPage13;
-        private TabPage tabPage14;
-        private TabPage tabPage15;
-        private TabPage tabPage16;
-        private TabPage tabPage17;
-        private TabPage tabPage18;
+        private TabPage tbVendorType;
+        private TabPage tbVendor;
+        private TabPage tbPurchaseType;
+        private TabPage tbPurchaseOrder;
+        private TabPage tbGRN;
+        private TabPage tbBill;
+        private TabPage tbPaymentVoucher;
         private TabPage tabPage19;
-        private TabPage tabPage20;
-        private TabPage tabPage21;
-        private TabPage tabPage22;
-        private TabPage tabPage23;
-        private TabPage tabPage24;
+        private TabPage tbProductType;
+        private TabPage tbProduct;
+        private TabPage tbUnitOfMeasure;
+        private TabPage tbConfiguration;
+        private TabPage tbUserAndRole;
     }
 }

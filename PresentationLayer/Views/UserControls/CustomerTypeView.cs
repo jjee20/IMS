@@ -1,15 +1,4 @@
-﻿using MaterialSkin;
-using PresentationLayer.Presenters;
-using PresentationLayer.Views.IViews;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using PresentationLayer.Views.IViews;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -23,6 +12,7 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
             tabControl1.TabPages.Remove(tabPage2);
             AssociateAndRaiseViewEvents();
+            TextBox.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -30,11 +20,16 @@ namespace PresentationLayer.Views.UserControls
             //Add New
             btnAdd.Click += delegate
             {
+                tabPage2.Text = "Add New";
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
                 if (tabControl1.TabPages.Contains(tabPage1))
                 {
-                    AddNewEvent?.Invoke(this, EventArgs.Empty);
-                    tabPage2.Text = "Add New";
                     tabControl1.TabPages.Remove(tabPage1);
+                    tabControl1.TabPages.Add(tabPage2);
+                }
+                else if((tabControl1.TabPages.Contains(tabPage2) && tabPage2.Text == "Edit"))
+                {
+                    tabControl1.TabPages.Remove(tabPage2);
                     tabControl1.TabPages.Add(tabPage2);
                 }
                 btnReturn.Visible = true;
@@ -47,9 +42,9 @@ namespace PresentationLayer.Views.UserControls
                 {
                     tabControl1.TabPages.Remove(tabPage2);
                     tabControl1.TabPages.Add(tabPage1);
+                    btnReturn.Visible = false;
                     MessageBox.Show(Message);
                 }
-                btnReturn.Visible = false;
             };
             txtSearch.TextChanged += (s, e) =>
             {
@@ -58,9 +53,9 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
+                EditEvent?.Invoke(this, EventArgs.Empty);
                 if (tabControl1.TabPages.Contains(tabPage1))
                 {
-                    EditEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Edit";
                     tabControl1.TabPages.Remove(tabPage1);
                     tabControl1.TabPages.Add(tabPage2);

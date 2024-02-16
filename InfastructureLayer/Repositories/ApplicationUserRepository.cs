@@ -15,7 +15,8 @@ namespace InfastructureLayer.Repositories
 
         public void Update(ApplicationUser obj)
         {
-            _db.ApplicationUsers.Update(obj);
+                _db.ChangeTracker.Clear();
+                _db.ApplicationUsers.Update(obj);
         }
     }
 }
