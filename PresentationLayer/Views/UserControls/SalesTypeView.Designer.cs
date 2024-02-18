@@ -1,6 +1,6 @@
 ﻿namespace PresentationLayer.Views.UserControls
 {
-    partial class CustomerView
+    partial class SalesTypeView
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,24 +30,15 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesTypeView));
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             dgList = new DataGridView();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
-            groupBox1 = new GroupBox();
-            txtBarangay = new MaterialSkin.Controls.MaterialComboBox();
-            txtCity = new MaterialSkin.Controls.MaterialComboBox();
-            txtProvince = new MaterialSkin.Controls.MaterialComboBox();
-            txtZipCode = new MaterialSkin.Controls.MaterialTextBox();
-            txtRegion = new MaterialSkin.Controls.MaterialComboBox();
-            txtContactPerson = new MaterialSkin.Controls.MaterialTextBox();
-            txtCustomerType = new MaterialSkin.Controls.MaterialComboBox();
-            txtEmail = new MaterialSkin.Controls.MaterialTextBox();
-            txtPhone = new MaterialSkin.Controls.MaterialTextBox();
             txtId = new MaterialSkin.Controls.MaterialTextBox();
+            txtDescription = new MaterialSkin.Controls.MaterialTextBox();
             txtName = new MaterialSkin.Controls.MaterialTextBox();
             panel2 = new Panel();
             btnPrint = new Button();
@@ -66,7 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             tabPage2.SuspendLayout();
             materialCard2.SuspendLayout();
-            groupBox1.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -114,7 +104,6 @@
             // dgList
             // 
             dgList.AllowUserToAddRows = false;
-            dgList.AllowUserToDeleteRows = false;
             dgList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgList.BackgroundColor = Color.White;
             dgList.BorderStyle = BorderStyle.None;
@@ -139,7 +128,6 @@
             dgList.Dock = DockStyle.Fill;
             dgList.Location = new Point(3, 3);
             dgList.Name = "dgList";
-            dgList.ReadOnly = true;
             dgList.RowHeadersVisible = false;
             dgList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgList.Size = new Size(1313, 511);
@@ -159,224 +147,18 @@
             // materialCard2
             // 
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
-            materialCard2.Controls.Add(groupBox1);
-            materialCard2.Controls.Add(txtContactPerson);
-            materialCard2.Controls.Add(txtCustomerType);
-            materialCard2.Controls.Add(txtEmail);
-            materialCard2.Controls.Add(txtPhone);
             materialCard2.Controls.Add(txtId);
+            materialCard2.Controls.Add(txtDescription);
             materialCard2.Controls.Add(txtName);
             materialCard2.Depth = 0;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(199, 24);
+            materialCard2.Location = new Point(481, 127);
             materialCard2.Margin = new Padding(14);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
-            materialCard2.Size = new Size(921, 468);
+            materialCard2.Size = new Size(372, 353);
             materialCard2.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(txtBarangay);
-            groupBox1.Controls.Add(txtCity);
-            groupBox1.Controls.Add(txtProvince);
-            groupBox1.Controls.Add(txtZipCode);
-            groupBox1.Controls.Add(txtRegion);
-            groupBox1.Font = new Font("Segoe UI", 12F);
-            groupBox1.Location = new Point(109, 213);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(652, 238);
-            groupBox1.TabIndex = 16;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Address Information";
-            // 
-            // txtBarangay
-            // 
-            txtBarangay.AutoResize = false;
-            txtBarangay.BackColor = Color.FromArgb(255, 255, 255);
-            txtBarangay.Depth = 0;
-            txtBarangay.DrawMode = DrawMode.OwnerDrawVariable;
-            txtBarangay.DropDownHeight = 174;
-            txtBarangay.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtBarangay.DropDownWidth = 121;
-            txtBarangay.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            txtBarangay.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            txtBarangay.FormattingEnabled = true;
-            txtBarangay.Hint = "Barangay";
-            txtBarangay.IntegralHeight = false;
-            txtBarangay.ItemHeight = 43;
-            txtBarangay.Location = new Point(342, 111);
-            txtBarangay.MaxDropDownItems = 4;
-            txtBarangay.MouseState = MaterialSkin.MouseState.OUT;
-            txtBarangay.Name = "txtBarangay";
-            txtBarangay.Size = new Size(284, 49);
-            txtBarangay.StartIndex = 0;
-            txtBarangay.TabIndex = 5;
-            // 
-            // txtCity
-            // 
-            txtCity.AutoResize = false;
-            txtCity.BackColor = Color.FromArgb(255, 255, 255);
-            txtCity.Depth = 0;
-            txtCity.DrawMode = DrawMode.OwnerDrawVariable;
-            txtCity.DropDownHeight = 174;
-            txtCity.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtCity.DropDownWidth = 121;
-            txtCity.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            txtCity.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            txtCity.FormattingEnabled = true;
-            txtCity.Hint = "City";
-            txtCity.IntegralHeight = false;
-            txtCity.ItemHeight = 43;
-            txtCity.Location = new Point(24, 111);
-            txtCity.MaxDropDownItems = 4;
-            txtCity.MouseState = MaterialSkin.MouseState.OUT;
-            txtCity.Name = "txtCity";
-            txtCity.Size = new Size(284, 49);
-            txtCity.StartIndex = 0;
-            txtCity.TabIndex = 6;
-            // 
-            // txtProvince
-            // 
-            txtProvince.AutoResize = false;
-            txtProvince.BackColor = Color.FromArgb(255, 255, 255);
-            txtProvince.Depth = 0;
-            txtProvince.DrawMode = DrawMode.OwnerDrawVariable;
-            txtProvince.DropDownHeight = 174;
-            txtProvince.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtProvince.DropDownWidth = 121;
-            txtProvince.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            txtProvince.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            txtProvince.FormattingEnabled = true;
-            txtProvince.Hint = "Province";
-            txtProvince.IntegralHeight = false;
-            txtProvince.ItemHeight = 43;
-            txtProvince.Location = new Point(342, 40);
-            txtProvince.MaxDropDownItems = 4;
-            txtProvince.MouseState = MaterialSkin.MouseState.OUT;
-            txtProvince.Name = "txtProvince";
-            txtProvince.Size = new Size(284, 49);
-            txtProvince.StartIndex = 0;
-            txtProvince.TabIndex = 7;
-            // 
-            // txtZipCode
-            // 
-            txtZipCode.AnimateReadOnly = false;
-            txtZipCode.BorderStyle = BorderStyle.None;
-            txtZipCode.Depth = 0;
-            txtZipCode.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtZipCode.Hint = "Zip Code";
-            txtZipCode.LeadingIcon = null;
-            txtZipCode.Location = new Point(179, 174);
-            txtZipCode.MaxLength = 50;
-            txtZipCode.MouseState = MaterialSkin.MouseState.OUT;
-            txtZipCode.Multiline = false;
-            txtZipCode.Name = "txtZipCode";
-            txtZipCode.Size = new Size(284, 50);
-            txtZipCode.TabIndex = 9;
-            txtZipCode.Text = "";
-            txtZipCode.TrailingIcon = null;
-            // 
-            // txtRegion
-            // 
-            txtRegion.AutoResize = false;
-            txtRegion.BackColor = Color.FromArgb(255, 255, 255);
-            txtRegion.Depth = 0;
-            txtRegion.DrawMode = DrawMode.OwnerDrawVariable;
-            txtRegion.DropDownHeight = 174;
-            txtRegion.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtRegion.DropDownWidth = 121;
-            txtRegion.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            txtRegion.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            txtRegion.FormattingEnabled = true;
-            txtRegion.Hint = "Region";
-            txtRegion.IntegralHeight = false;
-            txtRegion.ItemHeight = 43;
-            txtRegion.Location = new Point(24, 40);
-            txtRegion.MaxDropDownItems = 4;
-            txtRegion.MouseState = MaterialSkin.MouseState.OUT;
-            txtRegion.Name = "txtRegion";
-            txtRegion.Size = new Size(284, 49);
-            txtRegion.StartIndex = 0;
-            txtRegion.TabIndex = 8;
-            // 
-            // txtContactPerson
-            // 
-            txtContactPerson.AnimateReadOnly = false;
-            txtContactPerson.BorderStyle = BorderStyle.None;
-            txtContactPerson.Depth = 0;
-            txtContactPerson.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtContactPerson.Hint = "Enter contact person";
-            txtContactPerson.LeadingIcon = null;
-            txtContactPerson.Location = new Point(451, 144);
-            txtContactPerson.MaxLength = 50;
-            txtContactPerson.MouseState = MaterialSkin.MouseState.OUT;
-            txtContactPerson.Multiline = false;
-            txtContactPerson.Name = "txtContactPerson";
-            txtContactPerson.Size = new Size(284, 50);
-            txtContactPerson.TabIndex = 4;
-            txtContactPerson.Text = "";
-            txtContactPerson.TrailingIcon = null;
-            // 
-            // txtCustomerType
-            // 
-            txtCustomerType.AutoResize = false;
-            txtCustomerType.BackColor = Color.FromArgb(255, 255, 255);
-            txtCustomerType.Depth = 0;
-            txtCustomerType.DrawMode = DrawMode.OwnerDrawVariable;
-            txtCustomerType.DropDownHeight = 174;
-            txtCustomerType.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtCustomerType.DropDownWidth = 121;
-            txtCustomerType.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            txtCustomerType.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            txtCustomerType.FormattingEnabled = true;
-            txtCustomerType.Hint = "Enter customer type";
-            txtCustomerType.IntegralHeight = false;
-            txtCustomerType.ItemHeight = 43;
-            txtCustomerType.Location = new Point(133, 145);
-            txtCustomerType.MaxDropDownItems = 4;
-            txtCustomerType.MouseState = MaterialSkin.MouseState.OUT;
-            txtCustomerType.Name = "txtCustomerType";
-            txtCustomerType.Size = new Size(284, 49);
-            txtCustomerType.StartIndex = 1;
-            txtCustomerType.TabIndex = 14;
-            // 
-            // txtEmail
-            // 
-            txtEmail.AnimateReadOnly = false;
-            txtEmail.BorderStyle = BorderStyle.None;
-            txtEmail.Depth = 0;
-            txtEmail.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtEmail.Hint = "Enter email";
-            txtEmail.LeadingIcon = null;
-            txtEmail.Location = new Point(451, 79);
-            txtEmail.MaxLength = 50;
-            txtEmail.MouseState = MaterialSkin.MouseState.OUT;
-            txtEmail.Multiline = false;
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(284, 50);
-            txtEmail.TabIndex = 3;
-            txtEmail.Text = "";
-            txtEmail.TrailingIcon = null;
-            // 
-            // txtPhone
-            // 
-            txtPhone.AnimateReadOnly = false;
-            txtPhone.BorderStyle = BorderStyle.None;
-            txtPhone.Depth = 0;
-            txtPhone.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtPhone.Hint = "Enter phone number";
-            txtPhone.LeadingIcon = null;
-            txtPhone.Location = new Point(451, 17);
-            txtPhone.MaxLength = 50;
-            txtPhone.MouseState = MaterialSkin.MouseState.OUT;
-            txtPhone.Multiline = false;
-            txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(284, 50);
-            txtPhone.TabIndex = 2;
-            txtPhone.Text = "";
-            txtPhone.TrailingIcon = null;
             // 
             // txtId
             // 
@@ -385,7 +167,7 @@
             txtId.Depth = 0;
             txtId.Font = new Font("Microsoft Sans Serif", 12F);
             txtId.LeadingIcon = null;
-            txtId.Location = new Point(133, 17);
+            txtId.Location = new Point(44, 78);
             txtId.MaxLength = 50;
             txtId.MouseState = MaterialSkin.MouseState.OUT;
             txtId.Multiline = false;
@@ -394,8 +176,26 @@
             txtId.Size = new Size(284, 50);
             txtId.TabIndex = 6;
             txtId.TabStop = false;
-            txtId.Text = "Id";
+            txtId.Text = "0";
             txtId.TrailingIcon = null;
+            // 
+            // txtDescription
+            // 
+            txtDescription.AnimateReadOnly = false;
+            txtDescription.BorderStyle = BorderStyle.None;
+            txtDescription.Depth = 0;
+            txtDescription.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtDescription.Hint = "Enter Description";
+            txtDescription.LeadingIcon = null;
+            txtDescription.Location = new Point(44, 224);
+            txtDescription.MaxLength = 50;
+            txtDescription.MouseState = MaterialSkin.MouseState.OUT;
+            txtDescription.Multiline = false;
+            txtDescription.Name = "txtDescription";
+            txtDescription.Size = new Size(284, 50);
+            txtDescription.TabIndex = 1;
+            txtDescription.Text = "";
+            txtDescription.TrailingIcon = null;
             // 
             // txtName
             // 
@@ -403,9 +203,9 @@
             txtName.BorderStyle = BorderStyle.None;
             txtName.Depth = 0;
             txtName.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtName.Hint = "Enter name";
+            txtName.Hint = "Enter Type Name";
             txtName.LeadingIcon = null;
-            txtName.Location = new Point(133, 79);
+            txtName.Location = new Point(44, 151);
             txtName.MaxLength = 50;
             txtName.MouseState = MaterialSkin.MouseState.OUT;
             txtName.Multiline = false;
@@ -527,7 +327,7 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.BackColor = Color.White;
+            tableLayoutPanel1.BackColor = Color.Transparent;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
@@ -567,17 +367,17 @@
             materialLabel1.Location = new Point(3, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(186, 38);
+            materialLabel1.Size = new Size(196, 38);
             materialLabel1.TabIndex = 3;
-            materialLabel1.Text = "Customer Details";
+            materialLabel1.Text = "Sales Type Details";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // CustomerView
+            // SalesTypeView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(materialCard1);
-            Name = "CustomerView";
+            Name = "SalesTypeView";
             Size = new Size(1355, 653);
             materialCard1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
@@ -585,7 +385,6 @@
             ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             tabPage2.ResumeLayout(false);
             materialCard2.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
@@ -602,6 +401,7 @@
         private TabPage tabPage2;
         private MaterialSkin.Controls.MaterialCard materialCard2;
         private MaterialSkin.Controls.MaterialTextBox txtId;
+        private MaterialSkin.Controls.MaterialTextBox txtDescription;
         private MaterialSkin.Controls.MaterialTextBox txtName;
         private Panel panel2;
         private Button btnPrint;
@@ -614,15 +414,5 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialComboBox txtBarangay;
-        private MaterialSkin.Controls.MaterialTextBox txtZipCode;
-        private MaterialSkin.Controls.MaterialTextBox txtEmail;
-        private MaterialSkin.Controls.MaterialTextBox txtPhone;
-        private MaterialSkin.Controls.MaterialComboBox txtRegion;
-        private MaterialSkin.Controls.MaterialComboBox txtProvince;
-        private MaterialSkin.Controls.MaterialComboBox txtCity;
-        private MaterialSkin.Controls.MaterialComboBox txtCustomerType;
-        private GroupBox groupBox1;
-        private MaterialSkin.Controls.MaterialTextBox txtContactPerson;
     }
 }

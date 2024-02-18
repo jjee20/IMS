@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ForceDesignerDPIUnaware>true</ForceDesignerDPIUnaware>
     <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+    <StartupObject>PresentationLayer.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,8 +17,9 @@
     <None Remove="Json\philippine_provinces_cities_municipalities_and_barangays_2019v2.json" />
     <None Remove="Json\province.json" />
     <None Remove="Json\region.json" />
-    <None Remove="Reports\CustomerReport.rdlc" />
-    <None Remove="Reports\CustomerTypeReport.rdlc" />
+    <None Remove="Reports\CustomerDetailReport.rdlc" />
+    <None Remove="Reports\CustomerListReport.rdlc" />
+    <None Remove="Reports\CustomerTypeListReport.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,10 +35,13 @@
     <Content Include="Json\region.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\CustomerReport.rdlc">
+    <Content Include="Reports\CustomerDetailReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\CustomerTypeReport.rdlc">
+    <Content Include="Reports\CustomerListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\CustomerTypeListReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -60,6 +65,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="inventorymanagementsystemDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>inventorymanagementsystemDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -69,6 +79,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserControls\SalesTypeView.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\CustomerView.cs">
       <SubType>UserControl</SubType>
@@ -83,6 +96,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="inventorymanagementsystemDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>inventorymanagementsystemDataSet.Designer.cs</LastGenOutput>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

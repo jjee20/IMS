@@ -2,16 +2,17 @@
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class CustomerView : UserControl, ICustomerView
+    public partial class SalesTypeView : UserControl, ISalesTypeView
     {
         private string message;
         private bool isSuccessful;
         public bool isEdit;
-        public CustomerView()
+        public SalesTypeView()
         {
             InitializeComponent();
             tabControl1.TabPages.Remove(tabPage2);
             AssociateAndRaiseViewEvents();
+            TextBox.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -41,9 +42,9 @@ namespace PresentationLayer.Views.UserControls
                 {
                     tabControl1.TabPages.Remove(tabPage2);
                     tabControl1.TabPages.Add(tabPage1);
+                    btnReturn.Visible = false;
                     MessageBox.Show(Message);
                 }
-                btnReturn.Visible = false;
             };
             txtSearch.TextChanged += (s, e) =>
             {
@@ -52,9 +53,9 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
+                EditEvent?.Invoke(this, EventArgs.Empty);
                 if (tabControl1.TabPages.Contains(tabPage1))
                 {
-                    EditEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Edit";
                     tabControl1.TabPages.Remove(tabPage1);
                     tabControl1.TabPages.Add(tabPage2);
@@ -64,7 +65,7 @@ namespace PresentationLayer.Views.UserControls
             //Delete
             btnDelete.Click += delegate
             {
-                var result = MessageBox.Show("Are you sure you want to delete the selected customer type?", "Warning",
+                var result = MessageBox.Show("Are you sure you want to delete the selected Sales type?", "Warning",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
@@ -90,82 +91,24 @@ namespace PresentationLayer.Views.UserControls
                 }
                 btnReturn.Visible = false;
             };
-
-            txtRegion.SelectedIndexChanged += delegate
-            {
-                RegionEvent?.Invoke(this, EventArgs.Empty);
-            };
-            txtProvince.SelectedIndexChanged += delegate
-            {
-                ProvinceEvent?.Invoke(this, EventArgs.Empty);
-            };
-            txtCity.SelectedIndexChanged += delegate
-            {
-                CityEvent?.Invoke(this, EventArgs.Empty);
-            };
-
-            dgList.CellDoubleClick += (sender, e) =>
-            {
-                DisplayCustomerEvent?.Invoke(this, e);
-            };
         }
 
         //Properties
-        public int CustomerId
+        public int SalesTypeId
         {
             get { return Convert.ToInt32(txtId.Text); }
             set { txtId.Text = value.ToString(); }
         }
 
-        public string CustomerName
+        public string SalesTypeName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
-        public int CustomerTypeId
+        public string Description
         {
-            get { return (int)txtCustomerType.SelectedValue; }
-            set { txtCustomerType.Text = value.ToString(); }
-        }
-        public string BarangayCode
-        {
-            get { return (string)txtBarangay.SelectedValue; }
-            set { txtBarangay.Text = value; }
-        }
-        public string CityCode
-        {
-            get { return (string)txtCity.SelectedValue; }
-            set { txtCity.Text = value; }
-        }
-        public string ProvinceCode
-        {
-            get { return (string)txtProvince.SelectedValue; }
-            set { txtProvince.Text = value; }
-        }
-        public string RegionCode
-        {
-            get { return (string)txtRegion.SelectedValue; }
-            set { txtRegion.Text = value; }
-        }
-        public string ZipCode
-        {
-            get { return txtZipCode.Text; }
-            set { txtZipCode.Text = value; }
-        }
-        public string Phone
-        {
-            get { return txtPhone.Text; }
-            set { txtPhone.Text = value; }
-        }
-        public string Email
-        {
-            get { return txtEmail.Text; }
-            set { txtEmail.Text = value; }
-        }
-        public string ContactPerson
-        {
-            get { return txtContactPerson.Text; }
-            set { txtContactPerson.Text = value; }
+            get { return txtDescription.Text; }
+            set { txtDescription.Text = value; }
         }
         public bool IsEdit
         {
@@ -191,39 +134,9 @@ namespace PresentationLayer.Views.UserControls
             set { txtSearch.Text = value; }
         }
 
-
-        public void SetCustomerListBindingSource(BindingSource CustomerList)
+        public void SetSalesTypeListBindingSource(BindingSource SalesTypeList)
         {
-            dgList.DataSource = CustomerList;
-        }
-        public void SetCustomerTypeListBindingSource(BindingSource customerTypeBindingSource)
-        {
-            txtCustomerType.DataSource = customerTypeBindingSource;
-            txtCustomerType.DisplayMember = "CustomerTypeName";
-            txtCustomerType.ValueMember = "CustomerTypeId";
-        }
-
-        public void SetAddressBindingSource(
-            BindingSource barangayBindingSource,
-            BindingSource cityBindingSource,
-            BindingSource provinceBindingSource,
-            BindingSource regionBindingSource)
-        {
-            txtBarangay.DataSource = barangayBindingSource;
-            txtBarangay.DisplayMember = "BarangayName";
-            txtBarangay.ValueMember = "BarangayCode";
-
-            txtCity.DataSource = cityBindingSource;
-            txtCity.DisplayMember = "CityName";
-            txtCity.ValueMember = "CityCode";
-
-            txtProvince.DataSource = provinceBindingSource;
-            txtProvince.DisplayMember = "ProvinceName";
-            txtProvince.ValueMember = "ProvinceCode";
-
-            txtRegion.DataSource = regionBindingSource;
-            txtRegion.DisplayMember = "RegionName";
-            txtRegion.ValueMember = "RegionCode";
+            dgList.DataSource = SalesTypeList;
         }
 
         public event EventHandler AddNewEvent;
@@ -234,18 +147,12 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
 
-        public event EventHandler RegionEvent;
-        public event EventHandler ProvinceEvent;
-        public event EventHandler CityEvent;
-
-        public event DataGridViewCellEventHandler DisplayCustomerEvent;
-
-        private static CustomerView? instance;
-        public static CustomerView GetInstance(TabPage parentContainer)
+        private static SalesTypeView? instance;
+        public static SalesTypeView GetInstance(TabPage parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {
-                instance = new CustomerView();
+                instance = new SalesTypeView();
                 parentContainer.Controls.Add(instance);
                 instance.Dock = DockStyle.Fill;
             }

@@ -7,7 +7,7 @@ namespace ServiceLayer.Services.CommonServices
 {
     public static class MainMenu
     {
-        public static class Customer
+        public static class Customers
         {
             public const string PageName = "Customer";
             public const string RoleName = "Customer";
@@ -16,7 +16,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Vendor
+        public static class Vendors
         {
             public const string PageName = "Vendor";
             public const string RoleName = "Vendor";
@@ -25,7 +25,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Product
+        public static class Products
         {
             public const string PageName = "Product";
             public const string RoleName = "Product";
@@ -34,7 +34,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class PurchaseOrder
+        public static class PurchaseOrders
         {
             public const string PageName = "Purchase Order";
             public const string RoleName = "Purchase Order";
@@ -43,7 +43,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class GoodsReceivedNote
+        public static class GoodsReceivedNotes
         {
             public const string PageName = "Goods Received Note";
             public const string RoleName = "Goods Received Note";
@@ -52,7 +52,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Bill
+        public static class Bills
         {
             public const string PageName = "Bill";
             public const string RoleName = "Bill";
@@ -61,7 +61,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class PaymentVoucher
+        public static class PaymentVouchers
         {
             public const string PageName = "Payment Voucher";
             public const string RoleName = "Payment Voucher";
@@ -70,7 +70,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class SalesOrder
+        public static class SalesOrders
         {
             public const string PageName = "Sales Order";
             public const string RoleName = "Sales Order";
@@ -79,7 +79,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Shipment
+        public static class Shipments
         {
             public const string PageName = "Shipment";
             public const string RoleName = "Shipment";
@@ -88,7 +88,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Invoice
+        public static class Invoices
         {
             public const string PageName = "Invoice";
             public const string RoleName = "Invoice";
@@ -97,7 +97,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class PaymentReceive
+        public static class PaymentReceives
         {
             public const string PageName = "Payment Receive";
             public const string RoleName = "Payment Receive";
@@ -106,7 +106,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class BillType
+        public static class BillTypes
         {
             public const string PageName = "Bill Type";
             public const string RoleName = "Bill Type";
@@ -115,7 +115,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Branch
+        public static class Branchs
         {
             public const string PageName = "Branch";
             public const string RoleName = "Branch";
@@ -124,7 +124,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class CashBank
+        public static class CashBanks
         {
             public const string PageName = "Cash Bank";
             public const string RoleName = "Cash Bank";
@@ -133,7 +133,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Currency
+        public static class Currencys
         {
             public const string PageName = "Currency";
             public const string RoleName = "Currency";
@@ -142,7 +142,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class CustomerType
+        public static class CustomerTypes
         {
             public const string PageName = "Customer Type";
             public const string RoleName = "Customer Type";
@@ -151,7 +151,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class InvoiceType
+        public static class InvoiceTypes
         {
             public const string PageName = "Invoice Type";
             public const string RoleName = "Invoice Type";
@@ -160,7 +160,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class PaymentType
+        public static class PaymentTypes
         {
             public const string PageName = "Payment Type";
             public const string RoleName = "Payment Type";
@@ -169,7 +169,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class ProductType
+        public static class ProductTypes
         {
             public const string PageName = "Product Type";
             public const string RoleName = "Product Type";
@@ -178,7 +178,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class SalesType
+        public static class SalesTypes
         {
             public const string PageName = "Sales Type";
             public const string RoleName = "Sales Type";
@@ -187,7 +187,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class ShipmentType
+        public static class ShipmentTypes
         {
             public const string PageName = "Shipment Type";
             public const string RoleName = "Shipment Type";
@@ -196,7 +196,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class UnitOfMeasure
+        public static class UnitOfMeasures
         {
             public const string PageName = "Unit Of Measure";
             public const string RoleName = "Unit Of Measure";
@@ -205,7 +205,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class VendorType
+        public static class VendorTypes
         {
             public const string PageName = "Vendor Type";
             public const string RoleName = "Vendor Type";
@@ -214,7 +214,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Warehouse
+        public static class Warehouses
         {
             public const string PageName = "Warehouse";
             public const string RoleName = "Warehouse";
@@ -223,7 +223,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class PurchaseType
+        public static class PurchaseTypes
         {
             public const string PageName = "Purchase Type";
             public const string RoleName = "Purchase Type";
@@ -232,7 +232,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class User
+        public static class Users
         {
             public const string PageName = "User";
             public const string RoleName = "User";
@@ -241,7 +241,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class ChangePassword
+        public static class ChangePasswords
         {
             public const string PageName = "Change Password";
             public const string RoleName = "Change Password";
@@ -250,7 +250,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "ChangePassword";
         }
 
-        public static class Role
+        public static class Roles
         {
             public const string PageName = "Role";
             public const string RoleName = "Role";
@@ -259,7 +259,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Role";
         }
 
-        public static class ChangeRole
+        public static class ChangeRoles
         {
             public const string PageName = "Change Role";
             public const string RoleName = "Change Role";
@@ -268,7 +268,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "ChangeRole";
         }
 
-        public static class Dashboard
+        public static class Dashboards
         {
             public const string PageName = "Dashboard Main";
             public const string RoleName = "Dashboard Main";

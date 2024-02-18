@@ -15,10 +15,10 @@ namespace DomainLayer.Models
         public string CustomerName { get; set; }
         [Display(Name = "Customer Type")]
         public int CustomerTypeId { get; set; }
-        public string Barangay { get; set; }
-        public string Municipality { get; set; }
-        public string Province { get; set; }
-        public string Region { get; set; }
+        public string BarangayCode { get; set; }
+        public string CityCode { get; set; }
+        public string ProvinceCode { get; set; }
+        public string RegionCode { get; set; }
         [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
         public string Phone { get; set; }

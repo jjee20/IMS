@@ -5,10 +5,10 @@
         int CustomerId { get; set; }
         string CustomerName { get; set; }
         int CustomerTypeId { get; set; }
-        string Barangay { get; set; }
-        string Municipality { get; set; }
-        string Province { get; set; }
-        string Region { get; set; }
+        string BarangayCode { get; set; }
+        string CityCode { get; set; }
+        string ProvinceCode { get; set; }
+        string RegionCode { get; set; }
         string ZipCode { get; set; }
         string Phone { get; set; }
         string Email { get; set; }
@@ -26,10 +26,16 @@
         event EventHandler SaveEvent;
         event EventHandler SearchEvent;
 
-        void SetAddressBindingSource(List<string> barangayBindingSource,
-                                     List<string> municipalityBindingSource, 
-                                     List<string> provinceBindingSource, 
-                                     List<string> regionBindingSource);
+        event EventHandler RegionEvent;
+        event EventHandler ProvinceEvent;
+        event EventHandler CityEvent;
+
+        event DataGridViewCellEventHandler DisplayCustomerEvent;
+
+        void SetAddressBindingSource(BindingSource barangayBindingSource,
+                                     BindingSource municipalityBindingSource,
+                                     BindingSource provinceBindingSource,
+                                     BindingSource regionBindingSource);
         void SetCustomerListBindingSource(BindingSource CustomerList);
         void SetCustomerTypeListBindingSource(BindingSource customerTypeBindingSource);
     }

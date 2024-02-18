@@ -207,11 +207,11 @@ namespace PresentationLayer.Presenters
         }
         private void Print(object? sender, EventArgs e)
         {
-            string reportFileName = "CustomerTypeReport.rdlc";
+            string reportFileName = "CustomerTypeListReport.rdlc";
             string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
-            var reportDataSource = new ReportDataSource("CustomerType", CustomerTypeList);
+            var reportDataSource = new ReportDataSource("CustomerTypeList", CustomerTypeList);
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }

@@ -22,18 +22,24 @@ namespace PresentationLayer.Presenters
 
             _view.ShowCustomerType += ShowCustomerType;
             _view.ShowCustomer += ShowCustomer;
+            _view.ShowSalesType += ShowSalesType;
         }
 
         private void ShowCustomer(object? sender, EventArgs e)
         {
-            ICustomerView view = CustomerView.GetInstance((TabPage)_view.TabControlPage);
+            ICustomerView view = CustomerView.GetInstance(_view.TabControlPage);
             new CustomerPresenter(view, _unitOfWork);
         }
 
         private void ShowCustomerType(object? sender, EventArgs e)
         {
-            ICustomerTypeView view = CustomerTypeView.GetInstance((TabPage)_view.TabControlPage);
+            ICustomerTypeView view = CustomerTypeView.GetInstance(_view.TabControlPage);
             new CustomerTypePresenter(view, _unitOfWork);
+        }
+        private void ShowSalesType(object? sender, EventArgs e)
+        {
+            ISalesTypeView view = SalesTypeView.GetInstance(_view.TabControlPage);
+            new SalesTypePresenter(view, _unitOfWork);
         }
     }
 }
