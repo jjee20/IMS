@@ -10,7 +10,7 @@ namespace PresentationLayer.Reports
 {
     public static class Reports
     {
-        public static void Load(string path, ReportDataSource dataSource, LocalReport report)
+        public static void Load(string path, ReportDataSource? dataSource, LocalReport? report, List<ReportParameter>? parameters = null)
         {
             // Sample
             // Load report definition
@@ -18,6 +18,7 @@ namespace PresentationLayer.Reports
             {
                 report.LoadReportDefinition(fs);
                 report.DataSources.Add(dataSource);
+                report.SetParameters(parameters);
             }
         }
     }

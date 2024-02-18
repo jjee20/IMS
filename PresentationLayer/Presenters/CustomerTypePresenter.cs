@@ -212,7 +212,7 @@ namespace PresentationLayer.Presenters
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("CustomerTypeList", CustomerTypeList);
-            var reportView = new ReportView(reportPath, reportDataSource, localReport);
+            var reportView = new ReportView(reportPath, reportDataSource, localReport, null);
             reportView.ShowDialog();
         }
         private void Return(object? sender, EventArgs e)

@@ -20,6 +20,7 @@
     <None Remove="Reports\CustomerDetailReport.rdlc" />
     <None Remove="Reports\CustomerListReport.rdlc" />
     <None Remove="Reports\CustomerTypeListReport.rdlc" />
+    <None Remove="Reports\SalesTypeListReport.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +40,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\CustomerListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\SalesTypeListReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\CustomerTypeListReport.rdlc">

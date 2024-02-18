@@ -94,19 +94,21 @@ namespace PresentationLayer.Presenters
         private void DisplayCustomerEvent(object? sender, DataGridViewCellEventArgs e)
         {
             var customerData = (CustomerVM)CustomerBindingSource.Current;
-            var entity = _unitOfWork.Customer.Get(c => c.CustomerId.Equals(customerData.Id));
-            string regionCode = entity.RegionCode;
-            string provinceCode = entity.ProvinceCode;
-            string cityCode = entity.CityCode;
-            string barangayCode = entity.BarangayCode;
+            var entity = _unitOfWork.Customer.Get(c => c.CustomerId.Equals(customerData.Id), includeProperties: "CustomerType");
 
-            var region = GetRegionList.FirstOrDefault(r => r.RegionCode == regionCode);
-            var province = GetProvinceList.FirstOrDefault(p => p.ProvinceCode == provinceCode);
-            var city = GetCityList.FirstOrDefault(p => p.CityCode == cityCode);
-            var barangay = GetBarangayList.FirstOrDefault(p => p.BarangayCode == barangayCode);
+            var region = GetRegionList.FirstOrDefault(r => r.RegionCode == entity.RegionCode);
+            var province = GetProvinceList.FirstOrDefault(p => p.ProvinceCode == entity.ProvinceCode);
+            var city = GetCityList.FirstOrDefault(p => p.CityCode == entity.CityCode);
+            var barangay = GetBarangayList.FirstOrDefault(p => p.BarangayCode == entity.BarangayCode);
 
             var parameters = new List<ReportParameter>
             {
+                new ReportParameter("CustomerName", entity.CustomerName),
+                new ReportParameter("Email", entity.Email),
+                new ReportParameter("Phone", entity.Phone),
+                new ReportParameter("ZipCode", entity.ZipCode),
+                new ReportParameter("ContactPerson", entity.ContactPerson),
+                new ReportParameter("CustomerType", entity.CustomerType.CustomerTypeName),
                 new ReportParameter("Region", region.RegionName),
                 new ReportParameter("Province", province.ProvinceName),
                 new ReportParameter("City", city.CityName),
@@ -119,8 +121,7 @@ namespace PresentationLayer.Presenters
             var localReport = new LocalReport();
             localReport.ReportPath = reportPath;
             var reportDataSource = new ReportDataSource("CustomerDetails", new List<Customer> { entity });
-            localReport.SetParameters(parameters);
-            var reportView = new ReportView(reportPath, reportDataSource, localReport);
+            var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
             reportView.ShowDialog();
         }
 
@@ -338,7 +339,7 @@ namespace PresentationLayer.Presenters
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("CustomerList", CustomerList);
-            var reportView = new ReportView(reportPath, reportDataSource, localReport);
+            var reportView = new ReportView(reportPath, reportDataSource, localReport,null);
             reportView.ShowDialog();
         }
         private void Return(object? sender, EventArgs e)
