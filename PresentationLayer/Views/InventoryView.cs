@@ -42,6 +42,10 @@ namespace PresentationLayer.Views
                 {
                     ShowCustomer?.Invoke(this, EventArgs.Empty);
                 }
+                else if (tcMain.SelectedTab == tbVendor)
+                {
+                    ShowVendor?.Invoke(this, EventArgs.Empty);
+                }
                 else if (tcMain.SelectedTab == tbSalesType)
                 {
                     ShowSalesType?.Invoke(this, EventArgs.Empty);
@@ -130,5 +134,6 @@ namespace PresentationLayer.Views
         public event EventHandler ShowUnitOfMeasure;
         public event EventHandler ShowConfiguration;
         public event EventHandler ShowUserAndRole;
+        public event EventHandler ShowVendor;
     }
 }

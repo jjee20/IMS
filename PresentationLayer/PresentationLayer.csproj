@@ -121,6 +121,45 @@
     <Compile Update="Views\UserControls\CurrencyView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\InvoiceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\PaymentReceiveView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\PurchaseOrderView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\GoodsReceivedNoteView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\BillView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\PaymentVoucherView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ProductView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\CashBankView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\WarehouseView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\UnitOfMeasureView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\VendorView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ShipmentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\SalesOrderView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\PaymentTypeView.cs">
       <SubType>UserControl</SubType>
     </Compile>

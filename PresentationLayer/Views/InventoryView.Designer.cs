@@ -377,11 +377,10 @@
             DrawerShowIconsWhenHidden = true;
             DrawerTabControl = tcMain;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            IsMdiContainer = true;
             Name = "InventoryView";
             Padding = new Padding(0, 64, 3, 3);
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Inventory Management System";
+            Text = "IMS";
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

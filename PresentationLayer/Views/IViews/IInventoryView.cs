@@ -22,5 +22,6 @@
         event EventHandler ShowUnitOfMeasure;
         event EventHandler ShowUserAndRole;
         event EventHandler ShowVendorType;
+        event EventHandler ShowVendor;
     }
 }

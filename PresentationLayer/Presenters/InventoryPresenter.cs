@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenters
             _view.ShowUnitOfMeasure += ShowUnitOfMeasure;
             _view.ShowConfiguration += ShowConfiguration;
             _view.ShowUserAndRole += ShowUserAndRole;
+            _view.ShowVendor += ShowVendor;
         }
 
         private void ShowUserAndRole(object? sender, EventArgs e)
@@ -53,10 +54,15 @@ namespace PresentationLayer.Presenters
             //new ConfigurationPresenter(view, _unitOfWork);
         }
 
+        private void ShowVendor(object? sender, EventArgs e)
+        {
+            IVendorView view = VendorView.GetInstance(_view.TabControlPage);
+            new VendorPresenter(view, _unitOfWork);
+        }
         private void ShowUnitOfMeasure(object? sender, EventArgs e)
         {
-            //IUnitOfMeasureView view = UnitOfMeasureView.GetInstance(_view.TabControlPage);
-            //new UnitOfMeasurePresenter(view, _unitOfWork);
+            IUnitOfMeasureView view = UnitOfMeasureView.GetInstance(_view.TabControlPage);
+            new UnitOfMeasurePresenter(view, _unitOfWork);
         }
 
         private void ShowProductType(object? sender, EventArgs e)
@@ -67,32 +73,32 @@ namespace PresentationLayer.Presenters
 
         private void ShowProduct(object? sender, EventArgs e)
         {
-            //IProductView view = ProductView.GetInstance(_view.TabControlPage);
-            //new ProductPresenter(view, _unitOfWork);
+            IProductView view = ProductView.GetInstance(_view.TabControlPage);
+            new ProductPresenter(view, _unitOfWork);
         }
 
         private void ShowPaymentVoucher(object? sender, EventArgs e)
         {
-            //IPaymentVoucherView view = PaymentVoucherView.GetInstance(_view.TabControlPage);
-            //new PaymentVoucherPresenter(view, _unitOfWork);
+            IPaymentVoucherView view = PaymentVoucherView.GetInstance(_view.TabControlPage);
+            new PaymentVoucherPresenter(view, _unitOfWork);
         }
 
         private void ShowBill(object? sender, EventArgs e)
         {
-            //IBillView view = BillView.GetInstance(_view.TabControlPage);
-            //new BillPresenter(view, _unitOfWork);
+            IBillView view = BillView.GetInstance(_view.TabControlPage);
+            new BillPresenter(view, _unitOfWork);
         }
 
         private void ShowGRN(object? sender, EventArgs e)
         {
-            //IGoodsReceivedNoteView view = GoodsReceivedNoteView.GetInstance(_view.TabControlPage);
-            //new GoodsReceivedNotePresenter(view, _unitOfWork);
+            IGoodsReceivedNoteView view = GoodsReceivedNoteView.GetInstance(_view.TabControlPage);
+            new GoodsReceivedNotePresenter(view, _unitOfWork);
         }
 
         private void ShowPurchaseOrder(object? sender, EventArgs e)
         {
-            //IPurchaseOrderView view = PurchaseOrderView.GetInstance(_view.TabControlPage);
-            //new PurchaseOrderPresenter(view, _unitOfWork);
+            IPurchaseOrderView view = PurchaseOrderView.GetInstance(_view.TabControlPage);
+            new PurchaseOrderPresenter(view, _unitOfWork);
         }
 
         private void ShowPurchaseType(object? sender, EventArgs e)
@@ -109,26 +115,26 @@ namespace PresentationLayer.Presenters
 
         private void ShowPaymentReceive(object? sender, EventArgs e)
         {
-            //IPaymentReceiveView view = PaymentReceiveView.GetInstance(_view.TabControlPage);
-            //new PaymentReceivePresenter(view, _unitOfWork);
+            IPaymentReceiveView view = PaymentReceiveView.GetInstance(_view.TabControlPage);
+            new PaymentReceivePresenter(view, _unitOfWork);
         }
 
         private void ShowInvoice(object? sender, EventArgs e)
         {
-            //IInvoiceView view = InvoiceView.GetInstance(_view.TabControlPage);
-            //new InvoicePresenter(view, _unitOfWork);
+            IInvoiceView view = InvoiceView.GetInstance(_view.TabControlPage);
+            new InvoicePresenter(view, _unitOfWork);
         }
 
         private void ShowShipment(object? sender, EventArgs e)
         {
-            //IShipmentView view = ShipmentView.GetInstance(_view.TabControlPage);
-            //new ShipmentPresenter(view, _unitOfWork);
+            IShipmentView view = ShipmentView.GetInstance(_view.TabControlPage);
+            new ShipmentPresenter(view, _unitOfWork);
         }
 
         private void ShowSalesOrder(object? sender, EventArgs e)
         {
-            //ISalesOrderView view = SalesOrderView.GetInstance(_view.TabControlPage);
-            //new SalesOrderPresenter(view, _unitOfWork);
+            ISalesOrderView view = SalesOrderView.GetInstance(_view.TabControlPage);
+            new SalesOrderPresenter(view, _unitOfWork);
         }
 
         private void ShowCustomer(object? sender, EventArgs e)
