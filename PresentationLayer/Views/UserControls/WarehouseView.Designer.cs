@@ -367,9 +367,9 @@
             materialLabel1.Location = new Point(3, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(243, 38);
+            materialLabel1.Size = new Size(201, 38);
             materialLabel1.TabIndex = 3;
-            materialLabel1.Text = "Customer Type Details";
+            materialLabel1.Text = "Warehouse Details";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // WarehouseView

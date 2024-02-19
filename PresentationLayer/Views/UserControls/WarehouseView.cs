@@ -2,7 +2,7 @@
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class WarehouseView : UserControl
+    public partial class WarehouseView : UserControl, IWarehouseView
     {
         private string message;
         private bool isSuccessful;
@@ -27,7 +27,7 @@ namespace PresentationLayer.Views.UserControls
                     tabControl1.TabPages.Remove(tabPage1);
                     tabControl1.TabPages.Add(tabPage2);
                 }
-                else if((tabControl1.TabPages.Contains(tabPage2) && tabPage2.Text == "Edit"))
+                else if ((tabControl1.TabPages.Contains(tabPage2) && tabPage2.Text == "Edit"))
                 {
                     tabControl1.TabPages.Remove(tabPage2);
                     tabControl1.TabPages.Add(tabPage2);

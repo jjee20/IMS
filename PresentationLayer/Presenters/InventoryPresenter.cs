@@ -50,8 +50,8 @@ namespace PresentationLayer.Presenters
 
         private void ShowConfiguration(object? sender, EventArgs e)
         {
-            //IConfigurationView view = ConfigurationView.GetInstance(_view.TabControlPage);
-            //new ConfigurationPresenter(view, _unitOfWork);
+            IConfigurationView view = ConfigurationView.GetInstance(_view.TabControlPage);
+            new ConfigurationPresenter(view, _unitOfWork);
         }
 
         private void ShowVendor(object? sender, EventArgs e)
