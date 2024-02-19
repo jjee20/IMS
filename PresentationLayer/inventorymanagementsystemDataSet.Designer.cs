@@ -86,6 +86,8 @@ namespace PresentationLayer {
         
         private global::System.Data.DataRelation relationFK_Bill_BillType_BillTypeId;
         
+        private global::System.Data.DataRelation relationFK_Branch_Currency_CurrencyId;
+        
         private global::System.Data.DataRelation relationFK_Customer_CustomerType_CustomerTypeId;
         
         private global::System.Data.DataRelation relationFK_GoodsReceivedNote_PurchaseOrder_PurchaseOrderId;
@@ -949,6 +951,7 @@ namespace PresentationLayer {
                 }
             }
             this.relationFK_Bill_BillType_BillTypeId = this.Relations["FK_Bill_BillType_BillTypeId"];
+            this.relationFK_Branch_Currency_CurrencyId = this.Relations["FK_Branch_Currency_CurrencyId"];
             this.relationFK_Customer_CustomerType_CustomerTypeId = this.Relations["FK_Customer_CustomerType_CustomerTypeId"];
             this.relationFK_GoodsReceivedNote_PurchaseOrder_PurchaseOrderId = this.Relations["FK_GoodsReceivedNote_PurchaseOrder_PurchaseOrderId"];
             this.relationFK_Invoice_InvoiceType_InvoiceTypeId = this.Relations["FK_Invoice_InvoiceType_InvoiceTypeId"];
@@ -1051,6 +1054,10 @@ namespace PresentationLayer {
                         this.tableBillType.BillTypeIdColumn}, new global::System.Data.DataColumn[] {
                         this.tableBill.BillTypeIdColumn}, false);
             this.Relations.Add(this.relationFK_Bill_BillType_BillTypeId);
+            this.relationFK_Branch_Currency_CurrencyId = new global::System.Data.DataRelation("FK_Branch_Currency_CurrencyId", new global::System.Data.DataColumn[] {
+                        this.tableCurrency.CurrencyIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableBranch.CurrencyIdColumn}, false);
+            this.Relations.Add(this.relationFK_Branch_Currency_CurrencyId);
             this.relationFK_Customer_CustomerType_CustomerTypeId = new global::System.Data.DataRelation("FK_Customer_CustomerType_CustomerTypeId", new global::System.Data.DataColumn[] {
                         this.tableCustomerType.CustomerTypeIdColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerTypeIdColumn}, false);
@@ -2462,11 +2469,11 @@ namespace PresentationLayer {
             
             private global::System.Data.DataColumn columnCurrencyId;
             
-            private global::System.Data.DataColumn columnAddress;
+            private global::System.Data.DataColumn columnCityCode;
             
-            private global::System.Data.DataColumn columnCity;
+            private global::System.Data.DataColumn columnProvinceCode;
             
-            private global::System.Data.DataColumn columnState;
+            private global::System.Data.DataColumn columnRegionCode;
             
             private global::System.Data.DataColumn columnZipCode;
             
@@ -2475,6 +2482,8 @@ namespace PresentationLayer {
             private global::System.Data.DataColumn columnEmail;
             
             private global::System.Data.DataColumn columnContactPerson;
+            
+            private global::System.Data.DataColumn columnBarangayCode;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -2543,25 +2552,25 @@ namespace PresentationLayer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn AddressColumn {
+            public global::System.Data.DataColumn CityCodeColumn {
                 get {
-                    return this.columnAddress;
+                    return this.columnCityCode;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn CityColumn {
+            public global::System.Data.DataColumn ProvinceCodeColumn {
                 get {
-                    return this.columnCity;
+                    return this.columnProvinceCode;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn StateColumn {
+            public global::System.Data.DataColumn RegionCodeColumn {
                 get {
-                    return this.columnState;
+                    return this.columnRegionCode;
                 }
             }
             
@@ -2594,6 +2603,14 @@ namespace PresentationLayer {
             public global::System.Data.DataColumn ContactPersonColumn {
                 get {
                     return this.columnContactPerson;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn BarangayCodeColumn {
+                get {
+                    return this.columnBarangayCode;
                 }
             }
             
@@ -2634,20 +2651,24 @@ namespace PresentationLayer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public BranchRow AddBranchRow(string BranchName, string Description, int CurrencyId, string Address, string City, string State, string ZipCode, string Phone, string Email, string ContactPerson) {
+            public BranchRow AddBranchRow(string BranchName, string Description, CurrencyRow parentCurrencyRowByFK_Branch_Currency_CurrencyId, string CityCode, string ProvinceCode, string RegionCode, string ZipCode, string Phone, string Email, string ContactPerson, string BarangayCode) {
                 BranchRow rowBranchRow = ((BranchRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         BranchName,
                         Description,
-                        CurrencyId,
-                        Address,
-                        City,
-                        State,
+                        null,
+                        CityCode,
+                        ProvinceCode,
+                        RegionCode,
                         ZipCode,
                         Phone,
                         Email,
-                        ContactPerson};
+                        ContactPerson,
+                        BarangayCode};
+                if ((parentCurrencyRowByFK_Branch_Currency_CurrencyId != null)) {
+                    columnValuesArray[3] = parentCurrencyRowByFK_Branch_Currency_CurrencyId[0];
+                }
                 rowBranchRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBranchRow);
                 return rowBranchRow;
@@ -2681,13 +2702,14 @@ namespace PresentationLayer {
                 this.columnBranchName = base.Columns["BranchName"];
                 this.columnDescription = base.Columns["Description"];
                 this.columnCurrencyId = base.Columns["CurrencyId"];
-                this.columnAddress = base.Columns["Address"];
-                this.columnCity = base.Columns["City"];
-                this.columnState = base.Columns["State"];
+                this.columnCityCode = base.Columns["CityCode"];
+                this.columnProvinceCode = base.Columns["ProvinceCode"];
+                this.columnRegionCode = base.Columns["RegionCode"];
                 this.columnZipCode = base.Columns["ZipCode"];
                 this.columnPhone = base.Columns["Phone"];
                 this.columnEmail = base.Columns["Email"];
                 this.columnContactPerson = base.Columns["ContactPerson"];
+                this.columnBarangayCode = base.Columns["BarangayCode"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2701,12 +2723,12 @@ namespace PresentationLayer {
                 base.Columns.Add(this.columnDescription);
                 this.columnCurrencyId = new global::System.Data.DataColumn("CurrencyId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCurrencyId);
-                this.columnAddress = new global::System.Data.DataColumn("Address", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAddress);
-                this.columnCity = new global::System.Data.DataColumn("City", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCity);
-                this.columnState = new global::System.Data.DataColumn("State", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnState);
+                this.columnCityCode = new global::System.Data.DataColumn("CityCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCityCode);
+                this.columnProvinceCode = new global::System.Data.DataColumn("ProvinceCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProvinceCode);
+                this.columnRegionCode = new global::System.Data.DataColumn("RegionCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRegionCode);
                 this.columnZipCode = new global::System.Data.DataColumn("ZipCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnZipCode);
                 this.columnPhone = new global::System.Data.DataColumn("Phone", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2715,6 +2737,8 @@ namespace PresentationLayer {
                 base.Columns.Add(this.columnEmail);
                 this.columnContactPerson = new global::System.Data.DataColumn("ContactPerson", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnContactPerson);
+                this.columnBarangayCode = new global::System.Data.DataColumn("BarangayCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBarangayCode);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnBranchId}, true));
                 this.columnBranchId.AutoIncrement = true;
@@ -2728,12 +2752,12 @@ namespace PresentationLayer {
                 this.columnDescription.AllowDBNull = false;
                 this.columnDescription.MaxLength = 2147483647;
                 this.columnCurrencyId.AllowDBNull = false;
-                this.columnAddress.AllowDBNull = false;
-                this.columnAddress.MaxLength = 2147483647;
-                this.columnCity.AllowDBNull = false;
-                this.columnCity.MaxLength = 2147483647;
-                this.columnState.AllowDBNull = false;
-                this.columnState.MaxLength = 2147483647;
+                this.columnCityCode.AllowDBNull = false;
+                this.columnCityCode.MaxLength = 2147483647;
+                this.columnProvinceCode.AllowDBNull = false;
+                this.columnProvinceCode.MaxLength = 2147483647;
+                this.columnRegionCode.AllowDBNull = false;
+                this.columnRegionCode.MaxLength = 2147483647;
                 this.columnZipCode.AllowDBNull = false;
                 this.columnZipCode.MaxLength = 2147483647;
                 this.columnPhone.AllowDBNull = false;
@@ -2742,6 +2766,8 @@ namespace PresentationLayer {
                 this.columnEmail.MaxLength = 2147483647;
                 this.columnContactPerson.AllowDBNull = false;
                 this.columnContactPerson.MaxLength = 2147483647;
+                this.columnBarangayCode.AllowDBNull = false;
+                this.columnBarangayCode.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11099,11 +11125,11 @@ namespace PresentationLayer {
             
             private global::System.Data.DataColumn columnVendorTypeId;
             
-            private global::System.Data.DataColumn columnAddress;
+            private global::System.Data.DataColumn columnCityCode;
             
-            private global::System.Data.DataColumn columnCity;
+            private global::System.Data.DataColumn columnProvinceCode;
             
-            private global::System.Data.DataColumn columnState;
+            private global::System.Data.DataColumn columnRegionCode;
             
             private global::System.Data.DataColumn columnZipCode;
             
@@ -11112,6 +11138,8 @@ namespace PresentationLayer {
             private global::System.Data.DataColumn columnEmail;
             
             private global::System.Data.DataColumn columnContactPerson;
+            
+            private global::System.Data.DataColumn columnBarangayCode;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -11172,25 +11200,25 @@ namespace PresentationLayer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn AddressColumn {
+            public global::System.Data.DataColumn CityCodeColumn {
                 get {
-                    return this.columnAddress;
+                    return this.columnCityCode;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn CityColumn {
+            public global::System.Data.DataColumn ProvinceCodeColumn {
                 get {
-                    return this.columnCity;
+                    return this.columnProvinceCode;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn StateColumn {
+            public global::System.Data.DataColumn RegionCodeColumn {
                 get {
-                    return this.columnState;
+                    return this.columnRegionCode;
                 }
             }
             
@@ -11223,6 +11251,14 @@ namespace PresentationLayer {
             public global::System.Data.DataColumn ContactPersonColumn {
                 get {
                     return this.columnContactPerson;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn BarangayCodeColumn {
+                get {
+                    return this.columnBarangayCode;
                 }
             }
             
@@ -11263,19 +11299,20 @@ namespace PresentationLayer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public VendorRow AddVendorRow(string VendorName, VendorTypeRow parentVendorTypeRowByFK_Vendor_VendorType_VendorTypeId, string Address, string City, string State, string ZipCode, string Phone, string Email, string ContactPerson) {
+            public VendorRow AddVendorRow(string VendorName, VendorTypeRow parentVendorTypeRowByFK_Vendor_VendorType_VendorTypeId, string CityCode, string ProvinceCode, string RegionCode, string ZipCode, string Phone, string Email, string ContactPerson, string BarangayCode) {
                 VendorRow rowVendorRow = ((VendorRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         VendorName,
                         null,
-                        Address,
-                        City,
-                        State,
+                        CityCode,
+                        ProvinceCode,
+                        RegionCode,
                         ZipCode,
                         Phone,
                         Email,
-                        ContactPerson};
+                        ContactPerson,
+                        BarangayCode};
                 if ((parentVendorTypeRowByFK_Vendor_VendorType_VendorTypeId != null)) {
                     columnValuesArray[2] = parentVendorTypeRowByFK_Vendor_VendorType_VendorTypeId[0];
                 }
@@ -11311,13 +11348,14 @@ namespace PresentationLayer {
                 this.columnVendorId = base.Columns["VendorId"];
                 this.columnVendorName = base.Columns["VendorName"];
                 this.columnVendorTypeId = base.Columns["VendorTypeId"];
-                this.columnAddress = base.Columns["Address"];
-                this.columnCity = base.Columns["City"];
-                this.columnState = base.Columns["State"];
+                this.columnCityCode = base.Columns["CityCode"];
+                this.columnProvinceCode = base.Columns["ProvinceCode"];
+                this.columnRegionCode = base.Columns["RegionCode"];
                 this.columnZipCode = base.Columns["ZipCode"];
                 this.columnPhone = base.Columns["Phone"];
                 this.columnEmail = base.Columns["Email"];
                 this.columnContactPerson = base.Columns["ContactPerson"];
+                this.columnBarangayCode = base.Columns["BarangayCode"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11329,12 +11367,12 @@ namespace PresentationLayer {
                 base.Columns.Add(this.columnVendorName);
                 this.columnVendorTypeId = new global::System.Data.DataColumn("VendorTypeId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVendorTypeId);
-                this.columnAddress = new global::System.Data.DataColumn("Address", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAddress);
-                this.columnCity = new global::System.Data.DataColumn("City", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCity);
-                this.columnState = new global::System.Data.DataColumn("State", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnState);
+                this.columnCityCode = new global::System.Data.DataColumn("CityCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCityCode);
+                this.columnProvinceCode = new global::System.Data.DataColumn("ProvinceCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProvinceCode);
+                this.columnRegionCode = new global::System.Data.DataColumn("RegionCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRegionCode);
                 this.columnZipCode = new global::System.Data.DataColumn("ZipCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnZipCode);
                 this.columnPhone = new global::System.Data.DataColumn("Phone", typeof(string), null, global::System.Data.MappingType.Element);
@@ -11343,6 +11381,8 @@ namespace PresentationLayer {
                 base.Columns.Add(this.columnEmail);
                 this.columnContactPerson = new global::System.Data.DataColumn("ContactPerson", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnContactPerson);
+                this.columnBarangayCode = new global::System.Data.DataColumn("BarangayCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBarangayCode);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnVendorId}, true));
                 this.columnVendorId.AutoIncrement = true;
@@ -11354,12 +11394,12 @@ namespace PresentationLayer {
                 this.columnVendorName.AllowDBNull = false;
                 this.columnVendorName.MaxLength = 2147483647;
                 this.columnVendorTypeId.AllowDBNull = false;
-                this.columnAddress.AllowDBNull = false;
-                this.columnAddress.MaxLength = 2147483647;
-                this.columnCity.AllowDBNull = false;
-                this.columnCity.MaxLength = 2147483647;
-                this.columnState.AllowDBNull = false;
-                this.columnState.MaxLength = 2147483647;
+                this.columnCityCode.AllowDBNull = false;
+                this.columnCityCode.MaxLength = 2147483647;
+                this.columnProvinceCode.AllowDBNull = false;
+                this.columnProvinceCode.MaxLength = 2147483647;
+                this.columnRegionCode.AllowDBNull = false;
+                this.columnRegionCode.MaxLength = 2147483647;
                 this.columnZipCode.AllowDBNull = false;
                 this.columnZipCode.MaxLength = 2147483647;
                 this.columnPhone.AllowDBNull = false;
@@ -11368,6 +11408,8 @@ namespace PresentationLayer {
                 this.columnEmail.MaxLength = 2147483647;
                 this.columnContactPerson.AllowDBNull = false;
                 this.columnContactPerson.MaxLength = 2147483647;
+                this.columnBarangayCode.AllowDBNull = false;
+                this.columnBarangayCode.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12403,34 +12445,34 @@ namespace PresentationLayer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Address {
+            public string CityCode {
                 get {
-                    return ((string)(this[this.tableBranch.AddressColumn]));
+                    return ((string)(this[this.tableBranch.CityCodeColumn]));
                 }
                 set {
-                    this[this.tableBranch.AddressColumn] = value;
+                    this[this.tableBranch.CityCodeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string City {
+            public string ProvinceCode {
                 get {
-                    return ((string)(this[this.tableBranch.CityColumn]));
+                    return ((string)(this[this.tableBranch.ProvinceCodeColumn]));
                 }
                 set {
-                    this[this.tableBranch.CityColumn] = value;
+                    this[this.tableBranch.ProvinceCodeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string State {
+            public string RegionCode {
                 get {
-                    return ((string)(this[this.tableBranch.StateColumn]));
+                    return ((string)(this[this.tableBranch.RegionCodeColumn]));
                 }
                 set {
-                    this[this.tableBranch.StateColumn] = value;
+                    this[this.tableBranch.RegionCodeColumn] = value;
                 }
             }
             
@@ -12475,6 +12517,28 @@ namespace PresentationLayer {
                 }
                 set {
                     this[this.tableBranch.ContactPersonColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string BarangayCode {
+                get {
+                    return ((string)(this[this.tableBranch.BarangayCodeColumn]));
+                }
+                set {
+                    this[this.tableBranch.BarangayCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public CurrencyRow CurrencyRow {
+                get {
+                    return ((CurrencyRow)(this.GetParentRow(this.Table.ParentRelations["FK_Branch_Currency_CurrencyId"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Branch_Currency_CurrencyId"]);
                 }
             }
             
@@ -12637,6 +12701,17 @@ namespace PresentationLayer {
                 }
                 set {
                     this[this.tableCurrency.DescriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public BranchRow[] GetBranchRows() {
+                if ((this.Table.ChildRelations["FK_Branch_Currency_CurrencyId"] == null)) {
+                    return new BranchRow[0];
+                }
+                else {
+                    return ((BranchRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Branch_Currency_CurrencyId"])));
                 }
             }
             
@@ -15172,34 +15247,34 @@ namespace PresentationLayer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Address {
+            public string CityCode {
                 get {
-                    return ((string)(this[this.tableVendor.AddressColumn]));
+                    return ((string)(this[this.tableVendor.CityCodeColumn]));
                 }
                 set {
-                    this[this.tableVendor.AddressColumn] = value;
+                    this[this.tableVendor.CityCodeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string City {
+            public string ProvinceCode {
                 get {
-                    return ((string)(this[this.tableVendor.CityColumn]));
+                    return ((string)(this[this.tableVendor.ProvinceCodeColumn]));
                 }
                 set {
-                    this[this.tableVendor.CityColumn] = value;
+                    this[this.tableVendor.ProvinceCodeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string State {
+            public string RegionCode {
                 get {
-                    return ((string)(this[this.tableVendor.StateColumn]));
+                    return ((string)(this[this.tableVendor.RegionCodeColumn]));
                 }
                 set {
-                    this[this.tableVendor.StateColumn] = value;
+                    this[this.tableVendor.RegionCodeColumn] = value;
                 }
             }
             
@@ -15244,6 +15319,17 @@ namespace PresentationLayer {
                 }
                 set {
                     this[this.tableVendor.ContactPersonColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string BarangayCode {
+                get {
+                    return ((string)(this[this.tableVendor.BarangayCodeColumn]));
+                }
+                set {
+                    this[this.tableVendor.BarangayCodeColumn] = value;
                 }
             }
             
@@ -17574,13 +17660,14 @@ SELECT BillId, BillName, GoodsReceivedNoteId, VendorDONumber, VendorInvoiceNumbe
             tableMapping.ColumnMappings.Add("BranchName", "BranchName");
             tableMapping.ColumnMappings.Add("Description", "Description");
             tableMapping.ColumnMappings.Add("CurrencyId", "CurrencyId");
-            tableMapping.ColumnMappings.Add("Address", "Address");
-            tableMapping.ColumnMappings.Add("City", "City");
-            tableMapping.ColumnMappings.Add("State", "State");
+            tableMapping.ColumnMappings.Add("CityCode", "CityCode");
+            tableMapping.ColumnMappings.Add("ProvinceCode", "ProvinceCode");
+            tableMapping.ColumnMappings.Add("RegionCode", "RegionCode");
             tableMapping.ColumnMappings.Add("ZipCode", "ZipCode");
             tableMapping.ColumnMappings.Add("Phone", "Phone");
             tableMapping.ColumnMappings.Add("Email", "Email");
             tableMapping.ColumnMappings.Add("ContactPerson", "ContactPerson");
+            tableMapping.ColumnMappings.Add("BarangayCode", "BarangayCode");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -17591,34 +17678,36 @@ SELECT BillId, BillName, GoodsReceivedNoteId, VendorDONumber, VendorInvoiceNumbe
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CurrencyId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CurrencyId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Branch] ([BranchName], [Description], [CurrencyId], [Address], [City], [State], [ZipCode], [Phone], [Email], [ContactPerson]) VALUES (@BranchName, @Description, @CurrencyId, @Address, @City, @State, @ZipCode, @Phone, @Email, @ContactPerson);
-SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipCode, Phone, Email, ContactPerson FROM Branch WHERE (BranchId = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Branch] ([BranchName], [Description], [CurrencyId], [CityCode], [ProvinceCode], [RegionCode], [ZipCode], [Phone], [Email], [ContactPerson], [BarangayCode]) VALUES (@BranchName, @Description, @CurrencyId, @CityCode, @ProvinceCode, @RegionCode, @ZipCode, @Phone, @Email, @ContactPerson, @BarangayCode);
+SELECT BranchId, BranchName, Description, CurrencyId, CityCode, ProvinceCode, RegionCode, ZipCode, Phone, Email, ContactPerson, BarangayCode FROM Branch WHERE (BranchId = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BranchName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BranchName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CurrencyId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CurrencyId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Address", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@City", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "City", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@State", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CityCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CityCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProvinceCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProvinceCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RegionCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RegionCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ZipCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ZipCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Email", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContactPerson", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactPerson", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BarangayCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BarangayCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Branch] SET [BranchName] = @BranchName, [Description] = @Description, [CurrencyId] = @CurrencyId, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [ContactPerson] = @ContactPerson WHERE (([BranchId] = @Original_BranchId) AND ([CurrencyId] = @Original_CurrencyId));
-SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipCode, Phone, Email, ContactPerson FROM Branch WHERE (BranchId = @BranchId)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Branch] SET [BranchName] = @BranchName, [Description] = @Description, [CurrencyId] = @CurrencyId, [CityCode] = @CityCode, [ProvinceCode] = @ProvinceCode, [RegionCode] = @RegionCode, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [ContactPerson] = @ContactPerson, [BarangayCode] = @BarangayCode WHERE (([BranchId] = @Original_BranchId) AND ([CurrencyId] = @Original_CurrencyId));
+SELECT BranchId, BranchName, Description, CurrencyId, CityCode, ProvinceCode, RegionCode, ZipCode, Phone, Email, ContactPerson, BarangayCode FROM Branch WHERE (BranchId = @BranchId)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BranchName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BranchName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CurrencyId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CurrencyId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Address", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@City", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "City", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@State", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CityCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CityCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProvinceCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProvinceCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RegionCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RegionCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ZipCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ZipCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Email", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContactPerson", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactPerson", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BarangayCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BarangayCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BranchId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BranchId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CurrencyId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CurrencyId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BranchId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "BranchId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -17638,8 +17727,8 @@ SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipC
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipCo" +
-                "de, Phone, Email, ContactPerson FROM dbo.Branch";
+            this._commandCollection[0].CommandText = "SELECT BranchId, BranchName, Description, CurrencyId, CityCode, ProvinceCode, Reg" +
+                "ionCode, ZipCode, Phone, Email, ContactPerson, BarangayCode FROM dbo.Branch";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -17723,7 +17812,7 @@ SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipC
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string BranchName, string Description, int CurrencyId, string Address, string City, string State, string ZipCode, string Phone, string Email, string ContactPerson) {
+        public virtual int Insert(string BranchName, string Description, int CurrencyId, string CityCode, string ProvinceCode, string RegionCode, string ZipCode, string Phone, string Email, string ContactPerson, string BarangayCode) {
             if ((BranchName == null)) {
                 throw new global::System.ArgumentNullException("BranchName");
             }
@@ -17737,23 +17826,23 @@ SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipC
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Description));
             }
             this.Adapter.InsertCommand.Parameters[2].Value = ((int)(CurrencyId));
-            if ((Address == null)) {
-                throw new global::System.ArgumentNullException("Address");
+            if ((CityCode == null)) {
+                throw new global::System.ArgumentNullException("CityCode");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Address));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(CityCode));
             }
-            if ((City == null)) {
-                throw new global::System.ArgumentNullException("City");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(City));
-            }
-            if ((State == null)) {
-                throw new global::System.ArgumentNullException("State");
+            if ((ProvinceCode == null)) {
+                throw new global::System.ArgumentNullException("ProvinceCode");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(State));
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(ProvinceCode));
+            }
+            if ((RegionCode == null)) {
+                throw new global::System.ArgumentNullException("RegionCode");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(RegionCode));
             }
             if ((ZipCode == null)) {
                 throw new global::System.ArgumentNullException("ZipCode");
@@ -17779,6 +17868,12 @@ SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipC
             else {
                 this.Adapter.InsertCommand.Parameters[9].Value = ((string)(ContactPerson));
             }
+            if ((BarangayCode == null)) {
+                throw new global::System.ArgumentNullException("BarangayCode");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(BarangayCode));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17799,7 +17894,7 @@ SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipC
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string BranchName, string Description, int CurrencyId, string Address, string City, string State, string ZipCode, string Phone, string Email, string ContactPerson, int Original_BranchId, int Original_CurrencyId, int BranchId) {
+        public virtual int Update(string BranchName, string Description, int CurrencyId, string CityCode, string ProvinceCode, string RegionCode, string ZipCode, string Phone, string Email, string ContactPerson, string BarangayCode, int Original_BranchId, int Original_CurrencyId, int BranchId) {
             if ((BranchName == null)) {
                 throw new global::System.ArgumentNullException("BranchName");
             }
@@ -17813,23 +17908,23 @@ SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipC
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Description));
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(CurrencyId));
-            if ((Address == null)) {
-                throw new global::System.ArgumentNullException("Address");
+            if ((CityCode == null)) {
+                throw new global::System.ArgumentNullException("CityCode");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Address));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(CityCode));
             }
-            if ((City == null)) {
-                throw new global::System.ArgumentNullException("City");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(City));
-            }
-            if ((State == null)) {
-                throw new global::System.ArgumentNullException("State");
+            if ((ProvinceCode == null)) {
+                throw new global::System.ArgumentNullException("ProvinceCode");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(State));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(ProvinceCode));
+            }
+            if ((RegionCode == null)) {
+                throw new global::System.ArgumentNullException("RegionCode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(RegionCode));
             }
             if ((ZipCode == null)) {
                 throw new global::System.ArgumentNullException("ZipCode");
@@ -17855,9 +17950,15 @@ SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipC
             else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(ContactPerson));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_BranchId));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_CurrencyId));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(BranchId));
+            if ((BarangayCode == null)) {
+                throw new global::System.ArgumentNullException("BarangayCode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(BarangayCode));
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_BranchId));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_CurrencyId));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(BranchId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17878,8 +17979,8 @@ SELECT BranchId, BranchName, Description, CurrencyId, Address, City, State, ZipC
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string BranchName, string Description, int CurrencyId, string Address, string City, string State, string ZipCode, string Phone, string Email, string ContactPerson, int Original_BranchId, int Original_CurrencyId) {
-            return this.Update(BranchName, Description, CurrencyId, Address, City, State, ZipCode, Phone, Email, ContactPerson, Original_BranchId, Original_CurrencyId, Original_BranchId);
+        public virtual int Update(string BranchName, string Description, int CurrencyId, string CityCode, string ProvinceCode, string RegionCode, string ZipCode, string Phone, string Email, string ContactPerson, string BarangayCode, int Original_BranchId, int Original_CurrencyId) {
+            return this.Update(BranchName, Description, CurrencyId, CityCode, ProvinceCode, RegionCode, ZipCode, Phone, Email, ContactPerson, BarangayCode, Original_BranchId, Original_CurrencyId, Original_BranchId);
         }
     }
     
@@ -26506,13 +26607,14 @@ SELECT UserProfileId, FirstName, LastName, Email, Password, ConfirmPassword, Old
             tableMapping.ColumnMappings.Add("VendorId", "VendorId");
             tableMapping.ColumnMappings.Add("VendorName", "VendorName");
             tableMapping.ColumnMappings.Add("VendorTypeId", "VendorTypeId");
-            tableMapping.ColumnMappings.Add("Address", "Address");
-            tableMapping.ColumnMappings.Add("City", "City");
-            tableMapping.ColumnMappings.Add("State", "State");
+            tableMapping.ColumnMappings.Add("CityCode", "CityCode");
+            tableMapping.ColumnMappings.Add("ProvinceCode", "ProvinceCode");
+            tableMapping.ColumnMappings.Add("RegionCode", "RegionCode");
             tableMapping.ColumnMappings.Add("ZipCode", "ZipCode");
             tableMapping.ColumnMappings.Add("Phone", "Phone");
             tableMapping.ColumnMappings.Add("Email", "Email");
             tableMapping.ColumnMappings.Add("ContactPerson", "ContactPerson");
+            tableMapping.ColumnMappings.Add("BarangayCode", "BarangayCode");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -26523,32 +26625,34 @@ SELECT UserProfileId, FirstName, LastName, Email, Password, ConfirmPassword, Old
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VendorTypeId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorTypeId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Vendor] ([VendorName], [VendorTypeId], [Address], [City], [State], [ZipCode], [Phone], [Email], [ContactPerson]) VALUES (@VendorName, @VendorTypeId, @Address, @City, @State, @ZipCode, @Phone, @Email, @ContactPerson);
-SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone, Email, ContactPerson FROM Vendor WHERE (VendorId = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Vendor] ([VendorName], [VendorTypeId], [CityCode], [ProvinceCode], [RegionCode], [ZipCode], [Phone], [Email], [ContactPerson], [BarangayCode]) VALUES (@VendorName, @VendorTypeId, @CityCode, @ProvinceCode, @RegionCode, @ZipCode, @Phone, @Email, @ContactPerson, @BarangayCode);
+SELECT VendorId, VendorName, VendorTypeId, CityCode, ProvinceCode, RegionCode, ZipCode, Phone, Email, ContactPerson, BarangayCode FROM Vendor WHERE (VendorId = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VendorName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VendorTypeId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorTypeId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Address", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@City", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "City", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@State", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CityCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CityCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProvinceCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProvinceCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RegionCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RegionCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ZipCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ZipCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Email", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContactPerson", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactPerson", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BarangayCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BarangayCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Vendor] SET [VendorName] = @VendorName, [VendorTypeId] = @VendorTypeId, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [ContactPerson] = @ContactPerson WHERE (([VendorId] = @Original_VendorId) AND ([VendorTypeId] = @Original_VendorTypeId));
-SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone, Email, ContactPerson FROM Vendor WHERE (VendorId = @VendorId)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Vendor] SET [VendorName] = @VendorName, [VendorTypeId] = @VendorTypeId, [CityCode] = @CityCode, [ProvinceCode] = @ProvinceCode, [RegionCode] = @RegionCode, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [ContactPerson] = @ContactPerson, [BarangayCode] = @BarangayCode WHERE (([VendorId] = @Original_VendorId) AND ([VendorTypeId] = @Original_VendorTypeId));
+SELECT VendorId, VendorName, VendorTypeId, CityCode, ProvinceCode, RegionCode, ZipCode, Phone, Email, ContactPerson, BarangayCode FROM Vendor WHERE (VendorId = @VendorId)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VendorName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VendorTypeId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorTypeId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Address", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@City", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "City", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@State", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CityCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CityCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProvinceCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProvinceCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RegionCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RegionCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ZipCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ZipCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Email", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContactPerson", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactPerson", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BarangayCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BarangayCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VendorId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VendorTypeId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorTypeId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VendorId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "VendorId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -26568,8 +26672,8 @@ SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone,
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone, " +
-                "Email, ContactPerson FROM dbo.Vendor";
+            this._commandCollection[0].CommandText = "SELECT VendorId, VendorName, VendorTypeId, CityCode, ProvinceCode, RegionCode, Zi" +
+                "pCode, Phone, Email, ContactPerson, BarangayCode FROM dbo.Vendor";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -26653,7 +26757,7 @@ SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string VendorName, int VendorTypeId, string Address, string City, string State, string ZipCode, string Phone, string Email, string ContactPerson) {
+        public virtual int Insert(string VendorName, int VendorTypeId, string CityCode, string ProvinceCode, string RegionCode, string ZipCode, string Phone, string Email, string ContactPerson, string BarangayCode) {
             if ((VendorName == null)) {
                 throw new global::System.ArgumentNullException("VendorName");
             }
@@ -26661,23 +26765,23 @@ SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone,
                 this.Adapter.InsertCommand.Parameters[0].Value = ((string)(VendorName));
             }
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(VendorTypeId));
-            if ((Address == null)) {
-                throw new global::System.ArgumentNullException("Address");
+            if ((CityCode == null)) {
+                throw new global::System.ArgumentNullException("CityCode");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Address));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(CityCode));
             }
-            if ((City == null)) {
-                throw new global::System.ArgumentNullException("City");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(City));
-            }
-            if ((State == null)) {
-                throw new global::System.ArgumentNullException("State");
+            if ((ProvinceCode == null)) {
+                throw new global::System.ArgumentNullException("ProvinceCode");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(State));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(ProvinceCode));
+            }
+            if ((RegionCode == null)) {
+                throw new global::System.ArgumentNullException("RegionCode");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(RegionCode));
             }
             if ((ZipCode == null)) {
                 throw new global::System.ArgumentNullException("ZipCode");
@@ -26703,6 +26807,12 @@ SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone,
             else {
                 this.Adapter.InsertCommand.Parameters[8].Value = ((string)(ContactPerson));
             }
+            if ((BarangayCode == null)) {
+                throw new global::System.ArgumentNullException("BarangayCode");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(BarangayCode));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -26723,7 +26833,7 @@ SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string VendorName, int VendorTypeId, string Address, string City, string State, string ZipCode, string Phone, string Email, string ContactPerson, int Original_VendorId, int Original_VendorTypeId, int VendorId) {
+        public virtual int Update(string VendorName, int VendorTypeId, string CityCode, string ProvinceCode, string RegionCode, string ZipCode, string Phone, string Email, string ContactPerson, string BarangayCode, int Original_VendorId, int Original_VendorTypeId, int VendorId) {
             if ((VendorName == null)) {
                 throw new global::System.ArgumentNullException("VendorName");
             }
@@ -26731,23 +26841,23 @@ SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone,
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(VendorName));
             }
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(VendorTypeId));
-            if ((Address == null)) {
-                throw new global::System.ArgumentNullException("Address");
+            if ((CityCode == null)) {
+                throw new global::System.ArgumentNullException("CityCode");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Address));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(CityCode));
             }
-            if ((City == null)) {
-                throw new global::System.ArgumentNullException("City");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(City));
-            }
-            if ((State == null)) {
-                throw new global::System.ArgumentNullException("State");
+            if ((ProvinceCode == null)) {
+                throw new global::System.ArgumentNullException("ProvinceCode");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(State));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(ProvinceCode));
+            }
+            if ((RegionCode == null)) {
+                throw new global::System.ArgumentNullException("RegionCode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(RegionCode));
             }
             if ((ZipCode == null)) {
                 throw new global::System.ArgumentNullException("ZipCode");
@@ -26773,9 +26883,15 @@ SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone,
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(ContactPerson));
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_VendorId));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_VendorTypeId));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(VendorId));
+            if ((BarangayCode == null)) {
+                throw new global::System.ArgumentNullException("BarangayCode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(BarangayCode));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_VendorId));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_VendorTypeId));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(VendorId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -26796,8 +26912,8 @@ SELECT VendorId, VendorName, VendorTypeId, Address, City, State, ZipCode, Phone,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string VendorName, int VendorTypeId, string Address, string City, string State, string ZipCode, string Phone, string Email, string ContactPerson, int Original_VendorId, int Original_VendorTypeId) {
-            return this.Update(VendorName, VendorTypeId, Address, City, State, ZipCode, Phone, Email, ContactPerson, Original_VendorId, Original_VendorTypeId, Original_VendorId);
+        public virtual int Update(string VendorName, int VendorTypeId, string CityCode, string ProvinceCode, string RegionCode, string ZipCode, string Phone, string Email, string ContactPerson, string BarangayCode, int Original_VendorId, int Original_VendorTypeId) {
+            return this.Update(VendorName, VendorTypeId, CityCode, ProvinceCode, RegionCode, ZipCode, Phone, Email, ContactPerson, BarangayCode, Original_VendorId, Original_VendorTypeId, Original_VendorId);
         }
     }
     
@@ -28211,6 +28327,15 @@ SELECT WarehouseId, WarehouseName, Description, BranchId FROM Warehouse WHERE (W
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(inventorymanagementsystemDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._currencyTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Currency.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._currencyTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._customerTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.CustomerType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -28226,15 +28351,6 @@ SELECT WarehouseId, WarehouseName, Description, BranchId FROM Warehouse WHERE (W
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._branchTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._currencyTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Currency.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._currencyTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -28491,6 +28607,14 @@ SELECT WarehouseId, WarehouseName, Description, BranchId FROM Warehouse WHERE (W
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(inventorymanagementsystemDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._currencyTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Currency.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._currencyTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._customerTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.CustomerType.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -28504,14 +28628,6 @@ SELECT WarehouseId, WarehouseName, Description, BranchId FROM Warehouse WHERE (W
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._branchTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._currencyTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Currency.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._currencyTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -28957,14 +29073,6 @@ SELECT WarehouseId, WarehouseName, Description, BranchId FROM Warehouse WHERE (W
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._currencyTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Currency.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._currencyTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._branchTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Branch.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -28978,6 +29086,14 @@ SELECT WarehouseId, WarehouseName, Description, BranchId FROM Warehouse WHERE (W
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._customerTypeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._currencyTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Currency.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._currencyTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

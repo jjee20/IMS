@@ -17,10 +17,17 @@
     <None Remove="Json\philippine_provinces_cities_municipalities_and_barangays_2019v2.json" />
     <None Remove="Json\province.json" />
     <None Remove="Json\region.json" />
+    <None Remove="Reports\BillTypeListReport.rdlc" />
     <None Remove="Reports\CustomerDetailReport.rdlc" />
     <None Remove="Reports\CustomerListReport.rdlc" />
     <None Remove="Reports\CustomerTypeListReport.rdlc" />
+    <None Remove="Reports\InvoiceTypeListReport.rdlc" />
+    <None Remove="Reports\PaymentTypeListReport.rdlc" />
+    <None Remove="Reports\ProductTypeListReport.rdlc" />
+    <None Remove="Reports\PurchaseTypeListReport.rdlc" />
     <None Remove="Reports\SalesTypeListReport.rdlc" />
+    <None Remove="Reports\ShipmentTypeListReport.rdlc" />
+    <None Remove="Reports\VendorTypeListReport.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +47,27 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\CustomerListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\BillTypeListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\VendorTypeListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\ShipmentTypeListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\PurchaseTypeListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\ProductTypeListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\PaymentTypeListReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\InvoiceTypeListReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\SalesTypeListReport.rdlc">
@@ -83,6 +111,33 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserControls\BillTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\BranchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\CurrencyView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\PaymentTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\InvoiceTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ProductTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\PurchaseTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ShipmentTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\VendorTypeView.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\SalesTypeView.cs">
       <SubType>UserControl</SubType>

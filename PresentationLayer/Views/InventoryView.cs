@@ -34,32 +34,101 @@ namespace PresentationLayer.Views
 
             tcMain.SelectedIndexChanged += delegate
             {
-                // Check if the selected tab is the one where you want to raise the event
                 if (tcMain.SelectedTab == tbCustomerType)
                 {
-                    // Raise the ShowCustomerType event
                     ShowCustomerType?.Invoke(this, EventArgs.Empty);
                 }
-                // Check if the selected tab is the one where you want to raise the event
-                if (tcMain.SelectedTab == tbCustomer)
+                else if (tcMain.SelectedTab == tbCustomer)
                 {
-                    // Raise the ShowCustomerType event
                     ShowCustomer?.Invoke(this, EventArgs.Empty);
                 }
-                // Check if the selected tab is the one where you want to raise the event
-                if (tcMain.SelectedTab == tbSalesType)
+                else if (tcMain.SelectedTab == tbSalesType)
                 {
-                    // Raise the ShowCustomerType event
                     ShowSalesType?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbSalesOrder)
+                {
+                    ShowSalesOrder?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbShipment)
+                {
+                    ShowShipment?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbInvoice)
+                {
+                    ShowInvoice?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbPaymentReceive)
+                {
+                    ShowPaymentReceive?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbVendorType)
+                {
+                    ShowVendorType?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbPurchaseType)
+                {
+                    ShowPurchaseType?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbPurchaseOrder)
+                {
+                    ShowPurchaseOrder?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbGRN)
+                {
+                    ShowGRN?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbBill)
+                {
+                    ShowBill?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbPaymentVoucher)
+                {
+                    ShowPaymentVoucher?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbProduct)
+                {
+                    ShowProduct?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbProductType)
+                {
+                    ShowProductType?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbUnitOfMeasure)
+                {
+                    ShowUnitOfMeasure?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbConfiguration)
+                {
+                    ShowConfiguration?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbUserAndRole)
+                {
+                    ShowUserAndRole?.Invoke(this, EventArgs.Empty);
                 }
             };
         }
-            public TabPage TabControlPage
-            {
-                get { return tcMain.SelectedTab; }
-            }   
-            public event EventHandler ShowCustomerType;  
-            public event EventHandler ShowCustomer;  
-            public event EventHandler ShowSalesType;  
+        public TabPage TabControlPage
+        {
+            get { return tcMain.SelectedTab; }
+        }
+        public event EventHandler ShowCustomerType;
+        public event EventHandler ShowCustomer;
+        public event EventHandler ShowSalesType;
+        public event EventHandler ShowSalesOrder;
+        public event EventHandler ShowShipment;
+        public event EventHandler ShowInvoice;
+        public event EventHandler ShowPaymentReceive;
+        public event EventHandler ShowVendorType;
+        public event EventHandler ShowPurchaseType;
+        public event EventHandler ShowPurchaseOrder;
+        public event EventHandler ShowGRN;
+        public event EventHandler ShowBill;
+        public event EventHandler ShowPaymentVoucher;
+        public event EventHandler ShowProduct;
+        public event EventHandler ShowProductType;
+        public event EventHandler ShowUnitOfMeasure;
+        public event EventHandler ShowConfiguration;
+        public event EventHandler ShowUserAndRole;
     }
 }

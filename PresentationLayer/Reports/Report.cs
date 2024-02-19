@@ -12,13 +12,13 @@ namespace PresentationLayer.Reports
     {
         public static void Load(string path, ReportDataSource? dataSource, LocalReport? report, List<ReportParameter>? parameters = null)
         {
-            // Sample
-            // Load report definition
             using (var fs = new FileStream(path, FileMode.Open))
             {
                 report.LoadReportDefinition(fs);
-                report.DataSources.Add(dataSource);
-                report.SetParameters(parameters);
+                if (dataSource != null)
+                    report.DataSources.Add(dataSource);
+                if (parameters != null)
+                    report.SetParameters(parameters);
             }
         }
     }
