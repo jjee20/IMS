@@ -16,12 +16,14 @@ namespace PresentationLayer.Presenters
         private IInventoryView _view;
         private IUnitOfWork _unitOfWork;
         private CustomerTypePresenter _customerTypePresenter;
+        private CustomerPresenter _customerPresenter;
         public InventoryPresenter(IInventoryView view, IUnitOfWork unitOfWork)
         {
             _view = view;
             _unitOfWork = unitOfWork;
 
             _view.ShowCustomerType += ShowCustomerType;
+            _view.ShowCustomer += ShowCustomer;
             //var customerTypeView = new CustomerTypeView();
             //_customerTypePresenter = new CustomerTypePresenter(customerTypeView, unitOfWork);
         }
@@ -30,6 +32,11 @@ namespace PresentationLayer.Presenters
         {
             ICustomerTypeView view = CustomerTypeView.GetInstance((TabPage)_view.TabControlPage);
             new CustomerTypePresenter(view, _unitOfWork);
+        }
+        private void ShowCustomer(object? sender, EventArgs e)
+        {
+            ICustomerView view = CustomerView.GetInstance((TabPage)_view.TabControlPage);
+            new CustomerPresenter(view, _unitOfWork);
         }
     }
 }

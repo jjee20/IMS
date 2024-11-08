@@ -1,4 +1,6 @@
-﻿namespace PresentationLayer.Views.IViews
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PresentationLayer.Views.IViews
 {
     public interface ICustomerTypeView
     {

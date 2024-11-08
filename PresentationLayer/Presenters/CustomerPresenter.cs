@@ -20,12 +20,12 @@ namespace PresentationLayer.Presenters
         private IEnumerable<Customer> CustomerList;
         private IEnumerable<CustomerType> CustomerTypeList;
 
-        private List<string> GetBarangayList;
-        private List<string> GetMunicipalityList;
-        private List<string> GetProvinceList;
-        private List<string> GetRegionList;
+        //private List<string> GetBarangayList;
+        //private List<string> GetMunicipalityList;
+        //private List<string> GetProvinceList;
+        //private List<string> GetRegionList;
 
-        string reportFileName = "philippine_provinces_cities_municipalities_and_barangays_2019v2";
+        string reportFileName = "philippine_provinces_cities_municipalities_and_barangays_2019v2.json";
         string reportDirectory = Path.Combine(Application.StartupPath, "Json");
         public CustomerPresenter(ICustomerView view, IUnitOfWork unitOfWork) {
 
@@ -36,10 +36,10 @@ namespace PresentationLayer.Presenters
             CustomerBindingSource = new BindingSource();
             CustomerTypeBindingSource = new BindingSource();
 
-            GetBarangayList = new List<string>();
-            GetMunicipalityList = new List<string>();
-            GetProvinceList = new List<string>();
-            GetRegionList = new List<string>();
+            //GetBarangayList = new List<string>();
+            //GetMunicipalityList = new List<string>();
+            //GetProvinceList = new List<string>();
+            //GetRegionList = new List<string>();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -53,37 +53,38 @@ namespace PresentationLayer.Presenters
             //Source Binding
             _view.SetCustomerListBindingSource(CustomerBindingSource);
             _view.SetCustomerTypeListBindingSource(CustomerTypeBindingSource);
-            _view.SetAddressBindingSource(GetBarangayList, GetMunicipalityList,
-                                          GetProvinceList, GetRegionList);
+            //_view.SetAddressBindingSource(GetBarangayList, GetMunicipalityList,
+            //                              GetProvinceList, GetRegionList);
 
             //Load
 
             LoadAllCustomerList();
-            LoadAddress();
+            LoadAllCustomerTypeList();
+            //LoadAddress();
         }
 
-        private void LoadAddress()
-        {
-            string reportPath = Path.Combine(reportDirectory, reportFileName);
-            string addressData = File.ReadAllText(reportPath);
-            var regions = JsonConvert.DeserializeObject<Root>(addressData);
-            foreach (var region in regions.Items)
-            {
-                GetRegionList.Add(region.Value.ToString());
-                foreach (var province in region.Value.province.province_list)
-                {
-                    GetProvinceList.Add(province.Value.ToString());
-                    foreach (var municipality in province.Value.municipality_list)
-                    {
-                        GetMunicipalityList.Add(municipality.Value.ToString());
-                        foreach (var barangay in municipality.Value.barangay_list)
-                        {
-                            GetBarangayList.Add(barangay);
-                        }
-                    }
-                }
-            }
-        }
+        //private void LoadAddress()
+        //{
+        //    string reportPath = Path.Combine(reportDirectory, reportFileName);
+        //    string addressData = File.ReadAllText(reportPath);
+        //    var regions = JsonConvert.DeserializeObject<Root>(addressData);
+        //    foreach (var region in regions.Items)
+        //    {
+        //        GetRegionList.Add(region.Value.ToString());
+        //        foreach (var province in region.Value.province.province_list)
+        //        {
+        //            GetProvinceList.Add(province.Value.ToString());
+        //            foreach (var municipality in province.Value.municipality_list)
+        //            {
+        //                GetMunicipalityList.Add(municipality.Value.ToString());
+        //                foreach (var barangay in municipality.Value.barangay_list)
+        //                {
+        //                    GetBarangayList.Add(barangay);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         private void AddNew(object? sender, EventArgs e)
         {
@@ -99,23 +100,16 @@ namespace PresentationLayer.Presenters
                 return;
             }
 
-            if(_view.CustomerId == 0)
-            {
-
-            }
-            else
-            {
-
-            }
             var model = new Customer()
             {
                 
                 CustomerId = _view.CustomerId,
                 CustomerName = _view.CustomerName,
                 CustomerTypeId = _view.CustomerTypeId,
-                //Address = _view.Address,
-                //City = _view.City,
-                //State = _view.State,
+                Region = _view.Region,
+                Municipality = _view.Municipality,
+                Province = _view.Province,
+                Barangay = _view.Barangay,
                 ZipCode = _view.ZipCode,
                 Phone = _view.Phone,
                 Email = _view.Email,
@@ -209,6 +203,7 @@ namespace PresentationLayer.Presenters
         private void CleanviewFields()
         {
             LoadAllCustomerList();
+            LoadAllCustomerTypeList();
             _view.CustomerId = 0;
             _view.CustomerName = "";
             _view.CustomerTypeId = 0;
@@ -227,5 +222,11 @@ namespace PresentationLayer.Presenters
             CustomerList = _unitOfWork.Customer.GetAll(includeProperties: "CustomerType");
             CustomerBindingSource.DataSource = CustomerList;//Set data source.
         }
+        private void LoadAllCustomerTypeList()
+        {
+            CustomerTypeList = _unitOfWork.CustomerType.GetAll();
+            CustomerTypeBindingSource.DataSource = CustomerTypeList;//Set data source.
+        }
+
     }
 }

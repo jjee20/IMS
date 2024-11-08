@@ -24,6 +24,7 @@ namespace DomainLayer.Models
         [Display(Name = "Full Payment")]
         public bool IsFullPayment { get; set; } = true;
 
+
         [ForeignKey("BillId")]
         public virtual Bill Bill { get; set; }
 

@@ -25,5 +25,8 @@ namespace DomainLayer.Models
 
         [ForeignKey("PaymentTypeId")]
         public virtual PaymentType PaymentType { get; set; }
+
+        [ForeignKey("InvoiceId")]
+        public virtual Invoice Invoice { get; set; }
     }
 }

@@ -27,5 +27,6 @@ namespace DomainLayer.Models
         public int BillTypeId { get; set; }
         [ForeignKey("BillTypeId")]
         public virtual BillType BillType { get; set; }
+        public virtual GoodsReceivedNote GoodsReceivedNote { get; set; }
     }
 }

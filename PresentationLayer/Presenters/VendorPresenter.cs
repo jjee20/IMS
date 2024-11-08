@@ -1,0 +1,232 @@
+﻿using DomainLayer.Models;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
+using Microsoft.Reporting.WinForms;
+using Newtonsoft.Json;
+using PresentationLayer.Presenters.Commons;
+using PresentationLayer.Reports;
+using PresentationLayer.Views.IViews;
+using ServiceLayer.Services.IRepositories;
+using static PresentationLayer.Json.Address;
+
+namespace PresentationLayer.Presenters
+{
+    public class VendorPresenter
+    {
+        public IVendorView _view;
+        private IUnitOfWork _unitOfWork;
+        private BindingSource VendorBindingSource;
+        private BindingSource VendorTypeBindingSource;
+
+        private IEnumerable<Vendor> VendorList;
+        private IEnumerable<VendorType> VendorTypeList;
+
+        //private List<string> GetBarangayList;
+        //private List<string> GetMunicipalityList;
+        //private List<string> GetProvinceList;
+        //private List<string> GetRegionList;
+
+        string reportFileName = "philippine_provinces_cities_municipalities_and_barangays_2019v2.json";
+        string reportDirectory = Path.Combine(Application.StartupPath, "Json");
+        public VendorPresenter(IVendorView view, IUnitOfWork unitOfWork) {
+
+            //Initialize
+
+            _view = view;
+            _unitOfWork = unitOfWork;
+            VendorBindingSource = new BindingSource();
+            VendorTypeBindingSource = new BindingSource();
+
+            //GetBarangayList = new List<string>();
+            //GetMunicipalityList = new List<string>();
+            //GetProvinceList = new List<string>();
+            //GetRegionList = new List<string>();
+
+            //Events
+            _view.AddNewEvent += AddNew;
+            _view.SaveEvent += Save;
+            _view.SearchEvent += Search;
+            _view.EditEvent += Edit;
+            _view.DeleteEvent += Delete;
+            _view.PrintEvent += Print;
+            _view.RefreshEvent += Return;
+
+            //Source Binding
+            _view.SetVendorListBindingSource(VendorBindingSource);
+            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
+            //_view.SetAddressBindingSource(GetBarangayList, GetMunicipalityList,
+            //                              GetProvinceList, GetRegionList);
+
+            //Load
+
+            LoadAllVendorList();
+            LoadAllVendorTypeList();
+            //LoadAddress();
+        }
+
+        //private void LoadAddress()
+        //{
+        //    string reportPath = Path.Combine(reportDirectory, reportFileName);
+        //    string addressData = File.ReadAllText(reportPath);
+        //    var regions = JsonConvert.DeserializeObject<Root>(addressData);
+        //    foreach (var region in regions.Items)
+        //    {
+        //        GetRegionList.Add(region.Value.ToString());
+        //        foreach (var province in region.Value.province.province_list)
+        //        {
+        //            GetProvinceList.Add(province.Value.ToString());
+        //            foreach (var municipality in province.Value.municipality_list)
+        //            {
+        //                GetMunicipalityList.Add(municipality.Value.ToString());
+        //                foreach (var barangay in municipality.Value.barangay_list)
+        //                {
+        //                    GetBarangayList.Add(barangay);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+        private void AddNew(object? sender, EventArgs e)
+        {
+            _view.IsEdit = false;
+            CleanviewFields();
+        }
+        private void Save(object? sender, EventArgs e)
+        {
+            var Entity = _unitOfWork.Vendor.Get(c => c.VendorName == _view.VendorName);
+            if (Entity != null)
+            {
+                _view.Message = "Vendor is already added.";
+                return;
+            }
+
+            var model = new Vendor()
+            {
+                
+                VendorId = _view.VendorId,
+                VendorName = _view.VendorName,
+                VendorTypeId = _view.VendorTypeId,
+                Region = _view.Region,
+                Municipality = _view.Municipality,
+                Province = _view.Province,
+                Barangay = _view.Barangay,
+                ZipCode = _view.ZipCode,
+                Phone = _view.Phone,
+                Email = _view.Email,
+                ContactPerson = _view.ContactPerson,
+            };
+
+            try
+            {
+                new ModelDataValidation().Validate(model);
+                if (_view.IsEdit)//Edit model
+                {
+                    _unitOfWork.Vendor.Update(model);
+                    _unitOfWork.Save();
+                    _view.Message = "Vendor edited successfuly";
+                }
+                else //Add new model
+                {
+                    _unitOfWork.Vendor.Add(model);
+                    _unitOfWork.Save();
+                    _view.Message = "Vendor added sucessfully";
+                }
+                _view.IsSuccessful = true;
+                CleanviewFields();
+            }
+            catch (Exception ex)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = ex.Message;
+            }
+        }
+        private void Search(object? sender, EventArgs e)
+        {
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            if (emptyValue == false)
+            {
+                VendorList = _unitOfWork.Vendor.GetAll(c => c.VendorName.Contains(_view.SearchValue));
+                VendorBindingSource.DataSource = VendorList;
+            }
+            else
+            {
+                VendorList = _unitOfWork.Vendor.GetAll();
+                VendorBindingSource.DataSource = VendorList;
+            }
+        }
+        private void Edit(object? sender, EventArgs e)
+        {
+            var entity = (Vendor)VendorBindingSource.Current;
+            _view.VendorId = entity.VendorId;
+            _view.VendorName = entity.VendorName;
+            _view.VendorTypeId = entity.VendorTypeId;
+            _view.Barangay = entity.Barangay;
+            _view.Municipality = entity.Municipality;
+            _view.Province = entity.Province;
+            _view.Region = entity.Region;
+            _view.ZipCode = entity.ZipCode;
+            _view.Phone = entity.Phone;
+            _view.Email = entity.Email;
+            _view.ContactPerson = entity.ContactPerson;
+        }
+        private void Delete(object? sender, EventArgs e)
+        {
+            try
+            {
+                var entity = (Vendor)VendorBindingSource.Current;
+                _unitOfWork.Vendor.Remove(entity);
+                _unitOfWork.Save();
+                _view.IsSuccessful = true;
+                _view.Message = "Vendor deleted successfully";
+                LoadAllVendorList();
+            }
+            catch (Exception)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "An error ocurred, could not delete Vendor type";
+            }
+        }
+        private void Print(object? sender, EventArgs e)
+        {
+            string reportFileName = "VendorReport.rdlc";
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportPath = Path.Combine(reportDirectory, reportFileName);
+            var localReport = new LocalReport();
+            var reportDataSource = new ReportDataSource("Vendor", VendorList);
+            var reportView = new ReportView(reportPath, reportDataSource, localReport);
+            reportView.ShowDialog();
+        }
+        private void Return(object? sender, EventArgs e)
+        {
+            LoadAllVendorList();
+        }
+        private void CleanviewFields()
+        {
+            LoadAllVendorList();
+            LoadAllVendorTypeList();
+            _view.VendorId = 0;
+            _view.VendorName = "";
+            _view.VendorTypeId = 0;
+            _view.Barangay = "";
+            _view.Municipality = "";
+            _view.Province = "";
+            _view.Region = "";
+            _view.ZipCode = "";
+            _view.Phone = "";
+            _view.Email = "";
+            _view.ContactPerson = "";
+        }
+        
+        private void LoadAllVendorList()
+        {
+            VendorList = _unitOfWork.Vendor.GetAll(includeProperties: "VendorType");
+            VendorBindingSource.DataSource = VendorList;//Set data source.
+        }
+        private void LoadAllVendorTypeList()
+        {
+            VendorTypeList = _unitOfWork.VendorType.GetAll();
+            VendorTypeBindingSource.DataSource = VendorTypeList;//Set data source.
+        }
+
+    }
+}

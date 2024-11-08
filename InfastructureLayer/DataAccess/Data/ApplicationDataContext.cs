@@ -9,7 +9,7 @@ namespace InfastructureLayer.DataAccess.Data
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString);
+            optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=inventorymanagementsystem;Integrated Security=True;TrustServerCertificate=True;");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

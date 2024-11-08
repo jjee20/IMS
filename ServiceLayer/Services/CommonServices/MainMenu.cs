@@ -88,7 +88,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class Invoice
+        public static class Invoices
         {
             public const string PageName = "Invoice";
             public const string RoleName = "Invoice";
@@ -97,7 +97,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class PaymentReceive
+        public static class PaymentReceives
         {
             public const string PageName = "Payment Receive";
             public const string RoleName = "Payment Receive";
@@ -160,7 +160,7 @@ namespace ServiceLayer.Services.CommonServices
             public const string ActionName = "Index";
         }
 
-        public static class PaymentType
+        public static class PaymentTypes
         {
             public const string PageName = "Payment Type";
             public const string RoleName = "Payment Type";

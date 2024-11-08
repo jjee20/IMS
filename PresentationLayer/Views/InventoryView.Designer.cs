@@ -35,7 +35,7 @@
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
             tbCustomerType = new TabPage();
-            tabPage5 = new TabPage();
+            tbCustomer = new TabPage();
             tabPage6 = new TabPage();
             tabPage7 = new TabPage();
             tabPage8 = new TabPage();
@@ -65,7 +65,7 @@
             tcMain.Controls.Add(tabPage2);
             tcMain.Controls.Add(tabPage3);
             tcMain.Controls.Add(tbCustomerType);
-            tcMain.Controls.Add(tabPage5);
+            tcMain.Controls.Add(tbCustomer);
             tcMain.Controls.Add(tabPage6);
             tcMain.Controls.Add(tabPage7);
             tcMain.Controls.Add(tabPage8);
@@ -137,15 +137,15 @@
             tbCustomerType.Text = "Customer Type";
             tbCustomerType.UseVisualStyleBackColor = true;
             // 
-            // tabPage5
+            // tbCustomer
             // 
-            tabPage5.ImageKey = "customer.png";
-            tabPage5.Location = new Point(4, 44);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1371, 692);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "Customer";
-            tabPage5.UseVisualStyleBackColor = true;
+            tbCustomer.ImageKey = "customer.png";
+            tbCustomer.Location = new Point(4, 44);
+            tbCustomer.Name = "tbCustomer";
+            tbCustomer.Size = new Size(1371, 692);
+            tbCustomer.TabIndex = 4;
+            tbCustomer.Text = "Customer";
+            tbCustomer.UseVisualStyleBackColor = true;
             // 
             // tabPage6
             // 
@@ -394,7 +394,7 @@
         private ImageList imageList1;
         private TabPage tabPage3;
         private TabPage tbCustomerType;
-        private TabPage tabPage5;
+        private TabPage tbCustomer;
         private TabPage tabPage6;
         private TabPage tabPage7;
         private TabPage tabPage8;

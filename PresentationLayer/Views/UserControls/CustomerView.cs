@@ -118,22 +118,22 @@ namespace PresentationLayer.Views.UserControls
         }
         public string Barangay
         {
-            get { return txtBarangay.SelectedItem.ToString(); }
+            get { return txtBarangay.Text.Trim().ToString(); }
             set { txtBarangay.Text = value; }
         }
         public string Municipality
         {
-            get { return txtMunicipality.SelectedItem.ToString(); }
+            get { return txtMunicipality.Text.Trim().ToString(); }
             set { txtMunicipality.Text = value; }
         }
         public string Province
         {
-            get { return txtProvince.SelectedItem.ToString(); }
+            get { return txtProvince.Text.Trim().ToString(); }
             set { txtProvince.Text = value; }
         }
         public string Region
         {
-            get { return txtRegion.SelectedItem.ToString(); }
+            get { return txtRegion.Text.Trim(); }
             set { txtRegion.Text = value; }
         }
         public string ZipCode
@@ -191,16 +191,16 @@ namespace PresentationLayer.Views.UserControls
             txtCustomerType.ValueMember = "CustomerTypeId";
         }
 
-        public void SetAddressBindingSource(List<string> barangayBindingSource,
-            List<string> municipalityBindingSource,
-            List<string> provinceBindingSource,
-            List<string> regionBindingSource)
-        {
-            txtBarangay.DataSource = barangayBindingSource;
-            txtMunicipality.DataSource = municipalityBindingSource;
-            txtProvince.DataSource = provinceBindingSource;
-            txtRegion.DataSource = regionBindingSource;
-        }
+        //public void SetAddressBindingSource(List<string> barangayBindingSource,
+        //    List<string> municipalityBindingSource,
+        //    List<string> provinceBindingSource,
+        //    List<string> regionBindingSource)
+        //{
+        //    txtBarangay.DataSource = barangayBindingSource;
+        //    txtMunicipality.DataSource = municipalityBindingSource;
+        //    txtProvince.DataSource = provinceBindingSource;
+        //    txtRegion.DataSource = regionBindingSource;
+        //}
 
         public event EventHandler AddNewEvent;
         public event EventHandler SaveEvent;

@@ -52,14 +52,6 @@ namespace PresentationLayer.Presenters
                 return;
             }
 
-            if(_view.CustomerTypeId == 0)
-            {
-
-            }
-            else
-            {
-
-            }
             var model = new CustomerType()
             {
                 

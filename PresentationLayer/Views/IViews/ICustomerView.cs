@@ -26,10 +26,10 @@
         event EventHandler SaveEvent;
         event EventHandler SearchEvent;
 
-        void SetAddressBindingSource(List<string> barangayBindingSource,
-                                     List<string> municipalityBindingSource, 
-                                     List<string> provinceBindingSource, 
-                                     List<string> regionBindingSource);
+        //void SetAddressBindingSource(List<string> barangayBindingSource,
+        //                             List<string> municipalityBindingSource, 
+        //                             List<string> provinceBindingSource, 
+        //                             List<string> regionBindingSource);
         void SetCustomerListBindingSource(BindingSource CustomerList);
         void SetCustomerTypeListBindingSource(BindingSource customerTypeBindingSource);
     }

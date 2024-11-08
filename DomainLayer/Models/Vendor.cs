@@ -16,9 +16,10 @@ namespace DomainLayer.Models
         [Display(Name = "Vendor Type")]
         public int VendorTypeId { get; set; }
         [Display(Name = "Street Address")]
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
+        public string Region { get; set; }
+        public string Municipality { get; set; }
+        public string Province { get; set; }
+        public string Barangay { get; set; }
         [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
         public string Phone { get; set; }

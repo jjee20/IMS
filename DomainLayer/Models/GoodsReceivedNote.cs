@@ -27,6 +27,7 @@ namespace DomainLayer.Models
         public bool IsFullReceive { get; set; } = true;
 
         [ForeignKey("PurchaseOrderId")]
+        public virtual Warehouse Warehouse { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
     }
 }
