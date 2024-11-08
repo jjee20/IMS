@@ -4,6 +4,7 @@
     {
         int BranchId { get; set; }
         string BranchName { get; set; }
+        string Description { get; set; }
         int CurrencyId { get; set; }
         string Barangay { get; set; }
         string Municipality { get; set; }

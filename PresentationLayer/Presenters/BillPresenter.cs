@@ -25,6 +25,7 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
             BillBindingSource = new BindingSource();
             BillTypeBindingSource = new BindingSource();
+            GoodsReceivedNoteBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
