@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.Inventory;
 using InfastructureLayer.DataAccess.Data;
 using ServiceLayer.Services.IRepositories;
 

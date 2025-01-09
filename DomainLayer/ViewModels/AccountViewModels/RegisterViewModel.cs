@@ -8,6 +8,7 @@ namespace DomainLayer.ViewModels.AccountViewModels
 {
     public class RegisterViewModel
     {
+        public string UserName { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

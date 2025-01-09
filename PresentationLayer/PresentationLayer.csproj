@@ -9,16 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Reports\CustomerTypeReport.rdlc" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Reports\CustomerTypeReport.rdlc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Guna.Charts.WinForms" Version="1.1.0" />
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.6" />
     <PackageReference Include="MaterialSkin.2" Version="2.3.1" />
@@ -54,73 +44,141 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="Views\UserControls\SalesOrderView.cs">
+    <Compile Update="Reports\SERCS.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SERCS.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\RegisterView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\PurchaseOrderView.cs">
+    <Compile Update="Views\UserControls\Account\ChangePasswordView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\VendorView.cs">
+    <Compile Update="Views\UserControls\Payroll\AttendanceView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\UnitOfMeasureTypeView.cs">
+    <Compile Update="Views\UserControls\Payroll\ProjectView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\ShipmentView.cs">
+    <Compile Update="Views\UserControls\Payroll\LeaveView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\VendorTypeView.cs">
+    <Compile Update="Views\UserControls\Payroll\DeductionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\ShipmentTypeView.cs">
+    <Compile Update="Views\UserControls\Payroll\EmployeeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\SalesTypeView.cs">
+    <Compile Update="Views\UserControls\Payroll\JobPositionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\PurchaseTypeView.cs">
+    <Compile Update="Views\UserControls\Payroll\ContributionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\ProductView.cs">
+    <Compile Update="Views\UserControls\Payroll\TaxView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\ProductTypeView.cs">
+    <Compile Update="Views\UserControls\Payroll\ShiftView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\PaymentVoucherView.cs">
+    <Compile Update="Views\UserControls\Payroll\DepartmentView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\PaymentTypeView.cs">
+    <Compile Update="Views\UserControls\Inventory\DashboardView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\PaymentReceiveView.cs">
+    <Compile Update="Views\UserControls\Admin\AdminView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\UserProfileView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\InvoiceTypeView.cs">
+    <Compile Update="Views\UserControls\Inventory\PurchaseSettingsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\InvoiceView.cs">
+    <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\GoodsReceivedNoteView.cs">
+    <Compile Update="Views\UserControls\Inventory\PurchaseSettingsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\CurrencyView.cs">
+    <Compile Update="Views\UserControls\Inventory\PurchaseView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\CashBankView.cs">
+    <Compile Update="Views\UserControls\Inventory\ProductInventoryView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\BillView.cs">
+    <Compile Update="Views\UserControls\Inventory\ConfigurationView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\BillTypeView.cs">
+    <Compile Update="Views\UserControls\Inventory\PurchaseView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\BranchView.cs">
+    <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\CustomerView.cs">
+    <Compile Update="Views\UserControls\Inventory\WarehouseView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\VendorView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\UnitOfMeasureView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ShipmentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\VendorTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ShipmentTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchaseTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchaseTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentVoucherView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentReceiveView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\InvoiceTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\InvoiceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\CashBankView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BillView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BillTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BranchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\CustomerView.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -143,6 +201,88 @@
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Reports\BillReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\ProductReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PurchaseReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\SalesOrderReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\VendorReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\ShipmentReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PurchaseOrderReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PurchaseOrderReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\WarehouseReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\VendorTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\UnitOfMeasureReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\ShipmentTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PurchaseTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PurchaseTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\ProductTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PaymentVoucherReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PaymentTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PaymentReceiveReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\InvoiceTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\CashBankReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\BranchReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\InvoiceReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\GoodsReceivedNoteReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\CustomerReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\BillTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\CustomerTypeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\SERCS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SERCS.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

@@ -1,15 +1,19 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.Accounts;
+using DomainLayer.Models.Inventory;
+using DomainLayer.Models.Payroll;
+using DomainLayer.ViewModels.Inventory;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
 namespace InfastructureLayer.DataAccess.Data
 {
-    public class ApplicationDataContext : DbContext
+    public class ApplicationDataContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=inventorymanagementsystem;Integrated Security=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=db_sercs;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -18,7 +22,11 @@ namespace InfastructureLayer.DataAccess.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+        public DbSet<UserProfile> UserProfile { get; set; }
+
+        //Inventory
         public DbSet<Bill> Bill { get; set; }
 
         public DbSet<BillType> BillType { get; set; }
@@ -26,8 +34,6 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<Branch> Branch { get; set; }
 
         public DbSet<CashBank> CashBank { get; set; }
-
-        public DbSet<Currency> Currency { get; set; }
 
         public DbSet<Customer> Customer { get; set; }
 
@@ -75,7 +81,21 @@ namespace InfastructureLayer.DataAccess.Data
 
         public DbSet<Warehouse> Warehouse { get; set; }
 
-        public DbSet<UserProfile> UserProfile { get; set; }
+        //Payroll
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<JobPosition> JobPositions { get; set; }
+        public DbSet<Payroll> Payrolls { get; set; }
+        public DbSet<Deduction> Deductions { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<Tax> Taxes { get; set; }
+        public DbSet<Benefit> Benefits { get; set; }
+        public DbSet<Leave> Leaves { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<PerformanceReview> PerformanceReviews { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
+        public DbSet<Contribution> Contributions { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
     }
 }

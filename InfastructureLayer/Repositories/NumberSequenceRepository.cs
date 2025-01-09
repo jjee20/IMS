@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.Inventory;
 using InfastructureLayer.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Services.IRepositories;

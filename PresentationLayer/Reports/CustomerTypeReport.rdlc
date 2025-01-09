@@ -58,7 +58,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Customer Type Name</Value>
+                              <Value>Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -245,7 +245,7 @@
   <Width>6.57675in</Width>
   <Page>
     <PageHeader>
-      <Height>2.65176cm</Height>
+      <Height>3.67482cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -268,7 +268,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox7</rd:DefaultName>
-          <Top>0.42898cm</Top>
+          <Top>1.38148cm</Top>
           <Height>0.77639cm</Height>
           <Width>16.70495cm</Width>
           <Style>
@@ -282,7 +282,7 @@
           </Style>
         </Textbox>
         <Line Name="Line1">
-          <Top>2.47537cm</Top>
+          <Top>3.42787cm</Top>
           <Height>0cm</Height>
           <Width>16.70495cm</Width>
           <ZIndex>1</ZIndex>
@@ -309,7 +309,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
-          <Top>1.38176cm</Top>
+          <Top>2.33426cm</Top>
           <Height>0.6cm</Height>
           <Width>16.70495cm</Width>
           <ZIndex>2</ZIndex>
@@ -318,6 +318,39 @@
               <Style>None</Style>
             </Border>
             <VerticalAlign>Middle</VerticalAlign>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>SERCS</Value>
+                  <Style>
+                    <FontSize>14pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox7</rd:DefaultName>
+          <Top>0.4287cm</Top>
+          <Height>0.77639cm</Height>
+          <Width>16.70495cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
             <PaddingTop>2pt</PaddingTop>
@@ -341,7 +374,7 @@
           <Value>RvenTech_PNG</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.92569cm</Top>
-          <Left>7.21338cm</Left>
+          <Left>6.26088cm</Left>
           <Height>0.74153cm</Height>
           <Width>0.65333cm</Width>
           <Style>
@@ -368,7 +401,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>0.99646cm</Top>
-          <Left>7.93727cm</Left>
+          <Left>6.98477cm</Left>
           <Height>0.6cm</Height>
           <Width>3.41722cm</Width>
           <ZIndex>1</ZIndex>
@@ -400,18 +433,18 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="inventorymanagementsystemDataSet">
+    <DataSource Name="SERCS">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>65b563be-7bdb-4829-989d-34f740649b55</rd:DataSourceID>
+      <rd:DataSourceID>43de33a1-7b99-4242-a834-74f8449d5ca9</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="CustomerType">
       <Query>
-        <DataSourceName>inventorymanagementsystemDataSet</DataSourceName>
+        <DataSourceName>SERCS</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -429,8 +462,8 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>inventorymanagementsystemDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\Projects\.NET\InventoryManagementSystem\PresentationLayer\inventorymanagementsystemDataSet.xsd</rd:SchemaPath>
+        <rd:DataSetName>SERCS</rd:DataSetName>
+        <rd:SchemaPath>D:\Projects\IMS\PresentationLayer\Reports\SERCS.xsd</rd:SchemaPath>
         <rd:TableName>CustomerType</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

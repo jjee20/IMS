@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.Inventory;
 
 namespace ServiceLayer.Services.IRepositories
 {

@@ -7,7 +7,7 @@ namespace ServiceLayer.Services.CommonServices
 {
     public interface IRoles
     {
-        Task GenerateRolesFromPagesAsync();
+        //Task GenerateRolesFromPagesAsync();
 
         Task AddToRoles(string applicationUserId);
     }
