@@ -40,6 +40,7 @@
             tbTax = new TabPage();
             tbPayroll = new TabPage();
             tbProject = new TabPage();
+            tbBenefit = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             tcMain.Controls.Add(tbEmployee);
             tcMain.Controls.Add(tbJobPosition);
             tcMain.Controls.Add(tbLeave);
+            tcMain.Controls.Add(tbBenefit);
             tcMain.Controls.Add(tbShift);
             tcMain.Controls.Add(tbTax);
             tcMain.Controls.Add(tbPayroll);
@@ -177,6 +179,15 @@
             tbProject.Text = "Project";
             tbProject.UseVisualStyleBackColor = true;
             // 
+            // tbBenefit
+            // 
+            tbBenefit.Location = new Point(4, 29);
+            tbBenefit.Name = "tbBenefit";
+            tbBenefit.Size = new Size(1908, 994);
+            tbBenefit.TabIndex = 11;
+            tbBenefit.Text = "Benefit";
+            tbBenefit.UseVisualStyleBackColor = true;
+            // 
             // PayrollSystemView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -210,5 +221,6 @@
         private TabPage tbTax;
         private TabPage tbPayroll;
         private TabPage tbProject;
+        private TabPage tbBenefit;
     }
 }

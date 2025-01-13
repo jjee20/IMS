@@ -10,12 +10,10 @@ namespace DomainLayer.Models.Payroll
     public class JobPosition
     {
         [Key]
+        [Display(Name ="Id")]
         public int JobPositionId { get; set; } // Primary Key
         public string Title { get; set; }
-        public double Salary { get; set; } // Base Salary
         public string Description { get; set; }
-
-        public ICollection<Employee> Employees { get; set; } // Navigation Property
     }
 
 }

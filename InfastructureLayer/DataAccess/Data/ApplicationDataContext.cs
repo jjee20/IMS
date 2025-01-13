@@ -85,7 +85,6 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<JobPosition> JobPositions { get; set; }
-        public DbSet<Payroll> Payrolls { get; set; }
         public DbSet<Deduction> Deductions { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Tax> Taxes { get; set; }
@@ -96,6 +95,8 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<Contribution> Contributions { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Allowance> Allowances { get; set; }
+        public DbSet<Bonus> Bonuses { get; set; }
 
     }
 }

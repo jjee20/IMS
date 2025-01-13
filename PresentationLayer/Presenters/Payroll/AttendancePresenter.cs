@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
@@ -16,10 +17,8 @@ namespace PresentationLayer.Presenters.Payroll
         private IUnitOfWork _unitOfWork;
         private BindingSource AttendanceBindingSource;
         private BindingSource EmployeeBindingSource;
-        private BindingSource ShiftBindingSource;
-        private IEnumerable<Attendance> AttendanceList;
+        private IEnumerable<AttendanceViewModel> AttendanceList;
         private IEnumerable<Employee> EmployeeList;
-        private IEnumerable<Shift> ShiftList;
         public AttendancePresenter(IAttendanceView view, IUnitOfWork unitOfWork)
         {
 
@@ -29,7 +28,6 @@ namespace PresentationLayer.Presenters.Payroll
             _unitOfWork = unitOfWork;
             AttendanceBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
-            ShiftBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -44,12 +42,10 @@ namespace PresentationLayer.Presenters.Payroll
 
             LoadAllAttendanceList();
             LoadAllEmployeeList();
-            LoadAllShiftList();
 
             //Source Binding
             _view.SetAttendanceListBindingSource(AttendanceBindingSource);
             _view.SetEmployeeListBindingSource(EmployeeBindingSource);
-            _view.SetShiftListBindingSource(ShiftBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -68,8 +64,7 @@ namespace PresentationLayer.Presenters.Payroll
                 TimeOut = _view.TimeOut,
                 Date = _view.Date,
                 IsPresent = _view.IsPresent,
-                HoursWorked = _view.HoursWorked,
-                ShiftId = _view.ShiftId,
+                HoursWorked = _view.HoursWorked
             };
 
             try
@@ -98,20 +93,31 @@ namespace PresentationLayer.Presenters.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
+            bool hasDateRange = _view.StartDate != null && _view.EndDate != null;
+
+            if (!emptyValue || hasDateRange)
             {
-                AttendanceList = _unitOfWork.Attendance.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee");
+                // Apply filters based on SearchValue and Date Range
+                AttendanceList = Program.Mapper.Map<IEnumerable<AttendanceViewModel>>(_unitOfWork.Attendance.GetAll(c =>
+                    (emptyValue || c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue)) &&
+                    (!hasDateRange || (c.Date.Date >= _view.StartDate.Date && c.Date <= _view.EndDate.Date)),
+                    includeProperties: "Employee"));
+
                 AttendanceBindingSource.DataSource = AttendanceList;
             }
             else
             {
+                // Load all attendance records if no filters are applied
                 LoadAllAttendanceList();
             }
         }
+
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Attendance)AttendanceBindingSource.Current;
+            var attendance = (AttendanceViewModel)AttendanceBindingSource.Current;
+            var entity = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendance.AttendanceId);
+            
             _view.AttendanceId = entity.AttendanceId;
             _view.EmployeeId = entity.EmployeeId;
             _view.TimeIn = entity.TimeIn;
@@ -119,13 +125,13 @@ namespace PresentationLayer.Presenters.Payroll
             _view.Date = entity.Date;
             _view.IsPresent = entity.IsPresent;
             _view.HoursWorked = entity.HoursWorked;
-            _view.ShiftId = entity.ShiftId;
         }
         private void Delete(object? sender, EventArgs e)
         {
             try
             {
-                var entity = (Attendance)AttendanceBindingSource.Current;
+                var attendance = (AttendanceViewModel)AttendanceBindingSource.Current;
+                var entity = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendance.AttendanceId);
                 _unitOfWork.Attendance.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
@@ -157,26 +163,19 @@ namespace PresentationLayer.Presenters.Payroll
             LoadAllAttendanceList();
             _view.AttendanceId = 0;
             _view.EmployeeId = 0;
-            _view.Date = DateTime.Now;
             _view.IsPresent = true;
             _view.HoursWorked = 0;
-            _view.ShiftId = 0;
         }
 
         private void LoadAllAttendanceList()
         {
-            AttendanceList = _unitOfWork.Attendance.GetAll();
-            AttendanceBindingSource.DataSource = AttendanceList;//Set data source.
+            AttendanceList = Program.Mapper.Map<IEnumerable<AttendanceViewModel>>(_unitOfWork.Attendance.GetAll(includeProperties: "Employee"));
+            AttendanceBindingSource.DataSource = AttendanceList.OrderBy(c => c.Date);//Set data source.
         }
         private void LoadAllEmployeeList()
         {
             EmployeeList = _unitOfWork.Employee.GetAll();
             EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
-        }
-        private void LoadAllShiftList()
-        {
-            ShiftList = _unitOfWork.Shift.GetAll();
-            ShiftBindingSource.DataSource = ShiftList;//Set data source.
         }
     }
 }

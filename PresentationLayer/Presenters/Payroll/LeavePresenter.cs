@@ -3,6 +3,7 @@ using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
 using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
@@ -21,7 +22,7 @@ namespace PresentationLayer.Presenters.Payroll
         private BindingSource EmployeeBindingSource;
         private BindingSource LeaveTypeBindingSource;
         private BindingSource StatusBindingSource;
-        private IEnumerable<Leave> LeaveList;
+        private IEnumerable<LeaveViewModel> LeaveList;
         private IEnumerable<Employee> EmployeeList;
         private IEnumerable<EnumItemViewModel> LeaveTypeList;
         private IEnumerable<EnumItemViewModel> StatusList;
@@ -67,6 +68,20 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
+
+            var year = DateTime.Now.Year;
+            var startDate = new DateTime(year, 1, 1);
+            var endDate = new DateTime(year, 12, 31);
+
+            var employee = _unitOfWork.Employee.Get(c => c.EmployeeId == _view.EmployeeId, includeProperties: "Leaves");
+            var totalLeave = employee.Leaves.Where(c => c.StartDate >= startDate && c.EndDate <= endDate).Count();
+
+            if(totalLeave > employee.LeaveCredits)
+            {
+                _view.Message = $"Employee has {employee.LeaveCredits} leave credits left. You cannot proceed its request.";
+                return;
+            }
+
             var model = new Leave
             {
                 LeaveId = _view.LeaveId,
@@ -92,6 +107,7 @@ namespace PresentationLayer.Presenters.Payroll
                     _unitOfWork.Leave.Add(model);
                     _view.Message = "Leave added successfully";
                 }
+
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 CleanviewFields();
@@ -107,7 +123,9 @@ namespace PresentationLayer.Presenters.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                LeaveList = _unitOfWork.Leave.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee");
+                LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.GetAll(
+                    c => c.Employee.LastName.Contains(_view.SearchValue) || 
+                    c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
                 LeaveBindingSource.DataSource = LeaveList;
             }
             else
@@ -118,7 +136,8 @@ namespace PresentationLayer.Presenters.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Leave)LeaveBindingSource.Current;
+            var leave = (LeaveViewModel)LeaveBindingSource.Current;
+            var entity = _unitOfWork.Leave.Get(c => c.LeaveId == leave.LeaveId);
             _view.LeaveId = entity.LeaveId;
             _view.EmployeeId = entity.EmployeeId;
             _view.StartDate = entity.StartDate;
@@ -132,7 +151,8 @@ namespace PresentationLayer.Presenters.Payroll
         {
             try
             {
-                var entity = (Leave)LeaveBindingSource.Current;
+                var leave = (LeaveViewModel)LeaveBindingSource.Current;
+                var entity = _unitOfWork.Leave.Get(c => c.LeaveId == leave.LeaveId);
                 _unitOfWork.Leave.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
@@ -171,7 +191,7 @@ namespace PresentationLayer.Presenters.Payroll
 
         private void LoadAllLeaveList()
         {
-            LeaveList = _unitOfWork.Leave.GetAll();
+            LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.GetAll(includeProperties: "Employee"));
             LeaveBindingSource.DataSource = LeaveList;//Set data source.
         }
         private void LoadAllEmployeeList()

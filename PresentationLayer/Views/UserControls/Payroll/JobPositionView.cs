@@ -116,11 +116,6 @@ namespace PresentationLayer.Views.UserControls
             get { return txtTitle.Text; }
             set { txtTitle.Text = value; }
         }
-        public double Salary
-        {
-            get { return Convert.ToDouble(txtSalary.Text); }
-            set { txtSalary.Text = value.ToString(); }
-        }
         public string Description
         {
             get { return txtDescription.Text; }

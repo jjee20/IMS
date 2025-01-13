@@ -2,10 +2,9 @@
 
 public class Department
 {
-    [Key] 
+    [Key]
+    [Display(Name= "Id")]
     public int DepartmentId { get; set; } // Primary Key
     public string Name { get; set; }
     public string Description { get; set; }
-
-    public ICollection<Employee> Employees { get; set; } // Navigation Property
 }

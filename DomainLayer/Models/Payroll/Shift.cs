@@ -10,6 +10,7 @@ namespace DomainLayer.Models.Payroll
     public class Shift
     {
         [Key]
+        [Display(Name = "Id")]
         public int ShiftId { get; set; } // Primary Key
         [Display(Name = "Shift")]
         public string ShiftName { get; set; } // Example: Morning, Evening
@@ -17,6 +18,9 @@ namespace DomainLayer.Models.Payroll
         public TimeSpan StartTime { get; set; }
         [Display(Name = "End Time")]
         public TimeSpan EndTime { get; set; }
+        [Display(Name = "Overtime Rate")]
+        public double OvertimeRate { get; set; }
+        public double RegularHours { get; set; }
     }
 
 }

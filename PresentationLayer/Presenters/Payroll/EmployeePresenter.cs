@@ -3,6 +3,7 @@ using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
 using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
@@ -21,10 +22,12 @@ namespace PresentationLayer.Presenters.Payroll
         private BindingSource GenderBindingSource;
         private BindingSource DepartmentBindingSource;
         private BindingSource JobPositionBindingSource;
-        private IEnumerable<Employee> EmployeeList;
+        private BindingSource ShiftBindingSource;
+        private IEnumerable<EmployeeViewModel> EmployeeList;
         private IEnumerable<EnumItemViewModel> GenderList;
         private IEnumerable<Department> DepartmentList;
         private IEnumerable<JobPosition> JobPositionList;
+        private IEnumerable<Shift> ShiftList;
         public EmployeePresenter(IEmployeeView view, IUnitOfWork unitOfWork)
         {
 
@@ -36,6 +39,7 @@ namespace PresentationLayer.Presenters.Payroll
             GenderBindingSource = new BindingSource();
             DepartmentBindingSource = new BindingSource();
             JobPositionBindingSource = new BindingSource();
+            ShiftBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -52,12 +56,14 @@ namespace PresentationLayer.Presenters.Payroll
             LoadAllGenderList();
             LoadAllDepartmentList();
             LoadAllJobPositionList();
+            LoadAllShiftList();
 
             //Source Binding
             _view.SetEmployeeListBindingSource(EmployeeBindingSource);
             _view.SetGenderListBindingSource(GenderBindingSource);
             _view.SetDepartmentListBindingSource(DepartmentBindingSource);
             _view.SetJobPositionListBindingSource(JobPositionBindingSource);
+            _view.SetShiftListBindingSource(ShiftBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -67,13 +73,6 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Employee.Get(c => c.FirstName == _view.EmployeeFirstName && c.LastName == _view.EmployeeLastName);
-            if (Entity != null)
-            {
-                _view.Message = "Employee is already added.";
-                return;
-            }
-
             var model = new Employee
             {
                 EmployeeId = _view.EmployeeId,
@@ -86,7 +85,10 @@ namespace PresentationLayer.Presenters.Payroll
                 Address = _view.Address,
                 DepartmentId = _view.DepartmentId,
                 JobPositionId = _view.JobPositionId,
+                ShiftId = _view.ShiftId,
+                BasicSalary = _view.BasicSalary,
                 isDeducted = _view.isDeducted,
+                LeaveCredits = _view.LeaveCredits,
             };
 
             try
@@ -117,7 +119,9 @@ namespace PresentationLayer.Presenters.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                EmployeeList = _unitOfWork.Employee.GetAll(c => c.FirstName.Contains(_view.SearchValue) || c.LastName.Contains(_view.SearchValue));
+                EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll(
+                    c => c.FirstName.Contains(_view.SearchValue) || 
+                    c.LastName.Contains(_view.SearchValue), includeProperties: "Department,JobPosition,Shift"));
                 EmployeeBindingSource.DataSource = EmployeeList;
             }
             else
@@ -128,7 +132,8 @@ namespace PresentationLayer.Presenters.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Employee)EmployeeBindingSource.Current;
+            var employee = (EmployeeViewModel)EmployeeBindingSource.Current;
+            var entity = _unitOfWork.Employee.Get(c => c.EmployeeId == employee.EmployeeId);
             _view.EmployeeId = entity.EmployeeId;
             _view.EmployeeFirstName = entity.FirstName;
             _view.EmployeeLastName = entity.LastName;
@@ -139,13 +144,17 @@ namespace PresentationLayer.Presenters.Payroll
             _view.Address = entity.Address;
             _view.DepartmentId = entity.DepartmentId;
             _view.JobPositionId = entity.JobPositionId;
+            _view.BasicSalary = entity.BasicSalary;
+            _view.ShiftId = entity.ShiftId;
             _view.isDeducted = entity.isDeducted;
+            _view.LeaveCredits = entity.LeaveCredits;
         }
         private void Delete(object? sender, EventArgs e)
         {
             try
             {
-                var entity = (Employee)EmployeeBindingSource.Current;
+                var employee = (EmployeeViewModel)EmployeeBindingSource.Current;
+                var entity = _unitOfWork.Employee.Get(c => c.EmployeeId == employee.EmployeeId);
                 _unitOfWork.Employee.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
@@ -185,12 +194,15 @@ namespace PresentationLayer.Presenters.Payroll
             _view.Address = "";
             _view.DepartmentId = 0;
             _view.JobPositionId = 0;
+            _view.ShiftId = 0;
+            _view.BasicSalary = 0;
+            _view.LeaveCredits = 0;
             _view.isDeducted = true;
         }
 
         private void LoadAllEmployeeList()
         {
-            EmployeeList = _unitOfWork.Employee.GetAll();
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll(includeProperties: "Department,JobPosition,Shift"));
             EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
         }
         private void LoadAllGenderList()
@@ -207,6 +219,11 @@ namespace PresentationLayer.Presenters.Payroll
         {
             JobPositionList = _unitOfWork.JobPosition.GetAll();
             JobPositionBindingSource.DataSource = JobPositionList;//Set data source.
+        }
+        private void LoadAllShiftList()
+        {
+            ShiftList = _unitOfWork.Shift.GetAll();
+            ShiftBindingSource.DataSource = ShiftList;//Set data source.
         }
     }
 }

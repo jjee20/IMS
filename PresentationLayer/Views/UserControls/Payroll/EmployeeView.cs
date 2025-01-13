@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
@@ -156,6 +157,21 @@ namespace PresentationLayer.Views.UserControls
             get { return (int)txtJobPosition.SelectedValue; }
             set { txtJobPosition.Text = value.ToString(); }
         }
+        public int ShiftId
+        {
+            get { return (int)txtShift.SelectedValue; }
+            set { txtShift.Text = value.ToString(); }
+        }
+        public double BasicSalary
+        {
+            get { return Convert.ToDouble(txtBasicSalary.Text); }
+            set { txtBasicSalary.Text = value.ToString(); }
+        }
+        public double LeaveCredits
+        {
+            get { return Convert.ToDouble(txtLeaveCredits.Text); }
+            set { txtLeaveCredits.Text = value.ToString(); }
+        }
         public bool IsEdit
         {
             get { return isEdit; }
@@ -188,7 +204,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
             dgList.DataSource = EmployeeList;
-            DataGridHelper.ApplyDisplayNames<Employee>(EmployeeList, dgList);
+            DataGridHelper.ApplyDisplayNames<EmployeeViewModel>(EmployeeList, dgList);
         }
 
         public void SetGenderListBindingSource(BindingSource GenderList)
@@ -208,6 +224,12 @@ namespace PresentationLayer.Views.UserControls
             txtJobPosition.DataSource = JobPositionList;
             txtJobPosition.DisplayMember = "Title";
             txtJobPosition.ValueMember = "JobPositionId";
+        }
+        public void SetShiftListBindingSource(BindingSource ShiftList)
+        {
+            txtShift.DataSource = ShiftList;
+            txtShift.DisplayMember = "ShiftName";
+            txtShift.ValueMember = "ShiftId";
         }
 
 

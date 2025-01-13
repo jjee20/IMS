@@ -79,6 +79,10 @@ namespace PresentationLayer.Views.UserControls.Payroll
                 {
                     ShowProject?.Invoke(this, EventArgs.Empty);
                 }
+                else if (tcMain.SelectedTab == tbBenefit)
+                {
+                    ShowBenefit?.Invoke(this, EventArgs.Empty);
+                }
             };
         }
 
@@ -102,6 +106,7 @@ namespace PresentationLayer.Views.UserControls.Payroll
         public event EventHandler ShowShift;
         public event EventHandler ShowTax;
         public event EventHandler ShowProject;
+        public event EventHandler ShowBenefit;
 
         public void ShowForm()
         {

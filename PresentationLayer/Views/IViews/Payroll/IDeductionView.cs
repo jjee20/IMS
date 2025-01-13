@@ -8,6 +8,7 @@ namespace PresentationLayer.Views.IViews.Payroll
         int DeductionId { get; set; }
         public DeductionType DeductionType { get; set; }
         double Amount { get; set; }
+        string Description { get; set; }
         int EmployeeId { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }

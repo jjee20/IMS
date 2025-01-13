@@ -17,6 +17,7 @@
         event EventHandler ShowShift;
         event EventHandler ShowTax;
         event EventHandler ShowProject;
+        event EventHandler ShowBenefit;
 
         void ShowForm();
     }

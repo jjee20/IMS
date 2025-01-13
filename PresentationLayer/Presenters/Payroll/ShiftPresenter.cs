@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
@@ -15,7 +16,7 @@ namespace PresentationLayer.Presenters.Payroll
         public IShiftView _view;
         private IUnitOfWork _unitOfWork;
         private BindingSource ShiftBindingSource;
-        private IEnumerable<Shift> ShiftList;
+        private IEnumerable<ShiftViewModel> ShiftList;
         public ShiftPresenter(IShiftView view, IUnitOfWork unitOfWork)
         {
 
@@ -92,7 +93,7 @@ namespace PresentationLayer.Presenters.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                ShiftList = _unitOfWork.Shift.GetAll(c => c.ShiftName.Contains(_view.SearchValue));
+                ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.GetAll(c => c.ShiftName.Contains(_view.SearchValue)));
                 ShiftBindingSource.DataSource = ShiftList;
             }
             else
@@ -103,7 +104,8 @@ namespace PresentationLayer.Presenters.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Shift)ShiftBindingSource.Current;
+            var shift = (ShiftViewModel)ShiftBindingSource.Current;
+            var entity = _unitOfWork.Shift.Get(c => c.ShiftId == shift.ShiftId);    
             _view.ShiftId = entity.ShiftId;
             _view.ShiftName = entity.ShiftName;
             _view.StartTime = entity.StartTime;
@@ -113,7 +115,8 @@ namespace PresentationLayer.Presenters.Payroll
         {
             try
             {
-                var entity = (Shift)ShiftBindingSource.Current;
+                var shift = (ShiftViewModel)ShiftBindingSource.Current;
+                var entity = _unitOfWork.Shift.Get(c => c.ShiftId == shift.ShiftId);
                 _unitOfWork.Shift.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
@@ -149,7 +152,7 @@ namespace PresentationLayer.Presenters.Payroll
 
         private void LoadAllShiftList()
         {
-            ShiftList = _unitOfWork.Shift.GetAll();
+            ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.GetAll());
             ShiftBindingSource.DataSource = ShiftList;//Set data source.
         }
     }

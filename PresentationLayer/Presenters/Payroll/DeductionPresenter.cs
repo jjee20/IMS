@@ -3,6 +3,7 @@ using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
 using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
@@ -20,7 +21,7 @@ namespace PresentationLayer.Presenters.Payroll
         private BindingSource DeductionBindingSource;
         private BindingSource DeductionTypeBindingSource;
         private BindingSource EmployeeBindingSource;
-        private IEnumerable<Deduction> DeductionList;
+        private IEnumerable<DeductionViewModel> DeductionList;
         private IEnumerable<EnumItemViewModel> DeductionTypeList;
         private IEnumerable<Employee> EmployeeList;
         public DeductionPresenter(IDeductionView view, IUnitOfWork unitOfWork)
@@ -68,6 +69,7 @@ namespace PresentationLayer.Presenters.Payroll
                 DeductionType = _view.DeductionType,
                 Amount = _view.Amount,
                 EmployeeId = _view.EmployeeId,
+                Description = _view.Description,
             };
 
             try
@@ -98,7 +100,7 @@ namespace PresentationLayer.Presenters.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                DeductionList = _unitOfWork.Deduction.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee");
+                DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
                 DeductionBindingSource.DataSource = DeductionList;
             }
             else
@@ -109,17 +111,20 @@ namespace PresentationLayer.Presenters.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Deduction)DeductionBindingSource.Current;
+            var deduction = (DeductionViewModel)DeductionBindingSource.Current;
+            var entity = _unitOfWork.Deduction.Get(c => c.DeductionId == deduction.DeductionId);
             _view.DeductionId = entity.DeductionId;
             _view.DeductionType = entity.DeductionType;
             _view.Amount = entity.Amount;
             _view.EmployeeId = entity.EmployeeId;
+            _view.Description = entity.Description;
         }
         private void Delete(object? sender, EventArgs e)
         {
             try
             {
-                var entity = (Deduction)DeductionBindingSource.Current;
+                var deduction = (DeductionViewModel)DeductionBindingSource.Current;
+                var entity = _unitOfWork.Deduction.Get(c => c.DeductionId == deduction.DeductionId);
                 _unitOfWork.Deduction.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
@@ -153,11 +158,12 @@ namespace PresentationLayer.Presenters.Payroll
             _view.DeductionType = 0;
             _view.Amount = 0;
             _view.EmployeeId = 0;
+            _view.Description = "";
         }
 
         private void LoadAllDeductionList()
         {
-            DeductionList = _unitOfWork.Deduction.GetAll();
+            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.GetAll());
             DeductionBindingSource.DataSource = DeductionList;//Set data source.
         }
         private void LoadAllDeductionTypeList()

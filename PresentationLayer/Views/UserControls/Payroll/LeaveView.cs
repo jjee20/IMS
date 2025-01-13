@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
+using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
@@ -174,7 +175,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetLeaveListBindingSource(BindingSource LeaveList)
         {
             dgList.DataSource = LeaveList;
-            DataGridHelper.ApplyDisplayNames<Leave>(LeaveList, dgList);
+            DataGridHelper.ApplyDisplayNames<LeaveViewModel>(LeaveList, dgList);
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {

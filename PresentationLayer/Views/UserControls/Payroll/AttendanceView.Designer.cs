@@ -43,10 +43,6 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AttendanceView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -62,17 +58,21 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
             dgList = new Guna2DataGridView();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            label1 = new Label();
+            txtId = new Label();
             txtIsPresent = new MaterialSkin.Controls.MaterialSwitch();
             txtHoursWorked = new Guna2NumericUpDown();
             guna2HtmlLabel7 = new Guna2HtmlLabel();
-            txtShift = new Guna2ComboBox();
-            guna2HtmlLabel6 = new Guna2HtmlLabel();
             txtDate = new Guna2DateTimePicker();
             guna2HtmlLabel5 = new Guna2HtmlLabel();
             txtTimeOut = new Guna2DateTimePicker();
@@ -81,8 +81,6 @@ namespace PresentationLayer.Views.UserControls
             txtEmployee = new Guna2ComboBox();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna2HtmlLabel();
-            guna2HtmlLabel1 = new Guna2HtmlLabel();
-            txtId = new Guna2TextBox();
             panel2 = new Panel();
             txtSearch = new Guna2TextBox();
             btnPrint = new Guna2Button();
@@ -95,6 +93,10 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2 = new TableLayoutPanel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
+            guna2HtmlLabel1 = new Guna2HtmlLabel();
+            txtStartDate = new Guna2DateTimePicker();
+            guna2HtmlLabel6 = new Guna2HtmlLabel();
+            txtEndDate = new Guna2DateTimePicker();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -235,11 +237,11 @@ namespace PresentationLayer.Views.UserControls
             // 
             materialCard2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(label1);
+            materialCard2.Controls.Add(txtId);
             materialCard2.Controls.Add(txtIsPresent);
             materialCard2.Controls.Add(txtHoursWorked);
             materialCard2.Controls.Add(guna2HtmlLabel7);
-            materialCard2.Controls.Add(txtShift);
-            materialCard2.Controls.Add(guna2HtmlLabel6);
             materialCard2.Controls.Add(txtDate);
             materialCard2.Controls.Add(guna2HtmlLabel5);
             materialCard2.Controls.Add(txtTimeOut);
@@ -248,8 +250,6 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Controls.Add(txtEmployee);
             materialCard2.Controls.Add(guna2HtmlLabel3);
             materialCard2.Controls.Add(guna2HtmlLabel2);
-            materialCard2.Controls.Add(guna2HtmlLabel1);
-            materialCard2.Controls.Add(txtId);
             materialCard2.Depth = 0;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard2.Location = new Point(19, 23);
@@ -260,6 +260,28 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Size = new Size(1828, 727);
             materialCard2.TabIndex = 0;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Right;
+            label1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            label1.Location = new Point(1752, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(37, 25);
+            label1.TabIndex = 26;
+            label1.Text = "ID:";
+            // 
+            // txtId
+            // 
+            txtId.AutoSize = true;
+            txtId.Dock = DockStyle.Right;
+            txtId.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            txtId.Location = new Point(1789, 19);
+            txtId.Name = "txtId";
+            txtId.Size = new Size(23, 25);
+            txtId.TabIndex = 25;
+            txtId.Text = "0";
+            // 
             // txtIsPresent
             // 
             txtIsPresent.Anchor = AnchorStyles.None;
@@ -267,7 +289,7 @@ namespace PresentationLayer.Views.UserControls
             txtIsPresent.Checked = true;
             txtIsPresent.CheckState = CheckState.Checked;
             txtIsPresent.Depth = 0;
-            txtIsPresent.Location = new Point(952, 573);
+            txtIsPresent.Location = new Point(952, 561);
             txtIsPresent.Margin = new Padding(0);
             txtIsPresent.MouseLocation = new Point(-1, -1);
             txtIsPresent.MouseState = MaterialSkin.MouseState.HOVER;
@@ -284,7 +306,7 @@ namespace PresentationLayer.Views.UserControls
             txtHoursWorked.BackColor = Color.Transparent;
             txtHoursWorked.CustomizableEdges = customizableEdges1;
             txtHoursWorked.Font = new Font("Segoe UI", 9F);
-            txtHoursWorked.Location = new Point(363, 564);
+            txtHoursWorked.Location = new Point(362, 458);
             txtHoursWorked.Margin = new Padding(3, 4, 3, 4);
             txtHoursWorked.Name = "txtHoursWorked";
             txtHoursWorked.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -296,54 +318,26 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel7.Anchor = AnchorStyles.None;
             guna2HtmlLabel7.BackColor = Color.Transparent;
             guna2HtmlLabel7.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel7.Location = new Point(363, 510);
+            guna2HtmlLabel7.Location = new Point(362, 406);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             guna2HtmlLabel7.Size = new Size(112, 25);
             guna2HtmlLabel7.TabIndex = 22;
             guna2HtmlLabel7.Text = "Hours Worked";
             // 
-            // txtShift
-            // 
-            txtShift.Anchor = AnchorStyles.None;
-            txtShift.BackColor = Color.Transparent;
-            txtShift.CustomizableEdges = customizableEdges3;
-            txtShift.DrawMode = DrawMode.OwnerDrawFixed;
-            txtShift.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtShift.FocusedColor = Color.FromArgb(94, 148, 255);
-            txtShift.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtShift.Font = new Font("Segoe UI", 10F);
-            txtShift.ForeColor = Color.FromArgb(68, 88, 112);
-            txtShift.ItemHeight = 50;
-            txtShift.Location = new Point(363, 425);
-            txtShift.Name = "txtShift";
-            txtShift.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            txtShift.Size = new Size(514, 56);
-            txtShift.TabIndex = 20;
-            // 
-            // guna2HtmlLabel6
-            // 
-            guna2HtmlLabel6.Anchor = AnchorStyles.None;
-            guna2HtmlLabel6.BackColor = Color.Transparent;
-            guna2HtmlLabel6.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel6.Location = new Point(363, 371);
-            guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            guna2HtmlLabel6.Size = new Size(37, 25);
-            guna2HtmlLabel6.TabIndex = 19;
-            guna2HtmlLabel6.Text = "Shift";
-            // 
             // txtDate
             // 
             txtDate.Anchor = AnchorStyles.None;
             txtDate.Checked = true;
-            txtDate.CustomizableEdges = customizableEdges5;
-            txtDate.FillColor = Color.White;
+            txtDate.CustomizableEdges = customizableEdges3;
+            txtDate.FillColor = Color.MidnightBlue;
             txtDate.Font = new Font("Segoe UI", 9F);
+            txtDate.ForeColor = Color.White;
             txtDate.Format = DateTimePickerFormat.Long;
-            txtDate.Location = new Point(952, 147);
+            txtDate.Location = new Point(362, 320);
             txtDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtDate.Name = "txtDate";
-            txtDate.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtDate.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtDate.Size = new Size(513, 55);
             txtDate.TabIndex = 18;
             txtDate.Value = new DateTime(2024, 12, 17, 11, 27, 15, 69);
@@ -353,7 +347,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel5.Anchor = AnchorStyles.None;
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel5.Location = new Point(951, 93);
+            guna2HtmlLabel5.Location = new Point(362, 266);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(39, 25);
             guna2HtmlLabel5.TabIndex = 17;
@@ -363,15 +357,16 @@ namespace PresentationLayer.Views.UserControls
             // 
             txtTimeOut.Anchor = AnchorStyles.None;
             txtTimeOut.Checked = true;
-            txtTimeOut.CustomizableEdges = customizableEdges7;
-            txtTimeOut.FillColor = Color.White;
+            txtTimeOut.CustomizableEdges = customizableEdges5;
+            txtTimeOut.FillColor = Color.MidnightBlue;
             txtTimeOut.Font = new Font("Segoe UI", 9F);
+            txtTimeOut.ForeColor = Color.White;
             txtTimeOut.Format = DateTimePickerFormat.Time;
-            txtTimeOut.Location = new Point(951, 423);
+            txtTimeOut.Location = new Point(952, 458);
             txtTimeOut.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtTimeOut.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtTimeOut.Name = "txtTimeOut";
-            txtTimeOut.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtTimeOut.ShadowDecoration.CustomizableEdges = customizableEdges6;
             txtTimeOut.ShowUpDown = true;
             txtTimeOut.Size = new Size(513, 55);
             txtTimeOut.TabIndex = 16;
@@ -382,7 +377,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel4.Anchor = AnchorStyles.None;
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel4.Location = new Point(952, 369);
+            guna2HtmlLabel4.Location = new Point(953, 404);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(73, 25);
             guna2HtmlLabel4.TabIndex = 15;
@@ -392,15 +387,16 @@ namespace PresentationLayer.Views.UserControls
             // 
             txtTimeIn.Anchor = AnchorStyles.None;
             txtTimeIn.Checked = true;
-            txtTimeIn.CustomizableEdges = customizableEdges9;
-            txtTimeIn.FillColor = Color.White;
+            txtTimeIn.CustomizableEdges = customizableEdges7;
+            txtTimeIn.FillColor = Color.MidnightBlue;
             txtTimeIn.Font = new Font("Segoe UI", 9F);
+            txtTimeIn.ForeColor = Color.White;
             txtTimeIn.Format = DateTimePickerFormat.Time;
-            txtTimeIn.Location = new Point(952, 285);
+            txtTimeIn.Location = new Point(953, 320);
             txtTimeIn.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtTimeIn.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtTimeIn.Name = "txtTimeIn";
-            txtTimeIn.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtTimeIn.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtTimeIn.ShowUpDown = true;
             txtTimeIn.Size = new Size(513, 55);
             txtTimeIn.TabIndex = 14;
@@ -410,7 +406,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             txtEmployee.Anchor = AnchorStyles.None;
             txtEmployee.BackColor = Color.Transparent;
-            txtEmployee.CustomizableEdges = customizableEdges11;
+            txtEmployee.CustomizableEdges = customizableEdges9;
             txtEmployee.DrawMode = DrawMode.OwnerDrawFixed;
             txtEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
             txtEmployee.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -418,10 +414,10 @@ namespace PresentationLayer.Views.UserControls
             txtEmployee.Font = new Font("Segoe UI", 10F);
             txtEmployee.ForeColor = Color.FromArgb(68, 88, 112);
             txtEmployee.ItemHeight = 50;
-            txtEmployee.Location = new Point(363, 286);
+            txtEmployee.Location = new Point(362, 182);
             txtEmployee.Name = "txtEmployee";
-            txtEmployee.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtEmployee.Size = new Size(514, 56);
+            txtEmployee.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtEmployee.Size = new Size(1103, 56);
             txtEmployee.TabIndex = 13;
             // 
             // guna2HtmlLabel3
@@ -429,7 +425,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel3.Anchor = AnchorStyles.None;
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel3.Location = new Point(951, 231);
+            guna2HtmlLabel3.Location = new Point(952, 266);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(61, 25);
             guna2HtmlLabel3.TabIndex = 12;
@@ -440,49 +436,19 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Anchor = AnchorStyles.None;
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel2.Location = new Point(363, 232);
+            guna2HtmlLabel2.Location = new Point(362, 128);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(77, 25);
             guna2HtmlLabel2.TabIndex = 11;
             guna2HtmlLabel2.Text = "Employee";
             // 
-            // guna2HtmlLabel1
-            // 
-            guna2HtmlLabel1.Anchor = AnchorStyles.None;
-            guna2HtmlLabel1.BackColor = Color.Transparent;
-            guna2HtmlLabel1.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel1.Location = new Point(363, 93);
-            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(20, 25);
-            guna2HtmlLabel1.TabIndex = 10;
-            guna2HtmlLabel1.Text = "ID";
-            // 
-            // txtId
-            // 
-            txtId.Anchor = AnchorStyles.None;
-            txtId.CustomizableEdges = customizableEdges13;
-            txtId.DefaultText = "";
-            txtId.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtId.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtId.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtId.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtId.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtId.Font = new Font("Segoe UI", 10F);
-            txtId.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtId.Location = new Point(363, 147);
-            txtId.Margin = new Padding(3, 5, 3, 5);
-            txtId.Name = "txtId";
-            txtId.PasswordChar = '\0';
-            txtId.PlaceholderText = "(Auto Generated)";
-            txtId.ReadOnly = true;
-            txtId.SelectedText = "";
-            txtId.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            txtId.Size = new Size(514, 56);
-            txtId.TabIndex = 7;
-            // 
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(guna2HtmlLabel1);
+            panel2.Controls.Add(txtStartDate);
+            panel2.Controls.Add(guna2HtmlLabel6);
+            panel2.Controls.Add(txtEndDate);
             panel2.Controls.Add(txtSearch);
             panel2.Controls.Add(btnPrint);
             panel2.Controls.Add(btnDelete);
@@ -691,6 +657,62 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Size = new Size(1868, 11);
             guna2Separator1.TabIndex = 1;
             // 
+            // guna2HtmlLabel1
+            // 
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Dock = DockStyle.Right;
+            guna2HtmlLabel1.Location = new Point(933, 0);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(40, 22);
+            guna2HtmlLabel1.TabIndex = 18;
+            guna2HtmlLabel1.Text = "From:";
+            guna2HtmlLabel1.TextAlignment = ContentAlignment.MiddleRight;
+            // 
+            // txtStartDate
+            // 
+            txtStartDate.Checked = true;
+            txtStartDate.CustomizableEdges = customizableEdges11;
+            txtStartDate.Dock = DockStyle.Right;
+            txtStartDate.FillColor = Color.White;
+            txtStartDate.Font = new Font("Segoe UI", 9F);
+            txtStartDate.Format = DateTimePickerFormat.Long;
+            txtStartDate.Location = new Point(973, 0);
+            txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            txtStartDate.Name = "txtStartDate";
+            txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtStartDate.Size = new Size(250, 50);
+            txtStartDate.TabIndex = 17;
+            txtStartDate.Value = new DateTime(2025, 1, 12, 10, 14, 55, 9);
+            // 
+            // guna2HtmlLabel6
+            // 
+            guna2HtmlLabel6.BackColor = Color.Transparent;
+            guna2HtmlLabel6.Dock = DockStyle.Right;
+            guna2HtmlLabel6.Location = new Point(1223, 0);
+            guna2HtmlLabel6.Name = "guna2HtmlLabel6";
+            guna2HtmlLabel6.Size = new Size(23, 22);
+            guna2HtmlLabel6.TabIndex = 16;
+            guna2HtmlLabel6.Text = "To:";
+            guna2HtmlLabel6.TextAlignment = ContentAlignment.MiddleRight;
+            // 
+            // txtEndDate
+            // 
+            txtEndDate.Checked = true;
+            txtEndDate.CustomizableEdges = customizableEdges13;
+            txtEndDate.Dock = DockStyle.Right;
+            txtEndDate.FillColor = Color.White;
+            txtEndDate.Font = new Font("Segoe UI", 9F);
+            txtEndDate.Format = DateTimePickerFormat.Long;
+            txtEndDate.Location = new Point(1246, 0);
+            txtEndDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            txtEndDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            txtEndDate.Name = "txtEndDate";
+            txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            txtEndDate.Size = new Size(250, 50);
+            txtEndDate.TabIndex = 15;
+            txtEndDate.Value = new DateTime(2025, 1, 12, 10, 14, 55, 9);
+            // 
             // AttendanceView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -708,6 +730,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)txtHoursWorked).EndInit();
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -733,14 +756,10 @@ namespace PresentationLayer.Views.UserControls
         private Guna2Separator guna2Separator1;
         private Guna2DataGridView dgList;
         private MaterialSkin.Controls.MaterialCard materialCard2;
-        private Guna2TextBox txtId;
-        private Guna2HtmlLabel guna2HtmlLabel1;
         private Guna2HtmlLabel guna2HtmlLabel3;
         private Guna2HtmlLabel guna2HtmlLabel2;
         private Guna2ComboBox txtEmployee;
         private Guna2HtmlLabel guna2HtmlLabel7;
-        private Guna2ComboBox txtShift;
-        private Guna2HtmlLabel guna2HtmlLabel6;
         private Guna2DateTimePicker txtDate;
         private Guna2HtmlLabel guna2HtmlLabel5;
         private Guna2DateTimePicker txtTimeOut;
@@ -748,5 +767,11 @@ namespace PresentationLayer.Views.UserControls
         private Guna2DateTimePicker txtTimeIn;
         private MaterialSkin.Controls.MaterialSwitch txtIsPresent;
         private Guna2NumericUpDown txtHoursWorked;
+        private Label label1;
+        private Label txtId;
+        private Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna2DateTimePicker txtStartDate;
+        private Guna2HtmlLabel guna2HtmlLabel6;
+        private Guna2DateTimePicker txtEndDate;
     }
 }

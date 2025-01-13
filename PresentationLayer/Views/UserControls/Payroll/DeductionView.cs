@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
+using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
@@ -121,6 +122,11 @@ namespace PresentationLayer.Views.UserControls
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString(); }
         }
+        public string Description
+        {
+            get { return txtDescription.Text; }
+            set { txtDescription.Text = value; }
+        }
         public int EmployeeId
         {
             get { return (int)txtEmployee.SelectedValue; }
@@ -153,7 +159,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetDeductionListBindingSource(BindingSource DeductionList)
         {
             dgList.DataSource = DeductionList;
-            DataGridHelper.ApplyDisplayNames<Deduction>(DeductionList, dgList);
+            DataGridHelper.ApplyDisplayNames<DeductionViewModel>(DeductionList, dgList);
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
@@ -190,7 +196,7 @@ namespace PresentationLayer.Views.UserControls
 
         private void txtDeductionType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (txtDeductionType.Text == "Other") txtOther.ReadOnly = false; else txtOther.ReadOnly = true;
+            if (txtDeductionType.Text == "Other") txtDescription.ReadOnly = false; else txtDescription.ReadOnly = true;
         }
     }
 }

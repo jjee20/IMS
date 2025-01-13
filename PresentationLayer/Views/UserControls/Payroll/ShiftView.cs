@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
+using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
@@ -153,7 +154,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetShiftListBindingSource(BindingSource ShiftList)
         {
             dgList.DataSource = ShiftList;
-            DataGridHelper.ApplyDisplayNames<Shift>(ShiftList, dgList);
+            DataGridHelper.ApplyDisplayNames<ShiftViewModel>(ShiftList, dgList);
         }
 
         public event EventHandler AddNewEvent;

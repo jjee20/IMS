@@ -54,6 +54,8 @@ namespace InfastructureLayer.DataAccess.Repositories
         public IShiftRepository Shift { get; private set; }
         public ITaxRepository Tax { get; private set; }
         public IProjectRepository Project { get; private set; }
+        public IAllowanceRepository Allowance { get; private set; }
+        public IBonusRepository Bonus { get; private set; }
         public UnitOfWork(ApplicationDataContext db)
         {
             _db = db;
@@ -99,6 +101,8 @@ namespace InfastructureLayer.DataAccess.Repositories
             Shift ??= new ShiftRepository(_db);
             Tax ??= new TaxRepository(_db);
             Project ??= new ProjectRepository(_db);
+            Allowance ??= new AllowanceRepository(_db);
+            Bonus ??= new BonusRepository(_db);
         }
         public void Save()
         {

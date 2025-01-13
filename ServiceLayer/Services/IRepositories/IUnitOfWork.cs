@@ -44,6 +44,8 @@
         IShiftRepository Shift { get; }
         ITaxRepository Tax { get; }
         IProjectRepository Project { get; }
+        IAllowanceRepository Allowance { get; }
+        IBonusRepository Bonus { get; }
         void Save();
     }
 }

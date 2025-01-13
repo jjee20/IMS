@@ -10,12 +10,14 @@ namespace DomainLayer.Models.Payroll
     public class Tax
     {
         [Key]
+        [Display(Name ="Id")]
         public int TaxId { get; set; } // Primary Key
+        [Display(Name = "Minimum Salary")]
         public double MinimumSalary { get; set; }
+        [Display(Name = "Maximum Salary")]
         public double MaximumSalary { get; set; }
+        [Display(Name = "Tax Rate (%)")]
         public double TaxRate { get; set; } // In percentage
-
-        public ICollection<Payroll> Payrolls { get; set; } // Navigation Property
     }
 
 }

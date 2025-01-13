@@ -15,6 +15,9 @@ namespace PresentationLayer.Views.IViews.Payroll
         string Address { get; set; }
         int DepartmentId { get; set; }
         int JobPositionId { get; set; }
+        int ShiftId { get; set; }
+        double BasicSalary { get; set; }
+        double LeaveCredits { get; set; }
         bool isDeducted { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }
@@ -33,5 +36,6 @@ namespace PresentationLayer.Views.IViews.Payroll
         void SetGenderListBindingSource(BindingSource GenderList);
         void SetDepartmentListBindingSource(BindingSource DepartmentList);
         void SetJobPositionListBindingSource(BindingSource JobPositionList);
+        void SetShiftListBindingSource(BindingSource ShiftList);
     }
 }

@@ -21,9 +21,6 @@ namespace DomainLayer.Models.Payroll
         public DateTime Date { get; set; }
         public bool IsPresent { get; set; }
         public double HoursWorked { get; set; }
-        [ForeignKey(nameof(ShiftId))]
-        public int ShiftId { get; set; } // Foreign Key
-        public Shift Shift { get; set; } // Integration with Shift Management
     }
 
 }

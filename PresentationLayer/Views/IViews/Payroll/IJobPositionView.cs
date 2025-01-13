@@ -6,7 +6,6 @@ namespace PresentationLayer.Views.IViews.Payroll
     {
         int JobPositionId { get; set; }
         string Title { get; set; }
-        double Salary { get; set; }
         string Description { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }

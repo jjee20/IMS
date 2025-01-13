@@ -34,7 +34,7 @@ namespace PresentationLayer.Presenters.Payroll
             _view.ShowJobPosition += ShowJobPosition;
             _view.ShowLeave += ShowLeave;
             _view.ShowPayroll += ShowPayroll;
-            //_view.ShowPerformanceReview += ShowPerformanceReview;
+            _view.ShowBenefit += ShowBenefit;
             _view.ShowShift += ShowShift;
             _view.ShowTax += ShowTax;
             ShowAttendance(this, EventArgs.Empty);
@@ -60,7 +60,8 @@ namespace PresentationLayer.Presenters.Payroll
 
         private void ShowPayroll(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            IPayrollView view = PayrollView.GetInstance(_view.Guna2TabControlPage);
+            new PayrollPresenter(view, _unitOfWork);
         }
 
         private void ShowLeave(object? sender, EventArgs e)
@@ -115,10 +116,10 @@ namespace PresentationLayer.Presenters.Payroll
             IProfileView view = ProfileView.GetInstance(_view.Guna2TabControlPage);
             new ProfilePresenter(view, _unitOfWork);
         }
-        private void ShowDashboard(object? sender, EventArgs e)
+        private void ShowBenefit(object? sender, EventArgs e)
         {
-            IDashboardView view = DashboardView.GetInstance(_view.Guna2TabControlPage);
-            new DashboardPresenter(view, _unitOfWork);
+            IBenefitView view = BenefitView.GetInstance(_view.Guna2TabControlPage);
+            new BenefitPresenter(view, _unitOfWork);
         }
     }
 }

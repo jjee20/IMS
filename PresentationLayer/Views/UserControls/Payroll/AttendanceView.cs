@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Models.Inventory;
 using DomainLayer.Models.Payroll;
+using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using Newtonsoft.Json.Linq;
@@ -57,6 +58,14 @@ namespace PresentationLayer.Views.UserControls
                     btnReturn.Visible = false;
                 }
                 MessageBox.Show(Message);
+            };
+            txtStartDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
+            txtEndDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
             };
             txtSearch.TextChanged += (s, e) =>
             {
@@ -144,11 +153,6 @@ namespace PresentationLayer.Views.UserControls
             get { return Convert.ToDouble(txtHoursWorked.Text); }
             set { txtHoursWorked.Text = value.ToString(); }
         }
-        public int ShiftId
-        {
-            get { return (int)txtShift.SelectedValue; }
-            set { txtShift.Text = value.ToString(); }
-        }
         public bool IsEdit
         {
             get { return isEdit; }
@@ -167,6 +171,16 @@ namespace PresentationLayer.Views.UserControls
             set { message = value; }
         }
 
+        public DateTime StartDate
+        {
+            get { return txtStartDate.Value; }
+            set { txtStartDate.Text = value.ToString(); }
+        }
+        public DateTime EndDate
+        {
+            get { return txtEndDate.Value; }
+            set { txtEndDate.Text = value.ToString(); }
+        }
         public string SearchValue
         {
             get { return txtSearch.Text; }
@@ -176,7 +190,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetAttendanceListBindingSource(BindingSource AttendanceList)
         {
             dgList.DataSource = AttendanceList;
-            DataGridHelper.ApplyDisplayNames<Attendance>(AttendanceList, dgList);
+            DataGridHelper.ApplyDisplayNames<AttendanceViewModel>(AttendanceList, dgList);
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
@@ -184,12 +198,7 @@ namespace PresentationLayer.Views.UserControls
             txtEmployee.DisplayMember = "LastName";
             txtEmployee.ValueMember = "EmployeeId";
         }
-        public void SetShiftListBindingSource(BindingSource ShiftList)
-        {
-            txtShift.DataSource = ShiftList;
-            txtShift.DisplayMember = "ShiftName";
-            txtShift.ValueMember = "ShiftId";
-        }
+
         public event EventHandler AddNewEvent;
         public event EventHandler SaveEvent;
         public event EventHandler SearchEvent;

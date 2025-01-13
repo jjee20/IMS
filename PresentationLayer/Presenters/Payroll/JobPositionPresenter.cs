@@ -60,7 +60,6 @@ namespace PresentationLayer.Presenters.Payroll
             {
                 JobPositionId = _view.JobPositionId,
                 Title = _view.Title,
-                Salary = _view.Salary,
                 Description = _view.Description,
             };
 
@@ -106,7 +105,6 @@ namespace PresentationLayer.Presenters.Payroll
             var entity = (JobPosition)JobPositionBindingSource.Current;
             _view.JobPositionId = entity.JobPositionId;
             _view.Title = entity.Title;
-            _view.Salary = entity.Salary;
             _view.Description = entity.Description;
         }
         private void Delete(object? sender, EventArgs e)
@@ -146,7 +144,6 @@ namespace PresentationLayer.Presenters.Payroll
             _view.JobPositionId = 0;
             _view.Title = "";
             _view.Description = "";
-            _view.Salary = 0;
         }
 
         private void LoadAllJobPositionList()

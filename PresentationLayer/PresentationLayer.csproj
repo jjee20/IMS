@@ -58,6 +58,18 @@
     <Compile Update="Views\UserControls\Payroll\AttendanceView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Payroll\BenefitView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Payroll\AllowanceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Payroll\BonusView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Payroll\PayrollView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Payroll\ProjectView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -203,6 +215,15 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Update="Reports\BillReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\AttendanceReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PayslipReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\PayrollReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\ProductReport.rdlc">

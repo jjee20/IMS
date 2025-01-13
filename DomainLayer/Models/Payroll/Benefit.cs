@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLayer.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,13 +13,12 @@ namespace DomainLayer.Models.Payroll
     {
         [Key]
         public int BenefitId { get; set; } // Primary Key
-        public string Name { get; set; } // Example: "Health Insurance", "Transportation"
+        public BenefitType BenefitType { get; set; } // Example: "Health Insurance", "Transportation"
         public double Amount { get; set; }
-        public string Description { get; set; }
-        [ForeignKey(nameof(PayrollId))]
-
-        public int PayrollId { get; set; } // Foreign Key
-        public Payroll Payroll { get; set; }
+        [ForeignKey(nameof(EmployeeId))]
+        public int EmployeeId { get; set; } // Foreign Key
+        public Employee Employee { get; set; }
+        public string Other { get; set; }
     }
 
 }
