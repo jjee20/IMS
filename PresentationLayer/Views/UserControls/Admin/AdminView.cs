@@ -64,6 +64,11 @@ namespace PresentationLayer.Views
             Show();
         }
 
+        private void AdminView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Restart();
+        }
+
         public event EventHandler ShowRegister;
         public event EventHandler ShowInventory;
         public event EventHandler ShowPayroll;

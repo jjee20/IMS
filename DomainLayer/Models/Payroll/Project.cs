@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class Project
+    public class Project : BaseEntity
     {
         [Key] 
         public int ProjectId { get; set; }

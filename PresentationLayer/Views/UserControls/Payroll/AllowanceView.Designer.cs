@@ -42,7 +42,6 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AllowanceView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -56,12 +55,15 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AllowanceView));
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
             dgList = new Guna2DataGridView();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            label2 = new Label();
+            txtId = new Label();
             guna2HtmlLabel5 = new Guna2HtmlLabel();
             txtDescription = new Guna2TextBox();
             txtAllowanceType = new Guna2ComboBox();
@@ -82,8 +84,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2 = new TableLayoutPanel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
-            label2 = new Label();
-            txtId = new Label();
+            materialButton1 = new MaterialSkin.Controls.MaterialButton();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -184,6 +185,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Name = "dgList";
             dgList.RowHeadersVisible = false;
             dgList.RowHeadersWidth = 51;
+            dgList.RowTemplate.Height = 29;
             dgList.Size = new Size(1860, 765);
             dgList.TabIndex = 0;
             dgList.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
@@ -244,6 +246,28 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Size = new Size(1828, 727);
             materialCard2.TabIndex = 0;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Right;
+            label2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            label2.Location = new Point(1765, 19);
+            label2.Name = "label2";
+            label2.Size = new Size(29, 20);
+            label2.TabIndex = 22;
+            label2.Text = "ID:";
+            // 
+            // txtId
+            // 
+            txtId.AutoSize = true;
+            txtId.Dock = DockStyle.Right;
+            txtId.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            txtId.Location = new Point(1794, 19);
+            txtId.Name = "txtId";
+            txtId.Size = new Size(18, 20);
+            txtId.TabIndex = 21;
+            txtId.Text = "0";
+            // 
             // guna2HtmlLabel5
             // 
             guna2HtmlLabel5.Anchor = AnchorStyles.None;
@@ -251,7 +275,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel5.Font = new Font("Segoe UI", 10F);
             guna2HtmlLabel5.Location = new Point(955, 386);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            guna2HtmlLabel5.Size = new Size(89, 25);
+            guna2HtmlLabel5.Size = new Size(69, 19);
             guna2HtmlLabel5.TabIndex = 17;
             guna2HtmlLabel5.Text = "Description";
             // 
@@ -320,7 +344,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10F);
             guna2HtmlLabel4.Location = new Point(360, 227);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(77, 25);
+            guna2HtmlLabel4.Size = new Size(60, 19);
             guna2HtmlLabel4.TabIndex = 13;
             guna2HtmlLabel4.Text = "Employee";
             // 
@@ -331,7 +355,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel3.Font = new Font("Segoe UI", 10F);
             guna2HtmlLabel3.Location = new Point(955, 227);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            guna2HtmlLabel3.Size = new Size(65, 25);
+            guna2HtmlLabel3.Size = new Size(48, 19);
             guna2HtmlLabel3.TabIndex = 12;
             guna2HtmlLabel3.Text = "Amount";
             // 
@@ -342,7 +366,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Font = new Font("Segoe UI", 10F);
             guna2HtmlLabel2.Location = new Point(360, 386);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(121, 25);
+            guna2HtmlLabel2.Size = new Size(93, 19);
             guna2HtmlLabel2.TabIndex = 11;
             guna2HtmlLabel2.Text = "Allowance Type";
             // 
@@ -371,6 +395,7 @@ namespace PresentationLayer.Views.UserControls
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(materialButton1);
             panel2.Controls.Add(txtSearch);
             panel2.Controls.Add(btnPrint);
             panel2.Controls.Add(btnDelete);
@@ -579,27 +604,27 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Size = new Size(1868, 11);
             guna2Separator1.TabIndex = 1;
             // 
-            // label2
+            // materialButton1
             // 
-            label2.AutoSize = true;
-            label2.Dock = DockStyle.Right;
-            label2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            label2.Location = new Point(1752, 19);
-            label2.Name = "label2";
-            label2.Size = new Size(37, 25);
-            label2.TabIndex = 22;
-            label2.Text = "ID:";
-            // 
-            // txtId
-            // 
-            txtId.AutoSize = true;
-            txtId.Dock = DockStyle.Right;
-            txtId.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            txtId.Location = new Point(1789, 19);
-            txtId.Name = "txtId";
-            txtId.Size = new Size(23, 25);
-            txtId.TabIndex = 21;
-            txtId.Text = "0";
+            materialButton1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            materialButton1.Depth = 0;
+            materialButton1.Dock = DockStyle.Left;
+            materialButton1.HighEmphasis = true;
+            materialButton1.Icon = null;
+            materialButton1.Image = (Image)resources.GetObject("materialButton1.Image");
+            materialButton1.ImageAlign = ContentAlignment.MiddleLeft;
+            materialButton1.Location = new Point(300, 0);
+            materialButton1.Margin = new Padding(4, 6, 4, 6);
+            materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialButton1.Name = "materialButton1";
+            materialButton1.NoAccentTextColor = Color.Empty;
+            materialButton1.Size = new Size(77, 50);
+            materialButton1.TabIndex = 12;
+            materialButton1.Text = "Return";
+            materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            materialButton1.UseAccentColor = false;
+            materialButton1.UseVisualStyleBackColor = true;
             // 
             // AllowanceView
             // 
@@ -617,6 +642,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -653,5 +679,6 @@ namespace PresentationLayer.Views.UserControls
         private Guna2TextBox txtDescription;
         private Label label2;
         private Label txtId;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
     }
 }

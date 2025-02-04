@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Inventory
 {
-    public class UnitOfMeasure
+    public class UnitOfMeasure : BaseEntity
     {
         [Key]
         [Display(Name = "Id")]

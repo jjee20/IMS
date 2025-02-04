@@ -56,8 +56,8 @@ namespace PresentationLayer.Views.UserControls
 
         private static PayrollView? instance;
 
-        public DateTime StartDate { get => txtStartDate.Value.Date; }
-        public DateTime EndDate { get => txtEndDate.Value.Date; }
+        public DateTime StartDate { get => txtStartDate.Value.Date; set => txtStartDate.Value = value; }
+        public DateTime EndDate { get => txtEndDate.Value.Date; set => txtEndDate.Value = value; }
         public bool IncludeContribution { get => btnContribution.Checked; }
         public bool IncludeBenefits { get => btnBenefits.Checked; }
         public string Message

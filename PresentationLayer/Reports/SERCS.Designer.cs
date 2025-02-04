@@ -96,7 +96,9 @@ namespace PresentationLayer.Reports {
         
         private PayrollDataTable tablePayroll;
         
-        private AttendancesDataTable tableAttendances;
+        private IndividualAttendancesDataTable tableIndividualAttendances;
+        
+        private AttendanceDataTable tableAttendance;
         
         private global::System.Data.DataRelation relationFK_AspNetRoleClaims_AspNetRoles_RoleId;
         
@@ -252,8 +254,11 @@ namespace PresentationLayer.Reports {
                 if ((ds.Tables["Payroll"] != null)) {
                     base.Tables.Add(new PayrollDataTable(ds.Tables["Payroll"]));
                 }
-                if ((ds.Tables["Attendances"] != null)) {
-                    base.Tables.Add(new AttendancesDataTable(ds.Tables["Attendances"]));
+                if ((ds.Tables["IndividualAttendances"] != null)) {
+                    base.Tables.Add(new IndividualAttendancesDataTable(ds.Tables["IndividualAttendances"]));
+                }
+                if ((ds.Tables["Attendance"] != null)) {
+                    base.Tables.Add(new AttendanceDataTable(ds.Tables["Attendance"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -637,9 +642,19 @@ namespace PresentationLayer.Reports {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public AttendancesDataTable Attendances {
+        public IndividualAttendancesDataTable IndividualAttendances {
             get {
-                return this.tableAttendances;
+                return this.tableIndividualAttendances;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public AttendanceDataTable Attendance {
+            get {
+                return this.tableAttendance;
             }
         }
         
@@ -818,8 +833,11 @@ namespace PresentationLayer.Reports {
                 if ((ds.Tables["Payroll"] != null)) {
                     base.Tables.Add(new PayrollDataTable(ds.Tables["Payroll"]));
                 }
-                if ((ds.Tables["Attendances"] != null)) {
-                    base.Tables.Add(new AttendancesDataTable(ds.Tables["Attendances"]));
+                if ((ds.Tables["IndividualAttendances"] != null)) {
+                    base.Tables.Add(new IndividualAttendancesDataTable(ds.Tables["IndividualAttendances"]));
+                }
+                if ((ds.Tables["Attendance"] != null)) {
+                    base.Tables.Add(new AttendanceDataTable(ds.Tables["Attendance"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1070,10 +1088,16 @@ namespace PresentationLayer.Reports {
                     this.tablePayroll.InitVars();
                 }
             }
-            this.tableAttendances = ((AttendancesDataTable)(base.Tables["Attendances"]));
+            this.tableIndividualAttendances = ((IndividualAttendancesDataTable)(base.Tables["IndividualAttendances"]));
             if ((initTable == true)) {
-                if ((this.tableAttendances != null)) {
-                    this.tableAttendances.InitVars();
+                if ((this.tableIndividualAttendances != null)) {
+                    this.tableIndividualAttendances.InitVars();
+                }
+            }
+            this.tableAttendance = ((AttendanceDataTable)(base.Tables["Attendance"]));
+            if ((initTable == true)) {
+                if ((this.tableAttendance != null)) {
+                    this.tableAttendance.InitVars();
                 }
             }
             this.relationFK_AspNetRoleClaims_AspNetRoles_RoleId = this.Relations["FK_AspNetRoleClaims_AspNetRoles_RoleId"];
@@ -1166,8 +1190,10 @@ namespace PresentationLayer.Reports {
             base.Tables.Add(this.tableVendorType);
             this.tablePayroll = new PayrollDataTable();
             base.Tables.Add(this.tablePayroll);
-            this.tableAttendances = new AttendancesDataTable();
-            base.Tables.Add(this.tableAttendances);
+            this.tableIndividualAttendances = new IndividualAttendancesDataTable();
+            base.Tables.Add(this.tableIndividualAttendances);
+            this.tableAttendance = new AttendanceDataTable();
+            base.Tables.Add(this.tableAttendance);
             this.relationFK_AspNetRoleClaims_AspNetRoles_RoleId = new global::System.Data.DataRelation("FK_AspNetRoleClaims_AspNetRoles_RoleId", new global::System.Data.DataColumn[] {
                         this.tableAspNetRoles.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableAspNetRoleClaims.RoleIdColumn}, false);
@@ -1420,7 +1446,13 @@ namespace PresentationLayer.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializeAttendances() {
+        private bool ShouldSerializeIndividualAttendances() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeAttendance() {
             return false;
         }
         
@@ -1588,7 +1620,10 @@ namespace PresentationLayer.Reports {
         public delegate void PayrollRowChangeEventHandler(object sender, PayrollRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void AttendancesRowChangeEventHandler(object sender, AttendancesRowChangeEvent e);
+        public delegate void IndividualAttendancesRowChangeEventHandler(object sender, IndividualAttendancesRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void AttendanceRowChangeEventHandler(object sender, AttendanceRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -13887,7 +13922,7 @@ namespace PresentationLayer.Reports {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class AttendancesDataTable : global::System.Data.TypedTableBase<AttendancesRow> {
+        public partial class IndividualAttendancesDataTable : global::System.Data.TypedTableBase<IndividualAttendancesRow> {
             
             private global::System.Data.DataColumn columnTimeIn;
             
@@ -13899,12 +13934,10 @@ namespace PresentationLayer.Reports {
             
             private global::System.Data.DataColumn columnHoursWorked;
             
-            private global::System.Data.DataColumn columnName;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public AttendancesDataTable() {
-                this.TableName = "Attendances";
+            public IndividualAttendancesDataTable() {
+                this.TableName = "IndividualAttendances";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -13912,7 +13945,7 @@ namespace PresentationLayer.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal AttendancesDataTable(global::System.Data.DataTable table) {
+            internal IndividualAttendancesDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -13931,7 +13964,7 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called" +
                 " or extended by application code.", DiagnosticId="SYSLIB0051")]
-            protected AttendancesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected IndividualAttendancesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -13978,14 +14011,6 @@ namespace PresentationLayer.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn NameColumn {
-                get {
-                    return this.columnName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -13995,50 +14020,49 @@ namespace PresentationLayer.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public AttendancesRow this[int index] {
+            public IndividualAttendancesRow this[int index] {
                 get {
-                    return ((AttendancesRow)(this.Rows[index]));
+                    return ((IndividualAttendancesRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event AttendancesRowChangeEventHandler AttendancesRowChanging;
+            public event IndividualAttendancesRowChangeEventHandler IndividualAttendancesRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event AttendancesRowChangeEventHandler AttendancesRowChanged;
+            public event IndividualAttendancesRowChangeEventHandler IndividualAttendancesRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event AttendancesRowChangeEventHandler AttendancesRowDeleting;
+            public event IndividualAttendancesRowChangeEventHandler IndividualAttendancesRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event AttendancesRowChangeEventHandler AttendancesRowDeleted;
+            public event IndividualAttendancesRowChangeEventHandler IndividualAttendancesRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AddAttendancesRow(AttendancesRow row) {
+            public void AddIndividualAttendancesRow(IndividualAttendancesRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public AttendancesRow AddAttendancesRow(System.TimeSpan TimeIn, System.TimeSpan TimeOut, System.DateTime Date, bool Status, double HoursWorked, string Name) {
-                AttendancesRow rowAttendancesRow = ((AttendancesRow)(this.NewRow()));
+            public IndividualAttendancesRow AddIndividualAttendancesRow(System.TimeSpan TimeIn, System.TimeSpan TimeOut, System.DateTime Date, bool Status, double HoursWorked) {
+                IndividualAttendancesRow rowIndividualAttendancesRow = ((IndividualAttendancesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TimeIn,
                         TimeOut,
                         Date,
                         Status,
-                        HoursWorked,
-                        Name};
-                rowAttendancesRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowAttendancesRow);
-                return rowAttendancesRow;
+                        HoursWorked};
+                rowIndividualAttendancesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowIndividualAttendancesRow);
+                return rowIndividualAttendancesRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                AttendancesDataTable cln = ((AttendancesDataTable)(base.Clone()));
+                IndividualAttendancesDataTable cln = ((IndividualAttendancesDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -14046,7 +14070,7 @@ namespace PresentationLayer.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new AttendancesDataTable();
+                return new IndividualAttendancesDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14057,7 +14081,6 @@ namespace PresentationLayer.Reports {
                 this.columnDate = base.Columns["Date"];
                 this.columnStatus = base.Columns["Status"];
                 this.columnHoursWorked = base.Columns["HoursWorked"];
-                this.columnName = base.Columns["Name"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14073,42 +14096,38 @@ namespace PresentationLayer.Reports {
                 base.Columns.Add(this.columnStatus);
                 this.columnHoursWorked = new global::System.Data.DataColumn("HoursWorked", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnHoursWorked);
-                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnName);
                 this.columnTimeIn.AllowDBNull = false;
                 this.columnTimeOut.AllowDBNull = false;
                 this.columnDate.AllowDBNull = false;
                 this.columnStatus.AllowDBNull = false;
                 this.columnStatus.Caption = "IsPresent";
                 this.columnHoursWorked.AllowDBNull = false;
-                this.columnName.ReadOnly = true;
-                this.columnName.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public AttendancesRow NewAttendancesRow() {
-                return ((AttendancesRow)(this.NewRow()));
+            public IndividualAttendancesRow NewIndividualAttendancesRow() {
+                return ((IndividualAttendancesRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new AttendancesRow(builder);
+                return new IndividualAttendancesRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(AttendancesRow);
+                return typeof(IndividualAttendancesRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.AttendancesRowChanged != null)) {
-                    this.AttendancesRowChanged(this, new AttendancesRowChangeEvent(((AttendancesRow)(e.Row)), e.Action));
+                if ((this.IndividualAttendancesRowChanged != null)) {
+                    this.IndividualAttendancesRowChanged(this, new IndividualAttendancesRowChangeEvent(((IndividualAttendancesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -14116,8 +14135,8 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.AttendancesRowChanging != null)) {
-                    this.AttendancesRowChanging(this, new AttendancesRowChangeEvent(((AttendancesRow)(e.Row)), e.Action));
+                if ((this.IndividualAttendancesRowChanging != null)) {
+                    this.IndividualAttendancesRowChanging(this, new IndividualAttendancesRowChangeEvent(((IndividualAttendancesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -14125,8 +14144,8 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.AttendancesRowDeleted != null)) {
-                    this.AttendancesRowDeleted(this, new AttendancesRowChangeEvent(((AttendancesRow)(e.Row)), e.Action));
+                if ((this.IndividualAttendancesRowDeleted != null)) {
+                    this.IndividualAttendancesRowDeleted(this, new IndividualAttendancesRowChangeEvent(((IndividualAttendancesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -14134,14 +14153,14 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.AttendancesRowDeleting != null)) {
-                    this.AttendancesRowDeleting(this, new AttendancesRowChangeEvent(((AttendancesRow)(e.Row)), e.Action));
+                if ((this.IndividualAttendancesRowDeleting != null)) {
+                    this.IndividualAttendancesRowDeleting(this, new IndividualAttendancesRowChangeEvent(((IndividualAttendancesRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemoveAttendancesRow(AttendancesRow row) {
+            public void RemoveIndividualAttendancesRow(IndividualAttendancesRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -14168,7 +14187,354 @@ namespace PresentationLayer.Reports {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "AttendancesDataTable";
+                attribute2.FixedValue = "IndividualAttendancesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class AttendanceDataTable : global::System.Data.TypedTableBase<AttendanceRow> {
+            
+            private global::System.Data.DataColumn columnEmployeeId;
+            
+            private global::System.Data.DataColumn columnEmployee;
+            
+            private global::System.Data.DataColumn columnTotalDays;
+            
+            private global::System.Data.DataColumn columnDaysPresent;
+            
+            private global::System.Data.DataColumn columnDaysLate;
+            
+            private global::System.Data.DataColumn columnDaysEarlyOut;
+            
+            private global::System.Data.DataColumn columnDaysAbsent;
+            
+            private global::System.Data.DataColumn columnDaysOnLeave;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public AttendanceDataTable() {
+                this.TableName = "Attendance";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal AttendanceDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called" +
+                " or extended by application code.", DiagnosticId="SYSLIB0051")]
+            protected AttendanceDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn EmployeeIdColumn {
+                get {
+                    return this.columnEmployeeId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn EmployeeColumn {
+                get {
+                    return this.columnEmployee;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TotalDaysColumn {
+                get {
+                    return this.columnTotalDays;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DaysPresentColumn {
+                get {
+                    return this.columnDaysPresent;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DaysLateColumn {
+                get {
+                    return this.columnDaysLate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DaysEarlyOutColumn {
+                get {
+                    return this.columnDaysEarlyOut;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DaysAbsentColumn {
+                get {
+                    return this.columnDaysAbsent;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DaysOnLeaveColumn {
+                get {
+                    return this.columnDaysOnLeave;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public AttendanceRow this[int index] {
+                get {
+                    return ((AttendanceRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event AttendanceRowChangeEventHandler AttendanceRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event AttendanceRowChangeEventHandler AttendanceRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event AttendanceRowChangeEventHandler AttendanceRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event AttendanceRowChangeEventHandler AttendanceRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddAttendanceRow(AttendanceRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public AttendanceRow AddAttendanceRow(string EmployeeId, string Employee, string TotalDays, string DaysPresent, string DaysLate, string DaysEarlyOut, string DaysAbsent, string DaysOnLeave) {
+                AttendanceRow rowAttendanceRow = ((AttendanceRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        EmployeeId,
+                        Employee,
+                        TotalDays,
+                        DaysPresent,
+                        DaysLate,
+                        DaysEarlyOut,
+                        DaysAbsent,
+                        DaysOnLeave};
+                rowAttendanceRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowAttendanceRow);
+                return rowAttendanceRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                AttendanceDataTable cln = ((AttendanceDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new AttendanceDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnEmployeeId = base.Columns["EmployeeId"];
+                this.columnEmployee = base.Columns["Employee"];
+                this.columnTotalDays = base.Columns["TotalDays"];
+                this.columnDaysPresent = base.Columns["DaysPresent"];
+                this.columnDaysLate = base.Columns["DaysLate"];
+                this.columnDaysEarlyOut = base.Columns["DaysEarlyOut"];
+                this.columnDaysAbsent = base.Columns["DaysAbsent"];
+                this.columnDaysOnLeave = base.Columns["DaysOnLeave"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnEmployeeId = new global::System.Data.DataColumn("EmployeeId", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmployeeId);
+                this.columnEmployee = new global::System.Data.DataColumn("Employee", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmployee);
+                this.columnTotalDays = new global::System.Data.DataColumn("TotalDays", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalDays);
+                this.columnDaysPresent = new global::System.Data.DataColumn("DaysPresent", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDaysPresent);
+                this.columnDaysLate = new global::System.Data.DataColumn("DaysLate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDaysLate);
+                this.columnDaysEarlyOut = new global::System.Data.DataColumn("DaysEarlyOut", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDaysEarlyOut);
+                this.columnDaysAbsent = new global::System.Data.DataColumn("DaysAbsent", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDaysAbsent);
+                this.columnDaysOnLeave = new global::System.Data.DataColumn("DaysOnLeave", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDaysOnLeave);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public AttendanceRow NewAttendanceRow() {
+                return ((AttendanceRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new AttendanceRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(AttendanceRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.AttendanceRowChanged != null)) {
+                    this.AttendanceRowChanged(this, new AttendanceRowChangeEvent(((AttendanceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.AttendanceRowChanging != null)) {
+                    this.AttendanceRowChanging(this, new AttendanceRowChangeEvent(((AttendanceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.AttendanceRowDeleted != null)) {
+                    this.AttendanceRowDeleted(this, new AttendanceRowChangeEvent(((AttendanceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.AttendanceRowDeleting != null)) {
+                    this.AttendanceRowDeleting(this, new AttendanceRowChangeEvent(((AttendanceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveAttendanceRow(AttendanceRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SERCS ds = new SERCS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "AttendanceDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -17894,25 +18260,25 @@ namespace PresentationLayer.Reports {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class AttendancesRow : global::System.Data.DataRow {
+        public partial class IndividualAttendancesRow : global::System.Data.DataRow {
             
-            private AttendancesDataTable tableAttendances;
+            private IndividualAttendancesDataTable tableIndividualAttendances;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal AttendancesRow(global::System.Data.DataRowBuilder rb) : 
+            internal IndividualAttendancesRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableAttendances = ((AttendancesDataTable)(this.Table));
+                this.tableIndividualAttendances = ((IndividualAttendancesDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.TimeSpan TimeIn {
                 get {
-                    return ((global::System.TimeSpan)(this[this.tableAttendances.TimeInColumn]));
+                    return ((global::System.TimeSpan)(this[this.tableIndividualAttendances.TimeInColumn]));
                 }
                 set {
-                    this[this.tableAttendances.TimeInColumn] = value;
+                    this[this.tableIndividualAttendances.TimeInColumn] = value;
                 }
             }
             
@@ -17920,10 +18286,10 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.TimeSpan TimeOut {
                 get {
-                    return ((global::System.TimeSpan)(this[this.tableAttendances.TimeOutColumn]));
+                    return ((global::System.TimeSpan)(this[this.tableIndividualAttendances.TimeOutColumn]));
                 }
                 set {
-                    this[this.tableAttendances.TimeOutColumn] = value;
+                    this[this.tableIndividualAttendances.TimeOutColumn] = value;
                 }
             }
             
@@ -17931,10 +18297,10 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.DateTime Date {
                 get {
-                    return ((global::System.DateTime)(this[this.tableAttendances.DateColumn]));
+                    return ((global::System.DateTime)(this[this.tableIndividualAttendances.DateColumn]));
                 }
                 set {
-                    this[this.tableAttendances.DateColumn] = value;
+                    this[this.tableIndividualAttendances.DateColumn] = value;
                 }
             }
             
@@ -17942,10 +18308,10 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Status {
                 get {
-                    return ((bool)(this[this.tableAttendances.StatusColumn]));
+                    return ((bool)(this[this.tableIndividualAttendances.StatusColumn]));
                 }
                 set {
-                    this[this.tableAttendances.StatusColumn] = value;
+                    this[this.tableIndividualAttendances.StatusColumn] = value;
                 }
             }
             
@@ -17953,39 +18319,250 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public double HoursWorked {
                 get {
-                    return ((double)(this[this.tableAttendances.HoursWorkedColumn]));
+                    return ((double)(this[this.tableIndividualAttendances.HoursWorkedColumn]));
                 }
                 set {
-                    this[this.tableAttendances.HoursWorkedColumn] = value;
+                    this[this.tableIndividualAttendances.HoursWorkedColumn] = value;
                 }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class AttendanceRow : global::System.Data.DataRow {
+            
+            private AttendanceDataTable tableAttendance;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal AttendanceRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableAttendance = ((AttendanceDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Name {
+            public string EmployeeId {
                 get {
                     try {
-                        return ((string)(this[this.tableAttendances.NameColumn]));
+                        return ((string)(this[this.tableAttendance.EmployeeIdColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'Attendances\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'EmployeeId\' in table \'Attendance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableAttendances.NameColumn] = value;
+                    this[this.tableAttendance.EmployeeIdColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsNameNull() {
-                return this.IsNull(this.tableAttendances.NameColumn);
+            public string Employee {
+                get {
+                    try {
+                        return ((string)(this[this.tableAttendance.EmployeeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Employee\' in table \'Attendance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAttendance.EmployeeColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetNameNull() {
-                this[this.tableAttendances.NameColumn] = global::System.Convert.DBNull;
+            public string TotalDays {
+                get {
+                    try {
+                        return ((string)(this[this.tableAttendance.TotalDaysColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalDays\' in table \'Attendance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAttendance.TotalDaysColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DaysPresent {
+                get {
+                    try {
+                        return ((string)(this[this.tableAttendance.DaysPresentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DaysPresent\' in table \'Attendance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAttendance.DaysPresentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DaysLate {
+                get {
+                    try {
+                        return ((string)(this[this.tableAttendance.DaysLateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DaysLate\' in table \'Attendance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAttendance.DaysLateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DaysEarlyOut {
+                get {
+                    try {
+                        return ((string)(this[this.tableAttendance.DaysEarlyOutColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DaysEarlyOut\' in table \'Attendance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAttendance.DaysEarlyOutColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DaysAbsent {
+                get {
+                    try {
+                        return ((string)(this[this.tableAttendance.DaysAbsentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DaysAbsent\' in table \'Attendance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAttendance.DaysAbsentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DaysOnLeave {
+                get {
+                    try {
+                        return ((string)(this[this.tableAttendance.DaysOnLeaveColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DaysOnLeave\' in table \'Attendance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAttendance.DaysOnLeaveColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsEmployeeIdNull() {
+                return this.IsNull(this.tableAttendance.EmployeeIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetEmployeeIdNull() {
+                this[this.tableAttendance.EmployeeIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsEmployeeNull() {
+                return this.IsNull(this.tableAttendance.EmployeeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetEmployeeNull() {
+                this[this.tableAttendance.EmployeeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTotalDaysNull() {
+                return this.IsNull(this.tableAttendance.TotalDaysColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTotalDaysNull() {
+                this[this.tableAttendance.TotalDaysColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDaysPresentNull() {
+                return this.IsNull(this.tableAttendance.DaysPresentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDaysPresentNull() {
+                this[this.tableAttendance.DaysPresentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDaysLateNull() {
+                return this.IsNull(this.tableAttendance.DaysLateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDaysLateNull() {
+                this[this.tableAttendance.DaysLateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDaysEarlyOutNull() {
+                return this.IsNull(this.tableAttendance.DaysEarlyOutColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDaysEarlyOutNull() {
+                this[this.tableAttendance.DaysEarlyOutColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDaysAbsentNull() {
+                return this.IsNull(this.tableAttendance.DaysAbsentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDaysAbsentNull() {
+                this[this.tableAttendance.DaysAbsentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDaysOnLeaveNull() {
+                return this.IsNull(this.tableAttendance.DaysOnLeaveColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDaysOnLeaveNull() {
+                this[this.tableAttendance.DaysOnLeaveColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -19217,22 +19794,56 @@ namespace PresentationLayer.Reports {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class AttendancesRowChangeEvent : global::System.EventArgs {
+        public class IndividualAttendancesRowChangeEvent : global::System.EventArgs {
             
-            private AttendancesRow eventRow;
+            private IndividualAttendancesRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public AttendancesRowChangeEvent(AttendancesRow row, global::System.Data.DataRowAction action) {
+            public IndividualAttendancesRowChangeEvent(IndividualAttendancesRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public AttendancesRow Row {
+            public IndividualAttendancesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class AttendanceRowChangeEvent : global::System.EventArgs {
+            
+            private AttendanceRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public AttendanceRowChangeEvent(AttendanceRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public AttendanceRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -29894,24 +30505,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._paymentTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PaymentType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._paymentTypeTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._numberSequenceTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.NumberSequence.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._numberSequenceTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._aspNetUserClaimsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.AspNetUserClaims.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -29957,6 +30550,15 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._branchTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Branch.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._branchTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._cashBankTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.CashBank.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -29984,12 +30586,21 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._branchTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Branch.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._numberSequenceTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.NumberSequence.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._branchTableAdapter.Update(updatedRows));
+                    result = (result + this._numberSequenceTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._paymentTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PaymentType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._paymentTypeTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -30083,22 +30694,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._paymentTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PaymentType.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._paymentTypeTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._numberSequenceTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.NumberSequence.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._numberSequenceTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._aspNetUserClaimsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.AspNetUserClaims.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -30139,6 +30734,14 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._branchTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Branch.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._branchTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._cashBankTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.CashBank.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -30163,11 +30766,19 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._branchTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Branch.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._numberSequenceTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.NumberSequence.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._branchTableAdapter.Update(addedRows));
+                    result = (result + this._numberSequenceTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._paymentTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PaymentType.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._paymentTypeTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30181,11 +30792,19 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(SERCS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._branchTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Branch.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._paymentTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PaymentType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._branchTableAdapter.Update(deletedRows));
+                    result = (result + this._paymentTypeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._numberSequenceTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.NumberSequence.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._numberSequenceTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30210,6 +30829,14 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._cashBankTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._branchTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Branch.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._branchTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30250,22 +30877,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._aspNetUserClaimsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._numberSequenceTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.NumberSequence.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._numberSequenceTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._paymentTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PaymentType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._paymentTypeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

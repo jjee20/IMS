@@ -50,12 +50,6 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Shift.Get(c => c.ShiftName == _view.ShiftName);
-            if (Entity != null)
-            {
-                _view.Message = "Shift is already added.";
-                return;
-            }
 
             var model = new Shift
             {
@@ -63,6 +57,8 @@ namespace PresentationLayer.Presenters.Payroll
                 ShiftName = _view.ShiftName,
                 StartTime = _view.StartTime,
                 EndTime = _view.EndTime,
+                OvertimeRate = _view.OvertimeRate,
+                RegularHours = _view.RegularHours,
             };
 
             try
@@ -70,11 +66,18 @@ namespace PresentationLayer.Presenters.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
+
                     _unitOfWork.Shift.Update(model);
                     _view.Message = "Shift edited successfully";
                 }
                 else //Add new model
                 {
+                    var Entity = _unitOfWork.Shift.Get(c => c.ShiftName == _view.ShiftName);
+                    if (Entity != null)
+                    {
+                        _view.Message = "Shift is already added.";
+                        return;
+                    }
                     _unitOfWork.Shift.Add(model);
                     _view.Message = "Shift added successfully";
                 }
@@ -110,6 +113,8 @@ namespace PresentationLayer.Presenters.Payroll
             _view.ShiftName = entity.ShiftName;
             _view.StartTime = entity.StartTime;
             _view.EndTime = entity.EndTime;
+            _view.OvertimeRate = entity.OvertimeRate;
+            _view.RegularHours = entity.RegularHours;
         }
         private void Delete(object? sender, EventArgs e)
         {

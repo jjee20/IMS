@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class PerformanceReview
+    public class PerformanceReview : BaseEntity
     {
         public int PerformanceReviewId { get; set; } // Primary Key
         [ForeignKey(nameof(EmployeeId))]

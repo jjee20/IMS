@@ -3,7 +3,7 @@ using DomainLayer.Models.Payroll;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Employee
+public class Employee : BaseEntity
 {
     [Key]
     public int EmployeeId { get; set; } // Primary Key

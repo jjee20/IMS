@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class AuditLog
+    public class AuditLog : BaseEntity
     {
         [Key]
         public int AuditLogId { get; set; } // Primary Key

@@ -30,6 +30,7 @@ namespace PresentationLayer.Views.UserControls
         {
             InitializeComponent();
             Guna2TabControl1.TabPages.Remove(tabPage2);
+            Guna2TabControl1.TabPages.Remove(tabPage3);
             AssociateAndRaiseViewEvents();
         }
 
@@ -43,6 +44,7 @@ namespace PresentationLayer.Views.UserControls
                     AddNewEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Add New";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
+                    Guna2TabControl1.TabPages.Remove(tabPage3);
                     Guna2TabControl1.TabPages.Add(tabPage2);
                 }
                 btnReturn.Visible = true;
@@ -54,6 +56,7 @@ namespace PresentationLayer.Views.UserControls
                 if (isSuccessful)
                 {
                     Guna2TabControl1.TabPages.Remove(tabPage2);
+                    Guna2TabControl1.TabPages.Remove(tabPage3);
                     Guna2TabControl1.TabPages.Add(tabPage1);
                     btnReturn.Visible = false;
                 }
@@ -74,11 +77,12 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
-                if (Guna2TabControl1.TabPages.Contains(tabPage1))
+                if (Guna2TabControl1.TabPages.Contains(tabPage1) || Guna2TabControl1.TabPages.Contains(tabPage3))
                 {
                     EditEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Edit";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
+                    Guna2TabControl1.TabPages.Remove(tabPage3);
                     Guna2TabControl1.TabPages.Add(tabPage2);
                 }
                 btnReturn.Visible = true;
@@ -108,9 +112,22 @@ namespace PresentationLayer.Views.UserControls
                 {
                     RefreshEvent?.Invoke(this, EventArgs.Empty);
                     Guna2TabControl1.TabPages.Remove(tabPage2);
+                    Guna2TabControl1.TabPages.Remove(tabPage3);
                     Guna2TabControl1.TabPages.Add(tabPage1);
                 }
                 btnReturn.Visible = false;
+            };
+            dgList.CellDoubleClick += (sender, e) =>
+            {
+                    ShowAttendanceEvent?.Invoke(this, e);
+                    Guna2TabControl1.TabPages.Remove(tabPage2);
+                    Guna2TabControl1.TabPages.Add(tabPage3);
+                    Guna2TabControl1.TabPages.Remove(tabPage1);
+                btnReturn.Visible = true;
+            };
+            btnImport.Click += delegate
+            {
+                ImportEvent?.Invoke(this, EventArgs.Empty);
             };
         }
 
@@ -125,6 +142,11 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return (int)txtEmployee.SelectedValue; }
             set { txtEmployee.Text = value.ToString(); }
+        }
+        public int ProjectId
+        {
+            get { return (int)txtProject.SelectedValue; }
+            set { txtProject.Text = value.ToString(); }
         }
         public TimeSpan TimeIn
         {
@@ -186,17 +208,37 @@ namespace PresentationLayer.Views.UserControls
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
-
+        public string EmployeeName
+        {
+            get { return txtName.Text; }
+            set { txtName.Text = value; }
+        }
+        public OpenFileDialog OpenFileDialog
+        {
+            get { return OpenFileDialog; }
+        }
         public void SetAttendanceListBindingSource(BindingSource AttendanceList)
         {
             dgList.DataSource = AttendanceList;
             DataGridHelper.ApplyDisplayNames<AttendanceViewModel>(AttendanceList, dgList);
         }
+        public void SetIndividualAttendanceListBindingSource(BindingSource IndividualAttendanceList)
+        {
+            dgListInvidivual.DataSource = IndividualAttendanceList;
+            DataGridHelper.ApplyDisplayNames<IndividualAttendanceViewModel>(IndividualAttendanceList, dgListInvidivual);
+        }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
             txtEmployee.DataSource = EmployeeList;
-            txtEmployee.DisplayMember = "LastName";
+            txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
+        }
+        
+        public void SetProjectListBindingSource(BindingSource ProjectList)
+        {
+            txtProject.DataSource = ProjectList;
+            txtProject.DisplayMember = "ProjectName";
+            txtProject.ValueMember = "ProjectId";
         }
 
         public event EventHandler AddNewEvent;
@@ -206,6 +248,8 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler DeleteEvent;
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
+        public event EventHandler ImportEvent;
+        public event DataGridViewCellEventHandler ShowAttendanceEvent;
 
         private static AttendanceView? instance;
         public static AttendanceView GetInstance(TabPage parentContainer)

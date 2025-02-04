@@ -33,8 +33,8 @@
             tbGoodsReceiveNote = new TabPage();
             tbBill = new TabPage();
             tbPaymentVoucher = new TabPage();
-            tbSettings = new TabPage();
             tbVendor = new TabPage();
+            tbSettings = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -49,10 +49,10 @@
             tcMain.Dock = DockStyle.Fill;
             tcMain.ItemSize = new Size(180, 40);
             tcMain.Location = new Point(0, 0);
-            tcMain.Margin = new Padding(4, 4, 4, 4);
+            tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(2382, 1224);
+            tcMain.Size = new Size(1667, 734);
             tcMain.TabButtonHoverState.BorderColor = Color.Empty;
             tcMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -76,10 +76,10 @@
             // tbPurchaseOrder
             // 
             tbPurchaseOrder.Location = new Point(4, 44);
-            tbPurchaseOrder.Margin = new Padding(4, 4, 4, 4);
+            tbPurchaseOrder.Margin = new Padding(3, 2, 3, 2);
             tbPurchaseOrder.Name = "tbPurchaseOrder";
-            tbPurchaseOrder.Padding = new Padding(4, 4, 4, 4);
-            tbPurchaseOrder.Size = new Size(2374, 1176);
+            tbPurchaseOrder.Padding = new Padding(3, 2, 3, 2);
+            tbPurchaseOrder.Size = new Size(1659, 686);
             tbPurchaseOrder.TabIndex = 1;
             tbPurchaseOrder.Text = "Purchase Order";
             tbPurchaseOrder.UseVisualStyleBackColor = true;
@@ -87,9 +87,9 @@
             // tbGoodsReceiveNote
             // 
             tbGoodsReceiveNote.Location = new Point(4, 44);
-            tbGoodsReceiveNote.Margin = new Padding(4, 4, 4, 4);
+            tbGoodsReceiveNote.Margin = new Padding(3, 2, 3, 2);
             tbGoodsReceiveNote.Name = "tbGoodsReceiveNote";
-            tbGoodsReceiveNote.Size = new Size(2374, 1176);
+            tbGoodsReceiveNote.Size = new Size(1659, 686);
             tbGoodsReceiveNote.TabIndex = 2;
             tbGoodsReceiveNote.Text = "Goods Receive Note";
             tbGoodsReceiveNote.UseVisualStyleBackColor = true;
@@ -97,9 +97,9 @@
             // tbBill
             // 
             tbBill.Location = new Point(4, 44);
-            tbBill.Margin = new Padding(4, 4, 4, 4);
+            tbBill.Margin = new Padding(3, 2, 3, 2);
             tbBill.Name = "tbBill";
-            tbBill.Size = new Size(2374, 1176);
+            tbBill.Size = new Size(1659, 686);
             tbBill.TabIndex = 3;
             tbBill.Text = "Bill";
             tbBill.UseVisualStyleBackColor = true;
@@ -107,40 +107,40 @@
             // tbPaymentVoucher
             // 
             tbPaymentVoucher.Location = new Point(4, 44);
-            tbPaymentVoucher.Margin = new Padding(4, 4, 4, 4);
+            tbPaymentVoucher.Margin = new Padding(3, 2, 3, 2);
             tbPaymentVoucher.Name = "tbPaymentVoucher";
-            tbPaymentVoucher.Size = new Size(2374, 1176);
+            tbPaymentVoucher.Size = new Size(1659, 686);
             tbPaymentVoucher.TabIndex = 4;
             tbPaymentVoucher.Text = "Payment Voucher";
             tbPaymentVoucher.UseVisualStyleBackColor = true;
             // 
-            // tbSettings
-            // 
-            tbSettings.Location = new Point(4, 44);
-            tbSettings.Margin = new Padding(4, 4, 4, 4);
-            tbSettings.Name = "tbSettings";
-            tbSettings.Size = new Size(2374, 1176);
-            tbSettings.TabIndex = 5;
-            tbSettings.Text = "Settings";
-            tbSettings.UseVisualStyleBackColor = true;
-            // 
             // tbVendor
             // 
             tbVendor.Location = new Point(4, 44);
+            tbVendor.Margin = new Padding(2, 2, 2, 2);
             tbVendor.Name = "tbVendor";
-            tbVendor.Size = new Size(2374, 1176);
+            tbVendor.Size = new Size(1659, 686);
             tbVendor.TabIndex = 6;
             tbVendor.Text = "Vendor";
             tbVendor.UseVisualStyleBackColor = true;
             // 
+            // tbSettings
+            // 
+            tbSettings.Location = new Point(4, 44);
+            tbSettings.Margin = new Padding(3, 2, 3, 2);
+            tbSettings.Name = "tbSettings";
+            tbSettings.Size = new Size(1659, 686);
+            tbSettings.TabIndex = 5;
+            tbSettings.Text = "Settings";
+            tbSettings.UseVisualStyleBackColor = true;
+            // 
             // PurchaseView
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
             Controls.Add(tcMain);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "PurchaseView";
-            Size = new Size(2382, 1224);
+            Size = new Size(1667, 734);
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

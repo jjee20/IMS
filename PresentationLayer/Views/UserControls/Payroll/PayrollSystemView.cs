@@ -112,5 +112,10 @@ namespace PresentationLayer.Views.UserControls.Payroll
         {
             Show();
         }
+
+        private void PayrollSystemView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Restart();
+        }
     }
 }

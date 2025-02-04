@@ -35,12 +35,7 @@ namespace PresentationLayer.Views
 
             tcMain.SelectedIndexChanged += delegate
             {
-                // Check if the selected tab is the one where you want to raise the event
-                if (tcMain.SelectedTab == tbProfile)
-                {
-                    ShowProfile?.Invoke(this, EventArgs.Empty);
-                }
-                else if (tcMain.SelectedTab == tbDashboard)
+                if (tcMain.SelectedTab == tbDashboard)
                 {
                     ShowDashboard?.Invoke(this, EventArgs.Empty);
                 }
@@ -56,10 +51,6 @@ namespace PresentationLayer.Views
                 {
                     ShowInventory?.Invoke(this, EventArgs.Empty);
                 }
-                else if (tcMain.SelectedTab == tbConfiguration)
-                {
-                    ShowConfiguration?.Invoke(this, EventArgs.Empty);
-                }
             };
         }
         public TabPage Guna2TabControlPage
@@ -72,11 +63,14 @@ namespace PresentationLayer.Views
             Show();
         }
 
-        public event EventHandler ShowProfile;
+        private void InventoryView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Restart();
+        }
+
         public event EventHandler ShowDashboard;
         public event EventHandler ShowSales;
         public event EventHandler ShowPurchase;
         public event EventHandler ShowInventory;
-        public event EventHandler ShowConfiguration;
     }
 }

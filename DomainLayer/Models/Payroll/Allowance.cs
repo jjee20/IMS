@@ -9,7 +9,7 @@ using DomainLayer.Enums;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class Allowance
+    public class Allowance : BaseEntity
     {
         [Key]
         public int AllowanceId { get; set; } // Primary Key

@@ -5,8 +5,8 @@ namespace PresentationLayer.Views.IViews.Payroll
 {
     public interface IPayrollView
     {
-        public DateTime StartDate { get; }
-        public DateTime EndDate { get; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public bool IncludeContribution { get; }
         public bool IncludeBenefits { get; }
         string Message { get; set; }

@@ -32,6 +32,15 @@ namespace PresentationLayer.Presenters.Payroll
             PayrollList = new List<PayrollViewModel>();
             //Load
 
+
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
+            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6).Date;
+
+            _view.StartDate = startDate;
+            _view.EndDate = endDate;
+
             LoadAllPayrollList();
             _view.PrintPayrollEvent += PrintPayroll;
             _view.PrintPayslipEvent += PrintPayslip;
@@ -48,7 +57,7 @@ namespace PresentationLayer.Presenters.Payroll
                 string reportDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
                 string reportPath = Path.Combine(reportDirectory, reportFileName);
 
-                var payslip = (DomainLayer.ViewModels.PayrollViewModels.PayrollViewModel)PayrollBindingSource.Current;
+                var payslip = (PayrollViewModel)PayrollBindingSource.Current;
                 var payslipList = new []
                 {
                     payslip
@@ -165,12 +174,32 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private double CalculateContributions(IEnumerable<Contribution> contributions, ContributionType type, double basicSalary)
         {
-            return contributions?
+            var applicableRates = contributions?
                 .Where(c => c.ContributionType == type &&
                             c.MinimumLimit <= basicSalary &&
-                            c.MaximumLimit >= basicSalary)
-                .Sum(c => c.Rate) ?? 0;
+                            c.MaximumLimit >= basicSalary);
+
+            if (applicableRates == null || !applicableRates.Any())
+                return 0;
+
+            // Contribution Computation based on Type
+            switch (type)
+            {
+                case ContributionType.SSS:
+                    return applicableRates.Sum(c => c.EmployeeRate); // Sum up fixed SSS rates
+
+                case ContributionType.PagIbig:
+                    return applicableRates.Sum(c => (c.EmployeeRate / 100) * basicSalary); // Pag-IBIG is percentage-based
+
+                case ContributionType.PhilHealth:
+                    double computedPhilHealth = applicableRates.Sum(c => (c.EmployeeRate / 100) * basicSalary);
+                    return basicSalary < 10000 ? 500 : basicSalary > 100000 ? 5000 : computedPhilHealth; // Enforce PhilHealth min/max
+
+                default:
+                    return 0;
+            }
         }
+
 
         public List<PayrollViewModel> CalculatePayroll(DateTime startDate, DateTime endDate)
         {
@@ -178,7 +207,18 @@ namespace PresentationLayer.Presenters.Payroll
             var contributions = _unitOfWork.Contribution.GetAll();
 
             var payrollList = new List<PayrollViewModel>();
-            int totalDays = (endDate - startDate).Days + 1;
+            int totalDays = 0;
+            DateTime currentDate = startDate.Date;
+
+            do
+            {
+                if (currentDate.DayOfWeek != DayOfWeek.Sunday) // Exclude Sundays
+                {
+                    totalDays++;
+                }
+
+                currentDate = currentDate.AddDays(1);
+            } while (currentDate <= endDate.Date);
 
             foreach (var employee in employees)
             {
@@ -206,8 +246,8 @@ namespace PresentationLayer.Presenters.Payroll
                     .Where(a => a.TimeOut < employee.Shift.EndTime) 
                     .Aggregate(TimeSpan.Zero, (total, attendance) => total + (employee.Shift.EndTime - attendance.TimeOut));
 
-
-                int totalAbsentDays = totalDays - employeeAttendances.Where(a => a.IsPresent && !IsCoveredByLeave(a.Date, approvedLeaves)).Count();
+                int totalPresentDays = employeeAttendances.Where(a => a.IsPresent && !IsCoveredByLeave(a.Date, approvedLeaves)).Count();
+                int totalAbsentDays = totalDays > totalPresentDays ? totalDays - totalPresentDays : 0;
 
                 double totalLateHours = totalLateDuration.TotalHours;
                 double totalLateMinutes = totalLateDuration.TotalMinutes;
@@ -221,17 +261,30 @@ namespace PresentationLayer.Presenters.Payroll
 
                 double absentDeductions = totalAbsentDays * employee.BasicSalary;
 
-                double sssDeduction = CalculateContributions(contributions, ContributionType.SSS, employee.BasicSalary);
-                double pagIbigDeduction = CalculateContributions(contributions, ContributionType.PagIbig, employee.BasicSalary);
-                double philHealthDeduction = CalculateContributions(contributions, ContributionType.PhilHealth, employee.BasicSalary) / 2;
+                int totalDaysInMonth = DateTime.DaysInMonth(startDate.Year, startDate.Month);
+                int nonSundayDays = 0;
+
+                for (int day = 1; day <= totalDaysInMonth; day++)
+                {
+                    DateTime currentDateForMonth = new DateTime(startDate.Year, startDate.Month, day);
+                    if (currentDateForMonth.DayOfWeek != DayOfWeek.Sunday) // Exclude Sundays
+                    {
+                        nonSundayDays++;
+                    }
+                }
+
+                double monthlySalary = employee.BasicSalary * nonSundayDays;
+                double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.SSS, monthlySalary) / 2 : 0 : 0;
+                double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PagIbig, monthlySalary) / 2: 0 : 0;
+                double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PhilHealth, monthlySalary) / 2: 0 : 0;
 
                 double grossPay = regularPay + overtimePay + allowancePay + bonusPay + benefitPay;
-                double totalDeductions = deductions + absentDeductions + lateDeductions + earlyOutDeductions + sssDeduction + pagIbigDeduction + philHealthDeduction + taxDedudction;
+                double totalDeductions = deductions + absentDeductions + lateDeductions + earlyOutDeductions + sssDeduction + pagIbigDeduction + philHealthDeduction;
                 double netPay = grossPay - totalDeductions;
 
                 payrollList.Add(new PayrollViewModel
                 {
-                    Employee = $"{employee.FirstName} {employee.LastName}",
+                    Employee = $"{employee.LastName}, {employee.FirstName}",
                     BasicSalary = regularPay,
                     OvertimePay = overtimePay,
                     Allowances = allowancePay,
@@ -240,17 +293,16 @@ namespace PresentationLayer.Presenters.Payroll
                     Deductions = deductions,
                     Absent = absentDeductions,
                     LateAndEarly = lateDeductions + earlyOutDeductions,
-                    SSSContribution = _view.IncludeContribution ? employee.isDeducted ? sssDeduction : 0 : 0,
-                    PagibigContribution = _view.IncludeContribution ? employee.isDeducted ? pagIbigDeduction : 0 : 0,
-                    PhilHealthContribution = _view.IncludeContribution ? employee.isDeducted ? philHealthDeduction : 0 : 0,
-                    Tax = taxDedudction,
+                    SSSContribution = sssDeduction,
+                    PagibigContribution = pagIbigDeduction,
+                    PhilHealthContribution = philHealthDeduction,
                     TotalDeduction = totalDeductions,
                     GrossPay = grossPay,
                     NetPay = netPay
                 });
             }
 
-            return payrollList;
+            return payrollList.OrderBy(c => c.Employee).ToList();
         }
         private bool IsCoveredByLeave(DateTime date, IEnumerable<Leave> approvedLeaves)
         {

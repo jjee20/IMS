@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Inventory
 {
-    public class BillType
+    public class BillType : BaseEntity
     {
         [Key]
         [Display(Name = "Id")]

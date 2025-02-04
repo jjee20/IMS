@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLayer.Models.Payroll;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Inventory
 {
-    public class Invoice
+    public class Invoice : BaseEntity
     {
         [Key]
         public int InvoiceId { get; set; }

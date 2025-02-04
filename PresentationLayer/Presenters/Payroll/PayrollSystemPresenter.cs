@@ -6,6 +6,7 @@ using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.IViews.Payroll;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;

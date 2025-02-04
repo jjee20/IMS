@@ -5,7 +5,7 @@
         event EventHandler ShowRegister;
         event EventHandler ShowInventory;
         event EventHandler ShowPayroll;
-        event EventHandler ShowProfile;
+        event EventHandler ShowProfile; 
         TabPage Guna2TabControlPage { get; }
 
         void ShowForm();

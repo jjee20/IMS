@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class Benefit
+    public class Benefit : BaseEntity
     {
         [Key]
         public int BenefitId { get; set; } // Primary Key

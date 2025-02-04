@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class Contribution
-    {
+    public class Contribution : BaseEntity
+    { 
         [Key]
         public int ContributionId { get; set; } // Primary Key
         public ContributionType ContributionType { get; set; } // Example: "SSS", "Pag-IBIG", "PhilHealth"
-        public double Rate { get; set; } // Percentage or fixed amount
+        public double EmployeeRate { get; set; } // Percentage or fixed amount
+        public double EmployerRate { get; set; } // Percentage or fixed amount
         public double MinimumLimit { get; set; } // Max amount (if applicable)
         public double MaximumLimit { get; set; } // Max amount (if applicable)
     }

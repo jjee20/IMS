@@ -27,6 +27,7 @@ using PresentationLayer.Presenters.Inventory;
 using PresentationLayer.Presenters.Payroll;
 using PresentationLayer.Views.IViews.Payroll;
 using PresentationLayer.Views.UserControls.Payroll;
+using Microsoft.Data.SqlClient;
 
 namespace PresentationLayer
 {
@@ -50,19 +51,13 @@ namespace PresentationLayer
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            
             // Resolve InventoryView and Presenter
             var unitOfWork = UnityC.Resolve<IUnitOfWork>();
 
             // Pass dependencies to the presenter
-            //ILoginView mainView = new LoginView();
-            //var presenter = new LoginPresenter(mainView, unitOfWork);
-            //IAdminView mainView = new AdminView();
-            //var presenter = new AdminPresenter(mainView, unitOfWork);
-            //IInventoryView mainView = new InventoryView();
-            //var presenter = new InventoryPresenter(mainView, unitOfWork);
-            IPayrollSystemView mainView = new PayrollSystemView();
-            var presenter = new PayrollSystemPresenter(mainView, unitOfWork);
+            ILoginView mainView = new LoginView();
+            var presenter = new LoginPresenter(mainView, unitOfWork);
             Application.Run((Form)mainView);
         }
 

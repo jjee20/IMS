@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -102,6 +103,23 @@ namespace PresentationLayer.Views.UserControls
                     Guna2TabControl1.TabPages.Add(tabPage1);
                 }
                 btnReturn.Visible = false;
+            };
+
+            btnAddDepartment.Click += delegate
+            {
+                AddDepartmentEvent?.Invoke(this, EventArgs.Empty); 
+            };
+            btnAddJobPosition.Click += delegate
+            {
+                AddJobPositionEvent?.Invoke(this, EventArgs.Empty); 
+            };
+            btnAddShift.Click += delegate
+            {
+                AddShiftEvent?.Invoke(this, EventArgs.Empty); 
+            };
+            btnRefresh.Click += delegate
+            {
+                ReloadEvent?.Invoke(this, EventArgs.Empty); 
             };
         }
 
@@ -200,7 +218,6 @@ namespace PresentationLayer.Views.UserControls
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
-
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
             dgList.DataSource = EmployeeList;
@@ -240,6 +257,10 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler DeleteEvent;
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
+        public event EventHandler AddDepartmentEvent;
+        public event EventHandler AddJobPositionEvent;
+        public event EventHandler AddShiftEvent;
+        public event EventHandler ReloadEvent;
 
         private static EmployeeView? instance;
         public static EmployeeView GetInstance(TabPage parentContainer)

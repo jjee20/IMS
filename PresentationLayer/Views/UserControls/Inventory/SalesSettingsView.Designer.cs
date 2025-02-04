@@ -39,10 +39,10 @@
             // tbCustomerType
             // 
             tbCustomerType.Location = new Point(4, 44);
-            tbCustomerType.Margin = new Padding(4, 3, 4, 3);
+            tbCustomerType.Margin = new Padding(3, 2, 3, 2);
             tbCustomerType.Name = "tbCustomerType";
-            tbCustomerType.Padding = new Padding(4, 3, 4, 3);
-            tbCustomerType.Size = new Size(1699, 912);
+            tbCustomerType.Padding = new Padding(3, 2, 3, 2);
+            tbCustomerType.Size = new Size(1187, 528);
             tbCustomerType.TabIndex = 1;
             tbCustomerType.Text = "Customer Type";
             tbCustomerType.UseVisualStyleBackColor = true;
@@ -56,10 +56,10 @@
             tcMain.Dock = DockStyle.Fill;
             tcMain.ItemSize = new Size(180, 40);
             tcMain.Location = new Point(0, 0);
-            tcMain.Margin = new Padding(4, 3, 4, 3);
+            tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1707, 960);
+            tcMain.Size = new Size(1195, 576);
             tcMain.TabButtonHoverState.BorderColor = Color.Empty;
             tcMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -83,9 +83,9 @@
             // tbSalesType
             // 
             tbSalesType.Location = new Point(4, 44);
-            tbSalesType.Margin = new Padding(4, 3, 4, 3);
+            tbSalesType.Margin = new Padding(3, 2, 3, 2);
             tbSalesType.Name = "tbSalesType";
-            tbSalesType.Size = new Size(1699, 912);
+            tbSalesType.Size = new Size(1187, 528);
             tbSalesType.TabIndex = 2;
             tbSalesType.Text = "Sales Type";
             tbSalesType.UseVisualStyleBackColor = true;
@@ -93,9 +93,9 @@
             // tbShipmentType
             // 
             tbShipmentType.Location = new Point(4, 44);
-            tbShipmentType.Margin = new Padding(4, 3, 4, 3);
+            tbShipmentType.Margin = new Padding(3, 2, 3, 2);
             tbShipmentType.Name = "tbShipmentType";
-            tbShipmentType.Size = new Size(1699, 912);
+            tbShipmentType.Size = new Size(1187, 528);
             tbShipmentType.TabIndex = 3;
             tbShipmentType.Text = "Shipment Type";
             tbShipmentType.UseVisualStyleBackColor = true;
@@ -103,21 +103,20 @@
             // tbInvoiceType
             // 
             tbInvoiceType.Location = new Point(4, 44);
-            tbInvoiceType.Margin = new Padding(4, 3, 4, 3);
+            tbInvoiceType.Margin = new Padding(3, 2, 3, 2);
             tbInvoiceType.Name = "tbInvoiceType";
-            tbInvoiceType.Size = new Size(1699, 912);
+            tbInvoiceType.Size = new Size(1187, 528);
             tbInvoiceType.TabIndex = 4;
             tbInvoiceType.Text = "Invoice Type";
             tbInvoiceType.UseVisualStyleBackColor = true;
             // 
             // SalesSettingsView
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
             Controls.Add(tcMain);
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "SalesSettingsView";
-            Size = new Size(1707, 960);
+            Size = new Size(1195, 576);
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

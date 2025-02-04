@@ -20,8 +20,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public double Bonuses { get; set; }
         [Display(Name = "Gross Pay")]
         public double GrossPay { get; set; }
-        public double Deductions { get; set; }
-        [Display(Name = "")]
+        [Display(Name = "Late/Early")]
         public double LateAndEarly { get; set; }
         public double Absent { get; set; }
         [Display(Name = "SSS")]
@@ -30,6 +29,8 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public double PagibigContribution { get; set; }
         [Display(Name = "PhilHealth")]
         public double PhilHealthContribution { get; set; }
+        [Display(Name = "Add'l Deduction")]
+        public double Deductions { get; set; }
         [Display(Name = "Total Deduction")]
         public double TotalDeduction { get; set; }
         [Display(Name = "Net Pay")]

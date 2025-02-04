@@ -32,10 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminView));
             imageList1 = new ImageList(components);
             tcMain = new MaterialSkin.Controls.MaterialTabControl();
+            tbProfile = new TabPage();
             tbRegister = new TabPage();
             tbInventory = new TabPage();
             tbPayroll = new TabPage();
-            tbProfile = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -80,66 +80,70 @@
             tcMain.Depth = 0;
             tcMain.Dock = DockStyle.Fill;
             tcMain.ImageList = imageList1;
-            tcMain.Location = new Point(3, 64);
+            tcMain.Location = new Point(3, 48);
+            tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.MouseState = MaterialSkin.MouseState.HOVER;
             tcMain.Multiline = true;
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1914, 1012);
+            tcMain.Size = new Size(1203, 537);
             tcMain.TabIndex = 4;
+            // 
+            // tbProfile
+            // 
+            tbProfile.Location = new Point(4, 24);
+            tbProfile.Margin = new Padding(3, 2, 3, 2);
+            tbProfile.Name = "tbProfile";
+            tbProfile.Size = new Size(1195, 509);
+            tbProfile.TabIndex = 3;
+            tbProfile.Text = "Profile";
+            tbProfile.UseVisualStyleBackColor = true;
             // 
             // tbRegister
             // 
-            tbRegister.Location = new Point(4, 29);
+            tbRegister.Location = new Point(4, 24);
+            tbRegister.Margin = new Padding(3, 2, 3, 2);
             tbRegister.Name = "tbRegister";
-            tbRegister.Size = new Size(1906, 979);
+            tbRegister.Size = new Size(1195, 509);
             tbRegister.TabIndex = 0;
             tbRegister.Text = "Register Account";
             tbRegister.UseVisualStyleBackColor = true;
             // 
             // tbInventory
             // 
-            tbInventory.Location = new Point(4, 29);
+            tbInventory.Location = new Point(4, 24);
+            tbInventory.Margin = new Padding(3, 2, 3, 2);
             tbInventory.Name = "tbInventory";
-            tbInventory.Size = new Size(1906, 979);
+            tbInventory.Size = new Size(1195, 509);
             tbInventory.TabIndex = 1;
             tbInventory.Text = "Inventory";
             tbInventory.UseVisualStyleBackColor = true;
             // 
             // tbPayroll
             // 
-            tbPayroll.Location = new Point(4, 29);
+            tbPayroll.Location = new Point(4, 24);
+            tbPayroll.Margin = new Padding(3, 2, 3, 2);
             tbPayroll.Name = "tbPayroll";
-            tbPayroll.Size = new Size(1906, 979);
+            tbPayroll.Size = new Size(1195, 509);
             tbPayroll.TabIndex = 2;
             tbPayroll.Text = "Payroll";
             tbPayroll.UseVisualStyleBackColor = true;
             // 
-            // tbProfile
-            // 
-            tbProfile.Location = new Point(4, 29);
-            tbProfile.Name = "tbProfile";
-            tbProfile.Size = new Size(1906, 979);
-            tbProfile.TabIndex = 3;
-            tbProfile.Text = "Profile";
-            tbProfile.UseVisualStyleBackColor = true;
-            // 
             // AdminView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
             AutoScroll = true;
-            ClientSize = new Size(1920, 1080);
+            ClientSize = new Size(1209, 588);
             Controls.Add(tcMain);
             DrawerAutoShow = true;
-            DrawerShowIconsWhenHidden = true;
             DrawerTabControl = tcMain;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 4, 3, 4);
             Name = "AdminView";
-            Padding = new Padding(3, 64, 3, 4);
+            Padding = new Padding(3, 48, 3, 3);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin Management System";
+            WindowState = FormWindowState.Maximized;
+            FormClosing += AdminView_FormClosing;
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PayrollSystemView));
             tcMain = new MaterialSkin.Controls.MaterialTabControl();
             tbAttendance = new TabPage();
             tbContribution = new TabPage();
@@ -36,11 +37,11 @@
             tbEmployee = new TabPage();
             tbJobPosition = new TabPage();
             tbLeave = new TabPage();
+            tbBenefit = new TabPage();
             tbShift = new TabPage();
             tbTax = new TabPage();
             tbPayroll = new TabPage();
             tbProject = new TabPage();
-            tbBenefit = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,149 +61,160 @@
             tcMain.Controls.Add(tbProject);
             tcMain.Depth = 0;
             tcMain.Dock = DockStyle.Fill;
-            tcMain.Location = new Point(2, 51);
+            tcMain.Location = new Point(1, 38);
+            tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.MouseState = MaterialSkin.MouseState.HOVER;
             tcMain.Multiline = true;
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1916, 1027);
+            tcMain.Size = new Size(1207, 549);
             tcMain.TabIndex = 5;
             // 
             // tbAttendance
             // 
-            tbAttendance.ImageKey = "user.png";
-            tbAttendance.Location = new Point(4, 29);
+            tbAttendance.ImageKey = "(none)";
+            tbAttendance.Location = new Point(4, 24);
+            tbAttendance.Margin = new Padding(3, 2, 3, 2);
             tbAttendance.Name = "tbAttendance";
-            tbAttendance.Padding = new Padding(3);
-            tbAttendance.Size = new Size(1908, 994);
+            tbAttendance.Padding = new Padding(3, 2, 3, 2);
+            tbAttendance.Size = new Size(1199, 521);
             tbAttendance.TabIndex = 0;
             tbAttendance.Text = "Attendance";
             tbAttendance.UseVisualStyleBackColor = true;
             // 
             // tbContribution
             // 
-            tbContribution.ImageKey = "dashboard.png";
-            tbContribution.Location = new Point(4, 29);
+            tbContribution.ImageKey = "(none)";
+            tbContribution.Location = new Point(4, 24);
+            tbContribution.Margin = new Padding(3, 2, 3, 2);
             tbContribution.Name = "tbContribution";
-            tbContribution.Padding = new Padding(3);
-            tbContribution.Size = new Size(1908, 994);
+            tbContribution.Padding = new Padding(3, 2, 3, 2);
+            tbContribution.Size = new Size(1199, 521);
             tbContribution.TabIndex = 1;
             tbContribution.Text = "Contribution";
             tbContribution.UseVisualStyleBackColor = true;
             // 
             // tbDeduction
             // 
-            tbDeduction.ImageKey = "sales-order.png";
-            tbDeduction.Location = new Point(4, 29);
+            tbDeduction.ImageKey = "(none)";
+            tbDeduction.Location = new Point(4, 24);
+            tbDeduction.Margin = new Padding(3, 2, 3, 2);
             tbDeduction.Name = "tbDeduction";
-            tbDeduction.Size = new Size(1908, 994);
+            tbDeduction.Size = new Size(1199, 521);
             tbDeduction.TabIndex = 2;
             tbDeduction.Text = "Deduction";
             tbDeduction.UseVisualStyleBackColor = true;
             // 
             // tbDepartment
             // 
-            tbDepartment.ImageKey = "purchase-order.png";
-            tbDepartment.Location = new Point(4, 29);
+            tbDepartment.ImageKey = "(none)";
+            tbDepartment.Location = new Point(4, 24);
+            tbDepartment.Margin = new Padding(3, 2, 3, 2);
             tbDepartment.Name = "tbDepartment";
-            tbDepartment.Size = new Size(1908, 994);
+            tbDepartment.Size = new Size(1199, 521);
             tbDepartment.TabIndex = 3;
             tbDepartment.Text = "Department";
             tbDepartment.UseVisualStyleBackColor = true;
             // 
             // tbEmployee
             // 
-            tbEmployee.ImageKey = "product.png";
-            tbEmployee.Location = new Point(4, 29);
+            tbEmployee.ImageKey = "(none)";
+            tbEmployee.Location = new Point(4, 24);
+            tbEmployee.Margin = new Padding(3, 2, 3, 2);
             tbEmployee.Name = "tbEmployee";
-            tbEmployee.Size = new Size(1908, 994);
+            tbEmployee.Size = new Size(1199, 521);
             tbEmployee.TabIndex = 4;
             tbEmployee.Text = "Employee";
             tbEmployee.UseVisualStyleBackColor = true;
             // 
             // tbJobPosition
             // 
-            tbJobPosition.ImageKey = "setting.png";
-            tbJobPosition.Location = new Point(4, 29);
+            tbJobPosition.ImageKey = "(none)";
+            tbJobPosition.Location = new Point(4, 24);
+            tbJobPosition.Margin = new Padding(3, 2, 3, 2);
             tbJobPosition.Name = "tbJobPosition";
-            tbJobPosition.Size = new Size(1908, 994);
+            tbJobPosition.Size = new Size(1199, 521);
             tbJobPosition.TabIndex = 5;
             tbJobPosition.Text = "Job Position";
             tbJobPosition.UseVisualStyleBackColor = true;
             // 
             // tbLeave
             // 
-            tbLeave.Location = new Point(4, 29);
-            tbLeave.Margin = new Padding(2);
+            tbLeave.ImageKey = "(none)";
+            tbLeave.Location = new Point(4, 24);
+            tbLeave.Margin = new Padding(1);
             tbLeave.Name = "tbLeave";
-            tbLeave.Size = new Size(1908, 994);
+            tbLeave.Size = new Size(1199, 521);
             tbLeave.TabIndex = 6;
             tbLeave.Text = "Leave";
             tbLeave.UseVisualStyleBackColor = true;
             // 
+            // tbBenefit
+            // 
+            tbBenefit.Location = new Point(4, 24);
+            tbBenefit.Margin = new Padding(3, 2, 3, 2);
+            tbBenefit.Name = "tbBenefit";
+            tbBenefit.Size = new Size(1199, 521);
+            tbBenefit.TabIndex = 11;
+            tbBenefit.Text = "Benefit";
+            tbBenefit.UseVisualStyleBackColor = true;
+            // 
             // tbShift
             // 
-            tbShift.Location = new Point(4, 29);
-            tbShift.Margin = new Padding(2);
+            tbShift.Location = new Point(4, 24);
+            tbShift.Margin = new Padding(1);
             tbShift.Name = "tbShift";
-            tbShift.Size = new Size(1908, 994);
+            tbShift.Size = new Size(1199, 521);
             tbShift.TabIndex = 7;
             tbShift.Text = "Shift";
             tbShift.UseVisualStyleBackColor = true;
             // 
             // tbTax
             // 
-            tbTax.Location = new Point(4, 29);
-            tbTax.Margin = new Padding(2);
+            tbTax.Location = new Point(4, 24);
+            tbTax.Margin = new Padding(1);
             tbTax.Name = "tbTax";
-            tbTax.Size = new Size(1908, 994);
+            tbTax.Size = new Size(1199, 521);
             tbTax.TabIndex = 8;
             tbTax.Text = "Tax";
             tbTax.UseVisualStyleBackColor = true;
             // 
             // tbPayroll
             // 
-            tbPayroll.Location = new Point(4, 29);
-            tbPayroll.Margin = new Padding(2);
+            tbPayroll.Location = new Point(4, 24);
+            tbPayroll.Margin = new Padding(1);
             tbPayroll.Name = "tbPayroll";
-            tbPayroll.Size = new Size(1908, 994);
+            tbPayroll.Size = new Size(1199, 521);
             tbPayroll.TabIndex = 9;
             tbPayroll.Text = "Payroll";
             tbPayroll.UseVisualStyleBackColor = true;
             // 
             // tbProject
             // 
-            tbProject.Location = new Point(4, 29);
+            tbProject.Location = new Point(4, 24);
+            tbProject.Margin = new Padding(3, 2, 3, 2);
             tbProject.Name = "tbProject";
-            tbProject.Size = new Size(1908, 994);
+            tbProject.Size = new Size(1199, 521);
             tbProject.TabIndex = 10;
             tbProject.Text = "Project";
             tbProject.UseVisualStyleBackColor = true;
             // 
-            // tbBenefit
-            // 
-            tbBenefit.Location = new Point(4, 29);
-            tbBenefit.Name = "tbBenefit";
-            tbBenefit.Size = new Size(1908, 994);
-            tbBenefit.TabIndex = 11;
-            tbBenefit.Text = "Benefit";
-            tbBenefit.UseVisualStyleBackColor = true;
-            // 
             // PayrollSystemView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1920, 1080);
+            ClientSize = new Size(1209, 588);
             Controls.Add(tcMain);
             DrawerAutoShow = true;
-            DrawerShowIconsWhenHidden = true;
             DrawerTabControl = tcMain;
-            Margin = new Padding(2);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(1);
             Name = "PayrollSystemView";
-            Padding = new Padding(2, 51, 2, 2);
+            Padding = new Padding(1, 38, 1, 1);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Payroll System";
             WindowState = FormWindowState.Maximized;
+            FormClosing += PayrollSystemView_FormClosing;
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

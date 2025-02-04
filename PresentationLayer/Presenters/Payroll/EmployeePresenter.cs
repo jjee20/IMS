@@ -9,6 +9,8 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Payroll;
+using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.Payroll;
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 
@@ -49,6 +51,10 @@ namespace PresentationLayer.Presenters.Payroll
             _view.DeleteEvent += Delete;
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
+            _view.AddDepartmentEvent += AddDepartment;
+            _view.AddJobPositionEvent += AddJobPosition;
+            _view.AddShiftEvent += AddShift;
+            _view.ReloadEvent += ReloadAll;
 
             //Load
 
@@ -64,6 +70,42 @@ namespace PresentationLayer.Presenters.Payroll
             _view.SetDepartmentListBindingSource(DepartmentBindingSource);
             _view.SetJobPositionListBindingSource(JobPositionBindingSource);
             _view.SetShiftListBindingSource(ShiftBindingSource);
+        }
+
+        private void ReloadAll(object? sender, EventArgs e)
+        {
+            LoadAllEmployeeList();
+            LoadAllGenderList();
+            LoadAllDepartmentList();
+            LoadAllJobPositionList();
+            LoadAllShiftList();
+        }
+
+        private void AddShift(object? sender, EventArgs e)
+        {
+            var formDialog = new FormDialog();
+            IShiftView view = ShiftView.GetInstanceAsDialog(formDialog);
+
+            new ShiftPresenter(view, _unitOfWork);
+            formDialog.ShowDialog();
+        }
+
+        private void AddJobPosition(object? sender, EventArgs e)
+        {
+            var formDialog = new FormDialog();
+            IJobPositionView view =  JobPositionView.GetInstanceAsDialog(formDialog);
+            new JobPositionPresenter(view, _unitOfWork);
+
+            formDialog.ShowDialog();
+        }
+
+        private void AddDepartment(object? sender, EventArgs e)
+        {
+            var formDialog = new FormDialog();
+            IDepartmentView view = DepartmentView.GetInstanceAsDialog(formDialog);
+            new DepartmentPresenter(view, _unitOfWork);
+
+            formDialog.ShowDialog();
         }
 
         private void AddNew(object? sender, EventArgs e)

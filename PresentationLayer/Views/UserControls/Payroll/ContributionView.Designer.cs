@@ -41,6 +41,8 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContributionView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -74,16 +76,18 @@ namespace PresentationLayer.Views.UserControls
             txtMinimumLimit = new Guna2TextBox();
             panel2 = new Panel();
             txtSearch = new Guna2TextBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            guna2Separator1 = new Guna2Separator();
+            btnImport = new Guna2Button();
             btnPrint = new Guna2Button();
             btnDelete = new Guna2Button();
             btnSave = new Guna2Button();
             btnEdit = new Guna2Button();
             btnAdd = new Guna2Button();
             btnReturn = new Guna2Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            guna2Separator1 = new Guna2Separator();
+            guna2HtmlToolTip2 = new Guna2HtmlToolTip();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -184,6 +188,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Name = "dgList";
             dgList.RowHeadersVisible = false;
             dgList.RowHeadersWidth = 51;
+            dgList.RowTemplate.Height = 29;
             dgList.Size = new Size(1860, 765);
             dgList.TabIndex = 0;
             dgList.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
@@ -249,9 +254,9 @@ namespace PresentationLayer.Views.UserControls
             label1.AutoSize = true;
             label1.Dock = DockStyle.Right;
             label1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            label1.Location = new Point(1752, 19);
+            label1.Location = new Point(1765, 19);
             label1.Name = "label1";
-            label1.Size = new Size(37, 25);
+            label1.Size = new Size(29, 20);
             label1.TabIndex = 20;
             label1.Text = "ID:";
             // 
@@ -260,9 +265,9 @@ namespace PresentationLayer.Views.UserControls
             txtId.AutoSize = true;
             txtId.Dock = DockStyle.Right;
             txtId.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            txtId.Location = new Point(1789, 19);
+            txtId.Location = new Point(1794, 19);
             txtId.Name = "txtId";
-            txtId.Size = new Size(23, 25);
+            txtId.Size = new Size(18, 20);
             txtId.TabIndex = 19;
             txtId.Text = "0";
             // 
@@ -273,7 +278,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel5.Font = new Font("Segoe UI", 10F);
             guna2HtmlLabel5.Location = new Point(367, 232);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            guna2HtmlLabel5.Size = new Size(39, 25);
+            guna2HtmlLabel5.Size = new Size(31, 19);
             guna2HtmlLabel5.TabIndex = 18;
             guna2HtmlLabel5.Text = "Type";
             // 
@@ -346,7 +351,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10F);
             guna2HtmlLabel4.Location = new Point(367, 379);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(65, 25);
+            guna2HtmlLabel4.Size = new Size(48, 19);
             guna2HtmlLabel4.TabIndex = 14;
             guna2HtmlLabel4.Text = "Amount";
             // 
@@ -357,7 +362,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel3.Font = new Font("Segoe UI", 10F);
             guna2HtmlLabel3.Location = new Point(944, 379);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            guna2HtmlLabel3.Size = new Size(132, 25);
+            guna2HtmlLabel3.Size = new Size(101, 19);
             guna2HtmlLabel3.TabIndex = 12;
             guna2HtmlLabel3.Text = "Maximum Range";
             // 
@@ -368,7 +373,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Font = new Font("Segoe UI", 10F);
             guna2HtmlLabel2.Location = new Point(947, 232);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(129, 25);
+            guna2HtmlLabel2.Size = new Size(98, 19);
             guna2HtmlLabel2.TabIndex = 11;
             guna2HtmlLabel2.Text = "Minimum Range";
             // 
@@ -397,13 +402,14 @@ namespace PresentationLayer.Views.UserControls
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(txtSearch);
+            panel2.Controls.Add(btnImport);
             panel2.Controls.Add(btnPrint);
             panel2.Controls.Add(btnDelete);
             panel2.Controls.Add(btnSave);
             panel2.Controls.Add(btnEdit);
             panel2.Controls.Add(btnAdd);
             panel2.Controls.Add(btnReturn);
+            panel2.Controls.Add(txtSearch);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(16, 89);
             panel2.Margin = new Padding(3, 13, 3, 4);
@@ -413,7 +419,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             // txtSearch
             // 
-            txtSearch.CustomizableEdges = customizableEdges9;
+            txtSearch.CustomizableEdges = customizableEdges23;
             txtSearch.DefaultText = "";
             txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -430,124 +436,9 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
-            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges24;
             txtSearch.Size = new Size(378, 50);
             txtSearch.TabIndex = 11;
-            // 
-            // btnPrint
-            // 
-            btnPrint.CustomizableEdges = customizableEdges11;
-            btnPrint.DisabledState.BorderColor = Color.DarkGray;
-            btnPrint.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnPrint.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnPrint.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnPrint.Dock = DockStyle.Left;
-            btnPrint.FillColor = Color.Transparent;
-            btnPrint.Font = new Font("Segoe UI", 9F);
-            btnPrint.ForeColor = Color.White;
-            btnPrint.Image = (Image)resources.GetObject("btnPrint.Image");
-            btnPrint.ImageSize = new Size(30, 30);
-            btnPrint.Location = new Point(250, 0);
-            btnPrint.Name = "btnPrint";
-            btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            btnPrint.Size = new Size(50, 50);
-            btnPrint.TabIndex = 10;
-            // 
-            // btnDelete
-            // 
-            btnDelete.CustomizableEdges = customizableEdges13;
-            btnDelete.DisabledState.BorderColor = Color.DarkGray;
-            btnDelete.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnDelete.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnDelete.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnDelete.Dock = DockStyle.Left;
-            btnDelete.FillColor = Color.Transparent;
-            btnDelete.Font = new Font("Segoe UI", 9F);
-            btnDelete.ForeColor = Color.White;
-            btnDelete.Image = (Image)resources.GetObject("btnDelete.Image");
-            btnDelete.ImageSize = new Size(30, 30);
-            btnDelete.Location = new Point(200, 0);
-            btnDelete.Name = "btnDelete";
-            btnDelete.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            btnDelete.Size = new Size(50, 50);
-            btnDelete.TabIndex = 9;
-            // 
-            // btnSave
-            // 
-            btnSave.CustomizableEdges = customizableEdges15;
-            btnSave.DisabledState.BorderColor = Color.DarkGray;
-            btnSave.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnSave.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnSave.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnSave.Dock = DockStyle.Left;
-            btnSave.FillColor = Color.Transparent;
-            btnSave.Font = new Font("Segoe UI", 9F);
-            btnSave.ForeColor = Color.White;
-            btnSave.Image = (Image)resources.GetObject("btnSave.Image");
-            btnSave.ImageSize = new Size(30, 30);
-            btnSave.Location = new Point(150, 0);
-            btnSave.Name = "btnSave";
-            btnSave.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            btnSave.Size = new Size(50, 50);
-            btnSave.TabIndex = 8;
-            // 
-            // btnEdit
-            // 
-            btnEdit.CustomizableEdges = customizableEdges17;
-            btnEdit.DisabledState.BorderColor = Color.DarkGray;
-            btnEdit.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnEdit.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnEdit.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnEdit.Dock = DockStyle.Left;
-            btnEdit.FillColor = Color.Transparent;
-            btnEdit.Font = new Font("Segoe UI", 9F);
-            btnEdit.ForeColor = Color.White;
-            btnEdit.Image = (Image)resources.GetObject("btnEdit.Image");
-            btnEdit.ImageSize = new Size(30, 30);
-            btnEdit.Location = new Point(100, 0);
-            btnEdit.Name = "btnEdit";
-            btnEdit.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            btnEdit.Size = new Size(50, 50);
-            btnEdit.TabIndex = 7;
-            // 
-            // btnAdd
-            // 
-            btnAdd.CustomizableEdges = customizableEdges19;
-            btnAdd.DisabledState.BorderColor = Color.DarkGray;
-            btnAdd.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnAdd.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnAdd.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnAdd.Dock = DockStyle.Left;
-            btnAdd.FillColor = Color.Transparent;
-            btnAdd.Font = new Font("Segoe UI", 9F);
-            btnAdd.ForeColor = Color.White;
-            btnAdd.Image = (Image)resources.GetObject("btnAdd.Image");
-            btnAdd.ImageSize = new Size(30, 30);
-            btnAdd.Location = new Point(50, 0);
-            btnAdd.Name = "btnAdd";
-            btnAdd.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            btnAdd.Size = new Size(50, 50);
-            btnAdd.TabIndex = 6;
-            // 
-            // btnReturn
-            // 
-            btnReturn.CustomizableEdges = customizableEdges21;
-            btnReturn.DisabledState.BorderColor = Color.DarkGray;
-            btnReturn.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnReturn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnReturn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnReturn.Dock = DockStyle.Left;
-            btnReturn.FillColor = Color.Transparent;
-            btnReturn.Font = new Font("Segoe UI", 9F);
-            btnReturn.ForeColor = Color.White;
-            btnReturn.Image = (Image)resources.GetObject("btnReturn.Image");
-            btnReturn.ImageSize = new Size(30, 30);
-            btnReturn.Location = new Point(0, 0);
-            btnReturn.Name = "btnReturn";
-            btnReturn.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            btnReturn.Size = new Size(50, 50);
-            btnReturn.TabIndex = 5;
-            btnReturn.Visible = false;
             // 
             // tableLayoutPanel1
             // 
@@ -605,6 +496,157 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Size = new Size(1868, 11);
             guna2Separator1.TabIndex = 1;
             // 
+            // btnImport
+            // 
+            btnImport.CustomizableEdges = customizableEdges9;
+            btnImport.DisabledState.BorderColor = Color.DarkGray;
+            btnImport.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnImport.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnImport.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnImport.Dock = DockStyle.Left;
+            btnImport.FillColor = Color.Transparent;
+            btnImport.Font = new Font("Segoe UI", 9F);
+            btnImport.ForeColor = Color.White;
+            btnImport.Image = (Image)resources.GetObject("btnImport.Image");
+            btnImport.ImageSize = new Size(30, 30);
+            btnImport.Location = new Point(300, 0);
+            btnImport.Name = "btnImport";
+            btnImport.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnImport.Size = new Size(50, 50);
+            btnImport.TabIndex = 33;
+            guna2HtmlToolTip2.SetToolTip(btnImport, "Import");
+            btnImport.Visible = false;
+            // 
+            // btnPrint
+            // 
+            btnPrint.CustomizableEdges = customizableEdges11;
+            btnPrint.DisabledState.BorderColor = Color.DarkGray;
+            btnPrint.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnPrint.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnPrint.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnPrint.Dock = DockStyle.Left;
+            btnPrint.FillColor = Color.Transparent;
+            btnPrint.Font = new Font("Segoe UI", 9F);
+            btnPrint.ForeColor = Color.White;
+            btnPrint.Image = (Image)resources.GetObject("btnPrint.Image");
+            btnPrint.ImageSize = new Size(30, 30);
+            btnPrint.Location = new Point(250, 0);
+            btnPrint.Name = "btnPrint";
+            btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btnPrint.Size = new Size(50, 50);
+            btnPrint.TabIndex = 32;
+            guna2HtmlToolTip2.SetToolTip(btnPrint, "Print");
+            // 
+            // btnDelete
+            // 
+            btnDelete.CustomizableEdges = customizableEdges13;
+            btnDelete.DisabledState.BorderColor = Color.DarkGray;
+            btnDelete.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnDelete.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnDelete.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnDelete.Dock = DockStyle.Left;
+            btnDelete.FillColor = Color.Transparent;
+            btnDelete.Font = new Font("Segoe UI", 9F);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Image = (Image)resources.GetObject("btnDelete.Image");
+            btnDelete.ImageSize = new Size(30, 30);
+            btnDelete.Location = new Point(200, 0);
+            btnDelete.Name = "btnDelete";
+            btnDelete.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            btnDelete.Size = new Size(50, 50);
+            btnDelete.TabIndex = 31;
+            guna2HtmlToolTip2.SetToolTip(btnDelete, "Delete");
+            // 
+            // btnSave
+            // 
+            btnSave.CustomizableEdges = customizableEdges15;
+            btnSave.DisabledState.BorderColor = Color.DarkGray;
+            btnSave.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSave.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSave.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSave.Dock = DockStyle.Left;
+            btnSave.FillColor = Color.Transparent;
+            btnSave.Font = new Font("Segoe UI", 9F);
+            btnSave.ForeColor = Color.White;
+            btnSave.Image = (Image)resources.GetObject("btnSave.Image");
+            btnSave.ImageSize = new Size(30, 30);
+            btnSave.Location = new Point(150, 0);
+            btnSave.Name = "btnSave";
+            btnSave.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            btnSave.Size = new Size(50, 50);
+            btnSave.TabIndex = 30;
+            guna2HtmlToolTip2.SetToolTip(btnSave, "Save");
+            // 
+            // btnEdit
+            // 
+            btnEdit.CustomizableEdges = customizableEdges17;
+            btnEdit.DisabledState.BorderColor = Color.DarkGray;
+            btnEdit.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnEdit.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnEdit.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnEdit.Dock = DockStyle.Left;
+            btnEdit.FillColor = Color.Transparent;
+            btnEdit.Font = new Font("Segoe UI", 9F);
+            btnEdit.ForeColor = Color.White;
+            btnEdit.Image = (Image)resources.GetObject("btnEdit.Image");
+            btnEdit.ImageSize = new Size(30, 30);
+            btnEdit.Location = new Point(100, 0);
+            btnEdit.Name = "btnEdit";
+            btnEdit.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            btnEdit.Size = new Size(50, 50);
+            btnEdit.TabIndex = 29;
+            guna2HtmlToolTip2.SetToolTip(btnEdit, "Edit");
+            // 
+            // btnAdd
+            // 
+            btnAdd.CustomizableEdges = customizableEdges19;
+            btnAdd.DisabledState.BorderColor = Color.DarkGray;
+            btnAdd.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnAdd.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnAdd.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnAdd.Dock = DockStyle.Left;
+            btnAdd.FillColor = Color.Transparent;
+            btnAdd.Font = new Font("Segoe UI", 9F);
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Image = (Image)resources.GetObject("btnAdd.Image");
+            btnAdd.ImageSize = new Size(30, 30);
+            btnAdd.Location = new Point(50, 0);
+            btnAdd.Name = "btnAdd";
+            btnAdd.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            btnAdd.Size = new Size(50, 50);
+            btnAdd.TabIndex = 28;
+            guna2HtmlToolTip2.SetToolTip(btnAdd, "Add");
+            // 
+            // btnReturn
+            // 
+            btnReturn.CustomizableEdges = customizableEdges21;
+            btnReturn.DisabledState.BorderColor = Color.DarkGray;
+            btnReturn.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnReturn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnReturn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnReturn.Dock = DockStyle.Left;
+            btnReturn.FillColor = Color.Transparent;
+            btnReturn.Font = new Font("Segoe UI", 9F);
+            btnReturn.ForeColor = Color.White;
+            btnReturn.Image = (Image)resources.GetObject("btnReturn.Image");
+            btnReturn.ImageSize = new Size(30, 30);
+            btnReturn.Location = new Point(0, 0);
+            btnReturn.Name = "btnReturn";
+            btnReturn.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            btnReturn.Size = new Size(50, 50);
+            btnReturn.TabIndex = 27;
+            guna2HtmlToolTip2.SetToolTip(btnReturn, "Return");
+            btnReturn.Visible = false;
+            // 
+            // guna2HtmlToolTip2
+            // 
+            guna2HtmlToolTip2.AllowLinksHandling = true;
+            guna2HtmlToolTip2.AutoPopDelay = 5000;
+            guna2HtmlToolTip2.InitialDelay = 500;
+            guna2HtmlToolTip2.MaximumSize = new Size(0, 0);
+            guna2HtmlToolTip2.ReshowDelay = 100;
+            guna2HtmlToolTip2.ToolTipIcon = ToolTipIcon.Info;
+            // 
             // ContributionView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -637,13 +679,7 @@ namespace PresentationLayer.Views.UserControls
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private Guna2Button btnReturn;
         private Guna2TextBox txtSearch;
-        private Guna2Button btnPrint;
-        private Guna2Button btnDelete;
-        private Guna2Button btnSave;
-        private Guna2Button btnEdit;
-        private Guna2Button btnAdd;
         private Guna2Separator guna2Separator1;
         private Guna2DataGridView dgList;
         private MaterialSkin.Controls.MaterialCard materialCard2;
@@ -657,5 +693,13 @@ namespace PresentationLayer.Views.UserControls
         private Guna2ComboBox txtContributionType;
         private Label label1;
         private Label txtId;
+        private Guna2Button btnImport;
+        private Guna2HtmlToolTip guna2HtmlToolTip2;
+        private Guna2Button btnPrint;
+        private Guna2Button btnDelete;
+        private Guna2Button btnSave;
+        private Guna2Button btnEdit;
+        private Guna2Button btnAdd;
+        private Guna2Button btnReturn;
     }
 }

@@ -84,6 +84,11 @@ namespace PresentationLayer.Views.UserControls.Inventory
             }
         }
 
+        public void Show()
+        {
+            Show();
+        }
+
         private Image GetIconFromResource(string iconName)
         {
             byte[] imageBytes = iconName == "eye" ? Properties.Resources.eye : Properties.Resources.hidden;

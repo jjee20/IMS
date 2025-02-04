@@ -3,6 +3,7 @@ using PresentationLayer.Views;
 using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -22,24 +23,11 @@ namespace PresentationLayer.Presenters.Inventory
             _view = view;
             _unitOfWork = unitOfWork;
 
-            _view.ShowProfile += ShowProfile;
             _view.ShowDashboard += ShowDashboard;
             _view.ShowSales += ShowSales;
             _view.ShowPurchase += ShowPurchase;
             _view.ShowInventory += ShowInventory;
-            _view.ShowConfiguration += ShowConfiguration;
-            ShowDashboard(this, EventArgs.Empty);
-        }
-
-        private void ShowConfiguration(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ShowProfile(object? sender, EventArgs e)
-        {
-            IProfileView view = ProfileView.GetInstance(_view.Guna2TabControlPage);
-            new ProfilePresenter(view, _unitOfWork);
+            ShowInventory(this, EventArgs.Empty);
         }
         private void ShowDashboard(object? sender, EventArgs e)
         {

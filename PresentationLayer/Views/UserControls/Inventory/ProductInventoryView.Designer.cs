@@ -43,9 +43,10 @@
             tcMain.Dock = DockStyle.Fill;
             tcMain.ItemSize = new Size(180, 40);
             tcMain.Location = new Point(0, 0);
+            tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1906, 979);
+            tcMain.Size = new Size(1668, 734);
             tcMain.TabButtonHoverState.BorderColor = Color.Empty;
             tcMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -69,8 +70,9 @@
             // tbProduct
             // 
             tbProduct.Location = new Point(4, 44);
+            tbProduct.Margin = new Padding(3, 2, 3, 2);
             tbProduct.Name = "tbProduct";
-            tbProduct.Size = new Size(1898, 931);
+            tbProduct.Size = new Size(1660, 686);
             tbProduct.TabIndex = 2;
             tbProduct.Text = "Product";
             tbProduct.UseVisualStyleBackColor = true;
@@ -78,9 +80,10 @@
             // tbProductType
             // 
             tbProductType.Location = new Point(4, 44);
+            tbProductType.Margin = new Padding(3, 2, 3, 2);
             tbProductType.Name = "tbProductType";
-            tbProductType.Padding = new Padding(3);
-            tbProductType.Size = new Size(1898, 931);
+            tbProductType.Padding = new Padding(3, 2, 3, 2);
+            tbProductType.Size = new Size(1660, 686);
             tbProductType.TabIndex = 0;
             tbProductType.Text = "Product Type";
             tbProductType.UseVisualStyleBackColor = true;
@@ -88,20 +91,21 @@
             // tbUnitOfMeasure
             // 
             tbUnitOfMeasure.Location = new Point(4, 44);
+            tbUnitOfMeasure.Margin = new Padding(3, 2, 3, 2);
             tbUnitOfMeasure.Name = "tbUnitOfMeasure";
-            tbUnitOfMeasure.Padding = new Padding(3);
-            tbUnitOfMeasure.Size = new Size(1898, 931);
+            tbUnitOfMeasure.Padding = new Padding(3, 2, 3, 2);
+            tbUnitOfMeasure.Size = new Size(1660, 686);
             tbUnitOfMeasure.TabIndex = 1;
             tbUnitOfMeasure.Text = "Unit Of Measure";
             tbUnitOfMeasure.UseVisualStyleBackColor = true;
             // 
             // ProductInventoryView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
             Controls.Add(tcMain);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ProductInventoryView";
-            Size = new Size(1906, 979);
+            Size = new Size(1668, 734);
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

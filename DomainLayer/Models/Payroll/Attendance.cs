@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class Attendance
+    public class Attendance : BaseEntity
     {
         [Key]
         public int AttendanceId { get; set; } // Primary Key
@@ -21,6 +21,10 @@ namespace DomainLayer.Models.Payroll
         public DateTime Date { get; set; }
         public bool IsPresent { get; set; }
         public double HoursWorked { get; set; }
+
+        [ForeignKey(nameof(ProjectId))]
+        public int ProjectId { get; set; } // Foreign Key
+        public Project Project { get; set; }
     }
 
 }

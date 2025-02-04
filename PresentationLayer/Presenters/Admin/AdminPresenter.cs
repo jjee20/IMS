@@ -1,4 +1,5 @@
-﻿using PresentationLayer.Presenters;
+﻿using InfastructureLayer.DataAccess.Repositories;
+using PresentationLayer.Presenters;
 using PresentationLayer.Presenters.Account;
 using PresentationLayer.Presenters.Inventory;
 using PresentationLayer.Presenters.Payroll;
@@ -8,6 +9,7 @@ using PresentationLayer.Views.IViews.Admin;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.IViews.Payroll;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.Inventory;
 using PresentationLayer.Views.UserControls.Payroll;
 using ServiceLayer.Services.IRepositories;
 using System;
@@ -34,7 +36,6 @@ namespace PresentationLayer.Presenters.Admin
             _view.ShowProfile += ShowProfile;
             ShowProfile(this, EventArgs.Empty);
         }
-
         private void ShowProfile(object? sender, EventArgs e)
         {
             IUserProfileView view = UserProfileView.GetInstance(_view.Guna2TabControlPage);

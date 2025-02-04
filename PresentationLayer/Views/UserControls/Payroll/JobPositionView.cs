@@ -170,5 +170,15 @@ namespace PresentationLayer.Views.UserControls
             }
             return instance;
         }
+        public static JobPositionView GetInstanceAsDialog(Form parentForm)
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new JobPositionView();
+            }
+            parentForm.Controls.Add(instance);
+            instance.Dock = DockStyle.Fill;
+            return instance;
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace ServiceLayer.Services.CommonServices
     public class MappingProfile : Profile
     {
         public MappingProfile() {
+            #region Inventory
             CreateMap<Customer, CustomerViewModel>()
                 .ForMember(dest => dest.CustomerType, opt => opt.MapFrom(src => src.CustomerType.CustomerTypeName))
                 .ReverseMap();
@@ -66,11 +67,12 @@ namespace ServiceLayer.Services.CommonServices
             CreateMap<Warehouse, WarehouseViewModel>()
                 .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName))
                 .ReverseMap();
+            #endregion
 
             #region Payroll
-            CreateMap<Attendance, AttendanceViewModel>()
-                 .ForMember(dest => dest.Employee,
-                     opt => opt.MapFrom(src => $"{src.Employee.FirstName} {src.Employee.LastName}"))
+            CreateMap<Attendance, IndividualAttendanceViewModel>()
+                 .ForMember(dest => dest.Project,
+                     opt => opt.MapFrom(src => src.Project.ProjectName))
                  .ForMember(dest => dest.Date,
                      opt => opt.MapFrom(src => src.Date.ToShortDateString()))
                  .ForMember(dest => dest.TimeOut,
@@ -94,7 +96,7 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.FirstName} {src.Employee.LastName}"))
                 .ReverseMap();
             CreateMap<Employee, EmployeeViewModel>()
-                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.LastName}, {src.FirstName}"))
                  .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department.Name))
                  .ForMember(dest => dest.Shift, opt => opt.MapFrom(src => src.Shift.ShiftName))
                  .ForMember(dest => dest.JobPosition, opt => opt.MapFrom(src => src.JobPosition.Title))

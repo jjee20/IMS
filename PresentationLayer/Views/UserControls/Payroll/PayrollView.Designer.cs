@@ -108,6 +108,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Name = "dgList";
             dgList.RowHeadersVisible = false;
             dgList.RowHeadersWidth = 51;
+            dgList.RowTemplate.Height = 29;
             dgList.Size = new Size(1874, 821);
             dgList.TabIndex = 6;
             dgList.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
@@ -153,9 +154,9 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel7.BackColor = Color.Transparent;
             guna2HtmlLabel7.Dock = DockStyle.Right;
-            guna2HtmlLabel7.Location = new Point(882, 0);
+            guna2HtmlLabel7.Location = new Point(892, 0);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            guna2HtmlLabel7.Size = new Size(40, 22);
+            guna2HtmlLabel7.Size = new Size(34, 17);
             guna2HtmlLabel7.TabIndex = 14;
             guna2HtmlLabel7.Text = "From:";
             guna2HtmlLabel7.TextAlignment = ContentAlignment.MiddleRight;
@@ -168,7 +169,7 @@ namespace PresentationLayer.Views.UserControls
             txtStartDate.FillColor = Color.White;
             txtStartDate.Font = new Font("Segoe UI", 9F);
             txtStartDate.Format = DateTimePickerFormat.Long;
-            txtStartDate.Location = new Point(922, 0);
+            txtStartDate.Location = new Point(926, 0);
             txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtStartDate.Name = "txtStartDate";
@@ -181,9 +182,9 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Dock = DockStyle.Right;
-            guna2HtmlLabel6.Location = new Point(1172, 0);
+            guna2HtmlLabel6.Location = new Point(1176, 0);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            guna2HtmlLabel6.Size = new Size(23, 22);
+            guna2HtmlLabel6.Size = new Size(19, 17);
             guna2HtmlLabel6.TabIndex = 12;
             guna2HtmlLabel6.Text = "To:";
             guna2HtmlLabel6.TextAlignment = ContentAlignment.MiddleRight;

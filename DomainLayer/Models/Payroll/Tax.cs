@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class Tax
+    public class Tax : BaseEntity
     {
         [Key]
         [Display(Name ="Id")]

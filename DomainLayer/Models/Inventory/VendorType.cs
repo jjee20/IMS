@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Inventory
 {
-    public class VendorType
+    public class VendorType : BaseEntity
     {
         [Key]
         [Display(Name = "Id")]

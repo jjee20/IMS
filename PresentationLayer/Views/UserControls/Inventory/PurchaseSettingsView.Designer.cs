@@ -41,9 +41,10 @@
             // tbCashBank
             // 
             tbCashBank.Location = new Point(4, 44);
+            tbCashBank.Margin = new Padding(3, 2, 3, 2);
             tbCashBank.Name = "tbCashBank";
-            tbCashBank.Padding = new Padding(3);
-            tbCashBank.Size = new Size(1358, 720);
+            tbCashBank.Padding = new Padding(3, 2, 3, 2);
+            tbCashBank.Size = new Size(1660, 686);
             tbCashBank.TabIndex = 1;
             tbCashBank.Text = "Cash Bank";
             tbCashBank.UseVisualStyleBackColor = true;
@@ -51,9 +52,10 @@
             // tbBranch
             // 
             tbBranch.Location = new Point(4, 44);
+            tbBranch.Margin = new Padding(3, 2, 3, 2);
             tbBranch.Name = "tbBranch";
-            tbBranch.Padding = new Padding(3);
-            tbBranch.Size = new Size(1898, 931);
+            tbBranch.Padding = new Padding(3, 2, 3, 2);
+            tbBranch.Size = new Size(1660, 686);
             tbBranch.TabIndex = 0;
             tbBranch.Text = "Branch";
             tbBranch.UseVisualStyleBackColor = true;
@@ -69,9 +71,10 @@
             tcMain.Dock = DockStyle.Fill;
             tcMain.ItemSize = new Size(180, 40);
             tcMain.Location = new Point(0, 0);
+            tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1906, 979);
+            tcMain.Size = new Size(1668, 734);
             tcMain.TabButtonHoverState.BorderColor = Color.Empty;
             tcMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -95,8 +98,9 @@
             // tbPaymentType
             // 
             tbPaymentType.Location = new Point(4, 44);
+            tbPaymentType.Margin = new Padding(3, 2, 3, 2);
             tbPaymentType.Name = "tbPaymentType";
-            tbPaymentType.Size = new Size(1358, 720);
+            tbPaymentType.Size = new Size(1660, 686);
             tbPaymentType.TabIndex = 2;
             tbPaymentType.Text = "Payment Type";
             tbPaymentType.UseVisualStyleBackColor = true;
@@ -104,8 +108,9 @@
             // tbVendorType
             // 
             tbVendorType.Location = new Point(4, 44);
+            tbVendorType.Margin = new Padding(3, 2, 3, 2);
             tbVendorType.Name = "tbVendorType";
-            tbVendorType.Size = new Size(1358, 720);
+            tbVendorType.Size = new Size(1660, 686);
             tbVendorType.TabIndex = 3;
             tbVendorType.Text = "Vendor Type";
             tbVendorType.UseVisualStyleBackColor = true;
@@ -113,8 +118,9 @@
             // tbPurchaseType
             // 
             tbPurchaseType.Location = new Point(4, 44);
+            tbPurchaseType.Margin = new Padding(3, 2, 3, 2);
             tbPurchaseType.Name = "tbPurchaseType";
-            tbPurchaseType.Size = new Size(1358, 720);
+            tbPurchaseType.Size = new Size(1660, 686);
             tbPurchaseType.TabIndex = 4;
             tbPurchaseType.Text = "Purchase Type";
             tbPurchaseType.UseVisualStyleBackColor = true;
@@ -122,19 +128,20 @@
             // tbBillType
             // 
             tbBillType.Location = new Point(4, 44);
+            tbBillType.Margin = new Padding(3, 2, 3, 2);
             tbBillType.Name = "tbBillType";
-            tbBillType.Size = new Size(1358, 720);
+            tbBillType.Size = new Size(1660, 686);
             tbBillType.TabIndex = 5;
             tbBillType.Text = "Bill Type";
             tbBillType.UseVisualStyleBackColor = true;
             // 
             // PurchaseSettingsView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
             Controls.Add(tcMain);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "PurchaseSettingsView";
-            Size = new Size(1906, 979);
+            Size = new Size(1668, 734);
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

@@ -64,7 +64,7 @@ namespace PresentationLayer.Presenters.Account
                         ShowAdmin();
                     else if (user.Department == DomainLayer.Enums.Departments.Inventory)
                         ShowInventory();
-                    else if (user.Department == DomainLayer.Enums.Departments.Inventory)
+                    else if (user.Department == DomainLayer.Enums.Departments.Payroll)
                         ShowPayroll();
                 }
                 else

@@ -57,18 +57,12 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Contribution.Get(c => c.ContributionType == _view.ContributionType && c.MinimumLimit == _view.MinimumLimit && c.MaximumLimit == _view.MaximumLimit);
-            if (Entity != null)
-            {
-                _view.Message = "Contribution is already added.";
-                return;
-            }
 
             var model = new Contribution
             {
                 ContributionId = _view.ContributionId,
                 ContributionType = _view.ContributionType,
-                Rate = _view.Rate,
+                EmployeeRate = _view.Rate,
                 MinimumLimit = _view.MinimumLimit,
                 MaximumLimit = _view.MaximumLimit
             };
@@ -83,6 +77,13 @@ namespace PresentationLayer.Presenters.Payroll
                 }
                 else //Add new model
                 {
+                    var Entity = _unitOfWork.Contribution.Get(c => c.ContributionType == _view.ContributionType && c.MinimumLimit == _view.MinimumLimit && c.MaximumLimit == _view.MaximumLimit);
+                    if (Entity != null)
+                    {
+                        _view.Message = "Contribution is already added.";
+                        return;
+                    }
+
                     _unitOfWork.Contribution.Add(model);
                     _view.Message = "Contribution added successfully";
                 }
@@ -125,7 +126,7 @@ namespace PresentationLayer.Presenters.Payroll
             var entity = (Contribution)ContributionBindingSource.Current;
             _view.ContributionId = entity.ContributionId;
             _view.ContributionType = entity.ContributionType;
-            _view.Rate = entity.Rate;
+            _view.Rate = entity.EmployeeRate;
             _view.MinimumLimit = entity.MinimumLimit;
             _view.MaximumLimit = entity.MaximumLimit;
         }

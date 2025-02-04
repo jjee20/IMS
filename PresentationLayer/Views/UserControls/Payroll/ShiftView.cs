@@ -127,6 +127,16 @@ namespace PresentationLayer.Views.UserControls
             get { return txtEndTime.Value.TimeOfDay; }
             set { txtEndTime.Text = value.ToString(); }
         }
+        public double OvertimeRate
+        {
+            get { return Convert.ToDouble(txtOvertimeRate.Text); }
+            set { txtOvertimeRate.Text = value.ToString(); }
+        }
+        public double RegularHours
+        {
+            get { return Convert.ToDouble(txtRegularHours.Text); }
+            set { txtRegularHours.Text = value.ToString(); }
+        }
         public bool IsEdit
         {
             get { return isEdit; }
@@ -138,7 +148,6 @@ namespace PresentationLayer.Views.UserControls
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
-
         public string Message
         {
             get { return message; }
@@ -166,15 +175,34 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler RefreshEvent;
 
         private static ShiftView? instance;
-        public static ShiftView GetInstance(TabPage parentContainer)
+        private static ShiftView? dialogInstance;
+
+        public static ShiftView GetInstance(TabPage? parentContainer = null)
         {
             if (instance == null || instance.IsDisposed)
             {
                 instance = new ShiftView();
+            }
+
+            if (parentContainer != null && !parentContainer.Controls.Contains(instance))
+            {
                 parentContainer.Controls.Add(instance);
                 instance.Dock = DockStyle.Fill;
             }
             return instance;
         }
+
+        public static ShiftView GetInstanceAsDialog(Form form)
+        {
+            if (dialogInstance == null || dialogInstance.IsDisposed)
+            {
+                dialogInstance = new ShiftView();
+            }
+            form.Controls.Add(dialogInstance);
+
+
+            return dialogInstance;
+        }
+
     }
 }

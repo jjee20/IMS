@@ -8,5 +8,8 @@
         string Password { get; set; }
 
         event EventHandler LoginEvent;
+
+        void Show();
+        void Hide();
     }
 }

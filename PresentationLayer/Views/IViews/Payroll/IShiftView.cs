@@ -8,11 +8,12 @@ namespace PresentationLayer.Views.IViews.Payroll
         string ShiftName { get; set; }
         TimeSpan StartTime { get; set; }
         TimeSpan EndTime { get; set; }
+        double OvertimeRate { get; set; }
+        double RegularHours { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }
         string Message { get; set; }
         string SearchValue { get; set; }
-
         event EventHandler AddNewEvent;
         event EventHandler DeleteEvent;
         event EventHandler EditEvent;

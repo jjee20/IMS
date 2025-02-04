@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace InfastructureLayer.Migrations
 {
     /// <inheritdoc />
@@ -30,6 +32,7 @@ namespace InfastructureLayer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Department = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -88,11 +91,7 @@ namespace InfastructureLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BranchName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Barangay = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -114,6 +113,22 @@ namespace InfastructureLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CashBank", x => x.CashBankId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contributions",
+                columns: table => new
+                {
+                    ContributionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ContributionType = table.Column<int>(type: "int", nullable: false),
+                    Rate = table.Column<double>(type: "float", nullable: false),
+                    MinimumLimit = table.Column<double>(type: "float", nullable: false),
+                    MaximumLimit = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contributions", x => x.ContributionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,7 +180,6 @@ namespace InfastructureLayer.Migrations
                     JobPositionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -218,6 +232,20 @@ namespace InfastructureLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.ProjectId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PurchaseType",
                 columns: table => new
                 {
@@ -253,7 +281,9 @@ namespace InfastructureLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ShiftName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    EndTime = table.Column<TimeSpan>(type: "time", nullable: false)
+                    EndTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    OvertimeRate = table.Column<double>(type: "float", nullable: false),
+                    RegularHours = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -280,9 +310,9 @@ namespace InfastructureLayer.Migrations
                 {
                     TaxId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MinimumSalary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MaximumSalary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    MinimumSalary = table.Column<double>(type: "float", nullable: false),
+                    MaximumSalary = table.Column<double>(type: "float", nullable: false),
+                    TaxRate = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -474,11 +504,7 @@ namespace InfastructureLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerTypeId = table.Column<int>(type: "int", nullable: false),
-                    Barangay = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -503,12 +529,15 @@ namespace InfastructureLayer.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BasicSalary = table.Column<double>(type: "float", nullable: false),
+                    LeaveCredits = table.Column<double>(type: "float", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DepartmentId = table.Column<int>(type: "int", nullable: false),
                     JobPositionId = table.Column<int>(type: "int", nullable: false),
+                    ShiftId = table.Column<int>(type: "int", nullable: false),
                     isDeducted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -526,6 +555,12 @@ namespace InfastructureLayer.Migrations
                         principalTable: "JobPositions",
                         principalColumn: "JobPositionId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Employees_Shifts_ShiftId",
+                        column: x => x.ShiftId,
+                        principalTable: "Shifts",
+                        principalColumn: "ShiftId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -538,7 +573,10 @@ namespace InfastructureLayer.Migrations
                     ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Barcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductTypeId = table.Column<int>(type: "int", nullable: false),
                     ProductImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StockQuantity = table.Column<int>(type: "int", nullable: false),
+                    ReorderLevel = table.Column<int>(type: "int", nullable: false),
                     UnitOfMeasureId = table.Column<int>(type: "int", nullable: false),
                     DefaultBuyingPrice = table.Column<double>(type: "float", nullable: false),
                     DefaultSellingPrice = table.Column<double>(type: "float", nullable: false),
@@ -552,6 +590,12 @@ namespace InfastructureLayer.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branch",
                         principalColumn: "BranchId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Product_ProductType_ProductTypeId",
+                        column: x => x.ProductTypeId,
+                        principalTable: "ProductType",
+                        principalColumn: "ProductTypeId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Product_UnitOfMeasure_UnitOfMeasureId",
@@ -569,11 +613,7 @@ namespace InfastructureLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     VendorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VendorTypeId = table.Column<int>(type: "int", nullable: false),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Barangay = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -634,6 +674,30 @@ namespace InfastructureLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Allowances",
+                columns: table => new
+                {
+                    AllowanceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    AllowanceType = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateGranted = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsRecurring = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Allowances", x => x.AllowanceId);
+                    table.ForeignKey(
+                        name: "FK_Allowances_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Attendances",
                 columns: table => new
                 {
@@ -644,8 +708,7 @@ namespace InfastructureLayer.Migrations
                     TimeOut = table.Column<TimeSpan>(type: "time", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsPresent = table.Column<bool>(type: "bit", nullable: false),
-                    HoursWorked = table.Column<double>(type: "float", nullable: false),
-                    ShiftId = table.Column<int>(type: "int", nullable: false)
+                    HoursWorked = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -656,11 +719,51 @@ namespace InfastructureLayer.Migrations
                         principalTable: "Employees",
                         principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Benefits",
+                columns: table => new
+                {
+                    BenefitId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BenefitType = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<double>(type: "float", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    Other = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Benefits", x => x.BenefitId);
                     table.ForeignKey(
-                        name: "FK_Attendances_Shifts_ShiftId",
-                        column: x => x.ShiftId,
-                        principalTable: "Shifts",
-                        principalColumn: "ShiftId",
+                        name: "FK_Benefits_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bonuses",
+                columns: table => new
+                {
+                    BonusId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    BonusType = table.Column<int>(type: "int", maxLength: 100, nullable: false),
+                    Amount = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateGranted = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsOneTime = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bonuses", x => x.BonusId);
+                    table.ForeignKey(
+                        name: "FK_Bonuses_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -670,8 +773,9 @@ namespace InfastructureLayer.Migrations
                 {
                     DeductionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeductionType = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -696,7 +800,8 @@ namespace InfastructureLayer.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LeaveType = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Other = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -707,39 +812,6 @@ namespace InfastructureLayer.Migrations
                         principalTable: "Employees",
                         principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Payrolls",
-                columns: table => new
-                {
-                    PayrollId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    PayDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BasicSalary = table.Column<double>(type: "float", nullable: false),
-                    OvertimeHours = table.Column<double>(type: "float", nullable: false),
-                    OvertimePay = table.Column<double>(type: "float", nullable: false),
-                    Allowances = table.Column<double>(type: "float", nullable: false),
-                    Bonuses = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Deductions = table.Column<double>(type: "float", nullable: false),
-                    NetPay = table.Column<double>(type: "float", nullable: false),
-                    TaxId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payrolls", x => x.PayrollId);
-                    table.ForeignKey(
-                        name: "FK_Payrolls_Employees_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employees",
-                        principalColumn: "EmployeeId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Payrolls_Taxes_TaxId",
-                        column: x => x.TaxId,
-                        principalTable: "Taxes",
-                        principalColumn: "TaxId");
                 });
 
             migrationBuilder.CreateTable(
@@ -815,7 +887,8 @@ namespace InfastructureLayer.Migrations
                     SalesOrderLineId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SalesOrderId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: true),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
@@ -830,14 +903,13 @@ namespace InfastructureLayer.Migrations
                         name: "FK_SalesOrderLine_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ProductId");
                     table.ForeignKey(
                         name: "FK_SalesOrderLine_SalesOrder_SalesOrderId",
                         column: x => x.SalesOrderId,
                         principalTable: "SalesOrder",
                         principalColumn: "SalesOrderId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -874,28 +946,6 @@ namespace InfastructureLayer.Migrations
                         principalTable: "Warehouse",
                         principalColumn: "WarehouseId",
                         onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Benefits",
-                columns: table => new
-                {
-                    BenefitId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PayrollId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Benefits", x => x.BenefitId);
-                    table.ForeignKey(
-                        name: "FK_Benefits_Payrolls_PayrollId",
-                        column: x => x.PayrollId,
-                        principalTable: "Payrolls",
-                        principalColumn: "PayrollId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -936,10 +986,14 @@ namespace InfastructureLayer.Migrations
                     PurchaseOrderLineId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PurchaseOrderId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: true),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    DiscountPercentage = table.Column<double>(type: "float", nullable: false)
+                    Amount = table.Column<double>(type: "float", nullable: false),
+                    DiscountPercentage = table.Column<double>(type: "float", nullable: false),
+                    DiscountAmount = table.Column<double>(type: "float", nullable: false),
+                    SubTotal = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -948,14 +1002,13 @@ namespace InfastructureLayer.Migrations
                         name: "FK_PurchaseOrderLine_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ProductId");
                     table.ForeignKey(
                         name: "FK_PurchaseOrderLine_PurchaseOrder_PurchaseOrderId",
                         column: x => x.PurchaseOrderId,
                         principalTable: "PurchaseOrder",
                         principalColumn: "PurchaseOrderId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1085,6 +1138,41 @@ namespace InfastructureLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "5fe4ce37-22cf-43a8-9e85-0df1e051080f", null, "Payroll", "PAYROLL" },
+                    { "99fb0840-cf89-404d-bcf3-b44f1188507c", null, "Inventory", "INVENTORY" },
+                    { "c1daeb80-32b2-40b7-b8fe-0b1df8e3d0cc", null, "SuperAdmin", "SUPERADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Department", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "28e68682-b7c0-4f84-a655-ea4d714ff829", 0, "911c4b87-2040-40bd-b4d8-e2a343fb95f1", 0, "super@admin.com", true, false, null, "SUPER@ADMIN.COM", "SUPERADMIN", "AQAAAAIAAYagAAAAEPG/+H6EyczPdKiA50yKxkb6uxcQfxrl4YiM4DT8o5QjFwwyWDllFPj1byPHKItjYg==", null, false, "", false, "superadmin" },
+                    { "3332d0ec-8781-4d9f-9084-3ce26e97cdd1", 0, "a145796c-3db8-477e-b14e-da76a5a2f9bb", 1, "inventory@user.com", true, false, null, "INVENTORY@USER.COM", "inventory", "AQAAAAIAAYagAAAAEHwLmQxYMXrtppn4Rn4dRGry9Urk7qCa20xDQY2jcCJcwQzWGyYDYCi4E7V+pP8oPg==", null, false, "", false, "inventory" },
+                    { "3638b3fa-d6ee-4c32-a4a6-bd098e4ce671", 0, "32bbcb21-df9f-4d16-a683-d2663896a22d", 2, "payroll@user.com", true, false, null, "PAYROLL@USER.COM", "payroll", "AQAAAAIAAYagAAAAELaNJ+EQKNn0ye8LnkIbhMYGX88VyOD+ZzjBmracjrRYsraBc5WBBy8Ox+0/s/JeGA==", null, false, "", false, "payroll" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "c1daeb80-32b2-40b7-b8fe-0b1df8e3d0cc", "28e68682-b7c0-4f84-a655-ea4d714ff829" },
+                    { "99fb0840-cf89-404d-bcf3-b44f1188507c", "3332d0ec-8781-4d9f-9084-3ce26e97cdd1" },
+                    { "5fe4ce37-22cf-43a8-9e85-0df1e051080f", "3638b3fa-d6ee-4c32-a4a6-bd098e4ce671" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Allowances_EmployeeId",
+                table: "Allowances",
+                column: "EmployeeId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -1130,14 +1218,9 @@ namespace InfastructureLayer.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attendances_ShiftId",
-                table: "Attendances",
-                column: "ShiftId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Benefits_PayrollId",
+                name: "IX_Benefits_EmployeeId",
                 table: "Benefits",
-                column: "PayrollId");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bill_BillTypeId",
@@ -1148,6 +1231,11 @@ namespace InfastructureLayer.Migrations
                 name: "IX_Bill_GoodsReceivedNoteId",
                 table: "Bill",
                 column: "GoodsReceivedNoteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bonuses_EmployeeId",
+                table: "Bonuses",
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_CustomerTypeId",
@@ -1168,6 +1256,11 @@ namespace InfastructureLayer.Migrations
                 name: "IX_Employees_JobPositionId",
                 table: "Employees",
                 column: "JobPositionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_ShiftId",
+                table: "Employees",
+                column: "ShiftId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GoodsReceivedNote_PurchaseOrderId",
@@ -1220,16 +1313,6 @@ namespace InfastructureLayer.Migrations
                 column: "PaymentTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payrolls_EmployeeId",
-                table: "Payrolls",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Payrolls_TaxId",
-                table: "Payrolls",
-                column: "TaxId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PerformanceReviews_EmployeeId",
                 table: "PerformanceReviews",
                 column: "EmployeeId");
@@ -1238,6 +1321,11 @@ namespace InfastructureLayer.Migrations
                 name: "IX_Product_BranchId",
                 table: "Product",
                 column: "BranchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_ProductTypeId",
+                table: "Product",
+                column: "ProductTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_UnitOfMeasureId",
@@ -1312,7 +1400,8 @@ namespace InfastructureLayer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfile_ApplicationUserId",
                 table: "UserProfile",
-                column: "ApplicationUserId");
+                column: "ApplicationUserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vendor_VendorTypeId",
@@ -1328,6 +1417,9 @@ namespace InfastructureLayer.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Allowances");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -1353,6 +1445,12 @@ namespace InfastructureLayer.Migrations
                 name: "Benefits");
 
             migrationBuilder.DropTable(
+                name: "Bonuses");
+
+            migrationBuilder.DropTable(
+                name: "Contributions");
+
+            migrationBuilder.DropTable(
                 name: "Deductions");
 
             migrationBuilder.DropTable(
@@ -1371,7 +1469,7 @@ namespace InfastructureLayer.Migrations
                 name: "PerformanceReviews");
 
             migrationBuilder.DropTable(
-                name: "ProductType");
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "PurchaseOrderLine");
@@ -1380,16 +1478,13 @@ namespace InfastructureLayer.Migrations
                 name: "SalesOrderLine");
 
             migrationBuilder.DropTable(
+                name: "Taxes");
+
+            migrationBuilder.DropTable(
                 name: "UserProfile");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Shifts");
-
-            migrationBuilder.DropTable(
-                name: "Payrolls");
 
             migrationBuilder.DropTable(
                 name: "Invoice");
@@ -1404,16 +1499,13 @@ namespace InfastructureLayer.Migrations
                 name: "PaymentType");
 
             migrationBuilder.DropTable(
+                name: "Employees");
+
+            migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Employees");
-
-            migrationBuilder.DropTable(
-                name: "Taxes");
 
             migrationBuilder.DropTable(
                 name: "InvoiceType");
@@ -1428,13 +1520,19 @@ namespace InfastructureLayer.Migrations
                 name: "GoodsReceivedNote");
 
             migrationBuilder.DropTable(
-                name: "UnitOfMeasure");
-
-            migrationBuilder.DropTable(
                 name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "JobPositions");
+
+            migrationBuilder.DropTable(
+                name: "Shifts");
+
+            migrationBuilder.DropTable(
+                name: "ProductType");
+
+            migrationBuilder.DropTable(
+                name: "UnitOfMeasure");
 
             migrationBuilder.DropTable(
                 name: "SalesOrder");

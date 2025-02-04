@@ -6,6 +6,8 @@ namespace PresentationLayer.Views.IViews.Payroll
     {
         int AttendanceId { get; set; }
         int EmployeeId { get; set; }
+        string EmployeeName { get; set; }
+        int ProjectId { get; set; }
         TimeSpan TimeIn { get; set; }
         TimeSpan TimeOut { get; set; }
         DateTime Date { get; set; }
@@ -17,6 +19,7 @@ namespace PresentationLayer.Views.IViews.Payroll
         string SearchValue { get; set; }
         DateTime StartDate { get; set; }
         DateTime EndDate { get; set; }
+        OpenFileDialog OpenFileDialog { get; }
 
         event EventHandler AddNewEvent;
         event EventHandler DeleteEvent;
@@ -24,9 +27,12 @@ namespace PresentationLayer.Views.IViews.Payroll
         event EventHandler PrintEvent;
         event EventHandler SaveEvent;
         event EventHandler SearchEvent;
-        event EventHandler RefreshEvent;
-
+        event EventHandler RefreshEvent; 
+        event EventHandler ImportEvent;
+        event DataGridViewCellEventHandler ShowAttendanceEvent;
         void SetAttendanceListBindingSource(BindingSource AttendanceList);
+        void SetIndividualAttendanceListBindingSource(BindingSource IndividualAttendanceList);
         void SetEmployeeListBindingSource(BindingSource EmployeeList);
+        void SetProjectListBindingSource(BindingSource ProjectList);
     }
 }

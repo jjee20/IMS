@@ -161,12 +161,17 @@ namespace PresentationLayer.Views.UserControls
         private static DepartmentView? instance;
         public static DepartmentView GetInstance(TabPage parentContainer)
         {
-            if (instance == null || instance.IsDisposed)
-            {
-                instance = new DepartmentView();
-                parentContainer.Controls.Add(instance);
-                instance.Dock = DockStyle.Fill;
-            }
+            instance = new DepartmentView();
+            parentContainer.Controls.Add(instance);
+            instance.Dock = DockStyle.Fill;
+            return instance;
+        }
+
+        public static DepartmentView GetInstanceAsDialog(Form parentForm)
+        {
+            instance = new DepartmentView();
+            parentForm.Controls.Add(instance);
+            instance.Dock = DockStyle.Fill;
             return instance;
         }
     }
