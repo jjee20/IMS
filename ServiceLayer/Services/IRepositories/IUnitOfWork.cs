@@ -7,7 +7,6 @@
         IBillTypeRepository BillType { get; }
         IBranchRepository Branch { get; }
         ICashBankRepository CashBank { get; }
-        ICurrencyRepository Currency { get; }
         ICustomerRepository Customer { get; }
         ICustomerTypeRepository CustomerType { get; }
         IGoodsReceivedNoteRepository GoodsReceivedNote { get; }
@@ -32,6 +31,21 @@
         IVendorTypeRepository VendorType { get; }
         IWarehouseRepository Warehouse { get; }
         IUserProfileRepository UserProfile { get; }
+        IDepartmentRepository Department { get; }
+        IAttendanceRepository Attendance { get; }
+        IAuditLogRepository AuditLog { get; }
+        IBenefitRepository Benefit { get; }
+        IContributionRepository Contribution { get; }
+        IDeductionRepository Deduction { get; }
+        IEmployeeRepository Employee { get; }
+        IJobPositionRepository JobPosition { get; }
+        ILeaveRepository Leave { get; }
+        IPerformanceReviewRepository PerformanceReview { get; }
+        IShiftRepository Shift { get; }
+        ITaxRepository Tax { get; }
+        IProjectRepository Project { get; }
+        IAllowanceRepository Allowance { get; }
+        IBonusRepository Bonus { get; }
         void Save();
     }
 }

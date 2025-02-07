@@ -14,38 +14,38 @@ namespace ServiceLayer.Services.CommonServices
         public string GetNumberSequence(string module)
         {
             string result = "";
-            try
-            {
-                int counter = 0;
+            //try
+            //{
+            //    int counter = 0;
 
-                var numberSequence = _context.NumberSequence.Get(x => x.Module.Equals(module));
-                Interlocked.Increment(ref counter);
+            //    var numberSequence = _context.NumberSequence.Get(x => x.Module.Equals(module));
+            //    Interlocked.Increment(ref counter);
 
-                if (numberSequence == null)
-                {
-                    numberSequence.Module = module;
-                    numberSequence.LastNumber = counter;
-                    numberSequence.NumberSequenceName = module;
-                    numberSequence.Prefix = module;
+            //    if (numberSequence == null)
+            //    {
+            //        numberSequence.Module = module;
+            //        numberSequence.LastNumber = counter;
+            //        numberSequence.NumberSequenceName = module;
+            //        numberSequence.Prefix = module;
                     
-                    _context.NumberSequence.Add(numberSequence);
-                    _context.Save();
-                }
-                else
-                {
-                    counter = numberSequence.LastNumber;
-                    numberSequence.LastNumber = counter;
+            //        _context.NumberSequence.Add(numberSequence);
+            //        _context.Save();
+            //    }
+            //    else
+            //    {
+            //        counter = numberSequence.LastNumber;
+            //        numberSequence.LastNumber = counter;
 
-                    _context.NumberSequence.Update(numberSequence);
-                    _context.Save();
-                }
+            //        _context.NumberSequence.Update(numberSequence);
+            //        _context.Save();
+            //    }
 
-                result = counter.ToString().PadLeft(5, '0') + "#" + numberSequence.Prefix;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            //    result = counter.ToString().PadLeft(5, '0') + "#" + numberSequence.Prefix;
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
             return result;
         }
 

@@ -1,0 +1,6 @@
+@DatabaseLayer_HostAddress = http://localhost:5244
+
+GET {{DatabaseLayer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

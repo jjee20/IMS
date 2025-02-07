@@ -11,6 +11,8 @@ namespace DomainLayer.Enums
         Admin,
         Supplier,
         SalesPerson,
-        Customer
+        Customer,
+        Inventory,
+        Payroll
     }
 }

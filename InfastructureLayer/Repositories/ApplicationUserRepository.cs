@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.Accounts;
 using InfastructureLayer.DataAccess.Data;
 using ServiceLayer.Services.IRepositories;
 
@@ -15,7 +15,7 @@ namespace InfastructureLayer.Repositories
 
         public void Update(ApplicationUser obj)
         {
-            _db.ApplicationUsers.Update(obj);
+            _db.ApplicationUser.Update(obj);
         }
     }
 }
