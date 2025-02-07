@@ -22,11 +22,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseLayer", "DatabaseLa
 		{33C8DC59-6F89-4198-A7F3-FA1C20BB0DD7} = {33C8DC59-6F89-4198-A7F3-FA1C20BB0DD7}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "published", "published", "{42073114-EADD-4D86-A0CA-35A7D9E2D374}"
-	ProjectSection(SolutionItems) = preProject
-		PresentationLayer\published\.gitattributes = PresentationLayer\published\.gitattributes
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
