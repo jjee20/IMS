@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models.Payroll;
+﻿using DomainLayer.Models.Accounts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Inventory
 {
-    public class SalesType : BaseEntity
+    public class SalesType 
     {
         [Key]
         [Display(Name = "Id")]

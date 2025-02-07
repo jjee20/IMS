@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DomainLayer.Models.Accounts;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class Attendance : BaseEntity
+    public class Attendance 
     {
         [Key]
         public int AttendanceId { get; set; } // Primary Key

@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DomainLayer.Models.Accounts;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class AuditLog : BaseEntity
+    public class AuditLog 
     {
         [Key]
         public int AuditLogId { get; set; } // Primary Key

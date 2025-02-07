@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLayer.Models.Accounts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Inventory
 {
-    public class UnitOfMeasure : BaseEntity
+    public class UnitOfMeasure 
     {
         [Key]
         [Display(Name = "Id")]

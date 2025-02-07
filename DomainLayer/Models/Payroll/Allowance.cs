@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Enums;
+using DomainLayer.Models.Accounts;
 
 namespace DomainLayer.Models.Payroll
 {
-    public class Allowance : BaseEntity
+    public class Allowance 
     {
         [Key]
         public int AllowanceId { get; set; } // Primary Key

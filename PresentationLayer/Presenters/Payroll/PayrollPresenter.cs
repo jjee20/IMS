@@ -285,20 +285,20 @@ namespace PresentationLayer.Presenters.Payroll
                 payrollList.Add(new PayrollViewModel
                 {
                     Employee = $"{employee.LastName}, {employee.FirstName}",
-                    BasicSalary = regularPay,
-                    OvertimePay = overtimePay,
-                    Allowances = allowancePay,
-                    Benefits = _view.IncludeBenefits ? benefitPay : 0,
-                    Bonuses = bonusPay,
-                    Deductions = deductions,
-                    Absent = absentDeductions,
-                    LateAndEarly = lateDeductions + earlyOutDeductions,
-                    SSSContribution = sssDeduction,
-                    PagibigContribution = pagIbigDeduction,
-                    PhilHealthContribution = philHealthDeduction,
-                    TotalDeduction = totalDeductions,
-                    GrossPay = grossPay,
-                    NetPay = netPay
+                    BasicSalary = Math.Round(regularPay,2),
+                    OvertimePay = Math.Round(overtimePay, 2),
+                    Allowances = Math.Round(allowancePay, 2),
+                    Benefits = _view.IncludeBenefits ? Math.Round(benefitPay, 2) : 0,
+                    Bonuses = Math.Round(bonusPay, 2),
+                    Deductions = Math.Round(deductions, 2),
+                    Absent = Math.Round(absentDeductions, 2),
+                    LateAndEarly = Math.Round(lateDeductions + earlyOutDeductions, 2),
+                    SSSContribution = Math.Round(sssDeduction, 2),
+                    PagibigContribution = Math.Round(pagIbigDeduction, 2),
+                    PhilHealthContribution = Math.Round(philHealthDeduction, 2),
+                    TotalDeduction = Math.Round(totalDeductions, 2),
+                    GrossPay = Math.Round(grossPay, 2),
+                    NetPay = Math.Round(netPay, 2)
                 });
             }
 

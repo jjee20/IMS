@@ -16,26 +16,26 @@ namespace InfastructureLayer.DataAccess.Data
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //string environment = ConfigurationManager.AppSettings["Environment"];
+            string environment = ConfigurationManager.AppSettings["Environment"];
 
-            //// Fetch the corresponding connection string
-            //string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
+            // Fetch the corresponding connection string
+            string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
 
-            //if (string.IsNullOrEmpty(connectionString))
-            //{
-            //    throw new Exception($"Connection string for environment '{environment}' not found.");
-            //}
-            //var connection = new SqlConnection(connectionString);
-            //optionsBuilder.UseSqlServer(connection);
-            optionsBuilder.UseSqlServer("");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new Exception($"Connection string for environment '{environment}' not found.");
+            }
+            var connection = new SqlConnection(connectionString);
+            optionsBuilder.UseSqlServer(connection);
+            //optionsBuilder.UseSqlServer("Data Source=JAYCEE\\SQLEXPRESS;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            AppDbSeed.SeedRole(builder);
-            AppDbSeed.SeedUserRoles(builder);
-            AppDbSeed.SeedUsers(builder);
+            //AppDbSeed.SeedRole(builder);
+            //AppDbSeed.SeedUserRoles(builder);
+            //AppDbSeed.SeedUsers(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);

@@ -1,9 +1,10 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Payroll;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Employee : BaseEntity
+public class Employee 
 {
     [Key]
     public int EmployeeId { get; set; } // Primary Key

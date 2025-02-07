@@ -1,7 +1,7 @@
-﻿using DomainLayer.Models.Payroll;
+﻿using DomainLayer.Models.Accounts;
 using System.ComponentModel.DataAnnotations;
 
-public class Department : BaseEntity
+public class Department 
 {
     [Key]
     [Display(Name= "Id")]
