@@ -325,7 +325,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="published\" />
     <Folder Include="Views\UserControls\Admin\" />
   </ItemGroup>
 
