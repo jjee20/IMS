@@ -11,6 +11,10 @@ namespace DomainLayer.ViewModels.PayrollViewModels
     public class PayrollViewModel
     {
         public string Employee { get; set; }
+        [Display(Name = "Daily Rate")]
+        public double DailyRate { get; set; }
+        [Display(Name = "Days Worked")]
+        public double DaysWorked { get; set; }
         [Display(Name = "Basic Salary")]
         public double BasicSalary { get; set; }
         [Display(Name = "Overtime Pay")]

@@ -45,6 +45,8 @@ namespace PresentationLayer.Presenters.Payroll
             //Events
             _view.AddNewEvent += AddNew;
             _view.SaveEvent += Save;
+            _view.EditEvent += Edit;
+            _view.DeleteEvent += Delete;
             _view.SearchEvent += Search;
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
@@ -70,6 +72,45 @@ namespace PresentationLayer.Presenters.Payroll
             _view.SetIndividualAttendanceListBindingSource(IndividualAttendanceBindingSource);
             _view.SetEmployeeListBindingSource(EmployeeBindingSource);
             _view.SetProjectListBindingSource(ProjectBindingSource);
+        }
+
+        private void Delete(object? sender, EventArgs e)
+        {
+            var attendanceVM = (IndividualAttendanceViewModel)IndividualAttendanceBindingSource.Current;
+
+            if (attendanceVM == null)
+            {
+                _view.Message = "Please select individual attendance. Double click the name you want to check the attendance details";
+                return;
+            }
+
+            var attendance = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee");
+
+            _unitOfWork.Attendance.Remove(attendance);
+            _unitOfWork.Save();
+
+            _view.Message = "Attendance deleted successfully";
+        }
+
+        private void Edit(object? sender, EventArgs e)
+        {
+            var attendanceVM = (IndividualAttendanceViewModel)IndividualAttendanceBindingSource.Current;
+
+            if (attendanceVM == null)
+            {
+                _view.Message = "Please select individual attendance. Double click the name you want to check the attendance details";
+                return;
+            }
+
+            var attendance = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties:"Employee");
+            _view.AttendanceId = attendance.AttendanceId;
+            _view.EmployeeId = attendance.EmployeeId;
+            _view.TimeIn = attendance.TimeIn;
+            _view.TimeOut = attendance.TimeOut;
+            _view.Date = attendance.Date;
+            _view.IsPresent = attendance.IsPresent;
+            _view.HoursWorked = attendance.HoursWorked;
+            _view.ProjectId = attendance.ProjectId;
         }
 
         private void Import(object? sender, EventArgs e)
@@ -147,23 +188,9 @@ namespace PresentationLayer.Presenters.Payroll
             }
 
             _view.EmployeeName = attendanceVM.Employee;
+            _view.EmployeeIdFromTextBox = attendanceVM.EmployeeId;
             LoadAllIndividualAttendanceList(attendanceVM.EmployeeId);
-
-            //var showIndividualAttendance = new IndividualAttendance();
-
-            //// Use the new constructor
-            //var presenter = new IndividualAttendancePresenter(showIndividualAttendance, _unitOfWork,
-            //    attendanceVM.EmployeeId, _view.StartDate, _view.EndDate);
-
-            //showIndividualAttendance.Name = attendanceVM.Employee;
-            //showIndividualAttendance.EmployeeId = attendanceVM.EmployeeId;
-            //showIndividualAttendance.StartDate = _view.StartDate;
-            //showIndividualAttendance.EndDate = _view.EndDate;
-
-            //showIndividualAttendance.ShowDialog();
         }
-
-
 
         private void AddNew(object? sender, EventArgs e)
         {
@@ -172,18 +199,18 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
+            var model = _unitOfWork.Attendance.Get(c => c.AttendanceId == c.AttendanceId);
 
-            var model = new Attendance
-            {
-                AttendanceId = _view.AttendanceId,
-                EmployeeId = _view.EmployeeId,
-                ProjectId = _view.ProjectId,
-                TimeIn = _view.TimeIn,
-                TimeOut = _view.TimeOut,
-                Date = _view.Date,
-                IsPresent = _view.IsPresent,
-                HoursWorked = _view.HoursWorked
-            };
+            if (model == null) model = new Attendance();
+
+            model.AttendanceId = _view.AttendanceId;
+            model.EmployeeId = _view.EmployeeId;
+            model.ProjectId = _view.ProjectId;
+            model.TimeIn = _view.TimeIn;
+            model.TimeOut = _view.TimeOut;
+            model.Date = _view.Date;
+            model.IsPresent = _view.IsPresent;
+            model.HoursWorked = _view.HoursWorked;
 
             try
             {
@@ -271,11 +298,11 @@ namespace PresentationLayer.Presenters.Payroll
             foreach (var employee in employees)
             {
                 var attendances = employee.Attendances
-                    .Where(a => a.Date.Date >= startDate && a.Date.Date <= endDate)
+                    .Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date)
                     .ToList();
 
                 var approvedLeaves = employee.Leaves
-                    .Where(l => l.StartDate.Date <= startDate && l.EndDate.Date >= endDate && l.Status == Status.Approved)
+                    .Where(l => l.StartDate.Date <= startDate.Date && l.EndDate.Date >= endDate.Date && l.Status == Status.Approved)
                     .ToList();
 
                 int daysPresent = attendances.Count(a => a.IsPresent);

@@ -75,6 +75,8 @@ namespace PresentationLayer.Presenters.Payroll
                 {
                     new ReportParameter("PayrollPeriod", $"Payslip Period: {_view.StartDate.ToShortDateString()} to {_view.EndDate.ToShortDateString()}"),
                     new ReportParameter("Employee", payslip.Employee),
+                    new ReportParameter("DailyRate", payslip.DailyRate.ToString()),
+                    new ReportParameter("NoOfDaysWorked", payslip.DaysWorked.ToString()),
                     new ReportParameter("BasicSalary", payslip.BasicSalary.ToString()),
                     new ReportParameter("OvertimePay", payslip.OvertimePay.ToString()),
                     new ReportParameter("Allowances", payslip.Allowances.ToString()),
@@ -142,6 +144,7 @@ namespace PresentationLayer.Presenters.Payroll
                 var parameters = new List<ReportParameter>
                 {
                     new ReportParameter("PayrollPeriod", $"Payroll Period: {_view.StartDate.ToShortDateString()} to {_view.EndDate.ToShortDateString()}"),
+                    new ReportParameter("Total", PayrollList.Sum(c => c.NetPay).ToString()),
                 };
                 //localReport.SetParameters(parameters);
                 var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
@@ -285,6 +288,8 @@ namespace PresentationLayer.Presenters.Payroll
                 payrollList.Add(new PayrollViewModel
                 {
                     Employee = $"{employee.LastName}, {employee.FirstName}",
+                    DailyRate = employee.BasicSalary,
+                    DaysWorked = totalPresentDays,
                     BasicSalary = Math.Round(regularPay,2),
                     OvertimePay = Math.Round(overtimePay, 2),
                     Allowances = Math.Round(allowancePay, 2),

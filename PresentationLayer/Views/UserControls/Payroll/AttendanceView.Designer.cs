@@ -95,6 +95,8 @@ namespace PresentationLayer.Views.UserControls
             tabPage3 = new TabPage();
             dgListInvidivual = new Guna2DataGridView();
             guna2Panel1 = new Guna2Panel();
+            guna2HtmlLabel11 = new Guna2HtmlLabel();
+            txtEmployeeId = new Guna2HtmlLabel();
             txtName = new Guna2HtmlLabel();
             guna2HtmlLabel9 = new Guna2HtmlLabel();
             panel2 = new Panel();
@@ -578,6 +580,8 @@ namespace PresentationLayer.Views.UserControls
             // 
             // guna2Panel1
             // 
+            guna2Panel1.Controls.Add(guna2HtmlLabel11);
+            guna2Panel1.Controls.Add(txtEmployeeId);
             guna2Panel1.Controls.Add(txtName);
             guna2Panel1.Controls.Add(guna2HtmlLabel9);
             guna2Panel1.CustomizableEdges = customizableEdges13;
@@ -587,6 +591,28 @@ namespace PresentationLayer.Views.UserControls
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2Panel1.Size = new Size(1866, 40);
             guna2Panel1.TabIndex = 2;
+            // 
+            // guna2HtmlLabel11
+            // 
+            guna2HtmlLabel11.BackColor = Color.Transparent;
+            guna2HtmlLabel11.Dock = DockStyle.Right;
+            guna2HtmlLabel11.Font = new Font("Segoe UI", 16F);
+            guna2HtmlLabel11.Location = new Point(1820, 0);
+            guna2HtmlLabel11.Name = "guna2HtmlLabel11";
+            guna2HtmlLabel11.Size = new Size(26, 32);
+            guna2HtmlLabel11.TabIndex = 2;
+            guna2HtmlLabel11.Text = "Id:";
+            // 
+            // txtEmployeeId
+            // 
+            txtEmployeeId.BackColor = Color.Transparent;
+            txtEmployeeId.Dock = DockStyle.Right;
+            txtEmployeeId.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
+            txtEmployeeId.Location = new Point(1846, 0);
+            txtEmployeeId.Name = "txtEmployeeId";
+            txtEmployeeId.Size = new Size(20, 32);
+            txtEmployeeId.TabIndex = 3;
+            txtEmployeeId.Text = "Id";
             // 
             // txtName
             // 
@@ -762,7 +788,6 @@ namespace PresentationLayer.Views.UserControls
             btnDelete.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnDelete.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnDelete.Dock = DockStyle.Left;
-            btnDelete.Enabled = false;
             btnDelete.FillColor = Color.Transparent;
             btnDelete.Font = new Font("Segoe UI", 9F);
             btnDelete.ForeColor = Color.White;
@@ -803,7 +828,6 @@ namespace PresentationLayer.Views.UserControls
             btnEdit.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnEdit.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnEdit.Dock = DockStyle.Left;
-            btnEdit.Enabled = false;
             btnEdit.FillColor = Color.Transparent;
             btnEdit.Font = new Font("Segoe UI", 9F);
             btnEdit.ForeColor = Color.White;
@@ -1204,5 +1228,7 @@ namespace PresentationLayer.Views.UserControls
         private Guna2DateTimePicker txtStartDate;
         private Guna2HtmlLabel guna2HtmlLabel6;
         private Guna2DateTimePicker txtEndDate;
+        private Guna2HtmlLabel guna2HtmlLabel11;
+        private Guna2HtmlLabel txtEmployeeId;
     }
 }

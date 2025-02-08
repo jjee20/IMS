@@ -9,7 +9,7 @@ namespace PresentationLayer.Views.IViews.Payroll
         string EmployeeFirstName { get; set; }
         string EmployeeLastName { get; set; }
         DateTime DateOfBirth { get; set; }
-        Gender Gender { get; set; }
+        Gender? Gender { get; set; }
         string ContactNumber { get; set; }
         string Email { get; set; }
         string Address { get; set; }
@@ -23,6 +23,7 @@ namespace PresentationLayer.Views.IViews.Payroll
         bool IsSuccessful { get; set; }
         string Message { get; set; }
         string SearchValue { get; set; }
+        bool SaveButton { get; set; }
 
         event EventHandler AddNewEvent;
         event EventHandler DeleteEvent;

@@ -7,6 +7,7 @@ namespace PresentationLayer.Views.IViews.Payroll
         int AttendanceId { get; set; }
         int EmployeeId { get; set; }
         string EmployeeName { get; set; }
+        int EmployeeIdFromTextBox { get; set; }
         int ProjectId { get; set; }
         TimeSpan TimeIn { get; set; }
         TimeSpan TimeOut { get; set; }

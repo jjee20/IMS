@@ -13,6 +13,8 @@ using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.Payroll;
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
+using Windows.Networking;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters.Payroll
 {
@@ -115,37 +117,42 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = new Employee
-            {
-                EmployeeId = _view.EmployeeId,
-                FirstName = _view.EmployeeFirstName,
-                LastName = _view.EmployeeLastName,
-                DateOfBirth = _view.DateOfBirth,
-                Gender = _view.Gender,
-                ContactNumber = _view.ContactNumber,
-                Email = _view.Email,
-                Address = _view.Address,
-                DepartmentId = _view.DepartmentId,
-                JobPositionId = _view.JobPositionId,
-                ShiftId = _view.ShiftId,
-                BasicSalary = _view.BasicSalary,
-                isDeducted = _view.isDeducted,
-                LeaveCredits = _view.LeaveCredits,
-            };
+            _view.SaveButton = false;
+
+            var  employee = _unitOfWork.Employee.Get(c => c.EmployeeId == _view.EmployeeId, tracked: true);
+            if (employee == null) employee = new Employee();
+            else
+                _unitOfWork.Employee.Detach(employee);
+
+            employee.EmployeeId = _view.EmployeeId;
+            employee.FirstName = _view.EmployeeFirstName;
+            employee.LastName = _view.EmployeeLastName;
+            employee.DateOfBirth = _view.DateOfBirth;
+            employee.Gender = _view.Gender ?? Gender.Female;
+            employee.ContactNumber = _view.ContactNumber;
+            employee.Email = _view.Email;
+            employee.Address = _view.Address;
+            employee.DepartmentId = _view.DepartmentId;
+            employee.JobPositionId = _view.JobPositionId;
+            employee.ShiftId = _view.ShiftId;
+            employee.BasicSalary = _view.BasicSalary;
+            employee.isDeducted = _view.isDeducted;
+            employee.LeaveCredits = _view.LeaveCredits;
 
             try
             {
-                new ModelDataValidation().Validate(model);
+                new ModelDataValidation().Validate(employee);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Employee.Update(model);
+                    _unitOfWork.Employee.Update(employee);
                     _view.Message = "Employee edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Employee.Add(model);
+                    _unitOfWork.Employee.Add(employee);
                     _view.Message = "Employee added successfully";
                 }
+
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 CleanviewFields();
@@ -154,6 +161,10 @@ namespace PresentationLayer.Presenters.Payroll
             {
                 _view.IsSuccessful = false;
                 _view.Message = ex.Message;
+            }
+            finally
+            {
+                _view.SaveButton = true;
             }
         }
         private void Search(object? sender, EventArgs e)
@@ -176,6 +187,13 @@ namespace PresentationLayer.Presenters.Payroll
             _view.IsEdit = true;
             var employee = (EmployeeViewModel)EmployeeBindingSource.Current;
             var entity = _unitOfWork.Employee.Get(c => c.EmployeeId == employee.EmployeeId);
+
+            if (entity == null)
+            {
+                _view.Message = "Employee record not found.";
+                return;
+            }
+
             _view.EmployeeId = entity.EmployeeId;
             _view.EmployeeFirstName = entity.FirstName;
             _view.EmployeeLastName = entity.LastName;

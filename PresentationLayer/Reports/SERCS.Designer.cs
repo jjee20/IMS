@@ -13509,6 +13509,10 @@ namespace PresentationLayer.Reports {
             
             private global::System.Data.DataColumn columnTotalDeduction;
             
+            private global::System.Data.DataColumn columnDailyRate;
+            
+            private global::System.Data.DataColumn columnDaysWorked;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public PayrollDataTable() {
@@ -13666,6 +13670,22 @@ namespace PresentationLayer.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DailyRateColumn {
+                get {
+                    return this.columnDailyRate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DaysWorkedColumn {
+                get {
+                    return this.columnDaysWorked;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -13701,7 +13721,24 @@ namespace PresentationLayer.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PayrollRow AddPayrollRow(string Employee, double BasicSalary, double OvertimePay, double Allowances, double Benefits, double Bonuses, double Deductions, double SSSContribution, double PagibigContribution, double PhilHealthContribution, double NetPay, double GrossPay, double LateAndEarly, double Absent, double TotalDeduction) {
+            public PayrollRow AddPayrollRow(
+                        string Employee, 
+                        double BasicSalary, 
+                        double OvertimePay, 
+                        double Allowances, 
+                        double Benefits, 
+                        double Bonuses, 
+                        double Deductions, 
+                        double SSSContribution, 
+                        double PagibigContribution, 
+                        double PhilHealthContribution, 
+                        double NetPay, 
+                        double GrossPay, 
+                        double LateAndEarly, 
+                        double Absent, 
+                        double TotalDeduction, 
+                        string DailyRate, 
+                        string DaysWorked) {
                 PayrollRow rowPayrollRow = ((PayrollRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Employee,
@@ -13718,7 +13755,9 @@ namespace PresentationLayer.Reports {
                         GrossPay,
                         LateAndEarly,
                         Absent,
-                        TotalDeduction};
+                        TotalDeduction,
+                        DailyRate,
+                        DaysWorked};
                 rowPayrollRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPayrollRow);
                 return rowPayrollRow;
@@ -13756,6 +13795,8 @@ namespace PresentationLayer.Reports {
                 this.columnLateAndEarly = base.Columns["LateAndEarly"];
                 this.columnAbsent = base.Columns["Absent"];
                 this.columnTotalDeduction = base.Columns["TotalDeduction"];
+                this.columnDailyRate = base.Columns["DailyRate"];
+                this.columnDaysWorked = base.Columns["DaysWorked"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13791,6 +13832,10 @@ namespace PresentationLayer.Reports {
                 base.Columns.Add(this.columnAbsent);
                 this.columnTotalDeduction = new global::System.Data.DataColumn("TotalDeduction", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalDeduction);
+                this.columnDailyRate = new global::System.Data.DataColumn("DailyRate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDailyRate);
+                this.columnDaysWorked = new global::System.Data.DataColumn("DaysWorked", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDaysWorked);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -18078,6 +18123,38 @@ namespace PresentationLayer.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DailyRate {
+                get {
+                    try {
+                        return ((string)(this[this.tablePayroll.DailyRateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DailyRate\' in table \'Payroll\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePayroll.DailyRateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DaysWorked {
+                get {
+                    try {
+                        return ((string)(this[this.tablePayroll.DaysWorkedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DaysWorked\' in table \'Payroll\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePayroll.DaysWorkedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsEmployeeNull() {
                 return this.IsNull(this.tablePayroll.EmployeeColumn);
             }
@@ -18254,6 +18331,30 @@ namespace PresentationLayer.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTotalDeductionNull() {
                 this[this.tablePayroll.TotalDeductionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDailyRateNull() {
+                return this.IsNull(this.tablePayroll.DailyRateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDailyRateNull() {
+                this[this.tablePayroll.DailyRateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDaysWorkedNull() {
+                return this.IsNull(this.tablePayroll.DaysWorkedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDaysWorkedNull() {
+                this[this.tablePayroll.DaysWorkedColumn] = global::System.Convert.DBNull;
             }
         }
         

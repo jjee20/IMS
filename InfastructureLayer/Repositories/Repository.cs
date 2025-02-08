@@ -1,5 +1,6 @@
 ﻿using InfastructureLayer.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Mail;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -90,6 +91,10 @@ namespace InfastructureLayer.Repositories
         public void RemoveRange(IEnumerable<T> entity)
         {
             dbSet.RemoveRange(entity);
+        }
+        public void Detach(T entity)
+        {
+            _db.Entry(entity).State = EntityState.Detached;
         }
     }
 }

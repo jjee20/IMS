@@ -145,7 +145,7 @@ namespace PresentationLayer.Views.UserControls
             get { return txtDateOfBirth.Value; }
             set { txtDateOfBirth.Text = value.ToString(); }
         }
-        public Gender Gender
+        public Gender? Gender
         {
             get { return (Gender)txtGender.SelectedValue; }
             set { txtGender.Text = value.ToString(); }
@@ -189,6 +189,11 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return Convert.ToDouble(txtLeaveCredits.Text); }
             set { txtLeaveCredits.Text = value.ToString(); }
+        }
+        public bool SaveButton
+        {
+            get { return btnSave.Enabled; }
+            set { btnSave.Enabled = value; }
         }
         public bool IsEdit
         {

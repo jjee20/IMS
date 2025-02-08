@@ -208,6 +208,11 @@ namespace PresentationLayer.Views.UserControls
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
+        public int EmployeeIdFromTextBox
+        {
+            get { return Convert.ToInt16(txtEmployeeId.Text); }
+            set { txtEmployeeId.Text = value.ToString(); }
+        }
         public string EmployeeName
         {
             get { return txtName.Text; }

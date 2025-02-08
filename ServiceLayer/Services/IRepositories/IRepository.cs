@@ -11,5 +11,6 @@ namespace ServiceLayer.Services.IRepositories
         IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool tracked = false);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entity);
+        void Detach(T entity);
     }
 }
