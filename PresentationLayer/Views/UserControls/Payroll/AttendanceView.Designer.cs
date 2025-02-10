@@ -441,7 +441,7 @@ namespace PresentationLayer.Views.UserControls
             txtTimeOut.ShowUpDown = true;
             txtTimeOut.Size = new Size(513, 55);
             txtTimeOut.TabIndex = 16;
-            txtTimeOut.Value = new DateTime(2024, 12, 17, 11, 27, 15, 69);
+            txtTimeOut.Value = new DateTime(2024, 12, 17, 17, 0, 0, 0);
             // 
             // guna2HtmlLabel4
             // 
@@ -472,7 +472,7 @@ namespace PresentationLayer.Views.UserControls
             txtTimeIn.ShowUpDown = true;
             txtTimeIn.Size = new Size(513, 55);
             txtTimeIn.TabIndex = 14;
-            txtTimeIn.Value = new DateTime(2025, 1, 9, 11, 27, 0, 0);
+            txtTimeIn.Value = new DateTime(2025, 1, 9, 8, 0, 0, 0);
             // 
             // txtEmployee
             // 
@@ -739,6 +739,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             // txtSearch
             // 
+            txtSearch.CharacterCasing = CharacterCasing.Upper;
             txtSearch.CustomizableEdges = customizableEdges21;
             txtSearch.DefaultText = "";
             txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);

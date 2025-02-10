@@ -263,7 +263,7 @@ namespace PresentationLayer.Presenters.Payroll
         private void LoadAllEmployeeList()
         {
             EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll(includeProperties: "Department,JobPosition,Shift"));
-            EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
         }
         private void LoadAllGenderList()
         {

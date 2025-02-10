@@ -58,6 +58,7 @@ namespace PresentationLayer.Presenters.Payroll
             startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
             DateTime endDate = startDate.AddDays(6).Date;
 
+            _view.Date = currentDate;
             _view.StartDate = startDate;
             _view.EndDate = endDate;
 
@@ -84,12 +85,14 @@ namespace PresentationLayer.Presenters.Payroll
                 return;
             }
 
-            var attendance = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee");
+            var attendance = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee", tracked: true);
 
+            _unitOfWork.Attendance.Detach(attendance);
             _unitOfWork.Attendance.Remove(attendance);
             _unitOfWork.Save();
 
             _view.Message = "Attendance deleted successfully";
+            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
         }
 
         private void Edit(object? sender, EventArgs e)
@@ -199,11 +202,13 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Attendance.Get(c => c.AttendanceId == c.AttendanceId);
+            // Retrieve the specific attendance record based on the _view.AttendanceId
+            var model = _unitOfWork.Attendance.Get(c => c.AttendanceId == _view.AttendanceId);
 
+            // If no record exists, create a new instance
             if (model == null) model = new Attendance();
 
-            model.AttendanceId = _view.AttendanceId;
+            // Assign updated values from the view
             model.EmployeeId = _view.EmployeeId;
             model.ProjectId = _view.ProjectId;
             model.TimeIn = _view.TimeIn;
@@ -214,27 +219,34 @@ namespace PresentationLayer.Presenters.Payroll
 
             try
             {
+                // Validate the model
                 new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+
+                if (_view.IsEdit) // Editing existing record
                 {
                     _unitOfWork.Attendance.Update(model);
                     _view.Message = "Attendance edited successfully";
                 }
-                else //Add new model
+                else // Adding a new record
                 {
                     _unitOfWork.Attendance.Add(model);
                     _view.Message = "Attendance added successfully";
                 }
+
+                // Save changes to the database
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
+
+                // Clear the form fields after saving
                 CleanviewFields();
             }
             catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = ex.Message;
+                _view.Message = $"Error: {ex.Message}";
             }
         }
+
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
@@ -342,7 +354,7 @@ namespace PresentationLayer.Presenters.Payroll
         private void LoadAllEmployeeList()
         {
             EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
-            EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
         }
         private void LoadAllProjectList()
         {
