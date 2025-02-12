@@ -97,6 +97,7 @@ namespace PresentationLayer.Presenters.Payroll
 
         private void Edit(object? sender, EventArgs e)
         {
+            _view.IsEdit = true;
             var attendanceVM = (IndividualAttendanceViewModel)IndividualAttendanceBindingSource.Current;
 
             if (attendanceVM == null)

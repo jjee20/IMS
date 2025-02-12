@@ -223,9 +223,9 @@ namespace PresentationLayer.Presenters.Payroll
                 currentDate = currentDate.AddDays(1);
             } while (currentDate <= endDate.Date);
 
-            foreach (var employee in employees)
+            foreach (var employee in employees.OrderBy(c => c.LastName))
             {
-                var employeeAttendances = employee.Attendances?.Where(a => a.Date >= startDate && a.Date <= endDate) ?? Enumerable.Empty<Attendance>();
+                var employeeAttendances = employee.Attendances?.Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date) ?? Enumerable.Empty<Attendance>();
 
                 var approvedLeaves = employee.Leaves.Where(a => a.LeaveType != LeaveType.UnpaidLeave && a.Status == Status.Approved);
 
