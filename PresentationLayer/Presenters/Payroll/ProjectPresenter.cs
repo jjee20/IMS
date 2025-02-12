@@ -49,19 +49,14 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Project.Get(c => c.ProjectName == _view.ProjectName);
-            if (Entity != null)
-            {
-                _view.Message = "Project is already added.";
-                return;
-            }
+            var model = _unitOfWork.Project.Get(c => c.ProjectId == _view.ProjectId, tracked: true);
 
-            var model = new Project
-            {
-                ProjectId = _view.ProjectId,
-                ProjectName = _view.ProjectName,
-                Description = _view.Description,
-            };
+            if (model == null) model = new Project();
+            else _unitOfWork.Project.Detach(model);
+
+            model.ProjectId = _view.ProjectId;
+            model.ProjectName = _view.ProjectName;
+            model.Description = _view.Description;
 
             try
             {

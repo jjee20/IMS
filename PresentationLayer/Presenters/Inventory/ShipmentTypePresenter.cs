@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.ShipmentType.Get(c => c.ShipmentTypeName == _view.ShipmentTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Shipment type is already added.";
-                return;
-            }
+            var model = _unitOfWork.ShipmentType.Get(c => c.ShipmentTypeId == _view.ShipmentTypeId, tracked: true);
+            if (model == null) model = new ShipmentType();
+            else _unitOfWork.ShipmentType.Detach(model);
 
-            var model = new ShipmentType()
-            {
-                
-                ShipmentTypeId = _view.ShipmentTypeId,
-                ShipmentTypeName = _view.ShipmentTypeName,
-                Description = _view.Description,
-            };
+            model.ShipmentTypeId = _view.ShipmentTypeId;
+            model.ShipmentTypeName = _view.ShipmentTypeName;
+            model.Description = _view.Description;
 
             try
             {

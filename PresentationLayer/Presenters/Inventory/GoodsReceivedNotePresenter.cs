@@ -56,25 +56,18 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.GoodsReceivedNote.Get(c => c.GoodsReceivedNoteName == _view.GoodsReceivedNoteName);
-            if (Entity != null)
-            {
-                _view.Message = "Goods Received Note is already added.";
-                return;
-            }
+            var model = _unitOfWork.GoodsReceivedNote.Get(c => c.GoodsReceivedNoteId == _view.GoodsReceivedNoteId, tracked: true);
+            if (model == null) model = new GoodsReceivedNote();
+            else _unitOfWork.GoodsReceivedNote.Detach(model);
 
-            var model = new GoodsReceivedNote()
-            {
-                
-                GoodsReceivedNoteId = _view.GoodsReceivedNoteId,
-                GoodsReceivedNoteName = _view.GoodsReceivedNoteName,
-                PurchaseOrderId = _view.PurchaseOrderId,
-                GRNDate = _view.GRNDate,
-                VendorDONumber = _view.VendorDONumber,
-                VendorInvoiceNumber = _view.VendorInvoiceNumber,
-                WarehouseId = _view.WarehouseId,
-                IsFullReceive = _view.IsFullReceive
-            };
+            model.GoodsReceivedNoteId = _view.GoodsReceivedNoteId;
+            model.GoodsReceivedNoteName = _view.GoodsReceivedNoteName;
+            model.PurchaseOrderId = _view.PurchaseOrderId;
+            model.GRNDate = _view.GRNDate;
+            model.VendorDONumber = _view.VendorDONumber;
+            model.VendorInvoiceNumber = _view.VendorInvoiceNumber;
+            model.WarehouseId = _view.WarehouseId;
+            model.IsFullReceive = _view.IsFullReceive;
 
             try
             {

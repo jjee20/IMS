@@ -49,19 +49,14 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.JobPosition.Get(c => c.Title == _view.Title);
-            if (Entity != null)
-            {
-                _view.Message = "JobPosition is already added.";
-                return;
-            }
+            var model = _unitOfWork.JobPosition.Get(c => c.JobPositionId == _view.JobPositionId, tracked: true);
 
-            var model = new JobPosition
-            {
-                JobPositionId = _view.JobPositionId,
-                Title = _view.Title,
-                Description = _view.Description,
-            };
+            if (model == null) model = new JobPosition();
+            else _unitOfWork.JobPosition.Detach(model);
+
+            model.JobPositionId = _view.JobPositionId;
+            model.Title = _view.Title;
+            model.Description = _view.Description;
 
             try
             {

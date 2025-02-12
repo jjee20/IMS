@@ -60,27 +60,27 @@ namespace PresentationLayer.Presenters.Payroll
 
             //Load
 
-            LoadAllEmployeeList();
             LoadAllGenderList();
             LoadAllDepartmentList();
             LoadAllJobPositionList();
             LoadAllShiftList();
+            LoadAllEmployeeList();
 
             //Source Binding
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
             _view.SetGenderListBindingSource(GenderBindingSource);
             _view.SetDepartmentListBindingSource(DepartmentBindingSource);
             _view.SetJobPositionListBindingSource(JobPositionBindingSource);
             _view.SetShiftListBindingSource(ShiftBindingSource);
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
 
         private void ReloadAll(object? sender, EventArgs e)
         {
-            LoadAllEmployeeList();
             LoadAllGenderList();
             LoadAllDepartmentList();
             LoadAllJobPositionList();
             LoadAllShiftList();
+            LoadAllEmployeeList();
         }
 
         private void AddShift(object? sender, EventArgs e)
@@ -119,37 +119,36 @@ namespace PresentationLayer.Presenters.Payroll
         {
             _view.SaveButton = false;
 
-            var  employee = _unitOfWork.Employee.Get(c => c.EmployeeId == _view.EmployeeId, tracked: true);
-            if (employee == null) employee = new Employee();
-            else
-                _unitOfWork.Employee.Detach(employee);
+            var  model = _unitOfWork.Employee.Get(c => c.EmployeeId == _view.EmployeeId, tracked:true);
+            if (model == null) model = new Employee();
+            else  _unitOfWork.Employee.Detach(model);
 
-            employee.EmployeeId = _view.EmployeeId;
-            employee.FirstName = _view.EmployeeFirstName;
-            employee.LastName = _view.EmployeeLastName;
-            employee.DateOfBirth = _view.DateOfBirth;
-            employee.Gender = _view.Gender ?? Gender.Female;
-            employee.ContactNumber = _view.ContactNumber;
-            employee.Email = _view.Email;
-            employee.Address = _view.Address;
-            employee.DepartmentId = _view.DepartmentId;
-            employee.JobPositionId = _view.JobPositionId;
-            employee.ShiftId = _view.ShiftId;
-            employee.BasicSalary = _view.BasicSalary;
-            employee.isDeducted = _view.isDeducted;
-            employee.LeaveCredits = _view.LeaveCredits;
+            model.EmployeeId = _view.EmployeeId;
+            model.FirstName = _view.EmployeeFirstName;
+            model.LastName = _view.EmployeeLastName;
+            model.DateOfBirth = _view.DateOfBirth;
+            model.Gender = _view.Gender;
+            model.ContactNumber = _view.ContactNumber;
+            model.Email = _view.Email;
+            model.Address = _view.Address;
+            model.DepartmentId = _view.DepartmentId;
+            model.JobPositionId = _view.JobPositionId;
+            model.ShiftId = _view.ShiftId;
+            model.BasicSalary = _view.BasicSalary;
+            model.isDeducted = _view.isDeducted;
+            model.LeaveCredits = _view.LeaveCredits;
 
             try
             {
-                new ModelDataValidation().Validate(employee);
+                new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Employee.Update(employee);
+                    _unitOfWork.Employee.Update(model);
                     _view.Message = "Employee edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Employee.Add(employee);
+                    _unitOfWork.Employee.Add(model);
                     _view.Message = "Employee added successfully";
                 }
 

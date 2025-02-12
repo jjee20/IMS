@@ -63,14 +63,15 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = new Deduction
-            {
-                DeductionId = _view.DeductionId,
-                DeductionType = _view.DeductionType,
-                Amount = _view.Amount,
-                EmployeeId = _view.EmployeeId,
-                Description = _view.Description,
-            };
+            var model = _unitOfWork.Deduction.Get(c => c.DeductionId == _view.DeductionId, tracked: true);
+            if (model == null) model = new Deduction();
+            else _unitOfWork.Deduction.Detach(model);
+
+            model.DeductionId = _view.DeductionId;
+            model.DeductionType = _view.DeductionType;
+            model.Amount = _view.Amount;
+            model.EmployeeId = _view.EmployeeId;
+            model.Description = _view.Description;
 
             try
             {

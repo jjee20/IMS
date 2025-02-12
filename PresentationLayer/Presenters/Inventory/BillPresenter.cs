@@ -56,25 +56,18 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Bill.Get(c => c.BillName == _view.BillName);
-            if (Entity != null)
-            {
-                _view.Message = "Bill type is already added.";
-                return;
-            }
+            var model = _unitOfWork.Bill.Get(c => c.BillId == _view.BillId, tracked: true);
+            if (model == null) model = new Bill();
+            else _unitOfWork.Bill.Detach(model);
 
-            var model = new Bill()
-            {
-                
-                BillId = _view.BillId,
-                BillName = _view.BillName,
-                GoodsReceivedNoteId = _view.GoodsReceivedNoteId,
-                VendorDONumber = _view.VendorDONumber,
-                VendorInvoiceNumber = _view.VendorInvoiceNumber,
-                BillDate = _view.BillDate,
-                BillDueDate = _view.BillDueDate,
-                BillTypeId = _view.BillTypeId,
-            };
+            model.BillId = _view.BillId;
+            model.BillName = _view.BillName;
+            model.GoodsReceivedNoteId = _view.GoodsReceivedNoteId;
+            model.VendorDONumber = _view.VendorDONumber;
+            model.VendorInvoiceNumber = _view.VendorInvoiceNumber;
+            model.BillDate = _view.BillDate;
+            model.BillDueDate = _view.BillDueDate;
+            model.BillTypeId = _view.BillTypeId;
 
             try
             {

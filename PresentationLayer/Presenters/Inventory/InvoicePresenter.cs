@@ -55,23 +55,16 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Invoice.Get(c => c.InvoiceName == _view.InvoiceName);
-            if (Entity != null)
-            {
-                _view.Message = "Invoice is already added.";
-                return;
-            }
+            var model = _unitOfWork.Invoice.Get(c => c.InvoiceId == _view.InvoiceId, tracked: true);
+            if (model == null) model = new Invoice();
+            else _unitOfWork.Invoice.Detach(model);
 
-            var model = new Invoice()
-            {
-                
-                InvoiceId = _view.InvoiceId,
-                InvoiceName = _view.InvoiceName,
-                ShipmentId = _view.ShipmentId,
-                InvoiceDate = _view.InvoiceDate,
-                InvoiceDueDate = _view.InvoiceDueDate,
-                InvoiceTypeId = _view.InvoiceTypeId,
-            };
+            model.InvoiceId = _view.InvoiceId;
+            model.InvoiceName = _view.InvoiceName;
+            model.ShipmentId = _view.ShipmentId;
+            model.InvoiceDate = _view.InvoiceDate;
+            model.InvoiceDueDate = _view.InvoiceDueDate;
+            model.InvoiceTypeId = _view.InvoiceTypeId;
 
             try
             {

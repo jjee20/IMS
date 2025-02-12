@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.PurchaseType.Get(c => c.PurchaseTypeName == _view.PurchaseTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Purchase type is already added.";
-                return;
-            }
+            var model = _unitOfWork.PurchaseType.Get(c => c.PurchaseTypeId == _view.PurchaseTypeId, tracked: true);
+            if (model == null) model = new PurchaseType();
+            else _unitOfWork.PurchaseType.Detach(model);
 
-            var model = new PurchaseType()
-            {
-                
-                PurchaseTypeId = _view.PurchaseTypeId,
-                PurchaseTypeName = _view.PurchaseTypeName,
-                Description = _view.Description,
-            };
+            model.PurchaseTypeId = _view.PurchaseTypeId;
+            model.PurchaseTypeName = _view.PurchaseTypeName;
+            model.Description = _view.Description;
 
             try
             {

@@ -95,24 +95,17 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Customer.Get(c => c.CustomerName == _view.CustomerName);
-            if (Entity != null)
-            {
-                _view.Message = "Customer is already added.";
-                return;
-            }
+            var model = _unitOfWork.Customer.Get(c => c.CustomerId == _view.CustomerId, tracked: true);
+            if (model == null) model = new Customer();
+            else _unitOfWork.Customer.Detach(model);
 
-            var model = new Customer()
-            {
-                
-                CustomerId = _view.CustomerId,
-                CustomerName = _view.CustomerName,
-                CustomerTypeId = _view.CustomerTypeId,
-                Address = _view.Address,
-                Phone = _view.Phone,
-                Email = _view.Email,
-                ContactPerson = _view.ContactPerson,
-            };
+            model.CustomerId = _view.CustomerId;
+            model.CustomerName = _view.CustomerName;
+            model.CustomerTypeId = _view.CustomerTypeId;
+            model.Address = _view.Address;
+            model.Phone = _view.Phone;
+            model.Email = _view.Email;
+            model.ContactPerson = _view.ContactPerson;
 
             try
             {

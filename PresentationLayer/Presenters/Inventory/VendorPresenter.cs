@@ -94,24 +94,17 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Vendor.Get(c => c.VendorName == _view.VendorName);
-            if (Entity != null)
-            {
-                _view.Message = "Vendor is already added.";
-                return;
-            }
+            var model = _unitOfWork.Vendor.Get(c => c.VendorId == _view.VendorId, tracked: true);
+            if (model == null) model = new Vendor();
+            else _unitOfWork.Vendor.Detach(model);
 
-            var model = new Vendor()
-            {
-                
-                VendorId = _view.VendorId,
-                VendorName = _view.VendorName,
-                VendorTypeId = _view.VendorTypeId,
-                Address = _view.Address,
-                Phone = _view.Phone,
-                Email = _view.Email,
-                ContactPerson = _view.ContactPerson,
-            };
+            model.VendorId = _view.VendorId;
+            model.VendorName = _view.VendorName;
+            model.VendorTypeId = _view.VendorTypeId;
+            model.Address = _view.Address;
+            model.Phone = _view.Phone;
+            model.Email = _view.Email;
+            model.ContactPerson = _view.ContactPerson;
 
             try
             {

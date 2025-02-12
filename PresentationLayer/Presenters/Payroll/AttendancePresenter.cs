@@ -64,15 +64,15 @@ namespace PresentationLayer.Presenters.Payroll
 
             //Load
 
-            LoadAllAttendanceList();
             LoadAllEmployeeList();
             LoadAllProjectList();
+            LoadAllAttendanceList();
 
             //Source Binding
-            _view.SetAttendanceListBindingSource(AttendanceBindingSource);
-            _view.SetIndividualAttendanceListBindingSource(IndividualAttendanceBindingSource);
             _view.SetEmployeeListBindingSource(EmployeeBindingSource);
             _view.SetProjectListBindingSource(ProjectBindingSource);
+            _view.SetAttendanceListBindingSource(AttendanceBindingSource);
+
         }
 
         private void Delete(object? sender, EventArgs e)
@@ -105,7 +105,11 @@ namespace PresentationLayer.Presenters.Payroll
                 return;
             }
 
-            var attendance = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties:"Employee");
+
+
+            var attendance = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties:"Employee,Project");
+
+
             _view.AttendanceId = attendance.AttendanceId;
             _view.EmployeeId = attendance.EmployeeId;
             _view.TimeIn = attendance.TimeIn;
@@ -193,6 +197,7 @@ namespace PresentationLayer.Presenters.Payroll
             _view.EmployeeName = attendanceVM.Employee;
             _view.EmployeeIdFromTextBox = attendanceVM.EmployeeId;
             LoadAllIndividualAttendanceList(attendanceVM.EmployeeId);
+            _view.SetIndividualAttendanceListBindingSource(IndividualAttendanceBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -203,10 +208,11 @@ namespace PresentationLayer.Presenters.Payroll
         private void Save(object? sender, EventArgs e)
         {
             // Retrieve the specific attendance record based on the _view.AttendanceId
-            var model = _unitOfWork.Attendance.Get(c => c.AttendanceId == _view.AttendanceId);
+            var model = _unitOfWork.Attendance.Get(c => c.AttendanceId == _view.AttendanceId, tracked: true);
 
             // If no record exists, create a new instance
             if (model == null) model = new Attendance();
+            else _unitOfWork.Attendance.Detach(model);
 
             // Assign updated values from the view
             model.EmployeeId = _view.EmployeeId;
@@ -348,7 +354,7 @@ namespace PresentationLayer.Presenters.Payroll
         private void LoadAllIndividualAttendanceList(int id)
         {
             IndividualAttendanceList = Program.Mapper.Map<IEnumerable<IndividualAttendanceViewModel>>(_unitOfWork.Attendance.GetAll(c => c.EmployeeId == id && 
-                c.Date.Date >= _view.StartDate.Date && c.Date.Date <= _view.EndDate.Date, includeProperties: "Project"));
+                c.Date.Date >= _view.StartDate.Date && c.Date.Date <= _view.EndDate.Date, includeProperties: "Project,Employee"));
             IndividualAttendanceBindingSource.DataSource = IndividualAttendanceList.OrderBy(c => c.Date);//Set data source.
         }
         private void LoadAllEmployeeList()

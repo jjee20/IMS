@@ -30,6 +30,7 @@ namespace PresentationLayer.Views.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -77,6 +78,8 @@ namespace PresentationLayer.Views.UserControls
             dgList = new Guna2DataGridView();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            txtEmployee = new Guna2ComboBox();
+            employeeViewModelBindingSource = new BindingSource(components);
             txtProject = new Guna2ComboBox();
             guna2HtmlLabel8 = new Guna2HtmlLabel();
             label1 = new Label();
@@ -89,7 +92,6 @@ namespace PresentationLayer.Views.UserControls
             txtTimeOut = new Guna2DateTimePicker();
             guna2HtmlLabel4 = new Guna2HtmlLabel();
             txtTimeIn = new Guna2DateTimePicker();
-            txtEmployee = new Guna2ComboBox();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna2HtmlLabel();
             tabPage3 = new TabPage();
@@ -136,6 +138,7 @@ namespace PresentationLayer.Views.UserControls
             ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             tabPage2.SuspendLayout();
             materialCard2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)employeeViewModelBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtHoursWorked).BeginInit();
             tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgListInvidivual).BeginInit();
@@ -275,6 +278,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             materialCard2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(txtEmployee);
             materialCard2.Controls.Add(txtProject);
             materialCard2.Controls.Add(guna2HtmlLabel8);
             materialCard2.Controls.Add(label1);
@@ -287,7 +291,6 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Controls.Add(txtTimeOut);
             materialCard2.Controls.Add(guna2HtmlLabel4);
             materialCard2.Controls.Add(txtTimeIn);
-            materialCard2.Controls.Add(txtEmployee);
             materialCard2.Controls.Add(guna2HtmlLabel3);
             materialCard2.Controls.Add(guna2HtmlLabel2);
             materialCard2.Depth = 0;
@@ -300,11 +303,36 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Size = new Size(1828, 727);
             materialCard2.TabIndex = 0;
             // 
+            // txtEmployee
+            // 
+            txtEmployee.Anchor = AnchorStyles.None;
+            txtEmployee.BackColor = Color.Transparent;
+            txtEmployee.CustomizableEdges = customizableEdges1;
+            txtEmployee.DataBindings.Add(new Binding("SelectedValue", employeeViewModelBindingSource, "EmployeeId", true));
+            txtEmployee.DisplayMember = "EmployeeId";
+            txtEmployee.DrawMode = DrawMode.OwnerDrawFixed;
+            txtEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtEmployee.FocusedColor = Color.FromArgb(94, 148, 255);
+            txtEmployee.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtEmployee.Font = new Font("Segoe UI", 10F);
+            txtEmployee.ForeColor = Color.FromArgb(68, 88, 112);
+            txtEmployee.ItemHeight = 50;
+            txtEmployee.Location = new Point(362, 182);
+            txtEmployee.Name = "txtEmployee";
+            txtEmployee.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtEmployee.Size = new Size(513, 56);
+            txtEmployee.TabIndex = 29;
+            txtEmployee.ValueMember = "EmployeeId";
+            // 
+            // employeeViewModelBindingSource
+            // 
+            employeeViewModelBindingSource.DataSource = typeof(DomainLayer.ViewModels.PayrollViewModels.EmployeeViewModel);
+            // 
             // txtProject
             // 
             txtProject.Anchor = AnchorStyles.None;
             txtProject.BackColor = Color.Transparent;
-            txtProject.CustomizableEdges = customizableEdges1;
+            txtProject.CustomizableEdges = customizableEdges3;
             txtProject.DrawMode = DrawMode.OwnerDrawFixed;
             txtProject.DropDownStyle = ComboBoxStyle.DropDownList;
             txtProject.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -314,7 +342,7 @@ namespace PresentationLayer.Views.UserControls
             txtProject.ItemHeight = 50;
             txtProject.Location = new Point(952, 182);
             txtProject.Name = "txtProject";
-            txtProject.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtProject.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtProject.Size = new Size(513, 56);
             txtProject.TabIndex = 28;
             // 
@@ -373,12 +401,12 @@ namespace PresentationLayer.Views.UserControls
             // 
             txtHoursWorked.Anchor = AnchorStyles.None;
             txtHoursWorked.BackColor = Color.Transparent;
-            txtHoursWorked.CustomizableEdges = customizableEdges3;
+            txtHoursWorked.CustomizableEdges = customizableEdges5;
             txtHoursWorked.Font = new Font("Segoe UI", 9F);
             txtHoursWorked.Location = new Point(362, 458);
             txtHoursWorked.Margin = new Padding(3, 4, 3, 4);
             txtHoursWorked.Name = "txtHoursWorked";
-            txtHoursWorked.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtHoursWorked.ShadowDecoration.CustomizableEdges = customizableEdges6;
             txtHoursWorked.Size = new Size(514, 60);
             txtHoursWorked.TabIndex = 23;
             txtHoursWorked.Value = new decimal(new int[] { 8, 0, 0, 0 });
@@ -398,7 +426,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             txtDate.Anchor = AnchorStyles.None;
             txtDate.Checked = true;
-            txtDate.CustomizableEdges = customizableEdges5;
+            txtDate.CustomizableEdges = customizableEdges7;
             txtDate.FillColor = Color.MidnightBlue;
             txtDate.Font = new Font("Segoe UI", 9F);
             txtDate.ForeColor = Color.White;
@@ -407,7 +435,7 @@ namespace PresentationLayer.Views.UserControls
             txtDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtDate.Name = "txtDate";
-            txtDate.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtDate.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtDate.Size = new Size(513, 55);
             txtDate.TabIndex = 18;
             txtDate.Value = new DateTime(2024, 12, 17, 11, 27, 15, 69);
@@ -428,7 +456,7 @@ namespace PresentationLayer.Views.UserControls
             txtTimeOut.Anchor = AnchorStyles.None;
             txtTimeOut.Checked = true;
             txtTimeOut.CustomFormat = "HH:mm tt";
-            txtTimeOut.CustomizableEdges = customizableEdges7;
+            txtTimeOut.CustomizableEdges = customizableEdges9;
             txtTimeOut.FillColor = Color.MidnightBlue;
             txtTimeOut.Font = new Font("Segoe UI", 9F);
             txtTimeOut.ForeColor = Color.White;
@@ -437,7 +465,7 @@ namespace PresentationLayer.Views.UserControls
             txtTimeOut.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtTimeOut.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtTimeOut.Name = "txtTimeOut";
-            txtTimeOut.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtTimeOut.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtTimeOut.ShowUpDown = true;
             txtTimeOut.Size = new Size(513, 55);
             txtTimeOut.TabIndex = 16;
@@ -459,7 +487,7 @@ namespace PresentationLayer.Views.UserControls
             txtTimeIn.Anchor = AnchorStyles.None;
             txtTimeIn.Checked = true;
             txtTimeIn.CustomFormat = "HH:mm tt";
-            txtTimeIn.CustomizableEdges = customizableEdges9;
+            txtTimeIn.CustomizableEdges = customizableEdges11;
             txtTimeIn.FillColor = Color.MidnightBlue;
             txtTimeIn.Font = new Font("Segoe UI", 9F);
             txtTimeIn.ForeColor = Color.White;
@@ -468,29 +496,11 @@ namespace PresentationLayer.Views.UserControls
             txtTimeIn.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtTimeIn.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtTimeIn.Name = "txtTimeIn";
-            txtTimeIn.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtTimeIn.ShadowDecoration.CustomizableEdges = customizableEdges12;
             txtTimeIn.ShowUpDown = true;
             txtTimeIn.Size = new Size(513, 55);
             txtTimeIn.TabIndex = 14;
             txtTimeIn.Value = new DateTime(2025, 1, 9, 8, 0, 0, 0);
-            // 
-            // txtEmployee
-            // 
-            txtEmployee.Anchor = AnchorStyles.None;
-            txtEmployee.BackColor = Color.Transparent;
-            txtEmployee.CustomizableEdges = customizableEdges11;
-            txtEmployee.DrawMode = DrawMode.OwnerDrawFixed;
-            txtEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtEmployee.FocusedColor = Color.FromArgb(94, 148, 255);
-            txtEmployee.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmployee.Font = new Font("Segoe UI", 10F);
-            txtEmployee.ForeColor = Color.FromArgb(68, 88, 112);
-            txtEmployee.ItemHeight = 50;
-            txtEmployee.Location = new Point(362, 182);
-            txtEmployee.Name = "txtEmployee";
-            txtEmployee.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtEmployee.Size = new Size(513, 56);
-            txtEmployee.TabIndex = 13;
             // 
             // guna2HtmlLabel3
             // 
@@ -1158,6 +1168,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage2.ResumeLayout(false);
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)employeeViewModelBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtHoursWorked).EndInit();
             tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgListInvidivual).EndInit();
@@ -1192,7 +1203,6 @@ namespace PresentationLayer.Views.UserControls
         private MaterialSkin.Controls.MaterialCard materialCard2;
         private Guna2HtmlLabel guna2HtmlLabel3;
         private Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna2ComboBox txtEmployee;
         private Guna2HtmlLabel guna2HtmlLabel7;
         private Guna2DateTimePicker txtDate;
         private Guna2HtmlLabel guna2HtmlLabel5;
@@ -1231,5 +1241,7 @@ namespace PresentationLayer.Views.UserControls
         private Guna2DateTimePicker txtEndDate;
         private Guna2HtmlLabel guna2HtmlLabel11;
         private Guna2HtmlLabel txtEmployeeId;
+        private Guna2ComboBox txtEmployee;
+        private BindingSource employeeViewModelBindingSource;
     }
 }

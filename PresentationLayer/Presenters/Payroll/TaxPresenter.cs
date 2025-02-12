@@ -49,20 +49,15 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Tax.Get(c => c.MinimumSalary == _view.MinimumSalary);
-            if (Entity != null)
-            {
-                _view.Message = "Tax is already added.";
-                return;
-            }
+            var model = _unitOfWork.Tax.Get(c => c.TaxId == _view.TaxId, tracked: true);
 
-            var model = new Tax
-            {
-                TaxId = _view.TaxId,
-                MinimumSalary = _view.MinimumSalary,
-                MaximumSalary = _view.MaximumSalary,
-                TaxRate = _view.TaxRate,
-            };
+            if (model == null) model = new Tax();
+            else _unitOfWork.Tax.Detach(model);
+
+            model.TaxId = _view.TaxId;
+            model.MinimumSalary = _view.MinimumSalary;
+            model.MaximumSalary = _view.MaximumSalary;
+            model.TaxRate = _view.TaxRate;
 
             try
             {

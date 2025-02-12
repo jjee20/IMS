@@ -56,24 +56,17 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.PaymentReceive.Get(c => c.PaymentReceiveName == _view.PaymentReceiveName);
-            if (Entity != null)
-            {
-                _view.Message = "Payment Receive is already added.";
-                return;
-            }
+            var model = _unitOfWork.PaymentReceive.Get(c => c.PaymentReceiveId == _view.PaymentReceiveId, tracked: true);
+            if (model == null) model = new PaymentReceive();
+            else _unitOfWork.PaymentReceive.Detach(model);
 
-            var model = new PaymentReceive()
-            {
-                
-                PaymentReceiveId = _view.PaymentReceiveId,
-                PaymentReceiveName = _view.PaymentReceiveName,
-                InvoiceId = _view.InvoiceId,
-                PaymentDate = _view.PaymentDate,
-                PaymentTypeId = _view.PaymentTypeId,
-                PaymentAmount = _view.PaymentAmount,
-                IsFullPayment = _view.IsFullPayment
-            };
+            model.PaymentReceiveId = _view.PaymentReceiveId;
+            model.PaymentReceiveName = _view.PaymentReceiveName;
+            model.InvoiceId = _view.InvoiceId;
+            model.PaymentDate = _view.PaymentDate;
+            model.PaymentTypeId = _view.PaymentTypeId;
+            model.PaymentAmount = _view.PaymentAmount;
+            model.IsFullPayment = _view.IsFullPayment;
 
             try
             {

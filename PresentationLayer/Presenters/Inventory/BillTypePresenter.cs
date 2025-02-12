@@ -47,20 +47,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.BillType.Get(c => c.BillTypeName == _view.BillTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Bill type is already added.";
-                return;
-            }
+            var model = _unitOfWork.BillType.Get(c => c.BillTypeId == _view.BillTypeId, tracked: true);
+            if (model == null) model = new BillType();
+            else _unitOfWork.BillType.Detach(model);
 
-            var model = new BillType
-            {
-                
-                BillTypeId = _view.BillTypeId,
-                BillTypeName = _view.BillTypeName,
-                Description = _view.Description,
-            };
+            model.BillTypeId = _view.BillTypeId;
+            model.BillTypeName = _view.BillTypeName;
+            model.Description = _view.Description;
 
             try
             {

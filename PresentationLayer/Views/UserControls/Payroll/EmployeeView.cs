@@ -66,13 +66,13 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
-                if (Guna2TabControl1.TabPages.Contains(tabPage1))
+                if (Guna2TabControl1.SelectedTab == tabPage1)
                 {
-                    EditEvent?.Invoke(this, EventArgs.Empty);
-                    tabPage2.Text = "Edit";
+                    tabPage2.Text = "Edit Details";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
                 }
+                EditEvent?.Invoke(this, EventArgs.Empty);
                 btnReturn.Visible = true;
             };
             //Delete
@@ -145,10 +145,10 @@ namespace PresentationLayer.Views.UserControls
             get { return txtDateOfBirth.Value; }
             set { txtDateOfBirth.Text = value.ToString(); }
         }
-        public Gender? Gender
+        public Gender Gender
         {
             get { return (Gender)txtGender.SelectedValue; }
-            set { txtGender.Text = value.ToString(); }
+            set { txtGender.SelectedValue = (int)value; }
         }
         public string ContactNumber
         {
@@ -168,17 +168,17 @@ namespace PresentationLayer.Views.UserControls
         public int DepartmentId
         {
             get { return (int)txtDepartment.SelectedValue; }
-            set { txtDepartment.Text = value.ToString(); }
+            set { txtDepartment.SelectedValue = value; }
         }
         public int JobPositionId
         {
             get { return (int)txtJobPosition.SelectedValue; }
-            set { txtJobPosition.Text = value.ToString(); }
+            set { txtJobPosition.SelectedValue = value; }
         }
         public int ShiftId
         {
             get { return (int)txtShift.SelectedValue; }
-            set { txtShift.Text = value.ToString(); }
+            set { txtShift.SelectedValue = value; }
         }
         public double BasicSalary
         {

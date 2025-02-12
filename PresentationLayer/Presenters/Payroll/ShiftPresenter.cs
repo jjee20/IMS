@@ -50,16 +50,17 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
+            var model = _unitOfWork.Shift.Get(c => c.ShiftId == _view.ShiftId, tracked: true);
 
-            var model = new Shift
-            {
-                ShiftId = _view.ShiftId,
-                ShiftName = _view.ShiftName,
-                StartTime = _view.StartTime,
-                EndTime = _view.EndTime,
-                OvertimeRate = _view.OvertimeRate,
-                RegularHours = _view.RegularHours,
-            };
+            if (model == null) model = new Shift();
+            else _unitOfWork.Shift.Detach(model);
+
+            model.ShiftId = _view.ShiftId;
+            model.ShiftName = _view.ShiftName;
+            model.StartTime = _view.StartTime;
+            model.EndTime = _view.EndTime;
+            model.OvertimeRate = _view.OvertimeRate;
+            model.RegularHours = _view.RegularHours;
 
             try
             {

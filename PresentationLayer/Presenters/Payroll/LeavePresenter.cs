@@ -82,17 +82,19 @@ namespace PresentationLayer.Presenters.Payroll
                 return;
             }
 
-            var model = new Leave
-            {
-                LeaveId = _view.LeaveId,
-                EmployeeId = _view.EmployeeId,
-                StartDate = _view.StartDate,
-                EndDate = _view.EndDate,
-                LeaveType = _view.LeaveType,
-                Status = _view.Status,
-                Notes = _view.Notes,
-                Other = _view.Other,
-            };
+            var model = _unitOfWork.Leave.Get(c => c.LeaveId == _view.LeaveId, tracked: true);
+
+            if (model == null) model = new Leave();
+            else _unitOfWork.Leave.Detach(model);
+
+            model.LeaveId = _view.LeaveId;
+            model.EmployeeId = _view.EmployeeId;
+            model.StartDate = _view.StartDate;
+            model.EndDate = _view.EndDate;
+            model.LeaveType = _view.LeaveType;
+            model.Status = _view.Status;
+            model.Notes = _view.Notes;
+            model.Other = _view.Other;
 
             try
             {

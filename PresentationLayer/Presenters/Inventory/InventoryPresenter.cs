@@ -27,7 +27,6 @@ namespace PresentationLayer.Presenters.Inventory
             _view.ShowSales += ShowSales;
             _view.ShowPurchase += ShowPurchase;
             _view.ShowInventory += ShowInventory;
-            ShowInventory(this, EventArgs.Empty);
         }
         private void ShowDashboard(object? sender, EventArgs e)
         {

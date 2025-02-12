@@ -48,19 +48,13 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Department.Get(c => c.Name == _view.DepartmentName);
-            if (Entity != null)
-            {
-                _view.Message = "Department is already added.";
-                return;
-            }
+            var model = _unitOfWork.Department.Get(c => c.DepartmentId == _view.DepartmentId, tracked: true);
+            if (model == null) model = new Department();
+            else _unitOfWork.Department.Detach(model);
 
-            var model = new Department
-            {
-                DepartmentId = _view.DepartmentId,
-                Name = _view.DepartmentName,
-                Description = _view.Description,
-            };
+            model.DepartmentId = _view.DepartmentId;
+            model.Name = _view.DepartmentName;
+            model.Description = _view.Description;
 
             try
             {

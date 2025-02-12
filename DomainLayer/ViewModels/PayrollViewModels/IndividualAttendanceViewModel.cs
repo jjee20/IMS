@@ -12,7 +12,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
 {
     public class IndividualAttendanceViewModel
     {
-
+        [Display(Name = "#")]
         public int AttendanceId { get; set; }
         public string Project { get; set; }
         public string Date { get; set; }

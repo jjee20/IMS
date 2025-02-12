@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.ProductType.Get(c => c.ProductTypeName == _view.ProductTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Product type is already added.";
-                return;
-            }
+            var model = _unitOfWork.ProductType.Get(c => c.ProductTypeId == _view.ProductTypeId, tracked: true);
+            if (model == null) model = new ProductType();
+            else _unitOfWork.ProductType.Detach(model);
 
-            var model = new ProductType()
-            {
-                
-                ProductTypeId = _view.ProductTypeId,
-                ProductTypeName = _view.ProductTypeName,
-                Description = _view.Description,
-            };
+            model.ProductTypeId = _view.ProductTypeId;
+            model.ProductTypeName = _view.ProductTypeName;
+            model.Description = _view.Description;
 
             try
             {

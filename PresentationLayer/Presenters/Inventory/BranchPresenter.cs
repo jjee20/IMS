@@ -50,24 +50,17 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Branch.Get(c => c.BranchName == _view.BranchName);
-            if (Entity != null)
-            {
-                _view.Message = "Branch is already added.";
-                return;
-            }
+            var model = _unitOfWork.Branch.Get(c => c.BranchId == _view.BranchId, tracked: true);
+            if (model == null) model = new Branch();
+            else _unitOfWork.Branch.Detach(model);
 
-            var model = new Branch
-            {
-                
-                BranchId = _view.BranchId,
-                BranchName = _view.BranchName,
-                Description = _view.Description,
-                Address = _view.Address,
-                Phone = _view.Phone,
-                Email = _view.Email,
-                ContactPerson = _view.ContactPerson,
-            };
+            model.BranchId = _view.BranchId;
+            model.BranchName = _view.BranchName;
+            model.Description = _view.Description;
+            model.Address = _view.Address;
+            model.Phone = _view.Phone;
+            model.Email = _view.Email;
+            model.ContactPerson = _view.ContactPerson;
 
             try
             {

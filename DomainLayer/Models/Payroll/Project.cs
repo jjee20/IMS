@@ -10,8 +10,10 @@ namespace DomainLayer.Models.Payroll
 {
     public class Project 
     {
-        [Key] 
+        [Key]
+        [Display(Name = "Id")]
         public int ProjectId { get; set; }
+        [Display(Name = "Project Name")]
         public string ProjectName { get; set; }
         public string Description { get; set; }
     }

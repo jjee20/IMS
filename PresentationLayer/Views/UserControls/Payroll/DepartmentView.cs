@@ -63,13 +63,13 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
-                if (Guna2TabControl1.TabPages.Contains(tabPage1))
+                if (Guna2TabControl1.SelectedTab == tabPage1)
                 {
-                    EditEvent?.Invoke(this, EventArgs.Empty);
-                    tabPage2.Text = "Edit";
+                    tabPage2.Text = "Edit Details";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
                 }
+                EditEvent?.Invoke(this, EventArgs.Empty);
                 btnReturn.Visible = true;
             };
             //Delete

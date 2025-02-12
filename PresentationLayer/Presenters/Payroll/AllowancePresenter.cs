@@ -62,15 +62,15 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = new Allowance
-            {
-                AllowanceId = _view.AllowanceId,
-                AllowanceType = _view.AllowanceType,
-                Amount = _view.Amount,
-                EmployeeId = _view.EmployeeId,
-                Description = _view.Description,
-            };
+            var model = _unitOfWork.Allowance.Get(c => c.AllowanceId == _view.AllowanceId, tracked: true);
+            if (model == null) model = new Allowance();
+            else _unitOfWork.Allowance.Detach(model);
 
+            model.AllowanceId = _view.AllowanceId;
+            model.AllowanceType = _view.AllowanceType;
+            model.Amount = _view.Amount;
+            model.EmployeeId = _view.EmployeeId;
+            model.Description = _view.Description;
             try
             {
                 new ModelDataValidation().Validate(model);

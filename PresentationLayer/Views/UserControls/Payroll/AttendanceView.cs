@@ -41,11 +41,11 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    AddNewEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Add New";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Remove(tabPage3);
                     Guna2TabControl1.TabPages.Add(tabPage2);
+                    AddNewEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = true;
             };
@@ -77,14 +77,13 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
-                if (Guna2TabControl1.TabPages.Contains(tabPage1) || Guna2TabControl1.TabPages.Contains(tabPage3))
+                if (Guna2TabControl1.SelectedTab == tabPage1)
                 {
-                    EditEvent?.Invoke(this, EventArgs.Empty);
-                    tabPage2.Text = "Edit";
+                    tabPage2.Text = "Edit Details";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
-                    Guna2TabControl1.TabPages.Remove(tabPage3);
                     Guna2TabControl1.TabPages.Add(tabPage2);
                 }
+                EditEvent?.Invoke(this, EventArgs.Empty);
                 btnReturn.Visible = true;
             };
             //Delete
@@ -110,19 +109,19 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (!Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    RefreshEvent?.Invoke(this, EventArgs.Empty);
                     Guna2TabControl1.TabPages.Remove(tabPage2);
                     Guna2TabControl1.TabPages.Remove(tabPage3);
                     Guna2TabControl1.TabPages.Add(tabPage1);
+                    RefreshEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = false;
             };
             dgList.CellDoubleClick += (sender, e) =>
             {
-                    ShowAttendanceEvent?.Invoke(this, e);
-                    Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Add(tabPage3);
-                    Guna2TabControl1.TabPages.Remove(tabPage1);
+                Guna2TabControl1.TabPages.Remove(tabPage2);
+                Guna2TabControl1.TabPages.Remove(tabPage1);
+                Guna2TabControl1.TabPages.Add(tabPage3);
+                ShowAttendanceEvent?.Invoke(this, e);
                 btnReturn.Visible = true;
             };
             btnImport.Click += delegate
@@ -140,14 +139,38 @@ namespace PresentationLayer.Views.UserControls
 
         public int EmployeeId
         {
-            get { return (int)txtEmployee.SelectedValue; }
-            set { txtEmployee.Text = value.ToString(); }
+            get
+            {
+                return txtEmployee.SelectedValue != null ? Convert.ToInt32(txtEmployee.SelectedValue) : 0;
+            }
+            set
+            {
+                if (txtEmployee.DataSource != null)
+                {
+                    txtEmployee.SelectedValue = value;
+                }
+            }
         }
+
+
+
         public int ProjectId
         {
-            get { return (int)txtProject.SelectedValue; }
-            set { txtProject.Text = value.ToString(); }
+            get
+            {
+                return txtProject.SelectedValue != null ? Convert.ToInt32(txtProject.SelectedValue) : 0;
+            }
+            set
+            {
+                if (txtProject.DataSource != null)
+                {
+                    txtProject.SelectedValue = value;
+                }
+            }
         }
+
+
+
         public TimeSpan TimeIn
         {
             get { return txtTimeIn.Value.TimeOfDay; }
@@ -234,16 +257,26 @@ namespace PresentationLayer.Views.UserControls
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
+            EmployeeList.ResetBindings(false);
             txtEmployee.DataSource = EmployeeList;
             txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
+            
         }
-        
+
         public void SetProjectListBindingSource(BindingSource ProjectList)
         {
+            ProjectList.ResetBindings(false);
             txtProject.DataSource = ProjectList;
             txtProject.DisplayMember = "ProjectName";
             txtProject.ValueMember = "ProjectId";
+        }
+
+        public void SetEmployeeItem(Employee employee)
+        {
+            txtProject.SelectedItem = employee;
+            txtProject.Refresh();
+            txtProject.BindingContext = new BindingContext();
         }
 
         public event EventHandler AddNewEvent;

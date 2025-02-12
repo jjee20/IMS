@@ -62,14 +62,15 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = new Bonus
-            {
-                BonusId = _view.BonusId,
-                BonusType = _view.BonusType,
-                Amount = _view.Amount,
-                EmployeeId = _view.EmployeeId,
-                Description = _view.Description,
-            };
+            var model = _unitOfWork.Bonus.Get(c => c.BonusId == _view.BonusId, tracked: true);
+            if (model == null) model = new Bonus();
+            else _unitOfWork.Bonus.Detach(model);
+
+            model.BonusId = _view.BonusId;
+            model.BonusType = _view.BonusType;
+            model.Amount = _view.Amount;
+            model.EmployeeId = _view.EmployeeId;
+            model.Description = _view.Description;
 
             try
             {

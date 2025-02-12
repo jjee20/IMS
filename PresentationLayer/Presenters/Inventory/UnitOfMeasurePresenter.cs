@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.UnitOfMeasure.Get(c => c.UnitOfMeasureName == _view.UnitOfMeasureName);
-            if (Entity != null)
-            {
-                _view.Message = "Unit Of Measure is already added.";
-                return;
-            }
+            var model = _unitOfWork.UnitOfMeasure.Get(c => c.UnitOfMeasureId == _view.UnitOfMeasureId, tracked: true);
+            if (model == null) model = new UnitOfMeasure();
+            else _unitOfWork.UnitOfMeasure.Detach(model);
 
-            var model = new UnitOfMeasure()
-            {
-                
-                UnitOfMeasureId = _view.UnitOfMeasureId,
-                UnitOfMeasureName = _view.UnitOfMeasureName,
-                Description = _view.Description,
-            };
+            model.UnitOfMeasureId = _view.UnitOfMeasureId;
+            model.UnitOfMeasureName = _view.UnitOfMeasureName;
+            model.Description = _view.Description;
 
             try
             {

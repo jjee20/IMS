@@ -35,10 +35,10 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    AddNewEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Add New";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
+                    AddNewEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = true;
             };
@@ -63,10 +63,10 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    EditEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Edit";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
+                    EditEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = true;
             };
@@ -93,9 +93,9 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (!Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    RefreshEvent?.Invoke(this, EventArgs.Empty);
                     Guna2TabControl1.TabPages.Remove(tabPage2);
                     Guna2TabControl1.TabPages.Add(tabPage1);
+                    RefreshEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = false;
             };

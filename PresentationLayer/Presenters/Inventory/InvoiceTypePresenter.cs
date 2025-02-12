@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.InvoiceType.Get(c => c.InvoiceTypeName == _view.InvoiceTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Invoice is already added.";
-                return;
-            }
+            var model = _unitOfWork.InvoiceType.Get(c => c.InvoiceTypeId == _view.InvoiceTypeId, tracked: true);
+            if (model == null) model = new InvoiceType();
+            else _unitOfWork.InvoiceType.Detach(model);
 
-            var model = new InvoiceType()
-            {
-                
-                InvoiceTypeId = _view.InvoiceTypeId,
-                InvoiceTypeName = _view.InvoiceTypeName,
-                Description = _view.Description,
-            };
+            model.InvoiceTypeId = _view.InvoiceTypeId;
+            model.InvoiceTypeName = _view.InvoiceTypeName;
+            model.Description = _view.Description;
 
             try
             {

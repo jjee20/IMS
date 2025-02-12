@@ -84,7 +84,7 @@ namespace PresentationLayer.Presenters
         private void PrintSO(object? sender, DataGridViewCellEventArgs e)
         {
             var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
-            var salesOrderLine = _unitOfWork.SalesOrderLine.GetAll(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "Product");
+            var salesOrderLine = _unitOfWork.SalesOrderLine.GetAll(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "Product", tracked: true);
             var selesOrderLineVM = salesOrderLine.Select(c => new SalesOrderLineViewModel
             {
                 ProductId = (int)c.ProductId,
@@ -207,35 +207,28 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderName == _view.SalesOrderName);
-            if (Entity != null)
-            {
-                _view.Message = "Sales Order is already added.";
-                return;
-            }
-            _view.SalesOrderName = Guid.NewGuid().ToString();
+            var model = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == _view.SalesOrderId);
+            if (model == null) model = new SalesOrder();
+            else _unitOfWork.SalesOrder.Detach(model);
 
-            var model = new SalesOrder()
-            {
-                SalesOrderId = _view.SalesOrderId,
-                SalesOrderName = _view.SalesOrderName,
-                BranchId = _view.BranchId,
-                CustomerId = _view.CustomerId,
-                OrderDate = _view.OrderDate,
-                DeliveryDate = _view.DeliveryDate,
-                CustomerRefNumber = _view.CustomerRefNumber,
-                SalesTypeId = _view.SalesTypeId,
-                Remarks = _view.Remarks,
-                Amount = _view.Amount,
-                SubTotal = _view.SubTotal,
-                Discount = _view.Discount,
-                Tax = _view.Tax,
-                Freight = _view.Freight,
-                Total = _view.Total,
-                SalesOrderLines = _view.SalesOrderLines
-                    .Select(ToSalesOrderLine)
-                    .ToList()
-            };
+            model.SalesOrderId = _view.SalesOrderId;
+            model.SalesOrderName = _view.SalesOrderName;
+            model.BranchId = _view.BranchId;
+            model.CustomerId = _view.CustomerId;
+            model.OrderDate = _view.OrderDate;
+            model.DeliveryDate = _view.DeliveryDate;
+            model.CustomerRefNumber = _view.CustomerRefNumber;
+            model.SalesTypeId = _view.SalesTypeId;
+            model.Remarks = _view.Remarks;
+            model.Amount = _view.Amount;
+            model.SubTotal = _view.SubTotal;
+            model.Discount = _view.Discount;
+            model.Tax = _view.Tax;
+            model.Freight = _view.Freight;
+            model.Total = _view.Total;
+            model.SalesOrderLines = _view.SalesOrderLines
+                .Select(ToSalesOrderLine)
+                .ToList();
 
             try
             {

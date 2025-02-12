@@ -57,15 +57,15 @@ namespace PresentationLayer.Presenters.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
+            var model = _unitOfWork.Contribution.Get(c => c.ContributionId == _view.ContributionId, tracked: true);
+            if (model == null) model = new Contribution();
+            else _unitOfWork.Contribution.Detach(model);
 
-            var model = new Contribution
-            {
-                ContributionId = _view.ContributionId,
-                ContributionType = _view.ContributionType,
-                EmployeeRate = _view.Rate,
-                MinimumLimit = _view.MinimumLimit,
-                MaximumLimit = _view.MaximumLimit
-            };
+            model.ContributionId = _view.ContributionId;
+            model.ContributionType = _view.ContributionType;
+            model.EmployeeRate = _view.Rate;
+            model.MinimumLimit = _view.MinimumLimit;
+            model.MaximumLimit = _view.MaximumLimit;
 
             try
             {

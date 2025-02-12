@@ -35,5 +35,6 @@ namespace PresentationLayer.Views.IViews.Payroll
         void SetIndividualAttendanceListBindingSource(BindingSource IndividualAttendanceList);
         void SetEmployeeListBindingSource(BindingSource EmployeeList);
         void SetProjectListBindingSource(BindingSource ProjectList);
+        void SetEmployeeItem(Employee employee);
     }
 }

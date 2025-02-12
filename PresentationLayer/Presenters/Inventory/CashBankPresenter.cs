@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.CashBank.Get(c => c.CashBankName == _view.CashBankName);
-            if (Entity != null)
-            {
-                _view.Message = "Cash bank is already added.";
-                return;
-            }
+            var model = _unitOfWork.CashBank.Get(c => c.CashBankId == _view.CashBankId, tracked: true);
+            if (model == null) model = new CashBank();
+            else _unitOfWork.CashBank.Detach(model);
 
-            var model = new CashBank()
-            {
-
-                CashBankId = _view.CashBankId,
-                CashBankName = _view.CashBankName,
-                Description = _view.Description,
-            };
+            model.CashBankId = _view.CashBankId;
+            model.CashBankName = _view.CashBankName;
+            model.Description = _view.Description;
 
             try
             {
