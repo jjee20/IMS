@@ -123,6 +123,11 @@ namespace PresentationLayer.Views.UserControls
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString(); }
         }
+        public string Other
+        {
+            get { return txtOther.Text.Trim(); }
+            set { txtOther.Text = value; }
+        }
         public int EmployeeId
         {
             get { return (int)txtEmployee.SelectedValue; }
@@ -160,7 +165,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
             txtEmployee.DataSource = EmployeeList;
-            txtEmployee.DisplayMember = "LastName";
+            txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
         }
         public void SetBenefitTypeListBindingSource(BindingSource BenefitTypeList)

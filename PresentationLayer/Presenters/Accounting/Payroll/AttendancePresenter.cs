@@ -188,6 +188,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void ShowAttendance(object? sender, DataGridViewCellEventArgs e)
         {
+            _view.IsIndividual = true;
             var attendanceVM = (AttendanceViewModel)AttendanceBindingSource.Current;
 
             if (attendanceVM == null)
@@ -204,6 +205,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void AddNew(object? sender, EventArgs e)
         {
+            _view.IsIndividual = false;
             _view.IsEdit = false;
             CleanviewFields();
         }
@@ -262,15 +264,21 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
 
-            if (!emptyValue || hasDateRange)
+            if (_view.IsIndividual)
             {
-                AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date).Where(c => emptyValue || c.Employee.Contains(_view.SearchValue) || c.Employee.Contains(_view.SearchValue));
-                AttendanceBindingSource.DataSource = AttendanceList;
+                LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
             }
             else
             {
-                // Load all attendance records if no filters are applied
-                LoadAllAttendanceList();
+                if (!emptyValue || hasDateRange)
+                {
+                    AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date).Where(c => emptyValue || c.Employee.Contains(_view.SearchValue) || c.Employee.Contains(_view.SearchValue));
+                    AttendanceBindingSource.DataSource = AttendanceList;
+                }
+                else
+                {
+                    LoadAllAttendanceList();
+                }
             }
         }
 
@@ -286,7 +294,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Return(object? sender, EventArgs e)
         {
-            LoadAllAttendanceList();
+            if (_view.IsIndividual) LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
+            else LoadAllAttendanceList();
         }
         private void CleanviewFields()
         {

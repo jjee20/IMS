@@ -24,7 +24,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private BindingSource EmployeeBindingSource;
         private IEnumerable<AllowanceViewModel> AllowanceList;
         private IEnumerable<EnumItemViewModel> AllowanceTypeList;
-        private IEnumerable<Employee> EmployeeList;
+        private IEnumerable<EmployeeViewModel> EmployeeList;
         public AllowancePresenter(IAllowanceView view, IUnitOfWork unitOfWork)
         {
 
@@ -51,6 +51,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllAllowanceTypeList();
             LoadAllEmployeeList();
 
+            _view.DateGranted = DateTime.Now;
+
             //Source Binding
             _view.SetAllowanceListBindingSource(AllowanceBindingSource);
             _view.SetAllowanceTypeListBindingSource(AllowanceTypeBindingSource);
@@ -74,6 +76,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             model.DateGranted = _view.DateGranted;
             model.EmployeeId = _view.EmployeeId;
             model.Description = _view.Description;
+            model.IsRecurring = _view.IsRecurring;
             try
             {
                 new ModelDataValidation().Validate(model);
@@ -123,6 +126,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.EmployeeId = entity.EmployeeId;
             _view.DateGranted = entity.DateGranted;
             _view.Description = entity.Description;
+            _view.IsRecurring = entity.IsRecurring;
         }
         private void Delete(object? sender, EventArgs e)
         {
@@ -178,8 +182,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = _unitOfWork.Employee.GetAll();
-            EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
         }
     }
 }

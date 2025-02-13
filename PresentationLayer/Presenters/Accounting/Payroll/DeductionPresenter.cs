@@ -25,7 +25,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private BindingSource EmployeeBindingSource;
         private IEnumerable<DeductionViewModel> DeductionList;
         private IEnumerable<EnumItemViewModel> DeductionTypeList;
-        private IEnumerable<Employee> EmployeeList;
+        private IEnumerable<EmployeeViewModel> EmployeeList;
         public DeductionPresenter(IDeductionView view, IUnitOfWork unitOfWork)
         {
 
@@ -176,8 +176,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = _unitOfWork.Employee.GetAll();
-            EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
         }
     }
 }

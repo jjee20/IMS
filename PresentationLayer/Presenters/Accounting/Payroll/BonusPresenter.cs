@@ -3,7 +3,9 @@ using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
+using PresentationLayer;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
@@ -20,9 +22,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private BindingSource BonusBindingSource;
         private BindingSource BonusTypeBindingSource;
         private BindingSource EmployeeBindingSource;
-        private IEnumerable<Bonus> BonusList;
+        private IEnumerable<BonusViewModel> BonusList;
         private IEnumerable<EnumItemViewModel> BonusTypeList;
-        private IEnumerable<Employee> EmployeeList;
+        private IEnumerable<EmployeeViewModel> EmployeeList;
         public BonusPresenter(IBonusView view, IUnitOfWork unitOfWork)
         {
 
@@ -100,7 +102,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                BonusList = _unitOfWork.Bonus.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee");
+                BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
                 BonusBindingSource.DataSource = BonusList;
             }
             else
@@ -161,7 +163,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllBonusList()
         {
-            BonusList = _unitOfWork.Bonus.GetAll();
+            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.GetAll(includeProperties:"Employee"));
             BonusBindingSource.DataSource = BonusList;//Set data source.
         }
         private void LoadAllBonusTypeList()
@@ -171,8 +173,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = _unitOfWork.Employee.GetAll();
-            EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
         }
     }
 }

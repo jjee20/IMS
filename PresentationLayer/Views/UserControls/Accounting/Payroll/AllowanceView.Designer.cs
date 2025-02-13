@@ -86,6 +86,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2 = new TableLayoutPanel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
+            txtIsRecurring = new MaterialSkin.Controls.MaterialSwitch();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -227,6 +228,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             materialCard2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(txtIsRecurring);
             materialCard2.Controls.Add(guna2HtmlLabel1);
             materialCard2.Controls.Add(txtDateGranted);
             materialCard2.Controls.Add(guna2HtmlLabel5);
@@ -611,6 +613,21 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Size = new Size(1868, 11);
             guna2Separator1.TabIndex = 1;
             // 
+            // txtIsRecurring
+            // 
+            txtIsRecurring.AutoSize = true;
+            txtIsRecurring.Depth = 0;
+            txtIsRecurring.Location = new Point(950, 611);
+            txtIsRecurring.Margin = new Padding(0);
+            txtIsRecurring.MouseLocation = new Point(-1, -1);
+            txtIsRecurring.MouseState = MaterialSkin.MouseState.HOVER;
+            txtIsRecurring.Name = "txtIsRecurring";
+            txtIsRecurring.Ripple = true;
+            txtIsRecurring.Size = new Size(133, 37);
+            txtIsRecurring.TabIndex = 21;
+            txtIsRecurring.Text = "Recurring?";
+            txtIsRecurring.UseVisualStyleBackColor = true;
+            // 
             // AllowanceView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -663,5 +680,6 @@ namespace PresentationLayer.Views.UserControls
         private Guna2TextBox txtDescription;
         private Guna2HtmlLabel guna2HtmlLabel1;
         private Guna2DateTimePicker txtDateGranted;
+        private MaterialSkin.Controls.MaterialSwitch txtIsRecurring;
     }
 }

@@ -181,7 +181,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
             txtEmployee.DataSource = EmployeeList;
-            txtEmployee.DisplayMember = "LastName";
+            txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
         }
         public void SetLeaveTypeListBindingSource(BindingSource LeaveTypeList)

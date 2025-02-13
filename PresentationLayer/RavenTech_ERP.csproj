@@ -228,6 +228,33 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Update="Reports\Accounting\Payroll\Contribution.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Accounting\Payroll\LeaveReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Accounting\Payroll\JobPositionReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Accounting\Payroll\EmployeeReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Accounting\Payroll\ShiftReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Accounting\Payroll\ProjectReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Accounting\Payroll\TaxReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Accounting\Payroll\DeductionReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Accounting\Payroll\BonusReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Reports\Accounting\Payroll\BenefitReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

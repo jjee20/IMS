@@ -143,6 +143,12 @@ namespace PresentationLayer.Views.UserControls
             get { return isEdit; }
             set { isEdit = value; }
         }
+        
+        public bool IsRecurring
+        {
+            get { return txtIsRecurring.Checked; }
+            set { txtIsRecurring.Checked = value; }
+        }
 
         public bool IsSuccessful
         {
@@ -170,7 +176,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
             txtEmployee.DataSource = EmployeeList;
-            txtEmployee.DisplayMember = "LastName";
+            txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
         }
         public void SetAllowanceTypeListBindingSource(BindingSource AllowanceTypeList)

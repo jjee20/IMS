@@ -2,8 +2,8 @@
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
-
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using InfastructureLayer.Migrations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;

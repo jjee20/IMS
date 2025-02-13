@@ -15,7 +15,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public string Employee { get; set; } 
 
         [Required]
-        [Display(Name = "Allowanc eType")]
+        [Display(Name = "Allowance Type")]
         public string AllowanceType { get; set; } 
         public double Amount { get; set; } 
 

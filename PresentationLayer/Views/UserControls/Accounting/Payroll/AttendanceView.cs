@@ -26,6 +26,7 @@ namespace PresentationLayer.Views.UserControls
         private int id;
         private string message;
         private bool isSuccessful;
+        private bool isIndividual;
         public bool isEdit;
         public AttendanceView()
         {
@@ -219,6 +220,12 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
+        }
+        
+        public bool IsIndividual
+        {
+            get { return isIndividual; }
+            set { isIndividual = value; }
         }
 
         public string Message

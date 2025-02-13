@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
+using DomainLayer.ViewModels.PayrollViewModels;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

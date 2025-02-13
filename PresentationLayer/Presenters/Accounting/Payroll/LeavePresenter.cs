@@ -25,7 +25,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private BindingSource LeaveTypeBindingSource;
         private BindingSource StatusBindingSource;
         private IEnumerable<LeaveViewModel> LeaveList;
-        private IEnumerable<Employee> EmployeeList;
+        private IEnumerable<EmployeeViewModel> EmployeeList;
         private IEnumerable<EnumItemViewModel> LeaveTypeList;
         private IEnumerable<EnumItemViewModel> StatusList;
         public LeavePresenter(ILeaveView view, IUnitOfWork unitOfWork)
@@ -200,8 +200,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = _unitOfWork.Employee.GetAll();
-            EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
         }
         private void LoadAllLeaveTypeList()
         {

@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
@@ -164,7 +165,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
             txtEmployee.DataSource = EmployeeList;
-            txtEmployee.DisplayMember = "LastName";
+            txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
         }
         public void SetBonusTypeListBindingSource(BindingSource BonusTypeList)

@@ -9,6 +9,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         public BenefitType BenefitType { get; set; }
         double Amount { get; set; }
         int EmployeeId { get; set; }
+        string Other { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }
         string Message { get; set; }

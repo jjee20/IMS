@@ -238,7 +238,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
                 double allowancePay = CalculateAllowances(employee, startDate, endDate);
                 double bonusPay = CalculateBonuses(employee, startDate, endDate);
-                double benefitPay = employee.Benefits?.Sum(b => b.Amount) ?? 0;
+                double benefitPay = _view.IncludeBenefits ? employee.Benefits.Sum(b => b.Amount) : 0;
                 double deductions = employee.Deductions?.Sum(d => d.Amount) ?? 0;
 
                 var totalLateDuration = employeeAttendances
@@ -293,7 +293,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     BasicSalary = Math.Round(regularPay, 2),
                     OvertimePay = Math.Round(overtimePay, 2),
                     Allowances = Math.Round(allowancePay, 2),
-                    Benefits = _view.IncludeBenefits ? Math.Round(benefitPay, 2) : 0,
+                    Benefits = Math.Round(benefitPay, 2),
                     Bonuses = Math.Round(bonusPay, 2),
                     Deductions = Math.Round(deductions, 2),
                     Absent = Math.Round(absentDeductions, 2),

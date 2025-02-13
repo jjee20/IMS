@@ -15,6 +15,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         bool IsPresent { get; set; }
         double HoursWorked { get; set; }
         bool IsEdit { get; set; }
+        bool IsIndividual { get; set; }
         bool IsSuccessful { get; set; }
         string Message { get; set; }
         string SearchValue { get; set; }

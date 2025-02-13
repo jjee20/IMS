@@ -21,7 +21,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private BindingSource EmployeeBindingSource;
         private IEnumerable<BenefitViewModel> BenefitList;
         private IEnumerable<EnumItemViewModel> BenefitTypeList;
-        private IEnumerable<Employee> EmployeeList;
+        private IEnumerable<EmployeeViewModel> EmployeeList;
         public BenefitPresenter(IBenefitView view, IUnitOfWork unitOfWork)
         {
 
@@ -69,6 +69,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             model.BenefitType = _view.BenefitType;
             model.Amount = _view.Amount;
             model.EmployeeId = _view.EmployeeId;
+            model.Other = _view.Other;
 
             try
             {
@@ -117,6 +118,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.BenefitType = entity.BenefitType;
             _view.Amount = entity.Amount;
             _view.EmployeeId = entity.EmployeeId;
+            _view.Other = entity.Other;
         }
         private void Delete(object? sender, EventArgs e)
         {
@@ -171,8 +173,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = _unitOfWork.Employee.GetAll();
-            EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
         }
     }
 }
