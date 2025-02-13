@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models.Inventory;
+﻿using DomainLayer.Models.Accounts;
 using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
@@ -18,6 +18,7 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class CustomerTypeView : UserControl, ICustomerTypeView
     {
+        private int id;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
@@ -104,8 +105,8 @@ namespace PresentationLayer.Views.UserControls
         //Properties
         public int CustomerTypeId
         {
-            get { return Convert.ToInt32(txtId.Text); }
-            set { txtId.Text = value.ToString(); }
+            get { return id; }
+            set { id = value; }
         }
 
         public string CustomerTypeName

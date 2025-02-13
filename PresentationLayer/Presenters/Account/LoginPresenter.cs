@@ -2,16 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using PresentationLayer.Presenters.Admin;
 using PresentationLayer.Presenters.Inventory;
-using PresentationLayer.Presenters.Payroll;
 using PresentationLayer.Views;
 using PresentationLayer.Views.IViews.Admin;
 using PresentationLayer.Views.IViews.Inventory;
-using PresentationLayer.Views.IViews.Payroll;
-using PresentationLayer.Views.UserControls.Inventory;
 using PresentationLayer.Views.UserControls.Payroll;
-using ServiceLayer.Services.IRepositories;
-using System;
-using System.Windows.Forms;
+using RevenTech_ERP.Presenters.Accounting.Payroll;
+using RavenTech_ERP.Properties;
+using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters.Account
 {
@@ -59,7 +57,7 @@ namespace PresentationLayer.Presenters.Account
 
                 if (passwordVerificationResult == PasswordVerificationResult.Success)
                 {
-                    Properties.Settings.Default.User_Id = user.Id;
+                    Settings.Default.User_Id = user.Id;
                     if (user.Department == DomainLayer.Enums.Departments.Admin)
                         ShowAdmin();
                     else if (user.Department == DomainLayer.Enums.Departments.Inventory)
@@ -90,6 +88,7 @@ namespace PresentationLayer.Presenters.Account
 
                 // Show the PayrollView (assuming it's a form or user control)
                 view.ShowForm();
+                _view.Hide();
             }
             catch (Exception ex)
             {
@@ -106,6 +105,7 @@ namespace PresentationLayer.Presenters.Account
                 var presenter = new AdminPresenter(view, _unitOfWork);
 
                 view.ShowForm();
+                _view.Hide();
             }
             catch (Exception ex)
             {
@@ -124,6 +124,7 @@ namespace PresentationLayer.Presenters.Account
 
                 // Show the InventoryView (assuming it's a form or user control)
                 view.ShowForm();
+                _view.Hide();
             }
             catch (Exception ex)
             {

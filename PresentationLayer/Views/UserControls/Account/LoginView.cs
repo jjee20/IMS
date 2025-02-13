@@ -1,6 +1,6 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
-using PresentationLayer.Properties;
+using RavenTech_ERP.Properties;
 using PresentationLayer.Views.IViews.Inventory;
 using System;
 using System.Collections.Generic;
@@ -91,7 +91,7 @@ namespace PresentationLayer.Views.UserControls.Inventory
 
         private Image GetIconFromResource(string iconName)
         {
-            byte[] imageBytes = iconName == "eye" ? Properties.Resources.eye : Properties.Resources.hidden;
+            byte[] imageBytes = iconName == "eye" ? Resources.eye : Resources.hidden;
             using (MemoryStream ms = new MemoryStream(imageBytes))
             {
                 return Image.FromStream(ms);  // Converts byte[] to Image

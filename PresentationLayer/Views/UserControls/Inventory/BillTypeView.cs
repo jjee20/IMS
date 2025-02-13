@@ -1,25 +1,12 @@
 ﻿using DomainLayer.Models.Inventory;
-using MaterialSkin;
-using MaterialSkin.Controls;
-using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
-using PresentationLayer.Views.IViews.Payroll;
 using ServiceLayer.Services.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
     public partial class BillTypeView : UserControl, IBillTypeView
     {
+        private int id;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
@@ -106,8 +93,8 @@ namespace PresentationLayer.Views.UserControls
         //Properties
         public int BillTypeId
         {
-            get { return Convert.ToInt32(txtId.Text); }
-            set { txtId.Text = value.ToString(); }
+            get { return id; }
+            set { id = value; }
         }
 
         public string BillTypeName

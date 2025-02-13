@@ -925,9 +925,9 @@
             tableLayoutPanel9.Controls.Add(txtOutofStock, 0, 2);
             tableLayoutPanel9.Dock = DockStyle.Fill;
             tableLayoutPanel9.Location = new Point(0, 0);
-            tableLayoutPanel9.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel9.Margin = new Padding(4);
             tableLayoutPanel9.Name = "tableLayoutPanel9";
-            tableLayoutPanel9.Padding = new Padding(4, 4, 4, 4);
+            tableLayoutPanel9.Padding = new Padding(4);
             tableLayoutPanel9.RowCount = 3;
             tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 4F));
@@ -994,9 +994,9 @@
             tableLayoutPanel8.Controls.Add(txtPurchased, 0, 2);
             tableLayoutPanel8.Dock = DockStyle.Fill;
             tableLayoutPanel8.Location = new Point(0, 0);
-            tableLayoutPanel8.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel8.Margin = new Padding(4);
             tableLayoutPanel8.Name = "tableLayoutPanel8";
-            tableLayoutPanel8.Padding = new Padding(4, 4, 4, 4);
+            tableLayoutPanel8.Padding = new Padding(4);
             tableLayoutPanel8.RowCount = 3;
             tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Absolute, 4F));
@@ -1063,9 +1063,9 @@
             tableLayoutPanel7.Controls.Add(txtSales, 0, 2);
             tableLayoutPanel7.Dock = DockStyle.Fill;
             tableLayoutPanel7.Location = new Point(0, 0);
-            tableLayoutPanel7.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel7.Margin = new Padding(4);
             tableLayoutPanel7.Name = "tableLayoutPanel7";
-            tableLayoutPanel7.Padding = new Padding(4, 4, 4, 4);
+            tableLayoutPanel7.Padding = new Padding(4);
             tableLayoutPanel7.RowCount = 3;
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 4F));
@@ -1132,9 +1132,9 @@
             tableLayoutPanel12.Controls.Add(txtOnHand, 0, 2);
             tableLayoutPanel12.Dock = DockStyle.Fill;
             tableLayoutPanel12.Location = new Point(0, 0);
-            tableLayoutPanel12.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel12.Margin = new Padding(4);
             tableLayoutPanel12.Name = "tableLayoutPanel12";
-            tableLayoutPanel12.Padding = new Padding(4, 4, 4, 4);
+            tableLayoutPanel12.Padding = new Padding(4);
             tableLayoutPanel12.RowCount = 3;
             tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Absolute, 4F));
@@ -1207,7 +1207,7 @@
             guna2HtmlLabel1.Location = new Point(12, 10);
             guna2HtmlLabel1.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(1644, 32);
+            guna2HtmlLabel1.Size = new Size(210, 32);
             guna2HtmlLabel1.TabIndex = 0;
             guna2HtmlLabel1.Text = "Inventory Dashboard";
             // 

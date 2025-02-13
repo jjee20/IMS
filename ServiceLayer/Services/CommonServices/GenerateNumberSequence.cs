@@ -1,5 +1,5 @@
 ﻿using DomainLayer.Models;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 namespace ServiceLayer.Services.CommonServices
 {
     public class GenerateNumberSequence : IGenerateNumberSequence

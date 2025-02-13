@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
-using DomainLayer.Models.Payroll;
 using DomainLayer.ViewModels.AccountViewModels;
 using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.PayrollViewModels;
@@ -92,6 +92,10 @@ namespace ServiceLayer.Services.CommonServices
                                          : AttendanceStatus.Present.ToString())))))
                  .ReverseMap();
 
+            CreateMap<Allowance, AllowanceViewModel>()
+                 .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.FirstName} {src.Employee.LastName}"))
+                 .ForMember(dest => dest.IsRecurring, opt => opt.MapFrom(src => src.IsRecurring.ToString()))
+                .ReverseMap();
             CreateMap<Deduction, DeductionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.FirstName} {src.Employee.LastName}"))
                 .ReverseMap();

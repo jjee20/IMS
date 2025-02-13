@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Inventory;
+﻿using DomainLayer.Models.Accounts;
+using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Reporting.WinForms;
@@ -6,7 +7,7 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {

@@ -1,12 +1,12 @@
 ﻿using DomainLayer.Models;
 using DomainLayer.Models.Inventory;
-using DomainLayer.Models.Payroll;
+
 using DomainLayer.ViewModels.Inventory;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {

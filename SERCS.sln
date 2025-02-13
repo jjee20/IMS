@@ -9,12 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfastructureLayer", "Infas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{9C254F3A-BCA5-43C3-8231-BDC27BD1D715}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationLayer", "PresentationLayer\PresentationLayer.csproj", "{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenTech_ERP", "PresentationLayer\RavenTech_ERP.csproj", "{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}"
 	ProjectSection(ProjectDependencies) = postProject
 		{33C8DC59-6F89-4198-A7F3-FA1C20BB0DD7} = {33C8DC59-6F89-4198-A7F3-FA1C20BB0DD7}
 	EndProjectSection
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "RavenTech_ERP", "RavenTech_ERP\RavenTech_ERP.vdproj", "{1F323EAB-190F-4309-A0E8-60ED7A8554EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseLayer", "DatabaseLayer\DatabaseLayer.csproj", "{8E374089-425B-4013-B2CA-90C172D84E95}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -62,12 +60,6 @@ Global
 		{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}.Release|Any CPU.Build.0 = Release|Any CPU
 		{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}.Release|x64.ActiveCfg = Release|x64
 		{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}.Release|x64.Build.0 = Release|x64
-		{1F323EAB-190F-4309-A0E8-60ED7A8554EB}.Debug|Any CPU.ActiveCfg = Debug
-		{1F323EAB-190F-4309-A0E8-60ED7A8554EB}.Debug|x64.ActiveCfg = Debug
-		{1F323EAB-190F-4309-A0E8-60ED7A8554EB}.Debug|x64.Build.0 = Debug
-		{1F323EAB-190F-4309-A0E8-60ED7A8554EB}.Release|Any CPU.ActiveCfg = Release
-		{1F323EAB-190F-4309-A0E8-60ED7A8554EB}.Release|x64.ActiveCfg = Release
-		{1F323EAB-190F-4309-A0E8-60ED7A8554EB}.Release|x64.Build.0 = Release
 		{8E374089-425B-4013-B2CA-90C172D84E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E374089-425B-4013-B2CA-90C172D84E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E374089-425B-4013-B2CA-90C172D84E95}.Debug|x64.ActiveCfg = Debug|x64

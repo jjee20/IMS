@@ -18,6 +18,7 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class WarehouseView : UserControl, IWarehouseView
     {
+        private int id;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
@@ -104,8 +105,8 @@ namespace PresentationLayer.Views.UserControls
         //Properties
         public int WarehouseId
         {
-            get { return Convert.ToInt32(txtId.Text); }
-            set { txtId.Text = value.ToString(); }
+            get { return id; }
+            set { id = value; }
         }
 
         public string WarehouseName

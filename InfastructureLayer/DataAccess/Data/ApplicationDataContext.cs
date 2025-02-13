@@ -1,6 +1,8 @@
-﻿using DomainLayer.Models.Accounts;
+﻿using DomainLayer.Models.Accounting;
+using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
-using DomainLayer.Models.Payroll;
+
 using DomainLayer.ViewModels.Inventory;
 using InfastructureLayer.Migrations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -40,11 +42,12 @@ namespace InfastructureLayer.DataAccess.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+        #region Accounts
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
-
         public DbSet<UserProfile> UserProfile { get; set; }
+        #endregion
 
-        //Inventory
+        #region Inventory
         public DbSet<Bill> Bill { get; set; }
 
         public DbSet<BillType> BillType { get; set; }
@@ -59,7 +62,7 @@ namespace InfastructureLayer.DataAccess.Data
 
         public DbSet<GoodsReceivedNote> GoodsReceivedNote { get; set; }
 
-        public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<DomainLayer.Models.Inventory.Invoice> Invoice { get; set; }
 
         public DbSet<InvoiceType> InvoiceType { get; set; }
 
@@ -98,8 +101,17 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<VendorType> VendorType { get; set; }
 
         public DbSet<Warehouse> Warehouse { get; set; }
+        #endregion
 
-        //Payroll
+        #region Accounting
+        //public DbSet<Account> Accounts { get; set; }
+        //public DbSet<Budget> Budget { get; set; }
+        //public DbSet<FinancialSummary> FinancialSummaries { get; set; }
+        //public DbSet<FinancialTransaction> FinancialTransactions { get; set; }
+        //public DbSet<DomainLayer.Models.Accounting.Invoice> Invoices { get; set; }
+        //public DbSet<Account> AccountingAccounts { get; set; }
+        //public DbSet<LedgerEntry> LedgerEntries { get; set; }
+        #region Payroll
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<JobPosition> JobPositions { get; set; }
@@ -115,6 +127,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<Allowance> Allowances { get; set; }
         public DbSet<Bonus> Bonuses { get; set; }
-
+        #endregion
+        #endregion
     }
 }
