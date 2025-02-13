@@ -3,7 +3,9 @@ using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
+using PresentationLayer;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
@@ -20,7 +22,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private BindingSource AllowanceBindingSource;
         private BindingSource AllowanceTypeBindingSource;
         private BindingSource EmployeeBindingSource;
-        private IEnumerable<Allowance> AllowanceList;
+        private IEnumerable<AllowanceViewModel> AllowanceList;
         private IEnumerable<EnumItemViewModel> AllowanceTypeList;
         private IEnumerable<Employee> EmployeeList;
         public AllowancePresenter(IAllowanceView view, IUnitOfWork unitOfWork)
@@ -69,6 +71,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             model.AllowanceId = _view.AllowanceId;
             model.AllowanceType = _view.AllowanceType;
             model.Amount = _view.Amount;
+            model.DateGranted = _view.DateGranted;
             model.EmployeeId = _view.EmployeeId;
             model.Description = _view.Description;
             try
@@ -99,7 +102,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                AllowanceList = _unitOfWork.Allowance.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee");
+                AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(
+                    _unitOfWork.Allowance.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
+                    c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
                 AllowanceBindingSource.DataSource = AllowanceList;
             }
             else
@@ -110,18 +115,21 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Allowance)AllowanceBindingSource.Current;
+            var allowance = (AllowanceViewModel)AllowanceBindingSource.Current;
+            var entity = _unitOfWork.Allowance.Get(c => c.AllowanceId == allowance.AllowanceId);
             _view.AllowanceId = entity.AllowanceId;
             _view.AllowanceType = entity.AllowanceType;
             _view.Amount = entity.Amount;
             _view.EmployeeId = entity.EmployeeId;
+            _view.DateGranted = entity.DateGranted;
             _view.Description = entity.Description;
         }
         private void Delete(object? sender, EventArgs e)
         {
             try
             {
-                var entity = (Allowance)AllowanceBindingSource.Current;
+                var allowance = (AllowanceViewModel)AllowanceBindingSource.Current;
+                var entity = _unitOfWork.Allowance.Get(c => c.AllowanceId == allowance.AllowanceId);
                 _unitOfWork.Allowance.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
@@ -160,7 +168,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllAllowanceList()
         {
-            AllowanceList = _unitOfWork.Allowance.GetAll();
+            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.GetAll(includeProperties: "Employee"));
             AllowanceBindingSource.DataSource = AllowanceList;//Set data source.
         }
         private void LoadAllAllowanceTypeList()

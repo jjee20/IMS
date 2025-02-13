@@ -8,6 +8,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         int AllowanceId { get; set; }
         public AllowanceType AllowanceType { get; set; }
         double Amount { get; set; }
+        DateTime DateGranted { get; set; }
         string Description { get; set; }
         int EmployeeId { get; set; }
         bool IsEdit { get; set; }

@@ -57,8 +57,17 @@ namespace PresentationLayer.Views.UserControls
                 if (isSuccessful)
                 {
                     Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Remove(tabPage3);
-                    Guna2TabControl1.TabPages.Add(tabPage1);
+                    Guna2TabControl1.TabPages.Remove(tabPage1);
+                    if(isEdit)
+                    {
+                        Guna2TabControl1.TabPages.Remove(tabPage1);
+                        Guna2TabControl1.TabPages.Add(tabPage3);
+                    }
+                    else
+                    {
+                        Guna2TabControl1.TabPages.Remove(tabPage3);
+                        Guna2TabControl1.TabPages.Add(tabPage1);
+                    }
                     btnReturn.Visible = false;
                 }
                 MessageBox.Show(Message);

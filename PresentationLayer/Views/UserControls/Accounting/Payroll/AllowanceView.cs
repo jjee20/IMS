@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
@@ -122,6 +123,11 @@ namespace PresentationLayer.Views.UserControls
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString(); }
         }
+        public DateTime DateGranted
+        {
+            get { return txtDateGranted.Value; }
+            set { txtDateGranted.Text = value.ToString(); }
+        }
         public string Description
         {
             get { return txtDescription.Text; }
@@ -159,7 +165,7 @@ namespace PresentationLayer.Views.UserControls
         public void SetAllowanceListBindingSource(BindingSource AllowanceList)
         {
             dgList.DataSource = AllowanceList;
-            DataGridHelper.ApplyDisplayNames<Allowance>(AllowanceList, dgList);
+            DataGridHelper.ApplyDisplayNames<AllowanceViewModel>(AllowanceList, dgList);
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
