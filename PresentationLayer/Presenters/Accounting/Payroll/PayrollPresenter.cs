@@ -45,8 +45,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.PrintPayrollEvent += PrintPayroll;
             _view.PrintPayslipEvent += PrintPayslip;
             _view.SearchEvent += Search;
+            _view.IncludeBenefitsEvent += OnIncludeBenefits;
 
             _view.SetPayrollListBindingSource(PayrollBindingSource);
+        }
+
+        private void OnIncludeBenefits(object? sender, EventArgs e)
+        {
+            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date);
+            PayrollBindingSource.DataSource = PayrollList;
         }
 
         private void PrintPayslip(object? sender, DataGridViewCellEventArgs e)
@@ -238,16 +245,22 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
                 double allowancePay = CalculateAllowances(employee, startDate, endDate);
                 double bonusPay = CalculateBonuses(employee, startDate, endDate);
-                double benefitPay = _view.IncludeBenefits ? employee.Benefits.Sum(b => b.Amount) : 0;
                 double deductions = employee.Deductions?.Sum(d => d.Amount) ?? 0;
 
+                TimeSpan shiftEndTime = (TimeSpan)(employee.Shift?.EndTime);
+
                 var totalLateDuration = employeeAttendances
-                    .Where(a => a.TimeIn > employee.Shift.StartTime)
-                    .Aggregate(TimeSpan.Zero, (total, attendance) => total + employee.Shift.StartTime.Add(TimeSpan.FromMinutes(15)));
+                    .Where(a => a.TimeIn > employee.Shift?.StartTime) // Only consider late arrivals
+                    .Aggregate(TimeSpan.Zero, (total, attendance) => (TimeSpan)(total + (attendance.TimeIn - employee.Shift?.StartTime)));
+
 
                 var totalEarlyOutDuration = employeeAttendances
-                    .Where(a => a.TimeOut < employee.Shift.EndTime)
-                    .Aggregate(TimeSpan.Zero, (total, attendance) => total + (employee.Shift.EndTime - attendance.TimeOut));
+                     .Where(a => a.TimeOut < shiftEndTime)
+                     .Aggregate(TimeSpan.Zero, (total, attendance) =>
+                     {
+                         var earlyOut = shiftEndTime - attendance.TimeOut;
+                         return (TimeSpan)(earlyOut > TimeSpan.Zero ? total + earlyOut : total);
+                     });
 
                 int totalPresentDays = employeeAttendances.Where(a => a.IsPresent && !IsCoveredByLeave(a.Date, approvedLeaves)).Count();
                 int totalAbsentDays = totalDays > totalPresentDays ? totalDays - totalPresentDays : 0;
@@ -281,6 +294,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PagIbig, monthlySalary) / 2 : 0 : 0;
                 double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PhilHealth, monthlySalary) / 2 : 0 : 0;
 
+                double benefitPay = _view.IncludeBenefits ? CalcuLateBenefits(employee) : 0;
+
                 double grossPay = regularPay + overtimePay + allowancePay + bonusPay + benefitPay;
                 double totalDeductions = deductions + absentDeductions + lateDeductions + earlyOutDeductions + sssDeduction + pagIbigDeduction + philHealthDeduction;
                 double netPay = grossPay - totalDeductions;
@@ -308,6 +323,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             }
 
             return payrollList.OrderBy(c => c.Employee).ToList();
+        }
+
+        private double CalcuLateBenefits(Employee employee)
+        {
+            return employee.Benefits.Sum(b => b.Amount);
         }
         private bool IsCoveredByLeave(DateTime date, IEnumerable<Leave> approvedLeaves)
         {

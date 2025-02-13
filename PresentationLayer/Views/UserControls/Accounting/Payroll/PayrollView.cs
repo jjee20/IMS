@@ -46,6 +46,8 @@ namespace PresentationLayer.Views.UserControls
             {
                 PrintPayslipEvent?.Invoke(this, e);
             };
+
+            btnBenefits.CheckedChanged += (s, e) => IncludeBenefitsEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public void SetPayrollListBindingSource(BindingSource PayrollList)
@@ -69,6 +71,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler PrintPayrollEvent;
         public event DataGridViewCellEventHandler PrintPayslipEvent;
         public event EventHandler SearchEvent;
+        public event EventHandler IncludeBenefitsEvent;
 
         public static PayrollView GetInstance(TabPage parentContainer)
         {

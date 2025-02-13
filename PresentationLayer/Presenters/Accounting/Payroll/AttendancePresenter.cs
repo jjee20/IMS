@@ -300,6 +300,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void CleanviewFields()
         {
             LoadAllAttendanceList();
+            if(_view.IsIndividual) LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
             _view.AttendanceId = 0;
             _view.IsPresent = true;
             _view.HoursWorked = 8;

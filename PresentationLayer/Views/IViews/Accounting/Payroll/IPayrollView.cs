@@ -12,7 +12,8 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         string Message { get; set; }
         event EventHandler PrintPayrollEvent;
         event DataGridViewCellEventHandler PrintPayslipEvent;
-        event EventHandler SearchEvent;
+        event EventHandler SearchEvent; 
+        event EventHandler IncludeBenefitsEvent;
         void SetPayrollListBindingSource(BindingSource PayrollList);
     }
 }
