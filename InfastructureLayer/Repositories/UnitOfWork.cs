@@ -2,6 +2,9 @@
 
 using InfastructureLayer.DataAccess.Data;
 using InfastructureLayer.Repositories;
+using InfastructureLayer.Repositories.Accounting.Payroll;
+using InfastructureLayer.Repositories.Accounts;
+using InfastructureLayer.Repositories.Inventory;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using ServiceLayer.Services.CommonServices;

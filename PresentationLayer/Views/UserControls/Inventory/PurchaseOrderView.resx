@@ -117,6 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>398, 17</value>
+  </metadata>
+  <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAEZTeXN0ZW0uV2luZG93cy5Gb3JtcywgQ3VsdHVyZT1uZXV0cmFs
+        LCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BQEAAAAmU3lzdGVtLldpbmRvd3MuRm9ybXMu
+        SW1hZ2VMaXN0U3RyZWFtZXIBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAtgMAAAJNU0Z0AUkBTAMBAQAB
+        EAEAARABAAEgAQABIAEABP8BIQEACP8BQgFNATYHAAE2AwABKAMAAYADAAEgAwABAQEAASAGAAFA/wD/
+        AP8A/wD/AP8A/wD/AP8A/wD/AP8AWgAD8wH7BP8DOwFb/wDxAAPzAfsM/wM7AVv/AOkAA/MB+wT/A/UB
+        /AM3AVUI/wM7AVv/AOEAA/MB+wT/A/UB/AgAAzcBVQj/AzsBW/8A2QAD8wH7BP8D9QH8EAADNwFVCP8D
+        OwFb/wDRAAPzAfsE/wP1AfwYAAM3AVUI/wM7AVv/AMkAA/MB+wT/A/UB/CAAAzcBVQj/AzsBW/8AwQAD
+        8wH7BP8D9QH8KAADNwFVCP8DOwFb/wC5AAPzAfsE/wP1AfwUAAPzAfsE/wM7AVsQAAM3AVUI/wM7AVv/
+        ALEAA/MB+wT/A/UB/BQAA/MB+wz/AzsBWxAAAzcBVQj/AzsBW/8AqQADxQHjBP8D8wH7FAAD8wH7BP8D
+        8wH7AzgBVwj/AzgBVxAAAzgBVwj//wCpAAMwAUkDxQHjFAAD8wH7BP8D8wH7CAADOAFXCP8DOAFXEAAD
+        NAFQA8UB4/8AwQAD8wH7BP8D9QH8EAADNwFVCP8DOwFb/wDRAAPzAfsE/wP1AfwYAAM3AVUI/wM7AVv/
+        AMkAA/MB+wT/A/UB/CAAAzcBVQj/AzsBW/8AwQAD8wH7BP8D9QH8KAADNwFVCP8DOwFb/wC5AAPzAfsE
+        /wP1AfwwAAM3AVUI/wM7AVv/ALEAA/MB+wT/A/UB/DgAAzcBVQj/AzsBW/8AqQADxQHjBP8D8wH7QAAD
+        OAFXCP//AKkAAzABSQPFAeNIAAM0AVADxQHj/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wChAAFCAU0B
+        PgcAAT4DAAEoAwABgAMAASADAAEBAQABAQYAAQIWAAP/AQAE/wwABP8MAAT/DAAE/wwABP8MAAT/DAAB
+        /wH+AT8B/wwAAf8B/AEfAf8MAAH/AfgBDwH/DAAB/wHxAYcB/wwAAf8B4wHDAf8MAAH/AccB4QH/DAAB
+        /wGPAfAB/wwAAf8BHwH4AX8MAAH+AT4BPAE/DAAB/AF8AR4BHwwAAvgBDwEfDAAB+QHxAYcBnwwAAf8B
+        4wHDAf8MAAH/AccB4QH/DAAB/wGPAfAB/wwAAf8BHwH4AX8MAAH+AT8B/AE/DAAB/AF/Af4BHwwAAfgC
+        /wEfDAAB+QL/AZ8MAAT/DAAE/wwABP8MAAT/DAAE/wwABP8MAAs=
+</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnImport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

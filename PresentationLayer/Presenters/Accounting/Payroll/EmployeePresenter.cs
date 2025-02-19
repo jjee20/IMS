@@ -49,10 +49,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.DeleteEvent += Delete;
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
-            _view.AddDepartmentEvent += AddDepartment;
-            _view.AddJobPositionEvent += AddJobPosition;
-            _view.AddShiftEvent += AddShift;
-            _view.ReloadEvent += ReloadAll;
 
             //Load
 
@@ -78,34 +74,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllShiftList();
             LoadAllEmployeeList();
         }
-
-        private void AddShift(object? sender, EventArgs e)
-        {
-            var formDialog = new FormDialog();
-            IShiftView view = ShiftView.GetInstanceAsDialog(formDialog);
-
-            new ShiftPresenter(view, _unitOfWork);
-            formDialog.ShowDialog();
-        }
-
-        private void AddJobPosition(object? sender, EventArgs e)
-        {
-            var formDialog = new FormDialog();
-            IJobPositionView view = JobPositionView.GetInstanceAsDialog(formDialog);
-            new JobPositionPresenter(view, _unitOfWork);
-
-            formDialog.ShowDialog();
-        }
-
-        private void AddDepartment(object? sender, EventArgs e)
-        {
-            var formDialog = new FormDialog();
-            IDepartmentView view = DepartmentView.GetInstanceAsDialog(formDialog);
-            new DepartmentPresenter(view, _unitOfWork);
-
-            formDialog.ShowDialog();
-        }
-
         private void AddNew(object? sender, EventArgs e)
         {
             _view.IsEdit = false;

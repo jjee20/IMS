@@ -32,10 +32,6 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SaveEvent;
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
-        event EventHandler AddDepartmentEvent;
-        event EventHandler AddJobPositionEvent;
-        event EventHandler AddShiftEvent;
-        event EventHandler ReloadEvent;
 
         void SetEmployeeListBindingSource(BindingSource EmployeeList);
         void SetGenderListBindingSource(BindingSource GenderList);

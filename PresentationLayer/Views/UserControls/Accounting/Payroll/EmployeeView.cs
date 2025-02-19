@@ -105,23 +105,6 @@ namespace PresentationLayer.Views.UserControls
                 }
                 btnReturn.Visible = false;
             };
-
-            btnAddDepartment.Click += delegate
-            {
-                AddDepartmentEvent?.Invoke(this, EventArgs.Empty); 
-            };
-            btnAddJobPosition.Click += delegate
-            {
-                AddJobPositionEvent?.Invoke(this, EventArgs.Empty); 
-            };
-            btnAddShift.Click += delegate
-            {
-                AddShiftEvent?.Invoke(this, EventArgs.Empty); 
-            };
-            btnRefresh.Click += delegate
-            {
-                ReloadEvent?.Invoke(this, EventArgs.Empty); 
-            };
         }
 
         //Properties
@@ -263,10 +246,6 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler DeleteEvent;
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
-        public event EventHandler AddDepartmentEvent;
-        public event EventHandler AddJobPositionEvent;
-        public event EventHandler AddShiftEvent;
-        public event EventHandler ReloadEvent;
 
         private static EmployeeView? instance;
         public static EmployeeView GetInstance(TabPage parentContainer)

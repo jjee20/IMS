@@ -284,11 +284,23 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void Print(object? sender, EventArgs e)
         {
-            string reportFileName = "AttendanceReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportFileName = "";
+            ReportDataSource reportDataSource;
+            if (_view.IsIndividual)
+            {
+                reportFileName = "IndividualAttendanceReport.rdlc";
+                reportDataSource = new ReportDataSource("Attendance", IndividualAttendanceList);
+            }
+            else
+            {
+                reportFileName = "AttendanceReport.rdlc";
+                reportDataSource = new ReportDataSource("Attendance", AttendanceList);
+            }
+
+
+            var reportDirectory = Path.Combine(Application.StartupPath, "Reports");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
-            var reportDataSource = new ReportDataSource("Attendance", AttendanceList);
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
