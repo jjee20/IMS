@@ -789,7 +789,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>kYUR038zmbiag1PfzfYUK/V81zNU89b6BR8yQThOfAQ=</dsig:DigestValue>
+      <dsig:DigestValue>OJG9cx1HLPOMsP3/l7oOxK7Hbh3gKRRULqiS7B/333M=</dsig:DigestValue>
     </hash>
   </file>
   <file name="RavenTech_ERP.dll.config" size="1074">
@@ -807,7 +807,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>PlOLPEyfCWUgAGmBjcTXDkH1q539iIbvL+Sy/T1fwlA=</dsig:DigestValue>
+      <dsig:DigestValue>TBG0aSD7wbuKfpx56Wo7fAlwhk95lPFlJHOahjrpQvk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="RavenTech_ERP.runtimeconfig.json" size="676">
@@ -819,6 +819,15 @@
       <dsig:DigestValue>FbGZpmKdGIvd5XD8AAVgI97R86n7ef2KD7CDoWcQEYQ=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Reports\Accounting\Payroll\AllowanceReport.rdlc" size="356282">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>uKL7vm68HoocZuf/bbBjBaq7etFI5wavICD4b8+S06E=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Reports\Accounting\Payroll\AttendanceReport.rdlc" size="359224">
     <hash>
       <dsig:Transforms>
@@ -828,6 +837,51 @@
       <dsig:DigestValue>YJjOPH8WTU5ky9mpZZDf+TrgLP+s0ohwSWHVBC86Oe4=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Reports\Accounting\Payroll\BenefitReport.rdlc" size="349376">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>IAtF1a9NtplMCX7OazaVoa3PBS0lFjqKeCPsFzkmwdA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\BonusReport.rdlc" size="355088">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>cPcqLfZHoB7xDMV1Z0JLg7xaQe6slOpTL1Q1k8xJBMc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\Contribution.rdlc" size="353499">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>bnSqJzIjUlUUC12whf8f4G+x1uNZA/RFDc33qZgkY+I=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\DeductionReport.rdlc" size="349427">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Cx0JUThLresLdCwdff9QAhRbD6gPgp0VdQ7gXzsR8iE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\EmployeeReport.rdlc" size="380626">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>2v9w5P/i6Ty/NTsqOgZuw7I/wazdReBL0nL8scFVatE=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Reports\Accounting\Payroll\IndividualAttendanceReport.rdlc" size="357548">
     <hash>
       <dsig:Transforms>
@@ -835,6 +889,24 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>2f6XDH2amAv0NttU5XTcypx8RAgbl5EZVVeQSwcVc1Q=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\JobPositionReport.rdlc" size="343889">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>dijndebvKdDi07HhPy56TP9snvu7Gmh67E6aiFxEcgw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\LeaveReport.rdlc" size="357996">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>L5qzfy+FyQQfmwxypTEMnRLjQdC+O63vHU4/Ak4HDmA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Reports\Accounting\Payroll\PayrollReport.rdlc" size="390722">
@@ -853,6 +925,33 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>e4xZUJYq7HiGlES8oAS/iSery8u7vwFYAN2FHkzY0ug=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\ProjectReport.rdlc" size="343900">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>uLLkXa6MobVBptYB1hduYkDW0Rt90cesss07+OwTizw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\ShiftReport.rdlc" size="349709">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>j7jcjbHEJKjA0kjUQYxuS9ypwqtRWnf/8U3nUS31rkk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Reports\Accounting\Payroll\TaxReport.rdlc" size="346733">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>tvRBWDq9Otxxw4eZdyCzxZvfSJPx/FT2QWoE9VT5GLc=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Reports\Accounts\CustomerReport.rdlc" size="358087">
