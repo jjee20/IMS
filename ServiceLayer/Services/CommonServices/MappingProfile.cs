@@ -95,6 +95,7 @@ namespace ServiceLayer.Services.CommonServices
             CreateMap<Allowance, AllowanceViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                  .ForMember(dest => dest.IsRecurring, opt => opt.MapFrom(src => src.IsRecurring.ToString()))
+                 .ForMember(dest => dest.DateGranted, opt => opt.MapFrom(src => src.DateGranted.ToShortDateString()))
                 .ReverseMap();
             CreateMap<Deduction, DeductionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))

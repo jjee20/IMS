@@ -248,7 +248,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 _view.IsSuccessful = true;
 
                 // Clear the form fields after saving
-                CleanviewFields();
+                CleanviewFields(); 
+                
+                if (_view.IsIndividual)
+                {
+                    LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
+                }
             }
             catch (Exception ex)
             {
@@ -312,7 +317,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void CleanviewFields()
         {
             LoadAllAttendanceList();
-            if(_view.IsIndividual) LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
             _view.AttendanceId = 0;
             _view.IsPresent = true;
             _view.HoursWorked = 8;
@@ -321,7 +325,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
             var employees = _unitOfWork.Employee.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
-
             var summaryList = new List<AttendanceViewModel>();
 
             int totalDays = 0;
@@ -344,14 +347,19 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     .ToList();
 
                 var approvedLeaves = employee.Leaves
-                    .Where(l => l.StartDate.Date <= startDate.Date && l.EndDate.Date >= endDate.Date && l.Status == Status.Approved)
+                    .Where(l => l.StartDate.Date <= startDate.Date && l.EndDate.Date >= endDate.Date &&
+                     l.LeaveType != LeaveType.UnpaidLeave && l.Status == Status.Approved)
                     .ToList();
 
-                int daysPresent = attendances.Count(a => a.IsPresent);
-                int daysLate = attendances.Count(a => a.TimeIn > employee.Shift.StartTime);
-                int daysEarlyOut = attendances.Count(a => a.TimeOut < employee.Shift.EndTime);
+
+                TimeSpan shiftStartTime = (TimeSpan)(employee.Shift?.StartTime);
+                TimeSpan shiftEndTime = (TimeSpan)(employee.Shift?.EndTime);
+
+                int daysPresent = attendances.Count(a => a.IsPresent && !IsCoveredByLeave(a.Date, approvedLeaves));
+                int daysLate = attendances.Count(a => a.TimeIn > shiftStartTime);
+                int daysEarlyOut = attendances.Count(a => a.TimeOut.Hours < shiftEndTime.Hours);
                 int daysOnLeave = approvedLeaves.Sum(l => (l.EndDate - l.StartDate).Days + 1);
-                int daysAbsent = totalDays - (daysPresent + daysOnLeave);
+                int daysAbsent = totalDays > daysPresent ? totalDays - (daysPresent + daysOnLeave) : 0;
 
                 summaryList.Add(new AttendanceViewModel
                 {
@@ -369,7 +377,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             return summaryList.OrderBy(c => c.Employee).ToList();
         }
 
-
+        private bool IsCoveredByLeave(DateTime date, IEnumerable<Leave> approvedLeaves)
+        {
+            return approvedLeaves.Any(leave => date >= leave.StartDate && date <= leave.EndDate);
+        }
         private void LoadAllAttendanceList()
         {
             AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);

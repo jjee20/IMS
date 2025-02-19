@@ -172,14 +172,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             return employee.Allowances?
                 .Where(a => a.EmployeeId == employee.EmployeeId &&
-                            (a.IsRecurring || a.DateGranted >= startDate && a.DateGranted <= endDate))
+                            (a.IsRecurring || a.DateGranted.Date >= startDate.Date && a.DateGranted.Date <= endDate.Date))
                 .Sum(a => a.Amount) ?? 0;
         }
         private double CalculateBonuses(Employee employee, DateTime startDate, DateTime endDate)
         {
             return employee.Bonuses?
                 .Where(b => b.EmployeeId == employee.EmployeeId &&
-                            (b.IsOneTime || b.DateGranted >= startDate && b.DateGranted <= endDate))
+                            (b.IsOneTime || b.DateGranted.Date >= startDate.Date && b.DateGranted.Date <= endDate.Date))
                 .Sum(b => b.Amount) ?? 0;
         }
         private double CalculateContributions(IEnumerable<Contribution> contributions, ContributionType type, double basicSalary)
@@ -259,7 +259,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                      .Aggregate(TimeSpan.Zero, (total, attendance) =>
                      {
                          var earlyOut = shiftEndTime - attendance.TimeOut;
-                         return (TimeSpan)(earlyOut > TimeSpan.Zero ? total + earlyOut : total);
+                         return earlyOut > TimeSpan.Zero ? total + earlyOut : total;
                      });
 
                 int totalPresentDays = employeeAttendances.Where(a => a.IsPresent && !IsCoveredByLeave(a.Date, approvedLeaves)).Count();
@@ -305,20 +305,20 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     Employee = $"{employee.LastName}, {employee.FirstName}",
                     DailyRate = employee.BasicSalary,
                     DaysWorked = totalPresentDays,
-                    BasicSalary = Math.Round(regularPay, 2),
-                    OvertimePay = Math.Round(overtimePay, 2),
-                    Allowances = Math.Round(allowancePay, 2),
-                    Benefits = Math.Round(benefitPay, 2),
-                    Bonuses = Math.Round(bonusPay, 2),
-                    Deductions = Math.Round(deductions, 2),
-                    Absent = Math.Round(absentDeductions, 2),
-                    LateAndEarly = Math.Round(lateDeductions + earlyOutDeductions, 2),
-                    SSSContribution = Math.Round(sssDeduction, 2),
-                    PagibigContribution = Math.Round(pagIbigDeduction, 2),
-                    PhilHealthContribution = Math.Round(philHealthDeduction, 2),
-                    TotalDeduction = Math.Round(totalDeductions, 2),
-                    GrossPay = Math.Round(grossPay, 2),
-                    NetPay = Math.Round(netPay, 2)
+                    BasicSalary = Math.Round(regularPay, 0),
+                    OvertimePay = Math.Round(overtimePay, 0),
+                    Allowances = Math.Round(allowancePay, 0),
+                    Benefits = Math.Round(benefitPay, 0),
+                    Bonuses = Math.Round(bonusPay, 0),
+                    Deductions = Math.Round(deductions, 0),
+                    Absent = Math.Round(absentDeductions, 0),
+                    LateAndEarly = Math.Round(lateDeductions + earlyOutDeductions, 0),
+                    SSSContribution = Math.Round(sssDeduction, 0),
+                    PagibigContribution = Math.Round(pagIbigDeduction, 0),
+                    PhilHealthContribution = Math.Round(philHealthDeduction, 0),
+                    TotalDeduction = Math.Round(totalDeductions, 0),
+                    GrossPay = Math.Round(grossPay, 0),
+                    NetPay = Math.Round(netPay, 0)
                 });
             }
 
