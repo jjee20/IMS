@@ -41,7 +41,7 @@ namespace PresentationLayer.Views.UserControls
             //Add New
             btnAdd.Click += delegate
             {
-                if (Guna2TabControl1.TabPages.Contains(tabPage1))
+                if (Guna2TabControl1.TabPages.Contains(tabPage1) || Guna2TabControl1.TabPages.Contains(tabPage3))
                 {
                     tabPage2.Text = "Add New";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
