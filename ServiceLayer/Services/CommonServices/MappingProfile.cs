@@ -99,12 +99,14 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
             CreateMap<Deduction, DeductionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
+                 .ForMember(dest => dest.DateDeducted, opt => opt.MapFrom(src => src.DateDeducted.ToShortDateString()))
                 .ReverseMap();
             CreateMap<Benefit, BenefitViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                 .ReverseMap();
             CreateMap<Bonus, BonusViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
+                 .ForMember(dest => dest.DateGranted, opt => opt.MapFrom(src => src.DateGranted.ToShortDateString()))
                 .ReverseMap();
             CreateMap<Employee, EmployeeViewModel>()
                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.LastName}, {src.FirstName}"))

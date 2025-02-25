@@ -128,6 +128,11 @@ namespace PresentationLayer.Views.UserControls
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        public DateTime DateDeducted
+        {
+            get { return txtDateDeducted.Value; }
+            set { txtDateDeducted.Value = value; }
+        }
         public int EmployeeId
         {
             get { return (int)txtEmployee.SelectedValue; }

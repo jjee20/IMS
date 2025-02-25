@@ -303,7 +303,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             }
 
 
-            var reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            var reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Accounting", "Payroll");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportView = new ReportView(reportPath, reportDataSource, localReport);

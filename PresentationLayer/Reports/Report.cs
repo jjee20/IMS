@@ -10,6 +10,7 @@ namespace PresentationLayer.Reports
 {
     public static class Reports
     {
+
         public static void Load(string path, ReportDataSource dataSource, LocalReport report)
         {
             // Sample

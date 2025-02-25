@@ -16,6 +16,8 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public string Employee { get; set; }
         [Display(Name = "Deduction Type")]
         public string DeductionType { get; set; }
+        [Display(Name = "Date of Deduction")]
+        public DateTime DateDeducted { get; set; }
         public double Amount { get; set; }
         public string Description { get; set; }
     }

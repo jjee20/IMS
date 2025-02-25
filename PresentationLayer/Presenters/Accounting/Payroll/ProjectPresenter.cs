@@ -122,7 +122,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ProjectReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Accounting", "Payroll");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Project", ProjectList);

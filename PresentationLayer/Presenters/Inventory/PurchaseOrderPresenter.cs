@@ -97,7 +97,7 @@ namespace PresentationLayer.Presenters
             PurchaseOrderVM = PurchaseOrder;
 
             string reportFileName = "PurchaseOrderReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
 
             var localReport = new LocalReport();
@@ -332,7 +332,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PurchaseReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
 
             var localReport = new LocalReport();

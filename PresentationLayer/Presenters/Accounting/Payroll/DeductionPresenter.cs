@@ -74,6 +74,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             model.Amount = _view.Amount;
             model.EmployeeId = _view.EmployeeId;
             model.Description = _view.Description;
+            model.DateDeducted = _view.DateDeducted;
 
             try
             {
@@ -121,6 +122,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Amount = entity.Amount;
             _view.EmployeeId = entity.EmployeeId;
             _view.Description = entity.Description;
+            _view.DateDeducted = entity.DateDeducted;
         }
         private void Delete(object? sender, EventArgs e)
         {
@@ -143,7 +145,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "DeductionReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Accounting", "Payroll");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Deduction", DeductionList);
@@ -166,7 +168,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllDeductionList()
         {
-            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.GetAll());
+            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.GetAll(includeProperties: "Employee"));
             DeductionBindingSource.DataSource = DeductionList;//Set data source.
         }
         private void LoadAllDeductionTypeList()

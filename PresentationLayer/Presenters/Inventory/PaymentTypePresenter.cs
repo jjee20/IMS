@@ -117,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PaymentTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("PaymentType", PaymentTypeList);

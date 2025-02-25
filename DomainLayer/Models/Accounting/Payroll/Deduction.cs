@@ -17,6 +17,7 @@ namespace DomainLayer.Models.Accounting.Payroll
         public DeductionType DeductionType { get; set; }
         public double Amount { get; set; }
         public string Description { get; set; }
+        public DateTime DateDeducted { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
 

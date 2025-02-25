@@ -140,7 +140,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "BillReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Bill", BillList);

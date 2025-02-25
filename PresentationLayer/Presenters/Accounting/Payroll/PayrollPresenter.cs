@@ -137,7 +137,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             try
             {
                 string reportFileName = "PayrollReport.rdlc";
-                string reportDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
+                string reportDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "Accounting", "Payroll");
                 string reportPath = Path.Combine(reportDirectory, reportFileName);
 
                 if (!File.Exists(reportPath))

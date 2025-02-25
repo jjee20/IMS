@@ -9,6 +9,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         public DeductionType DeductionType { get; set; }
         double Amount { get; set; }
         string Description { get; set; }
+        DateTime DateDeducted { get; set; }
         int EmployeeId { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }
