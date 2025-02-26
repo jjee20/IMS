@@ -136,10 +136,6 @@ namespace PresentationLayer.Views.UserControls
                 ShowAttendanceEvent?.Invoke(this, e);
                 btnReturn.Visible = true;
             };
-            btnImport.Click += delegate
-            {
-                ImportEvent?.Invoke(this, EventArgs.Empty);
-            };
         }
 
         //Properties
