@@ -31,26 +31,30 @@ namespace PresentationLayer.Views.UserControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContributionView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
             dgList = new Guna2DataGridView();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            lblMandatoryProvidentFund = new Guna2TextBox();
+            lblMadatoryProvidentFund = new Guna2HtmlLabel();
             guna2HtmlLabel5 = new Guna2HtmlLabel();
             txtContributionType = new Guna2ComboBox();
             txtRate = new Guna2TextBox();
@@ -147,26 +151,26 @@ namespace PresentationLayer.Views.UserControls
             // 
             // dgList
             // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dgList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dgList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 14F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgList.ColumnHeadersHeight = 50;
             dgList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgList.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgList.DefaultCellStyle = dataGridViewCellStyle6;
             dgList.Dock = DockStyle.Fill;
             dgList.GridColor = Color.FromArgb(231, 229, 255);
             dgList.Location = new Point(3, 4);
@@ -214,6 +218,8 @@ namespace PresentationLayer.Views.UserControls
             // 
             materialCard2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(lblMandatoryProvidentFund);
+            materialCard2.Controls.Add(lblMadatoryProvidentFund);
             materialCard2.Controls.Add(guna2HtmlLabel5);
             materialCard2.Controls.Add(txtContributionType);
             materialCard2.Controls.Add(txtRate);
@@ -232,6 +238,41 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Size = new Size(1828, 715);
             materialCard2.TabIndex = 0;
             // 
+            // txtMandatoryProvidentFund
+            // 
+            lblMandatoryProvidentFund.Anchor = AnchorStyles.None;
+            lblMandatoryProvidentFund.CustomizableEdges = customizableEdges13;
+            lblMandatoryProvidentFund.DefaultText = "";
+            lblMandatoryProvidentFund.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            lblMandatoryProvidentFund.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            lblMandatoryProvidentFund.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            lblMandatoryProvidentFund.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            lblMandatoryProvidentFund.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            lblMandatoryProvidentFund.Font = new Font("Segoe UI", 10F);
+            lblMandatoryProvidentFund.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            lblMandatoryProvidentFund.Location = new Point(370, 577);
+            lblMandatoryProvidentFund.Margin = new Padding(3, 5, 3, 5);
+            lblMandatoryProvidentFund.Name = "txtMandatoryProvidentFund";
+            lblMandatoryProvidentFund.PasswordChar = '\0';
+            lblMandatoryProvidentFund.PlaceholderText = "Enter Mandatory Provident Fund (WISP)";
+            lblMandatoryProvidentFund.SelectedText = "";
+            lblMandatoryProvidentFund.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            lblMandatoryProvidentFund.Size = new Size(514, 56);
+            lblMandatoryProvidentFund.TabIndex = 20;
+            lblMandatoryProvidentFund.Visible = false;
+            // 
+            // lblMadatoryProvidentFund
+            // 
+            lblMadatoryProvidentFund.Anchor = AnchorStyles.None;
+            lblMadatoryProvidentFund.BackColor = Color.Transparent;
+            lblMadatoryProvidentFund.Font = new Font("Segoe UI", 10F);
+            lblMadatoryProvidentFund.Location = new Point(367, 519);
+            lblMadatoryProvidentFund.Name = "lblMadatoryProvidentFund";
+            lblMadatoryProvidentFund.Size = new Size(199, 19);
+            lblMadatoryProvidentFund.TabIndex = 19;
+            lblMadatoryProvidentFund.Text = "Mandatory Provident Fund (WISP)";
+            lblMadatoryProvidentFund.Visible = false;
+            // 
             // guna2HtmlLabel5
             // 
             guna2HtmlLabel5.Anchor = AnchorStyles.None;
@@ -247,7 +288,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             txtContributionType.Anchor = AnchorStyles.None;
             txtContributionType.BackColor = Color.Transparent;
-            txtContributionType.CustomizableEdges = customizableEdges1;
+            txtContributionType.CustomizableEdges = customizableEdges15;
             txtContributionType.DrawMode = DrawMode.OwnerDrawFixed;
             txtContributionType.DropDownStyle = ComboBoxStyle.DropDownList;
             txtContributionType.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -257,14 +298,15 @@ namespace PresentationLayer.Views.UserControls
             txtContributionType.ItemHeight = 50;
             txtContributionType.Location = new Point(367, 287);
             txtContributionType.Name = "txtContributionType";
-            txtContributionType.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtContributionType.ShadowDecoration.CustomizableEdges = customizableEdges16;
             txtContributionType.Size = new Size(514, 56);
             txtContributionType.TabIndex = 17;
+            txtContributionType.SelectedIndexChanged += txtContributionType_SelectedIndexChanged;
             // 
             // txtRate
             // 
             txtRate.Anchor = AnchorStyles.None;
-            txtRate.CustomizableEdges = customizableEdges3;
+            txtRate.CustomizableEdges = customizableEdges17;
             txtRate.DefaultText = "";
             txtRate.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtRate.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -279,14 +321,14 @@ namespace PresentationLayer.Views.UserControls
             txtRate.PasswordChar = '\0';
             txtRate.PlaceholderText = "Enter  Amount";
             txtRate.SelectedText = "";
-            txtRate.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtRate.ShadowDecoration.CustomizableEdges = customizableEdges18;
             txtRate.Size = new Size(514, 56);
             txtRate.TabIndex = 16;
             // 
             // txtMaximumLimit
             // 
             txtMaximumLimit.Anchor = AnchorStyles.None;
-            txtMaximumLimit.CustomizableEdges = customizableEdges5;
+            txtMaximumLimit.CustomizableEdges = customizableEdges19;
             txtMaximumLimit.DefaultText = "";
             txtMaximumLimit.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtMaximumLimit.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -301,7 +343,7 @@ namespace PresentationLayer.Views.UserControls
             txtMaximumLimit.PasswordChar = '\0';
             txtMaximumLimit.PlaceholderText = "Enter Maximum Range";
             txtMaximumLimit.SelectedText = "";
-            txtMaximumLimit.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtMaximumLimit.ShadowDecoration.CustomizableEdges = customizableEdges20;
             txtMaximumLimit.Size = new Size(514, 56);
             txtMaximumLimit.TabIndex = 15;
             // 
@@ -341,7 +383,7 @@ namespace PresentationLayer.Views.UserControls
             // txtMinimumLimit
             // 
             txtMinimumLimit.Anchor = AnchorStyles.None;
-            txtMinimumLimit.CustomizableEdges = customizableEdges7;
+            txtMinimumLimit.CustomizableEdges = customizableEdges21;
             txtMinimumLimit.DefaultText = "";
             txtMinimumLimit.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtMinimumLimit.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -356,7 +398,7 @@ namespace PresentationLayer.Views.UserControls
             txtMinimumLimit.PasswordChar = '\0';
             txtMinimumLimit.PlaceholderText = "Enter Minimum Range";
             txtMinimumLimit.SelectedText = "";
-            txtMinimumLimit.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtMinimumLimit.ShadowDecoration.CustomizableEdges = customizableEdges22;
             txtMinimumLimit.Size = new Size(514, 56);
             txtMinimumLimit.TabIndex = 8;
             // 
@@ -483,7 +525,7 @@ namespace PresentationLayer.Views.UserControls
             // txtSearch
             // 
             txtSearch.CharacterCasing = CharacterCasing.Upper;
-            txtSearch.CustomizableEdges = customizableEdges9;
+            txtSearch.CustomizableEdges = customizableEdges23;
             txtSearch.DefaultText = "";
             txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -500,7 +542,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
-            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges24;
             txtSearch.Size = new Size(378, 62);
             txtSearch.TabIndex = 11;
             // 
@@ -621,5 +663,7 @@ namespace PresentationLayer.Views.UserControls
         private Button btnReturn;
         private Guna2TextBox txtSearch;
         private Button btnSave;
+        private Guna2TextBox lblMandatoryProvidentFund;
+        private Guna2HtmlLabel lblMadatoryProvidentFund;
     }
 }

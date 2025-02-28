@@ -66,6 +66,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             model.EmployeeRate = _view.Rate;
             model.MinimumLimit = _view.MinimumLimit;
             model.MaximumLimit = _view.MaximumLimit;
+            model.MandatoryProvidentFund = _view.MandatoryProvidentFund;
 
             try
             {
@@ -129,6 +130,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Rate = entity.EmployeeRate;
             _view.MinimumLimit = entity.MinimumLimit;
             _view.MaximumLimit = entity.MaximumLimit;
+            _view.MandatoryProvidentFund = (double)entity.MandatoryProvidentFund;
         }
         private void Delete(object? sender, EventArgs e)
         {

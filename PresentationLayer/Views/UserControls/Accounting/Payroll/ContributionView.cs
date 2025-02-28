@@ -133,6 +133,11 @@ namespace PresentationLayer.Views.UserControls
             get { return Convert.ToDouble(txtMaximumLimit.Text); }
             set { txtMaximumLimit.Text = value.ToString(); }
         }
+        public double MandatoryProvidentFund
+        {
+            get { return Convert.ToDouble(lblMandatoryProvidentFund.Text); }
+            set { lblMandatoryProvidentFund.Text = value.ToString(); }
+        }
         public bool IsEdit
         {
             get { return isEdit; }
@@ -187,6 +192,20 @@ namespace PresentationLayer.Views.UserControls
                 instance.Dock = DockStyle.Fill;
             }
             return instance;
+        }
+
+        private void txtContributionType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if((ContributionType)txtContributionType.SelectedValue == ContributionType.SSS)
+            {
+                lblMandatoryProvidentFund.Visible = true;
+                lblMadatoryProvidentFund.Visible = true;
+            }
+            else
+            {
+                lblMandatoryProvidentFund.Visible = false;
+                lblMandatoryProvidentFund.Visible = false;
+            }
         }
     }
 }

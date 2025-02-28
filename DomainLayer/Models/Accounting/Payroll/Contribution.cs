@@ -12,12 +12,12 @@ namespace DomainLayer.Models.Accounting.Payroll
     public class Contribution
     {
         [Key]
-        public int ContributionId { get; set; } // Primary Key
-        public ContributionType ContributionType { get; set; } // Example: "SSS", "Pag-IBIG", "PhilHealth"
-        public double EmployeeRate { get; set; } // Percentage or fixed amount
-        public double EmployerRate { get; set; } // Percentage or fixed amount
-        public double MinimumLimit { get; set; } // Max amount (if applicable)
-        public double MaximumLimit { get; set; } // Max amount (if applicable)
+        public int ContributionId { get; set; }
+        public ContributionType ContributionType { get; set; }
+        public double EmployeeRate { get; set; }
+        public double EmployerRate { get; set; }
+        public double MinimumLimit { get; set; }
+        public double MaximumLimit { get; set; }
+        public double? MandatoryProvidentFund { get; set; }
     }
-
 }

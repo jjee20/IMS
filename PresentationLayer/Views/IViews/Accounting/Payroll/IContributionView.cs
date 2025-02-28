@@ -10,6 +10,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         double Rate { get; set; }
         double MinimumLimit { get; set; }
         double MaximumLimit { get; set; }
+        double MandatoryProvidentFund { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }
         string Message { get; set; }

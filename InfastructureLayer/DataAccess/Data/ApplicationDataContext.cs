@@ -18,24 +18,9 @@ namespace InfastructureLayer.DataAccess.Data
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-#if DEBUG
-            string environment = "Development";
-#else
-            string environment = "Production";
-#endif
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["Environment"].Value = environment;
-            config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("appSettings");
-
             // Fetch the corresponding connection string
-            string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
-
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new Exception($"Connection string for environment '{environment}' not found.");
-            }
-
+            string connectionString = ConfigurationManager.ConnectionStrings["Environment"]?.ConnectionString ?? "";
+            
             var connection = new SqlConnection(connectionString);
             optionsBuilder.UseSqlServer(connection);
             //optionsBuilder.UseSqlServer("Data Source=JAYCEE\\SQLEXPRESS;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
