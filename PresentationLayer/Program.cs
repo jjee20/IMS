@@ -38,9 +38,9 @@ namespace PresentationLayer
             // Pass dependencies to the presenter
             ILoginView mainView = new LoginView();
             var presenter = new LoginPresenter(mainView, unitOfWork);
-            //Application.Run((Form)mainView);
+            Application.Run((Form)mainView);
 
-            Application.Run(new POSView());
+            //Application.Run(new POSView());
         }
 
     }

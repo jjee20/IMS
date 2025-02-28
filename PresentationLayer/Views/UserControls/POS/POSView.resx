@@ -120,39 +120,6 @@
   <metadata name="guna2BorderlessForm1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="tableLayoutPanel1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Panel1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="tableLayoutPanel3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Panel3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="flowLayoutPanel1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="materialCard4.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2PictureBox1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="guna2PictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4020,21 +3987,6 @@
         rgEgB3eXy+VyuVwul+tVL5H/H18+aj8uXO9bAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="materialCard5.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label4.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label5.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label6.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2PictureBox2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAu4AAALuCAYAAADxHZPKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAW
@@ -7901,21 +7853,6 @@
         rgEgB3eXy+VyuVwul+tVL5H/H18+aj8uXO9bAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="materialCard6.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label7.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label8.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label9.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2PictureBox3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2PictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAu4AAALuCAYAAADxHZPKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAW
@@ -11782,21 +11719,6 @@
         rgEgB3eXy+VyuVwul+tVL5H/H18+aj8uXO9bAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="materialCard7.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label10.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label11.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label12.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2PictureBox4.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2PictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAu4AAALuCAYAAADxHZPKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAW
@@ -15663,39 +15585,16 @@
         rgEgB3eXy+VyuVwul+tVL5H/H18+aj8uXO9bAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="tableLayoutPanel2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Panel2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Button14.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Button13.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Button12.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Button11.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Button10.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2Button9.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="materialCard3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="materialCard1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2CircleButton1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="guna2Button16.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAAMkAAADJAca6Nd8AAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAAAwElEQVRYR+2X0QmEMBBExU9rs4ir0TKuAiu4NnIzYmCRweFAsh+3Aw/CJjoTNAmZWms/A83gBd4n
+        bM9qrEMWHdAK2IisaqxDFh3QFow7mxrrkEUHtAfjzq7GOmTRQbNg3KkAFaAC/EkAaAGf0zTC2qKeuYPi
+        wcK9ndsrZ+ZQ5h32qWeu0Iue9D5OMvWyEdD7OE5V5wjonR8g/RPk/oRqadwBPbsMVdEBcRbRnNRWXAEq
+        QAUYGiD9apZ+OX3oet6mL5pOESwGKCwKAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="guna2CircleButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAWgAAAFoCAYAAAB65WHVAAAABGdBTUEAALGPC/xhBQAAF5FJREFUeF7t
@@ -15802,9 +15701,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAMAM/O53/w+q2cd0Hhd6jQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="btnExit.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="btnExit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAT
@@ -15816,9 +15712,6 @@
         ctV+YaHQkqq6A0BP4nIFXU9AAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="guna2Button7.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2Button7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -15839,9 +15732,6 @@
         gg==
 </value>
   </data>
-  <metadata name="guna2Button6.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2Button6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAH
@@ -15861,9 +15751,6 @@
         6APKOWiptcRZ0MOpTthG+NvJ5X4C4LLw8A2rCdQAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="guna2Button4.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2Button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -15883,9 +15770,6 @@
         b73yb3DvIAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="guna2Button3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2Button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -15901,9 +15785,6 @@
         GEOwnYaflx78Ycz5v4C/p4AiT39ZJqshfGB6sA22TKwDf/FHKofl7YoAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="guna2Button5.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2Button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -15919,9 +15800,6 @@
         j4AfpO4JAw30r1XKb9BHtgedhvntAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="guna2Button2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2Button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -15940,9 +15818,6 @@
         AAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="guna2Button1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="guna2Button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -15957,15 +15832,48 @@
         J1GfZsk3kgsYxhSmuuYYZ1Anog/H+QbHdNk01KXeGgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="guna2Separator1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="materialCard2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="guna2ImageButton2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="guna2Button15.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAAdcAAAHXAYySCGgAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAAEiUlEQVR4Xu3bWch1UxzH8WN4ja8hMsSFIcqYCzcIuVAyD1dELl4yl0KIOxekuEAUciOZyY1SpkSZ
+        kyIXFDJTMo8Zvt/Hc7Ta/uectfezz1rb0/nVp973ec7eZ63nrL32GvYZLbLIIotUzAbY8J9/rt5shENx
+        Fe7Fq/gSv+CvZb8t/8zf3Ycr4TGb4H8ZK30iHsKPGFe0rR9wP07BGgw+W+JyfIaoQivxMWwZW2Fw8Vq+
+        CF8jKnyfvsKFGEyLOABvICrsPL2OfVE15+FnRAUswfc+H8Vjk78dUaFquBXFbqcb4xFEBanlZWyGucdP
+        vo/Ke5d4DU8u8/7f9c7xAXZEkXRt9l/gZhyHrTEp/s7X3AKPic6V+hb7oUjs8KJCTPMmTkWXW5bX9Gnw
+        HNG5f8dRKBJvdW16e8cD52J9rDRedufgG6Tv4QdSJBagzX3+ReyCvrMrXoLvcaM/KBVHeM1KTvIo5jmB
+        2RSXoI+WlRXH9rnDWytva1lVcWITVbbJZj+kqatDZD8QZ6Wd48GfIqpwyhYyj2u+a3bCh7Bsd/mDrjkJ
+        zcpG7O2Hki3Q7LCvRqe4mJGeKOI9uliHNCOOG55As4x/4ky0is0/ZyXHQc5QcieiMupXHIHsHIboRCmH
+        qkNZlLCZR2VM2Vftg6y4gBmdJHUThhBboc08KmPT+8iaOLl6G50gdSxq53Ckq8s5nIWuxdQ4PY0OTk2b
+        1ZXI3ui6Bvk4pi6guEYfHTjm3L1mtsO7iMqW6w5MzKxm9QpqxTtUTgvNcTH+E3v26MWpp1ErLphEZeoi
+        bMmO6aMXp55CreyO7xCVq63HsNSbPwN7R7neHr049T3Gr5eXxPUoNSq0DziyYVaf4ApS+vpDsNQR5qy9
+        5ToGtTKr43ZrLcyziA5oy7/wnqiR7RGVKWVLDbMzPkJ0UBsXoFZOQFSm1D2YmP3RXHRs41rUTM5y/WWY
+        mqNhM44OnuYB1JwSOy7I6cccNs+My8/RwZM8B7fKauZ0RGVL2bqzZ67XITpJ0zvYBjXjIuzbiMqXehDZ
+        WQ93IzrRmA8p7IHaseONytd0PFrF68rhbnSyn3AQaseNkpwR4SfotHVu87aZpyf7AyejdhyuO/pMyzaJ
+        S/udsxs+x/hk7hLVjp2ZY/i0kpM4OtwcK8qB8HG1G5b+Vzc+BOGGR1TZSG+DM/8Iuff6gzGPDtLW2GYd
+        wKdGio9P9oLLVHaUl6KPvUI7MD9JH4aIKhrx/R3dFo1T1PeQFsRO1MGVu7pt47V+Bt5Ces4c61A09sov
+        ICqM7Ixcg/OJjx0wKdvCic1tmDW9ncQnxorGgVPOMnrKy8TW8TxcXXIRpmuFUw+j+Bb9NYgKU5qVLz4v
+        cdMxd1dmnmz2VR7OOBv2uFGhSvC9z0LV+JxeX+v0bfiexZ4RnBWbn4+wO0uMCtsn36OvR/B6j5uOV8AV
+        2KjwK+GszsHVzI3NIcTRm1+ZcbmszQiuyf0Hv0PkbtBQnkVoHdcWfODCRUm//+M01hlmuv7oU6iOA/yd
+        q7d+NebfjYvVHCtY5fa1yCKLLDIajUZ/AxlCrCZqIVDcAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="guna2Button8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAACJ0lEQVRYR+2WPWyNYRzFL0mJ2hTRkKiJoDG3NTbxMRlYmBgIAxMSxUTUUotU6nPwEZeFBa2EoRUm
+        XzEQgsVHwmRRCR6/83/PTWPuP+1yT/JL/+c5N+d57pvb931rTTU17SqltMIBGDJnYAnMhn7/ldd64zMZ
+        aM9WHeAmfITzoGAqDnAOtGddB/gBm3xBpkzaU3trGIGncAkOw0E4CroimjMYhCOetcdFeAbDOsBCOA1/
+        QAe5D6/gp+cM1KVOzdrjN2jPBY3L0QJSj71O+yjCBKlLnZ7XgtQSoYRpq9ZKp/1oZVM16u41lS3z5EOY
+        jmqtdNg/hKvQm8Q1eODuZSAtlQ9hOqu10mb/DnZGmCC6dsFbz/NBWh2hhOmu1sosmAnjsM7xpKUu+OVu
+        3VekLsfxgfUw7lk3HWl5hAmia0VVWRbb6zATXxCzBb557oG/MCfCBKnLnd3232FzhBJmB7z3vA2+RJAo
+        Or/CVs8fYHsEEmYfvPDcB48jSBSdT+CQ55ewNwIJo9tj4//0LFyPIFF01mHI8xj0RSBhTsIdz8PQH0Gi
+        vMc9z3f/2wOjR23d8xvYHUGi6NwDrz3fgMEIJMwV0NNvBujBscFRmujc6G7tcQEuO4rwNgxAO0grHaWJ
+        zlVVdVkEp+CWowj1TnAMukCa6yhN6qyqY4/jMOIoQv1APsFzGPNyutTtPT7DCS9HoPuz3lb0Dtju5XSp
+        G/Rl98PE+0BTTU2farV/aS2FUr8wy7YAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="guna2ImageButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAu4AAALuCAYAAADxHZPKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAW

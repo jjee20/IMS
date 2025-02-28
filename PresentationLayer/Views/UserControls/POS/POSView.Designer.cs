@@ -31,10 +31,6 @@ namespace RavenTech_ERP.Views.UserControls.POS
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -49,6 +45,10 @@ namespace RavenTech_ERP.Views.UserControls.POS
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges52 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -76,6 +76,14 @@ namespace RavenTech_ERP.Views.UserControls.POS
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges51 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2BorderlessForm1 = new Guna2BorderlessForm(components);
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             guna2CircleButton1 = new Guna2CircleButton();
@@ -125,8 +133,13 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button11 = new Guna2Button();
             guna2Button10 = new Guna2Button();
             guna2Button9 = new Guna2Button();
+            guna2Button8 = new Guna2Button();
+            guna2Button15 = new Guna2Button();
+            guna2Panel4 = new Guna2Panel();
+            guna2Button16 = new Guna2Button();
             materialCard1.SuspendLayout();
             materialCard2.SuspendLayout();
+            materialCard3.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             guna2Panel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -142,6 +155,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox4).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             guna2Panel2.SuspendLayout();
+            guna2Panel4.SuspendLayout();
             SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -165,12 +179,12 @@ namespace RavenTech_ERP.Views.UserControls.POS
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Left;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(0, 53);
+            materialCard1.Location = new Point(0, 71);
             materialCard1.Margin = new Padding(14);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(112, 715);
+            materialCard1.Size = new Size(112, 697);
             materialCard1.TabIndex = 1;
             // 
             // guna2CircleButton1
@@ -188,9 +202,9 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2CircleButton1.HoverState.ForeColor = Color.Transparent;
             guna2CircleButton1.Image = (Image)resources.GetObject("guna2CircleButton1.Image");
             guna2CircleButton1.ImageSize = new Size(50, 50);
-            guna2CircleButton1.Location = new Point(14, 573);
+            guna2CircleButton1.Location = new Point(14, 555);
             guna2CircleButton1.Name = "guna2CircleButton1";
-            guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges27;
+            guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges31;
             guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CircleButton1.Size = new Size(84, 72);
             guna2CircleButton1.TabIndex = 9;
@@ -205,7 +219,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             btnExit.CheckedState.CustomBorderColor = Color.Red;
             btnExit.CheckedState.FillColor = Color.White;
             btnExit.CheckedState.ForeColor = Color.Red;
-            btnExit.CustomizableEdges = customizableEdges28;
+            btnExit.CustomizableEdges = customizableEdges32;
             btnExit.DisabledState.BorderColor = Color.DarkGray;
             btnExit.DisabledState.CustomBorderColor = Color.DarkGray;
             btnExit.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -220,9 +234,9 @@ namespace RavenTech_ERP.Views.UserControls.POS
             btnExit.HoverState.ForeColor = Color.OrangeRed;
             btnExit.Image = (Image)resources.GetObject("btnExit.Image");
             btnExit.IndicateFocus = true;
-            btnExit.Location = new Point(14, 645);
+            btnExit.Location = new Point(14, 627);
             btnExit.Name = "btnExit";
-            btnExit.ShadowDecoration.CustomizableEdges = customizableEdges29;
+            btnExit.ShadowDecoration.CustomizableEdges = customizableEdges33;
             btnExit.Size = new Size(84, 56);
             btnExit.TabIndex = 7;
             btnExit.Text = "Logout";
@@ -239,7 +253,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button7.CheckedState.CustomBorderColor = Color.Red;
             guna2Button7.CheckedState.FillColor = Color.White;
             guna2Button7.CheckedState.ForeColor = Color.Red;
-            guna2Button7.CustomizableEdges = customizableEdges30;
+            guna2Button7.CustomizableEdges = customizableEdges34;
             guna2Button7.DisabledState.BorderColor = Color.DarkGray;
             guna2Button7.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button7.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -256,7 +270,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button7.IndicateFocus = true;
             guna2Button7.Location = new Point(14, 350);
             guna2Button7.Name = "guna2Button7";
-            guna2Button7.ShadowDecoration.CustomizableEdges = customizableEdges31;
+            guna2Button7.ShadowDecoration.CustomizableEdges = customizableEdges35;
             guna2Button7.Size = new Size(84, 56);
             guna2Button7.TabIndex = 6;
             guna2Button7.Text = "Settings";
@@ -272,7 +286,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button6.CheckedState.CustomBorderColor = Color.Red;
             guna2Button6.CheckedState.FillColor = Color.White;
             guna2Button6.CheckedState.ForeColor = Color.Red;
-            guna2Button6.CustomizableEdges = customizableEdges32;
+            guna2Button6.CustomizableEdges = customizableEdges36;
             guna2Button6.DisabledState.BorderColor = Color.DarkGray;
             guna2Button6.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button6.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -289,7 +303,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button6.IndicateFocus = true;
             guna2Button6.Location = new Point(14, 294);
             guna2Button6.Name = "guna2Button6";
-            guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges33;
+            guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges37;
             guna2Button6.Size = new Size(84, 56);
             guna2Button6.TabIndex = 5;
             guna2Button6.Text = "Reports";
@@ -305,7 +319,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button4.CheckedState.CustomBorderColor = Color.Red;
             guna2Button4.CheckedState.FillColor = Color.White;
             guna2Button4.CheckedState.ForeColor = Color.Red;
-            guna2Button4.CustomizableEdges = customizableEdges34;
+            guna2Button4.CustomizableEdges = customizableEdges38;
             guna2Button4.DisabledState.BorderColor = Color.DarkGray;
             guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -322,7 +336,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button4.IndicateFocus = true;
             guna2Button4.Location = new Point(14, 238);
             guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges35;
+            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges39;
             guna2Button4.Size = new Size(84, 56);
             guna2Button4.TabIndex = 3;
             guna2Button4.Text = "Orders";
@@ -338,7 +352,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button3.CheckedState.CustomBorderColor = Color.Red;
             guna2Button3.CheckedState.FillColor = Color.White;
             guna2Button3.CheckedState.ForeColor = Color.Red;
-            guna2Button3.CustomizableEdges = customizableEdges36;
+            guna2Button3.CustomizableEdges = customizableEdges40;
             guna2Button3.DisabledState.BorderColor = Color.DarkGray;
             guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -355,7 +369,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button3.IndicateFocus = true;
             guna2Button3.Location = new Point(14, 182);
             guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges37;
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges41;
             guna2Button3.Size = new Size(84, 56);
             guna2Button3.TabIndex = 2;
             guna2Button3.Text = "Cashier";
@@ -371,7 +385,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button5.CheckedState.CustomBorderColor = Color.Red;
             guna2Button5.CheckedState.FillColor = Color.White;
             guna2Button5.CheckedState.ForeColor = Color.Red;
-            guna2Button5.CustomizableEdges = customizableEdges38;
+            guna2Button5.CustomizableEdges = customizableEdges42;
             guna2Button5.DisabledState.BorderColor = Color.DarkGray;
             guna2Button5.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button5.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -388,7 +402,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button5.IndicateFocus = true;
             guna2Button5.Location = new Point(14, 126);
             guna2Button5.Name = "guna2Button5";
-            guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges39;
+            guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges43;
             guna2Button5.Size = new Size(84, 56);
             guna2Button5.TabIndex = 4;
             guna2Button5.Text = "Tables";
@@ -404,7 +418,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button2.CheckedState.CustomBorderColor = Color.Red;
             guna2Button2.CheckedState.FillColor = Color.White;
             guna2Button2.CheckedState.ForeColor = Color.Red;
-            guna2Button2.CustomizableEdges = customizableEdges40;
+            guna2Button2.CustomizableEdges = customizableEdges44;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
             guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -421,7 +435,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button2.IndicateFocus = true;
             guna2Button2.Location = new Point(14, 70);
             guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges41;
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges45;
             guna2Button2.Size = new Size(84, 56);
             guna2Button2.TabIndex = 1;
             guna2Button2.Text = "Customers";
@@ -437,7 +451,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button1.CheckedState.CustomBorderColor = Color.Red;
             guna2Button1.CheckedState.FillColor = Color.White;
             guna2Button1.CheckedState.ForeColor = Color.Red;
-            guna2Button1.CustomizableEdges = customizableEdges42;
+            guna2Button1.CustomizableEdges = customizableEdges46;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;
             guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -454,7 +468,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button1.IndicateFocus = true;
             guna2Button1.Location = new Point(14, 14);
             guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges43;
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges47;
             guna2Button1.Size = new Size(84, 56);
             guna2Button1.TabIndex = 0;
             guna2Button1.Text = "Home";
@@ -463,6 +477,8 @@ namespace RavenTech_ERP.Views.UserControls.POS
             // materialCard2
             // 
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(guna2Button15);
+            materialCard2.Controls.Add(guna2Button8);
             materialCard2.Controls.Add(guna2ImageButton2);
             materialCard2.Depth = 0;
             materialCard2.Dock = DockStyle.Top;
@@ -472,7 +488,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
-            materialCard2.Size = new Size(1366, 50);
+            materialCard2.Size = new Size(1366, 68);
             materialCard2.TabIndex = 2;
             // 
             // guna2ImageButton2
@@ -483,19 +499,19 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2ImageButton2.Image = (Image)resources.GetObject("guna2ImageButton2.Image");
             guna2ImageButton2.ImageOffset = new Point(0, 0);
             guna2ImageButton2.ImageRotate = 0F;
-            guna2ImageButton2.ImageSize = new Size(45, 45);
+            guna2ImageButton2.ImageSize = new Size(60, 60);
             guna2ImageButton2.Location = new Point(14, 14);
             guna2ImageButton2.Name = "guna2ImageButton2";
             guna2ImageButton2.PressedState.ImageSize = new Size(64, 64);
-            guna2ImageButton2.ShadowDecoration.CustomizableEdges = customizableEdges44;
-            guna2ImageButton2.Size = new Size(50, 22);
+            guna2ImageButton2.ShadowDecoration.CustomizableEdges = customizableEdges52;
+            guna2ImageButton2.Size = new Size(50, 40);
             guna2ImageButton2.TabIndex = 3;
             // 
             // guna2Separator1
             // 
             guna2Separator1.Dock = DockStyle.Top;
             guna2Separator1.FillColor = Color.Transparent;
-            guna2Separator1.Location = new Point(0, 50);
+            guna2Separator1.Location = new Point(0, 68);
             guna2Separator1.Name = "guna2Separator1";
             guna2Separator1.Size = new Size(1366, 3);
             guna2Separator1.TabIndex = 3;
@@ -503,15 +519,16 @@ namespace RavenTech_ERP.Views.UserControls.POS
             // materialCard3
             // 
             materialCard3.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard3.Controls.Add(guna2Panel4);
             materialCard3.Depth = 0;
             materialCard3.Dock = DockStyle.Right;
             materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard3.Location = new Point(966, 53);
+            materialCard3.Location = new Point(966, 71);
             materialCard3.Margin = new Padding(14);
             materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard3.Name = "materialCard3";
             materialCard3.Padding = new Padding(14);
-            materialCard3.Size = new Size(400, 715);
+            materialCard3.Size = new Size(400, 697);
             materialCard3.TabIndex = 4;
             // 
             // tableLayoutPanel1
@@ -522,13 +539,13 @@ namespace RavenTech_ERP.Views.UserControls.POS
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Controls.Add(guna2Panel1, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(112, 53);
+            tableLayoutPanel1.Location = new Point(112, 71);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(854, 715);
+            tableLayoutPanel1.Size = new Size(854, 697);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // guna2Panel1
@@ -541,7 +558,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Panel1.Margin = new Padding(0);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2Panel1.Size = new Size(814, 675);
+            guna2Panel1.Size = new Size(814, 657);
             guna2Panel1.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -558,7 +575,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel3.Size = new Size(814, 636);
+            tableLayoutPanel3.Size = new Size(814, 618);
             tableLayoutPanel3.TabIndex = 6;
             // 
             // guna2Panel3
@@ -570,7 +587,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Panel3.Margin = new Padding(0);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Panel3.Size = new Size(814, 616);
+            guna2Panel3.Size = new Size(814, 598);
             guna2Panel3.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -584,7 +601,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Margin = new Padding(0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(814, 616);
+            flowLayoutPanel1.Size = new Size(814, 598);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // materialCard4
@@ -1074,6 +1091,114 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button9.Text = "Starters";
             guna2Button9.Tile = true;
             // 
+            // guna2Button8
+            // 
+            guna2Button8.BackColor = Color.Transparent;
+            guna2Button8.BorderColor = Color.Transparent;
+            guna2Button8.BorderRadius = 5;
+            guna2Button8.BorderThickness = 1;
+            guna2Button8.CheckedState.BorderColor = Color.Red;
+            guna2Button8.CheckedState.CustomBorderColor = Color.Red;
+            guna2Button8.CheckedState.FillColor = Color.White;
+            guna2Button8.CheckedState.ForeColor = Color.Red;
+            guna2Button8.CustomizableEdges = customizableEdges50;
+            guna2Button8.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button8.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button8.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button8.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button8.Dock = DockStyle.Right;
+            guna2Button8.FillColor = Color.Firebrick;
+            guna2Button8.FocusedColor = Color.White;
+            guna2Button8.Font = new Font("Segoe UI", 9F);
+            guna2Button8.ForeColor = Color.White;
+            guna2Button8.HoverState.BorderColor = Color.OrangeRed;
+            guna2Button8.HoverState.FillColor = Color.White;
+            guna2Button8.HoverState.ForeColor = Color.OrangeRed;
+            guna2Button8.Image = (Image)resources.GetObject("guna2Button8.Image");
+            guna2Button8.IndicateFocus = true;
+            guna2Button8.Location = new Point(1218, 14);
+            guna2Button8.Name = "guna2Button8";
+            guna2Button8.ShadowDecoration.CustomizableEdges = customizableEdges51;
+            guna2Button8.Size = new Size(134, 40);
+            guna2Button8.TabIndex = 8;
+            guna2Button8.Text = "Select Table";
+            // 
+            // guna2Button15
+            // 
+            guna2Button15.BackColor = Color.Transparent;
+            guna2Button15.BorderColor = Color.Transparent;
+            guna2Button15.BorderRadius = 5;
+            guna2Button15.BorderThickness = 1;
+            guna2Button15.CheckedState.BorderColor = Color.Red;
+            guna2Button15.CheckedState.CustomBorderColor = Color.Red;
+            guna2Button15.CheckedState.FillColor = Color.White;
+            guna2Button15.CheckedState.ForeColor = Color.Red;
+            guna2Button15.CustomizableEdges = customizableEdges48;
+            guna2Button15.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button15.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button15.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button15.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button15.Dock = DockStyle.Right;
+            guna2Button15.FillColor = Color.MistyRose;
+            guna2Button15.FocusedColor = Color.White;
+            guna2Button15.Font = new Font("Segoe UI", 9F);
+            guna2Button15.ForeColor = Color.White;
+            guna2Button15.HoverState.BorderColor = Color.OrangeRed;
+            guna2Button15.HoverState.FillColor = Color.White;
+            guna2Button15.HoverState.ForeColor = Color.OrangeRed;
+            guna2Button15.Image = (Image)resources.GetObject("guna2Button15.Image");
+            guna2Button15.IndicateFocus = true;
+            guna2Button15.Location = new Point(1174, 14);
+            guna2Button15.Margin = new Padding(3, 3, 15, 3);
+            guna2Button15.Name = "guna2Button15";
+            guna2Button15.ShadowDecoration.CustomizableEdges = customizableEdges49;
+            guna2Button15.Size = new Size(44, 40);
+            guna2Button15.TabIndex = 9;
+            // 
+            // guna2Panel4
+            // 
+            guna2Panel4.Controls.Add(guna2Button16);
+            guna2Panel4.CustomizableEdges = customizableEdges29;
+            guna2Panel4.Dock = DockStyle.Top;
+            guna2Panel4.Location = new Point(14, 14);
+            guna2Panel4.Name = "guna2Panel4";
+            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            guna2Panel4.Size = new Size(372, 40);
+            guna2Panel4.TabIndex = 0;
+            // 
+            // guna2Button16
+            // 
+            guna2Button16.BackColor = Color.Transparent;
+            guna2Button16.BorderColor = Color.Transparent;
+            guna2Button16.BorderRadius = 5;
+            guna2Button16.BorderThickness = 1;
+            guna2Button16.CheckedState.BorderColor = Color.Red;
+            guna2Button16.CheckedState.CustomBorderColor = Color.Red;
+            guna2Button16.CheckedState.FillColor = Color.White;
+            guna2Button16.CheckedState.ForeColor = Color.Red;
+            guna2Button16.CustomizableEdges = customizableEdges27;
+            guna2Button16.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button16.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button16.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button16.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button16.Dock = DockStyle.Left;
+            guna2Button16.FillColor = Color.MistyRose;
+            guna2Button16.FocusedColor = Color.White;
+            guna2Button16.Font = new Font("Segoe UI", 9F);
+            guna2Button16.ForeColor = Color.Black;
+            guna2Button16.HoverState.BorderColor = Color.OrangeRed;
+            guna2Button16.HoverState.FillColor = Color.White;
+            guna2Button16.HoverState.ForeColor = Color.OrangeRed;
+            guna2Button16.Image = (Image)resources.GetObject("guna2Button16.Image");
+            guna2Button16.IndicateFocus = true;
+            guna2Button16.Location = new Point(0, 0);
+            guna2Button16.Margin = new Padding(3, 3, 15, 3);
+            guna2Button16.Name = "guna2Button16";
+            guna2Button16.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            guna2Button16.Size = new Size(120, 40);
+            guna2Button16.TabIndex = 10;
+            guna2Button16.Text = "Add Product";
+            // 
             // POSView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1091,6 +1216,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             WindowState = FormWindowState.Maximized;
             materialCard1.ResumeLayout(false);
             materialCard2.ResumeLayout(false);
+            materialCard3.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             guna2Panel1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
@@ -1110,6 +1236,7 @@ namespace RavenTech_ERP.Views.UserControls.POS
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox4).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             guna2Panel2.ResumeLayout(false);
+            guna2Panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -1165,5 +1292,9 @@ namespace RavenTech_ERP.Views.UserControls.POS
         private Label label11;
         private Label label12;
         private Guna2PictureBox guna2PictureBox4;
+        private Guna2Button guna2Button8;
+        private Guna2Button guna2Button15;
+        private Guna2Panel guna2Panel4;
+        private Guna2Button guna2Button16;
     }
 }
