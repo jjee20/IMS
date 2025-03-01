@@ -8,6 +8,9 @@ using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using ServiceLayer.Services.IRepositories.IInventory;
 using RavenTech_ERP.Views.UserControls.POS;
+using PresentationLayer.Views.IViews.Admin;
+using PresentationLayer.Views;
+using PresentationLayer.Presenters.Admin;
 
 namespace PresentationLayer
 {
@@ -35,11 +38,10 @@ namespace PresentationLayer
             // Resolve InventoryView and Presenter
             var unitOfWork = UnityC.Resolve<IUnitOfWork>();
 
-            // Pass dependencies to the presenter
+            //Pass dependencies to the presenter
             ILoginView mainView = new LoginView();
             var presenter = new LoginPresenter(mainView, unitOfWork);
             Application.Run((Form)mainView);
-
             //Application.Run(new POSView());
         }
 

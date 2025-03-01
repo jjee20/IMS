@@ -70,14 +70,15 @@ namespace PresentationLayer.Presenters.Account
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.ApplicationUser.Get(c => c.UserName == _view.Username);
+            var model = _unitOfWork.ApplicationUser.Get(c => c.UserName == _view.Username, tracked: true);
             if (model == null) model = new ApplicationUser();
             else _unitOfWork.ApplicationUser.Detach(model);
 
             model.Id = _view.Id;
             model.UserName = _view.Username;
             model.Department = (Departments)_view.Department;
-            model.PasswordHash = _passwordHasher.HashPassword(null, _view.Password);
+            if(!_view.IsEdit) 
+                model.PasswordHash = _passwordHasher.HashPassword(null, _view.Password);
 
             var taskRoles = new List<TaskRoles>();
 

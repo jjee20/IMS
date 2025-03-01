@@ -33,6 +33,8 @@ namespace PresentationLayer.Views.UserControls
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -58,18 +60,17 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
             dgList = new Guna2DataGridView();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
-            txtViewing = new MaterialSkin.Controls.MaterialSwitch();
-            txtDeleting = new MaterialSkin.Controls.MaterialSwitch();
-            txtEditing = new MaterialSkin.Controls.MaterialSwitch();
+            guna2GroupBox1 = new Guna2GroupBox();
             txtAdding = new MaterialSkin.Controls.MaterialSwitch();
+            txtViewing = new MaterialSkin.Controls.MaterialSwitch();
+            txtEditing = new MaterialSkin.Controls.MaterialSwitch();
+            txtDeleting = new MaterialSkin.Controls.MaterialSwitch();
             txtDepartments = new Guna2ComboBox();
             guna2HtmlLabel5 = new Guna2HtmlLabel();
             guna2HtmlLabel4 = new Guna2HtmlLabel();
@@ -92,17 +93,16 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2 = new TableLayoutPanel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
-            guna2GroupBox1 = new Guna2GroupBox();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             tabPage2.SuspendLayout();
             materialCard2.SuspendLayout();
+            guna2GroupBox1.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            guna2GroupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // materialCard1
@@ -255,6 +255,39 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Size = new Size(1626, 562);
             materialCard2.TabIndex = 0;
             // 
+            // guna2GroupBox1
+            // 
+            guna2GroupBox1.Anchor = AnchorStyles.None;
+            guna2GroupBox1.Controls.Add(txtAdding);
+            guna2GroupBox1.Controls.Add(txtViewing);
+            guna2GroupBox1.Controls.Add(txtEditing);
+            guna2GroupBox1.Controls.Add(txtDeleting);
+            guna2GroupBox1.CustomizableEdges = customizableEdges1;
+            guna2GroupBox1.Font = new Font("Segoe UI", 9F);
+            guna2GroupBox1.ForeColor = Color.Black;
+            guna2GroupBox1.Location = new Point(843, 230);
+            guna2GroupBox1.Name = "guna2GroupBox1";
+            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2GroupBox1.Size = new Size(450, 236);
+            guna2GroupBox1.TabIndex = 22;
+            guna2GroupBox1.Text = "Roles";
+            // 
+            // txtAdding
+            // 
+            txtAdding.Anchor = AnchorStyles.None;
+            txtAdding.AutoSize = true;
+            txtAdding.Depth = 0;
+            txtAdding.Location = new Point(86, 80);
+            txtAdding.Margin = new Padding(0);
+            txtAdding.MouseLocation = new Point(-1, -1);
+            txtAdding.MouseState = MaterialSkin.MouseState.HOVER;
+            txtAdding.Name = "txtAdding";
+            txtAdding.Ripple = true;
+            txtAdding.Size = new Size(108, 37);
+            txtAdding.TabIndex = 18;
+            txtAdding.Text = "Adding";
+            txtAdding.UseVisualStyleBackColor = true;
+            // 
             // txtViewing
             // 
             txtViewing.Anchor = AnchorStyles.None;
@@ -270,22 +303,6 @@ namespace PresentationLayer.Views.UserControls
             txtViewing.TabIndex = 21;
             txtViewing.Text = "Viewing";
             txtViewing.UseVisualStyleBackColor = true;
-            // 
-            // txtDeleting
-            // 
-            txtDeleting.Anchor = AnchorStyles.None;
-            txtDeleting.AutoSize = true;
-            txtDeleting.Depth = 0;
-            txtDeleting.Location = new Point(248, 80);
-            txtDeleting.Margin = new Padding(0);
-            txtDeleting.MouseLocation = new Point(-1, -1);
-            txtDeleting.MouseState = MaterialSkin.MouseState.HOVER;
-            txtDeleting.Name = "txtDeleting";
-            txtDeleting.Ripple = true;
-            txtDeleting.Size = new Size(116, 37);
-            txtDeleting.TabIndex = 20;
-            txtDeleting.Text = "Deleting";
-            txtDeleting.UseVisualStyleBackColor = true;
             // 
             // txtEditing
             // 
@@ -303,21 +320,21 @@ namespace PresentationLayer.Views.UserControls
             txtEditing.Text = "Editing";
             txtEditing.UseVisualStyleBackColor = true;
             // 
-            // txtAdding
+            // txtDeleting
             // 
-            txtAdding.Anchor = AnchorStyles.None;
-            txtAdding.AutoSize = true;
-            txtAdding.Depth = 0;
-            txtAdding.Location = new Point(86, 80);
-            txtAdding.Margin = new Padding(0);
-            txtAdding.MouseLocation = new Point(-1, -1);
-            txtAdding.MouseState = MaterialSkin.MouseState.HOVER;
-            txtAdding.Name = "txtAdding";
-            txtAdding.Ripple = true;
-            txtAdding.Size = new Size(108, 37);
-            txtAdding.TabIndex = 18;
-            txtAdding.Text = "Adding";
-            txtAdding.UseVisualStyleBackColor = true;
+            txtDeleting.Anchor = AnchorStyles.None;
+            txtDeleting.AutoSize = true;
+            txtDeleting.Depth = 0;
+            txtDeleting.Location = new Point(248, 80);
+            txtDeleting.Margin = new Padding(0);
+            txtDeleting.MouseLocation = new Point(-1, -1);
+            txtDeleting.MouseState = MaterialSkin.MouseState.HOVER;
+            txtDeleting.Name = "txtDeleting";
+            txtDeleting.Ripple = true;
+            txtDeleting.Size = new Size(116, 37);
+            txtDeleting.TabIndex = 20;
+            txtDeleting.Text = "Deleting";
+            txtDeleting.UseVisualStyleBackColor = true;
             // 
             // txtDepartments
             // 
@@ -707,22 +724,6 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Size = new Size(1634, 9);
             guna2Separator1.TabIndex = 1;
             // 
-            // guna2GroupBox1
-            // 
-            guna2GroupBox1.Controls.Add(txtAdding);
-            guna2GroupBox1.Controls.Add(txtViewing);
-            guna2GroupBox1.Controls.Add(txtEditing);
-            guna2GroupBox1.Controls.Add(txtDeleting);
-            guna2GroupBox1.CustomizableEdges = customizableEdges1;
-            guna2GroupBox1.Font = new Font("Segoe UI", 9F);
-            guna2GroupBox1.ForeColor = Color.Black;
-            guna2GroupBox1.Location = new Point(843, 230);
-            guna2GroupBox1.Name = "guna2GroupBox1";
-            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2GroupBox1.Size = new Size(450, 236);
-            guna2GroupBox1.TabIndex = 22;
-            guna2GroupBox1.Text = "Roles";
-            // 
             // RegisterView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -738,11 +739,11 @@ namespace PresentationLayer.Views.UserControls
             tabPage2.ResumeLayout(false);
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
+            guna2GroupBox1.ResumeLayout(false);
+            guna2GroupBox1.PerformLayout();
             panel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
-            guna2GroupBox1.ResumeLayout(false);
-            guna2GroupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
