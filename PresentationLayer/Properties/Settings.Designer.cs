@@ -45,5 +45,17 @@ namespace RavenTech_ERP.Properties {
                 this["User_Id"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Roles {
+            get {
+                return ((string)(this["Roles"]));
+            }
+            set {
+                this["Roles"] = value;
+            }
+        }
     }
 }

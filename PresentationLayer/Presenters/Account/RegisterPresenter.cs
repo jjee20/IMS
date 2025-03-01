@@ -78,7 +78,19 @@ namespace PresentationLayer.Presenters.Account
             model.UserName = _view.Username;
             model.Department = (Departments)_view.Department;
             model.PasswordHash = _passwordHasher.HashPassword(null, _view.Password);
-            model.TaskRoles = _view.TaskRoles;
+
+            var taskRoles = new List<TaskRoles>();
+
+            if (_view.Adding) taskRoles.Add(TaskRoles.Add);
+            else taskRoles.Remove(TaskRoles.Add);
+            if (_view.Editing) taskRoles.Add(TaskRoles.Edit);
+            else taskRoles.Remove(TaskRoles.Edit);
+            if (_view.Deleting) taskRoles.Add(TaskRoles.Delete);
+            else taskRoles.Remove(TaskRoles.Delete);
+            if (_view.Viewing) taskRoles.Add(TaskRoles.View);
+            else taskRoles.Remove(TaskRoles.View);
+
+            model.TaskRoles = taskRoles;
 
             try
             {
@@ -124,6 +136,11 @@ namespace PresentationLayer.Presenters.Account
             var user = _unitOfWork.ApplicationUser.Get(c => c.Id == entity.Id, includeProperties: "Profile");
             _view.Id = entity.Id;
             _view.Username = entity.Username;
+
+            if (user.TaskRoles.Contains(TaskRoles.Add)) _view.Adding = true;
+            if (user.TaskRoles.Contains(TaskRoles.Edit)) _view.Editing = true;
+            if (user.TaskRoles.Contains(TaskRoles.Delete)) _view.Deleting = true;
+            if (user.TaskRoles.Contains(TaskRoles.View)) _view.Viewing = true;
         }
         private void Delete(object? sender, EventArgs e)
         {

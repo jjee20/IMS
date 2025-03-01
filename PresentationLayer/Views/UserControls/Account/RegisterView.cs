@@ -150,29 +150,29 @@ namespace PresentationLayer.Views.UserControls
             get { return message; }
             set { message = value; }
         }
-        public List<TaskRoles> TaskRoles
+        
+        public bool Adding
         {
-            get { 
-                
-                var taskRoles = new List<TaskRoles>();
-
-                if (txtAdding.Checked) taskRoles.Add(DomainLayer.Enums.TaskRoles.Add);
-                else taskRoles.Remove(DomainLayer.Enums.TaskRoles.Add);
-                if (txtEditing.Checked) taskRoles.Add(DomainLayer.Enums.TaskRoles.Edit);
-                else taskRoles.Remove(DomainLayer.Enums.TaskRoles.Edit);
-                if (txtDeleting.Checked) taskRoles.Add(DomainLayer.Enums.TaskRoles.Delete);
-                else taskRoles.Remove(DomainLayer.Enums.TaskRoles.Delete);
-                if (txtViewing.Checked) taskRoles.Add(DomainLayer.Enums.TaskRoles.View);
-                else taskRoles.Remove(DomainLayer.Enums.TaskRoles.View);
-
-                return taskRoles;
-            }
-            set { 
-                if(value.Contains(DomainLayer.Enums.TaskRoles.Add)) txtAdding.Checked = true;
-                if(value.Contains(DomainLayer.Enums.TaskRoles.Edit)) txtEditing.Checked = true;
-                if(value.Contains(DomainLayer.Enums.TaskRoles.Delete)) txtDeleting.Checked = true;
-                if(value.Contains(DomainLayer.Enums.TaskRoles.View)) txtViewing.Checked = true;
-            }
+            get { return txtAdding.Checked; }
+            set { txtAdding.Checked = value; }
+        }
+        
+        public bool Editing
+        {
+            get { return txtEditing.Checked; }
+            set { txtEditing.Checked = value; }
+        }
+        
+        public bool Deleting
+        {
+            get { return txtDeleting.Checked; }
+            set { txtDeleting.Checked = value; }
+        }
+        
+        public bool Viewing
+        {
+            get { return txtViewing.Checked; }
+            set { txtViewing.Checked = value; }
         }
 
         public string SearchValue

@@ -6,7 +6,9 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Properties;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.Helpers;
 using System;
 using System.Collections.Generic;
@@ -39,6 +41,11 @@ namespace PresentationLayer.Views.UserControls
             //Add New
             btnAdd.Click += delegate
             {
+                if (!AppUserHelper.AllowedToAdd(AppUserHelper.TaskRoles(Settings.Default.Roles)))
+                {
+                    MessageBox.Show("Account restricted to perform the function. Please contact your administrator.");
+                    return;
+                }
                 if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
                     AddNewEvent?.Invoke(this, EventArgs.Empty);
@@ -51,6 +58,11 @@ namespace PresentationLayer.Views.UserControls
             //Save changes
             btnSave.Click += delegate
             {
+                if (AppUserHelper.AllowedToView(AppUserHelper.TaskRoles(Settings.Default.Roles)))
+                {
+                    MessageBox.Show("Account restricted to perform the function. Please contact your administrator.");
+                    return;
+                }
                 SaveEvent?.Invoke(this, EventArgs.Empty);
                 if (isSuccessful)
                 {
@@ -67,6 +79,11 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
+                if (!AppUserHelper.AllowedToEdit(AppUserHelper.TaskRoles(Settings.Default.Roles)))
+                {
+                    MessageBox.Show("Account restricted to perform the function. Please contact your administrator.");
+                    return;
+                }
                 if (Guna2TabControl1.SelectedTab == tabPage1)
                 {
                     tabPage2.Text = "Edit Details";
@@ -79,6 +96,11 @@ namespace PresentationLayer.Views.UserControls
             //Delete
             btnDelete.Click += delegate
             {
+                if (!AppUserHelper.AllowedToDelete(AppUserHelper.TaskRoles(Settings.Default.Roles)))
+                {
+                    MessageBox.Show("Account restricted to perform the function. Please contact your administrator.");
+                    return;
+                }
                 var result = MessageBox.Show("Are you sure you want to delete the selected Allowance?", "Warning",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -92,6 +114,11 @@ namespace PresentationLayer.Views.UserControls
             //Print
             btnPrint.Click += delegate
             {
+                if (AppUserHelper.AllowedToView(AppUserHelper.TaskRoles(Settings.Default.Roles)))
+                {
+                    MessageBox.Show("Account restricted to perform the function. Please contact your administrator.");
+                    return;
+                }
                 PrintEvent?.Invoke(this, EventArgs.Empty);
             };
             //Refresh

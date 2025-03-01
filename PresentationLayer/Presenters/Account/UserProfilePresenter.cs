@@ -9,6 +9,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using RavenTech_ERP.Properties;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters.Account
@@ -52,6 +53,7 @@ namespace PresentationLayer.Presenters.Account
             var user = _unitOfWork.ApplicationUser.Get(c => c.Id == userId, includeProperties: "Profile");
 
             if (user == null) user = new ApplicationUser();
+            if (user.Profile == null) user.Profile = new UserProfile();
             else _unitOfWork.ApplicationUser.Detach(user);
 
             user.Profile.FirstName = _view.FirstName;

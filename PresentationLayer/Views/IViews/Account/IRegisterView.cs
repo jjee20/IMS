@@ -13,7 +13,10 @@ namespace PresentationLayer.Views.IViews.Account
         bool IsSuccessful { get; set; }
         string Message { get; set; }
         string SearchValue { get; set; }
-        List<TaskRoles> TaskRoles { get; set; }
+        bool Adding { get; set; }
+        bool Editing { get; set; }
+        bool Deleting { get; set; }
+        bool Viewing { get; set; }
         void SetRegisterListBindingSource(BindingSource RegisterList);
         void SetDepartmentListBindingSource(BindingSource departmentBindingSource);
 

@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PresentationLayer.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RavenTech_ERP.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="SqlConnection" Type="(Connection string)" Scope="Application">
@@ -10,6 +10,9 @@
       <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=inventorymanagementsystem;Integrated Security=True;TrustServerCertificate=True;</Value>
     </Setting>
     <Setting Name="User_Id" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Roles" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
