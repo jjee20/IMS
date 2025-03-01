@@ -144,13 +144,13 @@
       <dsig:DigestValue>RpPZvme9/uARs3jUrcj2ipXnnZ44WsmmEsAHsXwBLFs=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DomainLayer.dll" size="109568">
+  <file name="DomainLayer.dll" size="110080">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>IMs0zTWoIlWklVDDjJnMUnW68JkbWtrqWB5VETVANu0=</dsig:DigestValue>
+      <dsig:DigestValue>UvYY1kfBUpEdmNmGnpRLh6+XO2oCxasMfFVYREcxLnY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="es\Microsoft.CodeAnalysis.resources.dll" size="48304">
@@ -234,13 +234,13 @@
       <dsig:DigestValue>ID3ShAkIV2OkOFiUPFDQvnLni/xo40WTqGINJx/xIkE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="InfastructureLayer.dll" size="293888">
+  <file name="InfastructureLayer.dll" size="304128">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>rme1htVUwxF7xHYtjXSL3xH+Xovm7q+hLqQdPbyXonk=</dsig:DigestValue>
+      <dsig:DigestValue>HjAECSDzqznc7hgVGkWW4xDH1LFKdCebJownFowZc8o=</dsig:DigestValue>
     </hash>
   </file>
   <file name="it\Microsoft.CodeAnalysis.resources.dll" size="48800">
@@ -783,13 +783,13 @@
       <dsig:DigestValue>j6zWP2+5n+VUCbMrA32Mo53s3+W9TP31U+E7ekmxYfs=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="RavenTech_ERP.dll" size="4612096">
+  <file name="RavenTech_ERP.dll" size="4615168">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>DjHPJqBN1GvEjSiG+5/30bDwUUZ8/cGYuV5OXMP5mvA=</dsig:DigestValue>
+      <dsig:DigestValue>SSTPxj0q43AAae7T1/uJoqL0syYKDzj9Ab79f7JVM9g=</dsig:DigestValue>
     </hash>
   </file>
   <file name="RavenTech_ERP.dll.config" size="1074">
@@ -807,7 +807,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>tPpoURiieke2Mg1uDbtKR0y+Zo/skju/pLZvWiD/eEY=</dsig:DigestValue>
+      <dsig:DigestValue>mQZmT15Yl/v5Lp1DFoy6pCroMXV/8VkaDoST9ruvZcg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="RavenTech_ERP.runtimeconfig.json" size="676">
@@ -1323,13 +1323,13 @@
       <dsig:DigestValue>VtQLpn88Vu4Rb3O4ywwshN4Jx7IMGCAbHZkvCfKV0jU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ServiceLayer.dll" size="37888">
+  <file name="ServiceLayer.dll" size="39424">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>ac0eHaNnZpH3WNrWq7Sp6rWY1rOChsowPz96gQUsHnc=</dsig:DigestValue>
+      <dsig:DigestValue>5Ioj1mfgCMX2b7YXm2BEsjJlBHPvZ9LDMvw3ITQxCnw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="StarkbankEcdsa.dll" size="26112">
