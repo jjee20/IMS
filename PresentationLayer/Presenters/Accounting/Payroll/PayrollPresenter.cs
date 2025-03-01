@@ -268,14 +268,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             return approvedLeaves.Any(leave => date >= leave.StartDate && date <= leave.EndDate);
         }
 
-        private int TotalDays(DateTime startDate, DateTime endDate)
+        private int TotalDays(IEnumerable<Attendance> attendances, DateTime startDate, DateTime endDate)
         {
             int days = 0;
             DateTime currentDate = startDate.Date;
-
             do
             {
-                if (currentDate.DayOfWeek != DayOfWeek.Sunday) // Exclude Sundays
+                var attendance = attendances.Where(c => c.Date.Date == currentDate);
+                if (currentDate.DayOfWeek != DayOfWeek.Sunday || attendance.Any()) // Exclude Sundays
                 {
                     days++;
                 }
@@ -284,13 +284,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             } while (currentDate <= endDate.Date);
             return days;
         }
-        private int NonSundays(DateTime startDate)
+        private int NonSundays(IEnumerable<Attendance> attendances, DateTime startDate)
         {
             int days = 0;
             for (int day = 1; day <= DateTime.DaysInMonth(startDate.Year, startDate.Month); day++)
             {
+                var attendance = attendances.Where(c => c.Date.Day == day && c.Date.Month == startDate.Month && c.Date.Year == startDate.Year);
                 DateTime currentDateForMonth = new DateTime(startDate.Year, startDate.Month, day);
-                if (currentDateForMonth.DayOfWeek != DayOfWeek.Sunday) // Exclude Sundays
+                if (currentDateForMonth.DayOfWeek != DayOfWeek.Sunday || attendance.Any()) // Exclude Sundays
                 {
                     days++;
                 }
@@ -304,10 +305,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var contributions = _unitOfWork.Contribution.GetAll();
 
             var payrollList = new List<PayrollViewModel>();
-            int totalDays = TotalDays(startDate,endDate);
             
             foreach (var employee in employees.OrderBy(c => c.LastName))
             {
+                int totalDays = TotalDays(employee.Attendances, startDate, endDate);
                 var employeeAttendances = employee.Attendances?.Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date) ?? Enumerable.Empty<Attendance>();
 
                 var approvedLeaves = employee.Leaves.Where(a => a.LeaveType != LeaveType.UnpaidLeave && a.Status == Status.Approved);
@@ -328,7 +329,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 double lateDeductions = CalculateLateDeductions(employee, employeeAttendances, hourlyRate);
                 double earlyOutDeductions = CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate);
 
-                double monthlySalary = employee.BasicSalary * NonSundays(startDate);
+                double monthlySalary = employee.BasicSalary * NonSundays(employee.Attendances, startDate);
                 double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.SSS, monthlySalary) / 2 : 0 : 0;
                 double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PagIbig, monthlySalary) / 2 : 0 : 0;
                 double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PhilHealth, monthlySalary) / 2 : 0 : 0;
