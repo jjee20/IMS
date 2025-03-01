@@ -52,7 +52,7 @@
             tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1667, 734);
+            tcMain.Size = new Size(1356, 701);
             tcMain.TabButtonHoverState.BorderColor = Color.Empty;
             tcMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -79,7 +79,7 @@
             tbPurchaseOrder.Margin = new Padding(3, 2, 3, 2);
             tbPurchaseOrder.Name = "tbPurchaseOrder";
             tbPurchaseOrder.Padding = new Padding(3, 2, 3, 2);
-            tbPurchaseOrder.Size = new Size(1659, 686);
+            tbPurchaseOrder.Size = new Size(1348, 653);
             tbPurchaseOrder.TabIndex = 1;
             tbPurchaseOrder.Text = "Purchase Order";
             tbPurchaseOrder.UseVisualStyleBackColor = true;
@@ -117,7 +117,7 @@
             // tbVendor
             // 
             tbVendor.Location = new Point(4, 44);
-            tbVendor.Margin = new Padding(2, 2, 2, 2);
+            tbVendor.Margin = new Padding(2);
             tbVendor.Name = "tbVendor";
             tbVendor.Size = new Size(1659, 686);
             tbVendor.TabIndex = 6;
@@ -140,7 +140,7 @@
             Controls.Add(tcMain);
             Margin = new Padding(3, 2, 3, 2);
             Name = "PurchaseView";
-            Size = new Size(1667, 734);
+            Size = new Size(1356, 701);
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

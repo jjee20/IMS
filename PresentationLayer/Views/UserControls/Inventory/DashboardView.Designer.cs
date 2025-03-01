@@ -172,7 +172,7 @@
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(12, 10, 12, 10);
-            materialCard4.Size = new Size(816, 561);
+            materialCard4.Size = new Size(504, 528);
             materialCard4.TabIndex = 6;
             // 
             // tableLayoutPanel3
@@ -188,7 +188,7 @@
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(792, 541);
+            tableLayoutPanel3.Size = new Size(480, 508);
             tableLayoutPanel3.TabIndex = 2;
             // 
             // group1
@@ -199,11 +199,11 @@
             group1.Dock = DockStyle.Fill;
             group1.Font = new Font("Segoe UI", 9F);
             group1.ForeColor = Color.White;
-            group1.Location = new Point(3, 272);
+            group1.Location = new Point(3, 256);
             group1.Margin = new Padding(3, 2, 3, 2);
             group1.Name = "group1";
             group1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            group1.Size = new Size(786, 267);
+            group1.Size = new Size(474, 250);
             group1.TabIndex = 3;
             group1.Text = "Purchase Status";
             // 
@@ -218,7 +218,7 @@
             chartSalesStatus.Location = new Point(0, 40);
             chartSalesStatus.Margin = new Padding(3, 2, 3, 2);
             chartSalesStatus.Name = "chartSalesStatus";
-            chartSalesStatus.Size = new Size(786, 227);
+            chartSalesStatus.Size = new Size(474, 210);
             chartSalesStatus.TabIndex = 1;
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
@@ -258,7 +258,7 @@
             guna2GroupBox3.Margin = new Padding(3, 2, 3, 2);
             guna2GroupBox3.Name = "guna2GroupBox3";
             guna2GroupBox3.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2GroupBox3.Size = new Size(786, 266);
+            guna2GroupBox3.Size = new Size(474, 250);
             guna2GroupBox3.TabIndex = 2;
             guna2GroupBox3.Text = "Sales Status";
             // 
@@ -273,7 +273,7 @@
             chartInventoryStatus.Location = new Point(0, 40);
             chartInventoryStatus.Margin = new Padding(3, 2, 3, 2);
             chartInventoryStatus.Name = "chartInventoryStatus";
-            chartInventoryStatus.Size = new Size(786, 226);
+            chartInventoryStatus.Size = new Size(474, 210);
             chartInventoryStatus.TabIndex = 0;
             chartFont10.FontName = "Arial";
             chartFont10.Size = 12;
@@ -308,12 +308,12 @@
             materialCard3.Depth = 0;
             materialCard3.Dock = DockStyle.Right;
             materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard3.Location = new Point(1252, 173);
+            materialCard3.Location = new Point(940, 173);
             materialCard3.Margin = new Padding(12, 10, 12, 10);
             materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard3.Name = "materialCard3";
             materialCard3.Padding = new Padding(12, 10, 12, 10);
-            materialCard3.Size = new Size(416, 561);
+            materialCard3.Size = new Size(416, 528);
             materialCard3.TabIndex = 5;
             // 
             // tableLayoutPanel1
@@ -329,7 +329,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 27.5806446F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 72.41936F));
-            tableLayoutPanel1.Size = new Size(392, 541);
+            tableLayoutPanel1.Size = new Size(392, 508);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // guna2GroupBox6
@@ -340,11 +340,11 @@
             guna2GroupBox6.Dock = DockStyle.Fill;
             guna2GroupBox6.Font = new Font("Segoe UI", 9F);
             guna2GroupBox6.ForeColor = Color.White;
-            guna2GroupBox6.Location = new Point(3, 151);
+            guna2GroupBox6.Location = new Point(3, 142);
             guna2GroupBox6.Margin = new Padding(3, 2, 3, 2);
             guna2GroupBox6.Name = "guna2GroupBox6";
             guna2GroupBox6.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GroupBox6.Size = new Size(386, 388);
+            guna2GroupBox6.Size = new Size(386, 364);
             guna2GroupBox6.TabIndex = 2;
             guna2GroupBox6.Text = "Top Selling Item";
             // 
@@ -388,7 +388,7 @@
             dgTopSellingItems.RowHeadersVisible = false;
             dgTopSellingItems.RowHeadersWidth = 51;
             dgTopSellingItems.RowTemplate.Height = 29;
-            dgTopSellingItems.Size = new Size(386, 348);
+            dgTopSellingItems.Size = new Size(386, 324);
             dgTopSellingItems.TabIndex = 0;
             dgTopSellingItems.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgTopSellingItems.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -424,7 +424,7 @@
             guna2GroupBox1.Margin = new Padding(3, 2, 3, 2);
             guna2GroupBox1.Name = "guna2GroupBox1";
             guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2GroupBox1.Size = new Size(386, 145);
+            guna2GroupBox1.Size = new Size(386, 136);
             guna2GroupBox1.TabIndex = 1;
             guna2GroupBox1.Text = "Product Details";
             // 
@@ -449,7 +449,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(386, 105);
+            tableLayoutPanel2.Size = new Size(386, 96);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // txtAllItem
@@ -457,7 +457,7 @@
             txtAllItem.BackColor = Color.Transparent;
             txtAllItem.Dock = DockStyle.Bottom;
             txtAllItem.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtAllItem.Location = new Point(292, 59);
+            txtAllItem.Location = new Point(292, 52);
             txtAllItem.Margin = new Padding(3, 2, 3, 2);
             txtAllItem.Name = "txtAllItem";
             txtAllItem.Size = new Size(30, 23);
@@ -469,7 +469,7 @@
             guna2HtmlLabel10.BackColor = Color.Transparent;
             guna2HtmlLabel10.Dock = DockStyle.Bottom;
             guna2HtmlLabel10.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel10.Location = new Point(3, 59);
+            guna2HtmlLabel10.Location = new Point(3, 52);
             guna2HtmlLabel10.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel10.Name = "guna2HtmlLabel10";
             guna2HtmlLabel10.Size = new Size(63, 23);
@@ -481,7 +481,7 @@
             txtAllItemGroup.BackColor = Color.Transparent;
             txtAllItemGroup.Dock = DockStyle.Bottom;
             txtAllItemGroup.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtAllItemGroup.Location = new Point(292, 31);
+            txtAllItemGroup.Location = new Point(292, 27);
             txtAllItemGroup.Margin = new Padding(3, 2, 3, 2);
             txtAllItemGroup.Name = "txtAllItemGroup";
             txtAllItemGroup.Size = new Size(30, 23);
@@ -493,7 +493,7 @@
             guna2HtmlLabel8.BackColor = Color.Transparent;
             guna2HtmlLabel8.Dock = DockStyle.Bottom;
             guna2HtmlLabel8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel8.Location = new Point(3, 31);
+            guna2HtmlLabel8.Location = new Point(3, 27);
             guna2HtmlLabel8.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel8.Name = "guna2HtmlLabel8";
             guna2HtmlLabel8.Size = new Size(114, 23);
@@ -505,7 +505,7 @@
             txtLowStockItem.BackColor = Color.Transparent;
             txtLowStockItem.Dock = DockStyle.Bottom;
             txtLowStockItem.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtLowStockItem.Location = new Point(292, 3);
+            txtLowStockItem.Location = new Point(292, 2);
             txtLowStockItem.Margin = new Padding(3, 2, 3, 2);
             txtLowStockItem.Name = "txtLowStockItem";
             txtLowStockItem.Size = new Size(30, 23);
@@ -517,7 +517,7 @@
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Dock = DockStyle.Bottom;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel6.Location = new Point(3, 3);
+            guna2HtmlLabel6.Location = new Point(3, 2);
             guna2HtmlLabel6.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(119, 23);
@@ -536,7 +536,7 @@
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(12, 10, 12, 10);
-            materialCard2.Size = new Size(416, 561);
+            materialCard2.Size = new Size(416, 528);
             materialCard2.TabIndex = 4;
             // 
             // tableLayoutPanel4
@@ -552,7 +552,7 @@
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Size = new Size(392, 541);
+            tableLayoutPanel4.Size = new Size(392, 508);
             tableLayoutPanel4.TabIndex = 1;
             // 
             // guna2GroupBox2
@@ -567,7 +567,7 @@
             guna2GroupBox2.Margin = new Padding(3, 2, 3, 2);
             guna2GroupBox2.Name = "guna2GroupBox2";
             guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2GroupBox2.Size = new Size(386, 266);
+            guna2GroupBox2.Size = new Size(386, 250);
             guna2GroupBox2.TabIndex = 3;
             guna2GroupBox2.Text = "Sales Order";
             // 
@@ -595,7 +595,7 @@
             tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel6.Size = new Size(386, 226);
+            tableLayoutPanel6.Size = new Size(386, 210);
             tableLayoutPanel6.TabIndex = 1;
             // 
             // txtSOAnnual
@@ -603,7 +603,7 @@
             txtSOAnnual.BackColor = Color.Transparent;
             txtSOAnnual.Dock = DockStyle.Bottom;
             txtSOAnnual.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtSOAnnual.Location = new Point(292, 179);
+            txtSOAnnual.Location = new Point(292, 163);
             txtSOAnnual.Margin = new Padding(3, 2, 3, 2);
             txtSOAnnual.Name = "txtSOAnnual";
             txtSOAnnual.Size = new Size(30, 23);
@@ -615,7 +615,7 @@
             guna2HtmlLabel9.BackColor = Color.Transparent;
             guna2HtmlLabel9.Dock = DockStyle.Bottom;
             guna2HtmlLabel9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel9.Location = new Point(3, 179);
+            guna2HtmlLabel9.Location = new Point(3, 163);
             guna2HtmlLabel9.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel9.Name = "guna2HtmlLabel9";
             guna2HtmlLabel9.Size = new Size(58, 23);
@@ -627,7 +627,7 @@
             txtSOThisMonth.BackColor = Color.Transparent;
             txtSOThisMonth.Dock = DockStyle.Bottom;
             txtSOThisMonth.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtSOThisMonth.Location = new Point(292, 128);
+            txtSOThisMonth.Location = new Point(292, 116);
             txtSOThisMonth.Margin = new Padding(3, 2, 3, 2);
             txtSOThisMonth.Name = "txtSOThisMonth";
             txtSOThisMonth.Size = new Size(30, 23);
@@ -639,7 +639,7 @@
             guna2HtmlLabel13.BackColor = Color.Transparent;
             guna2HtmlLabel13.Dock = DockStyle.Bottom;
             guna2HtmlLabel13.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel13.Location = new Point(3, 128);
+            guna2HtmlLabel13.Location = new Point(3, 116);
             guna2HtmlLabel13.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel13.Name = "guna2HtmlLabel13";
             guna2HtmlLabel13.Size = new Size(89, 23);
@@ -651,7 +651,7 @@
             txtSO7Days.BackColor = Color.Transparent;
             txtSO7Days.Dock = DockStyle.Bottom;
             txtSO7Days.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtSO7Days.Location = new Point(292, 77);
+            txtSO7Days.Location = new Point(292, 69);
             txtSO7Days.Margin = new Padding(3, 2, 3, 2);
             txtSO7Days.Name = "txtSO7Days";
             txtSO7Days.Size = new Size(30, 23);
@@ -663,7 +663,7 @@
             guna2HtmlLabel15.BackColor = Color.Transparent;
             guna2HtmlLabel15.Dock = DockStyle.Bottom;
             guna2HtmlLabel15.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel15.Location = new Point(3, 77);
+            guna2HtmlLabel15.Location = new Point(3, 69);
             guna2HtmlLabel15.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel15.Name = "guna2HtmlLabel15";
             guna2HtmlLabel15.Size = new Size(53, 23);
@@ -675,7 +675,7 @@
             txtSOToday.BackColor = Color.Transparent;
             txtSOToday.Dock = DockStyle.Bottom;
             txtSOToday.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtSOToday.Location = new Point(292, 26);
+            txtSOToday.Location = new Point(292, 22);
             txtSOToday.Margin = new Padding(3, 2, 3, 2);
             txtSOToday.Name = "txtSOToday";
             txtSOToday.Size = new Size(30, 23);
@@ -687,7 +687,7 @@
             guna2HtmlLabel17.BackColor = Color.Transparent;
             guna2HtmlLabel17.Dock = DockStyle.Bottom;
             guna2HtmlLabel17.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel17.Location = new Point(3, 26);
+            guna2HtmlLabel17.Location = new Point(3, 22);
             guna2HtmlLabel17.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel17.Name = "guna2HtmlLabel17";
             guna2HtmlLabel17.Size = new Size(50, 23);
@@ -702,11 +702,11 @@
             guna2GroupBox5.Dock = DockStyle.Fill;
             guna2GroupBox5.Font = new Font("Segoe UI", 9F);
             guna2GroupBox5.ForeColor = Color.White;
-            guna2GroupBox5.Location = new Point(3, 272);
+            guna2GroupBox5.Location = new Point(3, 256);
             guna2GroupBox5.Margin = new Padding(3, 2, 3, 2);
             guna2GroupBox5.Name = "guna2GroupBox5";
             guna2GroupBox5.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2GroupBox5.Size = new Size(386, 267);
+            guna2GroupBox5.Size = new Size(386, 250);
             guna2GroupBox5.TabIndex = 2;
             guna2GroupBox5.Text = "Purchase Order";
             // 
@@ -734,7 +734,7 @@
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new Size(386, 227);
+            tableLayoutPanel5.Size = new Size(386, 210);
             tableLayoutPanel5.TabIndex = 1;
             // 
             // txtPOAnnual
@@ -742,7 +742,7 @@
             txtPOAnnual.BackColor = Color.Transparent;
             txtPOAnnual.Dock = DockStyle.Bottom;
             txtPOAnnual.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtPOAnnual.Location = new Point(292, 179);
+            txtPOAnnual.Location = new Point(292, 163);
             txtPOAnnual.Margin = new Padding(3, 2, 3, 2);
             txtPOAnnual.Name = "txtPOAnnual";
             txtPOAnnual.Size = new Size(30, 23);
@@ -754,7 +754,7 @@
             guna2HtmlLabel23.BackColor = Color.Transparent;
             guna2HtmlLabel23.Dock = DockStyle.Bottom;
             guna2HtmlLabel23.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel23.Location = new Point(3, 179);
+            guna2HtmlLabel23.Location = new Point(3, 163);
             guna2HtmlLabel23.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel23.Name = "guna2HtmlLabel23";
             guna2HtmlLabel23.Size = new Size(58, 23);
@@ -766,7 +766,7 @@
             txtPOThisMonth.BackColor = Color.Transparent;
             txtPOThisMonth.Dock = DockStyle.Bottom;
             txtPOThisMonth.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtPOThisMonth.Location = new Point(292, 128);
+            txtPOThisMonth.Location = new Point(292, 116);
             txtPOThisMonth.Margin = new Padding(3, 2, 3, 2);
             txtPOThisMonth.Name = "txtPOThisMonth";
             txtPOThisMonth.Size = new Size(30, 23);
@@ -778,7 +778,7 @@
             guna2HtmlLabel25.BackColor = Color.Transparent;
             guna2HtmlLabel25.Dock = DockStyle.Bottom;
             guna2HtmlLabel25.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel25.Location = new Point(3, 128);
+            guna2HtmlLabel25.Location = new Point(3, 116);
             guna2HtmlLabel25.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel25.Name = "guna2HtmlLabel25";
             guna2HtmlLabel25.Size = new Size(89, 23);
@@ -790,7 +790,7 @@
             txtPO7Days.BackColor = Color.Transparent;
             txtPO7Days.Dock = DockStyle.Bottom;
             txtPO7Days.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtPO7Days.Location = new Point(292, 77);
+            txtPO7Days.Location = new Point(292, 69);
             txtPO7Days.Margin = new Padding(3, 2, 3, 2);
             txtPO7Days.Name = "txtPO7Days";
             txtPO7Days.Size = new Size(30, 23);
@@ -802,7 +802,7 @@
             guna2HtmlLabel27.BackColor = Color.Transparent;
             guna2HtmlLabel27.Dock = DockStyle.Bottom;
             guna2HtmlLabel27.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel27.Location = new Point(3, 77);
+            guna2HtmlLabel27.Location = new Point(3, 69);
             guna2HtmlLabel27.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel27.Name = "guna2HtmlLabel27";
             guna2HtmlLabel27.Size = new Size(53, 23);
@@ -814,7 +814,7 @@
             txtPOToday.BackColor = Color.Transparent;
             txtPOToday.Dock = DockStyle.Bottom;
             txtPOToday.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Underline);
-            txtPOToday.Location = new Point(292, 26);
+            txtPOToday.Location = new Point(292, 22);
             txtPOToday.Margin = new Padding(3, 2, 3, 2);
             txtPOToday.Name = "txtPOToday";
             txtPOToday.Size = new Size(30, 23);
@@ -826,7 +826,7 @@
             guna2HtmlLabel29.BackColor = Color.Transparent;
             guna2HtmlLabel29.Dock = DockStyle.Bottom;
             guna2HtmlLabel29.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel29.Location = new Point(3, 26);
+            guna2HtmlLabel29.Location = new Point(3, 22);
             guna2HtmlLabel29.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel29.Name = "guna2HtmlLabel29";
             guna2HtmlLabel29.Size = new Size(50, 23);
@@ -841,7 +841,7 @@
             guna2HtmlLabel1.Location = new Point(0, 0);
             guna2HtmlLabel1.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(1668, 39);
+            guna2HtmlLabel1.Size = new Size(143, 39);
             guna2HtmlLabel1.TabIndex = 0;
             guna2HtmlLabel1.Text = "Dashboard";
             // 
@@ -853,7 +853,7 @@
             guna2Separator1.Location = new Point(0, 164);
             guna2Separator1.Margin = new Padding(3, 2, 3, 2);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1668, 9);
+            guna2Separator1.Size = new Size(1356, 9);
             guna2Separator1.TabIndex = 1;
             // 
             // guna2CustomGradientPanel1
@@ -871,7 +871,7 @@
             guna2CustomGradientPanel1.Margin = new Padding(3, 2, 3, 2);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2CustomGradientPanel1.Size = new Size(1668, 115);
+            guna2CustomGradientPanel1.Size = new Size(1356, 115);
             guna2CustomGradientPanel1.TabIndex = 2;
             // 
             // materialCard8
@@ -1071,7 +1071,7 @@
             guna2vSeparator4.FillColor = Color.Transparent;
             guna2vSeparator4.Location = new Point(416, 173);
             guna2vSeparator4.Name = "guna2vSeparator4";
-            guna2vSeparator4.Size = new Size(10, 561);
+            guna2vSeparator4.Size = new Size(10, 528);
             guna2vSeparator4.TabIndex = 17;
             // 
             // guna2vSeparator5
@@ -1079,9 +1079,9 @@
             guna2vSeparator5.BackColor = SystemColors.Control;
             guna2vSeparator5.Dock = DockStyle.Right;
             guna2vSeparator5.FillColor = Color.Transparent;
-            guna2vSeparator5.Location = new Point(1242, 173);
+            guna2vSeparator5.Location = new Point(930, 173);
             guna2vSeparator5.Name = "guna2vSeparator5";
-            guna2vSeparator5.Size = new Size(10, 561);
+            guna2vSeparator5.Size = new Size(10, 528);
             guna2vSeparator5.TabIndex = 19;
             // 
             // guna2Separator2
@@ -1089,7 +1089,7 @@
             guna2Separator2.Dock = DockStyle.Top;
             guna2Separator2.Location = new Point(0, 39);
             guna2Separator2.Name = "guna2Separator2";
-            guna2Separator2.Size = new Size(1668, 10);
+            guna2Separator2.Size = new Size(1356, 10);
             guna2Separator2.TabIndex = 20;
             // 
             // DashboardView
@@ -1107,7 +1107,7 @@
             Controls.Add(guna2HtmlLabel1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "DashboardView";
-            Size = new Size(1668, 734);
+            Size = new Size(1356, 701);
             materialCard4.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             group1.ResumeLayout(false);

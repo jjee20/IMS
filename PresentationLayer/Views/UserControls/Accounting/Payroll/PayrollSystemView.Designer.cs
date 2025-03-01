@@ -69,7 +69,7 @@
             tcMain.Multiline = true;
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1207, 549);
+            tcMain.Size = new Size(1364, 729);
             tcMain.TabIndex = 5;
             // 
             // tbAttendance
@@ -79,7 +79,7 @@
             tbAttendance.Margin = new Padding(3, 2, 3, 2);
             tbAttendance.Name = "tbAttendance";
             tbAttendance.Padding = new Padding(3, 2, 3, 2);
-            tbAttendance.Size = new Size(1199, 521);
+            tbAttendance.Size = new Size(1356, 701);
             tbAttendance.TabIndex = 0;
             tbAttendance.Text = "Attendance";
             tbAttendance.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@
             tbDepartment.Location = new Point(4, 24);
             tbDepartment.Margin = new Padding(3, 2, 3, 2);
             tbDepartment.Name = "tbDepartment";
-            tbDepartment.Size = new Size(1199, 521);
+            tbDepartment.Size = new Size(1356, 701);
             tbDepartment.TabIndex = 3;
             tbDepartment.Text = "Department";
             tbDepartment.UseVisualStyleBackColor = true;
@@ -214,7 +214,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1209, 588);
+            ClientSize = new Size(1366, 768);
             Controls.Add(tcMain);
             DrawerAutoShow = true;
             DrawerTabControl = tcMain;

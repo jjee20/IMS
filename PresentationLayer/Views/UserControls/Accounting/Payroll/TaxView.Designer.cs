@@ -31,9 +31,6 @@ namespace PresentationLayer.Views.UserControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -43,11 +40,13 @@ namespace PresentationLayer.Views.UserControls
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaxView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
-            dgList = new Guna2DataGridView();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
             txtTaxRate = new Guna2TextBox();
             txtMaximumSalary = new Guna2TextBox();
@@ -69,14 +68,16 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
             guna2HtmlToolTip2 = new Guna2HtmlToolTip();
+            dgList = new Guna2DataGridView();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             materialCard2.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             SuspendLayout();
             // 
             // materialCard1
@@ -94,7 +95,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(16, 19, 16, 19);
-            materialCard1.Size = new Size(1906, 979);
+            materialCard1.Size = new Size(1356, 701);
             materialCard1.TabIndex = 2;
             // 
             // Guna2TabControl1
@@ -107,7 +108,7 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.Margin = new Padding(3, 4, 3, 4);
             Guna2TabControl1.Name = "Guna2TabControl1";
             Guna2TabControl1.SelectedIndex = 0;
-            Guna2TabControl1.Size = new Size(1874, 809);
+            Guna2TabControl1.Size = new Size(1324, 531);
             Guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             Guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             Guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -130,84 +131,30 @@ namespace PresentationLayer.Views.UserControls
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(dgList);
             tabPage1.Location = new Point(4, 44);
             tabPage1.Margin = new Padding(3, 4, 3, 4);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3, 4, 3, 4);
-            tabPage1.Size = new Size(1866, 761);
+            tabPage1.Size = new Size(1316, 483);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "List";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(dgList);
             tabPage2.Controls.Add(materialCard2);
             tabPage2.Location = new Point(4, 44);
             tabPage2.Margin = new Padding(3, 4, 3, 4);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3, 4, 3, 4);
-            tabPage2.Size = new Size(1866, 761);
+            tabPage2.Size = new Size(1316, 483);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Add New";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dgList
-            // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dgList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgList.ColumnHeadersHeight = 50;
-            dgList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgList.DefaultCellStyle = dataGridViewCellStyle3;
-            dgList.Dock = DockStyle.Fill;
-            dgList.GridColor = Color.FromArgb(231, 229, 255);
-            dgList.Location = new Point(3, 4);
-            dgList.Name = "dgList";
-            dgList.RowHeadersVisible = false;
-            dgList.RowHeadersWidth = 51;
-            dgList.RowTemplate.Height = 29;
-            dgList.Size = new Size(1860, 753);
-            dgList.TabIndex = 0;
-            dgList.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgList.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgList.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgList.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgList.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgList.ThemeStyle.BackColor = Color.White;
-            dgList.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgList.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgList.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgList.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgList.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgList.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgList.ThemeStyle.HeaderStyle.Height = 50;
-            dgList.ThemeStyle.ReadOnly = false;
-            dgList.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgList.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgList.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgList.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgList.ThemeStyle.RowsStyle.Height = 29;
-            dgList.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgList.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
             // materialCard2
             // 
-            materialCard2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
             materialCard2.Controls.Add(txtTaxRate);
             materialCard2.Controls.Add(txtMaximumSalary);
@@ -216,13 +163,14 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Controls.Add(guna2HtmlLabel2);
             materialCard2.Controls.Add(txtMinimumSalary);
             materialCard2.Depth = 0;
+            materialCard2.Dock = DockStyle.Fill;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(19, 23);
+            materialCard2.Location = new Point(3, 4);
             materialCard2.Margin = new Padding(16, 19, 16, 19);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(16, 19, 16, 19);
-            materialCard2.Size = new Size(1828, 715);
+            materialCard2.Size = new Size(1310, 475);
             materialCard2.TabIndex = 0;
             // 
             // txtTaxRate
@@ -237,7 +185,7 @@ namespace PresentationLayer.Views.UserControls
             txtTaxRate.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtTaxRate.Font = new Font("Segoe UI", 10F);
             txtTaxRate.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtTaxRate.Location = new Point(657, 483);
+            txtTaxRate.Location = new Point(398, 292);
             txtTaxRate.Margin = new Padding(3, 5, 3, 5);
             txtTaxRate.Name = "txtTaxRate";
             txtTaxRate.PasswordChar = '\0';
@@ -259,7 +207,7 @@ namespace PresentationLayer.Views.UserControls
             txtMaximumSalary.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtMaximumSalary.Font = new Font("Segoe UI", 10F);
             txtMaximumSalary.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMaximumSalary.Location = new Point(657, 359);
+            txtMaximumSalary.Location = new Point(398, 192);
             txtMaximumSalary.Margin = new Padding(3, 5, 3, 5);
             txtMaximumSalary.Name = "txtMaximumSalary";
             txtMaximumSalary.PasswordChar = '\0';
@@ -274,7 +222,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel4.Anchor = AnchorStyles.None;
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel4.Location = new Point(657, 449);
+            guna2HtmlLabel4.Location = new Point(398, 265);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(53, 19);
             guna2HtmlLabel4.TabIndex = 14;
@@ -285,7 +233,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel3.Anchor = AnchorStyles.None;
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel3.Location = new Point(657, 300);
+            guna2HtmlLabel3.Location = new Point(398, 164);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(99, 19);
             guna2HtmlLabel3.TabIndex = 12;
@@ -296,7 +244,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Anchor = AnchorStyles.None;
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel2.Location = new Point(657, 151);
+            guna2HtmlLabel2.Location = new Point(398, 63);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(96, 19);
             guna2HtmlLabel2.TabIndex = 11;
@@ -314,7 +262,7 @@ namespace PresentationLayer.Views.UserControls
             txtMinimumSalary.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtMinimumSalary.Font = new Font("Segoe UI", 10F);
             txtMinimumSalary.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMinimumSalary.Location = new Point(657, 210);
+            txtMinimumSalary.Location = new Point(398, 90);
             txtMinimumSalary.Margin = new Padding(3, 5, 3, 5);
             txtMinimumSalary.Name = "txtMinimumSalary";
             txtMinimumSalary.PasswordChar = '\0';
@@ -338,7 +286,7 @@ namespace PresentationLayer.Views.UserControls
             panel2.Location = new Point(16, 89);
             panel2.Margin = new Padding(3, 13, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1874, 62);
+            panel2.Size = new Size(1324, 62);
             panel2.TabIndex = 5;
             // 
             // btnPrint
@@ -458,7 +406,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(1496, 0);
+            txtSearch.Location = new Point(946, 0);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
             txtSearch.Name = "txtSearch";
             txtSearch.PasswordChar = '\0';
@@ -482,7 +430,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1874, 70);
+            tableLayoutPanel1.Size = new Size(1324, 70);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // tableLayoutPanel2
@@ -497,7 +445,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1874, 53);
+            tableLayoutPanel2.Size = new Size(1324, 53);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -511,7 +459,7 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.Location = new Point(3, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(1492, 53);
+            materialLabel1.Size = new Size(1318, 53);
             materialLabel1.TabIndex = 3;
             materialLabel1.Text = "Tax Details";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
@@ -521,7 +469,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Dock = DockStyle.Fill;
             guna2Separator1.Location = new Point(3, 56);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1868, 11);
+            guna2Separator1.Size = new Size(1318, 11);
             guna2Separator1.TabIndex = 1;
             // 
             // guna2HtmlToolTip2
@@ -533,6 +481,59 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlToolTip2.ReshowDelay = 100;
             guna2HtmlToolTip2.ToolTipIcon = ToolTipIcon.Info;
             // 
+            // dgList
+            // 
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dgList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgList.ColumnHeadersHeight = 50;
+            dgList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgList.DefaultCellStyle = dataGridViewCellStyle3;
+            dgList.Dock = DockStyle.Fill;
+            dgList.GridColor = Color.FromArgb(231, 229, 255);
+            dgList.Location = new Point(3, 4);
+            dgList.Name = "dgList";
+            dgList.RowHeadersVisible = false;
+            dgList.RowHeadersWidth = 51;
+            dgList.RowTemplate.Height = 29;
+            dgList.Size = new Size(1310, 475);
+            dgList.TabIndex = 1;
+            dgList.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dgList.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dgList.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dgList.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dgList.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dgList.ThemeStyle.BackColor = Color.White;
+            dgList.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            dgList.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            dgList.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgList.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            dgList.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dgList.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgList.ThemeStyle.HeaderStyle.Height = 50;
+            dgList.ThemeStyle.ReadOnly = false;
+            dgList.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dgList.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgList.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dgList.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dgList.ThemeStyle.RowsStyle.Height = 29;
+            dgList.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dgList.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
             // TaxView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -540,16 +541,17 @@ namespace PresentationLayer.Views.UserControls
             Controls.Add(materialCard1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "TaxView";
-            Size = new Size(1906, 979);
+            Size = new Size(1356, 701);
             materialCard1.ResumeLayout(false);
             Guna2TabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
             panel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -564,7 +566,6 @@ namespace PresentationLayer.Views.UserControls
         private TableLayoutPanel tableLayoutPanel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Guna2Separator guna2Separator1;
-        private Guna2DataGridView dgList;
         private MaterialSkin.Controls.MaterialCard materialCard2;
         private Guna2TextBox txtMinimumSalary;
         private Guna2HtmlLabel guna2HtmlLabel2;
@@ -582,5 +583,6 @@ namespace PresentationLayer.Views.UserControls
         private Button btnReturn;
         private Guna2TextBox txtSearch;
         private Button btnSave;
+        private Guna2DataGridView dgList;
     }
 }

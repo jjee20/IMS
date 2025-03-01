@@ -52,7 +52,7 @@
             tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1195, 576);
+            tcMain.Size = new Size(1356, 701);
             tcMain.TabButtonHoverState.BorderColor = Color.Empty;
             tcMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -79,7 +79,7 @@
             tbSalesOrder.Margin = new Padding(3, 2, 3, 2);
             tbSalesOrder.Name = "tbSalesOrder";
             tbSalesOrder.Padding = new Padding(3, 2, 3, 2);
-            tbSalesOrder.Size = new Size(1187, 528);
+            tbSalesOrder.Size = new Size(1348, 653);
             tbSalesOrder.TabIndex = 1;
             tbSalesOrder.Text = "Sales Order";
             tbSalesOrder.UseVisualStyleBackColor = true;
@@ -141,7 +141,7 @@
             Controls.Add(tcMain);
             Margin = new Padding(3, 2, 3, 2);
             Name = "SalesView";
-            Size = new Size(1195, 576);
+            Size = new Size(1356, 701);
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

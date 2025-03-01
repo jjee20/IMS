@@ -24,7 +24,7 @@ namespace PresentationLayer.Presenters.Inventory
             _view.ShowSalesType += ShowSales;
             _view.ShowShipmentType += ShowShipment;
             _view.ShowInvoiceType += ShowInvoice;
-            ShowCustomer(this, EventArgs.Empty);
+            ShowSales(this, EventArgs.Empty);
         }
         private void ShowCustomer(object? sender, EventArgs e)
         {
