@@ -10,6 +10,7 @@ namespace DomainLayer.Enums
     {
         New, 
         Checkout, 
+        Pending,
         Paid, 
         Failed, 
         Shipped, 

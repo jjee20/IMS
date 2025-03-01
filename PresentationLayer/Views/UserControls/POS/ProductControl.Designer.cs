@@ -94,6 +94,7 @@
             // 
             // guna2PictureBox1
             // 
+            guna2PictureBox1.BackColor = Color.WhiteSmoke;
             guna2PictureBox1.CustomizableEdges = customizableEdges1;
             guna2PictureBox1.Dock = DockStyle.Top;
             guna2PictureBox1.Image = (Image)resources.GetObject("guna2PictureBox1.Image");

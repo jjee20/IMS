@@ -19,8 +19,11 @@ namespace InfastructureLayer.DataAccess.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Fetch the corresponding connection string
-            string connectionString = ConfigurationManager.ConnectionStrings["Environment"]?.ConnectionString ?? "";
-            
+            string environment = ConfigurationManager.AppSettings["Environment"];
+
+            // Fetch the corresponding connection string
+            string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
+
             var connection = new SqlConnection(connectionString);
             optionsBuilder.UseSqlServer(connection);
             //optionsBuilder.UseSqlServer("Data Source=JAYCEE\\SQLEXPRESS;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
