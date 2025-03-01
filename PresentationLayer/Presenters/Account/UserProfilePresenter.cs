@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Accounts;
+﻿using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -50,7 +51,9 @@ namespace PresentationLayer.Presenters.Account
             string userId = Settings.Default.User_Id;
             var user = _unitOfWork.ApplicationUser.Get(c => c.Id == userId, includeProperties: "Profile");
 
-            if (user.Profile == null) user.Profile = new UserProfile();
+            if (user == null) user = new ApplicationUser();
+            else _unitOfWork.ApplicationUser.Detach(user);
+
             user.Profile.FirstName = _view.FirstName;
             user.Profile.LastName = _view.LastName;
             user.Email = _view.Email;

@@ -129,6 +129,13 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime.ToString(@"hh\:mm")))
                 .ReverseMap();
             #endregion
+            #region Admin
+
+            CreateMap<ApplicationUser, AccountViewModel>()
+                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.Profile.LastName}, {src.Profile.FirstName}"))
+                 .ForMember(dest => dest.TaskRoles, opt => opt.MapFrom(src => string.Join(",",src.TaskRoles)))
+                 .ReverseMap();
+            #endregion
         }
     }
 }
