@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels;
@@ -13,6 +14,7 @@ using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Account;
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories.IInventory;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PresentationLayer.Presenters.Account
 {
@@ -68,21 +70,15 @@ namespace PresentationLayer.Presenters.Account
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.ApplicationUser.Get(c => c.UserName == _view.Username);
-            if (Entity != null)
-            {
-                _view.Message = "Account is already added.";
-                return;
-            }
+            var model = _unitOfWork.ApplicationUser.Get(c => c.UserName == _view.Username);
+            if (model == null) model = new ApplicationUser();
+            else _unitOfWork.ApplicationUser.Detach(model);
 
-            var model = new ApplicationUser
-            {
-
-                Id = Guid.NewGuid().ToString(),
-                UserName = _view.Username,
-                Department = (Departments)_view.Department,
-                PasswordHash = _passwordHasher.HashPassword(null, _view.Password),
-            };
+            model.Id = _view.Id;
+            model.UserName = _view.Username;
+            model.Department = (Departments)_view.Department;
+            model.PasswordHash = _passwordHasher.HashPassword(null, _view.Password);
+            model.TaskRoles = _view.TaskRoles;
 
             try
             {

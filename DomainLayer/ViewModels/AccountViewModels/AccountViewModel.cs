@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace DomainLayer.ViewModels.AccountViewModels
         public string Department { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
+        public string TaskRoles { get; set; }
     }
 }

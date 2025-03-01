@@ -10,5 +10,7 @@ namespace DomainLayer.Models.Accounts
     {
         public UserProfile Profile { get; set; }
         public Departments Department { get; set; }
+        public IEnumerable<TaskRoles>? TaskRoles { get; set; }
     }
 }
+
