@@ -77,7 +77,7 @@
             tbDashboard.Margin = new Padding(3, 2, 3, 2);
             tbDashboard.Name = "tbDashboard";
             tbDashboard.Padding = new Padding(3, 2, 3, 2);
-            tbDashboard.Size = new Size(1195, 509);
+            tbDashboard.Size = new Size(1352, 689);
             tbDashboard.TabIndex = 1;
             tbDashboard.Text = "Dashboard";
             tbDashboard.UseVisualStyleBackColor = true;
@@ -96,14 +96,14 @@
             tcMain.Multiline = true;
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1203, 537);
+            tcMain.Size = new Size(1360, 717);
             tcMain.TabIndex = 4;
             // 
             // InventoryView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             AutoScroll = true;
-            ClientSize = new Size(1209, 588);
+            ClientSize = new Size(1366, 768);
             Controls.Add(tcMain);
             DrawerAutoShow = true;
             DrawerTabControl = tcMain;

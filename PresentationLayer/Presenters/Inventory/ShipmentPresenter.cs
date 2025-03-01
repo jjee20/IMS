@@ -4,7 +4,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -61,24 +61,17 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Shipment.Get(c => c.ShipmentName == _view.ShipmentName);
-            if (Entity != null)
-            {
-                _view.Message = "Shipment is already added.";
-                return;
-            }
+            var model = _unitOfWork.Shipment.Get(c => c.ShipmentId == _view.ShipmentId, tracked: true);
+            if (model == null) model = new Shipment();
+            else _unitOfWork.Shipment.Detach(model);
 
-            var model = new Shipment()
-            {
-                
-                ShipmentId = _view.ShipmentId,
-                ShipmentName = _view.ShipmentName,
-                SalesOrderId = _view.SalesOrderId,
-                ShipmentDate = _view.ShipmentDate,
-                ShipmentTypeId = _view.ShipmentTypeId,
-                WarehouseId = _view.WarehouseId,
-                IsFullShipment = _view.IsFullShipment
-            };
+            model.ShipmentId = _view.ShipmentId;
+            model.ShipmentName = _view.ShipmentName;
+            model.SalesOrderId = _view.SalesOrderId;
+            model.ShipmentDate = _view.ShipmentDate;
+            model.ShipmentTypeId = _view.ShipmentTypeId;
+            model.WarehouseId = _view.WarehouseId;
+            model.IsFullShipment = _view.IsFullShipment;
 
             try
             {
@@ -150,7 +143,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ShipmentReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Shipment", ShipmentList);

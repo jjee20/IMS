@@ -1,6 +1,8 @@
-﻿using DomainLayer.Models.Inventory;
-using DomainLayer.Models.Payroll;
+﻿using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.Models.Inventory;
+
 using InfastructureLayer.DataAccess.Data;
+using InfastructureLayer.Repositories.Inventory;
 using ServiceLayer.Services.IRepositories;
 
 namespace InfastructureLayer.Repositories

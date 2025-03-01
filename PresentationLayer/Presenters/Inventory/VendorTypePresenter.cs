@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.VendorType.Get(c => c.VendorTypeName == _view.VendorTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Vendor type is already added.";
-                return;
-            }
+            var model = _unitOfWork.VendorType.Get(c => c.VendorTypeId == _view.VendorTypeId, tracked: true);
+            if (model == null) model = new VendorType();
+            else _unitOfWork.VendorType.Detach(model);
 
-            var model = new VendorType()
-            {
-                
-                VendorTypeId = _view.VendorTypeId,
-                VendorTypeName = _view.VendorTypeName,
-                Description = _view.Description,
-            };
+            model.VendorTypeId = _view.VendorTypeId;
+            model.VendorTypeName = _view.VendorTypeName;
+            model.Description = _view.Description;
 
             try
             {
@@ -124,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "VendorTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("VendorType", VendorTypeList);

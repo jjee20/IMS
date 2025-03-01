@@ -1,11 +1,17 @@
 ﻿using DomainLayer.Models;
-using DomainLayer.Models.Payroll;
+
 using InfastructureLayer.DataAccess.Data;
 using InfastructureLayer.Repositories;
+using InfastructureLayer.Repositories.Accounting.Payroll;
+using InfastructureLayer.Repositories.Accounts;
+using InfastructureLayer.Repositories.Inventory;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IAccounting.IPayroll;
+using ServiceLayer.Services.IRepositories.IAccounts;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace InfastructureLayer.DataAccess.Repositories
 {

@@ -4,7 +4,7 @@ using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.Inventory;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace PresentationLayer.Presenters.Inventory
             _view.ShowSales += ShowSales;
             _view.ShowPurchase += ShowPurchase;
             _view.ShowInventory += ShowInventory;
-            ShowInventory(this, EventArgs.Empty);
+            ShowDashboard(this, EventArgs.Empty);
         }
         private void ShowDashboard(object? sender, EventArgs e)
         {

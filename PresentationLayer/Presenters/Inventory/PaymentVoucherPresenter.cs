@@ -5,7 +5,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -62,25 +62,18 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.PaymentVoucher.Get(c => c.PaymentVoucherName == _view.PaymentVoucherName);
-            if (Entity != null)
-            {
-                _view.Message = "Payment Voucher is already added.";
-                return;
-            }
+            var model = _unitOfWork.PaymentVoucher.Get(c => c.PaymentVoucherId == _view.PaymentVoucherId, tracked: true);
+            if (model == null) model = new PaymentVoucher();
+            else _unitOfWork.PaymentVoucher.Detach(model);
 
-            var model = new PaymentVoucher()
-            {
-                
-                PaymentVoucherId = _view.PaymentVoucherId,
-                PaymentVoucherName = _view.PaymentVoucherName,
-                BillId = _view.BillId,
-                PaymentDate = _view.PaymentDate,
-                PaymentTypeId = _view.PaymentTypeId,
-                PaymentAmount = _view.PaymentAmount,
-                CashBankId = _view.CashBankId,
-                IsFullPayment = _view.IsFullPayment,
-            };
+            model.PaymentVoucherId = _view.PaymentVoucherId;
+            model.PaymentVoucherName = _view.PaymentVoucherName;
+            model.BillId = _view.BillId;
+            model.PaymentDate = _view.PaymentDate;
+            model.PaymentTypeId = _view.PaymentTypeId;
+            model.PaymentAmount = _view.PaymentAmount;
+            model.CashBankId = _view.CashBankId;
+            model.IsFullPayment = _view.IsFullPayment;
 
             try
             {
@@ -153,7 +146,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PaymentVoucherReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("PaymentVoucher", PaymentVoucherList);

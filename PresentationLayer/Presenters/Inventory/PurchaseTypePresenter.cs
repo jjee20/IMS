@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.PurchaseType.Get(c => c.PurchaseTypeName == _view.PurchaseTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Purchase type is already added.";
-                return;
-            }
+            var model = _unitOfWork.PurchaseType.Get(c => c.PurchaseTypeId == _view.PurchaseTypeId, tracked: true);
+            if (model == null) model = new PurchaseType();
+            else _unitOfWork.PurchaseType.Detach(model);
 
-            var model = new PurchaseType()
-            {
-                
-                PurchaseTypeId = _view.PurchaseTypeId,
-                PurchaseTypeName = _view.PurchaseTypeName,
-                Description = _view.Description,
-            };
+            model.PurchaseTypeId = _view.PurchaseTypeId;
+            model.PurchaseTypeName = _view.PurchaseTypeName;
+            model.Description = _view.Description;
 
             try
             {
@@ -124,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PurchaseTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("PurchaseType", PurchaseTypeList);

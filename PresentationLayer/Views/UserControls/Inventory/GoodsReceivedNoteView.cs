@@ -18,6 +18,7 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class GoodsReceivedNoteView : UserControl, IGoodsReceivedNoteView
     {
+        private int id;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
@@ -66,13 +67,13 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
-                EditEvent?.Invoke(this, EventArgs.Empty);
                 if (Guna2TabControl1.SelectedTab == tabPage1)
                 {
                     tabPage2.Text = "Edit Details";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
                 }
+                EditEvent?.Invoke(this, EventArgs.Empty);
                 btnReturn.Visible = true;
             };
             //Delete
@@ -105,8 +106,8 @@ namespace PresentationLayer.Views.UserControls
         //Properties
         public int GoodsReceivedNoteId
         {
-            get { return Convert.ToInt32(txtId.Text); }
-            set { txtId.Text = value.ToString(); }
+            get { return id; }
+            set { id = value; }
         }
 
         public string GoodsReceivedNoteName

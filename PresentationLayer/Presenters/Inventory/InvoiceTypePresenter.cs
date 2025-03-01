@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.InvoiceType.Get(c => c.InvoiceTypeName == _view.InvoiceTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Invoice is already added.";
-                return;
-            }
+            var model = _unitOfWork.InvoiceType.Get(c => c.InvoiceTypeId == _view.InvoiceTypeId, tracked: true);
+            if (model == null) model = new InvoiceType();
+            else _unitOfWork.InvoiceType.Detach(model);
 
-            var model = new InvoiceType()
-            {
-                
-                InvoiceTypeId = _view.InvoiceTypeId,
-                InvoiceTypeName = _view.InvoiceTypeName,
-                Description = _view.Description,
-            };
+            model.InvoiceTypeId = _view.InvoiceTypeId;
+            model.InvoiceTypeName = _view.InvoiceTypeName;
+            model.Description = _view.Description;
 
             try
             {
@@ -124,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "InvoiceTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("InvoiceType", InvoiceTypeList);

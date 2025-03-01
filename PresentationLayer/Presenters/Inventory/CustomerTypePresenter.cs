@@ -1,9 +1,9 @@
-﻿using DomainLayer.Models.Inventory;
+﻿using DomainLayer.Models.Accounts;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -45,32 +45,25 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.CustomerType.Get(c => c.CustomerTypeName == _view.CustomerTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Customer type is already added.";
-                return;
-            }
+            var model = _unitOfWork.CustomerType.Get(c => c.CustomerTypeId == _view.CustomerTypeId, tracked: true);
+            if (model == null) model = new CustomerType();
+            else _unitOfWork.CustomerType.Detach(model);
 
-            Entity = new CustomerType()
-            {
-                
-                CustomerTypeId = _view.CustomerTypeId,
-                CustomerTypeName = _view.CustomerTypeName,
-                Description = _view.Description,
-            };
+            model.CustomerTypeId = _view.CustomerTypeId;
+            model.CustomerTypeName = _view.CustomerTypeName;
+            model.Description = _view.Description;
 
             try
             {
-                new ModelDataValidation().Validate(Entity);
+                new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.CustomerType.Update(Entity);
+                    _unitOfWork.CustomerType.Update(model);
                     _view.Message = "Customer type edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.CustomerType.Add(Entity);
+                    _unitOfWork.CustomerType.Add(model);
                     _view.Message = "Customer type added successfully";
                 }
                 _unitOfWork.Save();
@@ -127,7 +120,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "CustomerTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("CustomerType", CustomerTypeList);

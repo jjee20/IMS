@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -48,33 +48,25 @@ namespace PresentationLayer.Presenters
             try
             {
                 // Check if SalesType already exists
-                var existingEntity = _unitOfWork.SalesType.Get(c => c.SalesTypeName == _view.SalesTypeName);
-                if (!_view.IsEdit && existingEntity != null) // Prevent adding duplicates in Add mode
-                {
-                    _view.Message = "Sales type is already added.";
-                    _view.IsSuccessful = false;
-                    return;
-                }
+                var model = _unitOfWork.SalesType.Get(c => c.SalesTypeId == _view.SalesTypeId, tracked: true);
+                if (model == null) model = new SalesType();
+                else _unitOfWork.SalesType.Detach(model);
 
-                // Initialize or update the entity
-                SalesType Entity = new SalesType
-                {
-                    SalesTypeId = _view.SalesTypeId,
-                    SalesTypeName = _view.SalesTypeName,
-                    Description = _view.Description
-                };
+                model.SalesTypeId = _view.SalesTypeId;
+                model.SalesTypeName = _view.SalesTypeName;
+                model.Description = _view.Description;
 
                 // Validate entity
-                new ModelDataValidation().Validate(Entity);
+                new ModelDataValidation().Validate(model);
 
                 if (_view.IsEdit)
                 {
-                    _unitOfWork.SalesType.Update(Entity); // Update existing entity
+                    _unitOfWork.SalesType.Update(model); // Update existing entity
                     _view.Message = "Sales type edited successfully.";
                 }
                 else
                 {
-                    _unitOfWork.SalesType.Add(Entity); // Add new entity
+                    _unitOfWork.SalesType.Add(model); // Add new entity
                     _view.Message = "Sales type added successfully.";
                 }
 
@@ -132,7 +124,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "SalesTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("SalesType", SalesTypeList);

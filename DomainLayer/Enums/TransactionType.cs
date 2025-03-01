@@ -8,7 +8,10 @@ namespace DomainLayer.Enums
 {
     public enum TransactionType
     {
-        Credit,
-        Debit
+        Deposit,
+        Withdrawal,
+        Expense,
+        Income,
+        Transfer
     }
 }

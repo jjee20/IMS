@@ -55,7 +55,7 @@
             tbBranch.Margin = new Padding(3, 2, 3, 2);
             tbBranch.Name = "tbBranch";
             tbBranch.Padding = new Padding(3, 2, 3, 2);
-            tbBranch.Size = new Size(1660, 686);
+            tbBranch.Size = new Size(1348, 653);
             tbBranch.TabIndex = 0;
             tbBranch.Text = "Branch";
             tbBranch.UseVisualStyleBackColor = true;
@@ -74,7 +74,7 @@
             tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1668, 734);
+            tcMain.Size = new Size(1356, 701);
             tcMain.TabButtonHoverState.BorderColor = Color.Empty;
             tcMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -141,7 +141,7 @@
             Controls.Add(tcMain);
             Margin = new Padding(3, 2, 3, 2);
             Name = "PurchaseSettingsView";
-            Size = new Size(1668, 734);
+            Size = new Size(1356, 701);
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

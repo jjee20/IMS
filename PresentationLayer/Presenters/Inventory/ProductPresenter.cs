@@ -4,7 +4,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -63,29 +63,22 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Product.Get(c => c.ProductName == _view.ProductName);
-            if (Entity != null)
-            {
-                _view.Message = "Product is already added.";
-                return;
-            }
+            var model = _unitOfWork.Product.Get(c => c.ProductId == _view.ProductId, tracked: true);
+            if (model == null) model = new Product();
+            else _unitOfWork.Product.Detach(model);
 
-            var model = new Product()
-            {
-                
-                ProductId = _view.ProductId,
-                ProductName = _view.ProductName ?? "",
-                ProductCode = _view.ProductCode ?? "",
-                Barcode = _view.Barcode ?? "",
-                Description = _view.Description ?? "",
-                ReorderLevel = _view.ReorderLevel,
-                StockQuantity = _view.StockQuantity,
-                ProductTypeId = _view.ProductTypeId,
-                UnitOfMeasureId = _view.UnitOfMeasureId,
-                DefaultBuyingPrice = _view.DefaultBuyingPrice,
-                DefaultSellingPrice = _view.DefaultSellingPrice,
-                BranchId = _view.BranchId,
-            };
+            model.ProductId = _view.ProductId;
+            model.ProductName = _view.ProductName ?? "";
+            model.ProductCode = _view.ProductCode ?? "";
+            model.Barcode = _view.Barcode ?? "";
+            model.Description = _view.Description ?? "";
+            model.ReorderLevel = _view.ReorderLevel;
+            model.StockQuantity = _view.StockQuantity;
+            model.ProductTypeId = _view.ProductTypeId;
+            model.UnitOfMeasureId = _view.UnitOfMeasureId;
+            model.DefaultBuyingPrice = _view.DefaultBuyingPrice;
+            model.DefaultSellingPrice = _view.DefaultSellingPrice;
+            model.BranchId = _view.BranchId;
 
             try
             {
@@ -162,7 +155,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ProductReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Product", ProductList);

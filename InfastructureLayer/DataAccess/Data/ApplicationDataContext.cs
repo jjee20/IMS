@@ -1,7 +1,9 @@
-﻿using DomainLayer.Models.Accounts;
+﻿using DomainLayer.Models.Accounting;
+using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
-using DomainLayer.Models.Payroll;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using InfastructureLayer.Migrations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
@@ -16,15 +18,12 @@ namespace InfastructureLayer.DataAccess.Data
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // Fetch the corresponding connection string
             string environment = ConfigurationManager.AppSettings["Environment"];
 
             // Fetch the corresponding connection string
             string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
 
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new Exception($"Connection string for environment '{environment}' not found.");
-            }
             var connection = new SqlConnection(connectionString);
             optionsBuilder.UseSqlServer(connection);
             //optionsBuilder.UseSqlServer("Data Source=JAYCEE\\SQLEXPRESS;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
@@ -40,11 +39,12 @@ namespace InfastructureLayer.DataAccess.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+        #region Accounts
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
-
         public DbSet<UserProfile> UserProfile { get; set; }
+        #endregion
 
-        //Inventory
+        #region Inventory
         public DbSet<Bill> Bill { get; set; }
 
         public DbSet<BillType> BillType { get; set; }
@@ -59,7 +59,7 @@ namespace InfastructureLayer.DataAccess.Data
 
         public DbSet<GoodsReceivedNote> GoodsReceivedNote { get; set; }
 
-        public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<DomainLayer.Models.Inventory.Invoice> Invoice { get; set; }
 
         public DbSet<InvoiceType> InvoiceType { get; set; }
 
@@ -98,8 +98,17 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<VendorType> VendorType { get; set; }
 
         public DbSet<Warehouse> Warehouse { get; set; }
+        #endregion
 
-        //Payroll
+        #region Accounting
+        //public DbSet<Account> Accounts { get; set; }
+        //public DbSet<Budget> Budget { get; set; }
+        //public DbSet<FinancialSummary> FinancialSummaries { get; set; }
+        //public DbSet<FinancialTransaction> FinancialTransactions { get; set; }
+        //public DbSet<DomainLayer.Models.Accounting.Invoice> Invoices { get; set; }
+        //public DbSet<Account> AccountingAccounts { get; set; }
+        //public DbSet<LedgerEntry> LedgerEntries { get; set; }
+        #region Payroll
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<JobPosition> JobPositions { get; set; }
@@ -115,6 +124,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<Allowance> Allowances { get; set; }
         public DbSet<Bonus> Bonuses { get; set; }
-
+        #endregion
+        #endregion
     }
 }

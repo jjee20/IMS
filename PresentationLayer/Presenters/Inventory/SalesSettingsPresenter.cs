@@ -2,7 +2,7 @@
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace PresentationLayer.Presenters.Inventory
             _view.ShowSalesType += ShowSales;
             _view.ShowShipmentType += ShowShipment;
             _view.ShowInvoiceType += ShowInvoice;
-            ShowCustomer(this, EventArgs.Empty);
+            ShowSales(this, EventArgs.Empty);
         }
         private void ShowCustomer(object? sender, EventArgs e)
         {

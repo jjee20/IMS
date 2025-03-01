@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DomainLayer.Models.Inventory;
+using DomainLayer.Models.Accounts;
 using DomainLayer.ViewModels.Inventory;
 using Microsoft.Reporting.Map.WebForms.BingMaps;
 using Microsoft.Reporting.WinForms;
@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 using static PresentationLayer.Json.Address;
 
 namespace PresentationLayer.Presenters
@@ -95,24 +95,17 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Customer.Get(c => c.CustomerName == _view.CustomerName);
-            if (Entity != null)
-            {
-                _view.Message = "Customer is already added.";
-                return;
-            }
+            var model = _unitOfWork.Customer.Get(c => c.CustomerId == _view.CustomerId, tracked: true);
+            if (model == null) model = new Customer();
+            else _unitOfWork.Customer.Detach(model);
 
-            var model = new Customer()
-            {
-                
-                CustomerId = _view.CustomerId,
-                CustomerName = _view.CustomerName,
-                CustomerTypeId = _view.CustomerTypeId,
-                Address = _view.Address,
-                Phone = _view.Phone,
-                Email = _view.Email,
-                ContactPerson = _view.ContactPerson,
-            };
+            model.CustomerId = _view.CustomerId;
+            model.CustomerName = _view.CustomerName;
+            model.CustomerTypeId = _view.CustomerTypeId;
+            model.Address = _view.Address;
+            model.Phone = _view.Phone;
+            model.Email = _view.Email;
+            model.ContactPerson = _view.ContactPerson;
 
             try
             {
@@ -187,7 +180,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "CustomerReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Customer", CustomerList);

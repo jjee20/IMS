@@ -4,7 +4,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -55,23 +55,16 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Invoice.Get(c => c.InvoiceName == _view.InvoiceName);
-            if (Entity != null)
-            {
-                _view.Message = "Invoice is already added.";
-                return;
-            }
+            var model = _unitOfWork.Invoice.Get(c => c.InvoiceId == _view.InvoiceId, tracked: true);
+            if (model == null) model = new Invoice();
+            else _unitOfWork.Invoice.Detach(model);
 
-            var model = new Invoice()
-            {
-                
-                InvoiceId = _view.InvoiceId,
-                InvoiceName = _view.InvoiceName,
-                ShipmentId = _view.ShipmentId,
-                InvoiceDate = _view.InvoiceDate,
-                InvoiceDueDate = _view.InvoiceDueDate,
-                InvoiceTypeId = _view.InvoiceTypeId,
-            };
+            model.InvoiceId = _view.InvoiceId;
+            model.InvoiceName = _view.InvoiceName;
+            model.ShipmentId = _view.ShipmentId;
+            model.InvoiceDate = _view.InvoiceDate;
+            model.InvoiceDueDate = _view.InvoiceDueDate;
+            model.InvoiceTypeId = _view.InvoiceTypeId;
 
             try
             {
@@ -142,7 +135,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "InvoiceReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Invoice", InvoiceList);

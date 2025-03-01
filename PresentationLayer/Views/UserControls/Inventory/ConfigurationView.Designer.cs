@@ -39,9 +39,10 @@
             tcMain.Dock = DockStyle.Fill;
             tcMain.ItemSize = new Size(180, 40);
             tcMain.Location = new Point(0, 0);
+            tcMain.Margin = new Padding(3, 2, 3, 2);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(1906, 979);
+            tcMain.Size = new Size(1356, 701);
             tcMain.TabButtonHoverState.BorderColor = Color.Empty;
             tcMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -65,20 +66,22 @@
             // tbUserRole
             // 
             tbUserRole.Location = new Point(4, 44);
+            tbUserRole.Margin = new Padding(3, 2, 3, 2);
             tbUserRole.Name = "tbUserRole";
-            tbUserRole.Padding = new Padding(3);
-            tbUserRole.Size = new Size(1898, 931);
+            tbUserRole.Padding = new Padding(3, 2, 3, 2);
+            tbUserRole.Size = new Size(1348, 653);
             tbUserRole.TabIndex = 0;
             tbUserRole.Text = "User Role";
             tbUserRole.UseVisualStyleBackColor = true;
             // 
             // ConfigurationView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tcMain);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ConfigurationView";
-            Size = new Size(1906, 979);
+            Size = new Size(1356, 701);
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }

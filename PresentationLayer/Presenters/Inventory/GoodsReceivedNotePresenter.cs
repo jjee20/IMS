@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -56,25 +56,18 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.GoodsReceivedNote.Get(c => c.GoodsReceivedNoteName == _view.GoodsReceivedNoteName);
-            if (Entity != null)
-            {
-                _view.Message = "Goods Received Note is already added.";
-                return;
-            }
+            var model = _unitOfWork.GoodsReceivedNote.Get(c => c.GoodsReceivedNoteId == _view.GoodsReceivedNoteId, tracked: true);
+            if (model == null) model = new GoodsReceivedNote();
+            else _unitOfWork.GoodsReceivedNote.Detach(model);
 
-            var model = new GoodsReceivedNote()
-            {
-                
-                GoodsReceivedNoteId = _view.GoodsReceivedNoteId,
-                GoodsReceivedNoteName = _view.GoodsReceivedNoteName,
-                PurchaseOrderId = _view.PurchaseOrderId,
-                GRNDate = _view.GRNDate,
-                VendorDONumber = _view.VendorDONumber,
-                VendorInvoiceNumber = _view.VendorInvoiceNumber,
-                WarehouseId = _view.WarehouseId,
-                IsFullReceive = _view.IsFullReceive
-            };
+            model.GoodsReceivedNoteId = _view.GoodsReceivedNoteId;
+            model.GoodsReceivedNoteName = _view.GoodsReceivedNoteName;
+            model.PurchaseOrderId = _view.PurchaseOrderId;
+            model.GRNDate = _view.GRNDate;
+            model.VendorDONumber = _view.VendorDONumber;
+            model.VendorInvoiceNumber = _view.VendorInvoiceNumber;
+            model.WarehouseId = _view.WarehouseId;
+            model.IsFullReceive = _view.IsFullReceive;
 
             try
             {
@@ -145,7 +138,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "GoodsReceivedNoteReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("GoodsReceivedNote", GoodsReceivedNoteList);

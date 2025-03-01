@@ -1,15 +1,7 @@
-﻿using PresentationLayer.Views;
-using PresentationLayer.Views.IViews;
+﻿using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
-using PresentationLayer.Views.IViews.Payroll;
 using PresentationLayer.Views.UserControls;
-using ServiceLayer.Services.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters.Inventory
 {

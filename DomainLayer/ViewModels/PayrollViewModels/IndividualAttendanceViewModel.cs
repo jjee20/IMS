@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomainLayer.Enums;
-using DomainLayer.Models.Payroll;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DomainLayer.ViewModels.PayrollViewModels
 {
     public class IndividualAttendanceViewModel
     {
-
+        [Display(Name = "#")]
         public int AttendanceId { get; set; }
         public string Project { get; set; }
         public string Date { get; set; }

@@ -18,6 +18,7 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class CashBankView : UserControl, ICashBankView
     {
+        private int id;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
@@ -35,10 +36,10 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    AddNewEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Add New";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
+                    AddNewEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = true;
             };
@@ -63,10 +64,10 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    EditEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Edit";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
+                    EditEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = true;
             };
@@ -93,9 +94,9 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (!Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    RefreshEvent?.Invoke(this, EventArgs.Empty);
                     Guna2TabControl1.TabPages.Remove(tabPage2);
                     Guna2TabControl1.TabPages.Add(tabPage1);
+                    RefreshEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = false;
             };
@@ -104,8 +105,8 @@ namespace PresentationLayer.Views.UserControls
         //Properties
         public int CashBankId
         {
-            get { return Convert.ToInt32(txtId.Text); }
-            set { txtId.Text = value.ToString(); }
+            get { return id; }
+            set { id = value; }
         }
 
         public string CashBankName

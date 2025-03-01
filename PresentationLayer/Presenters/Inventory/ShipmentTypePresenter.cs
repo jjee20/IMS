@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.ShipmentType.Get(c => c.ShipmentTypeName == _view.ShipmentTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Shipment type is already added.";
-                return;
-            }
+            var model = _unitOfWork.ShipmentType.Get(c => c.ShipmentTypeId == _view.ShipmentTypeId, tracked: true);
+            if (model == null) model = new ShipmentType();
+            else _unitOfWork.ShipmentType.Detach(model);
 
-            var model = new ShipmentType()
-            {
-                
-                ShipmentTypeId = _view.ShipmentTypeId,
-                ShipmentTypeName = _view.ShipmentTypeName,
-                Description = _view.Description,
-            };
+            model.ShipmentTypeId = _view.ShipmentTypeId;
+            model.ShipmentTypeName = _view.ShipmentTypeName;
+            model.Description = _view.Description;
 
             try
             {
@@ -124,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ShipmentTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("ShipmentType", ShipmentTypeList);

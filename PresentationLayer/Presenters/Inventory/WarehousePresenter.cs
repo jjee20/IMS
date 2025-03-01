@@ -1,11 +1,12 @@
 ﻿using DomainLayer.Models;
 using DomainLayer.Models.Inventory;
+
 using DomainLayer.ViewModels.Inventory;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -51,21 +52,14 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.Warehouse.Get(c => c.WarehouseName == _view.WarehouseName);
-            if (Entity != null)
-            {
-                _view.Message = "Warehouse is already added.";
-                return;
-            }
+            var model = _unitOfWork.Warehouse.Get(c => c.WarehouseId == _view.WarehouseId, tracked: true);
+            if (model == null) model = new Warehouse();
+            else _unitOfWork.Warehouse.Detach(model);
 
-            var model = new Warehouse()
-            {
-                
-                WarehouseId = _view.WarehouseId,
-                WarehouseName = _view.WarehouseName,
-                Description = _view.Description,
-                BranchId = _view.BranchId,
-            };
+            model.WarehouseId = _view.WarehouseId;
+            model.WarehouseName = _view.WarehouseName;
+            model.Description = _view.Description;
+            model.BranchId = _view.BranchId;
 
             try
             {
@@ -133,7 +127,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "WarehouseReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Warehouse", WarehouseList);

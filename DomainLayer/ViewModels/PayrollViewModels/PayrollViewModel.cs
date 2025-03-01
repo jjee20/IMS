@@ -11,6 +11,10 @@ namespace DomainLayer.ViewModels.PayrollViewModels
     public class PayrollViewModel
     {
         public string Employee { get; set; }
+        [Display(Name = "Daily Rate")]
+        public double DailyRate { get; set; }
+        [Display(Name = "Days Worked")]
+        public double DaysWorked { get; set; }
         [Display(Name = "Basic Salary")]
         public double BasicSalary { get; set; }
         [Display(Name = "Overtime Pay")]
@@ -19,7 +23,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public double Benefits { get; set; }
         public double Bonuses { get; set; }
         [Display(Name = "Gross Pay")]
-        public double GrossPay { get; set; }
+        public double GrossPay => BasicSalary + OvertimePay + Allowances + Benefits + Bonuses;
         [Display(Name = "Late/Early")]
         public double LateAndEarly { get; set; }
         public double Absent { get; set; }
@@ -32,9 +36,9 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Add'l Deduction")]
         public double Deductions { get; set; }
         [Display(Name = "Total Deduction")]
-        public double TotalDeduction { get; set; }
+        public double TotalDeduction => LateAndEarly + Absent + SSSContribution + PagibigContribution + PhilHealthContribution + Deductions;
         [Display(Name = "Net Pay")]
-        public double NetPay { get; set; }
+        public double NetPay => GrossPay - TotalDeduction;
 
     }
 

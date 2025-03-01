@@ -1,23 +1,14 @@
-﻿using InfastructureLayer.DataAccess.Repositories;
-using PresentationLayer.Presenters;
-using PresentationLayer.Presenters.Account;
+﻿using PresentationLayer.Presenters.Account;
 using PresentationLayer.Presenters.Inventory;
-using PresentationLayer.Presenters.Payroll;
 using PresentationLayer.Views;
 using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.IViews.Admin;
 using PresentationLayer.Views.IViews.Inventory;
-using PresentationLayer.Views.IViews.Payroll;
 using PresentationLayer.Views.UserControls;
-using PresentationLayer.Views.UserControls.Inventory;
 using PresentationLayer.Views.UserControls.Payroll;
-using ServiceLayer.Services.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using RevenTech_ERP.Presenters.Accounting.Payroll;
+using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters.Admin
 {

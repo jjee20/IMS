@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.ProductType.Get(c => c.ProductTypeName == _view.ProductTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Product type is already added.";
-                return;
-            }
+            var model = _unitOfWork.ProductType.Get(c => c.ProductTypeId == _view.ProductTypeId, tracked: true);
+            if (model == null) model = new ProductType();
+            else _unitOfWork.ProductType.Detach(model);
 
-            var model = new ProductType()
-            {
-                
-                ProductTypeId = _view.ProductTypeId,
-                ProductTypeName = _view.ProductTypeName,
-                Description = _view.Description,
-            };
+            model.ProductTypeId = _view.ProductTypeId;
+            model.ProductTypeName = _view.ProductTypeName;
+            model.Description = _view.Description;
 
             try
             {
@@ -124,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ProductTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("ProductType", ProductTypeList);

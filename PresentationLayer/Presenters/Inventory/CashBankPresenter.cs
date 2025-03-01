@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.CashBank.Get(c => c.CashBankName == _view.CashBankName);
-            if (Entity != null)
-            {
-                _view.Message = "Cash bank is already added.";
-                return;
-            }
+            var model = _unitOfWork.CashBank.Get(c => c.CashBankId == _view.CashBankId, tracked: true);
+            if (model == null) model = new CashBank();
+            else _unitOfWork.CashBank.Detach(model);
 
-            var model = new CashBank()
-            {
-
-                CashBankId = _view.CashBankId,
-                CashBankName = _view.CashBankName,
-                Description = _view.Description,
-            };
+            model.CashBankId = _view.CashBankId;
+            model.CashBankName = _view.CashBankName;
+            model.Description = _view.Description;
 
             try
             {
@@ -124,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "CashBankReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("CashBank", CashBankList);

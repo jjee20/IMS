@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -45,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.PaymentType.Get(c => c.PaymentTypeName == _view.PaymentTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Payment type is already added.";
-                return;
-            }
+            var model = _unitOfWork.PaymentType.Get(c => c.PaymentTypeId == _view.PaymentTypeId, tracked: true);
+            if (model == null) model = new PaymentType();
+            else _unitOfWork.PaymentType.Detach(model);
 
-            var model = new PaymentType()
-            {
-                
-                PaymentTypeId = _view.PaymentTypeId,
-                PaymentTypeName = _view.PaymentTypeName,
-                Description = _view.Description,
-            };
+            model.PaymentTypeId = _view.PaymentTypeId;
+            model.PaymentTypeName = _view.PaymentTypeName;
+            model.Description = _view.Description;
 
             try
             {
@@ -124,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PaymentTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("PaymentType", PaymentTypeList);

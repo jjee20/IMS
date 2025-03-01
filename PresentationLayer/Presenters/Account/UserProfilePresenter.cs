@@ -7,7 +7,8 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories;
+using RavenTech_ERP.Properties;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters.Account
 {
@@ -31,7 +32,7 @@ namespace PresentationLayer.Presenters.Account
 
         private void LoadUserProfile()
         {
-            string userId = Properties.Settings.Default.User_Id;
+            string userId = Settings.Default.User_Id;
             if (!string.IsNullOrEmpty(userId))
             {
                 var user = _unitOfWork.ApplicationUser.Get(c => c.Id == userId, includeProperties: "Profile");
@@ -46,7 +47,7 @@ namespace PresentationLayer.Presenters.Account
 
         private void Save(object? sender, EventArgs e)
         {
-            string userId = Properties.Settings.Default.User_Id;
+            string userId = Settings.Default.User_Id;
             var user = _unitOfWork.ApplicationUser.Get(c => c.Id == userId, includeProperties: "Profile");
 
             if (user.Profile == null) user.Profile = new UserProfile();

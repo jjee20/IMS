@@ -4,7 +4,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -56,24 +56,17 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.PaymentReceive.Get(c => c.PaymentReceiveName == _view.PaymentReceiveName);
-            if (Entity != null)
-            {
-                _view.Message = "Payment Receive is already added.";
-                return;
-            }
+            var model = _unitOfWork.PaymentReceive.Get(c => c.PaymentReceiveId == _view.PaymentReceiveId, tracked: true);
+            if (model == null) model = new PaymentReceive();
+            else _unitOfWork.PaymentReceive.Detach(model);
 
-            var model = new PaymentReceive()
-            {
-                
-                PaymentReceiveId = _view.PaymentReceiveId,
-                PaymentReceiveName = _view.PaymentReceiveName,
-                InvoiceId = _view.InvoiceId,
-                PaymentDate = _view.PaymentDate,
-                PaymentTypeId = _view.PaymentTypeId,
-                PaymentAmount = _view.PaymentAmount,
-                IsFullPayment = _view.IsFullPayment
-            };
+            model.PaymentReceiveId = _view.PaymentReceiveId;
+            model.PaymentReceiveName = _view.PaymentReceiveName;
+            model.InvoiceId = _view.InvoiceId;
+            model.PaymentDate = _view.PaymentDate;
+            model.PaymentTypeId = _view.PaymentTypeId;
+            model.PaymentAmount = _view.PaymentAmount;
+            model.IsFullPayment = _view.IsFullPayment;
 
             try
             {
@@ -145,7 +138,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PaymentReceiveReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("PaymentReceive", PaymentReceiveList);

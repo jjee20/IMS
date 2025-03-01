@@ -6,7 +6,7 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -84,7 +84,7 @@ namespace PresentationLayer.Presenters
         private void PrintSO(object? sender, DataGridViewCellEventArgs e)
         {
             var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
-            var PurchaseOrderLine = _unitOfWork.PurchaseOrderLine.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product");
+            var PurchaseOrderLine = _unitOfWork.PurchaseOrderLine.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product", tracked: true);
             var selesOrderLineVM = PurchaseOrderLine.Select(c => new PurchaseOrderLineViewModel
             {
                 ProductId = (int)c.ProductId,
@@ -97,7 +97,7 @@ namespace PresentationLayer.Presenters
             PurchaseOrderVM = PurchaseOrder;
 
             string reportFileName = "PurchaseOrderReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
 
             var localReport = new LocalReport();
@@ -206,35 +206,27 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.PurchaseOrder.Get(c => c.PurchaseOrderName == _view.PurchaseOrderName);
-            if (Entity != null)
-            {
-                _view.Message = "Purchase Order is already added.";
-                return;
-            }
+            var model = _unitOfWork.PurchaseOrder.Get(c => c.PurchaseOrderId == _view.PurchaseOrderId);
+            if (model == null) model = new PurchaseOrder();
+            else _unitOfWork.PurchaseOrder.Detach(model);
 
-            _view.PurchaseOrderName = Guid.NewGuid().ToString();
-            var model = new PurchaseOrder()
-            {
-                
-                PurchaseOrderId = _view.PurchaseOrderId,
-                PurchaseOrderName = _view.PurchaseOrderName,
-                BranchId = _view.BranchId,
-                VendorId = _view.VendorId,
-                OrderDate = _view.OrderDate,
-                DeliveryDate = _view.DeliveryDate,
-                PurchaseTypeId = _view.PurchaseTypeId,
-                Remarks = _view.Remarks,
-                Amount = _view.Amount,
-                SubTotal = _view.SubTotal,
-                Discount = _view.Discount,
-                Tax = _view.Tax,
-                Freight = _view.Freight,
-                Total = _view.Total,
-                PurchaseOrderLines = _view.PurchaseOrderLines
-                    .Select(ToPurchaseOrderLine)
-                    .ToList()
-            };
+            model.PurchaseOrderId = _view.PurchaseOrderId;
+            model.PurchaseOrderName = _view.PurchaseOrderName;
+            model.BranchId = _view.BranchId;
+            model.VendorId = _view.VendorId;
+            model.OrderDate = _view.OrderDate;
+            model.DeliveryDate = _view.DeliveryDate;
+            model.PurchaseTypeId = _view.PurchaseTypeId;
+            model.Remarks = _view.Remarks;
+            model.Amount = _view.Amount;
+            model.SubTotal = _view.SubTotal;
+            model.Discount = _view.Discount;
+            model.Tax = _view.Tax;
+            model.Freight = _view.Freight;
+            model.Total = _view.Total;
+            model.PurchaseOrderLines = _view.PurchaseOrderLines
+                .Select(ToPurchaseOrderLine)
+                .ToList();
 
             try
             {
@@ -340,7 +332,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PurchaseReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
 
             var localReport = new LocalReport();

@@ -1,11 +1,9 @@
 ﻿using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels.Inventory;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using PresentationLayer.Views.IViews.Payroll;
-using ServiceLayer.Services.IRepositories;
+using ServiceLayer.Services.IRepositories.IInventory;
 
 namespace PresentationLayer.Presenters
 {
@@ -47,20 +45,13 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.BillType.Get(c => c.BillTypeName == _view.BillTypeName);
-            if (Entity != null)
-            {
-                _view.Message = "Bill type is already added.";
-                return;
-            }
+            var model = _unitOfWork.BillType.Get(c => c.BillTypeId == _view.BillTypeId, tracked: true);
+            if (model == null) model = new BillType();
+            else _unitOfWork.BillType.Detach(model);
 
-            var model = new BillType
-            {
-                
-                BillTypeId = _view.BillTypeId,
-                BillTypeName = _view.BillTypeName,
-                Description = _view.Description,
-            };
+            model.BillTypeId = _view.BillTypeId;
+            model.BillTypeName = _view.BillTypeName;
+            model.Description = _view.Description;
 
             try
             {
@@ -126,7 +117,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "BillTypeReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports");
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("BillType", BillTypeList);
