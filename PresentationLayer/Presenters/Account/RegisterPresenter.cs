@@ -137,10 +137,13 @@ namespace PresentationLayer.Presenters.Account
             _view.Id = entity.Id;
             _view.Username = entity.Username;
 
-            if (user.TaskRoles.Contains(TaskRoles.Add)) _view.Adding = true;
-            if (user.TaskRoles.Contains(TaskRoles.Edit)) _view.Editing = true;
-            if (user.TaskRoles.Contains(TaskRoles.Delete)) _view.Deleting = true;
-            if (user.TaskRoles.Contains(TaskRoles.View)) _view.Viewing = true;
+            if(user.TaskRoles != null)
+            {
+                if (user.TaskRoles.Contains(TaskRoles.Add)) _view.Adding = true;
+                if (user.TaskRoles.Contains(TaskRoles.Edit)) _view.Editing = true;
+                if (user.TaskRoles.Contains(TaskRoles.Delete)) _view.Deleting = true;
+                if (user.TaskRoles.Contains(TaskRoles.View)) _view.Viewing = true;
+            }
         }
         private void Delete(object? sender, EventArgs e)
         {
