@@ -115,7 +115,7 @@ namespace PresentationLayer.Views.UserControls
             txtMonth.ValueMember = "Id";
         }
 
-        public void SetTopSelling(GunaBarDataset dataSet)
+        public void SetTopSelling(GunaHorizontalBarDataset dataSet)
         {
             chartTopSelling.Datasets.Clear();
             chartTopSelling.Datasets.Add(dataSet);
@@ -127,16 +127,17 @@ namespace PresentationLayer.Views.UserControls
             chartDailySales.Datasets.Add(dailySalesTrendDataSet);
         }
 
-        public void SetMonthlySalesTrend(GunaBarDataset monthlySalesTrendDataset)
+        public void SetMonthlySalesTrend(GunaBarDataset monthlySalesTrendDataset, GunaBarDataset monthlyExpenseTrendDataset)
         {
             chartMonthlySales.Datasets.Clear();
             chartMonthlySales.Datasets.Add(monthlySalesTrendDataset);
+            chartMonthlySales.Datasets.Add(monthlyExpenseTrendDataset);
         }
 
-        public void SetInventoryStatus(GunaBarDataset monthlySalesTrendDataset)
+        public void SetInventoryStatus(GunaBarDataset inventoryStatusDataset)
         {
             chartInventoryStatus.Datasets.Clear();
-            chartInventoryStatus.Datasets.Add(monthlySalesTrendDataset);
+            chartInventoryStatus.Datasets.Add(inventoryStatusDataset);
         }
 
         public void SetProjectExpenseDistribution(GunaDoughnutDataset projectDataSet)
