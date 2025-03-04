@@ -93,6 +93,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2 = new TableLayoutPanel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
+            txtOverriding = new MaterialSkin.Controls.MaterialSwitch();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -258,6 +259,7 @@ namespace PresentationLayer.Views.UserControls
             // guna2GroupBox1
             // 
             guna2GroupBox1.Anchor = AnchorStyles.None;
+            guna2GroupBox1.Controls.Add(txtOverriding);
             guna2GroupBox1.Controls.Add(txtAdding);
             guna2GroupBox1.Controls.Add(txtViewing);
             guna2GroupBox1.Controls.Add(txtEditing);
@@ -293,7 +295,7 @@ namespace PresentationLayer.Views.UserControls
             txtViewing.Anchor = AnchorStyles.None;
             txtViewing.AutoSize = true;
             txtViewing.Depth = 0;
-            txtViewing.Location = new Point(248, 119);
+            txtViewing.Location = new Point(250, 80);
             txtViewing.Margin = new Padding(0);
             txtViewing.MouseLocation = new Point(-1, -1);
             txtViewing.MouseState = MaterialSkin.MouseState.HOVER;
@@ -325,7 +327,7 @@ namespace PresentationLayer.Views.UserControls
             txtDeleting.Anchor = AnchorStyles.None;
             txtDeleting.AutoSize = true;
             txtDeleting.Depth = 0;
-            txtDeleting.Location = new Point(248, 80);
+            txtDeleting.Location = new Point(86, 157);
             txtDeleting.Margin = new Padding(0);
             txtDeleting.MouseLocation = new Point(-1, -1);
             txtDeleting.MouseState = MaterialSkin.MouseState.HOVER;
@@ -724,6 +726,22 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Size = new Size(1634, 9);
             guna2Separator1.TabIndex = 1;
             // 
+            // txtOverriding
+            // 
+            txtOverriding.Anchor = AnchorStyles.None;
+            txtOverriding.AutoSize = true;
+            txtOverriding.Depth = 0;
+            txtOverriding.Location = new Point(250, 119);
+            txtOverriding.Margin = new Padding(0);
+            txtOverriding.MouseLocation = new Point(-1, -1);
+            txtOverriding.MouseState = MaterialSkin.MouseState.HOVER;
+            txtOverriding.Name = "txtOverriding";
+            txtOverriding.Ripple = true;
+            txtOverriding.Size = new Size(130, 37);
+            txtOverriding.TabIndex = 22;
+            txtOverriding.Text = "Overriding";
+            txtOverriding.UseVisualStyleBackColor = true;
+            // 
             // RegisterView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -783,5 +801,6 @@ namespace PresentationLayer.Views.UserControls
         private MaterialSkin.Controls.MaterialSwitch txtDeleting;
         private MaterialSkin.Controls.MaterialSwitch txtAdding;
         private Guna2GroupBox guna2GroupBox1;
+        private MaterialSkin.Controls.MaterialSwitch txtOverriding;
     }
 }

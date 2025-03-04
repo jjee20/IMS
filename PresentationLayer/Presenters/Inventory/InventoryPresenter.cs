@@ -27,6 +27,7 @@ namespace PresentationLayer.Presenters.Inventory
             _view.ShowSales += ShowSales;
             _view.ShowPurchase += ShowPurchase;
             _view.ShowInventory += ShowInventory;
+            _view.ShowProject += ShowProject;
             ShowDashboard(this, EventArgs.Empty);
         }
         private void ShowDashboard(object? sender, EventArgs e)
@@ -48,6 +49,11 @@ namespace PresentationLayer.Presenters.Inventory
         {
             IProductInventoryView view = ProductInventoryView.GetInstance(_view.Guna2TabControlPage);
             new ProductInventoryPresenter(view, _unitOfWork);
+        }
+        private void ShowProject(object? sender, EventArgs e)
+        {
+            IProjectManagementView view = ProjectManagementView.GetInstance(_view.Guna2TabControlPage);
+            new ProjectManagementPresenter(view, _unitOfWork);
         }
     }
 }
