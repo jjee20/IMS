@@ -24,10 +24,11 @@ namespace PresentationLayer.Presenters
         private IDashboardView _view;
         private IUnitOfWork _unitOfWork;
         private IEnumerable<TopSellingItemViewModel> TopSellingItemList;
-        private GunaBarDataset TopSellingDataSet;
+        private GunaHorizontalBarDataset TopSellingDataSet;
         private GunaBarDataset InventoryStatusDataSet;
         private GunaLineDataset DailySalesTrendDataSet;
         private GunaBarDataset MonthlySalesTrendDataset;
+        private GunaBarDataset MonthlyExpenseTrendDataset;
         private GunaDoughnutDataset ProjectDataSet;
         private BindingSource MonthBindingSource;
         private BindingSource YearBindingSource;
@@ -39,10 +40,11 @@ namespace PresentationLayer.Presenters
         {
             _view = view;
             _unitOfWork = unitOfWork;
-            TopSellingDataSet = new GunaBarDataset();
+            TopSellingDataSet = new GunaHorizontalBarDataset();
             DailySalesTrendDataSet = new GunaLineDataset();
             InventoryStatusDataSet = new GunaBarDataset();
             MonthlySalesTrendDataset = new GunaBarDataset();
+            MonthlyExpenseTrendDataset = new GunaBarDataset();
             ProjectDataSet = new GunaDoughnutDataset();
             YearBindingSource = new BindingSource();
             MonthBindingSource = new BindingSource();
@@ -53,7 +55,7 @@ namespace PresentationLayer.Presenters
             _view.SetYear(YearBindingSource);
             _view.SetTopSelling(TopSellingDataSet);
             _view.SetDailySalesTrend(DailySalesTrendDataSet);
-            _view.SetMonthlySalesTrend(MonthlySalesTrendDataset);
+            _view.SetMonthlySalesTrend(MonthlySalesTrendDataset, MonthlyExpenseTrendDataset);
             _view.SetInventoryStatus(InventoryStatusDataSet);
             _view.SetProjectExpenseDistribution(ProjectDataSet);
             _view.SetProgressBars(ItemSold, Sales);
@@ -80,7 +82,6 @@ namespace PresentationLayer.Presenters
             var days = DateTime.DaysInMonth(today.Year, today.Month);
             var sales = _unitOfWork.SalesOrderLine.GetAll(includeProperties: "SalesOrder");
 
-            DailySalesTrendDataSet.Label = "Qty";
             for (int i = 1; i <= days; i++)
             {
                 var date = new DateTime(today.Year, today.Month, i);
@@ -166,8 +167,6 @@ namespace PresentationLayer.Presenters
                 .Take(5) // Top 10
                 .ToList();
 
-            TopSellingDataSet.Label = "Qty";
-
             foreach (var item in topSellingItems)
             {
                 TopSellingDataSet.DataPoints.Add(item.ProductName, item.Quantity);
@@ -185,7 +184,7 @@ namespace PresentationLayer.Presenters
                 Amount = g.Sum(c => c.ProjectLines.Sum(c => c.Amount)) // Total expenses per project
             }).ToList();
 
-            ProjectDataSet.Label = "Amount";
+            ProjectDataSet.Label = "Project";
 
             foreach (var item in projectExpenses)
             {
@@ -226,18 +225,19 @@ namespace PresentationLayer.Presenters
                 var sales = _unitOfWork.SalesOrder.GetAll(
                     c => c.OrderDate.Month == monthNumber && c.OrderDate.Year == date.Year,
                     includeProperties: "SalesOrderLines"
-                );
-                var totalSales = sales.SelectMany(c => c.SalesOrderLines).Sum(c => c.Quantity);
+                ).SelectMany(c => c.SalesOrderLines).Sum(c => c.Quantity);
 
                 var purchase = _unitOfWork.PurchaseOrder.GetAll(
                     c => c.OrderDate.Month == monthNumber && c.OrderDate.Year == date.Year,
                     includeProperties: "PurchaseOrderLines"
-                );
-                var totalPurchase = purchase.SelectMany(c => c.PurchaseOrderLines).Sum(c => c.Quantity);
+                ).SelectMany(c => c.PurchaseOrderLines).Sum(c => c.Quantity);
 
                 //totalSales as Sales and totalPurchase as Expenses
-                MonthlySalesTrendDataset.Label = "Qty";
-                MonthlySalesTrendDataset.DataPoints.Add(month, totalSales);
+                MonthlySalesTrendDataset.Label = "Sales";
+                MonthlySalesTrendDataset.DataPoints.Add(month, sales);
+                MonthlyExpenseTrendDataset.Label = "Expenses";
+                MonthlyExpenseTrendDataset.DataPoints.Add(month, purchase);
+                MonthlyExpenseTrendDataset.FillColors.Add(Color.Red);
             }
         }
     }
