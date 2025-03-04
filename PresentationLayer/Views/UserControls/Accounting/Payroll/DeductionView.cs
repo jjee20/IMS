@@ -105,6 +105,14 @@ namespace PresentationLayer.Views.UserControls
                 }
                 btnReturn.Visible = false;
             };
+            txtStartDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
+            txtEndDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         //Properties
@@ -137,6 +145,16 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return (int)txtEmployee.SelectedValue; }
             set { txtEmployee.Text = value.ToString(); }
+        }
+        public DateTime StartDate
+        {
+            get { return txtStartDate.Value; }
+            set { txtStartDate.Text = value.ToString(); }
+        }
+        public DateTime EndDate
+        {
+            get { return txtEndDate.Value; }
+            set { txtEndDate.Text = value.ToString(); }
         }
         public bool IsEdit
         {
@@ -203,6 +221,18 @@ namespace PresentationLayer.Views.UserControls
         private void txtDeductionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (txtDeductionType.Text == "Other") txtDescription.ReadOnly = false; else txtDescription.ReadOnly = true;
+        }
+
+        private void DeductionView_Load(object sender, EventArgs e)
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
+            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6).Date;
+
+            txtDateDeducted.Value = currentDate;
+            txtStartDate.Value = startDate;
+            txtEndDate.Value = endDate;
         }
     }
 }

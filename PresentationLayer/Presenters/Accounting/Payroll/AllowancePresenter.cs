@@ -108,7 +108,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             {
                 AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(
                     _unitOfWork.Allowance.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
-                    c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
+                    c.Employee.FirstName.Contains(_view.SearchValue) ||
+                    (c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date),
+                    includeProperties: "Employee"));
                 AllowanceBindingSource.DataSource = AllowanceList;
             }
             else
@@ -173,7 +175,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllAllowanceList()
         {
-            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.GetAll(includeProperties: "Employee"));
+            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.GetAll(c => c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date, 
+                includeProperties: "Employee"));
             AllowanceBindingSource.DataSource = AllowanceList;//Set data source.
         }
         private void LoadAllAllowanceTypeList()

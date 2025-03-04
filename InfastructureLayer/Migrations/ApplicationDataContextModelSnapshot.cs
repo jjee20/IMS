@@ -94,6 +94,9 @@ namespace InfastructureLayer.Migrations
                     b.Property<double>("HoursWorked")
                         .HasColumnType("float");
 
+                    b.Property<bool>("IsHalfDay")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsPresent")
                         .HasColumnType("bit");
 
@@ -1783,7 +1786,7 @@ namespace InfastructureLayer.Migrations
                         .HasForeignKey("ProductId");
 
                     b.HasOne("DomainLayer.Models.Accounting.Payroll.Project", "Project")
-                        .WithMany()
+                        .WithMany("ProjectLines")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2158,6 +2161,11 @@ namespace InfastructureLayer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Project", b =>
+                {
+                    b.Navigation("ProjectLines");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounts.ApplicationUser", b =>

@@ -129,6 +129,16 @@ namespace PresentationLayer.Views.UserControls
             get { return txtEndDate.Value; }
             set { txtEndDate.Text = value.ToString(); }
         }
+        public DateTime SearchStartDate
+        {
+            get { return txtSearchStartDate.Value; }
+            set { txtSearchStartDate.Text = value.ToString(); }
+        }
+        public DateTime SearchEndDate
+        {
+            get { return txtSearchEndDate.Value; }
+            set { txtSearchEndDate.Text = value.ToString(); }
+        }
         public LeaveType LeaveType
         {
             get { return (LeaveType)txtLeaveType.SelectedValue; }
@@ -220,6 +230,19 @@ namespace PresentationLayer.Views.UserControls
         private void txtStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (txtStatus.Text == "Other") txtOther.ReadOnly = false; else txtOther.ReadOnly = true;
+        }
+
+        private void LeaveView_Load(object sender, EventArgs e)
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
+            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6).Date;
+
+            txtSearchStartDate.Value = currentDate;
+            txtSearchEndDate.Value = currentDate;
+            txtStartDate.Value = startDate;
+            txtEndDate.Value = endDate;
         }
     }
 }

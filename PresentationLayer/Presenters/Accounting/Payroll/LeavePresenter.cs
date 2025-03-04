@@ -125,11 +125,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
+            bool hasDateRange = _view.StartDate != null && _view.EndDate != null;
+            if (!emptyValue || hasDateRange)
             {
                 LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.GetAll(
                     c => c.Employee.LastName.Contains(_view.SearchValue) ||
-                    c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
+                    c.Employee.FirstName.Contains(_view.SearchValue) || 
+                    (c.StartDate.Date >= _view.SearchStartDate.Date && c.EndDate.Date <= _view.SearchEndDate.Date), 
+                    includeProperties: "Employee"));
                 LeaveBindingSource.DataSource = LeaveList;
             }
             else
@@ -195,7 +198,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllLeaveList()
         {
-            LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.GetAll(includeProperties: "Employee"));
+            LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(
+                _unitOfWork.Leave.GetAll(c => c.StartDate.Date >= _view.StartDate.Date && c.EndDate.Date <= _view.EndDate.Date,
+                    includeProperties: "Employee"));
             LeaveBindingSource.DataSource = LeaveList;//Set data source.
         }
         private void LoadAllEmployeeList()

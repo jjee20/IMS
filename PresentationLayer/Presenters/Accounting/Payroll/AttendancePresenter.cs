@@ -294,17 +294,19 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Return(object? sender, EventArgs e)
         {
-            if (_view.IsIndividual) LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
-            else LoadAllAttendanceList();
+            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
+            LoadAllAttendanceList();
         }
         private void CleanviewFields()
         {
             LoadAllAttendanceList();
+            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
         }
 
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
-            var employees = _unitOfWork.Employee.GetAll(c => c.Attendances.Any(c => c.IsPresent == true || c.IsPresent == false),includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
+            var employees = _unitOfWork.Employee.GetAll(c => c.Attendances.Any(c => c.IsPresent == true || c.IsPresent == false),
+                includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
             var summaryList = new List<AttendanceViewModel>();
 
             int totalDays = 0;
@@ -335,18 +337,20 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 TimeSpan shiftStartTime = (TimeSpan)(employee.Shift?.StartTime);
                 TimeSpan shiftEndTime = (TimeSpan)(employee.Shift?.EndTime);
 
-                int daysPresent = attendances.Count(a => a.IsPresent && !IsCoveredByLeave(a.Date, approvedLeaves));
-                int daysLate = attendances.Count(a => a.TimeIn > shiftStartTime);
-                int daysEarlyOut = attendances.Count(a => a.TimeOut.Hours < shiftEndTime.Hours);
+                double daysPresent = attendances.Count(a => a.IsPresent && !a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves));
+                double daysHalfDayPresent = attendances.Count(a => a.IsPresent && a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
+                double totalPresentDays = daysPresent + daysHalfDayPresent;
+                int daysLate = attendances.Count(a => a.TimeIn > shiftStartTime && !a.IsHalfDay);
+                int daysEarlyOut = attendances.Count(a => a.TimeOut.Hours < shiftEndTime.Hours && !a.IsHalfDay);
                 int daysOnLeave = approvedLeaves.Sum(l => (l.EndDate - l.StartDate).Days + 1);
-                int daysAbsent = totalDays > daysPresent ? totalDays - (daysPresent + daysOnLeave) : 0;
+                double daysAbsent = totalDays > totalPresentDays ? totalDays - (totalPresentDays + daysOnLeave) : 0;
 
                 summaryList.Add(new AttendanceViewModel
                 {
                     EmployeeId = employee.EmployeeId,
                     Employee = $"{employee.LastName}, {employee.FirstName}",
                     TotalDays = totalDays,
-                    DaysPresent = daysPresent,
+                    DaysPresent = totalPresentDays,
                     DaysLate = daysLate,
                     DaysEarlyOut = daysEarlyOut,
                     DaysAbsent = daysAbsent,

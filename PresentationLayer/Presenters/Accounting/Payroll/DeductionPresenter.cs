@@ -104,7 +104,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
+                DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(
+                    _unitOfWork.Deduction.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
+                    c.Employee.FirstName.Contains(_view.SearchValue) ||
+                    (c.DateDeducted.Date >= _view.StartDate.Date && c.DateDeducted.Date <= _view.EndDate.Date), 
+                    includeProperties: "Employee"));
                 DeductionBindingSource.DataSource = DeductionList;
             }
             else
@@ -168,7 +172,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllDeductionList()
         {
-            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.GetAll(includeProperties: "Employee"));
+            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(
+                _unitOfWork.Deduction.GetAll(c => c.DateDeducted.Date >= _view.StartDate.Date && c.DateDeducted.Date <= _view.EndDate.Date, 
+                includeProperties: "Employee"));
             DeductionBindingSource.DataSource = DeductionList;//Set data source.
         }
         private void LoadAllDeductionTypeList()
