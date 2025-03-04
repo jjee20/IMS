@@ -324,7 +324,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
-            var employees = _unitOfWork.Employee.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
+            var employees = _unitOfWork.Employee.GetAll(c => c.Attendances.Any(c => c.IsPresent == true || c.IsPresent == false), includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
             var summaryList = new List<AttendanceViewModel>();
 
             int totalDays = 0;
@@ -373,8 +373,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     DaysOnLeave = daysOnLeave
                 });
             }
-
-            return summaryList.Where(c => c.DaysPresent != 0).OrderBy(c => c.Employee).ToList();
+            summaryList = summaryList.OrderBy(c => c.Employee).ToList();
+            return summaryList;
         }
 
         private bool IsCoveredByLeave(DateTime date, IEnumerable<Leave> approvedLeaves)
