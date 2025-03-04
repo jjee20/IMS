@@ -34,6 +34,7 @@
             tbSales = new TabPage();
             tbDashboard = new TabPage();
             tcMain = new MaterialSkin.Controls.MaterialTabControl();
+            tbProject = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             tbInventory.Location = new Point(4, 24);
             tbInventory.Margin = new Padding(3, 2, 3, 2);
             tbInventory.Name = "tbInventory";
-            tbInventory.Size = new Size(1195, 509);
+            tbInventory.Size = new Size(1352, 689);
             tbInventory.TabIndex = 4;
             tbInventory.Text = "Inventory";
             tbInventory.UseVisualStyleBackColor = true;
@@ -54,7 +55,7 @@
             tbPurchase.Location = new Point(4, 24);
             tbPurchase.Margin = new Padding(3, 2, 3, 2);
             tbPurchase.Name = "tbPurchase";
-            tbPurchase.Size = new Size(1195, 509);
+            tbPurchase.Size = new Size(1352, 689);
             tbPurchase.TabIndex = 3;
             tbPurchase.Text = "Purchase";
             tbPurchase.UseVisualStyleBackColor = true;
@@ -65,7 +66,7 @@
             tbSales.Location = new Point(4, 24);
             tbSales.Margin = new Padding(3, 2, 3, 2);
             tbSales.Name = "tbSales";
-            tbSales.Size = new Size(1195, 509);
+            tbSales.Size = new Size(1352, 689);
             tbSales.TabIndex = 2;
             tbSales.Text = "Sales";
             tbSales.UseVisualStyleBackColor = true;
@@ -88,6 +89,7 @@
             tcMain.Controls.Add(tbSales);
             tcMain.Controls.Add(tbPurchase);
             tcMain.Controls.Add(tbInventory);
+            tcMain.Controls.Add(tbProject);
             tcMain.Depth = 0;
             tcMain.Dock = DockStyle.Fill;
             tcMain.Location = new Point(3, 48);
@@ -98,6 +100,16 @@
             tcMain.SelectedIndex = 0;
             tcMain.Size = new Size(1360, 717);
             tcMain.TabIndex = 4;
+            // 
+            // tbProject
+            // 
+            tbProject.Location = new Point(4, 24);
+            tbProject.Name = "tbProject";
+            tbProject.Padding = new Padding(3);
+            tbProject.Size = new Size(1352, 689);
+            tbProject.TabIndex = 5;
+            tbProject.Text = "Project";
+            tbProject.UseVisualStyleBackColor = true;
             // 
             // InventoryView
             // 
@@ -124,5 +136,6 @@
         private TabPage tbSales;
         private TabPage tbDashboard;
         private MaterialSkin.Controls.MaterialTabControl tcMain;
+        private TabPage tbProject;
     }
 }

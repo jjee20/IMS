@@ -122,6 +122,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<Contribution> Contributions { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectLine> ProjectLines { get; set; }
         public DbSet<Allowance> Allowances { get; set; }
         public DbSet<Bonus> Bonuses { get; set; }
         #endregion

@@ -1,26 +1,31 @@
 ﻿using Guna.Charts.WinForms;
+using Guna.UI2.WinForms;
 
 namespace PresentationLayer.Views.IViews.Inventory
 {
     public interface IDashboardView
     {
-        string OutOfStock { get; set; }
-        string Sales { get; set; }
-        string Purchased { get; set; }
-        string OnHand { get; set; }
-        string LowStockItem { get; set; }
-        string AllItemGroup { get; set; }
-        string AllItem { get; set; }
-        string POToday { get; set; }
-        string PO7Days { get; set; }
-        string POThisMonth { get; set; }
-        string POAnnual { get; set; }
-        string SOToday { get; set; }
-        string SO7Days { get; set; }
-        string SOThisMonth { get; set; }
-        string SOAnnual { get; set; }
-        void SetTopSellingItemListBindingSource(BindingSource TopSellingItemList);
-        void SetChartInventoryStatusBindingSource(GunaBarDataset gunaBarDataset);
-        void SetChartSalesStatusBindingSource(GunaLineDataset gunaBarDataset);
+        string Gross { set; }
+        string Sales { set; }
+        string Expense { set; }
+        string SalesToday { set; }
+        string ItemSoldToday { set; }
+        string ExpenseToday { set; }
+        int Year { get; }
+        int Month { get; }
+        double ExpenseTodayItemsSold { set; }
+        double ExpenseTodayItemsSoldTarget { set; }
+        double ExpenseTodaySales { set; }
+        double ExpenseTodaySalesTarget { set; }
+        double TotalExpense { set; }
+        double TotalProfit { set; }
+        void SetYear(BindingSource dataSource);
+        void SetMonth(BindingSource dataSource);
+        void SetTopSelling(GunaHorizontalBarDataset topSellingItemsBindingSource);
+        void SetDailySalesTrend(GunaLineDataset dailySalesTrendDataSet);
+        void SetMonthlySalesTrend(GunaBarDataset monthlySalesTrendDataset, GunaBarDataset monthlyExpenseTrendDataset);
+        void SetInventoryStatus(GunaBarDataset monthlySalesTrendDataset);
+        void SetProjectExpenseDistribution(GunaDoughnutDataset projectDataSet);
+        void SetProgressBars(int itemSold, int sales);
     }
 }

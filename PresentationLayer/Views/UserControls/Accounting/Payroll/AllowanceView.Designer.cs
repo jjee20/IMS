@@ -322,11 +322,13 @@ namespace PresentationLayer.Views.UserControls
             txtAllowanceType.BackColor = Color.Transparent;
             txtAllowanceType.CustomizableEdges = customizableEdges5;
             txtAllowanceType.DrawMode = DrawMode.OwnerDrawFixed;
+            txtAllowanceType.DropDownHeight = 400;
             txtAllowanceType.DropDownStyle = ComboBoxStyle.DropDownList;
             txtAllowanceType.FocusedColor = Color.FromArgb(94, 148, 255);
             txtAllowanceType.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtAllowanceType.Font = new Font("Segoe UI", 10F);
             txtAllowanceType.ForeColor = Color.FromArgb(68, 88, 112);
+            txtAllowanceType.IntegralHeight = false;
             txtAllowanceType.ItemHeight = 50;
             txtAllowanceType.Location = new Point(90, 206);
             txtAllowanceType.Name = "txtAllowanceType";
@@ -340,11 +342,13 @@ namespace PresentationLayer.Views.UserControls
             txtEmployee.BackColor = Color.Transparent;
             txtEmployee.CustomizableEdges = customizableEdges7;
             txtEmployee.DrawMode = DrawMode.OwnerDrawFixed;
+            txtEmployee.DropDownHeight = 400;
             txtEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
             txtEmployee.FocusedColor = Color.FromArgb(94, 148, 255);
             txtEmployee.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmployee.Font = new Font("Segoe UI", 10F);
             txtEmployee.ForeColor = Color.FromArgb(68, 88, 112);
+            txtEmployee.IntegralHeight = false;
             txtEmployee.ItemHeight = 50;
             txtEmployee.Location = new Point(90, 99);
             txtEmployee.Name = "txtEmployee";

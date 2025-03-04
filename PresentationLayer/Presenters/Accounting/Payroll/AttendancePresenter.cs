@@ -54,15 +54,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.ShowAttendanceEvent += ShowAttendance;
             _view.ImportEvent += Import;
 
-            DateTime currentDate = DateTime.Now;
-            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
-            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
-            DateTime endDate = startDate.AddDays(6).Date;
-
-            _view.Date = currentDate;
-            _view.StartDate = startDate;
-            _view.EndDate = endDate;
-
             //Load
 
             LoadAllEmployeeList();
@@ -246,14 +237,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 // Save changes to the database
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
-
-                // Clear the form fields after saving
-                CleanviewFields(); 
-                
-                if (_view.IsIndividual)
-                {
-                    LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
-                }
             }
             catch (Exception ex)
             {
@@ -317,9 +300,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void CleanviewFields()
         {
             LoadAllAttendanceList();
-            _view.AttendanceId = 0;
-            _view.IsPresent = true;
-            _view.HoursWorked = 8;
         }
 
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)

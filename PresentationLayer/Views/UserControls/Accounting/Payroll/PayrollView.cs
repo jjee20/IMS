@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -47,7 +48,16 @@ namespace PresentationLayer.Views.UserControls
                 PrintPayslipEvent?.Invoke(this, e);
             };
 
-            btnBenefits.CheckedChanged += (s, e) => IncludeBenefitsEvent?.Invoke(this, EventArgs.Empty);
+            txtProject.SelectionChangeCommitted += delegate
+            {
+                ProjectEvent?.Invoke(this, EventArgs.Empty);
+            };
+            btnAll.CheckedChanged += delegate
+            {
+                AllEvent?.Invoke(this, EventArgs.Empty);
+            };
+
+            btnBenifits.CheckedChanged += (s, e) => IncludeBenefitsEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public void SetPayrollListBindingSource(BindingSource PayrollList)
@@ -55,13 +65,28 @@ namespace PresentationLayer.Views.UserControls
             dgList.DataSource = PayrollList;
             DataGridHelper.ApplyDisplayNames<DomainLayer.ViewModels.PayrollViewModels.PayrollViewModel>(PayrollList, dgList);
         }
+        public void SetProjectListBindingSource(BindingSource ProjectList)
+        {
+            txtProject.DataSource = ProjectList;
+            txtProject.DisplayMember = "ProjectName";
+            txtProject.ValueMember = "ProjectId";
+        }
 
         private static PayrollView? instance;
 
         public DateTime StartDate { get => txtStartDate.Value.Date; set => txtStartDate.Value = value; }
         public DateTime EndDate { get => txtEndDate.Value.Date; set => txtEndDate.Value = value; }
+        public int ProjectId {
+            get
+            {
+                if (txtProject.SelectedItem is Project project)
+                    return project.ProjectId;
+                return 0;
+            }
+        }
         public bool IncludeContribution { get => btnContribution.Checked; }
-        public bool IncludeBenefits { get => btnBenefits.Checked; }
+        public bool IncludeBenefits { get => btnBenifits.Checked; }
+        public bool All { get => btnAll.Checked; }
         public string Message
         {
             get { return message; }
@@ -72,6 +97,8 @@ namespace PresentationLayer.Views.UserControls
         public event DataGridViewCellEventHandler PrintPayslipEvent;
         public event EventHandler SearchEvent;
         public event EventHandler IncludeBenefitsEvent;
+        public event EventHandler ProjectEvent;
+        public event EventHandler AllEvent;
 
         public static PayrollView GetInstance(TabPage parentContainer)
         {
@@ -82,6 +109,17 @@ namespace PresentationLayer.Views.UserControls
                 instance.Dock = DockStyle.Fill;
             }
             return instance;
+        }
+
+        private void PayrollView_Load(object sender, EventArgs e)
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
+            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6).Date;
+
+            txtStartDate.Value = startDate;
+            txtEndDate.Value = endDate;
         }
     }
 }

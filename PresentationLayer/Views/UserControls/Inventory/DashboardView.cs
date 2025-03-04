@@ -1,5 +1,7 @@
-﻿using DomainLayer.ViewModels.Inventory;
+﻿using DomainLayer.ViewModels;
+using DomainLayer.ViewModels.Inventory;
 using Guna.Charts.WinForms;
+using Guna.UI2.WinForms;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
@@ -36,104 +38,118 @@ namespace PresentationLayer.Views.UserControls
             return instance;
         }
 
-        public string OutOfStock
+        public string Gross
         {
-            get { return txtOutofStock.Text; }
-            set { txtOutofStock.Text = value; }
+            set { txtGross.Text = value; }
         }
         public string Sales
         {
-            get { return txtSales.Text; }
             set { txtSales.Text = value; }
         }
-        public string Purchased
+        public string Expense
         {
-            get { return txtPurchased.Text; }
-            set { txtPurchased.Text = value; }
+            set { txtExpense.Text = value; }
         }
-        public string OnHand
+        public string SalesToday
         {
-            get { return txtOnHand.Text; }
-            set { txtOnHand.Text = value; }
-        }
-        
-        public string POToday
-        {
-            get { return txtPOToday.Text; }
-            set { txtPOToday.Text = value; }
-        }
-        
-        public string PO7Days
-        {
-            get { return txtPO7Days.Text; }
-            set { txtPO7Days.Text = value; }
-        }
-        
-        public string POThisMonth
-        {
-            get { return txtPOThisMonth.Text; }
-            set { txtPOThisMonth.Text = value; }
-        }
-        
-        public string POAnnual
-        {
-            get { return txtPOAnnual.Text; }
-            set { txtPOAnnual.Text = value; }
-        }
-        public string SOToday
-        {
-            get { return txtSOToday.Text; }
-            set { txtSOToday.Text = value; }
-        }
-        
-        public string SO7Days
-        {
-            get { return txtSO7Days.Text; }
-            set { txtSO7Days.Text = value; }
-        }
-        
-        public string SOThisMonth
-        {
-            get { return txtSOThisMonth.Text; }
-            set { txtSOThisMonth.Text = value; }
-        }
-        
-        public string SOAnnual
-        {
-            get { return txtSOAnnual.Text; }
-            set { txtSOAnnual.Text = value; }
+            set { txtSalesToday.Text = value; }
         }
 
-        public string LowStockItem
+        public string ItemSoldToday
         {
-            get { return txtLowStockItem.Text; }
-            set { txtLowStockItem.Text = value; }
-        }
-        public string AllItemGroup
-        {
-            get { return txtAllItemGroup.Text; }
-            set { txtAllItemGroup.Text = value; }
-        }
-        public string AllItem
-        {
-            get { return txtAllItem.Text; }
-            set { txtAllItem.Text = value; }
+            set { txtItemSoldToday.Text = value; }
         }
 
-        public void SetTopSellingItemListBindingSource(BindingSource TopSellingItemList)
+        public string ExpenseToday
         {
-            dgTopSellingItems.DataSource = TopSellingItemList;
-            DataGridHelper.ApplyDisplayNames<TopSellingItemViewModel>(TopSellingItemList, dgTopSellingItems);
+            set { txtExpenseToday.Text = value; }
         }
-        public void SetChartInventoryStatusBindingSource(GunaBarDataset gunaBarDataset)
+
+        public int Year
+        {
+            get {
+                    if (txtYear.DataSource != null)
+                        return (int)txtYear.SelectedValue;
+                    else return 0;
+            }
+        }
+        public int Month
+        {
+            get { return (int)txtMonth.SelectedValue; }
+        }
+        public double ExpenseTodayItemsSold
+        {
+            set { txtExpenseItemsSold.Text = value.ToString("N2"); }
+        }
+        public double ExpenseTodayItemsSoldTarget
+        {
+            set { txtExpenseItemsSoldTarget.Text = value.ToString("N2"); }
+        }
+        public double ExpenseTodaySales
+        {
+            set { txtExpenseSales.Text = value.ToString("N2"); }
+        }
+        public double ExpenseTodaySalesTarget
+        {
+            set { txtExpenseSalesTarget.Text = value.ToString("N2"); }
+        }
+        public double TotalExpense
+        {
+            set { txtTotalExpenses.Text = value.ToString("N2"); }
+        }
+        public double TotalProfit
+        {
+            set { txtTotalProfit.Text = value.ToString("N2"); }
+        }
+
+        public void SetYear(BindingSource dataSource)
+        {
+            txtYear.DataSource = dataSource;
+            txtYear.DisplayMember = "Name";
+            txtYear.ValueMember = "Id";
+        }
+        public void SetMonth(BindingSource dataSource)
+        {
+            txtMonth.DataSource = dataSource;
+            txtMonth.DisplayMember = "Name";
+            txtMonth.ValueMember = "Id";
+        }
+
+        public void SetTopSelling(GunaHorizontalBarDataset dataSet)
+        {
+            chartTopSelling.Datasets.Clear();
+            chartTopSelling.Datasets.Add(dataSet);
+        }
+
+        public void SetDailySalesTrend(GunaLineDataset dailySalesTrendDataSet)
+        {
+            chartDailySales.Datasets.Clear();
+            chartDailySales.Datasets.Add(dailySalesTrendDataSet);
+        }
+
+        public void SetMonthlySalesTrend(GunaBarDataset monthlySalesTrendDataset, GunaBarDataset monthlyExpenseTrendDataset)
+        {
+            chartMonthlySales.Datasets.Clear();
+            chartMonthlySales.Datasets.Add(monthlySalesTrendDataset);
+            chartMonthlySales.Datasets.Add(monthlyExpenseTrendDataset);
+        }
+
+        public void SetInventoryStatus(GunaBarDataset inventoryStatusDataset)
         {
             chartInventoryStatus.Datasets.Clear();
-            chartInventoryStatus.Datasets.Add(gunaBarDataset);
+            chartInventoryStatus.Datasets.Add(inventoryStatusDataset);
         }
-        public void SetChartSalesStatusBindingSource(GunaLineDataset gunaBarDataset)
+
+        public void SetProjectExpenseDistribution(GunaDoughnutDataset projectDataSet)
         {
-            chartSalesStatus.Datasets.Clear();
-            chartSalesStatus.Datasets.Add(gunaBarDataset);
+            chartProjectExpenseDistribution.Datasets.Clear();
+            chartProjectExpenseDistribution.Datasets.Add(projectDataSet);
+        }
+
+        public void SetProgressBars(int itemSold, int sales)
+        {
+            progressBarItemSold.Value = itemSold;
+            progressBarSales.Value = sales;
         }
     }
 }

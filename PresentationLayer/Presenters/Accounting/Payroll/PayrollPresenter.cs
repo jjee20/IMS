@@ -20,7 +20,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         public IPayrollView _view;
         private IUnitOfWork _unitOfWork;
         private BindingSource PayrollBindingSource;
+        private BindingSource ProjectBindingSource;
         private List<PayrollViewModel> PayrollList;
+        private IEnumerable<Project> ProjectList;
+        private string ProjectName;
         public PayrollPresenter(IPayrollView view, IUnitOfWork unitOfWork)
         {
 
@@ -29,25 +32,33 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view = view;
             _unitOfWork = unitOfWork;
             PayrollBindingSource = new BindingSource();
+            ProjectBindingSource = new BindingSource();
             PayrollList = new List<PayrollViewModel>();
             //Load
 
-
-            DateTime currentDate = DateTime.Now;
-            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
-            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
-            DateTime endDate = startDate.AddDays(6).Date;
-
-            _view.StartDate = startDate;
-            _view.EndDate = endDate;
-
+            LoadAllProjectList();
             LoadAllPayrollList();
             _view.PrintPayrollEvent += PrintPayroll;
             _view.PrintPayslipEvent += PrintPayslip;
             _view.SearchEvent += Search;
             _view.IncludeBenefitsEvent += OnIncludeBenefits;
+            _view.ProjectEvent += SelectProject;
+            _view.AllEvent += SelectAll;
 
+            _view.SetProjectListBindingSource(ProjectBindingSource);
             _view.SetPayrollListBindingSource(PayrollBindingSource);
+        }
+
+        private void SelectAll(object? sender, EventArgs e)
+        {
+            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
+            PayrollBindingSource.DataSource = PayrollList;
+        }
+
+        private void SelectProject(object? sender, EventArgs e)
+        {
+            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
+            PayrollBindingSource.DataSource = PayrollList;
         }
 
         private void OnIncludeBenefits(object? sender, EventArgs e)
@@ -152,6 +163,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 {
                     new ReportParameter("PayrollPeriod", $"Payroll Period: {_view.StartDate.ToShortDateString()} to {_view.EndDate.ToShortDateString()}"),
                     new ReportParameter("Total", PayrollList.Sum(c => c.NetPay).ToString()),
+                    new ReportParameter("Project", ProjectName),
                 };
                 //localReport.SetParameters(parameters);
                 var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
@@ -165,7 +177,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllPayrollList()
         {
-            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date);
+            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
             PayrollBindingSource.DataSource = PayrollList;
         }
         private double CalculateAllowances(Employee employee, DateTime startDate, DateTime endDate)
@@ -299,10 +311,28 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             return days;
         }
 
-        public List<PayrollViewModel> CalculatePayroll(DateTime startDate, DateTime endDate)
+        public List<PayrollViewModel> CalculatePayroll(DateTime startDate, DateTime endDate, int? projectId = 0)
         {
             var employees = _unitOfWork.Employee.GetAll(includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves");
             var contributions = _unitOfWork.Contribution.GetAll();
+            var project = _unitOfWork.Project.Get(c => c.ProjectId == projectId);
+            var projectName = "";
+            if(project != null)
+                projectName = $"Project: {project.ProjectName}";
+            else
+            {
+                projectName = "Project: All";
+            }
+
+            if (!_view.All)
+            {
+                employees = employees.Where(c => c.Attendances.Any(c => c.ProjectId == projectId));
+                ProjectName = projectName;
+            }
+            else
+            {
+                ProjectName = projectName;
+            }
 
             var payrollList = new List<PayrollViewModel>();
             
@@ -357,6 +387,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             return payrollList.OrderBy(c => c.Employee).ToList();
         }
-
+        private void LoadAllProjectList()
+        {
+            ProjectList = _unitOfWork.Project.GetAll();
+            ProjectBindingSource.DataSource = ProjectList;
+        }
     }
 }
