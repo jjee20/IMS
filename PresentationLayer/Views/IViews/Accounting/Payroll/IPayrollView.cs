@@ -9,11 +9,16 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         public DateTime EndDate { get; set; }
         public bool IncludeContribution { get; }
         public bool IncludeBenefits { get; }
+        public bool All { get; }
+        public int ProjectId { get; }
         string Message { get; set; }
         event EventHandler PrintPayrollEvent;
         event DataGridViewCellEventHandler PrintPayslipEvent;
         event EventHandler SearchEvent; 
         event EventHandler IncludeBenefitsEvent;
+        event EventHandler ProjectEvent;
+        event EventHandler AllEvent;
         void SetPayrollListBindingSource(BindingSource PayrollList);
+        void SetProjectListBindingSource(BindingSource ProjectList);
     }
 }

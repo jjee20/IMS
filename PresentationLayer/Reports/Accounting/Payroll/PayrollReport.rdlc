@@ -1138,7 +1138,7 @@
                     <TextRun>
                       <Value>Report</Value>
                       <Style>
-                        <FontSize>14pt</FontSize>
+                        <FontSize>18pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1148,8 +1148,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox7</rd:DefaultName>
-              <Top>1.36031cm</Top>
-              <Left>2.66667in</Left>
+              <Top>0.3302cm</Top>
+              <Left>2.66666in</Left>
               <Height>1.13622cm</Height>
               <Width>26.56254cm</Width>
               <Style>
@@ -1190,7 +1190,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PayrollPeriod</rd:DefaultName>
-              <Top>2.38337cm</Top>
+              <Top>1.5017cm</Top>
               <Left>6.77333cm</Left>
               <Height>0.6cm</Height>
               <Width>26.56254cm</Width>
@@ -1220,6 +1220,38 @@
                 </Border>
               </Style>
             </Image>
+            <Textbox Name="Project">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!Project.Value</Value>
+                      <Style>
+                        <FontStyle>Italic</FontStyle>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Project</rd:DefaultName>
+              <Top>2.38337cm</Top>
+              <Left>6.77331cm</Left>
+              <Height>0.6cm</Height>
+              <Width>26.56257cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>
@@ -1372,6 +1404,10 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="Project">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1387,6 +1423,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>Total</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Project</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

@@ -43,11 +43,13 @@ namespace PresentationLayer.Views.UserControls
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             dgList = new Guna2DataGridView();
             panel2 = new Panel();
+            btnAll = new MaterialSkin.Controls.MaterialSwitch();
+            txtProject = new MaterialSkin.Controls.MaterialComboBox();
             guna2HtmlLabel7 = new Guna2HtmlLabel();
             txtStartDate = new Guna2DateTimePicker();
             guna2HtmlLabel6 = new Guna2HtmlLabel();
             txtEndDate = new Guna2DateTimePicker();
-            btnBenefits = new MaterialSkin.Controls.MaterialSwitch();
+            btnBenifits = new MaterialSkin.Controls.MaterialSwitch();
             btnContribution = new MaterialSkin.Controls.MaterialSwitch();
             btnPrint = new Guna2Button();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -136,11 +138,13 @@ namespace PresentationLayer.Views.UserControls
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(btnAll);
+            panel2.Controls.Add(txtProject);
             panel2.Controls.Add(guna2HtmlLabel7);
             panel2.Controls.Add(txtStartDate);
             panel2.Controls.Add(guna2HtmlLabel6);
             panel2.Controls.Add(txtEndDate);
-            panel2.Controls.Add(btnBenefits);
+            panel2.Controls.Add(btnBenifits);
             panel2.Controls.Add(btnContribution);
             panel2.Controls.Add(btnPrint);
             panel2.Dock = DockStyle.Top;
@@ -150,13 +154,55 @@ namespace PresentationLayer.Views.UserControls
             panel2.Size = new Size(1324, 50);
             panel2.TabIndex = 3;
             // 
+            // btnAll
+            // 
+            btnAll.AutoSize = true;
+            btnAll.Checked = true;
+            btnAll.CheckState = CheckState.Checked;
+            btnAll.Depth = 0;
+            btnAll.Dock = DockStyle.Left;
+            btnAll.Location = new Point(264, 0);
+            btnAll.Margin = new Padding(0);
+            btnAll.MouseLocation = new Point(-1, -1);
+            btnAll.MouseState = MaterialSkin.MouseState.HOVER;
+            btnAll.Name = "btnAll";
+            btnAll.Ripple = true;
+            btnAll.Size = new Size(76, 50);
+            btnAll.TabIndex = 18;
+            btnAll.Text = "All";
+            btnAll.UseVisualStyleBackColor = true;
+            // 
+            // txtProject
+            // 
+            txtProject.AutoResize = false;
+            txtProject.BackColor = Color.FromArgb(255, 255, 255);
+            txtProject.Depth = 0;
+            txtProject.Dock = DockStyle.Left;
+            txtProject.DrawMode = DrawMode.OwnerDrawVariable;
+            txtProject.DropDownHeight = 174;
+            txtProject.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtProject.DropDownWidth = 121;
+            txtProject.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            txtProject.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            txtProject.FormattingEnabled = true;
+            txtProject.Hint = "Project";
+            txtProject.IntegralHeight = false;
+            txtProject.ItemHeight = 43;
+            txtProject.Location = new Point(0, 0);
+            txtProject.MaxDropDownItems = 4;
+            txtProject.MouseState = MaterialSkin.MouseState.OUT;
+            txtProject.Name = "txtProject";
+            txtProject.Size = new Size(264, 49);
+            txtProject.StartIndex = 0;
+            txtProject.TabIndex = 17;
+            // 
             // guna2HtmlLabel7
             // 
             guna2HtmlLabel7.BackColor = Color.Transparent;
             guna2HtmlLabel7.Dock = DockStyle.Right;
-            guna2HtmlLabel7.Location = new Point(342, 0);
+            guna2HtmlLabel7.Location = new Point(454, 0);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            guna2HtmlLabel7.Size = new Size(34, 17);
+            guna2HtmlLabel7.Size = new Size(34, 50);
             guna2HtmlLabel7.TabIndex = 14;
             guna2HtmlLabel7.Text = "From:";
             guna2HtmlLabel7.TextAlignment = ContentAlignment.MiddleRight;
@@ -169,12 +215,12 @@ namespace PresentationLayer.Views.UserControls
             txtStartDate.FillColor = Color.White;
             txtStartDate.Font = new Font("Segoe UI", 9F);
             txtStartDate.Format = DateTimePickerFormat.Long;
-            txtStartDate.Location = new Point(376, 0);
+            txtStartDate.Location = new Point(488, 0);
             txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtStartDate.Name = "txtStartDate";
             txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            txtStartDate.Size = new Size(250, 50);
+            txtStartDate.Size = new Size(191, 50);
             txtStartDate.TabIndex = 13;
             txtStartDate.Value = new DateTime(2025, 1, 12, 10, 14, 55, 9);
             // 
@@ -182,9 +228,9 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Dock = DockStyle.Right;
-            guna2HtmlLabel6.Location = new Point(626, 0);
+            guna2HtmlLabel6.Location = new Point(679, 0);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            guna2HtmlLabel6.Size = new Size(19, 17);
+            guna2HtmlLabel6.Size = new Size(19, 50);
             guna2HtmlLabel6.TabIndex = 12;
             guna2HtmlLabel6.Text = "To:";
             guna2HtmlLabel6.TextAlignment = ContentAlignment.MiddleRight;
@@ -197,30 +243,30 @@ namespace PresentationLayer.Views.UserControls
             txtEndDate.FillColor = Color.White;
             txtEndDate.Font = new Font("Segoe UI", 9F);
             txtEndDate.Format = DateTimePickerFormat.Long;
-            txtEndDate.Location = new Point(645, 0);
+            txtEndDate.Location = new Point(698, 0);
             txtEndDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtEndDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtEndDate.Name = "txtEndDate";
             txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            txtEndDate.Size = new Size(250, 50);
+            txtEndDate.Size = new Size(197, 50);
             txtEndDate.TabIndex = 11;
             txtEndDate.Value = new DateTime(2025, 1, 12, 10, 14, 55, 9);
             // 
-            // btnBenefits
+            // btnBenifits
             // 
-            btnBenefits.AutoSize = true;
-            btnBenefits.Depth = 0;
-            btnBenefits.Dock = DockStyle.Right;
-            btnBenefits.Location = new Point(895, 0);
-            btnBenefits.Margin = new Padding(0);
-            btnBenefits.MouseLocation = new Point(-1, -1);
-            btnBenefits.MouseState = MaterialSkin.MouseState.HOVER;
-            btnBenefits.Name = "btnBenefits";
-            btnBenefits.Ripple = true;
-            btnBenefits.Size = new Size(171, 50);
-            btnBenefits.TabIndex = 16;
-            btnBenefits.Text = "Include Benefits";
-            btnBenefits.UseVisualStyleBackColor = true;
+            btnBenifits.AutoSize = true;
+            btnBenifits.Depth = 0;
+            btnBenifits.Dock = DockStyle.Right;
+            btnBenifits.Location = new Point(895, 0);
+            btnBenifits.Margin = new Padding(0);
+            btnBenifits.MouseLocation = new Point(-1, -1);
+            btnBenifits.MouseState = MaterialSkin.MouseState.HOVER;
+            btnBenifits.Name = "btnBenifits";
+            btnBenifits.Ripple = true;
+            btnBenifits.Size = new Size(171, 50);
+            btnBenifits.TabIndex = 16;
+            btnBenifits.Text = "Include Benefits";
+            btnBenifits.UseVisualStyleBackColor = true;
             // 
             // btnContribution
             // 
@@ -321,6 +367,7 @@ namespace PresentationLayer.Views.UserControls
             Margin = new Padding(3, 4, 3, 4);
             Name = "PayrollView";
             Size = new Size(1356, 701);
+            Load += PayrollView_Load;
             materialCard1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             panel2.ResumeLayout(false);
@@ -346,6 +393,8 @@ namespace PresentationLayer.Views.UserControls
         private Guna2DateTimePicker txtStartDate;
         private Guna2DataGridView dgList;
         private MaterialSkin.Controls.MaterialSwitch btnContribution;
-        private MaterialSkin.Controls.MaterialSwitch btnBenefits;
+        private MaterialSkin.Controls.MaterialSwitch btnBenifits;
+        private MaterialSkin.Controls.MaterialComboBox txtProject;
+        private MaterialSkin.Controls.MaterialSwitch btnAll;
     }
 }

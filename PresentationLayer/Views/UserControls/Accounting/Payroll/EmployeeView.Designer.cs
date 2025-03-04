@@ -488,7 +488,7 @@ namespace PresentationLayer.Views.UserControls
             txtisDeducted.Anchor = AnchorStyles.None;
             txtisDeducted.AutoSize = true;
             txtisDeducted.Depth = 0;
-            txtisDeducted.Location = new Point(699, 511);
+            txtisDeducted.Location = new Point(681, 419);
             txtisDeducted.Margin = new Padding(0);
             txtisDeducted.MouseLocation = new Point(-1, -1);
             txtisDeducted.MouseState = MaterialSkin.MouseState.HOVER;
