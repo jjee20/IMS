@@ -357,7 +357,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     DaysOnLeave = daysOnLeave
                 });
             }
-
             return summaryList.OrderBy(c => c.Employee).ToList();
         }
 
