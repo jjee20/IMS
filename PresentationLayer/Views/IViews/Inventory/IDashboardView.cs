@@ -21,9 +21,9 @@ namespace PresentationLayer.Views.IViews.Inventory
         double TotalProfit { set; }
         void SetYear(BindingSource dataSource);
         void SetMonth(BindingSource dataSource);
-        void SetTopSelling(GunaBarDataset topSellingItemsBindingSource);
+        void SetTopSelling(GunaHorizontalBarDataset topSellingItemsBindingSource);
         void SetDailySalesTrend(GunaLineDataset dailySalesTrendDataSet);
-        void SetMonthlySalesTrend(GunaBarDataset monthlySalesTrendDataset);
+        void SetMonthlySalesTrend(GunaBarDataset monthlySalesTrendDataset, GunaBarDataset monthlyExpenseTrendDataset);
         void SetInventoryStatus(GunaBarDataset monthlySalesTrendDataset);
         void SetProjectExpenseDistribution(GunaDoughnutDataset projectDataSet);
         void SetProgressBars(int itemSold, int sales);

@@ -429,11 +429,13 @@ namespace PresentationLayer.Views.UserControls
             txtEmployee.BackColor = Color.Transparent;
             txtEmployee.CustomizableEdges = customizableEdges13;
             txtEmployee.DrawMode = DrawMode.OwnerDrawFixed;
+            txtEmployee.DropDownHeight = 400;
             txtEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
             txtEmployee.FocusedColor = Color.FromArgb(94, 148, 255);
             txtEmployee.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmployee.Font = new Font("Segoe UI", 10F);
             txtEmployee.ForeColor = Color.FromArgb(68, 88, 112);
+            txtEmployee.IntegralHeight = false;
             txtEmployee.ItemHeight = 46;
             txtEmployee.Location = new Point(93, 54);
             txtEmployee.Name = "txtEmployee";

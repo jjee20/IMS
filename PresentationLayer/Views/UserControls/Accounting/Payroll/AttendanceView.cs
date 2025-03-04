@@ -43,11 +43,11 @@ namespace PresentationLayer.Views.UserControls
             //Add New
             btnAdd.Click += delegate
             {
-                if (!AppUserHelper.AllowedToAdd(AppUserHelper.TaskRoles(Settings.Default.Roles)))
-                {
-                    MessageBox.Show("Account restricted to perform the function. Please contact your administrator.");
-                    return;
-                }
+                //if (!AppUserHelper.AllowedToAdd(AppUserHelper.TaskRoles(Settings.Default.Roles)))
+                //{
+                //    MessageBox.Show("Account restricted to perform the function. Please contact your administrator.");
+                //    return;
+                //}
                 if (Guna2TabControl1.TabPages.Contains(tabPage1) || Guna2TabControl1.TabPages.Contains(tabPage3))
                 {
                     tabPage2.Text = "Add New";
@@ -71,7 +71,7 @@ namespace PresentationLayer.Views.UserControls
                 {
                     Guna2TabControl1.TabPages.Remove(tabPage2);
                     Guna2TabControl1.TabPages.Remove(tabPage1);
-                    if(isEdit)
+                    if (isEdit)
                     {
                         Guna2TabControl1.TabPages.Remove(tabPage1);
                         Guna2TabControl1.TabPages.Add(tabPage3);
@@ -240,7 +240,7 @@ namespace PresentationLayer.Views.UserControls
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
-        
+
         public bool IsIndividual
         {
             get { return isIndividual; }
@@ -298,7 +298,7 @@ namespace PresentationLayer.Views.UserControls
             txtEmployee.DataSource = EmployeeList;
             txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
-            
+
         }
 
         public void SetProjectListBindingSource(BindingSource ProjectList)
@@ -336,6 +336,18 @@ namespace PresentationLayer.Views.UserControls
                 instance.Dock = DockStyle.Fill;
             }
             return instance;
+        }
+
+        private void AttendanceView_Load(object sender, EventArgs e)
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
+            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6).Date;
+
+            txtDate.Value = currentDate;
+            txtStartDate.Value = startDate;
+            txtEndDate.Value = endDate;
         }
     }
 }

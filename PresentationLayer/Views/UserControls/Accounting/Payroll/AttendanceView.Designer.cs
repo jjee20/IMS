@@ -290,11 +290,14 @@ namespace PresentationLayer.Views.UserControls
             txtEmployee.CustomizableEdges = customizableEdges1;
             txtEmployee.DisplayMember = "EmployeeId";
             txtEmployee.DrawMode = DrawMode.OwnerDrawFixed;
+            txtEmployee.DropDownHeight = 400;
             txtEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtEmployee.DropDownWidth = 500;
             txtEmployee.FocusedColor = Color.FromArgb(94, 148, 255);
             txtEmployee.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmployee.Font = new Font("Segoe UI", 10F);
             txtEmployee.ForeColor = Color.FromArgb(68, 88, 112);
+            txtEmployee.IntegralHeight = false;
             txtEmployee.ItemHeight = 50;
             txtEmployee.Location = new Point(87, 73);
             txtEmployee.Name = "txtEmployee";
@@ -309,11 +312,14 @@ namespace PresentationLayer.Views.UserControls
             txtProject.BackColor = Color.Transparent;
             txtProject.CustomizableEdges = customizableEdges3;
             txtProject.DrawMode = DrawMode.OwnerDrawFixed;
+            txtProject.DropDownHeight = 400;
             txtProject.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtProject.DropDownWidth = 500;
             txtProject.FocusedColor = Color.FromArgb(94, 148, 255);
             txtProject.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtProject.Font = new Font("Segoe UI", 10F);
             txtProject.ForeColor = Color.FromArgb(68, 88, 112);
+            txtProject.IntegralHeight = false;
             txtProject.ItemHeight = 50;
             txtProject.Location = new Point(677, 73);
             txtProject.Name = "txtProject";
@@ -483,7 +489,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage3.Controls.Add(guna2Panel1);
             tabPage3.Location = new Point(4, 44);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1866, 761);
+            tabPage3.Size = new Size(1316, 483);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Attendance Information";
             tabPage3.UseVisualStyleBackColor = true;
@@ -517,7 +523,7 @@ namespace PresentationLayer.Views.UserControls
             dgListInvidivual.RowHeadersVisible = false;
             dgListInvidivual.RowHeadersWidth = 51;
             dgListInvidivual.RowTemplate.Height = 29;
-            dgListInvidivual.Size = new Size(1866, 721);
+            dgListInvidivual.Size = new Size(1316, 443);
             dgListInvidivual.TabIndex = 1;
             dgListInvidivual.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgListInvidivual.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -552,7 +558,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2Panel1.Size = new Size(1866, 40);
+            guna2Panel1.Size = new Size(1316, 40);
             guna2Panel1.TabIndex = 2;
             // 
             // guna2HtmlLabel11
@@ -560,7 +566,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel11.BackColor = Color.Transparent;
             guna2HtmlLabel11.Dock = DockStyle.Right;
             guna2HtmlLabel11.Font = new Font("Segoe UI", 16F);
-            guna2HtmlLabel11.Location = new Point(1820, 0);
+            guna2HtmlLabel11.Location = new Point(1270, 0);
             guna2HtmlLabel11.Name = "guna2HtmlLabel11";
             guna2HtmlLabel11.Size = new Size(26, 32);
             guna2HtmlLabel11.TabIndex = 2;
@@ -571,7 +577,7 @@ namespace PresentationLayer.Views.UserControls
             txtEmployeeId.BackColor = Color.Transparent;
             txtEmployeeId.Dock = DockStyle.Right;
             txtEmployeeId.Font = new Font("Segoe UI", 16F, FontStyle.Italic);
-            txtEmployeeId.Location = new Point(1846, 0);
+            txtEmployeeId.Location = new Point(1296, 0);
             txtEmployeeId.Name = "txtEmployeeId";
             txtEmployeeId.Size = new Size(20, 32);
             txtEmployeeId.TabIndex = 3;
@@ -1072,6 +1078,7 @@ namespace PresentationLayer.Views.UserControls
             Margin = new Padding(3, 4, 3, 4);
             Name = "AttendanceView";
             Size = new Size(1356, 701);
+            Load += AttendanceView_Load;
             materialCard1.ResumeLayout(false);
             Guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
