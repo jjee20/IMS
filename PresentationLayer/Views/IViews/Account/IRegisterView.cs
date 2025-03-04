@@ -17,6 +17,7 @@ namespace PresentationLayer.Views.IViews.Account
         bool Editing { get; set; }
         bool Deleting { get; set; }
         bool Viewing { get; set; }
+        bool Overriding { get; set; }
         void SetRegisterListBindingSource(BindingSource RegisterList);
         void SetDepartmentListBindingSource(BindingSource departmentBindingSource);
 

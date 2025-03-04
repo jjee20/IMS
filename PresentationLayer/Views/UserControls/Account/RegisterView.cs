@@ -174,6 +174,11 @@ namespace PresentationLayer.Views.UserControls
             get { return txtViewing.Checked; }
             set { txtViewing.Checked = value; }
         }
+        public bool Overriding
+        {
+            get { return txtOverriding.Checked; }
+            set { txtOverriding.Checked = value; }
+        }
 
         public string SearchValue
         {

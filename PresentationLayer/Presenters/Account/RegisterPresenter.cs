@@ -90,6 +90,8 @@ namespace PresentationLayer.Presenters.Account
             else taskRoles.Remove(TaskRoles.Delete);
             if (_view.Viewing) taskRoles.Add(TaskRoles.View);
             else taskRoles.Remove(TaskRoles.View);
+            if (_view.Overriding) taskRoles.Add(TaskRoles.Override);
+            else taskRoles.Remove(TaskRoles.Override);
 
             model.TaskRoles = taskRoles;
 
@@ -140,11 +142,15 @@ namespace PresentationLayer.Presenters.Account
 
             if(user.TaskRoles != null)
             {
-                if (user.TaskRoles.Contains(TaskRoles.Add)) _view.Adding = true;
-                if (user.TaskRoles.Contains(TaskRoles.Edit)) _view.Editing = true;
-                if (user.TaskRoles.Contains(TaskRoles.Delete)) _view.Deleting = true;
-                if (user.TaskRoles.Contains(TaskRoles.View)) _view.Viewing = true;
+                if (user.TaskRoles.Contains(TaskRoles.Add)) _view.Adding = true; else _view.Adding = false;
+                if (user.TaskRoles.Contains(TaskRoles.Edit)) _view.Editing = true; else _view.Editing = false;
+                if (user.TaskRoles.Contains(TaskRoles.Delete)) _view.Deleting = true; else _view.Deleting = false;
+                if (user.TaskRoles.Contains(TaskRoles.View)) _view.Viewing = true; else _view.Viewing = false;
+                if (user.TaskRoles.Contains(TaskRoles.Override)) _view.Overriding = true; else _view.Overriding = false;
             }
+
+            _view.Password = user.PasswordHash;
+            _view.ConfirmPassword = user.PasswordHash;
         }
         private void Delete(object? sender, EventArgs e)
         {

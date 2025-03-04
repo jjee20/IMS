@@ -128,6 +128,9 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime.ToString(@"hh\:mm")))
                  .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime.ToString(@"hh\:mm")))
                 .ReverseMap();
+
+            CreateMap<Project, ProjectViewModel>()
+                .ReverseMap();
             #endregion
             #region Admin
 
