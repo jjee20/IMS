@@ -374,7 +374,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 });
             }
 
-            return summaryList.OrderBy(c => c.Employee).ToList();
+            return summaryList.Where(c => c.DaysPresent != 0).OrderBy(c => c.Employee).ToList();
         }
 
         private bool IsCoveredByLeave(DateTime date, IEnumerable<Leave> approvedLeaves)

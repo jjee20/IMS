@@ -49,6 +49,7 @@ namespace ServiceLayer.Services.IRepositories.IInventory
         IProjectRepository Project { get; }
         IAllowanceRepository Allowance { get; }
         IBonusRepository Bonus { get; }
+        IProjectLineRepository ProjectLine { get; }
         void Save();
     }
 }

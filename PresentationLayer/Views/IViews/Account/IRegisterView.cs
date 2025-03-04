@@ -1,4 +1,6 @@
-﻿namespace PresentationLayer.Views.IViews.Account
+﻿using DomainLayer.Enums;
+
+namespace PresentationLayer.Views.IViews.Account
 {
     public interface IRegisterView
     {
@@ -11,6 +13,11 @@
         bool IsSuccessful { get; set; }
         string Message { get; set; }
         string SearchValue { get; set; }
+        bool Adding { get; set; }
+        bool Editing { get; set; }
+        bool Deleting { get; set; }
+        bool Viewing { get; set; }
+        bool Overriding { get; set; }
         void SetRegisterListBindingSource(BindingSource RegisterList);
         void SetDepartmentListBindingSource(BindingSource departmentBindingSource);
 

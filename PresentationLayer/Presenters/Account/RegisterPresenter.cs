@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels;
@@ -13,6 +14,7 @@ using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Account;
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories.IInventory;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PresentationLayer.Presenters.Account
 {
@@ -68,21 +70,30 @@ namespace PresentationLayer.Presenters.Account
         }
         private void Save(object? sender, EventArgs e)
         {
-            var Entity = _unitOfWork.ApplicationUser.Get(c => c.UserName == _view.Username);
-            if (Entity != null)
-            {
-                _view.Message = "Account is already added.";
-                return;
-            }
+            var model = _unitOfWork.ApplicationUser.Get(c => c.UserName == _view.Username, tracked: true);
+            if (model == null) model = new ApplicationUser();
+            else _unitOfWork.ApplicationUser.Detach(model);
 
-            var model = new ApplicationUser
-            {
+            model.Id = _view.Id;
+            model.UserName = _view.Username;
+            model.Department = (Departments)_view.Department;
+            if(!_view.IsEdit) 
+                model.PasswordHash = _passwordHasher.HashPassword(null, _view.Password);
 
-                Id = Guid.NewGuid().ToString(),
-                UserName = _view.Username,
-                Department = (Departments)_view.Department,
-                PasswordHash = _passwordHasher.HashPassword(null, _view.Password),
-            };
+            var taskRoles = new List<TaskRoles>();
+
+            if (_view.Adding) taskRoles.Add(TaskRoles.Add);
+            else taskRoles.Remove(TaskRoles.Add);
+            if (_view.Editing) taskRoles.Add(TaskRoles.Edit);
+            else taskRoles.Remove(TaskRoles.Edit);
+            if (_view.Deleting) taskRoles.Add(TaskRoles.Delete);
+            else taskRoles.Remove(TaskRoles.Delete);
+            if (_view.Viewing) taskRoles.Add(TaskRoles.View);
+            else taskRoles.Remove(TaskRoles.View);
+            if (_view.Overriding) taskRoles.Add(TaskRoles.Override);
+            else taskRoles.Remove(TaskRoles.Override);
+
+            model.TaskRoles = taskRoles;
 
             try
             {
@@ -128,6 +139,18 @@ namespace PresentationLayer.Presenters.Account
             var user = _unitOfWork.ApplicationUser.Get(c => c.Id == entity.Id, includeProperties: "Profile");
             _view.Id = entity.Id;
             _view.Username = entity.Username;
+
+            if(user.TaskRoles != null)
+            {
+                if (user.TaskRoles.Contains(TaskRoles.Add)) _view.Adding = true; else _view.Adding = false;
+                if (user.TaskRoles.Contains(TaskRoles.Edit)) _view.Editing = true; else _view.Editing = false;
+                if (user.TaskRoles.Contains(TaskRoles.Delete)) _view.Deleting = true; else _view.Deleting = false;
+                if (user.TaskRoles.Contains(TaskRoles.View)) _view.Viewing = true; else _view.Viewing = false;
+                if (user.TaskRoles.Contains(TaskRoles.Override)) _view.Overriding = true; else _view.Overriding = false;
+            }
+
+            _view.Password = user.PasswordHash;
+            _view.ConfirmPassword = user.PasswordHash;
         }
         private void Delete(object? sender, EventArgs e)
         {

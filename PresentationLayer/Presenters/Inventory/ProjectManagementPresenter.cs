@@ -1,0 +1,324 @@
+﻿using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.Models.Accounts;
+using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.Reporting.WinForms;
+using PresentationLayer.Presenters.Commons;
+using PresentationLayer.Reports;
+using PresentationLayer.Views.IViews;
+using PresentationLayer.Views.UserControls;
+using ServiceLayer.Services.Helpers;
+using ServiceLayer.Services.IRepositories.IInventory;
+
+namespace PresentationLayer.Presenters
+{
+    public class ProjectManagementPresenter
+    {
+        public IProjectManagementView _view;
+        private IUnitOfWork _unitOfWork;
+        private BindingSource ProjectBindingSource;
+        private BindingSource ProjectLineBindingSource;
+        private BindingSource SalesTypeBindingSource;
+        private BindingSource BranchBindingSource;
+        private BindingSource CustomerBindingSource;
+        private BindingSource ProductBindingSource;
+        private IEnumerable<ProjectViewModel> ProjectList;
+        private ProjectViewModel ProjectVM;
+        private IEnumerable<Product> ProductList;
+        public ProjectManagementPresenter(IProjectManagementView view, IUnitOfWork unitOfWork) {
+
+            //Initialize
+
+            _view = view;
+            _unitOfWork = unitOfWork;
+            ProjectBindingSource = new BindingSource();
+            ProjectLineBindingSource = new BindingSource();
+            SalesTypeBindingSource = new BindingSource();
+            BranchBindingSource = new BindingSource();
+            CustomerBindingSource = new BindingSource();
+            ProductBindingSource = new BindingSource();
+            ProjectVM = new ProjectViewModel();
+
+            //Events
+            _view.AddNewEvent += AddNew;
+            _view.SaveEvent += Save;
+            _view.SearchEvent += Search;
+            _view.EditEvent += Edit;
+            _view.DeleteEvent += Delete;
+            _view.PrintEvent += Print;
+            _view.RefreshEvent += Return;
+            _view.ProductAddEvent += ProductAdd;
+            _view.PrintSOEvent += PrintSO;
+            _view.DeleteProductEvent += ProductDelete;
+
+            //Load
+            LoadAllProjectList();
+            LoadAllProductList();
+
+            //Source Binding
+            _view.SetProjectListBindingSource(ProjectBindingSource);
+            _view.SetProductListBindingSource(ProductBindingSource);
+        }
+
+        private void PrintSO(object? sender, DataGridViewCellEventArgs e)
+        {
+            var Project = (ProjectViewModel)ProjectBindingSource.Current;
+            var ProjectLine = _unitOfWork.ProjectLine.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product", tracked: true);
+            var projectLineVM = ProjectLine.Select(c => new ProjectLineViewModel
+            {
+                ProductId = (int)c.ProductId,
+                ProductName = c.Product.ProductName,
+                Price = c.Price,
+                DiscountPercentage = c.DiscountPercentage * 100,
+                Quantity = c.Quantity,
+                SubTotal = c.SubTotal,  
+            });
+            ProjectVM = Project;
+
+            string reportFileName = "ProjectReport.rdlc";
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
+            string reportPath = Path.Combine(reportDirectory, reportFileName);
+
+            var localReport = new LocalReport();
+
+            var reportDataSource = new ReportDataSource("ProjectLine", projectLineVM);
+            //localReport.DataSources.Add(reportDataSource);
+
+            var parameters = new List<ReportParameter>
+            {
+                new ReportParameter("ProjectName", ProjectVM.ProjectName ?? string.Empty),
+                new ReportParameter("StartDate", ProjectVM.StartDate.Value.ToString("MMM dd, yyyy")),
+                new ReportParameter("EndDate", ProjectVM.EndDate.Value.ToString("MMM dd, yyyy")),
+                new ReportParameter("Description", ProjectVM.Description ?? string.Empty),
+                new ReportParameter("Client", ProjectVM.Client ?? string.Empty),
+                new ReportParameter("Budget", ProjectVM.Budget.Value.ToString("N2")),
+                new ReportParameter("Revenue", ProjectVM.Revenue.Value.ToString("N2")),
+            };
+
+            //localReport.SetParameters(parameters);
+
+            var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
+            reportView.ShowDialog();
+        }
+
+        private void ProductDelete(object? sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                ProjectLineBindingSource.RemoveCurrent();
+                _view.SetProjectLineListBindingSource(ProjectLineBindingSource);
+                _view.Message = "Item removed from the list successfully";
+            }
+            catch (Exception)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "An error ocurred, could not delete Sales Order";
+            }
+        }
+
+        private void ProductAdd(object? sender, EventArgs e)
+        {
+            var product = _unitOfWork.Product.Get(c => c.ProductId == _view.ProductId);
+
+            // Initialize ProjectLines if it's null
+            _view.ProjectLines ??= new List<ProjectLineViewModel>();
+
+            var name = "";
+            var price = 0.00;
+
+            if (_view.NonStock)
+            {
+                name = _view.NonStockProductName.Trim();
+                price = 0.00;
+            }
+            else
+            {
+                name = product.ProductName;
+                price = product.DefaultSellingPrice;
+            }
+            // Calculate values
+            var productprice = price;
+            var productItem = name;
+            var quantity = _view.ProductQuantity;
+            var amount = productprice * quantity;
+            var discount = _view.ProductDiscount/100;
+            var discountAmount = productprice * discount;
+
+            var checkOrder = _view.ProjectLines.Where(c => c.ProductId == _view.ProductId);
+
+            if (checkOrder.Any())
+            {
+                _view.Message = "Item is already added.";
+                return;
+            }
+            _view.ProjectLines.Add(new ProjectLineViewModel
+            {
+                ProductId = _view.ProductId,
+                ProductName = productItem,
+                Price = productprice,
+                Quantity = quantity,
+                DiscountPercentage = discount,
+                SubTotal = amount - discountAmount
+            });
+            // Bind the data source
+            ProjectLineBindingSource.DataSource = null; // Reset the binding source
+            ProjectLineBindingSource.DataSource = _view.ProjectLines;
+            _view.SetProjectLineListBindingSource(ProjectLineBindingSource);
+        }
+
+
+        private void AddNew(object? sender, EventArgs e)
+        {
+            _view.IsEdit = false;
+            CleanviewFields();
+        }
+        private void Save(object? sender, EventArgs e)
+        {
+            var model = _unitOfWork.Project.Get(c => c.ProjectId == _view.ProjectId);
+            if (model == null) model = new Project();
+            else _unitOfWork.Project.Detach(model);
+
+            model.ProjectId = _view.ProjectId;
+            model.ProjectName = _view.ProjectName;
+            model.Description = _view.Description;
+            model.Client = _view.Client;
+            model.StartDate = _view.StartDate;
+            model.EndDate = _view.EndDate;
+            model.Budget = _view.Budget;
+            model.Revenue = _view.Revenue;
+            model.ProjectLines = _view.ProjectLines
+                .Select(ToProjectLine)
+                .ToList();
+
+            try
+            {
+                new ModelDataValidation().Validate(model);
+                if (_view.IsEdit)//Edit model
+                {
+                    _unitOfWork.Project.Update(model);
+                    _view.Message = "Sales Order edited successfully";
+                }
+                else //Add new model
+                {
+                    _unitOfWork.Project.Add(model);
+                    _view.Message = "Sales Order added successfully";
+                }
+                    _unitOfWork.Save();
+                _view.IsSuccessful = true;
+                CleanviewFields();
+            }
+            catch (Exception ex)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = ex.Message;
+            }
+        }
+        public static ProjectLine ToProjectLine(ProjectLineViewModel viewModel)
+        {
+            return new ProjectLine
+            {
+                ProductId = viewModel.ProductId,
+                ProductName = viewModel.ProductName,
+                Quantity = viewModel.Quantity,
+                Price = viewModel.Price,
+                DiscountPercentage = viewModel.DiscountPercentage,
+                SubTotal = viewModel.SubTotal
+            };
+        }
+        public static List<ProjectLineViewModel> ToProjectLineViewModels(IEnumerable<ProjectLine> ProjectLines)
+        {
+            return ProjectLines.Select(line => new ProjectLineViewModel
+            {
+                ProductId = (int)line.ProductId,
+                ProductName = line.Product.ProductName,
+                Quantity = line.Quantity,
+                Price = line.Price,
+                DiscountPercentage = line.DiscountPercentage,
+                SubTotal = line.SubTotal
+            }).ToList();
+        }
+
+        private void Search(object? sender, EventArgs e)
+        {
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            if (emptyValue == false)
+            {
+                ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(_unitOfWork.Project.GetAll(c => c.ProjectName.Contains(_view.SearchValue), includeProperties: "Branch,SalesType,Customer"));
+                ProjectBindingSource.DataSource = ProjectList;
+            }
+            else
+            {
+                LoadAllProjectList();
+            }
+        }
+        private void Edit(object? sender, EventArgs e)
+        {
+            _view.IsEdit = true;
+            var Project = (ProjectViewModel)ProjectBindingSource.Current;
+            var entity = _unitOfWork.Project.Get(c => c.ProjectId == Project.ProjectId);
+            var ProjectLines = _unitOfWork.ProjectLine.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product");
+            _view.ProjectId = entity.ProjectId;
+            _view.ProjectName = entity.ProjectName;
+            _view.Description = entity.Description;
+            _view.Client = entity.Client;
+            _view.Budget = (double)entity.Budget;
+            _view.Revenue = (double)entity.Revenue;
+            _view.StartDate = (DateTime)entity.StartDate;
+            _view.EndDate = (DateTime)entity.EndDate;
+            _view.ProjectLines = ToProjectLineViewModels(ProjectLines);
+        }
+        private void Delete(object? sender, EventArgs e)
+        {
+            try
+            {
+                var Project = (ProjectViewModel)ProjectBindingSource.Current;
+                var entity = _unitOfWork.Project.Get(c => c.ProjectId ==  Project.ProjectId);
+                _unitOfWork.Project.Remove(entity);
+                _unitOfWork.Save();
+                _view.IsSuccessful = true;
+                _view.Message = "Sales Order deleted successfully";
+                LoadAllProjectList();
+            }
+            catch (Exception)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "An error ocurred, could not delete Sales Order";
+            }
+        }
+        private void Print(object? sender, EventArgs e)
+        {
+            string reportFileName = "SalesReport.rdlc";
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
+            string reportPath = Path.Combine(reportDirectory, reportFileName);
+
+            var localReport = new LocalReport();
+
+            var reportDataSource = new ReportDataSource("Project", ProjectList);
+
+            var reportView = new ReportView(reportPath, reportDataSource, localReport);
+            reportView.ShowDialog();
+        }
+        private void Return(object? sender, EventArgs e)
+        {
+            LoadAllProjectList();
+        }
+        private void CleanviewFields()
+        {
+            LoadAllProjectList();
+            _view.ProjectId = 0;
+            _view.ProjectName = "";
+            _view.Description = "";
+            _view.Client = "";
+            _view.StartDate = DateTime.Now;
+            _view.EndDate = DateTime.Now;
+            _view.Budget = 0;
+            _view.Revenue = 0;
+            _view.ProjectLines = new List<ProjectLineViewModel>();
+        }
+
+        private void LoadAllProjectList() => ProjectBindingSource.DataSource = ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(_unitOfWork.Project.GetAll(includeProperties: "Branch,SalesType,Customer"));
+        private void LoadAllProductList() => ProductBindingSource.DataSource =  ProductList = _unitOfWork.Product.GetAll();
+    }
+}

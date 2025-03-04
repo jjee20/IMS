@@ -58,6 +58,7 @@ namespace PresentationLayer.Presenters.Account
                 if (passwordVerificationResult == PasswordVerificationResult.Success)
                 {
                     Settings.Default.User_Id = user.Id;
+                    if(user.TaskRoles != null) Settings.Default.Roles = string.Join(",",user.TaskRoles);
                     if (user.Department == DomainLayer.Enums.Departments.Admin)
                         ShowAdmin();
                     else if (user.Department == DomainLayer.Enums.Departments.Inventory)

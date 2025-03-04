@@ -30,12 +30,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -44,18 +38,457 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("DepartmentId");
 
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Allowance", b =>
+                {
+                    b.Property<int>("AllowanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AllowanceId"));
+
+                    b.Property<int>("AllowanceType")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("DateGranted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsRecurring")
+                        .HasColumnType("bit");
+
+                    b.HasKey("AllowanceId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Allowances");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Attendance", b =>
+                {
+                    b.Property<int>("AttendanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AttendanceId"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("HoursWorked")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsPresent")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("TimeIn")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("TimeOut")
+                        .HasColumnType("time");
+
+                    b.HasKey("AttendanceId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.AuditLog", b =>
+                {
+                    b.Property<int>("AuditLogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuditLogId"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AuditLogId");
+
+                    b.ToTable("AuditLogs");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Benefit", b =>
+                {
+                    b.Property<int>("BenefitId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BenefitId"));
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("BenefitType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Other")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BenefitId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Benefits");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Bonus", b =>
+                {
+                    b.Property<int>("BonusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BonusId"));
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("BonusType")
+                        .HasMaxLength(100)
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateGranted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsOneTime")
+                        .HasColumnType("bit");
+
+                    b.HasKey("BonusId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Bonuses");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Contribution", b =>
+                {
+                    b.Property<int>("ContributionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContributionId"));
+
+                    b.Property<int>("ContributionType")
+                        .HasColumnType("int");
+
+                    b.Property<double>("EmployeeRate")
+                        .HasColumnType("float");
+
+                    b.Property<double>("EmployerRate")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("MandatoryProvidentFund")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MaximumLimit")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MinimumLimit")
+                        .HasColumnType("float");
+
+                    b.HasKey("ContributionId");
+
+                    b.ToTable("Contributions");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Deduction", b =>
+                {
+                    b.Property<int>("DeductionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeductionId"));
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("DateDeducted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeductionType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DeductionId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Deductions");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.JobPosition", b =>
+                {
+                    b.Property<int>("JobPositionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobPositionId"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("JobPositionId");
+
+                    b.ToTable("JobPositions");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Leave", b =>
+                {
+                    b.Property<int>("LeaveId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LeaveId"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LeaveType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Other")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("LeaveId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Leaves");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.PerformanceReview", b =>
+                {
+                    b.Property<int>("PerformanceReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PerformanceReviewId"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Feedback")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reviewer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PerformanceReviewId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("PerformanceReviews");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Project", b =>
+                {
+                    b.Property<int>("ProjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectId"));
+
+                    b.Property<double?>("Budget")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Client")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ProjectName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("Revenue")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ProjectId");
+
+                    b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.ProjectLine", b =>
+                {
+                    b.Property<int>("ProjectLineId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectLineId"));
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<double>("DiscountAmount")
+                        .HasColumnType("float");
+
+                    b.Property<double>("DiscountPercentage")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SubTotal")
+                        .HasColumnType("float");
+
+                    b.HasKey("ProjectLineId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectLines");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Shift", b =>
+                {
+                    b.Property<int>("ShiftId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShiftId"));
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<double>("OvertimeRate")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RegularHours")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ShiftName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("ShiftId");
+
+                    b.ToTable("Shifts");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Tax", b =>
+                {
+                    b.Property<int>("TaxId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaxId"));
+
+                    b.Property<double>("MaximumSalary")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MinimumSalary")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TaxRate")
+                        .HasColumnType("float");
+
+                    b.HasKey("TaxId");
+
+                    b.ToTable("Taxes");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounts.ApplicationUser", b =>
@@ -106,6 +539,9 @@ namespace InfastructureLayer.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TaskRoles")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -126,196 +562,13 @@ namespace InfastructureLayer.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("DomainLayer.Models.Inventory.Bill", b =>
-                {
-                    b.Property<int>("BillId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("BillDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("BillDueDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("BillName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BillTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("GoodsReceivedNoteId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("VendorDONumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VendorInvoiceNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BillId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("BillTypeId");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("GoodsReceivedNoteId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Bill");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.BillType", b =>
-                {
-                    b.Property<int>("BillTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillTypeId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BillTypeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("BillTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("BillType");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.Branch", b =>
-                {
-                    b.Property<int>("BranchId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BranchId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BranchName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactPerson")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("BranchId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Branch");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.CashBank", b =>
-                {
-                    b.Property<int>("CashBankId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CashBankId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CashBankName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CashBankId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("CashBank");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.Customer", b =>
+            modelBuilder.Entity("DomainLayer.Models.Accounts.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -332,8 +585,127 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("CustomerTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerId");
+
+                    b.HasIndex("CustomerTypeId");
+
+                    b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounts.CustomerType", b =>
+                {
+                    b.Property<int>("CustomerTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerTypeId"));
+
+                    b.Property<string>("CustomerTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerTypeId");
+
+                    b.ToTable("CustomerType");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Inventory.Bill", b =>
+                {
+                    b.Property<int>("BillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillId"));
+
+                    b.Property<DateTimeOffset>("BillDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("BillDueDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("BillName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BillTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GoodsReceivedNoteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VendorDONumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VendorInvoiceNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BillId");
+
+                    b.HasIndex("BillTypeId");
+
+                    b.HasIndex("GoodsReceivedNoteId");
+
+                    b.ToTable("Bill");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Inventory.BillType", b =>
+                {
+                    b.Property<int>("BillTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillTypeId"));
+
+                    b.Property<string>("BillTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BillTypeId");
+
+                    b.ToTable("BillType");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Inventory.Branch", b =>
+                {
+                    b.Property<int>("BranchId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BranchId"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BranchName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPerson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -343,56 +715,30 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
+                    b.HasKey("BranchId");
 
-                    b.HasKey("CustomerId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("CustomerTypeId");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Customer");
+                    b.ToTable("Branch");
                 });
 
-            modelBuilder.Entity("DomainLayer.Models.Inventory.CustomerType", b =>
+            modelBuilder.Entity("DomainLayer.Models.Inventory.CashBank", b =>
                 {
-                    b.Property<int>("CustomerTypeId")
+                    b.Property<int>("CashBankId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerTypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CashBankId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CustomerTypeName")
+                    b.Property<string>("CashBankName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
+                    b.HasKey("CashBankId");
 
-                    b.HasKey("CustomerTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("CustomerType");
+                    b.ToTable("CashBank");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.GoodsReceivedNote", b =>
@@ -402,12 +748,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GoodsReceivedNoteId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset>("GRNDate")
                         .HasColumnType("datetimeoffset");
@@ -422,9 +762,6 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("PurchaseOrderId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("VendorDONumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -438,13 +775,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("GoodsReceivedNoteId");
 
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
                     b.HasIndex("PurchaseOrderId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.HasIndex("WarehouseId");
 
@@ -458,12 +789,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset>("InvoiceDate")
                         .HasColumnType("datetimeoffset");
@@ -481,20 +806,11 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("ShipmentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("InvoiceId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
 
                     b.HasIndex("InvoiceTypeId");
 
                     b.HasIndex("ShipmentId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Invoice");
                 });
@@ -507,12 +823,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceTypeId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -521,16 +831,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("InvoiceTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("InvoiceType");
                 });
@@ -571,12 +872,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentReceiveId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("InvoiceId")
                         .HasColumnType("int");
 
@@ -596,20 +891,11 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("PaymentTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("PaymentReceiveId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
 
                     b.HasIndex("InvoiceId");
 
                     b.HasIndex("PaymentTypeId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("PaymentReceive");
                 });
@@ -622,12 +908,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentTypeId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -636,16 +916,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("PaymentTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("PaymentType");
                 });
@@ -658,17 +929,11 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentVoucherId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("BillId")
                         .HasColumnType("int");
 
                     b.Property<int>("CashBankId")
                         .HasColumnType("int");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsFullPayment")
                         .HasColumnType("bit");
@@ -686,22 +951,13 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("PaymentVoucherId");
-
-                    b.HasIndex("AddedById");
 
                     b.HasIndex("BillId");
 
                     b.HasIndex("CashBankId");
 
-                    b.HasIndex("DeletedById");
-
                     b.HasIndex("PaymentTypeId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("PaymentVoucher");
                 });
@@ -713,9 +969,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Barcode")
                         .IsRequired()
@@ -729,9 +982,6 @@ namespace InfastructureLayer.Migrations
 
                     b.Property<double>("DefaultSellingPrice")
                         .HasColumnType("float");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -760,22 +1010,13 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("UnitOfMeasureId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ProductId");
 
-                    b.HasIndex("AddedById");
-
                     b.HasIndex("BranchId");
-
-                    b.HasIndex("DeletedById");
 
                     b.HasIndex("ProductTypeId");
 
                     b.HasIndex("UnitOfMeasureId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Product");
                 });
@@ -788,12 +1029,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductTypeId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -802,16 +1037,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ProductTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("ProductType");
                 });
@@ -824,17 +1050,11 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PurchaseOrderId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset>("DeliveryDate")
                         .HasColumnType("datetimeoffset");
@@ -868,23 +1088,14 @@ namespace InfastructureLayer.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("VendorId")
                         .HasColumnType("int");
 
                     b.HasKey("PurchaseOrderId");
 
-                    b.HasIndex("AddedById");
-
                     b.HasIndex("BranchId");
 
-                    b.HasIndex("DeletedById");
-
                     b.HasIndex("PurchaseTypeId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.HasIndex("VendorId");
 
@@ -944,12 +1155,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PurchaseTypeId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -958,16 +1163,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("PurchaseTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("PurchaseType");
                 });
@@ -979,9 +1175,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalesOrderId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Amount")
                         .HasColumnType("float");
@@ -995,9 +1188,6 @@ namespace InfastructureLayer.Migrations
                     b.Property<string>("CustomerRefNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset>("DeliveryDate")
                         .HasColumnType("datetimeoffset");
@@ -1031,22 +1221,13 @@ namespace InfastructureLayer.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("SalesOrderId");
-
-                    b.HasIndex("AddedById");
 
                     b.HasIndex("BranchId");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("DeletedById");
-
                     b.HasIndex("SalesTypeId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("SalesOrder");
                 });
@@ -1104,12 +1285,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalesTypeId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1118,16 +1293,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("SalesTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("SalesType");
                 });
@@ -1139,12 +1305,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShipmentId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsFullShipment")
                         .HasColumnType("bit");
@@ -1162,23 +1322,14 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("ShipmentTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("WarehouseId")
                         .HasColumnType("int");
 
                     b.HasKey("ShipmentId");
 
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
                     b.HasIndex("SalesOrderId");
 
                     b.HasIndex("ShipmentTypeId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.HasIndex("WarehouseId");
 
@@ -1193,12 +1344,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShipmentTypeId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1207,16 +1352,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ShipmentTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("ShipmentType");
                 });
@@ -1229,12 +1365,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UnitOfMeasureId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1243,16 +1373,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("UnitOfMeasureId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("UnitOfMeasure");
                 });
@@ -1297,9 +1418,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendorId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1307,9 +1425,6 @@ namespace InfastructureLayer.Migrations
                     b.Property<string>("ContactPerson")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1319,9 +1434,6 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("VendorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1330,12 +1442,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("VendorId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.HasIndex("VendorTypeId");
 
@@ -1350,30 +1456,15 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendorTypeId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("VendorTypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VendorTypeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("VendorType");
                 });
@@ -1386,21 +1477,12 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WarehouseId"));
 
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("WarehouseName")
                         .IsRequired()
@@ -1408,592 +1490,9 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("WarehouseId");
 
-                    b.HasIndex("AddedById");
-
                     b.HasIndex("BranchId");
 
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
                     b.ToTable("Warehouse");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Allowance", b =>
-                {
-                    b.Property<int>("AllowanceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AllowanceId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AllowanceType")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("DateGranted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsRecurring")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("AllowanceId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Allowances");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Attendance", b =>
-                {
-                    b.Property<int>("AttendanceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AttendanceId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("HoursWorked")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("IsPresent")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("TimeIn")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("TimeOut")
-                        .HasColumnType("time");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("AttendanceId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Attendances");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.AuditLog", b =>
-                {
-                    b.Property<int>("AuditLogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuditLogId"));
-
-                    b.Property<string>("Action")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("User")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AuditLogId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("AuditLogs");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Benefit", b =>
-                {
-                    b.Property<int>("BenefitId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BenefitId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("BenefitType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Other")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("BenefitId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Benefits");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Bonus", b =>
-                {
-                    b.Property<int>("BonusId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BonusId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("BonusType")
-                        .HasMaxLength(100)
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateGranted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsOneTime")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("BonusId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Bonuses");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Contribution", b =>
-                {
-                    b.Property<int>("ContributionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContributionId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ContributionType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("EmployeeRate")
-                        .HasColumnType("float");
-
-                    b.Property<double>("EmployerRate")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MaximumLimit")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MinimumLimit")
-                        .HasColumnType("float");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ContributionId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Contributions");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Deduction", b =>
-                {
-                    b.Property<int>("DeductionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeductionId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("DeductionType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("DeductionId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Deductions");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.JobPosition", b =>
-                {
-                    b.Property<int>("JobPositionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobPositionId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("JobPositionId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("JobPositions");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Leave", b =>
-                {
-                    b.Property<int>("LeaveId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LeaveId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LeaveType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Other")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LeaveId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Leaves");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.PerformanceReview", b =>
-                {
-                    b.Property<int>("PerformanceReviewId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PerformanceReviewId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Feedback")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Reviewer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PerformanceReviewId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("PerformanceReviews");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Project", b =>
-                {
-                    b.Property<int>("ProjectId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProjectName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ProjectId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Shift", b =>
-                {
-                    b.Property<int>("ShiftId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShiftId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<TimeSpan>("EndTime")
-                        .HasColumnType("time");
-
-                    b.Property<double>("OvertimeRate")
-                        .HasColumnType("float");
-
-                    b.Property<double>("RegularHours")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ShiftName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("StartTime")
-                        .HasColumnType("time");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ShiftId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Shifts");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Tax", b =>
-                {
-                    b.Property<int>("TaxId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaxId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("MaximumSalary")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MinimumSalary")
-                        .HasColumnType("float");
-
-                    b.Property<double>("TaxRate")
-                        .HasColumnType("float");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("TaxId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Taxes");
                 });
 
             modelBuilder.Entity("Employee", b =>
@@ -2003,9 +1502,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"));
-
-                    b.Property<string>("AddedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -2020,9 +1516,6 @@ namespace InfastructureLayer.Migrations
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
@@ -2051,25 +1544,16 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("ShiftId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("isDeducted")
                         .HasColumnType("bit");
 
                     b.HasKey("EmployeeId");
-
-                    b.HasIndex("AddedById");
-
-                    b.HasIndex("DeletedById");
 
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("JobPositionId");
 
                     b.HasIndex("ShiftId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Employees");
                 });
@@ -2207,42 +1691,126 @@ namespace InfastructureLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Department", b =>
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Allowance", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
+                    b.HasOne("Employee", "Employee")
+                        .WithMany("Allowances")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Attendance", b =>
+                {
+                    b.HasOne("Employee", "Employee")
+                        .WithMany("Attendances")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Models.Accounting.Payroll.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("AddedById");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
+                    b.Navigation("Employee");
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Benefit", b =>
+                {
+                    b.HasOne("Employee", "Employee")
+                        .WithMany("Benefits")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Bonus", b =>
+                {
+                    b.HasOne("Employee", "Employee")
+                        .WithMany("Bonuses")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Deduction", b =>
+                {
+                    b.HasOne("Employee", "Employee")
+                        .WithMany("Deductions")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Leave", b =>
+                {
+                    b.HasOne("Employee", "Employee")
+                        .WithMany("Leaves")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.PerformanceReview", b =>
+                {
+                    b.HasOne("Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("DeletedById");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.ProjectLine", b =>
+                {
+                    b.HasOne("DomainLayer.Models.Inventory.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("UpdatedById");
+                        .HasForeignKey("ProductId");
 
-                    b.Navigation("AddedBy");
+                    b.HasOne("DomainLayer.Models.Accounting.Payroll.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("DeletedBy");
+                    b.Navigation("Product");
 
-                    b.Navigation("UpdatedBy");
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Accounts.Customer", b =>
+                {
+                    b.HasOne("DomainLayer.Models.Accounts.CustomerType", "CustomerType")
+                        .WithMany()
+                        .HasForeignKey("CustomerTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CustomerType");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Bill", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.BillType", "BillType")
                         .WithMany()
                         .HasForeignKey("BillTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
 
                     b.HasOne("DomainLayer.Models.Inventory.GoodsReceivedNote", "GoodsReceivedNote")
                         .WithMany()
@@ -2250,153 +1818,18 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
                     b.Navigation("BillType");
 
-                    b.Navigation("DeletedBy");
-
                     b.Navigation("GoodsReceivedNote");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.BillType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.Branch", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.CashBank", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.Customer", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Inventory.CustomerType", "CustomerType")
-                        .WithMany()
-                        .HasForeignKey("CustomerTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("CustomerType");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.CustomerType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.GoodsReceivedNote", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.PurchaseOrder", "PurchaseOrder")
                         .WithMany()
                         .HasForeignKey("PurchaseOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
 
                     b.HasOne("DomainLayer.Models.Inventory.Warehouse", "Warehouse")
                         .WithMany()
@@ -2404,27 +1837,13 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
                     b.Navigation("PurchaseOrder");
-
-                    b.Navigation("UpdatedBy");
 
                     b.Navigation("Warehouse");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Invoice", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.InvoiceType", "InvoiceType")
                         .WithMany()
                         .HasForeignKey("InvoiceTypeId")
@@ -2437,52 +1856,13 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
                     b.Navigation("InvoiceType");
 
                     b.Navigation("Shipment");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.InvoiceType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PaymentReceive", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.Invoice", "Invoice")
                         .WithMany()
                         .HasForeignKey("InvoiceId")
@@ -2495,48 +1875,13 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
                     b.Navigation("Invoice");
 
                     b.Navigation("PaymentType");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.PaymentType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PaymentVoucher", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.Bill", "Bill")
                         .WithMany()
                         .HasForeignKey("BillId")
@@ -2549,48 +1894,26 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.PaymentType", "PaymentType")
                         .WithMany()
                         .HasForeignKey("PaymentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
                     b.Navigation("Bill");
 
                     b.Navigation("CashBank");
 
-                    b.Navigation("DeletedBy");
-
                     b.Navigation("PaymentType");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Product", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
 
                     b.HasOne("DomainLayer.Models.Inventory.ProductType", "ProductType")
                         .WithMany()
@@ -2604,59 +1927,20 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
                     b.Navigation("Branch");
-
-                    b.Navigation("DeletedBy");
 
                     b.Navigation("ProductType");
 
                     b.Navigation("UnitOfMeasure");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.ProductType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PurchaseOrder", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
 
                     b.HasOne("DomainLayer.Models.Inventory.PurchaseType", "PurchaseType")
                         .WithMany()
@@ -2664,25 +1948,15 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.Vendor", "Vendor")
                         .WithMany()
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AddedBy");
-
                     b.Navigation("Branch");
 
-                    b.Navigation("DeletedBy");
-
                     b.Navigation("PurchaseType");
-
-                    b.Navigation("UpdatedBy");
 
                     b.Navigation("Vendor");
                 });
@@ -2704,48 +1978,19 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("PurchaseOrder");
                 });
 
-            modelBuilder.Entity("DomainLayer.Models.Inventory.PurchaseType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
             modelBuilder.Entity("DomainLayer.Models.Inventory.SalesOrder", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Inventory.Customer", "Customer")
+                    b.HasOne("DomainLayer.Models.Accounts.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
 
                     b.HasOne("DomainLayer.Models.Inventory.SalesType", "SalesType")
                         .WithMany()
@@ -2753,21 +1998,11 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
                     b.Navigation("Branch");
 
                     b.Navigation("Customer");
 
-                    b.Navigation("DeletedBy");
-
                     b.Navigation("SalesType");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.SalesOrderLine", b =>
@@ -2787,37 +2022,8 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("SalesOrder");
                 });
 
-            modelBuilder.Entity("DomainLayer.Models.Inventory.SalesType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
             modelBuilder.Entity("DomainLayer.Models.Inventory.Shipment", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.SalesOrder", "SalesOrder")
                         .WithMany()
                         .HasForeignKey("SalesOrderId")
@@ -2830,69 +2036,17 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
                     b.Navigation("SalesOrder");
 
                     b.Navigation("ShipmentType");
 
-                    b.Navigation("UpdatedBy");
-
                     b.Navigation("Warehouse");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.ShipmentType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.UnitOfMeasure", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.UserProfile", b =>
@@ -2908,463 +2062,51 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Vendor", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.VendorType", "VendorType")
                         .WithMany()
                         .HasForeignKey("VendorTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-
                     b.Navigation("VendorType");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Inventory.VendorType", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Warehouse", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
                     b.HasOne("DomainLayer.Models.Inventory.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
                     b.Navigation("Branch");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Allowance", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("Employee", "Employee")
-                        .WithMany("Allowances")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Attendance", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("Employee", "Employee")
-                        .WithMany("Attendances")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Payroll.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Project");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.AuditLog", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Benefit", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("Employee", "Employee")
-                        .WithMany("Benefits")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Bonus", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("Employee", "Employee")
-                        .WithMany("Bonuses")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Contribution", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Deduction", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("Employee", "Employee")
-                        .WithMany("Deductions")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.JobPosition", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Leave", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("Employee", "Employee")
-                        .WithMany("Leaves")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.PerformanceReview", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Project", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Shift", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.Payroll.Tax", b =>
-                {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("Employee", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
-
                     b.HasOne("Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Payroll.JobPosition", "JobPosition")
+                    b.HasOne("DomainLayer.Models.Accounting.Payroll.JobPosition", "JobPosition")
                         .WithMany()
                         .HasForeignKey("JobPositionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Payroll.Shift", "Shift")
+                    b.HasOne("DomainLayer.Models.Accounting.Payroll.Shift", "Shift")
                         .WithMany()
                         .HasForeignKey("ShiftId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("AddedBy");
-
-                    b.Navigation("DeletedBy");
 
                     b.Navigation("Department");
 
                     b.Navigation("JobPosition");
 
                     b.Navigation("Shift");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Inventory;
+﻿using DomainLayer.Enums;
+using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.AccountViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -148,6 +149,35 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return message; }
             set { message = value; }
+        }
+        
+        public bool Adding
+        {
+            get { return txtAdding.Checked; }
+            set { txtAdding.Checked = value; }
+        }
+        
+        public bool Editing
+        {
+            get { return txtEditing.Checked; }
+            set { txtEditing.Checked = value; }
+        }
+        
+        public bool Deleting
+        {
+            get { return txtDeleting.Checked; }
+            set { txtDeleting.Checked = value; }
+        }
+        
+        public bool Viewing
+        {
+            get { return txtViewing.Checked; }
+            set { txtViewing.Checked = value; }
+        }
+        public bool Overriding
+        {
+            get { return txtOverriding.Checked; }
+            set { txtOverriding.Checked = value; }
         }
 
         public string SearchValue

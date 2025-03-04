@@ -39,6 +39,11 @@ namespace PresentationLayer.Views.UserControls
             //Add New
             btnAdd.Click += delegate
             {
+                //if (!AppUserHelper.AllowedToAdd(AppUserHelper.TaskRoles(Settings.Default.Roles)))
+                //{
+                //    MessageBox.Show("Account restricted to perform the function. Please contact your administrator.");
+                //    return;
+                //}
                 if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
                     AddNewEvent?.Invoke(this, EventArgs.Empty);
