@@ -232,7 +232,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private double CalculateLateDeductions(Employee employee, IEnumerable<Attendance> employeeAttendances, double hourlyRate)
         {
             var totalLateDuration = employeeAttendances
-                .Where(a => a.TimeIn > employee.Shift?.StartTime) // Only consider late arrivals
+                .Where(a => a.TimeIn > employee.Shift?.StartTime && !a.IsHalfDay) // Only consider late arrivals
                 .Aggregate(TimeSpan.Zero, (total, attendance) =>
                     total + (attendance.TimeIn - employee.Shift?.StartTime ?? TimeSpan.Zero));
 
@@ -249,7 +249,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             TimeSpan shiftEndTime = employee.Shift?.EndTime ?? TimeSpan.Zero;
 
             var totalEarlyOutDuration = employeeAttendances
-                .Where(a => a.TimeOut < shiftEndTime)
+                .Where(a => a.TimeOut < shiftEndTime && !a.IsHalfDay)
                 .Aggregate(TimeSpan.Zero, (total, attendance) =>
                 {
                     var earlyOut = shiftEndTime - attendance.TimeOut;
@@ -260,10 +260,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             return totalEarlyOutHours * hourlyRate;
         }
 
-        private double CalculateAbsentDeductions(int totalDays, int totalPresentDays, double dailyRate)
+        private double CalculateAbsentDeductions(double totalDays, double totalPresentDays, double dailyRate)
         {
             // Calculate total absent days
-            int totalAbsentDays = Math.Max(0, totalDays - totalPresentDays);
+            double totalAbsentDays = Math.Max(0, totalDays - totalPresentDays);
 
             // Compute absent deductions
             double absentDeductions = totalAbsentDays * dailyRate;
@@ -342,9 +342,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 var employeeAttendances = employee.Attendances?.Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date) ?? Enumerable.Empty<Attendance>();
 
                 var approvedLeaves = employee.Leaves.Where(a => a.LeaveType != LeaveType.UnpaidLeave && a.Status == Status.Approved);
-                int totalPresentDays = employeeAttendances.Count(a => a.IsPresent && !IsCoveredByLeave(a.Date, approvedLeaves));
-
-                double totalHoursWorked = employeeAttendances.Sum(a => a.HoursWorked);
+                double totalPresentWholeDays = employeeAttendances.Count(a => a.IsPresent && !a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves));
+                double totalPresentHalfDays = employeeAttendances.Count(a => a.IsPresent && a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
+                double totalPresentDays = totalPresentWholeDays + totalPresentHalfDays;
                 double regularHours = totalDays * (employee.Shift?.RegularHours ?? 0);
                 double hourlyRate = employee.BasicSalary / (totalDays * (employee.Shift?.RegularHours ?? 8));
                 double regularPay = totalDays * employee.BasicSalary;

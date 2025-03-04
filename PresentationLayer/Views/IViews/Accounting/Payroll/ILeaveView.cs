@@ -9,6 +9,8 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         int EmployeeId { get; set; }
         DateTime StartDate { get; set; }
         DateTime EndDate { get; set; }
+        DateTime SearchStartDate { get; set; }
+        DateTime SearchEndDate { get; set; }
         LeaveType LeaveType { get; set; }
         Status Status { get; set; }
         string Notes { get; set; }

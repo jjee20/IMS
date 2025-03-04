@@ -110,6 +110,14 @@ namespace PresentationLayer.Views.UserControls
                 }
                 btnReturn.Visible = false;
             };
+            txtStartDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
+            txtEndDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         //Properties
@@ -148,7 +156,16 @@ namespace PresentationLayer.Views.UserControls
             get { return isEdit; }
             set { isEdit = value; }
         }
-        
+        public DateTime StartDate
+        {
+            get { return txtStartDate.Value; }
+            set { txtStartDate.Text = value.ToString(); }
+        }
+        public DateTime EndDate
+        {
+            get { return txtEndDate.Value; }
+            set { txtEndDate.Text = value.ToString(); }
+        }
         public bool IsRecurring
         {
             get { return txtIsRecurring.Checked; }
@@ -209,6 +226,17 @@ namespace PresentationLayer.Views.UserControls
                 instance.Dock = DockStyle.Fill;
             }
             return instance;
+        }
+        private void AllowanceView_Load(object sender, EventArgs e)
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
+            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6).Date;
+
+            txtDateGranted.Value = currentDate;
+            txtStartDate.Value = startDate;
+            txtEndDate.Value = endDate;
         }
     }
 }

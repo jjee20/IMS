@@ -44,9 +44,13 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeductionView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeductionView));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
@@ -64,6 +68,10 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2 = new Guna2HtmlLabel();
             txtAmount = new Guna2TextBox();
             panel2 = new Panel();
+            label2 = new Label();
+            txtStartDate = new Guna2DateTimePicker();
+            label1 = new Label();
+            txtEndDate = new Guna2DateTimePicker();
             btnPrint = new Button();
             imageList1 = new ImageList(components);
             btnDelete = new Button();
@@ -397,6 +405,10 @@ namespace PresentationLayer.Views.UserControls
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(txtStartDate);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(txtEndDate);
             panel2.Controls.Add(btnPrint);
             panel2.Controls.Add(btnDelete);
             panel2.Controls.Add(btnSave);
@@ -410,6 +422,62 @@ namespace PresentationLayer.Views.UserControls
             panel2.Name = "panel2";
             panel2.Size = new Size(1324, 62);
             panel2.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Right;
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(470, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(47, 21);
+            label2.TabIndex = 34;
+            label2.Text = "From";
+            // 
+            // txtStartDate
+            // 
+            txtStartDate.Checked = true;
+            txtStartDate.CustomizableEdges = customizableEdges11;
+            txtStartDate.Dock = DockStyle.Right;
+            txtStartDate.FillColor = Color.White;
+            txtStartDate.Font = new Font("Segoe UI", 9F);
+            txtStartDate.Format = DateTimePickerFormat.Long;
+            txtStartDate.Location = new Point(517, 0);
+            txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            txtStartDate.Name = "txtStartDate";
+            txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtStartDate.Size = new Size(199, 62);
+            txtStartDate.TabIndex = 33;
+            txtStartDate.Value = new DateTime(2025, 2, 26, 9, 16, 55, 624);
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Right;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(716, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(25, 21);
+            label1.TabIndex = 32;
+            label1.Text = "To";
+            // 
+            // txtEndDate
+            // 
+            txtEndDate.Checked = true;
+            txtEndDate.CustomizableEdges = customizableEdges13;
+            txtEndDate.Dock = DockStyle.Right;
+            txtEndDate.FillColor = Color.White;
+            txtEndDate.Font = new Font("Segoe UI", 9F);
+            txtEndDate.Format = DateTimePickerFormat.Long;
+            txtEndDate.Location = new Point(741, 0);
+            txtEndDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            txtEndDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            txtEndDate.Name = "txtEndDate";
+            txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            txtEndDate.Size = new Size(205, 62);
+            txtEndDate.TabIndex = 31;
+            txtEndDate.Value = new DateTime(2025, 2, 26, 9, 16, 55, 624);
             // 
             // btnPrint
             // 
@@ -517,7 +585,7 @@ namespace PresentationLayer.Views.UserControls
             // txtSearch
             // 
             txtSearch.CharacterCasing = CharacterCasing.Upper;
-            txtSearch.CustomizableEdges = customizableEdges11;
+            txtSearch.CustomizableEdges = customizableEdges15;
             txtSearch.DefaultText = "";
             txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -534,7 +602,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
-            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges16;
             txtSearch.Size = new Size(378, 62);
             txtSearch.TabIndex = 11;
             // 
@@ -611,6 +679,7 @@ namespace PresentationLayer.Views.UserControls
             Margin = new Padding(3, 4, 3, 4);
             Name = "DeductionView";
             Size = new Size(1356, 701);
+            Load += DeductionView_Load;
             materialCard1.ResumeLayout(false);
             Guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
@@ -619,6 +688,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -657,5 +727,9 @@ namespace PresentationLayer.Views.UserControls
         private Button btnReturn;
         private Guna2TextBox txtSearch;
         private Button btnSave;
+        private Label label2;
+        private Guna2DateTimePicker txtStartDate;
+        private Label label1;
+        private Guna2DateTimePicker txtEndDate;
     }
 }

@@ -21,6 +21,7 @@ namespace DomainLayer.Models.Accounting.Payroll
 
         public DateTime Date { get; set; }
         public bool IsPresent { get; set; }
+        public bool IsHalfDay { get; set; }
         public double HoursWorked { get; set; }
 
         [ForeignKey(nameof(ProjectId))]

@@ -13,6 +13,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         TimeSpan TimeOut { get; set; }
         DateTime Date { get; set; }
         bool IsPresent { get; set; }
+        bool IsHalfDay { get; set; }
         double HoursWorked { get; set; }
         bool IsEdit { get; set; }
         bool IsIndividual { get; set; }

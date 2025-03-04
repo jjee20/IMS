@@ -16,6 +16,8 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         bool IsRecurring { get; set; }
         string Message { get; set; }
         string SearchValue { get; set; }
+        DateTime StartDate { get; set; }
+        DateTime EndDate { get; set; }
 
         event EventHandler AddNewEvent;
         event EventHandler DeleteEvent;
