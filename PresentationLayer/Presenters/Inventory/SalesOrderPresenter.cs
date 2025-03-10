@@ -6,6 +6,8 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.UserControls;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.Helpers;
 using ServiceLayer.Services.IRepositories.IInventory;
 
@@ -21,12 +23,16 @@ namespace PresentationLayer.Presenters
         private BindingSource BranchBindingSource;
         private BindingSource CustomerBindingSource;
         private BindingSource ProductBindingSource;
+        private BindingSource ShipmentTypeBindingSource;
+        private BindingSource WarehouseBindingSource;
         private IEnumerable<SalesOrderViewModel> SalesOrderList;
         private SalesOrderViewModel SalesOrderVM;
         private IEnumerable<SalesType> SalesTypeList;
         private IEnumerable<Branch> BranchList;
         private IEnumerable<Customer> CustomerList;
         private IEnumerable<Product> ProductList;
+        private IEnumerable<ShipmentType> ShipmentTypeList;
+        private IEnumerable<Warehouse> WarehouseList;
         public SalesOrderPresenter(ISalesOrderView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -40,6 +46,8 @@ namespace PresentationLayer.Presenters
             CustomerBindingSource = new BindingSource();
             ProductBindingSource = new BindingSource();
             SalesOrderVM = new SalesOrderViewModel();
+            ShipmentTypeBindingSource = new BindingSource();
+            WarehouseBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -54,6 +62,9 @@ namespace PresentationLayer.Presenters
             _view.FreightEvent += Freight;
             _view.PrintSOEvent += PrintSO;
             _view.DeleteProductEvent += ProductDelete;
+            _view.UpdateComputationEvent += UpdateComputation;
+            _view.InvoiceEvent += ShowInvoice;
+            _view.PaymentEvent += ShowPayment;
 
             //Load
             LoadAllSalesOrderList();
@@ -61,6 +72,8 @@ namespace PresentationLayer.Presenters
             LoadAllBranchList();
             LoadAllCustomerList();
             LoadAllProductList();
+            LoadAllShipmentTypeList();
+            LoadAllWarehouseList();
 
             //Source Binding
             _view.SetSalesOrderListBindingSource(SalesOrderBindingSource);
@@ -68,6 +81,36 @@ namespace PresentationLayer.Presenters
             _view.SetBranchListBindingSource(BranchBindingSource);
             _view.SetCustomerListBindingSource(CustomerBindingSource);
             _view.SetProductListBindingSource(ProductBindingSource);
+            _view.SetShipmentTypeListBindingSource(ShipmentTypeBindingSource);
+            _view.SetWarehouseListBindingSource(WarehouseBindingSource);
+        }
+
+        private void ShowPayment(object? sender, EventArgs e)
+        {
+            var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
+            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: ",SalesOrderLines,Invoice,Customer,Shipment,PaymentReceive", tracked: true);
+
+            var payment = new PaymentReceiveView(entity, _unitOfWork);
+            payment.Text = $"Payment Details for S.0.#: {entity.SalesOrderName}";
+            payment.ShowDialog();
+        }
+
+        private void ShowInvoice(object? sender, EventArgs e)
+        {
+            var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
+            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: ",SalesOrderLines,Invoice,Customer,Shipment,PaymentReceive", tracked: true);
+            
+            var generateInvoice = new InvoiceView(entity, _unitOfWork);
+            generateInvoice.Text = $"Generate Invoice for S.0.#: {entity.SalesOrderName}";
+            generateInvoice.ShowDialog();
+        }
+
+        private void UpdateComputation(object? sender, DataGridViewCellEventArgs e)
+        {
+            _view.Amount = _view.SalesOrderLines.Select(c => c.SubTotal).Sum();
+            _view.Tax = _view.SubTotal * 0.12;
+            _view.SubTotal = _view.Amount - (_view.Amount * _view.Discount) - _view.Tax;
+            _view.Total = _view.SubTotal + _view.Tax + _view.Freight;
         }
 
         private void Freight(object? sender, EventArgs e)
@@ -157,6 +200,7 @@ namespace PresentationLayer.Presenters
 
             if (_view.NonStock)
             {
+                _view.ProductId = 0;
                 name = _view.NonStockProductName.Trim();
                 price = 0.00;
             }
@@ -164,6 +208,14 @@ namespace PresentationLayer.Presenters
             {
                 name = product.ProductName;
                 price = product.DefaultSellingPrice;
+
+                var checkOrder = _view.SalesOrderLines.Where(c => c.ProductId == _view.ProductId);
+
+                if (checkOrder.Any())
+                {
+                    _view.Message = "Item is already added.";
+                    return;
+                }
             }
             // Calculate values
             var productprice = price;
@@ -172,14 +224,6 @@ namespace PresentationLayer.Presenters
             var amount = productprice * quantity;
             var discount = _view.ProductDiscount/100;
             var discountAmount = productprice * discount;
-
-            var checkOrder = _view.SalesOrderLines.Where(c => c.ProductId == _view.ProductId);
-
-            if (checkOrder.Any())
-            {
-                _view.Message = "Item is already added.";
-                return;
-            }
             _view.SalesOrderLines.Add(new SalesOrderLineViewModel
             {
                 ProductId = _view.ProductId,
@@ -208,10 +252,18 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == _view.SalesOrderId);
-            if (model == null) model = new SalesOrder();
-            else _unitOfWork.SalesOrder.Detach(model);
+            var model = _unitOfWork.SalesOrder.Get(
+                c => c.SalesOrderId == _view.SalesOrderId,
+                includeProperties: "Shipment",
+                tracked: true
+            );
 
+            if (model == null)
+                model = new SalesOrder();
+            else
+                _unitOfWork.SalesOrder.Detach(model);
+
+            // Update SalesOrder properties
             model.SalesOrderId = _view.SalesOrderId;
             model.SalesOrderName = _view.SalesOrderName;
             model.BranchId = _view.BranchId;
@@ -231,20 +283,47 @@ namespace PresentationLayer.Presenters
                 .Select(ToSalesOrderLine)
                 .ToList();
 
+            // Handling Shipment
+            if (_view.NoShipment)
+            {
+                if (model.Shipment != null)
+                {
+                    _unitOfWork.Shipment.Remove(model.Shipment);
+                    _unitOfWork.Save();
+                    model.Shipment = null;
+                }
+            }
+            else
+            {
+                if (model.Shipment == null)
+                    model.Shipment = new Shipment();
+
+                model.Shipment.ShipmentId = _view.ShipmentId;
+                model.Shipment.ShipmentName = Guid.NewGuid().ToString();
+                model.Shipment.ShipmentTypeId = _view.ShipmentTypeId; // Nullable int
+                model.Shipment.WarehouseId = _view.WarehouseId;       // Nullable int
+                model.Shipment.IsFullShipment = _view.IsFullShipment;
+                model.Shipment.ShipmentDate = _view.ShipmentDate == default(DateTime)
+                    ? new DateTime(1753, 1, 1) // Default SQL min date
+                    : _view.ShipmentDate;
+            }
+
             try
             {
                 new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+
+                if (_view.IsEdit)
                 {
                     _unitOfWork.SalesOrder.Update(model);
                     _view.Message = "Sales Order edited successfully";
                 }
-                else //Add new model
+                else
                 {
                     _unitOfWork.SalesOrder.Add(model);
                     _view.Message = "Sales Order added successfully";
                 }
-                    _unitOfWork.Save();
+
+                _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 CleanviewFields();
             }
@@ -254,6 +333,7 @@ namespace PresentationLayer.Presenters
                 _view.Message = ex.Message;
             }
         }
+
         public static SalesOrderLine ToSalesOrderLine(SalesOrderLineViewModel viewModel)
         {
             return new SalesOrderLine
@@ -296,7 +376,7 @@ namespace PresentationLayer.Presenters
         {
             _view.IsEdit = true;
             var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
-            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId);
+            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "Shipment");
             var salesOrderLines = _unitOfWork.SalesOrderLine.GetAll(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "Product");
             _view.SalesOrderId = entity.SalesOrderId;
             _view.SalesOrderName = entity.SalesOrderName;
@@ -314,6 +394,18 @@ namespace PresentationLayer.Presenters
             _view.Freight = entity.Freight;
             _view.Total = entity.Total;
             _view.SalesOrderLines = ToSalesOrderLineViewModels(salesOrderLines);
+
+            if (entity.Shipment == null) _view.NoShipment = true;
+            else
+            {
+                _view.ShipmentName = entity.Shipment.ShipmentName;
+                _view.ShipmentTypeId = (int)(entity.Shipment.ShipmentTypeId ?? 0);
+                _view.WarehouseId = (int)(entity.Shipment.WarehouseId ?? 0);
+                _view.IsFullShipment = entity.Shipment.IsFullShipment;
+                _view.ShipmentDate = entity.Shipment.ShipmentDate;
+                _view.ShipmentId = entity.Shipment.ShipmentId;
+                _view.SalesOrderId = entity.Shipment.SalesOrderId;
+            }
         }
         private void Delete(object? sender, EventArgs e)
         {
@@ -371,6 +463,16 @@ namespace PresentationLayer.Presenters
             _view.SalesOrderLines = new List<SalesOrderLineViewModel>();
         }
 
+        private void LoadAllShipmentTypeList()
+        {
+            ShipmentTypeList = _unitOfWork.ShipmentType.GetAll();
+            ShipmentTypeBindingSource.DataSource = ShipmentTypeList;//Set data source.
+        }
+        private void LoadAllWarehouseList()
+        {
+            WarehouseList = _unitOfWork.Warehouse.GetAll();
+            WarehouseBindingSource.DataSource = WarehouseList;//Set data source.
+        }
         private void LoadAllSalesOrderList() => SalesOrderBindingSource.DataSource = SalesOrderList = Program.Mapper.Map<IEnumerable<SalesOrderViewModel>>(_unitOfWork.SalesOrder.GetAll(includeProperties: "Branch,SalesType,Customer"));
         private void LoadAllSalesTypeList() => SalesTypeBindingSource.DataSource = SalesTypeList = _unitOfWork.SalesType.GetAll();
         private void LoadAllBranchList() => BranchBindingSource.DataSource = BranchList = _unitOfWork.Branch.GetAll();

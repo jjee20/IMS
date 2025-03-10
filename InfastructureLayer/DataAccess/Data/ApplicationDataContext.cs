@@ -72,6 +72,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<PaymentVoucher> PaymentVoucher { get; set; }
 
         public DbSet<Product> Product { get; set; }
+        public DbSet<ProductStockInLog> StockInLogs { get; set; }
 
         public DbSet<ProductType> ProductType { get; set; }
 

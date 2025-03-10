@@ -49,6 +49,8 @@ namespace PresentationLayer.Presenters
             YearBindingSource = new BindingSource();
             MonthBindingSource = new BindingSource();
 
+            _view.UpdateDashboardEvent += UpdateDashboard;
+
             LoadAll();
 
             _view.SetMonth(MonthBindingSource);
@@ -59,6 +61,13 @@ namespace PresentationLayer.Presenters
             _view.SetInventoryStatus(InventoryStatusDataSet);
             _view.SetProjectExpenseDistribution(ProjectDataSet);
             _view.SetProgressBars(ItemSold, Sales);
+
+        }
+
+        private void UpdateDashboard(object? sender, EventArgs e)
+        {
+            LoadDailySalesTrend(_view.Year, _view.Month);
+            LoadMonthlySalesTrend(_view.Year);
         }
 
         private void LoadAll()
@@ -75,23 +84,11 @@ namespace PresentationLayer.Presenters
             LoadMonthlySalesTrend();
             LoadInventoryStatus();
         }
-
-        private void LoadDailySalesTrend()
-        {
-            var today = DateTime.Now;
-            var days = DateTime.DaysInMonth(today.Year, today.Month);
-            var sales = _unitOfWork.SalesOrderLine.GetAll(includeProperties: "SalesOrder");
-
-            for (int i = 1; i <= days; i++)
-            {
-                var date = new DateTime(today.Year, today.Month, i);
-                var qty = sales.Where(c => c.SalesOrder.OrderDate.Date == date.Date).Sum(c => c.Quantity);
-                DailySalesTrendDataSet.DataPoints.Add(i.ToString(), qty);
-            }
-        }
-        private void LoadPanelHeader(int year)
+        private void LoadPanelHeader(int? year = 0)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
+            var today = DateTime.Now;
+            var newToday = year == 0 ? DateTime.Now : new DateTime(year.Value, today.Month, today.Day);
             var salesOrder = _unitOfWork.SalesOrder.GetAll(c => c.OrderDate.Year == year, includeProperties: "SalesOrderLines.Product");
             var purchaseOrder = _unitOfWork.PurchaseOrder.GetAll(c => c.OrderDate.Year == year, includeProperties: "PurchaseOrderLines.Product");
 
@@ -104,7 +101,8 @@ namespace PresentationLayer.Presenters
             _view.Expense = expense.ToString("N2");
 
 
-            var salesToday = salesOrder.Where(c => c.OrderDate.Date == DateTime.Now.Date)
+
+            var salesToday = salesOrder.Where(c => c.OrderDate.Date == newToday)
                 .Select(c => c.SalesOrderLines).Sum(c => c.Sum(c => c.SubTotal));
             _view.SalesToday = salesToday.ToString("N2");
             _view.ExpenseTodaySales = salesToday;
@@ -112,7 +110,7 @@ namespace PresentationLayer.Presenters
 
             Sales = (int)(salesToday / 100000.00 * 100);
 
-            var itemsSoldToday = salesOrder.Where(c => c.OrderDate.Date == DateTime.Now.Date)
+            var itemsSoldToday = salesOrder.Where(c => c.OrderDate.Date == newToday)
                 .Select(c => c.SalesOrderLines).Sum(c => c.Sum(c => c.Quantity));
             _view.ItemSoldToday = itemsSoldToday.ToString("N0");
             _view.ExpenseTodayItemsSold = itemsSoldToday;
@@ -120,7 +118,7 @@ namespace PresentationLayer.Presenters
 
             ItemSold = (int)(itemsSoldToday / 1000.00 * 100);
 
-            var expenseToday = purchaseOrder.Where(c => c.OrderDate.Date == DateTime.Now.Date)
+            var expenseToday = purchaseOrder.Where(c => c.OrderDate.Date == newToday)
                 .Select(c => c.PurchaseOrderLines).Sum(c => c.Sum(c => c.SubTotal));
             _view.ExpenseToday = expenseToday.ToString("N2");
             _view.TotalExpense = expenseToday;
@@ -156,10 +154,10 @@ namespace PresentationLayer.Presenters
             YearBindingSource.DataSource = YearList.OrderByDescending(c => c.Name);
         }
 
-        private void LoadTopSellingItems(int year, int? month = 0)
+        private void LoadTopSellingItems(int year)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
-            var topSellingItems = _unitOfWork.SalesOrderLine.GetAll(c => c.SalesOrder.OrderDate.Year == year, 
+            var topSellingItems = _unitOfWork.SalesOrderLine.GetAll(c => c.SalesOrder.OrderDate.Year == year,
                 includeProperties: "Product,SalesOrder")
                 .GroupBy(c => c.Product.ProductName)
                 .Select(g => new { ProductName = g.Key, Quantity = g.Sum(c => c.Quantity) })
@@ -167,13 +165,14 @@ namespace PresentationLayer.Presenters
                 .Take(5) // Top 10
                 .ToList();
 
+            TopSellingDataSet.Label = "Product";
             foreach (var item in topSellingItems)
             {
                 TopSellingDataSet.DataPoints.Add(item.ProductName, item.Quantity);
             }
         }
 
-        private void LoadProjectExpenseDistribution(int year, int? month = 0)
+        private void LoadProjectExpenseDistribution(int year)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
             var projectExpenses = _unitOfWork.Project.GetAll(includeProperties: "ProjectLines")
@@ -181,7 +180,7 @@ namespace PresentationLayer.Presenters
             .Select(g => new ProjectExpenseDistributionViewModel
             {
                 Project = g.Key,
-                Amount = g.Sum(c => c.ProjectLines.Sum(c => c.Amount)) // Total expenses per project
+                Amount = g.Sum(c => c.ProjectLines.Sum(c => c.SubTotal)) // Total expenses per project
             }).ToList();
 
             ProjectDataSet.Label = "Project";
@@ -194,13 +193,13 @@ namespace PresentationLayer.Presenters
 
         private void LoadInventoryStatus()
         {
-            var products = _unitOfWork.Product.GetAll();
+            var products = _unitOfWork.Product.GetAll(includeProperties: "ProductStockInLogs");
 
             var inventoryData = new List<InventoryStatusViewModel>
                 {
-                    new InventoryStatusViewModel { Category = "Total Stock", Quantity = products.Sum(c => c.StockQuantity) },
-                    new InventoryStatusViewModel { Category = "Low Stock (<10)", Quantity = products.Where(c => c.StockQuantity < 10).Count() },
-                    new InventoryStatusViewModel { Category = "Out of Stock", Quantity = products.Where(c => c.StockQuantity == 0).Count() }
+                    new InventoryStatusViewModel { Category = "Total Stock", Quantity = products.SelectMany(c => c.ProductStockInLogs).Sum(c => c.StockQuantity) },
+                    new InventoryStatusViewModel { Category = "Low Stock (<10)", Quantity = products.SelectMany(c => c.ProductStockInLogs).Where(c => c.StockQuantity <= c.Product.ReorderLevel).Count() },
+                    new InventoryStatusViewModel { Category = "Out of Stock", Quantity = products.SelectMany(c => c.ProductStockInLogs).Where(c => c.StockQuantity == 0).Count() }
                 };
 
             InventoryStatusDataSet.Label = "Qty";
@@ -211,16 +210,36 @@ namespace PresentationLayer.Presenters
             }
         }
 
-        private void LoadMonthlySalesTrend()
+        private void LoadDailySalesTrend(int? year = 0, int? month = 0)
         {
-            var date = DateTime.Now;
+            var today = year == 0 && month == 0 ? DateTime.Now : new DateTime(year.Value, month.Value, 1);
+            var days = DateTime.DaysInMonth(today.Year, today.Month);
+            var sales = _unitOfWork.SalesOrderLine.GetAll(includeProperties: "SalesOrder");
+
+            DailySalesTrendDataSet.DataPoints.Clear();
+            DailySalesTrendDataSet.Label = "Qty";
+            for (int i = 1; i <= days; i++)
+            {
+                var date = new DateTime(today.Year, today.Month, i);
+                var qty = sales.Where(c => c.SalesOrder.OrderDate.Date == date.Date).Sum(c => c.Quantity);
+                DailySalesTrendDataSet.DataPoints.Add(i.ToString(), qty);
+            }
+        }
+
+        private void LoadMonthlySalesTrend(int? year = 0)
+        {
+            var date = year == 0 ? DateTime.Now : new DateTime(year.Value, 1, 1);
             var months = Enumerable.Range(1, 12)
                 .Select(i => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i))
                 .ToList();
 
-            foreach (var month in months)
+
+            MonthlySalesTrendDataset.DataPoints.Clear();
+            MonthlyExpenseTrendDataset.DataPoints.Clear();
+
+            foreach (var m in months)
             {
-                int monthNumber = Array.IndexOf(CultureInfo.CurrentCulture.DateTimeFormat.MonthNames, month) + 1;
+                int monthNumber = Array.IndexOf(CultureInfo.CurrentCulture.DateTimeFormat.MonthNames, m) + 1;
 
                 var sales = _unitOfWork.SalesOrder.GetAll(
                     c => c.OrderDate.Month == monthNumber && c.OrderDate.Year == date.Year,
@@ -231,12 +250,12 @@ namespace PresentationLayer.Presenters
                     c => c.OrderDate.Month == monthNumber && c.OrderDate.Year == date.Year,
                     includeProperties: "PurchaseOrderLines"
                 ).SelectMany(c => c.PurchaseOrderLines).Sum(c => c.Quantity);
-
                 //totalSales as Sales and totalPurchase as Expenses
                 MonthlySalesTrendDataset.Label = "Sales";
-                MonthlySalesTrendDataset.DataPoints.Add(month, sales);
+                MonthlySalesTrendDataset.DataPoints.Add(m, sales);
+                MonthlySalesTrendDataset.FillColors.Add(Color.Blue);
                 MonthlyExpenseTrendDataset.Label = "Expenses";
-                MonthlyExpenseTrendDataset.DataPoints.Add(month, purchase);
+                MonthlyExpenseTrendDataset.DataPoints.Add(m, purchase);
                 MonthlyExpenseTrendDataset.FillColors.Add(Color.Red);
             }
         }

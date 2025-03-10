@@ -2,6 +2,8 @@
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Presenters.Inventory;
+using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.IRepositories.IInventory;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,21 @@ namespace PresentationLayer.Presenters.Inventory
             _view.ShowProductType += ShowProductType;
             _view.ShowUnitOfMeasure += ShowUnitOfMeasure;
             _view.ShowProduct += ShowProduct;
+            _view.ShowStockIn += ShowStockIn;
+            _view.ShowStockMonitoring += ShowStockMonitoring;
             ShowProduct(this, EventArgs.Empty);
+        }
+
+        private void ShowStockMonitoring(object? sender, EventArgs e)
+        {
+            IProductMonitoringView view = ProductMonitoringView.GetInstance((TabPage)_view.Guna2TabControlPage);
+            new ProductMonitoringPresenter(view, _unitOfWork);
+        }
+
+        private void ShowStockIn(object? sender, EventArgs e)
+        {
+            IProductStockInLogView view = ProductStockInLogView.GetInstance((TabPage)_view.Guna2TabControlPage);
+            new ProductStockInLogPresenter(view, _unitOfWork);
         }
 
         private void ShowProductType(object? sender, EventArgs e)

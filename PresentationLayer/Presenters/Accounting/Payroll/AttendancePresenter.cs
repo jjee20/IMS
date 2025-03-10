@@ -340,6 +340,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 double daysPresent = attendances.Count(a => a.IsPresent && !a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves));
                 double daysHalfDayPresent = attendances.Count(a => a.IsPresent && a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
                 double totalPresentDays = daysPresent + daysHalfDayPresent;
+                double totalOvertime = attendances.Sum(c => c.HoursWorked - employee.Shift.RegularHours);
                 int daysLate = attendances.Count(a => a.TimeIn > shiftStartTime && !a.IsHalfDay);
                 int daysEarlyOut = attendances.Count(a => a.TimeOut.Hours < shiftEndTime.Hours && !a.IsHalfDay);
                 int daysOnLeave = approvedLeaves.Sum(l => (l.EndDate - l.StartDate).Days + 1);
@@ -351,6 +352,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     Employee = $"{employee.LastName}, {employee.FirstName}",
                     TotalDays = totalDays,
                     DaysPresent = totalPresentDays,
+                    TotalOvertime = totalOvertime,
                     DaysLate = daysLate,
                     DaysEarlyOut = daysEarlyOut,
                     DaysAbsent = daysAbsent,

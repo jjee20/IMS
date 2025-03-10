@@ -53,6 +53,7 @@ namespace PresentationLayer.Presenters
             _view.FreightEvent += Freight;
             _view.PrintSOEvent += PrintSO;
             _view.DeleteProductEvent += ProductDelete;
+            _view.UpdateComputationEvent += UpdateComputation;
 
             //Load
             LoadAllPurchaseOrderList();
@@ -68,7 +69,13 @@ namespace PresentationLayer.Presenters
             _view.SetVendorListBindingSource(VendorBindingSource);
             _view.SetProductListBindingSource(ProductBindingSource);
         }
-
+        private void UpdateComputation(object? sender, DataGridViewCellEventArgs e)
+        {
+            _view.Amount = _view.PurchaseOrderLines.Select(c => c.SubTotal).Sum();
+            _view.Tax = _view.SubTotal * 0.12;
+            _view.SubTotal = _view.Amount - (_view.Amount * _view.Discount) - _view.Tax;
+            _view.Total = _view.SubTotal + _view.Tax + _view.Freight;
+        }
         private void Freight(object? sender, EventArgs e)
         {
             _view.Total = _view.SubTotal + _view.Tax + _view.Freight;
@@ -155,6 +162,7 @@ namespace PresentationLayer.Presenters
 
             if (_view.NonStock)
             {
+                _view.ProductId = 0;
                 name = _view.NonStockProductName.Trim();
                 price = 0.00;
             }
@@ -162,6 +170,14 @@ namespace PresentationLayer.Presenters
             {
                 name = product.ProductName;
                 price = product.DefaultSellingPrice;
+
+                var checkOrder = _view.PurchaseOrderLines.Where(c => c.ProductId == _view.ProductId);
+
+                if (checkOrder.Any())
+                {
+                    _view.Message = "Item is already added.";
+                    return;
+                }
             }
             // Calculate values
             var productprice = price;
@@ -170,14 +186,6 @@ namespace PresentationLayer.Presenters
             var amount = productprice * quantity;
             var discount = _view.ProductDiscount/100;
             var discountAmount = productprice * discount;
-
-            var checkOrder = _view.PurchaseOrderLines.Where(c => c.ProductId == _view.ProductId);
-
-            if (checkOrder.Any())
-            {
-                _view.Message = "Item is already added.";
-                return;
-            }
             _view.PurchaseOrderLines.Add(new PurchaseOrderLineViewModel
             {
                 ProductId = _view.ProductId,
@@ -206,7 +214,7 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.PurchaseOrder.Get(c => c.PurchaseOrderId == _view.PurchaseOrderId);
+            var model = _unitOfWork.PurchaseOrder.Get(c => c.PurchaseOrderId == _view.PurchaseOrderId, tracked: true);
             if (model == null) model = new PurchaseOrder();
             else _unitOfWork.PurchaseOrder.Detach(model);
 

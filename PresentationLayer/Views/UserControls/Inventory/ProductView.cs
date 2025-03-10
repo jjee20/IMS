@@ -135,11 +135,6 @@ namespace PresentationLayer.Views.UserControls
             get { return Convert.ToInt16(txtReorderLevel.Text); }
             set { txtReorderLevel.Text = value.ToString(); }
         }
-        public int StockQuantity
-        {
-            get { return Convert.ToInt16(txtStockQuantity.Text); }
-            set { txtStockQuantity.Text = value.ToString(); }
-        }
         public int UnitOfMeasureId
         {
             get { return (int)txtUnitOfMeasure.SelectedValue; }

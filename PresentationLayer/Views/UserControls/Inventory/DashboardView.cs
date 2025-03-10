@@ -24,7 +24,18 @@ namespace PresentationLayer.Views.UserControls
         public DashboardView()
         {
             InitializeComponent();
+
+            txtYear.SelectionChangeCommitted += (s, e) =>
+            {
+                UpdateDashboardEvent?.Invoke(this, EventArgs.Empty);
+            };
+            txtMonth.SelectionChangeCommitted += (s, e) =>
+            {
+                UpdateDashboardEvent?.Invoke(this, EventArgs.Empty);
+            };
         }
+
+        public event EventHandler UpdateDashboardEvent;
 
         private static DashboardView? instance;
         public static DashboardView GetInstance(TabPage parentContainer)

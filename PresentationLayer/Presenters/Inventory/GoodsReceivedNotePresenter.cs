@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.Inventory;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
@@ -14,7 +15,7 @@ namespace PresentationLayer.Presenters
         private BindingSource GoodsReceivedNoteBindingSource;
         private BindingSource PurchaseOrderBindingSource;
         private BindingSource WarehouseBindingSource;
-        private IEnumerable<GoodsReceivedNote> GoodsReceivedNoteList;
+        private IEnumerable<GoodsReceiveNoteViewModel> GoodsReceivedNoteList;
         private IEnumerable<PurchaseOrder> PurchaseOrderList;
         private IEnumerable<Warehouse> WarehouseList;
        
@@ -97,7 +98,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                GoodsReceivedNoteList = _unitOfWork.GoodsReceivedNote.GetAll(c => c.GoodsReceivedNoteName.Contains(_view.SearchValue));
+                GoodsReceivedNoteList = Program.Mapper.Map<IEnumerable<GoodsReceiveNoteViewModel>>(_unitOfWork.GoodsReceivedNote.GetAll(c => c.GoodsReceivedNoteName.Contains(_view.SearchValue), includeProperties: "PurchaseOrder,Warehouse"));
                 GoodsReceivedNoteBindingSource.DataSource = GoodsReceivedNoteList;
             }
             else
@@ -164,7 +165,7 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllGoodsReceivedNoteList()
         {
-            GoodsReceivedNoteList = _unitOfWork.GoodsReceivedNote.GetAll();
+            GoodsReceivedNoteList = Program.Mapper.Map<IEnumerable<GoodsReceiveNoteViewModel>>(_unitOfWork.GoodsReceivedNote.GetAll(includeProperties: "PurchaseOrder,Warehouse"));
             GoodsReceivedNoteBindingSource.DataSource = GoodsReceivedNoteList;//Set data source.
         }
         private void LoadAllPurchaseOrderList()

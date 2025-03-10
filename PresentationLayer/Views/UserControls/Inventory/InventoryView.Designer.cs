@@ -35,6 +35,8 @@
             tbDashboard = new TabPage();
             tcMain = new MaterialSkin.Controls.MaterialTabControl();
             tbProject = new TabPage();
+            tbTargetGoals = new TabPage();
+            tbSettings = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,7 +48,7 @@
             tbInventory.Name = "tbInventory";
             tbInventory.Size = new Size(1352, 689);
             tbInventory.TabIndex = 4;
-            tbInventory.Text = "Inventory";
+            tbInventory.Text = "Product/Service";
             tbInventory.UseVisualStyleBackColor = true;
             // 
             // tbPurchase
@@ -57,7 +59,7 @@
             tbPurchase.Name = "tbPurchase";
             tbPurchase.Size = new Size(1352, 689);
             tbPurchase.TabIndex = 3;
-            tbPurchase.Text = "Purchase";
+            tbPurchase.Text = "Purchases";
             tbPurchase.UseVisualStyleBackColor = true;
             // 
             // tbSales
@@ -86,10 +88,12 @@
             // tcMain
             // 
             tcMain.Controls.Add(tbDashboard);
+            tcMain.Controls.Add(tbInventory);
             tcMain.Controls.Add(tbSales);
             tcMain.Controls.Add(tbPurchase);
-            tcMain.Controls.Add(tbInventory);
             tcMain.Controls.Add(tbProject);
+            tcMain.Controls.Add(tbTargetGoals);
+            tcMain.Controls.Add(tbSettings);
             tcMain.Depth = 0;
             tcMain.Dock = DockStyle.Fill;
             tcMain.Location = new Point(3, 48);
@@ -110,6 +114,24 @@
             tbProject.TabIndex = 5;
             tbProject.Text = "Project";
             tbProject.UseVisualStyleBackColor = true;
+            // 
+            // tbTargetGoals
+            // 
+            tbTargetGoals.Location = new Point(4, 24);
+            tbTargetGoals.Name = "tbTargetGoals";
+            tbTargetGoals.Size = new Size(1352, 689);
+            tbTargetGoals.TabIndex = 6;
+            tbTargetGoals.Text = "Target Goals";
+            tbTargetGoals.UseVisualStyleBackColor = true;
+            // 
+            // tbSettings
+            // 
+            tbSettings.Location = new Point(4, 24);
+            tbSettings.Name = "tbSettings";
+            tbSettings.Size = new Size(1352, 689);
+            tbSettings.TabIndex = 7;
+            tbSettings.Text = "Settings";
+            tbSettings.UseVisualStyleBackColor = true;
             // 
             // InventoryView
             // 
@@ -137,5 +159,7 @@
         private TabPage tbDashboard;
         private MaterialSkin.Controls.MaterialTabControl tcMain;
         private TabPage tbProject;
+        private TabPage tbTargetGoals;
+        private TabPage tbSettings;
     }
 }

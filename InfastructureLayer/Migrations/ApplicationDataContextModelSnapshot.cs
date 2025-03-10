@@ -806,14 +806,15 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("InvoiceTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShipmentId")
+                    b.Property<int>("SalesOrderId")
                         .HasColumnType("int");
 
                     b.HasKey("InvoiceId");
 
                     b.HasIndex("InvoiceTypeId");
 
-                    b.HasIndex("ShipmentId");
+                    b.HasIndex("SalesOrderId")
+                        .IsUnique();
 
                     b.ToTable("Invoice");
                 });
@@ -875,9 +876,6 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentReceiveId"));
 
-                    b.Property<int>("InvoiceId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsFullPayment")
                         .HasColumnType("bit");
 
@@ -894,11 +892,14 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("PaymentTypeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SalesOrderId")
+                        .HasColumnType("int");
+
                     b.HasKey("PaymentReceiveId");
 
-                    b.HasIndex("InvoiceId");
-
                     b.HasIndex("PaymentTypeId");
+
+                    b.HasIndex("SalesOrderId");
 
                     b.ToTable("PaymentReceive");
                 });
@@ -1007,9 +1008,6 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("ReorderLevel")
                         .HasColumnType("int");
 
-                    b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
-
                     b.Property<int>("UnitOfMeasureId")
                         .HasColumnType("int");
 
@@ -1022,6 +1020,37 @@ namespace InfastructureLayer.Migrations
                     b.HasIndex("UnitOfMeasureId");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Inventory.ProductStockInLog", b =>
+                {
+                    b.Property<int>("ProductStockInLogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductStockInLogId"));
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductStatus")
+                        .HasColumnType("int");
+
+                    b.Property<double>("StockQuantity")
+                        .HasColumnType("float");
+
+                    b.HasKey("ProductStockInLogId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("StockInLogs");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductType", b =>
@@ -1322,15 +1351,16 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ShipmentTypeId")
+                    b.Property<int?>("ShipmentTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WarehouseId")
+                    b.Property<int?>("WarehouseId")
                         .HasColumnType("int");
 
                     b.HasKey("ShipmentId");
 
-                    b.HasIndex("SalesOrderId");
+                    b.HasIndex("SalesOrderId")
+                        .IsUnique();
 
                     b.HasIndex("ShipmentTypeId");
 
@@ -1853,34 +1883,34 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.Inventory.Shipment", "Shipment")
-                        .WithMany()
-                        .HasForeignKey("ShipmentId")
+                    b.HasOne("DomainLayer.Models.Inventory.SalesOrder", "SalesOrder")
+                        .WithOne("Invoice")
+                        .HasForeignKey("DomainLayer.Models.Inventory.Invoice", "SalesOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("InvoiceType");
 
-                    b.Navigation("Shipment");
+                    b.Navigation("SalesOrder");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PaymentReceive", b =>
                 {
-                    b.HasOne("DomainLayer.Models.Inventory.Invoice", "Invoice")
-                        .WithMany()
-                        .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DomainLayer.Models.Inventory.PaymentType", "PaymentType")
                         .WithMany()
                         .HasForeignKey("PaymentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Invoice");
+                    b.HasOne("DomainLayer.Models.Inventory.SalesOrder", "SalesOrder")
+                        .WithMany()
+                        .HasForeignKey("SalesOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PaymentType");
+
+                    b.Navigation("SalesOrder");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PaymentVoucher", b =>
@@ -1935,6 +1965,17 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("ProductType");
 
                     b.Navigation("UnitOfMeasure");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Inventory.ProductStockInLog", b =>
+                {
+                    b.HasOne("DomainLayer.Models.Inventory.Product", "Product")
+                        .WithMany("ProductStockInLogs")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PurchaseOrder", b =>
@@ -2028,22 +2069,18 @@ namespace InfastructureLayer.Migrations
             modelBuilder.Entity("DomainLayer.Models.Inventory.Shipment", b =>
                 {
                     b.HasOne("DomainLayer.Models.Inventory.SalesOrder", "SalesOrder")
-                        .WithMany()
-                        .HasForeignKey("SalesOrderId")
+                        .WithOne("Shipment")
+                        .HasForeignKey("DomainLayer.Models.Inventory.Shipment", "SalesOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DomainLayer.Models.Inventory.ShipmentType", "ShipmentType")
                         .WithMany()
-                        .HasForeignKey("ShipmentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ShipmentTypeId");
 
                     b.HasOne("DomainLayer.Models.Inventory.Warehouse", "Warehouse")
                         .WithMany()
-                        .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WarehouseId");
 
                     b.Navigation("SalesOrder");
 
@@ -2174,6 +2211,11 @@ namespace InfastructureLayer.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Inventory.Product", b =>
+                {
+                    b.Navigation("ProductStockInLogs");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Inventory.PurchaseOrder", b =>
                 {
                     b.Navigation("PurchaseOrderLines");
@@ -2181,7 +2223,13 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.SalesOrder", b =>
                 {
+                    b.Navigation("Invoice")
+                        .IsRequired();
+
                     b.Navigation("SalesOrderLines");
+
+                    b.Navigation("Shipment")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Employee", b =>

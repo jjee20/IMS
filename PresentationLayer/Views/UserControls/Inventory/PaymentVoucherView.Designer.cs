@@ -48,11 +48,9 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentVoucherView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentVoucherView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
@@ -70,8 +68,6 @@ namespace PresentationLayer.Views.UserControls
             txtName = new Guna2TextBox();
             guna2HtmlLabel9 = new Guna2HtmlLabel();
             txtIsFullPayment = new Guna2ToggleSwitch();
-            guna2HtmlLabel4 = new Guna2HtmlLabel();
-            txtInvoice = new Guna2ComboBox();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna2HtmlLabel();
             txtPaymentType = new Guna2ComboBox();
@@ -237,8 +233,6 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Controls.Add(txtName);
             materialCard2.Controls.Add(guna2HtmlLabel9);
             materialCard2.Controls.Add(txtIsFullPayment);
-            materialCard2.Controls.Add(guna2HtmlLabel4);
-            materialCard2.Controls.Add(txtInvoice);
             materialCard2.Controls.Add(guna2HtmlLabel3);
             materialCard2.Controls.Add(guna2HtmlLabel2);
             materialCard2.Controls.Add(txtPaymentType);
@@ -322,7 +316,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel6.Anchor = AnchorStyles.None;
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 10.2F);
-            guna2HtmlLabel6.Location = new Point(183, 360);
+            guna2HtmlLabel6.Location = new Point(186, 172);
             guna2HtmlLabel6.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(32, 21);
@@ -342,7 +336,7 @@ namespace PresentationLayer.Views.UserControls
             txtBill.Font = new Font("Segoe UI", 10.2F);
             txtBill.ForeColor = Color.FromArgb(68, 88, 112);
             txtBill.ItemHeight = 38;
-            txtBill.Location = new Point(181, 385);
+            txtBill.Location = new Point(184, 197);
             txtBill.Margin = new Padding(3, 2, 3, 2);
             txtBill.Name = "txtBill";
             txtBill.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -437,39 +431,6 @@ namespace PresentationLayer.Views.UserControls
             txtIsFullPayment.UncheckedState.InnerBorderColor = Color.White;
             txtIsFullPayment.UncheckedState.InnerColor = Color.White;
             // 
-            // guna2HtmlLabel4
-            // 
-            guna2HtmlLabel4.Anchor = AnchorStyles.None;
-            guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Segoe UI", 10.2F);
-            guna2HtmlLabel4.Location = new Point(185, 172);
-            guna2HtmlLabel4.Margin = new Padding(3, 2, 3, 2);
-            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(58, 21);
-            guna2HtmlLabel4.TabIndex = 60;
-            guna2HtmlLabel4.Text = "Invoice #";
-            // 
-            // txtInvoice
-            // 
-            txtInvoice.Anchor = AnchorStyles.None;
-            txtInvoice.BackColor = Color.Transparent;
-            txtInvoice.CustomizableEdges = customizableEdges13;
-            txtInvoice.DisplayMember = "BillTypeId";
-            txtInvoice.DrawMode = DrawMode.OwnerDrawFixed;
-            txtInvoice.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtInvoice.FocusedColor = Color.FromArgb(94, 148, 255);
-            txtInvoice.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtInvoice.Font = new Font("Segoe UI", 10.2F);
-            txtInvoice.ForeColor = Color.FromArgb(68, 88, 112);
-            txtInvoice.ItemHeight = 38;
-            txtInvoice.Location = new Point(183, 197);
-            txtInvoice.Margin = new Padding(3, 2, 3, 2);
-            txtInvoice.Name = "txtInvoice";
-            txtInvoice.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            txtInvoice.Size = new Size(451, 44);
-            txtInvoice.TabIndex = 59;
-            txtInvoice.ValueMember = "BillTypeId";
-            // 
             // guna2HtmlLabel3
             // 
             guna2HtmlLabel3.Anchor = AnchorStyles.None;
@@ -498,7 +459,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             txtPaymentType.Anchor = AnchorStyles.None;
             txtPaymentType.BackColor = Color.Transparent;
-            txtPaymentType.CustomizableEdges = customizableEdges15;
+            txtPaymentType.CustomizableEdges = customizableEdges13;
             txtPaymentType.DisplayMember = "BillTypeId";
             txtPaymentType.DrawMode = DrawMode.OwnerDrawFixed;
             txtPaymentType.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -510,7 +471,7 @@ namespace PresentationLayer.Views.UserControls
             txtPaymentType.Location = new Point(683, 109);
             txtPaymentType.Margin = new Padding(3, 2, 3, 2);
             txtPaymentType.Name = "txtPaymentType";
-            txtPaymentType.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            txtPaymentType.ShadowDecoration.CustomizableEdges = customizableEdges14;
             txtPaymentType.Size = new Size(451, 44);
             txtPaymentType.TabIndex = 45;
             txtPaymentType.ValueMember = "BillTypeId";
@@ -638,7 +599,7 @@ namespace PresentationLayer.Views.UserControls
             // txtSearch
             // 
             txtSearch.CharacterCasing = CharacterCasing.Upper;
-            txtSearch.CustomizableEdges = customizableEdges17;
+            txtSearch.CustomizableEdges = customizableEdges15;
             txtSearch.DefaultText = "";
             txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -655,7 +616,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
-            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges16;
             txtSearch.Size = new Size(378, 62);
             txtSearch.TabIndex = 11;
             // 

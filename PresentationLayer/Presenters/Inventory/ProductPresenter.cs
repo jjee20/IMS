@@ -73,7 +73,6 @@ namespace PresentationLayer.Presenters
             model.Barcode = _view.Barcode ?? "";
             model.Description = _view.Description ?? "";
             model.ReorderLevel = _view.ReorderLevel;
-            model.StockQuantity = _view.StockQuantity;
             model.ProductTypeId = _view.ProductTypeId;
             model.UnitOfMeasureId = _view.UnitOfMeasureId;
             model.DefaultBuyingPrice = _view.DefaultBuyingPrice;
@@ -126,7 +125,6 @@ namespace PresentationLayer.Presenters
             _view.ProductCode = entity.ProductCode;
             _view.Barcode = entity.Barcode;
             _view.Description = entity.Description;
-            _view.StockQuantity = entity.StockQuantity;
             _view.ReorderLevel = entity.ReorderLevel;
             _view.ProductTypeId = entity.ProductTypeId;
             _view.UnitOfMeasureId = entity.UnitOfMeasureId;
@@ -175,7 +173,6 @@ namespace PresentationLayer.Presenters
             _view.Barcode = "";
             _view.Description = "";
             _view.ReorderLevel = 0;
-            _view.StockQuantity = 0;
             _view.ProductTypeId = 0;
             _view.UnitOfMeasureId = 0;
             _view.DefaultBuyingPrice = 0;

@@ -44,6 +44,7 @@ namespace PresentationLayer.Views.IViews
         event EventHandler FreightEvent;
         event DataGridViewCellEventHandler PrintSOEvent;
         event DataGridViewCellEventHandler DeleteProductEvent;
+        event DataGridViewCellEventHandler UpdateComputationEvent;
 
         void SetPurchaseOrderListBindingSource(BindingSource PurchaseOrderList);
         void SetPurchaseOrderLineListBindingSource(BindingSource PurchaseOrderLineList);

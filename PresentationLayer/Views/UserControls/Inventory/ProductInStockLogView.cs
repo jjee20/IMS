@@ -1,29 +1,19 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Enums;
+using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
-using MaterialSkin;
-using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class ShipmentView : UserControl, IShipmentView
+    public partial class ProductStockInLogView : UserControl, IProductStockInLogView
     {
         private int id;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
-        public ShipmentView()
+        public ProductStockInLogView()
         {
             InitializeComponent();
             Guna2TabControl1.TabPages.Remove(tabPage2);
@@ -37,10 +27,10 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    AddNewEvent?.Invoke(this, EventArgs.Empty);
                     tabPage2.Text = "Add New";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
+                    AddNewEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = true;
             };
@@ -63,19 +53,19 @@ namespace PresentationLayer.Views.UserControls
             //Edit
             btnEdit.Click += delegate
             {
-                if (Guna2TabControl1.SelectedTab == tabPage1)
+                if (Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    tabPage2.Text = "Edit Details";
+                    tabPage2.Text = "Edit";
                     Guna2TabControl1.TabPages.Remove(tabPage1);
                     Guna2TabControl1.TabPages.Add(tabPage2);
+                    EditEvent?.Invoke(this, EventArgs.Empty);
                 }
-                EditEvent?.Invoke(this, EventArgs.Empty);
                 btnReturn.Visible = true;
             };
             //Delete
             btnDelete.Click += delegate
             {
-                var result = MessageBox.Show("Are you sure you want to delete the selected shipment?", "Warning",
+                var result = MessageBox.Show("Are you sure you want to delete the selected stock logs?", "Warning",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
@@ -95,50 +85,46 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (!Guna2TabControl1.TabPages.Contains(tabPage1))
                 {
-                    RefreshEvent?.Invoke(this, EventArgs.Empty);
                     Guna2TabControl1.TabPages.Remove(tabPage2);
                     Guna2TabControl1.TabPages.Add(tabPage1);
+                    RefreshEvent?.Invoke(this, EventArgs.Empty);
                 }
                 btnReturn.Visible = false;
             };
         }
 
         //Properties
-        public int ShipmentId
+        public int ProductStockInLogId
         {
             get { return id; }
             set { id = value; }
         }
 
-        public string ShipmentName
+        public int ProductId
         {
-            get { return txtName.Text; }
-            set { txtName.Text = value; }
+            get { return (int)txtProduct.SelectedValue; }
+            set { txtProduct.SelectedValue = value; }
         }
-        public int SalesOrderId
+        public ProductStatus ProductStatus
         {
-            get { return (int)txtSalesOrder.SelectedValue; }
-            set { txtSalesOrder.Text = value.ToString(); }
+            get { return (ProductStatus)txtStatus.SelectedValue; }
+            set { txtStatus.Text = value.ToString(); }
         }
-        public DateTimeOffset ShipmentDate
+        public double StockQuantity
         {
-            get { return txtShipmentDate.Value; }
-            set { txtShipmentDate.Text = value.ToString(); }
+            get { return Convert.ToDouble(txtQuantity.Text); }
+            set { txtQuantity.Text = value.ToString(); }
         }
-        public int ShipmentTypeId
+
+        public DateTime DateAdded
         {
-            get { return (int)txtShipmentType.SelectedValue; }
-            set { txtShipmentType.Text = value.ToString(); }
+            get { return txtDate.Value; }
+            set { txtDate.Value = value; }
         }
-        public int WarehouseId
+        public string Notes
         {
-            get { return (int)txtWarehouse.SelectedValue; }
-            set { txtWarehouse.Text = value.ToString(); }
-        }
-        public bool IsFullShipment
-        {
-            get { return txtIsFullShipment.Checked; }
-            set { txtIsFullShipment.Checked = value; }
+            get { return txtNotes.Text; }
+            set { txtNotes.Text = value; }
         }
         public bool IsEdit
         {
@@ -164,28 +150,22 @@ namespace PresentationLayer.Views.UserControls
             set { txtSearch.Text = value; }
         }
 
-        public void SetShipmentListBindingSource(BindingSource ShipmentList)
+        public void SetProductListBindingSource(BindingSource bindingSource)
         {
-            dgList.DataSource = ShipmentList;
-            DataGridHelper.ApplyDisplayNames<ShipmentViewModel>(ShipmentList, dgList);
+            txtProduct.DataSource = bindingSource;
+            txtProduct.DisplayMember = "ProductName";
+            txtProduct.ValueMember = "ProductId";
         }
-        public void SetShipmentTypeListBindingSource(BindingSource ShipmentTypeBindingSource)
+        public void SetProductStatusListBindingSource(BindingSource bindingSource)
         {
-            txtShipmentType.DataSource = ShipmentTypeBindingSource;
-            txtShipmentType.DisplayMember = "ShipmentTypeName";
-            txtShipmentType.ValueMember = "ShipmentTypeId";
+            txtStatus.DataSource = bindingSource;
+            txtStatus.DisplayMember = "Name";
+            txtStatus.ValueMember = "Id";
         }
-        public void SetSalesOrderListBindingSource(BindingSource SalesOrderListBindingSource)
+        public void SetProductStockInLogListBindingSource(BindingSource ProductStockInLogList)
         {
-            txtSalesOrder.DataSource = SalesOrderListBindingSource;
-            txtSalesOrder.DisplayMember = "SalesOrderName";
-            txtSalesOrder.ValueMember = "SalesOrderId";
-        }
-        public void SetWarehouseListBindingSource(BindingSource WarehouseListBindingSource)
-        {
-            txtWarehouse.DataSource = WarehouseListBindingSource;
-            txtWarehouse.DisplayMember = "WarehouseName";
-            txtWarehouse.ValueMember = "WarehouseId";
+            dgList.DataSource = ProductStockInLogList;
+            DataGridHelper.ApplyDisplayNames<ProductStockInLogViewModel>(ProductStockInLogList, dgList);
         }
 
         public event EventHandler AddNewEvent;
@@ -196,16 +176,21 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
 
-        private static ShipmentView? instance;
-        public static ShipmentView GetInstance(TabPage parentContainer)
+        private static ProductStockInLogView? instance;
+        public static ProductStockInLogView GetInstance(TabPage parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {
-                instance = new ShipmentView();
+                instance = new ProductStockInLogView();
                 parentContainer.Controls.Add(instance);
                 instance.Dock = DockStyle.Fill;
             }
             return instance;
+        }
+
+        private void ProductStockInLogView_Load(object sender, EventArgs e)
+        {
+            txtDate.Value = DateTime.Now;
         }
     }
 }

@@ -20,7 +20,6 @@ namespace DomainLayer.Models.Inventory
         [ForeignKey("ProductTypeId")]
         public int ProductTypeId { get; set; }
         public string? ProductImageUrl { get; set; }
-        public int StockQuantity { get; set; }
         public int ReorderLevel { get; set; }
         [Display(Name = "UOM")]
         [ForeignKey("UnitOfMeasureId")]
@@ -36,5 +35,7 @@ namespace DomainLayer.Models.Inventory
         public virtual UnitOfMeasure UnitOfMeasure { get; set; }
         public virtual Branch Branch { get; set; }
         public virtual ProductType ProductType { get; set; }
+
+        public IEnumerable<ProductStockInLog> ProductStockInLogs { get; set; }
     }
 }

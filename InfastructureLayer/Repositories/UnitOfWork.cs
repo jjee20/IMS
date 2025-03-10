@@ -63,6 +63,7 @@ namespace InfastructureLayer.DataAccess.Repositories
         public IAllowanceRepository Allowance { get; private set; }
         public IBonusRepository Bonus { get; private set; }
         public IProjectLineRepository ProjectLine { get; private set; }
+        public IProductStockInLogRepository StockInLogs { get; private set; }
         public UnitOfWork(ApplicationDataContext db)
         {
             _db = db;
@@ -111,6 +112,7 @@ namespace InfastructureLayer.DataAccess.Repositories
             Allowance ??= new AllowanceRepository(_db);
             Bonus ??= new BonusRepository(_db);
             ProjectLine ??= new ProjectLineRepository(_db);
+            StockInLogs ??= new ProductStockInLogRepository(_db);
         }
         public void Save()
         {

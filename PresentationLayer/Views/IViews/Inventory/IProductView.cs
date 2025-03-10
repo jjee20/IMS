@@ -11,7 +11,6 @@ namespace PresentationLayer.Views.IViews
         string Description { get; set; }
         int UnitOfMeasureId { get; set; }
         int ProductTypeId { get; set; }
-        int StockQuantity { get; set; }
         int ReorderLevel { get; set; }
         double DefaultBuyingPrice { get; set; }
         double DefaultSellingPrice { get; set; }

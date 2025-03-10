@@ -18,21 +18,13 @@ namespace PresentationLayer.Views.UserControls
                 {
                     ShowSalesOrder?.Invoke(this, EventArgs.Empty);
                 }
-                else if (tcMain.SelectedTab == tbShipment)
-                {
-                    ShowShipment?.Invoke(this, EventArgs.Empty);
-                }
-                else if (tcMain.SelectedTab == tbInvoice)
-                {
-                    ShowSalesInvoice?.Invoke(this, EventArgs.Empty);
-                }
-                else if (tcMain.SelectedTab == tbPaymentReceive)
-                {
-                    ShowPaymentReceive?.Invoke(this, EventArgs.Empty);
-                }
                 else if (tcMain.SelectedTab == tbSettings)
                 {
                     ShowSettings?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbWarehouse)
+                {
+                    ShowWarehouse?.Invoke(this, EventArgs.Empty);
                 }
             };
         }
@@ -44,9 +36,8 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ShowCustomer;
         public event EventHandler ShowSalesOrder;
         public event EventHandler ShowShipment;
-        public event EventHandler ShowSalesInvoice;
-        public event EventHandler ShowPaymentReceive;
         public event EventHandler ShowSettings;
+        public event EventHandler ShowWarehouse;
 
         public static SalesView GetInstance(TabPage parentContainer)
         {

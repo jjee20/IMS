@@ -5,9 +5,8 @@
         event EventHandler ShowCustomer;
         event EventHandler ShowSalesOrder;
         event EventHandler ShowShipment;
-        event EventHandler ShowSalesInvoice;
-        event EventHandler ShowPaymentReceive;
         event EventHandler ShowSettings;
+        event EventHandler ShowWarehouse;
         TabPage Guna2TabControlPage { get; }
     }
 }

@@ -176,21 +176,21 @@ namespace PresentationLayer.Views.UserControls
         }
         public void SetBillListBindingSource(BindingSource BillBindingSource)
         {
-            txtPaymentType.DataSource = BillBindingSource;
-            txtPaymentType.DisplayMember = "BillName";
-            txtPaymentType.ValueMember = "BillId";
+            txtBill.DataSource = BillBindingSource;
+            txtBill.DisplayMember = "BillName";
+            txtBill.ValueMember = "BillId";
         }
         public void SetPaymentTypeListBindingSource(BindingSource PaymentTypeBindingSource)
         {
-            txtCashBank.DataSource = PaymentTypeBindingSource;
-            txtCashBank.DisplayMember = "PaymentTypeName";
-            txtCashBank.ValueMember = "PaymentTypeId";
+            txtPaymentType.DataSource = PaymentTypeBindingSource;
+            txtPaymentType.DisplayMember = "PaymentTypeName";
+            txtPaymentType.ValueMember = "PaymentTypeId";
         }
         public void SetCashBankListBindingSource(BindingSource CashBankListBindingSource)
         {
-            txtPaymentType.DataSource = CashBankListBindingSource;
-            txtPaymentType.DisplayMember = "CashBankName";
-            txtPaymentType.ValueMember = "CashBankId";
+            txtCashBank.DataSource = CashBankListBindingSource;
+            txtCashBank.DisplayMember = "CashBankName";
+            txtCashBank.ValueMember = "CashBankId";
         }
 
         public event EventHandler AddNewEvent;

@@ -1,6 +1,6 @@
 ﻿using DomainLayer.ViewModels.PayrollViewModels;
 
-namespace PresentationLayer.Views.UserControls
+namespace RavenTech_ERP.Views.IViews.Inventory
 {
     public interface IProjectManagementView
     {
@@ -23,10 +23,12 @@ namespace PresentationLayer.Views.UserControls
         double Revenue { get; set; }
         string SearchValue { get; set; }
         DateTime StartDate { get; set; }
+        double Total { get; set; }
 
         event EventHandler AddNewEvent;
         event EventHandler DeleteEvent;
         event DataGridViewCellEventHandler DeleteProductEvent;
+        event DataGridViewCellEventHandler UpdateComputationEvent;
         event EventHandler EditEvent;
         event EventHandler FreightEvent;
         event EventHandler PaymentDiscountEvent;
