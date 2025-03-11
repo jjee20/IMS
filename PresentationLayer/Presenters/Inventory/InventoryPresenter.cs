@@ -4,6 +4,9 @@ using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.Inventory;
+using RavenTech_ERP.Presenters.Inventory;
+using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories.IInventory;
 using System;
 using System.Collections.Generic;
@@ -28,8 +31,30 @@ namespace PresentationLayer.Presenters.Inventory
             _view.ShowPurchase += ShowPurchase;
             _view.ShowInventory += ShowInventory;
             _view.ShowProject += ShowProject;
+            _view.ShowTargetGoals += ShowTargetGoals;
+            _view.ShowSalesReport += ShowSalesReport;
+            _view.ShowPurchaseReport += ShowPurchaseReport;
             ShowDashboard(this, EventArgs.Empty);
         }
+
+        private void ShowPurchaseReport(object? sender, EventArgs e)
+        {
+            IPurchasesReportView view = PurchasesReportView.GetInstance(_view.Guna2TabControlPage);
+            new PurchasesReportPresenter(view, _unitOfWork);
+        }
+
+        private void ShowSalesReport(object? sender, EventArgs e)
+        {
+            ISalesReportView view = SalesReportView.GetInstance(_view.Guna2TabControlPage);
+            new SalesReportPresenter(view, _unitOfWork);
+        }
+
+        private void ShowTargetGoals(object? sender, EventArgs e)
+        {
+            ITargetGoalsView view = TargetGoalsView.GetInstance(_view.Guna2TabControlPage);
+            new TargetGoalsPresenter(view, _unitOfWork);
+        }
+
         private void ShowDashboard(object? sender, EventArgs e)
         {
             IDashboardView view = DashboardView.GetInstance(_view.Guna2TabControlPage);

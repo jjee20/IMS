@@ -40,5 +40,12 @@ namespace DomainLayer.Models.Inventory
         public virtual Branch Branch { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual SalesType SalesType { get; set; }
+
+        public Shipment Shipment { get; set; }
+        public Invoice Invoice { get; set; }
+        public IEnumerable<PaymentReceive> PaymentReceive { get; set; }
+
+        [NotMapped]
+        public string InvoiceDisplay => $"{SalesOrderName}-{Customer.CustomerName}";
     }
 }

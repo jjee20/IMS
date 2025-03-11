@@ -121,16 +121,13 @@ namespace PresentationLayer.Presenters
                     _view.Message = "Customer added successfully";
                 }
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
+                _view.IsSuccessful = true; 
+                CleanviewFields();
             }
             catch (Exception ex)
             {
                 _view.IsSuccessful = false;
                 _view.Message = ex.Message;
-            }
-            finally
-            {
-                CleanviewFields();
             }
         }
         private void Search(object? sender, EventArgs e)

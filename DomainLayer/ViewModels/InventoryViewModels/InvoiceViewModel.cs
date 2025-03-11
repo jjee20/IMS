@@ -13,12 +13,12 @@ namespace DomainLayer.ViewModels.Inventory
         public int InvoiceId { get; set; }
         [Display(Name = "Invoice #")]
         public string InvoiceName { get; set; }
-        public string Shipment { get; set; }
+        [Display(Name = "Invoice Type")]
+        public string InvoiceType { get; set; }
+        public string SalesOrder { get; set; }
         [Display(Name = "Invoice Date")]
         public DateTimeOffset InvoiceDate { get; set; }
         [Display(Name = "Due Date")]
         public DateTimeOffset InvoiceDueDate { get; set; }
-        [Display(Name = "Invoice Type")]
-        public string InvoiceType { get; set; }
     }
 }

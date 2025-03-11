@@ -45,6 +45,7 @@ namespace InfastructureLayer.DataAccess.Data
         #endregion
 
         #region Inventory
+        public DbSet<TargetGoals> TargetGoals { get; set; }
         public DbSet<Bill> Bill { get; set; }
 
         public DbSet<BillType> BillType { get; set; }
@@ -72,6 +73,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<PaymentVoucher> PaymentVoucher { get; set; }
 
         public DbSet<Product> Product { get; set; }
+        public DbSet<ProductStockInLog> StockInLogs { get; set; }
 
         public DbSet<ProductType> ProductType { get; set; }
 

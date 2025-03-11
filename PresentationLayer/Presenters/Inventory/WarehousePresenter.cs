@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenters
             //Load
 
             LoadAllWarehouseList();
+            LoadAllBranchList();
 
             //Source Binding
             _view.SetWarehouseListBindingSource(WarehouseBindingSource);
@@ -150,6 +151,12 @@ namespace PresentationLayer.Presenters
         {
             WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.GetAll(includeProperties: "Branch")); ;
             WarehouseBindingSource.DataSource = WarehouseList;//Set data source.
+        }
+
+        private void LoadAllBranchList()
+        {
+            BranchList = _unitOfWork.Branch.GetAll(); ;
+            BranchBindingSource.DataSource = BranchList;//Set data source.
         }
     }
 }

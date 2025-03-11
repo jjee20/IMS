@@ -22,11 +22,15 @@ namespace PresentationLayer.Presenters.Inventory
             _unitOfWork = unitOfWork;
             _view.ShowCustomer += ShowCustomer;
             _view.ShowSalesOrder += ShowSalesOrder;
-            _view.ShowShipment += ShowShipment;
-            _view.ShowSalesInvoice += ShowSalesInvoice;
-            _view.ShowPaymentReceive += ShowPaymentReceive;
             _view.ShowSettings += ShowSettings;
+            _view.ShowWarehouse += ShowWarehouse;
             ShowSalesOrder(this, EventArgs.Empty);
+        }
+
+        private void ShowWarehouse(object? sender, EventArgs e)
+        {
+            IWarehouseView view = WarehouseView.GetInstance((TabPage)_view.Guna2TabControlPage);
+            new WarehousePresenter(view, _unitOfWork); ;
         }
 
         private void ShowCustomer(object? sender, EventArgs e)
@@ -38,21 +42,6 @@ namespace PresentationLayer.Presenters.Inventory
         {
             ISalesOrderView view = SalesOrderView.GetInstance((TabPage)_view.Guna2TabControlPage);
             new SalesOrderPresenter(view, _unitOfWork);
-        }
-        private void ShowShipment(object? sender, EventArgs e)
-        {
-            IShipmentView view = ShipmentView.GetInstance((TabPage)_view.Guna2TabControlPage);
-            new ShipmentPresenter(view, _unitOfWork);
-        }
-        private void ShowSalesInvoice(object? sender, EventArgs e)
-        {
-            IInvoiceView view = InvoiceView.GetInstance((TabPage)_view.Guna2TabControlPage);
-            new InvoicePresenter(view, _unitOfWork);
-        }
-        private void ShowPaymentReceive(object? sender, EventArgs e)
-        {
-            IPaymentReceiveView view = PaymentReceiveView.GetInstance((TabPage)_view.Guna2TabControlPage);
-            new PaymentReceivePresenter(view, _unitOfWork);
         }
         private void ShowSettings(object? sender, EventArgs e)
         {

@@ -14,10 +14,10 @@ namespace DomainLayer.Models.Inventory
         public int InvoiceId { get; set; }
         [Display(Name = "Invoice Number")]
         public string InvoiceName { get; set; }
-        [Display(Name = "Shipment")]
+        [Display(Name = "Sales Order #")]
 
-        [ForeignKey("ShipmentId")]
-        public int ShipmentId { get; set; }
+        [ForeignKey("SalesOrderId")]
+        public int SalesOrderId { get; set; }
         [Display(Name = "Invoice Date")]
         public DateTimeOffset InvoiceDate { get; set; }
         [Display(Name = "Invoice Due Date")]
@@ -26,7 +26,7 @@ namespace DomainLayer.Models.Inventory
 
         [ForeignKey("InvoiceTypeId")]
         public int InvoiceTypeId { get; set; }
-        public virtual Shipment Shipment { get; set; }
+        public virtual SalesOrder SalesOrder { get; set; }
         public virtual InvoiceType InvoiceType { get; set; }
     }
 }

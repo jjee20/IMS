@@ -1102,14 +1102,12 @@ namespace PresentationLayer.Views.UserControls
             chartFont12.Size = 9;
             chartFont12.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
             chartMonthlySales.Tooltips.TitleFont = chartFont12;
-            chartMonthlySales.XAxes.Display = false;
             grid4.Color = Color.Transparent;
             grid4.ZeroLineColor = Color.Transparent;
             chartMonthlySales.XAxes.GridLines = grid4;
             chartFont13.FontName = "Arial";
             tick4.Font = chartFont13;
             chartMonthlySales.XAxes.Ticks = tick4;
-            chartMonthlySales.YAxes.Display = false;
             grid5.Color = Color.Transparent;
             chartMonthlySales.YAxes.GridLines = grid5;
             chartFont14.FontName = "Arial";
@@ -1181,14 +1179,12 @@ namespace PresentationLayer.Views.UserControls
             chartFont20.Size = 9;
             chartFont20.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
             chartDailySales.Tooltips.TitleFont = chartFont20;
-            chartDailySales.XAxes.Display = false;
             grid7.Color = Color.Transparent;
             grid7.ZeroLineColor = Color.Transparent;
             chartDailySales.XAxes.GridLines = grid7;
             chartFont21.FontName = "Arial";
             tick7.Font = chartFont21;
             chartDailySales.XAxes.Ticks = tick7;
-            chartDailySales.YAxes.Display = false;
             grid8.Color = Color.Transparent;
             chartDailySales.YAxes.GridLines = grid8;
             chartFont22.FontName = "Arial";
@@ -1258,7 +1254,6 @@ namespace PresentationLayer.Views.UserControls
             chartFont28.Size = 9;
             chartFont28.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
             chartTopSelling.Tooltips.TitleFont = chartFont28;
-            chartTopSelling.XAxes.Display = false;
             grid10.Color = Color.Transparent;
             grid10.LineWidth = 0;
             grid10.ZeroLineColor = Color.Transparent;
@@ -1267,7 +1262,6 @@ namespace PresentationLayer.Views.UserControls
             chartFont29.FontName = "Arial";
             tick10.Font = chartFont29;
             chartTopSelling.XAxes.Ticks = tick10;
-            chartTopSelling.YAxes.Display = false;
             grid11.Color = Color.Transparent;
             grid11.LineWidth = 0;
             grid11.ZeroLineWidth = 0;
@@ -1318,7 +1312,6 @@ namespace PresentationLayer.Views.UserControls
             // 
             chartProjectExpenseDistribution.BackColor = Color.WhiteSmoke;
             chartProjectExpenseDistribution.Dock = DockStyle.Fill;
-            chartProjectExpenseDistribution.Legend.Display = false;
             chartFont33.FontName = "Arial";
             chartProjectExpenseDistribution.Legend.LabelFont = chartFont33;
             chartProjectExpenseDistribution.Location = new Point(14, 14);

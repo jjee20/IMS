@@ -10,6 +10,8 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public int TotalDays { get; set; }
         [Display(Name = "Days Present")]
         public double DaysPresent { get; set; }
+        [Display(Name = "Total Overtime (hrs)")]
+        public double TotalOvertime { get; set; }
         [Display(Name = "Days Late")]
         public int DaysLate { get; set; }
         [Display(Name = "Days Early-out")]

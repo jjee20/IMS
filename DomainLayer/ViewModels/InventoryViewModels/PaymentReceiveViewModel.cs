@@ -13,8 +13,8 @@ namespace DomainLayer.ViewModels.Inventory
         public int PaymentReceiveId { get; set; }
         [Display(Name = "Payment Receive #")]
         public string PaymentReceiveName { get; set; }
-        [Display(Name = "Invoice #")]
-        public string Invoice { get; set; }
+        [Display(Name = "Sales Order #")]
+        public string SalesOrder { get; set; }
         [Display(Name = "Payment Date")]
         public DateTimeOffset PaymentDate { get; set; }
         [Display(Name = "Payment Type")]

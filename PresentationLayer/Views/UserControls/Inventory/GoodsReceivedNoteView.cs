@@ -1,9 +1,8 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
-using MaterialSkin;
-using PresentationLayer.Presenters;
-using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.Helpers;
+using MaterialSkin.Controls;
+using PresentationLayer;
+using ServiceLayer.Services.IRepositories.IInventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,208 +13,61 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PresentationLayer.Views.UserControls
+namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class GoodsReceivedNoteView : UserControl, IGoodsReceivedNoteView
+    public partial class GoodsReceivedNoteView : MaterialForm
     {
-        private int id;
-        private string message;
-        private bool isSuccessful;
-        public bool isEdit;
-        public GoodsReceivedNoteView()
+        private readonly PurchaseOrder _purchaseOrder;
+        private readonly IUnitOfWork _unitOfWork;
+        public GoodsReceivedNoteView(PurchaseOrder purchaseOrder, IUnitOfWork unitOfWork)
         {
             InitializeComponent();
-            Guna2TabControl1.TabPages.Remove(tabPage2);
-            AssociateAndRaiseViewEvents();
+            _purchaseOrder = purchaseOrder;
+            _unitOfWork = unitOfWork;
         }
 
-        private void AssociateAndRaiseViewEvents()
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
-            //Add New
-            btnAdd.Click += delegate
+            try
             {
-                AddNewEvent?.Invoke(this, EventArgs.Empty);
-                tabPage2.Text = "Add New";
-                if (Guna2TabControl1.SelectedTab == tabPage1)
+                var grnList = _purchaseOrder.GoodsReceivedNote;
+                var grns = new List<GoodsReceivedNote>();
+                if (grnList.Any()) grns.AddRange(grnList);
+
+                var grn = new GoodsReceivedNote
                 {
-                    Guna2TabControl1.TabPages.Remove(tabPage1);
-                    Guna2TabControl1.TabPages.Add(tabPage2);
-                }
-                else
-                {
-                    Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Add(tabPage2);
-                }
-                btnReturn.Visible = true;
-            };
-            //Save changes
-            btnSave.Click += delegate
-            {
-                SaveEvent?.Invoke(this, EventArgs.Empty);
-                if (isSuccessful)
-                {
-                    Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Add(tabPage1);
-                    btnReturn.Visible = false;
-                }
-                MessageBox.Show(Message);
-            };
-            txtSearch.TextChanged += (s, e) =>
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-            };
-            //Edit
-            btnEdit.Click += delegate
-            {
-                if (Guna2TabControl1.SelectedTab == tabPage1)
-                {
-                    tabPage2.Text = "Edit Details";
-                    Guna2TabControl1.TabPages.Remove(tabPage1);
-                    Guna2TabControl1.TabPages.Add(tabPage2);
-                }
-                EditEvent?.Invoke(this, EventArgs.Empty);
-                btnReturn.Visible = true;
-            };
-            //Delete
-            btnDelete.Click += delegate
-            {
-                var result = MessageBox.Show("Are you sure you want to delete the selected goods received note?", "Warning",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    GoodsReceivedNoteName = Guid.NewGuid().ToString(),
+                    GRNDate = txtGRNDate.Value,
+                    VendorDONumber = txtVendorDONumber.Text,
+                    VendorInvoiceNumber = txtVendorInvoiceNumber.Text,
+                    Remarks = txtRemarks.Text,
+                    WarehouseId = (int)txtWarehouse.SelectedValue,
+                    IsFullReceive = txtFullReceive.Checked
+                };
 
-                if (result == DialogResult.Yes)
-                {
-                    // Invoke the DeleteEvent with the selected row as an argument
-                    DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show(Message);
-                }
-            };
-            //Print
-            btnPrint.Click += delegate
-            {
-                PrintEvent?.Invoke(this, EventArgs.Empty);
-            };
-            //Refresh
-            btnReturn.Click += delegate
-            {
-                RefreshEvent?.Invoke(this, EventArgs.Empty);
-                Guna2TabControl1.TabPages.Remove(tabPage2);
-                Guna2TabControl1.TabPages.Add(tabPage1);
-            };
-        }
+                grns.Add(grn);
 
-        //Properties
-        public int GoodsReceivedNoteId
-        {
-            get { return id; }
-            set { id = value; }
-        }
+                _purchaseOrder.GoodsReceivedNote = grns;
+                _unitOfWork.PurchaseOrder.Detach(_purchaseOrder);
+                _unitOfWork.PurchaseOrder.Update(_purchaseOrder);
+                _unitOfWork.Save();
 
-        public string GoodsReceivedNoteName
-        {
-            get { return txtName.Text; }
-            set { txtName.Text = value; }
-        }
-        public int PurchaseOrderId
-        {
-            get { return (int)txtPurchaseOrder.SelectedValue; }
-            set { txtPurchaseOrder.Text = value.ToString(); }
-        }
-        public DateTimeOffset GRNDate
-        {
-            get { return txtGRNDate.Value; }
-            set { txtGRNDate.Text = value.ToString(); }
-        }
-        public string VendorDONumber
-        {
-            get { return txtVendorDONumber.Text.Trim().ToString(); }
-            set { txtVendorDONumber.Text = value; }
-        }
-        public string VendorInvoiceNumber
-        {
-            get { return txtVendorInvoiceNumber.Text.Trim().ToString(); }
-            set { txtVendorInvoiceNumber.Text = value; }
-        }
-        public int WarehouseId
-        {
-            get { return (int)txtWarehouse.SelectedValue; }
-            set { txtWarehouse.Text = value.ToString(); }
-        }
-        public bool IsFullReceive
-        {
-            get { return txtIsFullReceive.Checked; }
-            set { txtIsFullReceive.Checked = value; }
-        }
-        public bool IsEdit
-        {
-            get { return isEdit; }
-            set { isEdit = value; }
-        }
-
-        public bool IsSuccessful
-        {
-            get { return isSuccessful; }
-            set { isSuccessful = value; }
-        }
-
-        public string Message
-        {
-            get { return message; }
-            set { message = value; }
-        }
-
-        public string SearchValue
-        {
-            get { return txtSearch.Text; }
-            set { txtSearch.Text = value; }
-        }
-
-        public void SetGoodsReceivedNoteListBindingSource(BindingSource GoodsReceivedNoteList)
-        {
-            dgList.DataSource = GoodsReceivedNoteList;
-            DataGridHelper.ApplyDisplayNames<GoodsReceiveNoteViewModel>(GoodsReceivedNoteList, dgList);
-        }
-        public void SetPurchaseOrderListBindingSource(BindingSource PurchaseOrderBindingSource)
-        {
-            txtPurchaseOrder.DataSource = PurchaseOrderBindingSource;
-            txtPurchaseOrder.DisplayMember = "PurchaseOrderName";
-            txtPurchaseOrder.ValueMember = "PurchaseOrderId";
-        }
-        public void SetWarehouseListBindingSource(BindingSource WarehouseBindingSource)
-        {
-            txtWarehouse.DataSource = WarehouseBindingSource;
-            txtWarehouse.DisplayMember = "WarehouseName";
-            txtWarehouse.ValueMember = "WarehouseId";
-        }
-
-        //public void SetAddressBindingSource(List<string> barangayBindingSource,
-        //    List<string> municipalityBindingSource,
-        //    List<string> provinceBindingSource,
-        //    List<string> regionBindingSource)
-        //{
-        //    txtBarangay.DataSource = barangayBindingSource;
-        //    txtMunicipality.DataSource = municipalityBindingSource;
-        //    txtProvince.DataSource = provinceBindingSource;
-        //    txtRegion.DataSource = regionBindingSource;
-        //}
-
-        public event EventHandler AddNewEvent;
-        public event EventHandler SaveEvent;
-        public event EventHandler SearchEvent;
-        public event EventHandler EditEvent;
-        public event EventHandler DeleteEvent;
-        public event EventHandler PrintEvent;
-        public event EventHandler RefreshEvent;
-
-        private static GoodsReceivedNoteView? instance;
-        public static GoodsReceivedNoteView GetInstance(TabPage parentContainer)
-        {
-            if (instance == null || instance.IsDisposed)
-            {
-                instance = new GoodsReceivedNoteView();
-                parentContainer.Controls.Add(instance);
-                instance.Dock = DockStyle.Fill;
+                MessageBox.Show("Goods Received Note created successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            return instance;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void linkGRNs_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var grnList = Program.Mapper.Map<IEnumerable<GoodsReceiveNoteViewModel>>(_purchaseOrder.GoodsReceivedNote);
+            var bindingSource = new BindingSource();
+            bindingSource.DataSource = grnList;
+            var grns = new GoodsReceivedNoteListVView(bindingSource, _unitOfWork);
+            grns.Text = $"GRN List for P.O. #: {_purchaseOrder.PurchaseOrderName}";
+            grns.ShowDialog();
         }
     }
 }

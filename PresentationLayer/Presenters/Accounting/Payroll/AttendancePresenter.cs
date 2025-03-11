@@ -109,6 +109,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.TimeOut = attendance.TimeOut;
             _view.Date = attendance.Date;
             _view.IsPresent = attendance.IsPresent;
+            _view.IsHalfDay = attendance.IsHalfDay;
             _view.HoursWorked = attendance.HoursWorked;
             _view.ProjectId = attendance.ProjectId;
         }
@@ -215,6 +216,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             model.TimeIn = _view.TimeIn;
             model.TimeOut = _view.TimeOut;
             model.Date = _view.Date;
+            model.IsHalfDay = _view.IsHalfDay;
             model.IsPresent = _view.IsPresent;
             model.HoursWorked = _view.HoursWorked;
 
@@ -305,8 +307,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
-            var employees = _unitOfWork.Employee.GetAll(c => c.Attendances.Any(c => c.IsPresent == true || c.IsPresent == false),
-                includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
+            var employees = _unitOfWork.Employee.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
             var summaryList = new List<AttendanceViewModel>();
 
             int totalDays = 0;
@@ -322,7 +323,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 currentDate = currentDate.AddDays(1);
             } while (currentDate <= endDate.Date);
 
-            foreach (var employee in employees)
+            foreach (var employee in employees.OrderBy(c => c.LastName))
             {
                 var attendances = employee.Attendances
                     .Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date)
@@ -340,6 +341,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 double daysPresent = attendances.Count(a => a.IsPresent && !a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves));
                 double daysHalfDayPresent = attendances.Count(a => a.IsPresent && a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
                 double totalPresentDays = daysPresent + daysHalfDayPresent;
+                double totalOvertime = attendances.Sum(c => employee.Shift.RegularHours > c.HoursWorked ? 0 : c.HoursWorked - employee.Shift.RegularHours);
                 int daysLate = attendances.Count(a => a.TimeIn > shiftStartTime && !a.IsHalfDay);
                 int daysEarlyOut = attendances.Count(a => a.TimeOut.Hours < shiftEndTime.Hours && !a.IsHalfDay);
                 int daysOnLeave = approvedLeaves.Sum(l => (l.EndDate - l.StartDate).Days + 1);
@@ -351,13 +353,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     Employee = $"{employee.LastName}, {employee.FirstName}",
                     TotalDays = totalDays,
                     DaysPresent = totalPresentDays,
+                    TotalOvertime = totalOvertime,
                     DaysLate = daysLate,
                     DaysEarlyOut = daysEarlyOut,
                     DaysAbsent = daysAbsent,
                     DaysOnLeave = daysOnLeave
                 });
             }
-            return summaryList.OrderBy(c => c.Employee).ToList();
+            return summaryList.ToList();
         }
 
         private bool IsCoveredByLeave(DateTime date, IEnumerable<Leave> approvedLeaves)
@@ -373,7 +376,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             IndividualAttendanceList = Program.Mapper.Map<IEnumerable<IndividualAttendanceViewModel>>(_unitOfWork.Attendance.GetAll(c => c.EmployeeId == id &&
                 c.Date.Date >= _view.StartDate.Date && c.Date.Date <= _view.EndDate.Date, includeProperties: "Project,Employee"));
-            IndividualAttendanceBindingSource.DataSource = IndividualAttendanceList.OrderBy(c => c.Date);//Set data source.
+            IndividualAttendanceBindingSource.DataSource = IndividualAttendanceList;//Set data source.
         }
         private void LoadAllEmployeeList()
         {

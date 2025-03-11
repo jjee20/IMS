@@ -21,9 +21,6 @@ namespace PresentationLayer.Presenters.Inventory
             _view = view;
             _unitOfWork = unitOfWork;
             _view.ShowPurchaseOrder += ShowPurchaseOrder;
-            _view.ShowGoodsReceiveNote += ShowGoodsReceiveNote;
-            _view.ShowBill += ShowBill;
-            _view.ShowPaymentVoucher += ShowPaymentVoucher;
             _view.ShowSettings += ShowSettings;
             _view.ShowVendor += ShowVendor;
             ShowPurchaseOrder(this, EventArgs.Empty);
@@ -39,21 +36,6 @@ namespace PresentationLayer.Presenters.Inventory
         {
             IPurchaseOrderView view = PurchaseOrderView.GetInstance((TabPage)_view.Guna2TabControlPage);
             new PurchaseOrderPresenter(view, _unitOfWork);
-        }
-        private void ShowGoodsReceiveNote(object? sender, EventArgs e)
-        {
-            IGoodsReceivedNoteView view = GoodsReceivedNoteView.GetInstance((TabPage)_view.Guna2TabControlPage);
-            new GoodsReceivedNotePresenter(view, _unitOfWork);
-        }
-        private void ShowBill(object? sender, EventArgs e)
-        {
-            IBillView view = BillView.GetInstance((TabPage)_view.Guna2TabControlPage);
-            new BillPresenter(view, _unitOfWork);
-        }
-        private void ShowPaymentVoucher(object? sender, EventArgs e)
-        {
-            IPaymentVoucherView view = PaymentVoucherView.GetInstance((TabPage)_view.Guna2TabControlPage);
-            new PaymentVoucherPresenter(view, _unitOfWork);
         }
         private void ShowSettings(object? sender, EventArgs e)
         {

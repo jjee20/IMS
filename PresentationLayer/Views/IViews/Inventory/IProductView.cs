@@ -9,9 +9,11 @@ namespace PresentationLayer.Views.IViews
         string ProductCode { get; set; }
         string Barcode { get; set; }
         string Description { get; set; }
+        string Brand { get; set; }
+        string PSize { get; set; }
+        string PColor { get; set; }
         int UnitOfMeasureId { get; set; }
         int ProductTypeId { get; set; }
-        int StockQuantity { get; set; }
         int ReorderLevel { get; set; }
         double DefaultBuyingPrice { get; set; }
         double DefaultSellingPrice { get; set; }

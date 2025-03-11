@@ -55,6 +55,18 @@ namespace PresentationLayer.Views
                 {
                     ShowProject?.Invoke(this, EventArgs.Empty);
                 }
+                else if (tcMain.SelectedTab == tbTargetGoals)
+                {
+                    ShowTargetGoals?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbSalesReport)
+                {
+                    ShowSalesReport?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbPurchaseReport)
+                {
+                    ShowPurchaseReport?.Invoke(this, EventArgs.Empty);
+                }
             };
         }
         public TabPage Guna2TabControlPage
@@ -77,5 +89,8 @@ namespace PresentationLayer.Views
         public event EventHandler ShowPurchase;
         public event EventHandler ShowInventory;
         public event EventHandler ShowProject;
+        public event EventHandler ShowTargetGoals;
+        public event EventHandler ShowSalesReport;
+        public event EventHandler ShowPurchaseReport;
     }
 }

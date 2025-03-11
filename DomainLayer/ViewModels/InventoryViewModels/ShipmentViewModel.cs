@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using DomainLayer.Models;
+using DomainLayer.Models.Inventory;
 
 namespace DomainLayer.ViewModels.Inventory
 {
@@ -21,7 +22,9 @@ namespace DomainLayer.ViewModels.Inventory
         [Display(Name = "Shipment Type")]
         public string ShipmentType { get; set; }
         public string Warehouse { get; set; }
-        [Display(Name = "Full Shipment")]
+        [Display(Name = "Full Shipment")]   
         public bool IsFullShipment { get; set; } = true;
+
+        public SalesOrder SalesOrderDetails { get; set; }
     }
 }

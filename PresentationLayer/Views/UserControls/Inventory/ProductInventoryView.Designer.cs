@@ -32,12 +32,16 @@
             tbProduct = new TabPage();
             tbProductType = new TabPage();
             tbUnitOfMeasure = new TabPage();
+            tbStockIn = new TabPage();
+            tbStockMonitoring = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
             // tcMain
             // 
             tcMain.Controls.Add(tbProduct);
+            tcMain.Controls.Add(tbStockIn);
+            tcMain.Controls.Add(tbStockMonitoring);
             tcMain.Controls.Add(tbProductType);
             tcMain.Controls.Add(tbUnitOfMeasure);
             tcMain.Dock = DockStyle.Fill;
@@ -74,7 +78,7 @@
             tbProduct.Name = "tbProduct";
             tbProduct.Size = new Size(1348, 653);
             tbProduct.TabIndex = 2;
-            tbProduct.Text = "Product";
+            tbProduct.Text = "Product/Service";
             tbProduct.UseVisualStyleBackColor = true;
             // 
             // tbProductType
@@ -83,7 +87,7 @@
             tbProductType.Margin = new Padding(3, 2, 3, 2);
             tbProductType.Name = "tbProductType";
             tbProductType.Padding = new Padding(3, 2, 3, 2);
-            tbProductType.Size = new Size(1660, 686);
+            tbProductType.Size = new Size(1348, 653);
             tbProductType.TabIndex = 0;
             tbProductType.Text = "Product Type";
             tbProductType.UseVisualStyleBackColor = true;
@@ -94,10 +98,29 @@
             tbUnitOfMeasure.Margin = new Padding(3, 2, 3, 2);
             tbUnitOfMeasure.Name = "tbUnitOfMeasure";
             tbUnitOfMeasure.Padding = new Padding(3, 2, 3, 2);
-            tbUnitOfMeasure.Size = new Size(1660, 686);
+            tbUnitOfMeasure.Size = new Size(1348, 653);
             tbUnitOfMeasure.TabIndex = 1;
             tbUnitOfMeasure.Text = "Unit Of Measure";
             tbUnitOfMeasure.UseVisualStyleBackColor = true;
+            // 
+            // tbStockIn
+            // 
+            tbStockIn.Location = new Point(4, 44);
+            tbStockIn.Name = "tbStockIn";
+            tbStockIn.Padding = new Padding(3);
+            tbStockIn.Size = new Size(1348, 653);
+            tbStockIn.TabIndex = 3;
+            tbStockIn.Text = "Stock In Log";
+            tbStockIn.UseVisualStyleBackColor = true;
+            // 
+            // tbStockMonitoring
+            // 
+            tbStockMonitoring.Location = new Point(4, 44);
+            tbStockMonitoring.Name = "tbStockMonitoring";
+            tbStockMonitoring.Size = new Size(1348, 653);
+            tbStockMonitoring.TabIndex = 4;
+            tbStockMonitoring.Text = "Stock Monitoring";
+            tbStockMonitoring.UseVisualStyleBackColor = true;
             // 
             // ProductInventoryView
             // 
@@ -116,5 +139,7 @@
         private TabPage tbProductType;
         private TabPage tbUnitOfMeasure;
         private TabPage tbProduct;
+        private TabPage tbStockIn;
+        private TabPage tbStockMonitoring;
     }
 }

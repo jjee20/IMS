@@ -46,6 +46,14 @@ namespace PresentationLayer.Views.UserControls
                     Guna2TabControl1.TabPages.Add(tabPage2);
                     btnReturn.Visible = true;
                 }
+            }; 
+            txtStartDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
+            txtEndDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
             };
             //Save changes
             btnSave.Click += delegate
@@ -93,6 +101,10 @@ namespace PresentationLayer.Views.UserControls
             {
                 PrintEvent?.Invoke(this, EventArgs.Empty);
             };
+            btnInvoice.Click += delegate
+            {
+                InvoiceEvent?.Invoke(this, EventArgs.Empty);
+            };
             //Refresh
             btnReturn.Click += delegate
             {
@@ -120,10 +132,20 @@ namespace PresentationLayer.Views.UserControls
             {
                 FreightEvent?.Invoke(this, EventArgs.Empty);
             };
+            
+            btnPayment.Click += delegate
+            {
+                PaymentEvent?.Invoke(this, EventArgs.Empty);
+            };
 
             dgList.CellDoubleClick += (sender, e) =>
             {
                 PrintSOEvent?.Invoke(this, e);
+            };
+
+            dgOrderLine.CellEndEdit += (sender, e) =>
+            {
+                UpdateComputationEvent?.Invoke(this, e);
             };
 
             dgOrderLine.CellDoubleClick += (sender, e) =>
@@ -151,6 +173,16 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
+        }
+        public DateTime StartDate
+        {
+            get { return txtStartDate.Value; }
+            set { txtStartDate.Text = value.ToString(); }
+        }
+        public DateTime EndDate
+        {
+            get { return txtEndDate.Value; }
+            set { txtEndDate.Text = value.ToString(); }
         }
         public int BranchId
         {
@@ -242,12 +274,42 @@ namespace PresentationLayer.Views.UserControls
                 DataGridHelper.ApplyDisplayNames<SalesOrderLineViewModel>(_salesOrderLineBindingSource, dgOrderLine);
             }
         }
+        public int ShipmentId
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string ShipmentName
+        {
+            get { return txtName.Text; }
+            set { txtName.Text = value; }
+        }
+        public DateTimeOffset ShipmentDate
+        {
+            get { return txtShipmentDate.Value; }
+            set { txtShipmentDate.Text = value.ToString(); }
+        }
+        public int ShipmentTypeId
+        {
+            get { return (int)txtShipmentType.SelectedValue; }
+            set { txtShipmentType.Text = value.ToString(); }
+        }
+        public int WarehouseId
+        {
+            get { return (int)txtWarehouse.SelectedValue; }
+            set { txtWarehouse.Text = value.ToString(); }
+        }
+        public bool IsFullShipment
+        {
+            get { return txtIsFullShipment.Checked; }
+            set { txtIsFullShipment.Checked = value; }
+        }
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
-
         public bool IsSuccessful
         {
             get { return isSuccessful; }
@@ -304,10 +366,27 @@ namespace PresentationLayer.Views.UserControls
             get { return btnNonStock.Checked; }
             set { btnNonStock.Checked = value; }
         }
+        public bool NoShipment
+        {
+            get { return txtShipment.Checked; }
+            set { txtShipment.Checked = value; }
+        }
         public string NonStockProductName
         {
             get { return txtNonStock.Text; }
             set { txtNonStock.Text = value; }
+        }
+        public void SetShipmentTypeListBindingSource(BindingSource ShipmentTypeBindingSource)
+        {
+            txtShipmentType.DataSource = ShipmentTypeBindingSource;
+            txtShipmentType.DisplayMember = "ShipmentTypeName";
+            txtShipmentType.ValueMember = "ShipmentTypeId";
+        }
+        public void SetWarehouseListBindingSource(BindingSource WarehouseListBindingSource)
+        {
+            txtWarehouse.DataSource = WarehouseListBindingSource;
+            txtWarehouse.DisplayMember = "WarehouseName";
+            txtWarehouse.ValueMember = "WarehouseId";
         }
         public void SetSalesOrderListBindingSource(BindingSource SalesOrderList)
         {
@@ -355,8 +434,11 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ProductAddEvent;
         public event EventHandler PaymentDiscountEvent;
         public event EventHandler FreightEvent;
+        public event EventHandler InvoiceEvent;
+        public event EventHandler PaymentEvent;
         public event DataGridViewCellEventHandler PrintSOEvent;
         public event DataGridViewCellEventHandler DeleteProductEvent;
+        public event DataGridViewCellEventHandler UpdateComputationEvent;
 
         private static SalesOrderView? instance;
         public static SalesOrderView GetInstance(TabPage parentContainer)
@@ -370,7 +452,7 @@ namespace PresentationLayer.Views.UserControls
             return instance;
         }
 
-        private void btnNonStock_CheckedChanged(object sender, EventArgs e)
+        private void btnNonStock_CheckedChanged_1(object sender, EventArgs e)
         {
             if (btnNonStock.Checked)
             {
@@ -384,14 +466,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        private void dgOrderLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void dgOrderLine_CellEndEdit_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgOrderLine.Columns["Price"].Index || e.ColumnIndex == dgOrderLine.Columns["Quantity"].Index)
+            if (e.ColumnIndex == dgOrderLine.Columns["Price"].Index || e.ColumnIndex == dgOrderLine.Columns["Quantity"].Index || e.ColumnIndex == dgOrderLine.Columns["DiscountPercentage"].Index)
             {
                 // Get the value from Column1
                 var editedValue = dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value;
                 var qtyValue = dgOrderLine.Rows[e.RowIndex].Cells["Quantity"].Value;
-                var discountValue = dgOrderLine.Rows[e.RowIndex].Cells["Discount"].Value;
+                var discountValue = dgOrderLine.Rows[e.RowIndex].Cells["DiscountPercentage"].Value;
 
                 // Perform some computation or logic (example: doubling the value)
                 if (int.TryParse(editedValue?.ToString(), out int result))
@@ -402,7 +484,7 @@ namespace PresentationLayer.Views.UserControls
                         {
                             // Update the value in Column2
                             var subTotal = result * qtyResult;
-                            dgOrderLine.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal - (subTotal * discountResult);
+                            dgOrderLine.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal - (subTotal * discountResult / 100);
                         }
                     }
                 }
@@ -412,6 +494,11 @@ namespace PresentationLayer.Views.UserControls
                     dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value = "Invalid";
                 }
             }
+        }
+
+        private void txtShipment_CheckedChanged(object sender, EventArgs e)
+        {
+            shipmentPanel.Visible = txtShipment.Checked ? false : true;
         }
     }
 }

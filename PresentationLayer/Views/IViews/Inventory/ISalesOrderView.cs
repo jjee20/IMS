@@ -26,11 +26,17 @@ namespace PresentationLayer.Views.IViews
         bool IsSuccessful { get; set; }
         string Message { get; set; }
         string SearchValue { get; set; }
-
+        int ShipmentId { get; set; }
+        string ShipmentName { get; set; }
+        DateTimeOffset ShipmentDate { get; set; }
+        int ShipmentTypeId { get; set; }
+        int WarehouseId { get; set; }
+        bool IsFullShipment { get; set; }
         int ProductId { get; set; }
         double ProductQuantity { get; set; }
         double ProductDiscount { get; set; }
         bool NonStock { get; set; }
+        bool NoShipment { get; set; }
         string NonStockProductName { get; set; }
 
         event EventHandler AddNewEvent;
@@ -43,8 +49,11 @@ namespace PresentationLayer.Views.IViews
         event EventHandler ProductAddEvent;
         event EventHandler PaymentDiscountEvent;
         event EventHandler FreightEvent;
+        event EventHandler InvoiceEvent;
+        event EventHandler PaymentEvent;
         event DataGridViewCellEventHandler PrintSOEvent;
-        event DataGridViewCellEventHandler DeleteProductEvent;
+        event DataGridViewCellEventHandler DeleteProductEvent; 
+        event DataGridViewCellEventHandler UpdateComputationEvent;
 
         void SetSalesOrderListBindingSource(BindingSource SalesOrderList);
         void SetSalesOrderLineListBindingSource(BindingSource SalesOrderLineList);
@@ -52,5 +61,7 @@ namespace PresentationLayer.Views.IViews
         void SetBranchListBindingSource(BindingSource BranchBindingSource);
         void SetCustomerListBindingSource(BindingSource CustomerBindingSource);
         void SetProductListBindingSource(BindingSource ProductBindingSource);
+        void SetShipmentTypeListBindingSource(BindingSource ShipmentTypeBindingSource);
+        void SetWarehouseListBindingSource(BindingSource WarehouseBindingSource);
     }
 }
