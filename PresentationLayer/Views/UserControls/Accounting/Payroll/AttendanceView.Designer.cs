@@ -64,6 +64,7 @@ namespace PresentationLayer.Views.UserControls
             dgList = new Guna2DataGridView();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            txtHalfDay = new MaterialSkin.Controls.MaterialSwitch();
             txtEmployee = new Guna2ComboBox();
             txtProject = new Guna2ComboBox();
             guna2HtmlLabel8 = new Guna2HtmlLabel();
@@ -260,6 +261,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             materialCard2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(txtHalfDay);
             materialCard2.Controls.Add(txtEmployee);
             materialCard2.Controls.Add(txtProject);
             materialCard2.Controls.Add(guna2HtmlLabel8);
@@ -282,6 +284,22 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Padding = new Padding(16, 19, 16, 19);
             materialCard2.Size = new Size(1278, 437);
             materialCard2.TabIndex = 0;
+            // 
+            // txtHalfDay
+            // 
+            txtHalfDay.Anchor = AnchorStyles.None;
+            txtHalfDay.AutoSize = true;
+            txtHalfDay.Depth = 0;
+            txtHalfDay.Location = new Point(826, 351);
+            txtHalfDay.Margin = new Padding(0);
+            txtHalfDay.MouseLocation = new Point(-1, -1);
+            txtHalfDay.MouseState = MaterialSkin.MouseState.HOVER;
+            txtHalfDay.Name = "txtHalfDay";
+            txtHalfDay.Ripple = true;
+            txtHalfDay.Size = new Size(126, 37);
+            txtHalfDay.TabIndex = 30;
+            txtHalfDay.Text = "Half-day?";
+            txtHalfDay.UseVisualStyleBackColor = true;
             // 
             // txtEmployee
             // 
@@ -1157,5 +1175,6 @@ namespace PresentationLayer.Views.UserControls
         private Guna2DateTimePicker txtStartDate;
         private Label label1;
         private Guna2DateTimePicker txtEndDate;
+        private MaterialSkin.Controls.MaterialSwitch txtHalfDay;
     }
 }

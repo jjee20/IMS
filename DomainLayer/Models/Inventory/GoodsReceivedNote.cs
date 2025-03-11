@@ -26,6 +26,7 @@ namespace DomainLayer.Models.Inventory
         [Display(Name = "Warehouse")]
         [ForeignKey("WarehouseId")]
         public int WarehouseId { get; set; }
+        public string Remarks { get; set; }
         [Display(Name = "Full Receive")]
         public bool IsFullReceive { get; set; } = true;
 

@@ -36,5 +36,9 @@ namespace DomainLayer.Models.Inventory
         public virtual Branch Branch { get; set; }
         public virtual Vendor Vendor { get; set; }
         public virtual PurchaseType PurchaseType { get; set; }
+
+        public virtual IEnumerable<GoodsReceivedNote> GoodsReceivedNote { get; set; }
+        public virtual Bill Bill { get; set; }
+        public virtual IEnumerable<PaymentVoucher> PaymentVoucher { get; set; }
     }
 }

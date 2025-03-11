@@ -15,8 +15,10 @@ namespace DomainLayer.ViewModels.Inventory
         public int BillId { get; set; }
         [Display(Name = "Bill / Invoice #")]
         public string BillName { get; set; }
-        [Display(Name = "GRN")]
-        public string GoodsReceivedNote { get; set; }
+        [Display(Name = "Bill Type")]
+        public string BillType { get; set; }
+        [Display(Name = "Purchase Order #")]
+        public string PurchaseOrder { get; set; }
         [Display(Name = "Vendor Delivery Order #")]
         public string VendorDONumber { get; set; }
         [Display(Name = "Vendor Bill / Invoice #")]
@@ -25,7 +27,5 @@ namespace DomainLayer.ViewModels.Inventory
         public DateTimeOffset BillDate { get; set; }
         [Display(Name = "Bill Due Date")]
         public DateTimeOffset BillDueDate { get; set; }
-        [Display(Name = "Bill Type")]
-        public string BillType { get; set; }
     }
 }

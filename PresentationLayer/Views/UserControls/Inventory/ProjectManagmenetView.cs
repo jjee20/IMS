@@ -3,6 +3,7 @@ using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
 using System;
 using System.Collections.Generic;
@@ -128,6 +129,10 @@ namespace PresentationLayer.Views.UserControls
                     MessageBox.Show(Message);
                 }
             };
+            dgOrderLine.CellEndEdit += (sender, e) =>
+            {
+                UpdateComputationEvent?.Invoke(this, e);
+            };
         }
 
         //Properties
@@ -239,10 +244,18 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+
+
         public bool NonStock
         {
             get { return btnNonStock.Checked; }
             set { btnNonStock.Checked = value; }
+        }
+
+        public double Total
+        {
+            get { return Convert.ToDouble(txtAmount.Text); }
+            set { txtAmount.Text = value.ToString("N2"); }
         }
         public string NonStockProductName
         {
@@ -278,6 +291,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler FreightEvent;
         public event DataGridViewCellEventHandler PrintSOEvent;
         public event DataGridViewCellEventHandler DeleteProductEvent;
+        public event DataGridViewCellEventHandler UpdateComputationEvent;
 
         private static ProjectManagementView? instance;
         public static ProjectManagementView GetInstance(TabPage parentContainer)
@@ -291,6 +305,36 @@ namespace PresentationLayer.Views.UserControls
             return instance;
         }
 
+        private void dgOrderLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgOrderLine.Columns["Price"].Index || e.ColumnIndex == dgOrderLine.Columns["Quantity"].Index || e.ColumnIndex == dgOrderLine.Columns["DiscountPercentage"].Index)
+            {
+                // Get the value from Column1
+                var editedValue = dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value;
+                var qtyValue = dgOrderLine.Rows[e.RowIndex].Cells["Quantity"].Value;
+                var discountValue = dgOrderLine.Rows[e.RowIndex].Cells["DiscountPercentage"].Value;
+
+                // Perform some computation or logic (example: doubling the value)
+                if (int.TryParse(editedValue?.ToString(), out int result))
+                {
+                    if (int.TryParse(qtyValue?.ToString(), out int qtyResult))
+                    {
+                        if (int.TryParse(discountValue?.ToString(), out int discountResult))
+                        {
+                            // Update the value in Column2
+                            var subTotal = result * qtyResult;
+                            dgOrderLine.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal - (subTotal * discountResult / 100);
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle invalid input (optional)
+                    dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value = "Invalid";
+                }
+            }
+        }
+
         private void btnNonStock_CheckedChanged(object sender, EventArgs e)
         {
             if (btnNonStock.Checked)
@@ -302,36 +346,6 @@ namespace PresentationLayer.Views.UserControls
             {
                 txtProduct.Visible = true;
                 txtNonStock.Visible = false;
-            }
-        }
-
-        private void dgOrderLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dgOrderLine.Columns["Price"].Index || e.ColumnIndex == dgOrderLine.Columns["Quantity"].Index)
-            {
-                // Get the value from Column1
-                var editedValue = dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value;
-                var qtyValue = dgOrderLine.Rows[e.RowIndex].Cells["Quantity"].Value;
-                var discountValue = dgOrderLine.Rows[e.RowIndex].Cells["Discount"].Value;
-
-                // Perform some computation or logic (example: doubling the value)
-                if (int.TryParse(editedValue?.ToString(), out int result))
-                {
-                    if (int.TryParse(qtyValue?.ToString(), out int qtyResult))
-                    {
-                        if (int.TryParse(discountValue?.ToString(), out int discountResult))
-                        {
-                            // Update the value in Column2
-                            var subTotal = result * qtyResult;
-                            dgOrderLine.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal - (subTotal * discountResult);
-                        }
-                    }
-                }
-                else
-                {
-                    // Handle invalid input (optional)
-                    dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value = "Invalid";
-                }
             }
         }
     }

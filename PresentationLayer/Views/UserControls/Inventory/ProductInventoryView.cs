@@ -22,6 +22,14 @@ namespace PresentationLayer.Views.UserControls
                 {
                     ShowProduct?.Invoke(this, EventArgs.Empty);
                 }
+                else if (tcMain.SelectedTab == tbStockIn)
+                {
+                    ShowStockIn?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbStockMonitoring)
+                {
+                    ShowStockMonitoring?.Invoke(this, EventArgs.Empty);
+                }
             };
         }
 
@@ -32,6 +40,8 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ShowProductType;
         public event EventHandler ShowUnitOfMeasure;
         public event EventHandler ShowProduct;
+        public event EventHandler ShowStockIn;
+        public event EventHandler ShowStockMonitoring;
 
         public static ProductInventoryView GetInstance(TabPage parentContainer)
         {

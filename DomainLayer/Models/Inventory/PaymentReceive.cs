@@ -14,10 +14,10 @@ namespace DomainLayer.Models.Inventory
         public int PaymentReceiveId { get; set; }
         [Display(Name = "Payment Number")]
         public string PaymentReceiveName { get; set; }
-        [Display(Name = "Invoice")]
+        [Display(Name = "SalesOrder")]
 
-        [ForeignKey("InvoiceId")]
-        public int InvoiceId { get; set; }
+        [ForeignKey("SalesOrderId")]
+        public int SalesOrderId { get; set; }
         public DateTimeOffset PaymentDate { get; set; }
         [Display(Name = "Payment Type")]
         [ForeignKey("PaymentTypeId")]
@@ -26,6 +26,6 @@ namespace DomainLayer.Models.Inventory
         [Display(Name = "Full Payment")]
         public bool IsFullPayment { get; set; } = true;
         public virtual PaymentType PaymentType { get; set; }
-        public virtual Invoice Invoice { get; set; }
+        public virtual SalesOrder SalesOrder { get; set; }
     }
 }

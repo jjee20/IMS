@@ -15,8 +15,8 @@ namespace DomainLayer.Models.Inventory
         [Display(Name = "Bill / Invoice Number")]
         public string BillName { get; set; }
         [Display(Name = "GRN")]
-        [ForeignKey("GoodsReceivedNoteId")]
-        public int GoodsReceivedNoteId { get; set; }
+        [ForeignKey("PurchaseOrderId")]
+        public int PurchaseOrderId { get; set; }
         [Display(Name = "Vendor Delivery Order #")]
         public string VendorDONumber { get; set; }
         [Display(Name = "Vendor Bill / Invoice #")]
@@ -29,6 +29,6 @@ namespace DomainLayer.Models.Inventory
         public int BillTypeId { get; set; }
         [ForeignKey("BillTypeId")]
         public virtual BillType BillType { get; set; }
-        public virtual GoodsReceivedNote GoodsReceivedNote { get; set; }
+        public virtual PurchaseOrder PurchaseOrder { get; set; }
     }
 }

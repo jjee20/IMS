@@ -224,6 +224,11 @@ namespace PresentationLayer.Views.UserControls
             get { return txtIsPresent.Checked; }
             set { txtIsPresent.Checked = value; }
         }
+        public bool IsHalfDay
+        {
+            get { return txtHalfDay.Checked; }
+            set { txtHalfDay.Checked = value; }
+        }
         public double HoursWorked
         {
             get { return Convert.ToDouble(txtHoursWorked.Text); }

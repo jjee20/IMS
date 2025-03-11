@@ -12,7 +12,7 @@ namespace DomainLayer.ViewModels.Inventory
     {
         [Display(Name = "Id")]
         public int ProductId { get; set; }
-        [Display(Name = "Product Item")]
+        [Display(Name = "Product/Service")]
         [Required]
         public string ProductName { get; set; }
         [Display(Name = "Code")]

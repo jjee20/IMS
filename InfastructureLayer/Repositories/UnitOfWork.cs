@@ -19,6 +19,7 @@ namespace InfastructureLayer.DataAccess.Repositories
     {
         private ApplicationDataContext _db;
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public ITargetGoalsRepository TargetGoals { get; private set; }
         public IBillRepository Bill { get; private set; }
         public IBillTypeRepository BillType { get; private set; }
         public IBranchRepository Branch { get; private set; }
@@ -63,10 +64,12 @@ namespace InfastructureLayer.DataAccess.Repositories
         public IAllowanceRepository Allowance { get; private set; }
         public IBonusRepository Bonus { get; private set; }
         public IProjectLineRepository ProjectLine { get; private set; }
+        public IProductStockInLogRepository StockInLogs { get; private set; }
         public UnitOfWork(ApplicationDataContext db)
         {
             _db = db;
             ApplicationUser ??= new ApplicationUserRepository(_db);
+            TargetGoals ??= new TargetGoalsRepository(_db);
             Bill ??= new BillRepository(_db);
             BillType ??= new BillTypeRepository(_db);
             Branch ??= new BranchRepository(_db);
@@ -111,6 +114,7 @@ namespace InfastructureLayer.DataAccess.Repositories
             Allowance ??= new AllowanceRepository(_db);
             Bonus ??= new BonusRepository(_db);
             ProjectLine ??= new ProjectLineRepository(_db);
+            StockInLogs ??= new ProductStockInLogRepository(_db);
         }
         public void Save()
         {

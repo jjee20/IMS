@@ -66,10 +66,10 @@
             tcMain.TabButtonHoverState.ForeColor = Color.White;
             tcMain.TabButtonHoverState.InnerColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonIdleState.BorderColor = Color.Empty;
-            tcMain.TabButtonIdleState.FillColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabButtonIdleState.FillColor = Color.SteelBlue;
             tcMain.TabButtonIdleState.Font = new Font("Segoe UI Semibold", 10F);
-            tcMain.TabButtonIdleState.ForeColor = Color.FromArgb(156, 160, 167);
-            tcMain.TabButtonIdleState.InnerColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabButtonIdleState.ForeColor = Color.White;
+            tcMain.TabButtonIdleState.InnerColor = Color.SteelBlue;
             tcMain.TabButtonSelectedState.BorderColor = Color.Empty;
             tcMain.TabButtonSelectedState.FillColor = Color.FromArgb(29, 37, 49);
             tcMain.TabButtonSelectedState.Font = new Font("Segoe UI Semibold", 10F);
@@ -77,7 +77,7 @@
             tcMain.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
             tcMain.TabButtonSize = new Size(180, 40);
             tcMain.TabIndex = 0;
-            tcMain.TabMenuBackColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabMenuBackColor = Color.SteelBlue;
             tcMain.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
             // 
             // tbSalesType

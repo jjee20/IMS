@@ -44,13 +44,14 @@
             tbCashBank.Margin = new Padding(3, 2, 3, 2);
             tbCashBank.Name = "tbCashBank";
             tbCashBank.Padding = new Padding(3, 2, 3, 2);
-            tbCashBank.Size = new Size(1660, 686);
+            tbCashBank.Size = new Size(1348, 653);
             tbCashBank.TabIndex = 1;
             tbCashBank.Text = "Cash Bank";
             tbCashBank.UseVisualStyleBackColor = true;
             // 
             // tbBranch
             // 
+            tbBranch.ForeColor = SystemColors.ControlText;
             tbBranch.Location = new Point(4, 44);
             tbBranch.Margin = new Padding(3, 2, 3, 2);
             tbBranch.Name = "tbBranch";
@@ -81,10 +82,10 @@
             tcMain.TabButtonHoverState.ForeColor = Color.White;
             tcMain.TabButtonHoverState.InnerColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonIdleState.BorderColor = Color.Empty;
-            tcMain.TabButtonIdleState.FillColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabButtonIdleState.FillColor = Color.SteelBlue;
             tcMain.TabButtonIdleState.Font = new Font("Segoe UI Semibold", 10F);
-            tcMain.TabButtonIdleState.ForeColor = Color.FromArgb(156, 160, 167);
-            tcMain.TabButtonIdleState.InnerColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabButtonIdleState.ForeColor = Color.White;
+            tcMain.TabButtonIdleState.InnerColor = Color.SteelBlue;
             tcMain.TabButtonSelectedState.BorderColor = Color.Empty;
             tcMain.TabButtonSelectedState.FillColor = Color.FromArgb(29, 37, 49);
             tcMain.TabButtonSelectedState.Font = new Font("Segoe UI Semibold", 10F);
@@ -92,7 +93,7 @@
             tcMain.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
             tcMain.TabButtonSize = new Size(180, 40);
             tcMain.TabIndex = 0;
-            tcMain.TabMenuBackColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabMenuBackColor = Color.SteelBlue;
             tcMain.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
             // 
             // tbPaymentType
@@ -100,7 +101,7 @@
             tbPaymentType.Location = new Point(4, 44);
             tbPaymentType.Margin = new Padding(3, 2, 3, 2);
             tbPaymentType.Name = "tbPaymentType";
-            tbPaymentType.Size = new Size(1660, 686);
+            tbPaymentType.Size = new Size(1348, 653);
             tbPaymentType.TabIndex = 2;
             tbPaymentType.Text = "Payment Type";
             tbPaymentType.UseVisualStyleBackColor = true;
@@ -110,7 +111,7 @@
             tbVendorType.Location = new Point(4, 44);
             tbVendorType.Margin = new Padding(3, 2, 3, 2);
             tbVendorType.Name = "tbVendorType";
-            tbVendorType.Size = new Size(1660, 686);
+            tbVendorType.Size = new Size(1348, 653);
             tbVendorType.TabIndex = 3;
             tbVendorType.Text = "Vendor Type";
             tbVendorType.UseVisualStyleBackColor = true;
@@ -120,7 +121,7 @@
             tbPurchaseType.Location = new Point(4, 44);
             tbPurchaseType.Margin = new Padding(3, 2, 3, 2);
             tbPurchaseType.Name = "tbPurchaseType";
-            tbPurchaseType.Size = new Size(1660, 686);
+            tbPurchaseType.Size = new Size(1348, 653);
             tbPurchaseType.TabIndex = 4;
             tbPurchaseType.Text = "Purchase Type";
             tbPurchaseType.UseVisualStyleBackColor = true;
@@ -130,7 +131,7 @@
             tbBillType.Location = new Point(4, 44);
             tbBillType.Margin = new Padding(3, 2, 3, 2);
             tbBillType.Name = "tbBillType";
-            tbBillType.Size = new Size(1660, 686);
+            tbBillType.Size = new Size(1348, 653);
             tbBillType.TabIndex = 5;
             tbBillType.Text = "Bill Type";
             tbBillType.UseVisualStyleBackColor = true;

@@ -12,6 +12,8 @@ namespace PresentationLayer.Views.IViews
         int VendorId { get; set; }
         DateTimeOffset OrderDate { get; set; }
         DateTimeOffset DeliveryDate { get; set; }
+        DateTime StartDate { get; set; }
+        DateTime EndDate { get; set; }
         int PurchaseTypeId { get; set; }
         string Remarks { get; set; }
         double Amount { get; set; }
@@ -42,8 +44,12 @@ namespace PresentationLayer.Views.IViews
         event EventHandler ProductAddEvent;
         event EventHandler PaymentDiscountEvent;
         event EventHandler FreightEvent;
-        event DataGridViewCellEventHandler PrintSOEvent;
+        event EventHandler GRNEvent;
+        event EventHandler BillEvent;
+        event EventHandler PaymentVoucherEvent;
+        event DataGridViewCellEventHandler PrintPOEvent;
         event DataGridViewCellEventHandler DeleteProductEvent;
+        event DataGridViewCellEventHandler UpdateComputationEvent;
 
         void SetPurchaseOrderListBindingSource(BindingSource PurchaseOrderList);
         void SetPurchaseOrderLineListBindingSource(BindingSource PurchaseOrderLineList);

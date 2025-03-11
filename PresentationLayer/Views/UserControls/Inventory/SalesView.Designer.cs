@@ -30,10 +30,8 @@
         {
             tcMain = new Guna.UI2.WinForms.Guna2TabControl();
             tbSalesOrder = new TabPage();
+            tbWarehouse = new TabPage();
             tbCustomer = new TabPage();
-            tbShipment = new TabPage();
-            tbInvoice = new TabPage();
-            tbPaymentReceive = new TabPage();
             tbSettings = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
@@ -41,10 +39,8 @@
             // tcMain
             // 
             tcMain.Controls.Add(tbSalesOrder);
+            tcMain.Controls.Add(tbWarehouse);
             tcMain.Controls.Add(tbCustomer);
-            tcMain.Controls.Add(tbShipment);
-            tcMain.Controls.Add(tbInvoice);
-            tcMain.Controls.Add(tbPaymentReceive);
             tcMain.Controls.Add(tbSettings);
             tcMain.Dock = DockStyle.Fill;
             tcMain.ItemSize = new Size(180, 40);
@@ -84,53 +80,33 @@
             tbSalesOrder.Text = "Sales Order";
             tbSalesOrder.UseVisualStyleBackColor = true;
             // 
+            // tbWarehouse
+            // 
+            tbWarehouse.Location = new Point(4, 44);
+            tbWarehouse.Name = "tbWarehouse";
+            tbWarehouse.Padding = new Padding(3);
+            tbWarehouse.Size = new Size(1348, 653);
+            tbWarehouse.TabIndex = 6;
+            tbWarehouse.Text = "Warehouse";
+            tbWarehouse.UseVisualStyleBackColor = true;
+            // 
             // tbCustomer
             // 
             tbCustomer.Location = new Point(4, 44);
             tbCustomer.Margin = new Padding(3, 2, 3, 2);
             tbCustomer.Name = "tbCustomer";
             tbCustomer.Padding = new Padding(3, 2, 3, 2);
-            tbCustomer.Size = new Size(1187, 528);
+            tbCustomer.Size = new Size(1348, 653);
             tbCustomer.TabIndex = 0;
             tbCustomer.Text = "Customer";
             tbCustomer.UseVisualStyleBackColor = true;
-            // 
-            // tbShipment
-            // 
-            tbShipment.Location = new Point(4, 44);
-            tbShipment.Margin = new Padding(3, 2, 3, 2);
-            tbShipment.Name = "tbShipment";
-            tbShipment.Size = new Size(1187, 528);
-            tbShipment.TabIndex = 2;
-            tbShipment.Text = "Shipment";
-            tbShipment.UseVisualStyleBackColor = true;
-            // 
-            // tbInvoice
-            // 
-            tbInvoice.Location = new Point(4, 44);
-            tbInvoice.Margin = new Padding(3, 2, 3, 2);
-            tbInvoice.Name = "tbInvoice";
-            tbInvoice.Size = new Size(1187, 528);
-            tbInvoice.TabIndex = 3;
-            tbInvoice.Text = "Sales Invoice";
-            tbInvoice.UseVisualStyleBackColor = true;
-            // 
-            // tbPaymentReceive
-            // 
-            tbPaymentReceive.Location = new Point(4, 44);
-            tbPaymentReceive.Margin = new Padding(3, 2, 3, 2);
-            tbPaymentReceive.Name = "tbPaymentReceive";
-            tbPaymentReceive.Size = new Size(1187, 528);
-            tbPaymentReceive.TabIndex = 4;
-            tbPaymentReceive.Text = "Payment Receive";
-            tbPaymentReceive.UseVisualStyleBackColor = true;
             // 
             // tbSettings
             // 
             tbSettings.Location = new Point(4, 44);
             tbSettings.Margin = new Padding(3, 2, 3, 2);
             tbSettings.Name = "tbSettings";
-            tbSettings.Size = new Size(1187, 528);
+            tbSettings.Size = new Size(1348, 653);
             tbSettings.TabIndex = 5;
             tbSettings.Text = "Settings";
             tbSettings.UseVisualStyleBackColor = true;
@@ -151,9 +127,7 @@
         private Guna.UI2.WinForms.Guna2TabControl tcMain;
         private TabPage tbCustomer;
         private TabPage tbSalesOrder;
-        private TabPage tbShipment;
-        private TabPage tbInvoice;
-        private TabPage tbPaymentReceive;
         private TabPage tbSettings;
+        private TabPage tbWarehouse;
     }
 }

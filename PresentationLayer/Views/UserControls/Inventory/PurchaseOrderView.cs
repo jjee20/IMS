@@ -105,6 +105,14 @@ namespace PresentationLayer.Views.UserControls
                 btnReturn.Visible = false;
             };
 
+            txtStartDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
+            txtEndDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
             btnProductAdd.Click += delegate
             {
                 if (!string.IsNullOrEmpty(Message)) MessageBox.Show(Message);
@@ -123,9 +131,12 @@ namespace PresentationLayer.Views.UserControls
 
             dgList.CellDoubleClick += (sender, e) =>
             {
-                PrintSOEvent?.Invoke(this, e);
+                PrintPOEvent?.Invoke(this, e);
             };
-
+            dgOrderLine.CellEndEdit += (sender, e) =>
+            {
+                UpdateComputationEvent?.Invoke(this, e);
+            };
             dgOrderLine.CellDoubleClick += (sender, e) =>
             {
                 var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
@@ -137,6 +148,18 @@ namespace PresentationLayer.Views.UserControls
                     DeleteProductEvent?.Invoke(this, e);
                     MessageBox.Show(Message);
                 }
+            };
+            btnGRN.Click += delegate
+            {
+                GRNEvent?.Invoke(this, EventArgs.Empty);
+            };
+            btnBill.Click += delegate
+            {
+                BillEvent?.Invoke(this, EventArgs.Empty);
+            };
+            btnPaymentVoucher.Click += delegate
+            {
+                PaymentVoucherEvent?.Invoke(this, EventArgs.Empty);
             };
         }
 
@@ -151,6 +174,16 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
+        }
+        public DateTime StartDate
+        {
+            get { return txtStartDate.Value; }
+            set { txtStartDate.Text = value.ToString(); }
+        }
+        public DateTime EndDate
+        {
+            get { return txtEndDate.Value; }
+            set { txtEndDate.Text = value.ToString(); }
         }
         public int BranchId
         {
@@ -350,8 +383,12 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ProductAddEvent;
         public event EventHandler PaymentDiscountEvent;
         public event EventHandler FreightEvent;
-        public event DataGridViewCellEventHandler PrintSOEvent;
+        public event EventHandler GRNEvent;
+        public event EventHandler BillEvent;
+        public event EventHandler PaymentVoucherEvent;
+        public event DataGridViewCellEventHandler PrintPOEvent;
         public event DataGridViewCellEventHandler DeleteProductEvent;
+        public event DataGridViewCellEventHandler UpdateComputationEvent;
 
         private static PurchaseOrderView? instance;
         public static PurchaseOrderView GetInstance(TabPage parentContainer)
@@ -364,8 +401,7 @@ namespace PresentationLayer.Views.UserControls
             }
             return instance;
         }
-
-        private void btnNonStock_CheckedChanged(object sender, EventArgs e)
+        private void btnNonStock_CheckedChanged_1(object sender, EventArgs e)
         {
             if (btnNonStock.Checked)
             {
@@ -379,14 +415,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        private void dgOrderLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void dgOrderLine_CellEndEdit_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgOrderLine.Columns["Price"].Index || e.ColumnIndex == dgOrderLine.Columns["Quantity"].Index)
+            if (e.ColumnIndex == dgOrderLine.Columns["Price"].Index || e.ColumnIndex == dgOrderLine.Columns["Quantity"].Index || e.ColumnIndex == dgOrderLine.Columns["DiscountPercentage"].Index)
             {
                 // Get the value from Column1
                 var editedValue = dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value;
                 var qtyValue = dgOrderLine.Rows[e.RowIndex].Cells["Quantity"].Value;
-                var discountValue = dgOrderLine.Rows[e.RowIndex].Cells["Discount"].Value;
+                var discountValue = dgOrderLine.Rows[e.RowIndex].Cells["DiscountPercentage"].Value;
 
                 // Perform some computation or logic (example: doubling the value)
                 if (int.TryParse(editedValue?.ToString(), out int result))
@@ -397,7 +433,7 @@ namespace PresentationLayer.Views.UserControls
                         {
                             // Update the value in Column2
                             var subTotal = result * qtyResult;
-                            dgOrderLine.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal - (subTotal * discountResult);
+                            dgOrderLine.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal - (subTotal * discountResult/ 100);
                         }
                     }
                 }

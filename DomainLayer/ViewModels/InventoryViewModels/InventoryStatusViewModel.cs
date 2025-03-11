@@ -9,6 +9,6 @@ namespace DomainLayer.ViewModels.InventoryViewModels
     public class InventoryStatusViewModel
     {
         public string Category { get; set; }
-        public int Quantity { get; set; }
+        public double Quantity { get; set; }
     }
 }

@@ -1,200 +1,79 @@
-﻿using DomainLayer.Models;
-using DomainLayer.ViewModels.Inventory;
-using MaterialSkin;
-using PresentationLayer.Presenters;
-using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.Helpers;
+﻿using DomainLayer.Models.Inventory;
+using InfastructureLayer.DataAccess.Repositories;
+using MaterialSkin.Controls;
+using Microsoft.Reporting.WinForms;
+using PresentationLayer.Reports;
+using ServiceLayer.Services.IRepositories.IInventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Unity.Storage.RegistrationSet;
 
-namespace PresentationLayer.Views.UserControls
+namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class InvoiceView : UserControl, IInvoiceView
+    public partial class InvoiceView : MaterialForm
     {
-        private int id;
-        private string message;
-        private bool isSuccessful;
-        public bool isEdit;
-        public InvoiceView()
+        private readonly SalesOrder _salesOrder;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public InvoiceView(SalesOrder salesOrder, IUnitOfWork unitOfWork)
         {
             InitializeComponent();
-            Guna2TabControl1.TabPages.Remove(tabPage2);
-            AssociateAndRaiseViewEvents();
+            _unitOfWork = unitOfWork;
+            _salesOrder = salesOrder;
+
+            LoadAllInvoiceTypes();
         }
 
-        private void AssociateAndRaiseViewEvents()
+        private void btnPrint_Click(object sender, EventArgs e)
         {
-            //Add New
-            btnAdd.Click += delegate
+
+            if (_salesOrder.Invoice == null)
             {
-                if (Guna2TabControl1.TabPages.Contains(tabPage1))
+                _salesOrder.Invoice = new Invoice
                 {
-                    AddNewEvent?.Invoke(this, EventArgs.Empty);
-                    tabPage2.Text = "Add New";
-                    Guna2TabControl1.TabPages.Remove(tabPage1);
-                    Guna2TabControl1.TabPages.Add(tabPage2);
-                }
-                btnReturn.Visible = true;
-            };
-            //Save changes
-            btnSave.Click += delegate
+                    InvoiceName = Guid.NewGuid().ToString(),
+                    InvoiceDate = DateTime.Now,
+                    InvoiceDueDate = DateTime.Now,
+                    InvoiceTypeId = (int)txtInvoiceType.SelectedValue
+                };
+            }
+            _unitOfWork.SalesOrder.Detach(_salesOrder);
+            _unitOfWork.SalesOrder.Update(_salesOrder);
+            _unitOfWork.Save();
+
+            string reportFileName = "InvoiceReport.rdlc";
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
+            string reportPath = Path.Combine(reportDirectory, reportFileName);
+            var localReport = new LocalReport();
+            var reportDataSource = new ReportDataSource("SalesOrderLine", _salesOrder.SalesOrderLines);
+            var parameters = new List<ReportParameter>
             {
-                SaveEvent?.Invoke(this, EventArgs.Empty);
-                if (isSuccessful)
-                {
-                    Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Add(tabPage1);
-                    btnReturn.Visible = false;
-                }
-                MessageBox.Show(Message);
+                new ReportParameter("InvoiceNumber", _salesOrder.Invoice.InvoiceName ?? string.Empty),
+                new ReportParameter("InvoiceDate", _salesOrder.Invoice.InvoiceDate.ToString("MMM dd, yyyy")),
+                new ReportParameter("Customer", _salesOrder.Customer.CustomerName),
+                new ReportParameter("CustomerAddress", string.IsNullOrEmpty(_salesOrder.Customer.Address) ? " " : _salesOrder.Customer.Address),
+                new ReportParameter("TotalSales", _salesOrder.SubTotal.ToString()),
+                new ReportParameter("VATRate", "12%"),
+                new ReportParameter("VAT", _salesOrder.Tax.ToString("N2")),
+                new ReportParameter("NetOfVAT", _salesOrder.Total.ToString("N2")),
             };
-            txtSearch.TextChanged += (s, e) =>
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-            };
-            //Edit
-            btnEdit.Click += delegate
-            {
-                if (Guna2TabControl1.SelectedTab == tabPage1)
-                {
-                    tabPage2.Text = "Edit Details";
-                    Guna2TabControl1.TabPages.Remove(tabPage1);
-                    Guna2TabControl1.TabPages.Add(tabPage2);
-                }
-                EditEvent?.Invoke(this, EventArgs.Empty);
-                btnReturn.Visible = true;
-            };
-            //Delete
-            btnDelete.Click += delegate
-            {
-                var result = MessageBox.Show("Are you sure you want to delete the selected invoice?", "Warning",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    // Invoke the DeleteEvent with the selected row as an argument
-                    DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show(Message);
-                }
-            };
-            //Print
-            btnPrint.Click += delegate
-            {
-                PrintEvent?.Invoke(this, EventArgs.Empty);
-            };
-            //Refresh
-            btnReturn.Click += delegate
-            {
-                if (!Guna2TabControl1.TabPages.Contains(tabPage1))
-                {
-                    RefreshEvent?.Invoke(this, EventArgs.Empty);
-                    Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Add(tabPage1);
-                }
-                btnReturn.Visible = false;
-            };
+            var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
+            reportView.ShowDialog();
         }
 
-        //Properties
-        public int InvoiceId
+        private void LoadAllInvoiceTypes()
         {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public string InvoiceName
-        {
-            get { return txtName.Text; }
-            set { txtName.Text = value; }
-        }
-        public int ShipmentId
-        {
-            get { return (int)txtShipment.SelectedValue; }
-            set { txtShipment.Text = value.ToString(); }
-        }
-        public DateTimeOffset InvoiceDate
-        {
-            get { return txtInvoiceDate.Value; }
-            set { txtInvoiceDate.Text = value.ToString(); }
-        }
-        public DateTimeOffset InvoiceDueDate
-        {
-            get { return txtInvoiceDueDate.Value; }
-            set { txtInvoiceDueDate.Text = value.ToString(); }
-        }
-        public int InvoiceTypeId
-        {
-            get { return (int)txtInvoiceType.SelectedValue; }
-            set { txtInvoiceType.Text = value.ToString(); }
-        }
-        public bool IsEdit
-        {
-            get { return isEdit; }
-            set { isEdit = value; }
-        }
-
-        public bool IsSuccessful
-        {
-            get { return isSuccessful; }
-            set { isSuccessful = value; }
-        }
-
-        public string Message
-        {
-            get { return message; }
-            set { message = value; }
-        }
-
-        public string SearchValue
-        {
-            get { return txtSearch.Text; }
-            set { txtSearch.Text = value; }
-        }
-
-        public void SetInvoiceListBindingSource(BindingSource InvoiceList)
-        {
-            dgList.DataSource = InvoiceList;
-            DataGridHelper.ApplyDisplayNames<InvoiceViewModel>(InvoiceList, dgList);
-        }
-        public void SetInvoiceTypeListBindingSource(BindingSource InvoiceTypeBindingSource)
-        {
-            txtInvoiceType.DataSource = InvoiceTypeBindingSource;
+            var invoiceTypes = _unitOfWork.InvoiceType.GetAll();
+            txtInvoiceType.DataSource = invoiceTypes;
             txtInvoiceType.DisplayMember = "InvoiceTypeName";
             txtInvoiceType.ValueMember = "InvoiceTypeId";
-        }
-        public void SetShipmentListBindingSource(BindingSource ShipmentBindingSource)
-        {
-            txtShipment.DataSource = ShipmentBindingSource;
-            txtShipment.DisplayMember = "ShipmentName";
-            txtShipment.ValueMember = "ShipmentId";
-        }
-
-        public event EventHandler AddNewEvent;
-        public event EventHandler SaveEvent;
-        public event EventHandler SearchEvent;
-        public event EventHandler EditEvent;
-        public event EventHandler DeleteEvent;
-        public event EventHandler PrintEvent;
-        public event EventHandler RefreshEvent;
-
-        private static InvoiceView? instance;
-        public static InvoiceView GetInstance(TabPage parentContainer)
-        {
-            if (instance == null || instance.IsDisposed)
-            {
-                instance = new InvoiceView();
-                parentContainer.Controls.Add(instance);
-                instance.Dock = DockStyle.Fill;
-            }
-            return instance;
         }
     }
 }

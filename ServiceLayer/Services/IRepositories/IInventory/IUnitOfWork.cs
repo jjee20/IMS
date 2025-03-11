@@ -6,6 +6,7 @@ namespace ServiceLayer.Services.IRepositories.IInventory
     public interface IUnitOfWork
     {
         IApplicationUserRepository ApplicationUser { get; }
+        ITargetGoalsRepository TargetGoals { get; }
         IBillRepository Bill { get; }
         IBillTypeRepository BillType { get; }
         IBranchRepository Branch { get; }
@@ -50,6 +51,7 @@ namespace ServiceLayer.Services.IRepositories.IInventory
         IAllowanceRepository Allowance { get; }
         IBonusRepository Bonus { get; }
         IProjectLineRepository ProjectLine { get; }
+        IProductStockInLogRepository StockInLogs { get; }
         void Save();
     }
 }

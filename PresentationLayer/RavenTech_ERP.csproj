@@ -129,6 +129,21 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\DepartmentView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BillView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentVoucherListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentVoucherView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductInStockLogView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\DashboardView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -136,6 +151,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Account\UserProfileView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductMonitoringView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\PurchaseSettingsView.cs">
@@ -165,6 +183,12 @@
     <Compile Update="Views\UserControls\Inventory\ProjectManagmenetView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchaseOrderInformationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchasesReportView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\WarehouseView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,9 +196,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\UnitOfMeasureView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\ShipmentView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\VendorTypeView.cs">
@@ -195,28 +216,13 @@
     <Compile Update="Views\UserControls\Inventory\ProductTypeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PaymentVoucherView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Inventory\PaymentTypeView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\PaymentReceiveView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\InvoiceTypeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\InvoiceView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Inventory\CashBankView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\BillView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\BillTypeView.cs">
@@ -295,6 +301,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Accounting\Payroll\PayrollReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\StockInLogReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Inventory\ProductReport.rdlc">

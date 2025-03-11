@@ -20,10 +20,10 @@ namespace DomainLayer.Models.Inventory
         public DateTimeOffset ShipmentDate { get; set; }
         [Display(Name = "Shipment Type")]
         [ForeignKey("ShipmentTypeId")]
-        public int ShipmentTypeId { get; set; }
+        public int? ShipmentTypeId { get; set; }
         [Display(Name = "Warehouse")]
         [ForeignKey("WarehouseId")]
-        public int WarehouseId { get; set; }
+        public int? WarehouseId { get; set; }
         [Display(Name = "Full Shipment")]
         public bool IsFullShipment { get; set; } = true;
         public virtual SalesOrder SalesOrder { get; set; }

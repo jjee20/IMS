@@ -14,8 +14,8 @@ namespace DomainLayer.ViewModels.Inventory
         public int PaymentVoucherId { get; set; }
         [Display(Name = "Payment Voucher #")]
         public string PaymentVoucherName { get; set; }
-        [Display(Name = "Bill #")]
-        public string Bill { get; set; }
+        [Display(Name = "Purchase Order #")]
+        public string PurchaseOrder { get; set; }
         [Display(Name = "Payment Date")]
         public DateTimeOffset PaymentDate { get; set; }
         [Display(Name = "Payment Type")]

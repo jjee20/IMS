@@ -135,11 +135,6 @@ namespace PresentationLayer.Views.UserControls
             get { return Convert.ToInt16(txtReorderLevel.Text); }
             set { txtReorderLevel.Text = value.ToString(); }
         }
-        public int StockQuantity
-        {
-            get { return Convert.ToInt16(txtStockQuantity.Text); }
-            set { txtStockQuantity.Text = value.ToString(); }
-        }
         public int UnitOfMeasureId
         {
             get { return (int)txtUnitOfMeasure.SelectedValue; }
@@ -169,6 +164,24 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return isEdit; }
             set { isEdit = value; }
+        }
+
+        public string PSize
+        {
+            get { return txtSize.Text; }
+            set { txtSize.Text = value; }
+        }
+
+        public string Brand
+        {
+            get { return txtBrand.Text; }
+            set { txtBrand.Text = value; }
+        }
+
+        public string PColor
+        {
+            get { return txtColor.Text; }
+            set { txtColor.Text = value; }
         }
 
         public bool IsSuccessful

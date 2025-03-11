@@ -109,6 +109,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.TimeOut = attendance.TimeOut;
             _view.Date = attendance.Date;
             _view.IsPresent = attendance.IsPresent;
+            _view.IsHalfDay = attendance.IsHalfDay;
             _view.HoursWorked = attendance.HoursWorked;
             _view.ProjectId = attendance.ProjectId;
         }
@@ -215,6 +216,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             model.TimeIn = _view.TimeIn;
             model.TimeOut = _view.TimeOut;
             model.Date = _view.Date;
+            model.IsHalfDay = _view.IsHalfDay;
             model.IsPresent = _view.IsPresent;
             model.HoursWorked = _view.HoursWorked;
 
@@ -294,12 +296,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Return(object? sender, EventArgs e)
         {
-            if (_view.IsIndividual) LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
-            else LoadAllAttendanceList();
+            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
+            LoadAllAttendanceList();
         }
         private void CleanviewFields()
         {
             LoadAllAttendanceList();
+            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
         }
 
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
@@ -320,7 +323,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 currentDate = currentDate.AddDays(1);
             } while (currentDate <= endDate.Date);
 
-            foreach (var employee in employees)
+            foreach (var employee in employees.OrderBy(c => c.LastName))
             {
                 var attendances = employee.Attendances
                     .Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date)
@@ -335,26 +338,29 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 TimeSpan shiftStartTime = (TimeSpan)(employee.Shift?.StartTime);
                 TimeSpan shiftEndTime = (TimeSpan)(employee.Shift?.EndTime);
 
-                int daysPresent = attendances.Count(a => a.IsPresent && !IsCoveredByLeave(a.Date, approvedLeaves));
-                int daysLate = attendances.Count(a => a.TimeIn > shiftStartTime);
-                int daysEarlyOut = attendances.Count(a => a.TimeOut.Hours < shiftEndTime.Hours);
+                double daysPresent = attendances.Count(a => a.IsPresent && !a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves));
+                double daysHalfDayPresent = attendances.Count(a => a.IsPresent && a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
+                double totalPresentDays = daysPresent + daysHalfDayPresent;
+                double totalOvertime = attendances.Sum(c => employee.Shift.RegularHours > c.HoursWorked ? 0 : c.HoursWorked - employee.Shift.RegularHours);
+                int daysLate = attendances.Count(a => a.TimeIn > shiftStartTime && !a.IsHalfDay);
+                int daysEarlyOut = attendances.Count(a => a.TimeOut.Hours < shiftEndTime.Hours && !a.IsHalfDay);
                 int daysOnLeave = approvedLeaves.Sum(l => (l.EndDate - l.StartDate).Days + 1);
-                int daysAbsent = totalDays > daysPresent ? totalDays - (daysPresent + daysOnLeave) : 0;
+                double daysAbsent = totalDays > totalPresentDays ? totalDays - (totalPresentDays + daysOnLeave) : 0;
 
                 summaryList.Add(new AttendanceViewModel
                 {
                     EmployeeId = employee.EmployeeId,
                     Employee = $"{employee.LastName}, {employee.FirstName}",
                     TotalDays = totalDays,
-                    DaysPresent = daysPresent,
+                    DaysPresent = totalPresentDays,
+                    TotalOvertime = totalOvertime,
                     DaysLate = daysLate,
                     DaysEarlyOut = daysEarlyOut,
                     DaysAbsent = daysAbsent,
                     DaysOnLeave = daysOnLeave
                 });
             }
-
-            return summaryList.Where(c => c.DaysPresent != 0 && c.DaysAbsent != 0).OrderBy(c => c.Employee).ToList();
+            return summaryList.ToList();
         }
 
         private bool IsCoveredByLeave(DateTime date, IEnumerable<Leave> approvedLeaves)
@@ -370,7 +376,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             IndividualAttendanceList = Program.Mapper.Map<IEnumerable<IndividualAttendanceViewModel>>(_unitOfWork.Attendance.GetAll(c => c.EmployeeId == id &&
                 c.Date.Date >= _view.StartDate.Date && c.Date.Date <= _view.EndDate.Date, includeProperties: "Project,Employee"));
-            IndividualAttendanceBindingSource.DataSource = IndividualAttendanceList.OrderBy(c => c.Date);//Set data source.
+            IndividualAttendanceBindingSource.DataSource = IndividualAttendanceList;//Set data source.
         }
         private void LoadAllEmployeeList()
         {
