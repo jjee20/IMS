@@ -88,7 +88,7 @@ namespace PresentationLayer.Presenters
         private void ShowPayment(object? sender, EventArgs e)
         {
             var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
-            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: ",SalesOrderLines,Invoice,Customer,Shipment,PaymentReceive", tracked: true);
+            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "SalesOrderLines,Invoice,Customer,Shipment,PaymentReceive", tracked: true);
 
             var payment = new PaymentReceiveView(entity, _unitOfWork);
             payment.Text = $"Payment Details for S.0.#: {entity.SalesOrderName}";
@@ -128,49 +128,10 @@ namespace PresentationLayer.Presenters
         private void PrintSO(object? sender, DataGridViewCellEventArgs e)
         {
             var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
-            var salesOrderLine = _unitOfWork.SalesOrderLine.GetAll(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "Product", tracked: true);
-            var selesOrderLineVM = salesOrderLine.Select(c => new SalesOrderLineViewModel
-            {
-                ProductId = (int)c.ProductId,
-                ProductName = c.Product.ProductName,
-                Price = c.Price,
-                DiscountPercentage = c.DiscountPercentage * 100,
-                Quantity = c.Quantity,
-                SubTotal = c.SubTotal,  
-            });
-            SalesOrderVM = salesOrder;
+            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "SalesOrderLines,Shipment.ShipmentType,Invoice.InvoiceType,PaymentReceive.PaymentType");
 
-            string reportFileName = "SalesOrderReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
-            string reportPath = Path.Combine(reportDirectory, reportFileName);
-
-            var localReport = new LocalReport();
-
-            var reportDataSource = new ReportDataSource("SalesOrderLine", selesOrderLineVM);
-            //localReport.DataSources.Add(reportDataSource);
-
-            var parameters = new List<ReportParameter>
-            {
-                new ReportParameter("SalesOrderName", SalesOrderVM.SalesOrderName ?? string.Empty),
-                new ReportParameter("OrderDate", SalesOrderVM.OrderDate.ToString("MMM dd, yyyy")),
-                new ReportParameter("DeliveryDate", SalesOrderVM.DeliveryDate.ToString("MMM dd, yyyy")),
-                new ReportParameter("CustomerRefNumber", SalesOrderVM.CustomerRefNumber ?? string.Empty),
-                new ReportParameter("Remarks", SalesOrderVM.Remarks ?? string.Empty),
-                new ReportParameter("Amount", SalesOrderVM.Amount.ToString("N2")),
-                new ReportParameter("SubTotal", SalesOrderVM.SubTotal.ToString("N2")),
-                new ReportParameter("Discount", $"{(SalesOrderVM.Discount*100).ToString("N2")}%"),
-                new ReportParameter("Tax", SalesOrderVM.Tax.ToString("N2")),
-                new ReportParameter("Freight", SalesOrderVM.Freight.ToString("N2")),
-                new ReportParameter("Total", SalesOrderVM.Total.ToString("N2")),
-                new ReportParameter("Branch", SalesOrderVM.Branch ?? string.Empty),
-                new ReportParameter("Customer", SalesOrderVM.Customer ?? string.Empty),
-                new ReportParameter("SalesType", SalesOrderVM.SalesType ?? string.Empty),
-            };
-
-            //localReport.SetParameters(parameters);
-
-            var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
-            reportView.ShowDialog();
+            var salesOrderInformation = new SalesOrderInformationView(entity, salesOrder, _unitOfWork);
+            salesOrderInformation.ShowDialog();
         }
 
         private void ProductDelete(object? sender, DataGridViewCellEventArgs e)
@@ -190,36 +151,28 @@ namespace PresentationLayer.Presenters
 
         private void ProductAdd(object? sender, EventArgs e)
         {
-            var product = _unitOfWork.Product.Get(c => c.ProductId == _view.ProductId);
+            var product = _unitOfWork.Product.Get(c => c.ProductId == _view.ProductId, includeProperties: "ProductStockInLogs");
+
+            if (product.ProductStockInLogs.Sum(c => c.StockQuantity) == 0)
+            {
+                _view.Message = "Not enough stocks. Please contact administrator.";
+            }
 
             // Initialize SalesOrderLines if it's null
             _view.SalesOrderLines ??= new List<SalesOrderLineViewModel>();
 
-            var name = "";
-            var price = 0.00;
+            var checkOrder = _view.SalesOrderLines.Where(c => c.ProductId == _view.ProductId);
 
-            if (_view.NonStock)
+            if (checkOrder.Any() && !_view.NonStock)
             {
-                _view.ProductId = 0;
-                name = _view.NonStockProductName.Trim();
-                price = 0.00;
+                _view.Message = "Item is already added.";
+                return;
             }
-            else
-            {
-                name = product.ProductName;
-                price = product.DefaultSellingPrice;
 
-                var checkOrder = _view.SalesOrderLines.Where(c => c.ProductId == _view.ProductId);
-
-                if (checkOrder.Any())
-                {
-                    _view.Message = "Item is already added.";
-                    return;
-                }
-            }
             // Calculate values
-            var productprice = price;
-            var productItem = name;
+            var productId = _view.NonStock ? (int?)null : _view.ProductId;
+            var productprice = _view.NonStock ? 0.00 : product.DefaultSellingPrice;
+            var productItem = _view.NonStock ? _view.NonStockProductName.Trim() : product.ProductName;
             var quantity = _view.ProductQuantity;
             var amount = productprice * quantity;
             var discount = _view.ProductDiscount/100;

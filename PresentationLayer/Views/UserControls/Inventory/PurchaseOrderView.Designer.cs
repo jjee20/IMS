@@ -83,8 +83,12 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseOrderView));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
@@ -159,6 +163,13 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2ContextMenuStrip1 = new Guna2ContextMenuStrip();
             guna2HtmlToolTip2 = new Guna2HtmlToolTip();
+            btnBill = new Button();
+            label2 = new Label();
+            txtStartDate = new Guna2DateTimePicker();
+            label1 = new Label();
+            txtEndDate = new Guna2DateTimePicker();
+            btnGRN = new Button();
+            btnPaymentVoucher = new Button();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -1233,6 +1244,13 @@ namespace PresentationLayer.Views.UserControls
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(btnPaymentVoucher);
+            panel2.Controls.Add(btnBill);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(txtStartDate);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(txtEndDate);
+            panel2.Controls.Add(btnGRN);
             panel2.Controls.Add(btnSave);
             panel2.Controls.Add(btnPrint);
             panel2.Controls.Add(btnDelete);
@@ -1353,7 +1371,7 @@ namespace PresentationLayer.Views.UserControls
             // txtSearch
             // 
             txtSearch.CharacterCasing = CharacterCasing.Upper;
-            txtSearch.CustomizableEdges = customizableEdges45;
+            txtSearch.CustomizableEdges = customizableEdges49;
             txtSearch.DefaultText = "";
             txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -1364,14 +1382,14 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(950, 0);
+            txtSearch.Location = new Point(1051, 0);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
             txtSearch.Name = "txtSearch";
             txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
-            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges46;
-            txtSearch.Size = new Size(378, 62);
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges50;
+            txtSearch.Size = new Size(277, 62);
             txtSearch.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -1455,6 +1473,104 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlToolTip2.ReshowDelay = 100;
             guna2HtmlToolTip2.ToolTipIcon = ToolTipIcon.Info;
             // 
+            // btnBill
+            // 
+            btnBill.Dock = DockStyle.Left;
+            btnBill.FlatAppearance.BorderSize = 0;
+            btnBill.FlatStyle = FlatStyle.Flat;
+            btnBill.Image = (Image)resources.GetObject("btnBill.Image");
+            btnBill.Location = new Point(525, 0);
+            btnBill.Name = "btnBill";
+            btnBill.Size = new Size(75, 62);
+            btnBill.TabIndex = 41;
+            btnBill.Text = "Bill";
+            btnBill.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnBill.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Right;
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(675, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(47, 21);
+            label2.TabIndex = 40;
+            label2.Text = "From";
+            // 
+            // txtStartDate
+            // 
+            txtStartDate.Checked = true;
+            txtStartDate.CustomizableEdges = customizableEdges45;
+            txtStartDate.Dock = DockStyle.Right;
+            txtStartDate.FillColor = Color.White;
+            txtStartDate.Font = new Font("Segoe UI", 9F);
+            txtStartDate.Format = DateTimePickerFormat.Long;
+            txtStartDate.Location = new Point(722, 0);
+            txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            txtStartDate.Name = "txtStartDate";
+            txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges46;
+            txtStartDate.Size = new Size(152, 62);
+            txtStartDate.TabIndex = 39;
+            txtStartDate.Value = new DateTime(2025, 2, 26, 9, 16, 55, 624);
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Right;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(874, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(25, 21);
+            label1.TabIndex = 38;
+            label1.Text = "To";
+            // 
+            // txtEndDate
+            // 
+            txtEndDate.Checked = true;
+            txtEndDate.CustomizableEdges = customizableEdges47;
+            txtEndDate.Dock = DockStyle.Right;
+            txtEndDate.FillColor = Color.White;
+            txtEndDate.Font = new Font("Segoe UI", 9F);
+            txtEndDate.Format = DateTimePickerFormat.Long;
+            txtEndDate.Location = new Point(899, 0);
+            txtEndDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            txtEndDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            txtEndDate.Name = "txtEndDate";
+            txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges48;
+            txtEndDate.Size = new Size(152, 62);
+            txtEndDate.TabIndex = 37;
+            txtEndDate.Value = new DateTime(2025, 2, 26, 9, 16, 55, 624);
+            // 
+            // btnGRN
+            // 
+            btnGRN.Dock = DockStyle.Left;
+            btnGRN.FlatAppearance.BorderSize = 0;
+            btnGRN.FlatStyle = FlatStyle.Flat;
+            btnGRN.Image = (Image)resources.GetObject("btnGRN.Image");
+            btnGRN.Location = new Point(450, 0);
+            btnGRN.Name = "btnGRN";
+            btnGRN.Size = new Size(75, 62);
+            btnGRN.TabIndex = 36;
+            btnGRN.Text = "GRN";
+            btnGRN.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnGRN.UseVisualStyleBackColor = true;
+            // 
+            // btnPaymentVoucher
+            // 
+            btnPaymentVoucher.Dock = DockStyle.Left;
+            btnPaymentVoucher.FlatAppearance.BorderSize = 0;
+            btnPaymentVoucher.FlatStyle = FlatStyle.Flat;
+            btnPaymentVoucher.Image = (Image)resources.GetObject("btnPaymentVoucher.Image");
+            btnPaymentVoucher.Location = new Point(600, 0);
+            btnPaymentVoucher.Name = "btnPaymentVoucher";
+            btnPaymentVoucher.Size = new Size(75, 62);
+            btnPaymentVoucher.TabIndex = 42;
+            btnPaymentVoucher.Text = "Voucher";
+            btnPaymentVoucher.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnPaymentVoucher.UseVisualStyleBackColor = true;
+            // 
             // PurchaseOrderView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -1490,6 +1606,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard3.ResumeLayout(false);
             materialCard3.PerformLayout();
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
@@ -1572,5 +1689,12 @@ namespace PresentationLayer.Views.UserControls
         private Guna2HtmlLabel guna2HtmlLabel9;
         private Guna2Panel guna2Panel1;
         private MaterialSkin.Controls.MaterialSwitch btnNonStock;
+        private Button btnBill;
+        private Label label2;
+        private Guna2DateTimePicker txtStartDate;
+        private Label label1;
+        private Guna2DateTimePicker txtEndDate;
+        private Button btnGRN;
+        private Button btnPaymentVoucher;
     }
 }

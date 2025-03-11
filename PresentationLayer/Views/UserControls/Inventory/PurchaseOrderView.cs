@@ -105,6 +105,14 @@ namespace PresentationLayer.Views.UserControls
                 btnReturn.Visible = false;
             };
 
+            txtStartDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
+            txtEndDate.ValueChanged += delegate
+            {
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            };
             btnProductAdd.Click += delegate
             {
                 if (!string.IsNullOrEmpty(Message)) MessageBox.Show(Message);
@@ -123,7 +131,7 @@ namespace PresentationLayer.Views.UserControls
 
             dgList.CellDoubleClick += (sender, e) =>
             {
-                PrintSOEvent?.Invoke(this, e);
+                PrintPOEvent?.Invoke(this, e);
             };
             dgOrderLine.CellEndEdit += (sender, e) =>
             {
@@ -141,6 +149,18 @@ namespace PresentationLayer.Views.UserControls
                     MessageBox.Show(Message);
                 }
             };
+            btnGRN.Click += delegate
+            {
+                GRNEvent?.Invoke(this, EventArgs.Empty);
+            };
+            btnBill.Click += delegate
+            {
+                BillEvent?.Invoke(this, EventArgs.Empty);
+            };
+            btnPaymentVoucher.Click += delegate
+            {
+                PaymentVoucherEvent?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         //Properties
@@ -154,6 +174,16 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
+        }
+        public DateTime StartDate
+        {
+            get { return txtStartDate.Value; }
+            set { txtStartDate.Text = value.ToString(); }
+        }
+        public DateTime EndDate
+        {
+            get { return txtEndDate.Value; }
+            set { txtEndDate.Text = value.ToString(); }
         }
         public int BranchId
         {
@@ -353,7 +383,10 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ProductAddEvent;
         public event EventHandler PaymentDiscountEvent;
         public event EventHandler FreightEvent;
-        public event DataGridViewCellEventHandler PrintSOEvent;
+        public event EventHandler GRNEvent;
+        public event EventHandler BillEvent;
+        public event EventHandler PaymentVoucherEvent;
+        public event DataGridViewCellEventHandler PrintPOEvent;
         public event DataGridViewCellEventHandler DeleteProductEvent;
         public event DataGridViewCellEventHandler UpdateComputationEvent;
 

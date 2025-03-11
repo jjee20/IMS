@@ -41,7 +41,7 @@ namespace RavenTech_ERP.Views.UserControls
                 var payment = new PaymentReceive
                 {
                     PaymentReceiveName = Guid.NewGuid().ToString(),
-                    PaymentDate = DateTime.Now,
+                    PaymentDate = txtPaymentDate.Value,
                     PaymentTypeId = (int)txtPaymentType.SelectedValue,
                     PaymentAmount = double.Parse(txtAmount.Text),
                     IsFullPayment = txtFullPayment.Checked

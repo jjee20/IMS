@@ -129,6 +129,18 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\DepartmentView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BillView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentVoucherListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentVoucherView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\ProductInStockLogView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -171,6 +183,9 @@
     <Compile Update="Views\UserControls\Inventory\ProjectManagmenetView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchaseOrderInformationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\WarehouseView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -198,22 +213,13 @@
     <Compile Update="Views\UserControls\Inventory\ProductTypeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PaymentVoucherView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Inventory\PaymentTypeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\InvoiceTypeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Inventory\CashBankView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\BillView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\BillTypeView.cs">

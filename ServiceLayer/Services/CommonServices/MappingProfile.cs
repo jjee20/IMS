@@ -27,12 +27,16 @@ namespace ServiceLayer.Services.CommonServices
             CreateMap<Branch, BranchViewModel>()
                 .ReverseMap();
             CreateMap<Bill, BillViewModel>()
-                .ForMember(dest => dest.GoodsReceivedNote, opt => opt.MapFrom(src => src.GoodsReceivedNote.GoodsReceivedNoteName))
+                .ForMember(dest => dest.PurchaseOrder, opt => opt.MapFrom(src => src.PurchaseOrder.PurchaseOrderName))
                 .ForMember(dest => dest.BillType, opt => opt.MapFrom(src => src.BillType.BillTypeName))
                 .ForMember(dest => dest.BillDueDate, opt => opt.MapFrom(src => src.BillDueDate.Date.ToLongDateString()))
                 .ForMember(dest => dest.BillDate, opt => opt.MapFrom(src => src.BillDate.Date.ToLongDateString()))
                 .ReverseMap();
             CreateMap<GoodsReceivedNote, GoodsReceiveNoteViewModel>()
+                .ForMember(dest => dest.Warehouse, opt => opt.MapFrom(src => src.Warehouse.WarehouseName))
+                .ForMember(dest => dest.PurchaseOrder, opt => opt.MapFrom(src => src.PurchaseOrder.PurchaseOrderName))
+                .ReverseMap();
+            CreateMap<GoodsReceivedNote, GoodsReceiveNoteInfoViewModel>()
                 .ForMember(dest => dest.Warehouse, opt => opt.MapFrom(src => src.Warehouse.WarehouseName))
                 .ForMember(dest => dest.PurchaseOrder, opt => opt.MapFrom(src => src.PurchaseOrder.PurchaseOrderName))
                 .ReverseMap();
@@ -45,8 +49,18 @@ namespace ServiceLayer.Services.CommonServices
                 .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(src => src.PaymentType.PaymentTypeName))
                 .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.PaymentDate.Date.ToLongDateString()))
                 .ReverseMap();
+            CreateMap<PaymentReceive, PaymentReceiveInfoViewModel>()
+                .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(src => src.PaymentType.PaymentTypeName))
+                .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.PaymentDate.Date.ToLongDateString()))
+                .ReverseMap();
             CreateMap<PaymentVoucher, PaymentVoucherViewModel>()
-                .ForMember(dest => dest.Bill, opt => opt.MapFrom(src => src.Bill.BillName))
+                .ForMember(dest => dest.PurchaseOrder, opt => opt.MapFrom(src => src.PurchaseOrder.PurchaseOrderName))
+                .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(src => src.PaymentType.PaymentTypeName))
+                .ForMember(dest => dest.CashBank, opt => opt.MapFrom(src => src.CashBank.CashBankName))
+                .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.PaymentDate.Date.ToLongDateString()))
+                .ReverseMap();
+            CreateMap<PaymentVoucher, PaymentVoucherInfoViewModel>()
+                .ForMember(dest => dest.PurchaseOrder, opt => opt.MapFrom(src => src.PurchaseOrder.PurchaseOrderName))
                 .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(src => src.PaymentType.PaymentTypeName))
                 .ForMember(dest => dest.CashBank, opt => opt.MapFrom(src => src.CashBank.CashBankName))
                 .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.PaymentDate.Date.ToLongDateString()))
@@ -71,6 +85,8 @@ namespace ServiceLayer.Services.CommonServices
                 .ForMember(dest => dest.DeliveryDate, opt => opt.MapFrom(src => src.DeliveryDate.Date.ToLongDateString()))
                 .ReverseMap();
             CreateMap<SalesOrderLine, SalesOrderLineViewModel>()
+                .ReverseMap();
+            CreateMap<SalesOrderLine, SalesOrderLineInfoViewModel>()
                 .ReverseMap();
             CreateMap<Shipment, ShipmentViewModel>()
                 .ForMember(dest => dest.SalesOrder, opt => opt.MapFrom(src => src.SalesOrder.SalesOrderName))

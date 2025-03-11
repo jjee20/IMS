@@ -4,6 +4,7 @@ using InfastructureLayer.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfastructureLayer.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    partial class ApplicationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20250310031630_PurchaseOrder_Update")]
+    partial class PurchaseOrder_Update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -660,8 +663,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("BillTypeId");
 
-                    b.HasIndex("PurchaseOrderId")
-                        .IsUnique();
+                    b.HasIndex("PurchaseOrderId");
 
                     b.ToTable("Bill");
                 });
@@ -765,10 +767,6 @@ namespace InfastructureLayer.Migrations
 
                     b.Property<int>("PurchaseOrderId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Remarks")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VendorDONumber")
                         .IsRequired()
@@ -959,10 +957,6 @@ namespace InfastructureLayer.Migrations
 
                     b.Property<int>("PurchaseOrderId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Remarks")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PaymentVoucherId");
 
@@ -1855,8 +1849,8 @@ namespace InfastructureLayer.Migrations
                         .IsRequired();
 
                     b.HasOne("DomainLayer.Models.Inventory.PurchaseOrder", "PurchaseOrder")
-                        .WithOne("Bill")
-                        .HasForeignKey("DomainLayer.Models.Inventory.Bill", "PurchaseOrderId")
+                        .WithMany()
+                        .HasForeignKey("PurchaseOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1868,7 +1862,7 @@ namespace InfastructureLayer.Migrations
             modelBuilder.Entity("DomainLayer.Models.Inventory.GoodsReceivedNote", b =>
                 {
                     b.HasOne("DomainLayer.Models.Inventory.PurchaseOrder", "PurchaseOrder")
-                        .WithMany("GoodsReceivedNote")
+                        .WithMany()
                         .HasForeignKey("PurchaseOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1937,7 +1931,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired();
 
                     b.HasOne("DomainLayer.Models.Inventory.PurchaseOrder", "PurchaseOrder")
-                        .WithMany("PaymentVoucher")
+                        .WithMany()
                         .HasForeignKey("PurchaseOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2227,13 +2221,6 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PurchaseOrder", b =>
                 {
-                    b.Navigation("Bill")
-                        .IsRequired();
-
-                    b.Navigation("GoodsReceivedNote");
-
-                    b.Navigation("PaymentVoucher");
-
                     b.Navigation("PurchaseOrderLines");
                 });
 

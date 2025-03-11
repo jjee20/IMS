@@ -5,6 +5,9 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.UserControls;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.Helpers;
 using ServiceLayer.Services.IRepositories.IInventory;
 
@@ -51,9 +54,12 @@ namespace PresentationLayer.Presenters
             _view.ProductAddEvent += ProductAdd;
             _view.PaymentDiscountEvent += PaymentDiscount;
             _view.FreightEvent += Freight;
-            _view.PrintSOEvent += PrintSO;
+            _view.PrintPOEvent += PrintPO;
             _view.DeleteProductEvent += ProductDelete;
             _view.UpdateComputationEvent += UpdateComputation;
+            _view.GRNEvent += GRN;
+            _view.BillEvent += GenerateBill;
+            _view.PaymentVoucherEvent += GeneratePaymentVoucher;
 
             //Load
             LoadAllPurchaseOrderList();
@@ -69,6 +75,44 @@ namespace PresentationLayer.Presenters
             _view.SetVendorListBindingSource(VendorBindingSource);
             _view.SetProductListBindingSource(ProductBindingSource);
         }
+
+        private void OpenPurchaseOrderView<T>(Func<PurchaseOrder, T> viewCreator, string titlePrefix) where T : Form
+        {
+            try
+            {
+                var purchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
+                var entity = _unitOfWork.PurchaseOrder.Get(
+                    c => c.PurchaseOrderId == purchaseOrder.PurchaseOrderId,
+                    includeProperties: "PurchaseOrderLines,GoodsReceivedNote,Bill,PaymentVoucher",
+                    tracked: true
+                );
+
+                var form = viewCreator(entity);
+                form.Text = $"{titlePrefix} Details for P.O.#: {entity.PurchaseOrderName}";
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _view.Message = ex.Message;
+            }
+        }
+
+        private void GeneratePaymentVoucher(object? sender, EventArgs e)
+        {
+            OpenPurchaseOrderView(entity => new PaymentVoucherView(entity, _unitOfWork), "Payment Voucher");
+        }
+
+        private void GenerateBill(object? sender, EventArgs e)
+        {
+            OpenPurchaseOrderView(entity => new BillView(entity, _unitOfWork), "Bill");
+        }
+
+        private void GRN(object? sender, EventArgs e)
+        {
+            OpenPurchaseOrderView(entity => new GoodsReceivedNoteView(entity, _unitOfWork), "Goods Received Note");
+        }
+
+
         private void UpdateComputation(object? sender, DataGridViewCellEventArgs e)
         {
             _view.Amount = _view.PurchaseOrderLines.Select(c => c.SubTotal).Sum();
@@ -88,7 +132,7 @@ namespace PresentationLayer.Presenters
             _view.Total = _view.SubTotal + _view.Tax + _view.Freight;
         }
 
-        private void PrintSO(object? sender, DataGridViewCellEventArgs e)
+        private void PrintPO(object? sender, DataGridViewCellEventArgs e)
         {
             var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
             var PurchaseOrderLine = _unitOfWork.PurchaseOrderLine.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product", tracked: true);

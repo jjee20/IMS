@@ -8,10 +8,8 @@ using DomainLayer.Models;
 
 namespace DomainLayer.ViewModels.Inventory
 {
-    public class PaymentVoucherViewModel
+    public class PaymentVoucherInfoViewModel
     {
-        [Display(Name = "Id")]
-        public int PaymentVoucherId { get; set; }
         [Display(Name = "Payment Voucher #")]
         public string PaymentVoucherName { get; set; }
         [Display(Name = "Purchase Order #")]
@@ -24,7 +22,5 @@ namespace DomainLayer.ViewModels.Inventory
         public double PaymentAmount { get; set; }
         [Display(Name = "Payment Source")]
         public string CashBank { get; set; }
-        [Display(Name = "Full Payment")]
-        public bool IsFullPayment { get; set; } = true;
     }
 }
