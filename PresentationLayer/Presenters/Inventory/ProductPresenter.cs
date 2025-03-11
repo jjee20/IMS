@@ -78,6 +78,9 @@ namespace PresentationLayer.Presenters
             model.DefaultBuyingPrice = _view.DefaultBuyingPrice;
             model.DefaultSellingPrice = _view.DefaultSellingPrice;
             model.BranchId = _view.BranchId;
+            model.Color = _view.PColor;
+            model.Size = _view.PSize;
+            model.Brand = _view.Brand;
 
             try
             {
@@ -131,6 +134,9 @@ namespace PresentationLayer.Presenters
             _view.DefaultBuyingPrice = entity.DefaultBuyingPrice;
             _view.DefaultSellingPrice = entity.DefaultSellingPrice;
             _view.BranchId = entity.BranchId;
+            _view.Brand = entity.Brand;
+            _view.PSize = entity.Size;
+            _view.PColor = entity.Color;
         }
         private void Delete(object? sender, EventArgs e)
         {

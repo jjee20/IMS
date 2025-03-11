@@ -166,6 +166,24 @@ namespace PresentationLayer.Views.UserControls
             set { isEdit = value; }
         }
 
+        public string PSize
+        {
+            get { return txtSize.Text; }
+            set { txtSize.Text = value; }
+        }
+
+        public string Brand
+        {
+            get { return txtBrand.Text; }
+            set { txtBrand.Text = value; }
+        }
+
+        public string PColor
+        {
+            get { return txtColor.Text; }
+            set { txtColor.Text = value; }
+        }
+
         public bool IsSuccessful
         {
             get { return isSuccessful; }

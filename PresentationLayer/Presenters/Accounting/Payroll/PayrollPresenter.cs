@@ -348,7 +348,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 double regularHours = totalDays * (employee.Shift?.RegularHours ?? 0);
                 double hourlyRate = employee.BasicSalary / (totalDays * (employee.Shift?.RegularHours ?? 8));
                 double regularPay = totalDays * employee.BasicSalary;
-                double overtimeHours = employeeAttendances.Sum(a => Math.Max(0, a.HoursWorked - (employee.Shift?.RegularHours ?? 0)));
+                double overtimeHours = employeeAttendances.Sum(a => Math.Max(0, employee.Shift?.RegularHours > a.HoursWorked ? 0 : a.HoursWorked - (employee.Shift?.RegularHours ?? 8)));
                 double overtimePay = overtimeHours * (employee.BasicSalary/employee.Shift?.RegularHours ?? 0);
 
                 double allowancePay = CalculateAllowances(employee, startDate, endDate);

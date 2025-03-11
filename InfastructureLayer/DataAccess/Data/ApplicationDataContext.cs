@@ -45,6 +45,7 @@ namespace InfastructureLayer.DataAccess.Data
         #endregion
 
         #region Inventory
+        public DbSet<TargetGoals> TargetGoals { get; set; }
         public DbSet<Bill> Bill { get; set; }
 
         public DbSet<BillType> BillType { get; set; }

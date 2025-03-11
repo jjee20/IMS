@@ -85,24 +85,28 @@ namespace PresentationLayer.Presenters
             _view.SetWarehouseListBindingSource(WarehouseBindingSource);
         }
 
-        private void ShowPayment(object? sender, EventArgs e)
+        private void ShowSalesOrderView<T>(Func<SalesOrder, T> viewCreator, string titlePrefix) where T : Form
         {
             var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
-            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "SalesOrderLines,Invoice,Customer,Shipment,PaymentReceive", tracked: true);
+            var entity = _unitOfWork.SalesOrder.Get(
+                c => c.SalesOrderId == salesOrder.SalesOrderId,
+                includeProperties: "SalesOrderLines,Invoice,Customer,Shipment,PaymentReceive",
+                tracked: true
+            );
 
-            var payment = new PaymentReceiveView(entity, _unitOfWork);
-            payment.Text = $"Payment Details for S.0.#: {entity.SalesOrderName}";
-            payment.ShowDialog();
+            var form = viewCreator(entity);
+            form.Text = $"{titlePrefix} for S.O.#: {entity.SalesOrderName}";
+            form.ShowDialog();
+        }
+
+        private void ShowPayment(object? sender, EventArgs e)
+        {
+            ShowSalesOrderView(entity => new PaymentReceiveView(entity, _unitOfWork), "Payment Details");
         }
 
         private void ShowInvoice(object? sender, EventArgs e)
         {
-            var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
-            var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: ",SalesOrderLines,Invoice,Customer,Shipment,PaymentReceive", tracked: true);
-            
-            var generateInvoice = new InvoiceView(entity, _unitOfWork);
-            generateInvoice.Text = $"Generate Invoice for S.0.#: {entity.SalesOrderName}";
-            generateInvoice.ShowDialog();
+            ShowSalesOrderView(entity => new InvoiceView(entity, _unitOfWork), "Generate Invoice");
         }
 
         private void UpdateComputation(object? sender, DataGridViewCellEventArgs e)

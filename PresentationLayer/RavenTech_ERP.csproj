@@ -186,6 +186,9 @@
     <Compile Update="Views\UserControls\Inventory\PurchaseOrderInformationView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchasesReportView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\WarehouseView.cs">
       <SubType>UserControl</SubType>
     </Compile>

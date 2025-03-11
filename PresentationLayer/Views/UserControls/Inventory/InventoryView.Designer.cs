@@ -37,6 +37,8 @@
             tbProject = new TabPage();
             tbTargetGoals = new TabPage();
             tbSettings = new TabPage();
+            tbSalesReport = new TabPage();
+            tbPurchaseReport = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,7 +61,7 @@
             tbPurchase.Name = "tbPurchase";
             tbPurchase.Size = new Size(1352, 689);
             tbPurchase.TabIndex = 3;
-            tbPurchase.Text = "Purchases";
+            tbPurchase.Text = "Purchase Listing";
             tbPurchase.UseVisualStyleBackColor = true;
             // 
             // tbSales
@@ -70,7 +72,7 @@
             tbSales.Name = "tbSales";
             tbSales.Size = new Size(1352, 689);
             tbSales.TabIndex = 2;
-            tbSales.Text = "Sales";
+            tbSales.Text = "Sales Listing";
             tbSales.UseVisualStyleBackColor = true;
             // 
             // tbDashboard
@@ -92,6 +94,8 @@
             tcMain.Controls.Add(tbSales);
             tcMain.Controls.Add(tbPurchase);
             tcMain.Controls.Add(tbProject);
+            tcMain.Controls.Add(tbSalesReport);
+            tcMain.Controls.Add(tbPurchaseReport);
             tcMain.Controls.Add(tbTargetGoals);
             tcMain.Controls.Add(tbSettings);
             tcMain.Depth = 0;
@@ -112,7 +116,7 @@
             tbProject.Padding = new Padding(3);
             tbProject.Size = new Size(1352, 689);
             tbProject.TabIndex = 5;
-            tbProject.Text = "Project";
+            tbProject.Text = "Project Listing";
             tbProject.UseVisualStyleBackColor = true;
             // 
             // tbTargetGoals
@@ -132,6 +136,24 @@
             tbSettings.TabIndex = 7;
             tbSettings.Text = "Settings";
             tbSettings.UseVisualStyleBackColor = true;
+            // 
+            // tbSalesReport
+            // 
+            tbSalesReport.Location = new Point(4, 24);
+            tbSalesReport.Name = "tbSalesReport";
+            tbSalesReport.Size = new Size(1352, 689);
+            tbSalesReport.TabIndex = 8;
+            tbSalesReport.Text = "Sales Report";
+            tbSalesReport.UseVisualStyleBackColor = true;
+            // 
+            // tbPurchaseReport
+            // 
+            tbPurchaseReport.Location = new Point(4, 24);
+            tbPurchaseReport.Name = "tbPurchaseReport";
+            tbPurchaseReport.Size = new Size(1352, 689);
+            tbPurchaseReport.TabIndex = 9;
+            tbPurchaseReport.Text = "Purchase Report";
+            tbPurchaseReport.UseVisualStyleBackColor = true;
             // 
             // InventoryView
             // 
@@ -161,5 +183,7 @@
         private TabPage tbProject;
         private TabPage tbTargetGoals;
         private TabPage tbSettings;
+        private TabPage tbSalesReport;
+        private TabPage tbPurchaseReport;
     }
 }

@@ -1399,6 +1399,28 @@ namespace InfastructureLayer.Migrations
                     b.ToTable("ShipmentType");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Inventory.TargetGoals", b =>
+                {
+                    b.Property<int>("TargetGoalsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TargetGoalsId"));
+
+                    b.Property<double>("AnnualSales")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MonthlyItemSold")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MonthlySales")
+                        .HasColumnType("float");
+
+                    b.HasKey("TargetGoalsId");
+
+                    b.ToTable("TargetGoals");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Inventory.UnitOfMeasure", b =>
                 {
                     b.Property<int>("UnitOfMeasureId")

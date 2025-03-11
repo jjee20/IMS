@@ -20,6 +20,9 @@ namespace DomainLayer.Models.Inventory
         [ForeignKey("ProductTypeId")]
         public int ProductTypeId { get; set; }
         public string? ProductImageUrl { get; set; }
+        public string? Brand { get; set; }
+        public string? Color { get; set; }
+        public string? Size { get; set; }
         public int ReorderLevel { get; set; }
         [Display(Name = "UOM")]
         [ForeignKey("UnitOfMeasureId")]

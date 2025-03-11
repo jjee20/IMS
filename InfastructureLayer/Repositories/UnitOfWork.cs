@@ -19,6 +19,7 @@ namespace InfastructureLayer.DataAccess.Repositories
     {
         private ApplicationDataContext _db;
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public ITargetGoalsRepository TargetGoals { get; private set; }
         public IBillRepository Bill { get; private set; }
         public IBillTypeRepository BillType { get; private set; }
         public IBranchRepository Branch { get; private set; }
@@ -68,6 +69,7 @@ namespace InfastructureLayer.DataAccess.Repositories
         {
             _db = db;
             ApplicationUser ??= new ApplicationUserRepository(_db);
+            TargetGoals ??= new TargetGoalsRepository(_db);
             Bill ??= new BillRepository(_db);
             BillType ??= new BillTypeRepository(_db);
             Branch ??= new BranchRepository(_db);
