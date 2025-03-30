@@ -3,7 +3,7 @@ using InfastructureLayer.DataAccess.Repositories;
 using MaterialSkin.Controls;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Reports;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

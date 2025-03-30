@@ -7,6 +7,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -164,8 +165,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetContributionListBindingSource(BindingSource ContributionList)
         {
-            dgList.DataSource = ContributionList;
-            DataGridHelper.ApplyDisplayNames<Contribution>(ContributionList, dgList);
+            dgPager.DataSource = ContributionList.ToList<Contribution>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetContributionTypeListBindingSource(BindingSource ContributionTypeList)
         {

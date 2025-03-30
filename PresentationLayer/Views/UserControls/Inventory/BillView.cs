@@ -2,7 +2,7 @@
 using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
 using PresentationLayer;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +24,20 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             InitializeComponent();
             _purchaseOrder = purchaseOrder;
             _unitOfWork = unitOfWork;
+
+            LoadBill();
+        }
+
+        private void LoadBill()
+        {
+            if(_purchaseOrder.Bill != null)
+            {
+                txtDate.Value = _purchaseOrder.Bill.BillDate.Date;
+                txtDueDate.Value = _purchaseOrder.Bill.BillDueDate.Date;
+                txtBillType.SelectedValue = _purchaseOrder.Bill.BillTypeId;
+                txtVendorDONumber.Text = _purchaseOrder.Bill.VendorDONumber;
+                txtVendorInvoiceNumber.Text = _purchaseOrder.Bill.VendorInvoiceNumber;
+            }
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)

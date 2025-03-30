@@ -9,7 +9,7 @@ using PresentationLayer.Views.UserControls.Payroll;
 using RevenTech_ERP.Presenters.Accounting.Payroll;
 using RavenTech_ERP.Properties;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters.Account
 {

@@ -6,6 +6,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -148,8 +149,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetProjectListBindingSource(BindingSource ProjectList)
         {
-            dgList.DataSource = ProjectList;
-            DataGridHelper.ApplyDisplayNames<Project>(ProjectList, dgList);
+            dgPager.DataSource = ProjectList.ToList<Project>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

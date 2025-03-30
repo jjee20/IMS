@@ -4,6 +4,7 @@ using DomainLayer.ViewModels.Inventory;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -164,8 +165,8 @@ namespace PresentationLayer.Views.UserControls
         }
         public void SetProductStockInLogListBindingSource(BindingSource ProductStockInLogList)
         {
-            dgList.DataSource = ProductStockInLogList;
-            DataGridHelper.ApplyDisplayNames<ProductStockInLogViewModel>(ProductStockInLogList, dgList);
+            dgPager.DataSource = ProductStockInLogList.ToList<ProductStockInLogViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

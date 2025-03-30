@@ -4,6 +4,7 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -390,13 +391,12 @@ namespace PresentationLayer.Views.UserControls
         }
         public void SetSalesOrderListBindingSource(BindingSource SalesOrderList)
         {
-            dgList.DataSource = SalesOrderList;
-            DataGridHelper.ApplyDisplayNames<SalesOrderViewModel>(SalesOrderList, dgList);
+            dgPager.DataSource = SalesOrderList.ToList<SalesOrderViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetSalesOrderLineListBindingSource(BindingSource SalesOrderLineList)
         {
-            dgOrderLine.DataSource = SalesOrderLineList;
-            DataGridHelper.ApplyDisplayNames<SalesOrderLineViewModel>(SalesOrderLineList, dgOrderLine);
+            dgOrderLine.DataSource = SalesOrderLineList.ToList<SalesOrderLineViewModel>();
         }
 
         public void SetSalesTypeListBindingSource(BindingSource SalesTypeBindingSource)
@@ -436,9 +436,9 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler FreightEvent;
         public event EventHandler InvoiceEvent;
         public event EventHandler PaymentEvent;
-        public event DataGridViewCellEventHandler PrintSOEvent;
-        public event DataGridViewCellEventHandler DeleteProductEvent;
-        public event DataGridViewCellEventHandler UpdateComputationEvent;
+        public event EventHandler PrintSOEvent;
+        public event EventHandler DeleteProductEvent;
+        public event EventHandler UpdateComputationEvent;
 
         private static SalesOrderView? instance;
         public static SalesOrderView GetInstance(TabPage parentContainer)

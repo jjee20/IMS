@@ -47,9 +47,9 @@ namespace PresentationLayer.Views.IViews
         event EventHandler GRNEvent;
         event EventHandler BillEvent;
         event EventHandler PaymentVoucherEvent;
-        event DataGridViewCellEventHandler PrintPOEvent;
-        event DataGridViewCellEventHandler DeleteProductEvent;
-        event DataGridViewCellEventHandler UpdateComputationEvent;
+        event EventHandler PrintPOEvent;
+        event EventHandler DeleteProductEvent;
+        event EventHandler UpdateComputationEvent;
 
         void SetPurchaseOrderListBindingSource(BindingSource PurchaseOrderList);
         void SetPurchaseOrderLineListBindingSource(BindingSource PurchaseOrderLineList);

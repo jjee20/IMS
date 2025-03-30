@@ -12,6 +12,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         int EmployeeId { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }
+        bool IsOneTime { get; set; }
         string Message { get; set; }
         string SearchValue { get; set; }
 

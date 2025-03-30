@@ -9,8 +9,9 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.Helpers;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -50,7 +51,7 @@ namespace PresentationLayer.Presenters
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
             _view.ProductAddEvent += ProductAdd;
-            _view.PrintSOEvent += PrintSO;
+            _view.PrintProjectEvent += PrintProject;
             _view.DeleteProductEvent += ProductDelete;
             _view.UpdateComputationEvent += UpdateComputation;
 
@@ -62,36 +63,38 @@ namespace PresentationLayer.Presenters
             _view.SetProjectListBindingSource(ProjectBindingSource);
             _view.SetProductListBindingSource(ProductBindingSource);
         }
-        private void UpdateComputation(object? sender, DataGridViewCellEventArgs e)
+        private void UpdateComputation(object? sender, EventArgs e)
         {
             _view.Total = _view.ProjectLines.Select(c => c.SubTotal).Sum();
         }
 
-        private void PrintSO(object? sender, DataGridViewCellEventArgs e)
+        private void PrintProject(object? sender, EventArgs e)
         {
-            var Project = (ProjectViewModel)ProjectBindingSource.Current;
-            var ProjectLine = _unitOfWork.ProjectLine.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product", tracked: true);
-            var projectLineVM = ProjectLine.Select(c => new ProjectLineViewModel
+            try
             {
-                ProductId = (int)c.ProductId,
-                ProductName = c.Product.ProductName,
-                Price = c.Price,
-                DiscountPercentage = c.DiscountPercentage * 100,
-                Quantity = c.Quantity,
-                SubTotal = c.SubTotal,  
-            });
-            ProjectVM = Project;
+                var Project = (ProjectViewModel)ProjectBindingSource.Current;
+                var ProjectLine = _unitOfWork.ProjectLine.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product", tracked: true);
+                var projectLineVM = ProjectLine.Select(c => new ProjectLineViewModel
+                {
+                    ProductId = (int)c.ProductId,
+                    ProductName = c.Product.ProductName,
+                    Price = c.Price,
+                    DiscountPercentage = c.DiscountPercentage * 100,
+                    Quantity = c.Quantity,
+                    SubTotal = c.SubTotal,
+                });
+                ProjectVM = Project;
 
-            string reportFileName = "ProjectReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
-            string reportPath = Path.Combine(reportDirectory, reportFileName);
+                string reportFileName = "ProjectReport.rdlc";
+                string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
+                string reportPath = Path.Combine(reportDirectory, reportFileName);
 
-            var localReport = new LocalReport();
+                var localReport = new LocalReport();
 
-            var reportDataSource = new ReportDataSource("ProjectLine", projectLineVM);
-            //localReport.DataSources.Add(reportDataSource);
+                var reportDataSource = new ReportDataSource("ProjectLine", projectLineVM);
+                //localReport.DataSources.Add(reportDataSource);
 
-            var parameters = new List<ReportParameter>
+                var parameters = new List<ReportParameter>
             {
                 new ReportParameter("ProjectName", ProjectVM.ProjectName ?? string.Empty),
                 new ReportParameter("StartDate", ProjectVM.StartDate.Value.ToString("MMM dd, yyyy")),
@@ -102,13 +105,19 @@ namespace PresentationLayer.Presenters
                 new ReportParameter("Revenue", ProjectVM.Revenue.Value.ToString("N2")),
             };
 
-            //localReport.SetParameters(parameters);
+                //localReport.SetParameters(parameters);
 
-            var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
-            reportView.ShowDialog();
+                var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
+                reportView.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = ex.Message;
+            }
         }
 
-        private void ProductDelete(object? sender, DataGridViewCellEventArgs e)
+        private void ProductDelete(object? sender, EventArgs e)
         {
             try
             {
@@ -296,16 +305,11 @@ namespace PresentationLayer.Presenters
         }
         private void Print(object? sender, EventArgs e)
         {
-            string reportFileName = "SalesReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
-            string reportPath = Path.Combine(reportDirectory, reportFileName);
+            var project = (ProjectViewModel)ProjectBindingSource.Current;
+            var entity = _unitOfWork.Project.Get(c => c.ProjectId == project.ProjectId, includeProperties: "ProjectLines");
 
-            var localReport = new LocalReport();
-
-            var reportDataSource = new ReportDataSource("Project", ProjectList);
-
-            var reportView = new ReportView(reportPath, reportDataSource, localReport);
-            reportView.ShowDialog();
+            var projectInformation = new ProjectInformationView(entity, project, _unitOfWork);
+            projectInformation.ShowDialog();
         }
         private void Return(object? sender, EventArgs e)
         {

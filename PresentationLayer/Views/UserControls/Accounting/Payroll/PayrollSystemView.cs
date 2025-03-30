@@ -23,11 +23,9 @@ namespace PresentationLayer.Views.UserControls.Payroll
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             var colorScheme = new ColorScheme(
-                                ColorTranslator.FromHtml("#457b9d"),
-                                ColorTranslator.FromHtml("#1d3557"),
-                                ColorTranslator.FromHtml("#f1faee"),
-                                ColorTranslator.FromHtml("#457b9d"),
-                                TextShade.WHITE // text shade
+                                Primary.Blue400, Primary.Blue500,
+                Primary.Blue500, Accent.LightBlue200,
+                TextShade.WHITE
             );
 
             materialSkinManager.ColorScheme = colorScheme;
@@ -38,10 +36,6 @@ namespace PresentationLayer.Views.UserControls.Payroll
                 if (tcMain.SelectedTab == tbAttendance)
                 {
                     ShowAttendance?.Invoke(this, EventArgs.Empty);
-                }
-                else if (tcMain.SelectedTab == tbContribution)
-                {
-                    ShowContribution?.Invoke(this, EventArgs.Empty);
                 }
                 else if (tcMain.SelectedTab == tbDeduction)
                 {
@@ -54,6 +48,10 @@ namespace PresentationLayer.Views.UserControls.Payroll
                 else if (tcMain.SelectedTab == tbEmployee)
                 {
                     ShowEmployee?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbEmployeeContribution)
+                {
+                    ShowEmployeeContribution?.Invoke(this, EventArgs.Empty);
                 }
                 else if (tcMain.SelectedTab == tbJobPosition)
                 {
@@ -87,6 +85,10 @@ namespace PresentationLayer.Views.UserControls.Payroll
                 {
                     ShowAllowance?.Invoke(this, EventArgs.Empty);
                 }
+                else if (tcMain.SelectedTab == tbProfile)
+                {
+                    ShowProfile?.Invoke(this, EventArgs.Empty);
+                }
             };
         }
 
@@ -112,6 +114,7 @@ namespace PresentationLayer.Views.UserControls.Payroll
         public event EventHandler ShowProject;
         public event EventHandler ShowBenefit;
         public event EventHandler ShowAllowance;
+        public event EventHandler ShowEmployeeContribution;
 
         public void ShowForm()
         {
@@ -120,7 +123,7 @@ namespace PresentationLayer.Views.UserControls.Payroll
 
         private void PayrollSystemView_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Restart();
+
         }
     }
 }

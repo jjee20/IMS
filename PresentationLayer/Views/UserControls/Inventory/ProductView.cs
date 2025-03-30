@@ -4,6 +4,7 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -204,8 +205,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetProductListBindingSource(BindingSource ProductList)
         {
-            dgList.DataSource = ProductList;
-            DataGridHelper.ApplyDisplayNames<ProductViewModel>(ProductList, dgList);
+            dgPager.DataSource = ProductList.ToList<ProductViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetProductTypeListBindingSource(BindingSource ProductTypeBindingSource)
         {

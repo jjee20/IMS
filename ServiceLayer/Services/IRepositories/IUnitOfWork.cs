@@ -1,7 +1,8 @@
 ﻿using ServiceLayer.Services.IRepositories.IAccounting.IPayroll;
 using ServiceLayer.Services.IRepositories.IAccounts;
+using ServiceLayer.Services.IRepositories.IInventory;
 
-namespace ServiceLayer.Services.IRepositories.IInventory
+namespace ServiceLayer.Services.IRepositories
 {
     public interface IUnitOfWork
     {
@@ -52,6 +53,7 @@ namespace ServiceLayer.Services.IRepositories.IInventory
         IBonusRepository Bonus { get; }
         IProjectLineRepository ProjectLine { get; }
         IProductStockInLogRepository StockInLogs { get; }
+        IEmployeeContributionRepository EmployeeContribution { get; }
         void Save();
     }
 }

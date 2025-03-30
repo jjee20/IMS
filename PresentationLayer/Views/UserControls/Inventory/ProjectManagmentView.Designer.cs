@@ -31,9 +31,6 @@ namespace PresentationLayer.Views.UserControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -48,10 +45,10 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -78,7 +75,6 @@ namespace PresentationLayer.Views.UserControls
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
-            dgList = new Guna2DataGridView();
             tabPage2 = new TabPage();
             guna2TabControl2 = new Guna2TabControl();
             tabPage4 = new TabPage();
@@ -144,10 +140,13 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel8 = new Guna2HtmlLabel();
             guna2HtmlLabel7 = new Guna2HtmlLabel();
             guna2HtmlLabel10 = new Guna2HtmlLabel();
+            materialCard3 = new MaterialSkin.Controls.MaterialCard();
+            panel1 = new Panel();
+            dgList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            dgPager = new Syncfusion.WinForms.DataPager.SfDataPager();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             tabPage2.SuspendLayout();
             guna2TabControl2.SuspendLayout();
             tabPage4.SuspendLayout();
@@ -165,6 +164,9 @@ namespace PresentationLayer.Views.UserControls
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
+            materialCard3.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             SuspendLayout();
             // 
             // materialCard1
@@ -216,7 +218,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(dgList);
+            tabPage1.Controls.Add(materialCard3);
             tabPage1.Location = new Point(4, 44);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -224,60 +226,6 @@ namespace PresentationLayer.Views.UserControls
             tabPage1.TabIndex = 0;
             tabPage1.Text = "List";
             tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // dgList
-            // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dgList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgList.ColumnHeadersHeight = 50;
-            dgList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgList.DefaultCellStyle = dataGridViewCellStyle3;
-            dgList.Dock = DockStyle.Fill;
-            dgList.GridColor = Color.FromArgb(231, 229, 255);
-            dgList.Location = new Point(3, 3);
-            dgList.Margin = new Padding(3, 2, 3, 2);
-            dgList.Name = "dgList";
-            dgList.RowHeadersVisible = false;
-            dgList.RowHeadersWidth = 51;
-            dgList.RowTemplate.Height = 29;
-            dgList.Size = new Size(1314, 507);
-            dgList.TabIndex = 1;
-            dgList.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgList.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgList.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgList.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgList.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgList.ThemeStyle.BackColor = Color.White;
-            dgList.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgList.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgList.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgList.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgList.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgList.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgList.ThemeStyle.HeaderStyle.Height = 50;
-            dgList.ThemeStyle.ReadOnly = false;
-            dgList.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgList.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgList.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgList.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgList.ThemeStyle.RowsStyle.Height = 29;
-            dgList.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgList.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
             // tabPage2
             // 
@@ -617,39 +565,39 @@ namespace PresentationLayer.Views.UserControls
             // dgOrderLine
             // 
             dgOrderLine.AllowUserToAddRows = false;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dgOrderLine.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgOrderLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dgOrderLine.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgOrderLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgOrderLine.ColumnHeadersHeight = 51;
             dgOrderLine.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgOrderLine.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgOrderLine.DefaultCellStyle = dataGridViewCellStyle3;
             dgOrderLine.Dock = DockStyle.Fill;
             dgOrderLine.GridColor = Color.FromArgb(231, 229, 255);
             dgOrderLine.Location = new Point(14, 78);
             dgOrderLine.Margin = new Padding(3, 2, 3, 2);
             dgOrderLine.Name = "dgOrderLine";
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = SystemColors.Control;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dgOrderLine.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgOrderLine.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgOrderLine.RowHeadersVisible = false;
             dgOrderLine.RowHeadersWidth = 51;
             dgOrderLine.RowTemplate.Height = 29;
@@ -1283,6 +1231,67 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel10.TabIndex = 6;
             guna2HtmlLabel10.Text = "Sales Type";
             // 
+            // materialCard3
+            // 
+            materialCard3.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard3.Controls.Add(panel1);
+            materialCard3.Depth = 0;
+            materialCard3.Dock = DockStyle.Fill;
+            materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard3.Location = new Point(3, 3);
+            materialCard3.Margin = new Padding(14);
+            materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard3.Name = "materialCard3";
+            materialCard3.Padding = new Padding(14);
+            materialCard3.Size = new Size(1314, 507);
+            materialCard3.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(dgList);
+            panel1.Controls.Add(dgPager);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(14, 14);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1286, 479);
+            panel1.TabIndex = 1;
+            // 
+            // dgList
+            // 
+            dgList.AccessibleName = "Table";
+            dgList.AllowFiltering = true;
+            dgList.AllowTriStateSorting = true;
+            dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            dgList.Dock = DockStyle.Fill;
+            dgList.FrozenColumnCount = 2;
+            dgList.FrozenRowCount = 1;
+            dgList.Location = new Point(0, 0);
+            dgList.Name = "dgList";
+            dgList.ShowGroupDropArea = true;
+            dgList.Size = new Size(1286, 443);
+            dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            dgList.TabIndex = 7;
+            dgList.Text = "sfDataGrid1";
+            // 
+            // dgPager
+            // 
+            dgPager.AccessibleName = "DataPager";
+            dgPager.CanOverrideStyle = true;
+            dgPager.DataSource = dgList.DataBindings;
+            dgPager.Dock = DockStyle.Bottom;
+            dgPager.HorizontalAlignment = HorizontalAlignment.Center;
+            dgPager.Location = new Point(0, 443);
+            dgPager.Name = "dgPager";
+            dgPager.PageCount = 1;
+            dgPager.PageSize = 15;
+            dgPager.Size = new Size(1286, 36);
+            dgPager.TabIndex = 8;
+            dgPager.Text = "sfDataPager1";
+            // 
             // ProjectManagementView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -1292,7 +1301,6 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.ResumeLayout(false);
             Guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             tabPage2.ResumeLayout(false);
             guna2TabControl2.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
@@ -1317,6 +1325,9 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
+            materialCard3.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             ResumeLayout(false);
         }
 
@@ -1331,7 +1342,6 @@ namespace PresentationLayer.Views.UserControls
         private Guna2HtmlToolTip guna2HtmlToolTip2;
         private Guna2TabControl Guna2TabControl1;
         private TabPage tabPage1;
-        private Guna2DataGridView dgList;
         private TabPage tabPage2;
         private Guna2TabControl guna2TabControl2;
         private TabPage tabPage4;
@@ -1391,5 +1401,9 @@ namespace PresentationLayer.Views.UserControls
         private Guna2HtmlLabel guna2HtmlLabel9;
         private Guna2Panel guna2Panel1;
         private MaterialSkin.Controls.MaterialSwitch btnNonStock;
+        private MaterialSkin.Controls.MaterialCard materialCard3;
+        private Panel panel1;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid dgList;
+        private Syncfusion.WinForms.DataPager.SfDataPager dgPager;
     }
 }

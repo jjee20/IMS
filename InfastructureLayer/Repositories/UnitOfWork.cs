@@ -65,6 +65,7 @@ namespace InfastructureLayer.DataAccess.Repositories
         public IBonusRepository Bonus { get; private set; }
         public IProjectLineRepository ProjectLine { get; private set; }
         public IProductStockInLogRepository StockInLogs { get; private set; }
+        public IEmployeeContributionRepository EmployeeContribution { get; private set; }
         public UnitOfWork(ApplicationDataContext db)
         {
             _db = db;
@@ -115,6 +116,7 @@ namespace InfastructureLayer.DataAccess.Repositories
             Bonus ??= new BonusRepository(_db);
             ProjectLine ??= new ProjectLineRepository(_db);
             StockInLogs ??= new ProductStockInLogRepository(_db);
+            EmployeeContribution ??= new EmployeeContributionRepository(_db);
         }
         public void Save()
         {

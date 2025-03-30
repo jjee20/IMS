@@ -8,6 +8,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -185,8 +186,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetLeaveListBindingSource(BindingSource LeaveList)
         {
-            dgList.DataSource = LeaveList;
-            DataGridHelper.ApplyDisplayNames<LeaveViewModel>(LeaveList, dgList);
+            dgPager.DataSource = LeaveList.ToList<LeaveViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {

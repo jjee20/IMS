@@ -254,7 +254,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Shipment Type List</Value>
+                  <Value>Shipment Type Report</Value>
                   <Style>
                     <FontSize>14pt</FontSize>
                   </Style>

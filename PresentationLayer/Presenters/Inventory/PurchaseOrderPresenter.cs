@@ -9,7 +9,7 @@ using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.UserControls;
 using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.Helpers;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -113,7 +113,7 @@ namespace PresentationLayer.Presenters
         }
 
 
-        private void UpdateComputation(object? sender, DataGridViewCellEventArgs e)
+        private void UpdateComputation(object? sender, EventArgs e)
         {
             _view.Amount = _view.PurchaseOrderLines.Select(c => c.SubTotal).Sum();
             _view.Tax = _view.SubTotal * 0.12;
@@ -132,11 +132,11 @@ namespace PresentationLayer.Presenters
             _view.Total = _view.SubTotal + _view.Tax + _view.Freight;
         }
 
-        private void PrintPO(object? sender, DataGridViewCellEventArgs e)
+        private void PrintPO(object? sender, EventArgs e)
         {
             var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
             var PurchaseOrderLine = _unitOfWork.PurchaseOrderLine.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product", tracked: true);
-            var selesOrderLineVM = PurchaseOrderLine.Select(c => new PurchaseOrderLineViewModel
+            var purchaseOrderLineVM = PurchaseOrderLine.Select(c => new PurchaseOrderLineViewModel
             {
                 ProductId = (int)c.ProductId,
                 ProductName = c.Product.ProductName,
@@ -153,7 +153,7 @@ namespace PresentationLayer.Presenters
 
             var localReport = new LocalReport();
 
-            var reportDataSource = new ReportDataSource("PurchaseOrderLine", selesOrderLineVM);
+            var reportDataSource = new ReportDataSource("PurchaseOrderLine", purchaseOrderLineVM);
             //localReport.DataSources.Add(reportDataSource);
 
             var parameters = new List<ReportParameter>
@@ -179,7 +179,7 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
 
-        private void ProductDelete(object? sender, DataGridViewCellEventArgs e)
+        private void ProductDelete(object? sender, EventArgs e)
         {
             try
             {

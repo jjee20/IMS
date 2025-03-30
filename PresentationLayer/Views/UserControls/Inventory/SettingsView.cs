@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using DomainLayer.Models.Inventory;
 using PresentationLayer.Views.IViews.Inventory;
 using System;
 using System.Collections.Generic;
@@ -12,24 +13,32 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class PurchaseSettingsView : UserControl, IPurchaseSettingsView
+    public partial class SettingsView : UserControl, ISettingsView
     {
-        public PurchaseSettingsView()
+        public SettingsView()
         {
             InitializeComponent();
             tcMain.SelectedIndexChanged += delegate
             {
-                if (tcMain.SelectedTab == tbPaymentType)
+                if (tcMain.SelectedTab == tbCustomerType)
+                {
+                    ShowCustomerType?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbSalesType)
+                {
+                    ShowSalesType?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbShipmentType)
+                {
+                    ShowShipmentType?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbInvoiceType)
+                {
+                    ShowInvoiceType?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbPaymentType)
                 {
                     ShowPaymentType?.Invoke(this, EventArgs.Empty);
-                }
-                else if (tcMain.SelectedTab == tbBranch)
-                {
-                    ShowBranch?.Invoke(this, EventArgs.Empty);
-                }
-                else if (tcMain.SelectedTab == tbCashBank)
-                {
-                    ShowCashBank?.Invoke(this, EventArgs.Empty);
                 }
                 else if (tcMain.SelectedTab == tbVendorType)
                 {
@@ -46,22 +55,24 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
-        private static PurchaseSettingsView? instance;
+        private static SettingsView? instance;
 
         public TabPage Guna2TabControlPage => tcMain.SelectedTab;
 
+        public event EventHandler ShowCustomerType;
+        public event EventHandler ShowSalesType;
+        public event EventHandler ShowShipmentType;
+        public event EventHandler ShowInvoiceType;
         public event EventHandler ShowPaymentType;
-        public event EventHandler ShowBranch;
-        public event EventHandler ShowCashBank;
         public event EventHandler ShowVendorType;
         public event EventHandler ShowPurchaseType;
         public event EventHandler ShowBillType;
 
-        public static PurchaseSettingsView GetInstance(TabPage parentContainer)
+        public static SettingsView GetInstance(TabPage parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {
-                instance = new PurchaseSettingsView();
+                instance = new SettingsView();
                 parentContainer.Controls.Add(instance);
                 instance.Dock = DockStyle.Fill;
             }

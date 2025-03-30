@@ -11,7 +11,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -73,6 +73,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             model.Amount = _view.Amount;
             model.EmployeeId = _view.EmployeeId;
             model.Description = _view.Description;
+            model.IsOneTime = _view.IsOneTime;
 
             try
             {
@@ -119,6 +120,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Amount = entity.Amount;
             _view.EmployeeId = entity.EmployeeId;
             _view.Description = entity.Description;
+            _view.IsOneTime = entity.IsOneTime;
         }
         private void Delete(object? sender, EventArgs e)
         {

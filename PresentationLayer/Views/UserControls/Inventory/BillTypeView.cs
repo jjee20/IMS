@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Models.Inventory;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -133,8 +134,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetBillTypeListBindingSource(BindingSource BillTypeList)
         {
-            dgList.DataSource = BillTypeList;
-            DataGridHelper.ApplyDisplayNames<BillType>(BillTypeList, dgList);
+            dgPager.DataSource = BillTypeList.ToList<BillType>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

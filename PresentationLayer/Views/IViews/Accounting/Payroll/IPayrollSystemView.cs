@@ -19,6 +19,8 @@
         event EventHandler ShowProject;
         event EventHandler ShowBenefit;
         event EventHandler ShowAllowance;
+        event EventHandler ShowEmployeeContribution;
+        event EventHandler ShowProfile;
 
         void ShowForm();
     }

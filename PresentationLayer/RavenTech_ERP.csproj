@@ -38,7 +38,6 @@
     <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="Guna.Charts.WinForms" Version="1.1.0" />
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.6" />
-    <PackageReference Include="LiveCharts.WinForms" Version="0.9.7.1" />
     <PackageReference Include="MaterialSkin.2" Version="2.3.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
@@ -50,6 +49,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.19" />
+    <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="28.2.12" />
+    <PackageReference Include="Syncfusion.Tools.Windows" Version="28.2.12" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
@@ -80,6 +81,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SERCS.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\EmployeeContributionView.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Account\RegisterView.cs">
       <SubType>UserControl</SubType>
@@ -132,9 +136,6 @@
     <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteListView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\BillView.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Inventory\PaymentVoucherListView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,16 +157,10 @@
     <Compile Update="Views\UserControls\Inventory\ProductMonitoringView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PurchaseSettingsView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\ProjectInformationView.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\PurchaseSettingsView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\PurchaseView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\ProductInventoryView.cs">
@@ -174,13 +169,10 @@
     <Compile Update="Views\UserControls\Inventory\ConfigurationView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PurchaseView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\ProjectManagmenetView.cs">
+    <Compile Update="Views\UserControls\Inventory\ProjectManagmentView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\PurchaseOrderInformationView.cs">
@@ -255,6 +247,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Update="Reports\Accounting\Payroll\EmployeeContribution.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Reports\Accounting\Payroll\Contribution.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -303,6 +298,9 @@
     <None Update="Reports\Accounting\Payroll\PayrollReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Reports\Inventory\PurchaseReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Reports\Inventory\StockInLogReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -310,9 +308,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\PurchaseReport.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Reports\Inventory\SalesOrderReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Inventory\VendorReport.rdlc">

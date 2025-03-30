@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using static PresentationLayer.Json.Address;
 
 namespace PresentationLayer.Presenters

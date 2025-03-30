@@ -2,7 +2,8 @@
 using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
 using ServiceLayer.Services.Helpers;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,8 +32,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private void LoadAllPaymentReceiveList()
         {
 
-            dgList.DataSource = _bindingSource;
-            DataGridHelper.ApplyDisplayNames<PaymentReceiveViewModel>(_bindingSource, dgList);
+            dgPager.DataSource = _bindingSource.ToList<PaymentReceiveViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         private void dgList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

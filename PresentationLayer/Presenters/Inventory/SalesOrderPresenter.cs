@@ -9,7 +9,7 @@ using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.UserControls;
 using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.Helpers;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -109,7 +109,7 @@ namespace PresentationLayer.Presenters
             ShowSalesOrderView(entity => new InvoiceView(entity, _unitOfWork), "Generate Invoice");
         }
 
-        private void UpdateComputation(object? sender, DataGridViewCellEventArgs e)
+        private void UpdateComputation(object? sender, EventArgs e)
         {
             _view.Amount = _view.SalesOrderLines.Select(c => c.SubTotal).Sum();
             _view.Tax = _view.SubTotal * 0.12;
@@ -129,7 +129,7 @@ namespace PresentationLayer.Presenters
             _view.Total = _view.SubTotal + _view.Tax + _view.Freight;
         }
 
-        private void PrintSO(object? sender, DataGridViewCellEventArgs e)
+        private void PrintSO(object? sender, EventArgs e)
         {
             var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
             var entity = _unitOfWork.SalesOrder.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "SalesOrderLines,Shipment.ShipmentType,Invoice.InvoiceType,PaymentReceive.PaymentType");
@@ -138,7 +138,7 @@ namespace PresentationLayer.Presenters
             salesOrderInformation.ShowDialog();
         }
 
-        private void ProductDelete(object? sender, DataGridViewCellEventArgs e)
+        private void ProductDelete(object? sender, EventArgs e)
         {
             try
             {

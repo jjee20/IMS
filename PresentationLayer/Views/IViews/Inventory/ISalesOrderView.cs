@@ -51,9 +51,9 @@ namespace PresentationLayer.Views.IViews
         event EventHandler FreightEvent;
         event EventHandler InvoiceEvent;
         event EventHandler PaymentEvent;
-        event DataGridViewCellEventHandler PrintSOEvent;
-        event DataGridViewCellEventHandler DeleteProductEvent; 
-        event DataGridViewCellEventHandler UpdateComputationEvent;
+        event EventHandler PrintSOEvent;
+        event EventHandler DeleteProductEvent; 
+        event EventHandler UpdateComputationEvent;
 
         void SetSalesOrderListBindingSource(BindingSource SalesOrderList);
         void SetSalesOrderLineListBindingSource(BindingSource SalesOrderLineList);

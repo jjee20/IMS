@@ -627,7 +627,7 @@
             materialLabel1.Location = new Point(0, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(221, 52);
+            materialLabel1.Size = new Size(569, 52);
             materialLabel1.TabIndex = 4;
             materialLabel1.Text = "Purchases Report";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;

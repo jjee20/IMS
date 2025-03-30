@@ -31,9 +31,9 @@ namespace PresentationLayer.Views.UserControls
         private void InitializeComponent()
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePasswordView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePasswordView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -43,14 +43,13 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1 = new Guna2TabControl();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            btnSave = new Guna2Button();
             txtConfirmNewPassword = new Guna2TextBox();
             guna2HtmlLabel5 = new Guna2HtmlLabel();
             txtNewPassword = new Guna2TextBox();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna2HtmlLabel();
             txtPassword = new Guna2TextBox();
-            panel2 = new Panel();
-            btnSave = new Guna2Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             guna2Separator1 = new Guna2Separator();
             tableLayoutPanel2 = new TableLayoutPanel();
@@ -59,7 +58,6 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
             materialCard2.SuspendLayout();
-            panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -68,7 +66,6 @@ namespace PresentationLayer.Views.UserControls
             // 
             materialCard1.BackColor = Color.FromArgb(255, 255, 255);
             materialCard1.Controls.Add(Guna2TabControl1);
-            materialCard1.Controls.Add(panel2);
             materialCard1.Controls.Add(tableLayoutPanel1);
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
@@ -86,10 +83,10 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.Controls.Add(tabPage2);
             Guna2TabControl1.Dock = DockStyle.Fill;
             Guna2TabControl1.ItemSize = new Size(180, 40);
-            Guna2TabControl1.Location = new Point(14, 102);
+            Guna2TabControl1.Location = new Point(14, 64);
             Guna2TabControl1.Name = "Guna2TabControl1";
             Guna2TabControl1.SelectedIndex = 0;
-            Guna2TabControl1.Size = new Size(1640, 618);
+            Guna2TabControl1.Size = new Size(1640, 656);
             Guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             Guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             Guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -107,7 +104,7 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
             Guna2TabControl1.TabButtonSize = new Size(180, 40);
             Guna2TabControl1.TabIndex = 4;
-            Guna2TabControl1.TabMenuBackColor = Color.FromArgb(33, 42, 57);
+            Guna2TabControl1.TabMenuBackColor = Color.White;
             Guna2TabControl1.TabMenuOrientation = TabMenuOrientation.HorizontalTop;
             // 
             // tabPage2
@@ -116,15 +113,15 @@ namespace PresentationLayer.Views.UserControls
             tabPage2.Location = new Point(4, 44);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1632, 570);
+            tabPage2.Size = new Size(1632, 608);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Edit";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // materialCard2
             // 
-            materialCard2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(btnSave);
             materialCard2.Controls.Add(txtConfirmNewPassword);
             materialCard2.Controls.Add(guna2HtmlLabel5);
             materialCard2.Controls.Add(txtNewPassword);
@@ -132,19 +129,37 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Controls.Add(guna2HtmlLabel2);
             materialCard2.Controls.Add(txtPassword);
             materialCard2.Depth = 0;
+            materialCard2.Dock = DockStyle.Fill;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(17, 19);
+            materialCard2.Location = new Point(3, 3);
             materialCard2.Margin = new Padding(14);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
-            materialCard2.Size = new Size(1600, 545);
+            materialCard2.Size = new Size(1626, 602);
             materialCard2.TabIndex = 5;
+            // 
+            // btnSave
+            // 
+            btnSave.Anchor = AnchorStyles.None;
+            btnSave.CustomizableEdges = customizableEdges1;
+            btnSave.DisabledState.BorderColor = Color.DarkGray;
+            btnSave.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSave.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSave.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSave.Font = new Font("Segoe UI", 9F);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(588, 439);
+            btnSave.Name = "btnSave";
+            btnSave.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnSave.Size = new Size(450, 45);
+            btnSave.TabIndex = 62;
+            btnSave.Text = "Save";
             // 
             // txtConfirmNewPassword
             // 
             txtConfirmNewPassword.Anchor = AnchorStyles.None;
-            txtConfirmNewPassword.CustomizableEdges = customizableEdges1;
+            txtConfirmNewPassword.CustomizableEdges = customizableEdges3;
             txtConfirmNewPassword.DefaultText = "";
             txtConfirmNewPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtConfirmNewPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -154,13 +169,13 @@ namespace PresentationLayer.Views.UserControls
             txtConfirmNewPassword.Font = new Font("Segoe UI", 10.2F);
             txtConfirmNewPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtConfirmNewPassword.IconRight = (Image)resources.GetObject("txtConfirmNewPassword.IconRight");
-            txtConfirmNewPassword.Location = new Point(575, 375);
+            txtConfirmNewPassword.Location = new Point(588, 365);
             txtConfirmNewPassword.Margin = new Padding(3, 4, 3, 4);
             txtConfirmNewPassword.Name = "txtConfirmNewPassword";
             txtConfirmNewPassword.PasswordChar = '*';
             txtConfirmNewPassword.PlaceholderText = "Confirm New Password";
             txtConfirmNewPassword.SelectedText = "";
-            txtConfirmNewPassword.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtConfirmNewPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtConfirmNewPassword.Size = new Size(450, 42);
             txtConfirmNewPassword.TabIndex = 60;
             txtConfirmNewPassword.TextChanged += txtConfirmNewPassword_TextChanged;
@@ -170,7 +185,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel5.Anchor = AnchorStyles.None;
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel5.Location = new Point(575, 334);
+            guna2HtmlLabel5.Location = new Point(588, 324);
             guna2HtmlLabel5.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(139, 19);
@@ -180,7 +195,7 @@ namespace PresentationLayer.Views.UserControls
             // txtNewPassword
             // 
             txtNewPassword.Anchor = AnchorStyles.None;
-            txtNewPassword.CustomizableEdges = customizableEdges3;
+            txtNewPassword.CustomizableEdges = customizableEdges5;
             txtNewPassword.DefaultText = "";
             txtNewPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtNewPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -190,13 +205,13 @@ namespace PresentationLayer.Views.UserControls
             txtNewPassword.Font = new Font("Segoe UI", 10.2F);
             txtNewPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtNewPassword.IconRight = (Image)resources.GetObject("txtNewPassword.IconRight");
-            txtNewPassword.Location = new Point(575, 272);
+            txtNewPassword.Location = new Point(588, 262);
             txtNewPassword.Margin = new Padding(3, 4, 3, 4);
             txtNewPassword.Name = "txtNewPassword";
             txtNewPassword.PasswordChar = '*';
             txtNewPassword.PlaceholderText = "Enter New Password";
             txtNewPassword.SelectedText = "";
-            txtNewPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtNewPassword.ShadowDecoration.CustomizableEdges = customizableEdges6;
             txtNewPassword.Size = new Size(450, 42);
             txtNewPassword.TabIndex = 56;
             txtNewPassword.TextChanged += txtNewPassword_TextChanged;
@@ -206,7 +221,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel3.Anchor = AnchorStyles.None;
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel3.Location = new Point(575, 231);
+            guna2HtmlLabel3.Location = new Point(588, 221);
             guna2HtmlLabel3.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(89, 19);
@@ -218,7 +233,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Anchor = AnchorStyles.None;
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel2.Location = new Point(575, 128);
+            guna2HtmlLabel2.Location = new Point(588, 118);
             guna2HtmlLabel2.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(84, 19);
@@ -228,7 +243,7 @@ namespace PresentationLayer.Views.UserControls
             // txtPassword
             // 
             txtPassword.Anchor = AnchorStyles.None;
-            txtPassword.CustomizableEdges = customizableEdges5;
+            txtPassword.CustomizableEdges = customizableEdges7;
             txtPassword.DefaultText = "";
             txtPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -238,47 +253,16 @@ namespace PresentationLayer.Views.UserControls
             txtPassword.Font = new Font("Segoe UI", 10.2F);
             txtPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPassword.IconRight = (Image)resources.GetObject("txtPassword.IconRight");
-            txtPassword.Location = new Point(575, 169);
+            txtPassword.Location = new Point(588, 159);
             txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.PlaceholderText = "Enter Old Password";
             txtPassword.SelectedText = "";
-            txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtPassword.Size = new Size(450, 42);
             txtPassword.TabIndex = 44;
             txtPassword.TextChanged += txtPassword_TextChanged;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.White;
-            panel2.Controls.Add(btnSave);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(14, 64);
-            panel2.Margin = new Padding(3, 10, 3, 3);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1640, 38);
-            panel2.TabIndex = 6;
-            // 
-            // btnSave
-            // 
-            btnSave.CustomizableEdges = customizableEdges7;
-            btnSave.DisabledState.BorderColor = Color.DarkGray;
-            btnSave.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnSave.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnSave.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnSave.Dock = DockStyle.Left;
-            btnSave.FillColor = Color.Transparent;
-            btnSave.Font = new Font("Segoe UI", 9F);
-            btnSave.ForeColor = Color.White;
-            btnSave.Image = (Image)resources.GetObject("btnSave.Image");
-            btnSave.ImageSize = new Size(30, 30);
-            btnSave.Location = new Point(0, 0);
-            btnSave.Margin = new Padding(3, 2, 3, 2);
-            btnSave.Name = "btnSave";
-            btnSave.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnSave.Size = new Size(44, 38);
-            btnSave.TabIndex = 8;
             // 
             // tableLayoutPanel1
             // 
@@ -349,7 +333,6 @@ namespace PresentationLayer.Views.UserControls
             tabPage2.ResumeLayout(false);
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
-            panel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
@@ -363,8 +346,6 @@ namespace PresentationLayer.Views.UserControls
         private TableLayoutPanel tableLayoutPanel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Guna2Separator guna2Separator1;
-        private Panel panel2;
-        private Guna2Button btnSave;
         private Guna2TabControl Guna2TabControl1;
         private TabPage tabPage2;
         private MaterialSkin.Controls.MaterialCard materialCard2;
@@ -374,5 +355,6 @@ namespace PresentationLayer.Views.UserControls
         private Guna2TextBox txtPassword;
         private Guna2TextBox txtConfirmNewPassword;
         private Guna2HtmlLabel guna2HtmlLabel5;
+        private Guna2Button btnSave;
     }
 }

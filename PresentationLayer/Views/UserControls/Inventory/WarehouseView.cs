@@ -1,8 +1,10 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.Inventory;
 using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -150,8 +152,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetWarehouseListBindingSource(BindingSource WarehouseList)
         {
-            dgList.DataSource = WarehouseList;
-            DataGridHelper.ApplyDisplayNames<Warehouse>(WarehouseList, dgList);
+            dgPager.DataSource = WarehouseList.ToList<WarehouseViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetBranchListBindingSource(BindingSource BranchList)
         {

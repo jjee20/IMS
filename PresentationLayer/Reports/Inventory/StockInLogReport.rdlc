@@ -382,7 +382,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Stock In Log Report</Value>
+                  <Value>Stock-In Log Report</Value>
                   <Style>
                     <FontSize>14pt</FontSize>
                   </Style>

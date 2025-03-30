@@ -13,7 +13,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         public int ProjectId { get; }
         string Message { get; set; }
         event EventHandler PrintPayrollEvent;
-        event DataGridViewCellEventHandler PrintPayslipEvent;
+        event EventHandler PrintPayslipEvent;
         event EventHandler SearchEvent; 
         event EventHandler IncludeBenefitsEvent;
         event EventHandler ProjectEvent;

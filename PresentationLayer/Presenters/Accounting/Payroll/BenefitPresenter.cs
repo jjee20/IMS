@@ -8,7 +8,7 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {

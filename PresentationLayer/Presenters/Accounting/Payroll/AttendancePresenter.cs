@@ -12,7 +12,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.UserControls.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System.Formats.Asn1;
 using System.Globalization;
 using Windows.Devices.Usb;
@@ -178,7 +178,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             return attendanceList;
         }
 
-        private void ShowAttendance(object? sender, DataGridViewCellEventArgs e)
+        private void ShowAttendance(object? sender, EventArgs e)
         {
             _view.IsIndividual = true;
             var attendanceVM = (AttendanceViewModel)AttendanceBindingSource.Current;

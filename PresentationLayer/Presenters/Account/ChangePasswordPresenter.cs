@@ -9,7 +9,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using RavenTech_ERP.Properties;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters.Account
 {

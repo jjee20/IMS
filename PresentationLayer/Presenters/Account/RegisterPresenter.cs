@@ -13,7 +13,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Account;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PresentationLayer.Presenters.Account

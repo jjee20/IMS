@@ -39,5 +39,6 @@ public class Employee
     public IEnumerable<Deduction> Deductions { get; set; }
     public IEnumerable<Attendance> Attendances { get; set; }
     public IEnumerable<Leave> Leaves { get; set; }
+    public EmployeeContribution Contribution { get; set; }
 
 }

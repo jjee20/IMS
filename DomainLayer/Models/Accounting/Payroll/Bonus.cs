@@ -13,6 +13,7 @@ namespace DomainLayer.Models.Accounting.Payroll
     public class Bonus
     {
         [Key]
+        [Display(Name = "Id")]
         public int BonusId { get; set; } // Primary Key
 
         [ForeignKey(nameof(EmployeeId))]

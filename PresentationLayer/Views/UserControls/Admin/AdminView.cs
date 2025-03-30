@@ -24,11 +24,9 @@ namespace PresentationLayer.Views
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             var colorScheme = new ColorScheme(
-                                ColorTranslator.FromHtml("#457b9d"),
-                                ColorTranslator.FromHtml("#1d3557"),
-                                ColorTranslator.FromHtml("#f1faee"),
-                                ColorTranslator.FromHtml("#457b9d"),
-                                TextShade.WHITE // text shade
+                Primary.Blue400, Primary.Blue500,
+                Primary.Blue500, Accent.LightBlue200,
+                TextShade.WHITE
             );
 
             materialSkinManager.ColorScheme = colorScheme;
@@ -42,7 +40,8 @@ namespace PresentationLayer.Views
                 }
                 else if (tcMain.SelectedTab == tbInventory)
                 {
-                    ShowInventory?.Invoke(this, EventArgs.Empty);
+                    //customDropdownMenu1.Show(tbInventory, tbInventory.Width, 0);
+                    //ShowInventory?.Invoke(this, EventArgs.Empty);
                 }
                 else if (tcMain.SelectedTab == tbPayroll)
                 {
@@ -66,7 +65,12 @@ namespace PresentationLayer.Views
 
         private void AdminView_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Restart();
+            
+        }
+
+        private void AdminView_Load(object sender, EventArgs e)
+        {
+            //customDropdownMenu1.IsMainMenu = true;
         }
 
         public event EventHandler ShowRegister;

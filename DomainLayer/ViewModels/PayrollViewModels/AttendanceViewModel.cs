@@ -4,6 +4,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
 {
     public class AttendanceViewModel
     {
+        [Display(Name = "Id")]
         public int EmployeeId { get; set; }
         public string Employee { get; set; }
         [Display(Name = "Total Days")]

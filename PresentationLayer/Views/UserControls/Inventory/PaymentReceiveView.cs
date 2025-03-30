@@ -3,7 +3,7 @@ using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
 using PresentationLayer;
 using RavenTech_ERP.Views.UserControls.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

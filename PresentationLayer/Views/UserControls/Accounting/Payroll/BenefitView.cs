@@ -8,6 +8,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -159,8 +160,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetBenefitListBindingSource(BindingSource BenefitList)
         {
-            dgList.DataSource = BenefitList;
-            DataGridHelper.ApplyDisplayNames<BenefitViewModel>(BenefitList, dgList);
+            dgPager.DataSource = BenefitList.ToList<BenefitViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {

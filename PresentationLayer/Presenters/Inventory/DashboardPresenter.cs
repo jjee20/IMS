@@ -8,7 +8,7 @@ using PresentationLayer.Views;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

@@ -27,13 +27,13 @@ namespace RavenTech_ERP.Views.IViews.Inventory
 
         event EventHandler AddNewEvent;
         event EventHandler DeleteEvent;
-        event DataGridViewCellEventHandler DeleteProductEvent;
-        event DataGridViewCellEventHandler UpdateComputationEvent;
+        event EventHandler DeleteProductEvent;
+        event EventHandler UpdateComputationEvent;
         event EventHandler EditEvent;
         event EventHandler FreightEvent;
         event EventHandler PaymentDiscountEvent;
         event EventHandler PrintEvent;
-        event DataGridViewCellEventHandler PrintSOEvent;
+        event EventHandler PrintProjectEvent;
         event EventHandler ProductAddEvent;
         event EventHandler RefreshEvent;
         event EventHandler SaveEvent;

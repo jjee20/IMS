@@ -5,6 +5,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -114,7 +115,12 @@ namespace PresentationLayer.Views.UserControls
 
             dgList.CellDoubleClick += (sender, e) =>
             {
-                PrintSOEvent?.Invoke(this, e);
+                PrintProjectEvent?.Invoke(this, e);
+
+                if (!isSuccessful)
+                {
+                    MessageBox.Show(Message);
+                }
             };
 
             dgOrderLine.CellDoubleClick += (sender, e) =>
@@ -264,8 +270,8 @@ namespace PresentationLayer.Views.UserControls
         }
         public void SetProjectListBindingSource(BindingSource ProjectList)
         {
-            dgList.DataSource = ProjectList;
-            DataGridHelper.ApplyDisplayNames<ProjectViewModel>(ProjectList, dgList);
+            dgPager.DataSource = ProjectList.ToList<ProjectViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetProjectLineListBindingSource(BindingSource ProjectLineList)
         {
@@ -289,9 +295,9 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ProductAddEvent;
         public event EventHandler PaymentDiscountEvent;
         public event EventHandler FreightEvent;
-        public event DataGridViewCellEventHandler PrintSOEvent;
-        public event DataGridViewCellEventHandler DeleteProductEvent;
-        public event DataGridViewCellEventHandler UpdateComputationEvent;
+        public event EventHandler PrintProjectEvent;
+        public event EventHandler DeleteProductEvent;
+        public event EventHandler UpdateComputationEvent;
 
         private static ProjectManagementView? instance;
         public static ProjectManagementView GetInstance(TabPage parentContainer)

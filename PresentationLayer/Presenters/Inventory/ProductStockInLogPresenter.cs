@@ -8,7 +8,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {

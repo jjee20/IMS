@@ -12,7 +12,7 @@ using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Properties;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {

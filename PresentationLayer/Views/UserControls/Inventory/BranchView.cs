@@ -4,6 +4,7 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -161,8 +162,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetBranchListBindingSource(BindingSource BranchList)
         {
-            dgList.DataSource = BranchList;
-            DataGridHelper.ApplyDisplayNames<BranchViewModel>(BranchList, dgList);
+            dgPager.DataSource = BranchList.ToList<BranchViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         //public void SetAddressBindingSource(List<string> barangayBindingSource,

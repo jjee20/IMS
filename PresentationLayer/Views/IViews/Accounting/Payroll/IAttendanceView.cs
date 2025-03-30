@@ -32,7 +32,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
         event EventHandler ImportEvent;
-        event DataGridViewCellEventHandler ShowAttendanceEvent;
+        event EventHandler ShowAttendanceEvent;
         void SetAttendanceListBindingSource(BindingSource AttendanceList);
         void SetIndividualAttendanceListBindingSource(BindingSource IndividualAttendanceList);
         void SetEmployeeListBindingSource(BindingSource EmployeeList);

@@ -35,11 +35,6 @@ namespace PresentationLayer.Views.UserControls
                 SaveEvent?.Invoke(this, EventArgs.Empty);
                 MessageBox.Show(Message);
             };
-            //Print
-            btnPrint.Click += delegate
-            {
-                PrintEvent?.Invoke(this, EventArgs.Empty);
-            };
         }
 
         //Properties

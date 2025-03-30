@@ -8,9 +8,10 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.Payroll;
+using RavenTech_ERP.Views.UserControls.Account;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -49,6 +50,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.DeleteEvent += Delete;
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
+            _view.UserInformationEvent += UserInformation;
 
             //Load
 
@@ -64,6 +66,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.SetJobPositionListBindingSource(JobPositionBindingSource);
             _view.SetShiftListBindingSource(ShiftBindingSource);
             _view.SetEmployeeListBindingSource(EmployeeBindingSource);
+        }
+
+        private void UserInformation(object? sender, EventArgs e)
+        {
+            var employee = (EmployeeViewModel)EmployeeBindingSource.Current;
+            var user = Program.Mapper.Map<UserInformationViewModel>(_unitOfWork.Employee.Get(c => c.EmployeeId == employee.EmployeeId, includeProperties: "Department,JobPosition,Shift,Attendances.Project,Leaves,Bonuses,Benefits,Deductions,Allowances,Contribution"));
+            var userInformation = new ProfileInformationView(user);
+            userInformation.ShowDialog();   
         }
 
         private void ReloadAll(object? sender, EventArgs e)
