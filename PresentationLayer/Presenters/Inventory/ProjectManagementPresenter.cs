@@ -28,7 +28,8 @@ namespace PresentationLayer.Presenters
         private IEnumerable<ProjectViewModel> ProjectList;
         private ProjectViewModel ProjectVM;
         private IEnumerable<Product> ProductList;
-        public ProjectManagementPresenter(IProjectManagementView view, IUnitOfWork unitOfWork) {
+        public ProjectManagementPresenter(IProjectManagementView view, IUnitOfWork unitOfWork)
+        {
 
             //Initialize
 
@@ -164,7 +165,7 @@ namespace PresentationLayer.Presenters
             var productItem = name;
             var quantity = _view.ProductQuantity;
             var amount = productprice * quantity;
-            var discount = _view.ProductDiscount/100;
+            var discount = _view.ProductDiscount / 100;
             var discountAmount = productprice * discount;
 
             _view.ProjectLines.Add(new ProjectLineViewModel
@@ -219,7 +220,7 @@ namespace PresentationLayer.Presenters
                     _unitOfWork.Project.Value.Add(model);
                     _view.Message = "Project added successfully";
                 }
-                    _unitOfWork.Save();
+                _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 CleanviewFields();
             }
@@ -302,7 +303,7 @@ namespace PresentationLayer.Presenters
                 }
 
                 var Project = (ProjectViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId ==  Project.ProjectId);
+                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == Project.ProjectId);
                 _unitOfWork.Project.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
@@ -353,4 +354,5 @@ namespace PresentationLayer.Presenters
             ProductBindingSource.DataSource = ProductList = _unitOfWork.Product.Value.GetAll();
             _view.SetProductListBindingSource(ProductBindingSource);
         }
+    }
 }

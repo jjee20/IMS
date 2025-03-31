@@ -6,7 +6,6 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IPayrollView
     {
-        SfDataGrid DataGrid { get; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool IncludeContribution { get; }

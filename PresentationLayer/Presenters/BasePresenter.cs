@@ -72,7 +72,7 @@ namespace RavenTech_ERP.Presenters
         {
             if (BindingSource.Current is TModel selectedModel)
             {
-                //_unitOfWork.GetRepository<TModel>().Remove(selectedModel);
+                _unitOfWork.GetRepository<TModel>().Remove(selectedModel);
                 _unitOfWork.Save();
                 LoadAllData();
             }

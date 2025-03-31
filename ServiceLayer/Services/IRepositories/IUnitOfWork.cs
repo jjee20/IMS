@@ -55,6 +55,7 @@ namespace ServiceLayer.Services.IRepositories
         Lazy<IVendorTypeRepository> VendorType { get; }
         Lazy<IWarehouseRepository> Warehouse { get; }
 
+        IRepository<T> GetRepository<T>() where T : class;
         void Save();
         Task SaveAsync();
     }

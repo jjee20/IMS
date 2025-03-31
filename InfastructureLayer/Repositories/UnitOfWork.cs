@@ -15,6 +15,7 @@ namespace InfastructureLayer.DataAccess.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDataContext _db;
+        private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
         public UnitOfWork(ApplicationDataContext db)
         {
@@ -120,6 +121,19 @@ namespace InfastructureLayer.DataAccess.Repositories
         public Lazy<IProjectLineRepository> ProjectLine { get; }
         public Lazy<IProductStockInLogRepository> StockInLogs { get; }
         public Lazy<IEmployeeContributionRepository> EmployeeContribution { get; }
+
+        public IRepository<T> GetRepository<T>() where T : class
+        {
+            var type = typeof(T);
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryInstance = new Repository<T>(_db);
+                _repositories[type] = repositoryInstance;
+            }
+
+            return (IRepository<T>)_repositories[type];
+        }
 
         public void Save() => _db.SaveChanges();
         public Task SaveAsync() => _db.SaveChangesAsync();
