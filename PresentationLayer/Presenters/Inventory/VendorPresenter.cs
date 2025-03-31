@@ -144,7 +144,15 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Vendor)VendorBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var vendor = (VendorViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Vendor.Value.Get(c => c.VendorId == vendor.VendorId);
             _view.VendorId = entity.VendorId;
             _view.VendorName = entity.VendorName;
             _view.VendorTypeId = entity.VendorTypeId;
@@ -157,7 +165,15 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var entity = (Vendor)VendorBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to edit";
+                    return;
+                }
+
+                var vendor = (VendorViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Vendor.Value.Get(c => c.VendorId == vendor.VendorId);
                 _unitOfWork.Vendor.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;

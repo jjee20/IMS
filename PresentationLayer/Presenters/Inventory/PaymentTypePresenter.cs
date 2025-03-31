@@ -91,7 +91,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (PaymentType)PaymentTypeBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (PaymentType)_view.DataGrid.SelectedItem;
             _view.PaymentTypeId = entity.PaymentTypeId;
             _view.PaymentTypeName = entity.PaymentTypeName;
             _view.Description = entity.Description;
@@ -100,7 +107,14 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var entity = (PaymentType)PaymentTypeBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to edit";
+                    return;
+                }
+
+                var entity = (PaymentType)_view.DataGrid.SelectedItem;
                 _unitOfWork.PaymentType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;

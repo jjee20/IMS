@@ -99,7 +99,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var warehouse = (WarehouseViewModel)WarehouseBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var warehouse = (WarehouseViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.Warehouse.Value.Get(c => c.WarehouseId == warehouse.WarehouseId);
             _view.WarehouseId = entity.WarehouseId;
             _view.WarehouseName = entity.WarehouseName;
@@ -109,7 +116,14 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var warehouse = (WarehouseViewModel)WarehouseBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to edit";
+                    return;
+                }
+
+                var warehouse = (WarehouseViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.Warehouse.Value.Get(c => c.WarehouseId == warehouse.WarehouseId);
                 _unitOfWork.Warehouse.Value.Remove(entity);
                 _unitOfWork.Save();

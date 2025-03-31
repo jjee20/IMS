@@ -66,14 +66,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void Delete(object? sender, EventArgs e)
         {
-            var attendanceVM = (IndividualAttendanceViewModel)IndividualAttendanceBindingSource.Current;
 
-            if (attendanceVM == null)
+            if (_view.DataGrid.SelectedItem == null)
             {
-                _view.Message = "Please select individual attendance. Double click the name you want to check the attendance details";
+                _view.IsSuccessful = false;
+                _view.Message = "Please select an Allowance to delete";
                 return;
             }
 
+            var attendanceVM = (IndividualAttendanceViewModel)_view.DataGrid.SelectedItem;
             var attendance = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee", tracked: true);
 
             _unitOfWork.Attendance.Value.Detach(attendance);
@@ -87,16 +88,16 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var attendanceVM = (IndividualAttendanceViewModel)IndividualAttendanceBindingSource.Current;
 
-            if (attendanceVM == null)
+
+            if (_view.DataGrid.SelectedItem == null)
             {
-                _view.Message = "Please select individual attendance. Double click the name you want to check the attendance details";
+                _view.IsSuccessful = false;
+                _view.Message = "Please select an Allowance to edit";
                 return;
             }
 
-
-
+            var attendanceVM = (IndividualAttendanceViewModel)_view.DataGrid.SelectedItem;
             var attendance = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee,Project");
 
 

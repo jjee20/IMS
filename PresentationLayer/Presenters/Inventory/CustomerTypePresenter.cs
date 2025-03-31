@@ -94,7 +94,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (CustomerType)CustomerTypeBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (CustomerType)_view.DataGrid.SelectedItem;
             _view.CustomerTypeId = entity.CustomerTypeId;
             _view.CustomerTypeName = entity.CustomerTypeName;
             _view.Description = entity.Description;
@@ -103,7 +110,14 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var entity = (CustomerType)CustomerTypeBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (CustomerType)_view.DataGrid.SelectedItem;
                 _unitOfWork.CustomerType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;

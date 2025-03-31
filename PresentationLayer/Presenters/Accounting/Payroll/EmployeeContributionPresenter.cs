@@ -22,7 +22,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private IUnitOfWork _unitOfWork;
         private BindingSource EmployeeContributionBindingSource;
         private BindingSource EmployeeBindingSource;
-        private IEnumerable<EmployeeContribution> EmployeeContributionList;
+        private IEnumerable<EmployeeContributionViewModel> EmployeeContributionList;
         private IEnumerable<EmployeeViewModel> EmployeeList;
         public EmployeeContributionPresenter(IEmployeeContributionView view, IUnitOfWork unitOfWork)
         {
@@ -105,7 +105,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             if (!emptyValue)
             {
                 // Safely parse and filter EmployeeContributions
-                EmployeeContributionList = _unitOfWork.EmployeeContribution.Value.GetAll(c => c.Employee.LastName == _view.SearchValue || c.Employee.FirstName == _view.SearchValue, includeProperties: "Employee");
+                EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(_unitOfWork.EmployeeContribution.Value.GetAll(
+                    c => c.Employee.LastName == _view.SearchValue || c.Employee.FirstName == _view.SearchValue, 
+                    includeProperties: "Employee"));
                 EmployeeContributionBindingSource.DataSource = EmployeeContributionList;
             }
             else
@@ -116,7 +118,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (EmployeeContribution)EmployeeContributionBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var employeeContribution = (EmployeeContributionViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == employeeContribution.EmployeeContributionId);
             _view.EmployeeContributionId = entity.EmployeeContributionId;
             _view.SSS = entity.SSS;
             _view.SSSWISP = entity.SSSWISP;
@@ -128,7 +138,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var entity = (EmployeeContribution)EmployeeContributionBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var employeeContribution = (EmployeeContributionViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == employeeContribution.EmployeeContributionId);
                 _unitOfWork.EmployeeContribution.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
@@ -163,7 +181,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllEmployeeContributionList()
         {
-            EmployeeContributionList = _unitOfWork.EmployeeContribution.Value.GetAll();
+            EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(
+                _unitOfWork.EmployeeContribution.Value.GetAll(includeProperties:"Employee"));
             EmployeeContributionBindingSource.DataSource = EmployeeContributionList;//Set data source.
             _view.SetEmployeeContributionListBindingSource(EmployeeContributionBindingSource);
         }

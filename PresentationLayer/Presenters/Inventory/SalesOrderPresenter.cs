@@ -325,7 +325,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var salesOrder = (SalesOrderViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.SalesOrder.Value.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "Shipment");
             var salesOrderLines = _unitOfWork.SalesOrderLine.Value.GetAll(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "Product");
             _view.SalesOrderId = entity.SalesOrderId;
@@ -361,7 +368,14 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var salesOrder = (SalesOrderViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.SalesOrder.Value.Get(c => c.SalesOrderId ==  salesOrder.SalesOrderId);
                 _unitOfWork.SalesOrder.Value.Remove(entity);
                 _unitOfWork.Save();

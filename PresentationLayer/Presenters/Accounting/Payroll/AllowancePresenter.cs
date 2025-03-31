@@ -119,7 +119,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             _view.IsEdit = true;
 
-            var allowance = (AllowanceViewModel)AllowanceBindingSource.Current;
+            if(_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var allowance = (AllowanceViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == allowance.AllowanceId);
             _view.AllowanceId = entity.AllowanceId;
             _view.AllowanceType = entity.AllowanceType;
@@ -133,7 +140,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var allowance = (AllowanceViewModel)AllowanceBindingSource.Current;
+
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var allowance = (AllowanceViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == allowance.AllowanceId);
                 _unitOfWork.Allowance.Value.Remove(entity);
                 _unitOfWork.Save();

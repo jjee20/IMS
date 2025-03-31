@@ -339,7 +339,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var PurchaseOrder = (PurchaseOrderViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.PurchaseOrder.Value.Get(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId);
             var PurchaseOrderLines = _unitOfWork.PurchaseOrderLine.Value.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product");
             _view.PurchaseOrderId = entity.PurchaseOrderId;
@@ -362,7 +369,14 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var PurchaseOrder = (PurchaseOrderViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.PurchaseOrder.Value.Get(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId);
                 _unitOfWork.PurchaseOrder.Value.Remove(entity);
                 _unitOfWork.Save();

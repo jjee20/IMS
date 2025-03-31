@@ -109,7 +109,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var benefit = (BenefitViewModel)BenefitBindingSource.Current;
+
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var benefit = (BenefitViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.Benefit.Value.Get(c => c.BenefitId == benefit.BenefitId);
             _view.BenefitId = entity.BenefitId;
             _view.BenefitType = entity.BenefitType;
@@ -121,7 +129,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var benefit = (BenefitViewModel)BenefitBindingSource.Current;
+
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var benefit = (BenefitViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.Benefit.Value.Get(c => c.BenefitId == benefit.BenefitId);
                 _unitOfWork.Benefit.Value.Remove(entity);
                 _unitOfWork.Save();

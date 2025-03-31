@@ -109,7 +109,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var shift = (ShiftViewModel)ShiftBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var shift = (ShiftViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.Shift.Value.Get(c => c.ShiftId == shift.ShiftId);
             _view.ShiftId = entity.ShiftId;
             _view.ShiftName = entity.ShiftName;
@@ -122,7 +129,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var shift = (ShiftViewModel)ShiftBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var shift = (ShiftViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.Shift.Value.Get(c => c.ShiftId == shift.ShiftId);
                 _unitOfWork.Shift.Value.Remove(entity);
                 _unitOfWork.Save();

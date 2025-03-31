@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models.Inventory;
+﻿using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
@@ -94,7 +95,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Department)DepartmentBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (Department)_view.DataGrid.SelectedItem;
             _view.DepartmentId = entity.DepartmentId;
             _view.DepartmentName = entity.Name;
             _view.Description = entity.Description;
@@ -103,7 +111,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var entity = (Department)DepartmentBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (Department)_view.DataGrid.SelectedItem;
                 _unitOfWork.Department.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;

@@ -100,7 +100,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var branch = (BranchViewModel)BranchBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var branch = (BranchViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.Branch.Value.Get(c => c.BranchId == branch.BranchId);
             _view.BranchId = entity.BranchId;
             _view.BranchName = entity.BranchName;
@@ -114,7 +121,14 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var branch = (BranchViewModel)BranchBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var branch = (BranchViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.Branch.Value.Get(c => c.BranchId == branch.BranchId);
                 _unitOfWork.Branch.Value.Remove(entity);
                 _unitOfWork.Save();

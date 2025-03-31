@@ -122,7 +122,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Contribution)ContributionBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (Contribution)_view.DataGrid.SelectedItem;
             _view.ContributionId = entity.ContributionId;
             _view.ContributionType = entity.ContributionType;
             _view.Rate = entity.EmployeeRate;
@@ -134,7 +141,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var entity = (Contribution)ContributionBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (Contribution)_view.DataGrid.SelectedItem;
                 _unitOfWork.Contribution.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;

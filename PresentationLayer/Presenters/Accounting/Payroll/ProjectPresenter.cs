@@ -96,7 +96,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Project)ProjectBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (Project)_view.DataGrid.SelectedItem;
             _view.ProjectId = entity.ProjectId;
             _view.ProjectName = entity.ProjectName;
             _view.Description = entity.Description;
@@ -105,7 +112,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var entity = (Project)ProjectBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to edit";
+                    return;
+                }
+
+                var entity = (Project)_view.DataGrid.SelectedItem;
                 _unitOfWork.Project.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;

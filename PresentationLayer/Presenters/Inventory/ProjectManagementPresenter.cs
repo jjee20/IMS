@@ -270,7 +270,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var Project = (ProjectViewModel)ProjectBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var Project = (ProjectViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == Project.ProjectId);
             var ProjectLines = _unitOfWork.ProjectLine.Value.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product");
             _view.ProjectId = entity.ProjectId;
@@ -287,7 +294,14 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var Project = (ProjectViewModel)ProjectBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var Project = (ProjectViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId ==  Project.ProjectId);
                 _unitOfWork.Project.Value.Remove(entity);
                 _unitOfWork.Save();

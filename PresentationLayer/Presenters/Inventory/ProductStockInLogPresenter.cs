@@ -107,7 +107,13 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var productlog = (ProductStockInLogViewModel)ProductStockInLogBindingSource.Current;
+            if(_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+            var productlog = (ProductStockInLogViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == productlog.ProductStockInLogId);
             _view.ProductStockInLogId = entity.ProductStockInLogId;
             _view.ProductId = entity.ProductId;
@@ -120,7 +126,14 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var productlog = (ProductStockInLogViewModel)ProductStockInLogBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var productlog = (ProductStockInLogViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == productlog.ProductStockInLogId);
                 _unitOfWork.StockInLogs.Value.Remove(entity);
                 _unitOfWork.Save();

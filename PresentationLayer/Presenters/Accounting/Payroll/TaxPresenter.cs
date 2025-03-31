@@ -97,7 +97,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Tax)TaxBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (Tax)_view.DataGrid.SelectedItem;
             _view.TaxId = entity.TaxId;
             _view.MinimumSalary = entity.MinimumSalary;
             _view.MaximumSalary = entity.MaximumSalary;
@@ -107,7 +114,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var entity = (Tax)TaxBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (Tax)_view.DataGrid.SelectedItem;
                 _unitOfWork.Tax.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;

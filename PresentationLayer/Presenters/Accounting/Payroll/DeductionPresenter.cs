@@ -116,7 +116,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var deduction = (DeductionViewModel)DeductionBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var deduction = (DeductionViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.Deduction.Value.Get(c => c.DeductionId == deduction.DeductionId);
             _view.DeductionId = entity.DeductionId;
             _view.DeductionType = entity.DeductionType;
@@ -129,7 +136,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var deduction = (DeductionViewModel)DeductionBindingSource.Current;
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var deduction = (DeductionViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.Deduction.Value.Get(c => c.DeductionId == deduction.DeductionId);
                 _unitOfWork.Deduction.Value.Remove(entity);
                 _unitOfWork.Save();
