@@ -8,7 +8,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -48,9 +48,6 @@ namespace PresentationLayer.Presenters
             LoadAllProductStockInLogList();
 
             //Source Binding
-            _view.SetProductStockInLogListBindingSource(ProductStockInLogBindingSource);
-            _view.SetProductListBindingSource(ProductBindingSource);
-            _view.SetProductStatusListBindingSource(StatusBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -60,9 +57,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.StockInLogs.Get(c => c.ProductStockInLogId == _view.ProductStockInLogId, tracked: true);
+            var model = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == _view.ProductStockInLogId, tracked: true);
             if (model == null) model = new ProductStockInLog();
-            else _unitOfWork.StockInLogs.Detach(model);
+            else _unitOfWork.StockInLogs.Value.Detach(model);
 
             model.ProductStockInLogId = _view.ProductStockInLogId;
             model.ProductId = _view.ProductId;
@@ -76,12 +73,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.StockInLogs.Update(model);
+                    _unitOfWork.StockInLogs.Value.Update(model);
                     _view.Message = "Product log edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.StockInLogs.Add(model);
+                    _unitOfWork.StockInLogs.Value.Add(model);
                     _view.Message = "Product log added successfully";
                 }
                     _unitOfWork.Save();
@@ -99,7 +96,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.GetAll(c => c.Product.ProductName.Contains(_view.SearchValue), includeProperties: "Product"));
+                ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll(c => c.Product.ProductName.Contains(_view.SearchValue), includeProperties: "Product"));
                 ProductStockInLogBindingSource.DataSource = ProductStockInLogList;
             }
             else
@@ -110,8 +107,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var productlog = (ProductStockInLogViewModel)ProductStockInLogBindingSource.Current;
-            var entity = _unitOfWork.StockInLogs.Get(c => c.ProductStockInLogId == productlog.ProductStockInLogId);
+            if(_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+            var productlog = (ProductStockInLogViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == productlog.ProductStockInLogId);
             _view.ProductStockInLogId = entity.ProductStockInLogId;
             _view.ProductId = entity.ProductId;
             _view.StockQuantity = entity.StockQuantity;
@@ -123,9 +126,16 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var productlog = (ProductStockInLogViewModel)ProductStockInLogBindingSource.Current;
-                var entity = _unitOfWork.StockInLogs.Get(c => c.ProductStockInLogId == productlog.ProductStockInLogId);
-                _unitOfWork.StockInLogs.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var productlog = (ProductStockInLogViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == productlog.ProductStockInLogId);
+                _unitOfWork.StockInLogs.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Product log deleted successfully";
@@ -161,18 +171,21 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllProductStockInLogList()
         {
-            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.GetAll(includeProperties: "Product"));
+            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll(includeProperties: "Product"));
             ProductStockInLogBindingSource.DataSource = ProductStockInLogList;//Set data source.
+            _view.SetProductStockInLogListBindingSource(ProductStockInLogBindingSource);
         }
         private void LoadAllStatus()
         {
             StatusList = EnumHelper.EnumToEnumerable<ProductStatus>();
             StatusBindingSource.DataSource = StatusList;//Set data source.
+            _view.SetProductStatusListBindingSource(StatusBindingSource);
         }
         private void LoadAllProduct()
         {
-            ProductList = _unitOfWork.Product.GetAll();
+            ProductList = _unitOfWork.Product.Value.GetAll();
             ProductBindingSource.DataSource = ProductList;//Set data source.
+            _view.SetProductListBindingSource(ProductBindingSource);
         }
     }
 }

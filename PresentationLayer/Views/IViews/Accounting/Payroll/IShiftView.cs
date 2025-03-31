@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Syncfusion.WinForms.DataGrid;
+using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IShiftView
     {
+        SfDataGrid DataGrid { get; }
         int ShiftId { get; set; }
         string ShiftName { get; set; }
         TimeSpan StartTime { get; set; }

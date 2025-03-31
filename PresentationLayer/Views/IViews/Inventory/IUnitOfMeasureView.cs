@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Syncfusion.WinForms.DataGrid;
+using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
 {
     public interface IUnitOfMeasureView
     {
+        SfDataGrid DataGrid { get; }
         int UnitOfMeasureId { get; set; }
         string UnitOfMeasureName { get; set; }
         string Description { get; set; }

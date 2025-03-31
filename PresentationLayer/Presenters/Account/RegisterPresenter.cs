@@ -13,7 +13,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Account;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PresentationLayer.Presenters.Account
@@ -70,9 +70,9 @@ namespace PresentationLayer.Presenters.Account
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.ApplicationUser.Get(c => c.UserName == _view.Username, tracked: true);
+            var model = _unitOfWork.ApplicationUser.Value.Get(c => c.UserName == _view.Username, tracked: true);
             if (model == null) model = new ApplicationUser();
-            else _unitOfWork.ApplicationUser.Detach(model);
+            else _unitOfWork.ApplicationUser.Value.Detach(model);
 
             model.Id = _view.Id;
             model.UserName = _view.Username;
@@ -100,12 +100,12 @@ namespace PresentationLayer.Presenters.Account
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.ApplicationUser.Update(model);
+                    _unitOfWork.ApplicationUser.Value.Update(model);
                     _view.Message = "Account edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.ApplicationUser.Add(model);
+                    _unitOfWork.ApplicationUser.Value.Add(model);
                     _view.Message = "Account added successfully";
                 }
                 _unitOfWork.Save();
@@ -123,7 +123,7 @@ namespace PresentationLayer.Presenters.Account
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                var user = _unitOfWork.ApplicationUser.GetAll(c => c.UserName.Contains(_view.SearchValue), includeProperties: "Profile");
+                var user = _unitOfWork.ApplicationUser.Value.GetAll(c => c.UserName.Contains(_view.SearchValue), includeProperties: "Profile");
                 RegisterList = Program.Mapper.Map<IEnumerable<AccountViewModel>>(user);
                 RegisterBindingSource.DataSource = RegisterList;
             }
@@ -136,7 +136,7 @@ namespace PresentationLayer.Presenters.Account
         {
             _view.IsEdit = true;
             var entity = (AccountViewModel)RegisterBindingSource.Current;
-            var user = _unitOfWork.ApplicationUser.Get(c => c.Id == entity.Id, includeProperties: "Profile");
+            var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == entity.Id, includeProperties: "Profile");
             _view.Id = entity.Id;
             _view.Username = entity.Username;
 
@@ -157,8 +157,8 @@ namespace PresentationLayer.Presenters.Account
             try
             {
                 var entity = (AccountViewModel)RegisterBindingSource.Current;
-                var user = _unitOfWork.ApplicationUser.Get(c => c.Id == entity.Id, includeProperties: "Profile");
-                _unitOfWork.ApplicationUser.Remove(user);
+                var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == entity.Id, includeProperties: "Profile");
+                _unitOfWork.ApplicationUser.Value.Remove(user);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Account deleted successfully";
@@ -195,7 +195,7 @@ namespace PresentationLayer.Presenters.Account
 
         private void LoadAllRegisterList()
         {
-            var user = _unitOfWork.ApplicationUser.GetAll(includeProperties: "Profile");
+            var user = _unitOfWork.ApplicationUser.Value.GetAll(includeProperties: "Profile");
             RegisterList = Program.Mapper.Map<IEnumerable<AccountViewModel>>(user);
             RegisterBindingSource.DataSource = RegisterList;//Set data source.
         }

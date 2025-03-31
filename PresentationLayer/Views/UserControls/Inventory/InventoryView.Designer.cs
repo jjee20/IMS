@@ -35,10 +35,15 @@
             tbDashboard = new TabPage();
             tcMain = new MaterialSkin.Controls.MaterialTabControl();
             tbProject = new TabPage();
-            tbTargetGoals = new TabPage();
-            tbSettings = new TabPage();
             tbSalesReport = new TabPage();
             tbPurchaseReport = new TabPage();
+            tbTargetGoals = new TabPage();
+            tbCustomer = new TabPage();
+            tbVendor = new TabPage();
+            tbWarehouse = new TabPage();
+            tbCashBank = new TabPage();
+            tbSettings = new TabPage();
+            tbProfile = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -97,7 +102,12 @@
             tcMain.Controls.Add(tbSalesReport);
             tcMain.Controls.Add(tbPurchaseReport);
             tcMain.Controls.Add(tbTargetGoals);
+            tcMain.Controls.Add(tbCustomer);
+            tcMain.Controls.Add(tbVendor);
+            tcMain.Controls.Add(tbWarehouse);
+            tcMain.Controls.Add(tbCashBank);
             tcMain.Controls.Add(tbSettings);
+            tcMain.Controls.Add(tbProfile);
             tcMain.Depth = 0;
             tcMain.Dock = DockStyle.Fill;
             tcMain.Location = new Point(3, 48);
@@ -119,24 +129,6 @@
             tbProject.Text = "Project Listing";
             tbProject.UseVisualStyleBackColor = true;
             // 
-            // tbTargetGoals
-            // 
-            tbTargetGoals.Location = new Point(4, 24);
-            tbTargetGoals.Name = "tbTargetGoals";
-            tbTargetGoals.Size = new Size(1352, 689);
-            tbTargetGoals.TabIndex = 6;
-            tbTargetGoals.Text = "Target Goals";
-            tbTargetGoals.UseVisualStyleBackColor = true;
-            // 
-            // tbSettings
-            // 
-            tbSettings.Location = new Point(4, 24);
-            tbSettings.Name = "tbSettings";
-            tbSettings.Size = new Size(1352, 689);
-            tbSettings.TabIndex = 7;
-            tbSettings.Text = "Settings";
-            tbSettings.UseVisualStyleBackColor = true;
-            // 
             // tbSalesReport
             // 
             tbSalesReport.Location = new Point(4, 24);
@@ -155,6 +147,70 @@
             tbPurchaseReport.Text = "Purchase Report";
             tbPurchaseReport.UseVisualStyleBackColor = true;
             // 
+            // tbTargetGoals
+            // 
+            tbTargetGoals.Location = new Point(4, 24);
+            tbTargetGoals.Name = "tbTargetGoals";
+            tbTargetGoals.Size = new Size(1352, 689);
+            tbTargetGoals.TabIndex = 6;
+            tbTargetGoals.Text = "Target Goals";
+            tbTargetGoals.UseVisualStyleBackColor = true;
+            // 
+            // tbCustomer
+            // 
+            tbCustomer.Location = new Point(4, 24);
+            tbCustomer.Name = "tbCustomer";
+            tbCustomer.Size = new Size(1352, 689);
+            tbCustomer.TabIndex = 10;
+            tbCustomer.Text = "Customers";
+            tbCustomer.UseVisualStyleBackColor = true;
+            // 
+            // tbVendor
+            // 
+            tbVendor.Location = new Point(4, 24);
+            tbVendor.Name = "tbVendor";
+            tbVendor.Size = new Size(1352, 689);
+            tbVendor.TabIndex = 12;
+            tbVendor.Text = "Vendor";
+            tbVendor.UseVisualStyleBackColor = true;
+            // 
+            // tbWarehouse
+            // 
+            tbWarehouse.Location = new Point(4, 24);
+            tbWarehouse.Name = "tbWarehouse";
+            tbWarehouse.Size = new Size(1352, 689);
+            tbWarehouse.TabIndex = 13;
+            tbWarehouse.Text = "Warehouse";
+            tbWarehouse.UseVisualStyleBackColor = true;
+            // 
+            // tbCashBank
+            // 
+            tbCashBank.Location = new Point(4, 24);
+            tbCashBank.Name = "tbCashBank";
+            tbCashBank.Size = new Size(1352, 689);
+            tbCashBank.TabIndex = 11;
+            tbCashBank.Text = "Cash Bank";
+            tbCashBank.UseVisualStyleBackColor = true;
+            // 
+            // tbSettings
+            // 
+            tbSettings.Location = new Point(4, 24);
+            tbSettings.Name = "tbSettings";
+            tbSettings.Size = new Size(1352, 689);
+            tbSettings.TabIndex = 7;
+            tbSettings.Text = "Settings";
+            tbSettings.UseVisualStyleBackColor = true;
+            // 
+            // tbProfile
+            // 
+            tbProfile.Location = new Point(4, 24);
+            tbProfile.Name = "tbProfile";
+            tbProfile.Padding = new Padding(3);
+            tbProfile.Size = new Size(1352, 689);
+            tbProfile.TabIndex = 14;
+            tbProfile.Text = "Profile";
+            tbProfile.UseVisualStyleBackColor = true;
+            // 
             // InventoryView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -170,6 +226,7 @@
             Text = "Inventory Management System";
             WindowState = FormWindowState.Maximized;
             FormClosing += InventoryView_FormClosing;
+            Load += InventoryView_Load;
             tcMain.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -185,5 +242,10 @@
         private TabPage tbSettings;
         private TabPage tbSalesReport;
         private TabPage tbPurchaseReport;
+        private TabPage tbCustomer;
+        private TabPage tbVendor;
+        private TabPage tbWarehouse;
+        private TabPage tbCashBank;
+        private TabPage tbProfile;
     }
 }

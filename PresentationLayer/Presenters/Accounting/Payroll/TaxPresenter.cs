@@ -6,7 +6,7 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -39,7 +39,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllTaxList();
 
             //Source Binding
-            _view.SetTaxListBindingSource(TaxBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -49,10 +48,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Tax.Get(c => c.TaxId == _view.TaxId, tracked: true);
+            var model = _unitOfWork.Tax.Value.Get(c => c.TaxId == _view.TaxId, tracked: true);
 
             if (model == null) model = new Tax();
-            else _unitOfWork.Tax.Detach(model);
+            else _unitOfWork.Tax.Value.Detach(model);
 
             model.TaxId = _view.TaxId;
             model.MinimumSalary = _view.MinimumSalary;
@@ -64,12 +63,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Tax.Update(model);
+                    _unitOfWork.Tax.Value.Update(model);
                     _view.Message = "Tax edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Tax.Add(model);
+                    _unitOfWork.Tax.Value.Add(model);
                     _view.Message = "Tax added successfully";
                 }
                 _unitOfWork.Save();
@@ -87,7 +86,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                TaxList = _unitOfWork.Tax.GetAll(c => c.MinimumSalary == Convert.ToDouble(_view.SearchValue));
+                TaxList = _unitOfWork.Tax.Value.GetAll(c => c.MinimumSalary == Convert.ToDouble(_view.SearchValue));
                 TaxBindingSource.DataSource = TaxList;
             }
             else
@@ -98,7 +97,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Tax)TaxBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (Tax)_view.DataGrid.SelectedItem;
             _view.TaxId = entity.TaxId;
             _view.MinimumSalary = entity.MinimumSalary;
             _view.MaximumSalary = entity.MaximumSalary;
@@ -108,8 +114,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var entity = (Tax)TaxBindingSource.Current;
-                _unitOfWork.Tax.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (Tax)_view.DataGrid.SelectedItem;
+                _unitOfWork.Tax.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Tax deleted successfully";
@@ -146,8 +159,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllTaxList()
         {
-            TaxList = _unitOfWork.Tax.GetAll();
+            TaxList = _unitOfWork.Tax.Value.GetAll();
             TaxBindingSource.DataSource = TaxList;//Set data source.
+            _view.SetTaxListBindingSource(TaxBindingSource);
         }
     }
 }

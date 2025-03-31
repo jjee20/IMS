@@ -1,5 +1,6 @@
 ﻿using Guna.Charts.WinForms;
 using Guna.UI2.WinForms;
+using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.IViews.Inventory
 {

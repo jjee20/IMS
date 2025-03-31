@@ -6,7 +6,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -42,8 +42,6 @@ namespace PresentationLayer.Presenters
             LoadAllBranchList();
 
             //Source Binding
-            _view.SetWarehouseListBindingSource(WarehouseBindingSource);
-            _view.SetBranchListBindingSource(BranchBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -53,9 +51,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Warehouse.Get(c => c.WarehouseId == _view.WarehouseId, tracked: true);
+            var model = _unitOfWork.Warehouse.Value.Get(c => c.WarehouseId == _view.WarehouseId, tracked: true);
             if (model == null) model = new Warehouse();
-            else _unitOfWork.Warehouse.Detach(model);
+            else _unitOfWork.Warehouse.Value.Detach(model);
 
             model.WarehouseId = _view.WarehouseId;
             model.WarehouseName = _view.WarehouseName;
@@ -67,12 +65,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Warehouse.Update(model);
+                    _unitOfWork.Warehouse.Value.Update(model);
                     _view.Message = "Warehouse edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Warehouse.Add(model);
+                    _unitOfWork.Warehouse.Value.Add(model);
                     _view.Message = "Warehouse added successfully";
                 }
                     _unitOfWork.Save();
@@ -90,7 +88,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.GetAll(c => c.WarehouseName.Contains(_view.SearchValue), includeProperties: "Branch"));
+                WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.Value.GetAll(c => c.WarehouseName.Contains(_view.SearchValue), includeProperties: "Branch"));
                 WarehouseBindingSource.DataSource = WarehouseList;
             }
             else
@@ -101,8 +99,15 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var warehouse = (WarehouseViewModel)WarehouseBindingSource.Current;
-            var entity = _unitOfWork.Warehouse.Get(c => c.WarehouseId == warehouse.WarehouseId);
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var warehouse = (WarehouseViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Warehouse.Value.Get(c => c.WarehouseId == warehouse.WarehouseId);
             _view.WarehouseId = entity.WarehouseId;
             _view.WarehouseName = entity.WarehouseName;
             _view.Description = entity.Description;
@@ -111,9 +116,16 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var warehouse = (WarehouseViewModel)WarehouseBindingSource.Current;
-                var entity = _unitOfWork.Warehouse.Get(c => c.WarehouseId == warehouse.WarehouseId);
-                _unitOfWork.Warehouse.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to edit";
+                    return;
+                }
+
+                var warehouse = (WarehouseViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Warehouse.Value.Get(c => c.WarehouseId == warehouse.WarehouseId);
+                _unitOfWork.Warehouse.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Warehouse deleted successfully";
@@ -149,14 +161,16 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllWarehouseList()
         {
-            WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.GetAll(includeProperties: "Branch")); ;
+            WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.Value.GetAll(includeProperties: "Branch")); ;
             WarehouseBindingSource.DataSource = WarehouseList;//Set data source.
+            _view.SetWarehouseListBindingSource(WarehouseBindingSource);
         }
 
         private void LoadAllBranchList()
         {
-            BranchList = _unitOfWork.Branch.GetAll(); ;
+            BranchList = _unitOfWork.Branch.Value.GetAll(); ;
             BranchBindingSource.DataSource = BranchList;//Set data source.
+            _view.SetBranchListBindingSource(BranchBindingSource);
         }
     }
 }

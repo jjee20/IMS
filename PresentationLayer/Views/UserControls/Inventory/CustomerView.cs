@@ -4,6 +4,8 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -103,6 +105,7 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
+        public SfDataGrid DataGrid => dgList;
         //Properties
         public int CustomerId
         {
@@ -166,8 +169,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetCustomerListBindingSource(BindingSource CustomerList)
         {
-            dgList.DataSource = CustomerList;
-            DataGridHelper.ApplyDisplayNames<CustomerViewModel>(CustomerList, dgList);
+            dgPager.DataSource = CustomerList.ToList<CustomerViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetCustomerTypeListBindingSource(BindingSource customerTypeBindingSource)
         {

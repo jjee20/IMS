@@ -1,7 +1,10 @@
-﻿namespace PresentationLayer.Views.IViews
+﻿using Syncfusion.WinForms.DataGrid;
+
+namespace PresentationLayer.Views.IViews
 {
     public interface IBranchView
     {
+        SfDataGrid DataGrid { get; }
         int BranchId { get; set; }
         string BranchName { get; set; }
         string Description { get; set; }

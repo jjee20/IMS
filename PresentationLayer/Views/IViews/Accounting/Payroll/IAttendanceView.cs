@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Syncfusion.WinForms.DataGrid;
+using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IAttendanceView
     {
+        SfDataGrid DataGrid { get; }
         int AttendanceId { get; set; }
         int EmployeeId { get; set; }
         string EmployeeName { get; set; }
@@ -31,8 +33,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SaveEvent;
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
-        event EventHandler ImportEvent;
-        event DataGridViewCellEventHandler ShowAttendanceEvent;
+        event EventHandler ShowAttendanceEvent;
         void SetAttendanceListBindingSource(BindingSource AttendanceList);
         void SetIndividualAttendanceListBindingSource(BindingSource IndividualAttendanceList);
         void SetEmployeeListBindingSource(BindingSource EmployeeList);

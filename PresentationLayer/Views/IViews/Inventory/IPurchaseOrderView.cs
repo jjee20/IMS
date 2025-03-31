@@ -1,11 +1,13 @@
 ﻿using DomainLayer.Models;
 using DomainLayer.ViewModels.Inventory;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
 {
     public interface IPurchaseOrderView
     {
+        SfDataGrid DataGrid { get; }
         int PurchaseOrderId { get; set; }
         string PurchaseOrderName { get; set; }
         int BranchId { get; set; }
@@ -47,9 +49,9 @@ namespace PresentationLayer.Views.IViews
         event EventHandler GRNEvent;
         event EventHandler BillEvent;
         event EventHandler PaymentVoucherEvent;
-        event DataGridViewCellEventHandler PrintPOEvent;
-        event DataGridViewCellEventHandler DeleteProductEvent;
-        event DataGridViewCellEventHandler UpdateComputationEvent;
+        event EventHandler PrintPOEvent;
+        event EventHandler DeleteProductEvent;
+        event EventHandler UpdateComputationEvent;
 
         void SetPurchaseOrderListBindingSource(BindingSource PurchaseOrderList);
         void SetPurchaseOrderLineListBindingSource(BindingSource PurchaseOrderLineList);

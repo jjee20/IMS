@@ -31,9 +31,6 @@ namespace PresentationLayer.Views.UserControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -54,7 +51,10 @@ namespace PresentationLayer.Views.UserControls
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
-            dgList = new Guna2DataGridView();
+            materialCard4 = new MaterialSkin.Controls.MaterialCard();
+            panel1 = new Panel();
+            dgList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            dgPager = new Syncfusion.WinForms.DataPager.SfDataPager();
             tabPage2 = new TabPage();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
             txtIsRecurring = new MaterialSkin.Controls.MaterialSwitch();
@@ -88,6 +88,8 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            materialCard4.SuspendLayout();
+            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             tabPage2.SuspendLayout();
             materialCard2.SuspendLayout();
@@ -147,7 +149,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(dgList);
+            tabPage1.Controls.Add(materialCard4);
             tabPage1.Location = new Point(4, 44);
             tabPage1.Margin = new Padding(3, 4, 3, 4);
             tabPage1.Name = "tabPage1";
@@ -157,58 +159,66 @@ namespace PresentationLayer.Views.UserControls
             tabPage1.Text = "List";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // materialCard4
+            // 
+            materialCard4.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard4.Controls.Add(panel1);
+            materialCard4.Depth = 0;
+            materialCard4.Dock = DockStyle.Fill;
+            materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard4.Location = new Point(3, 4);
+            materialCard4.Margin = new Padding(14);
+            materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard4.Name = "materialCard4";
+            materialCard4.Padding = new Padding(14);
+            materialCard4.Size = new Size(1310, 475);
+            materialCard4.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(dgList);
+            panel1.Controls.Add(dgPager);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(14, 14);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1282, 447);
+            panel1.TabIndex = 1;
+            // 
             // dgList
             // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dgList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgList.ColumnHeadersHeight = 50;
-            dgList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgList.DefaultCellStyle = dataGridViewCellStyle3;
+            dgList.AccessibleName = "Table";
+            dgList.AllowFiltering = true;
+            dgList.AllowTriStateSorting = true;
+            dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             dgList.Dock = DockStyle.Fill;
-            dgList.GridColor = Color.FromArgb(231, 229, 255);
-            dgList.Location = new Point(3, 4);
+            dgList.FrozenColumnCount = 2;
+            dgList.FrozenRowCount = 1;
+            dgList.Location = new Point(0, 0);
             dgList.Name = "dgList";
-            dgList.RowHeadersVisible = false;
-            dgList.RowHeadersWidth = 51;
-            dgList.RowTemplate.Height = 29;
-            dgList.Size = new Size(1310, 475);
-            dgList.TabIndex = 0;
-            dgList.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgList.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgList.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgList.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgList.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgList.ThemeStyle.BackColor = Color.White;
-            dgList.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgList.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgList.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgList.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgList.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgList.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgList.ThemeStyle.HeaderStyle.Height = 50;
-            dgList.ThemeStyle.ReadOnly = false;
-            dgList.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgList.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgList.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgList.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgList.ThemeStyle.RowsStyle.Height = 29;
-            dgList.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgList.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dgList.ShowGroupDropArea = true;
+            dgList.Size = new Size(1282, 411);
+            dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            dgList.TabIndex = 7;
+            dgList.Text = "sfDataGrid1";
+            // 
+            // dgPager
+            // 
+            dgPager.AccessibleName = "DataPager";
+            dgPager.CanOverrideStyle = true;
+            dgPager.DataSource = dgList.DataBindings;
+            dgPager.Dock = DockStyle.Bottom;
+            dgPager.HorizontalAlignment = HorizontalAlignment.Center;
+            dgPager.Location = new Point(0, 411);
+            dgPager.Name = "dgPager";
+            dgPager.PageCount = 1;
+            dgPager.PageSize = 15;
+            dgPager.Size = new Size(1282, 36);
+            dgPager.TabIndex = 8;
+            dgPager.Text = "sfDataPager1";
             // 
             // tabPage2
             // 
@@ -224,7 +234,6 @@ namespace PresentationLayer.Views.UserControls
             // 
             // materialCard2
             // 
-            materialCard2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
             materialCard2.Controls.Add(txtIsRecurring);
             materialCard2.Controls.Add(guna2HtmlLabel1);
@@ -238,13 +247,14 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.Controls.Add(guna2HtmlLabel2);
             materialCard2.Controls.Add(txtAmount);
             materialCard2.Depth = 0;
+            materialCard2.Dock = DockStyle.Fill;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(19, 23);
+            materialCard2.Location = new Point(3, 4);
             materialCard2.Margin = new Padding(16, 19, 16, 19);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(16, 19, 16, 19);
-            materialCard2.Size = new Size(1278, 437);
+            materialCard2.Size = new Size(1310, 475);
             materialCard2.TabIndex = 0;
             // 
             // txtIsRecurring
@@ -267,7 +277,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel1.Anchor = AnchorStyles.None;
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel1.Location = new Point(90, 282);
+            guna2HtmlLabel1.Location = new Point(106, 301);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(81, 19);
             guna2HtmlLabel1.TabIndex = 20;
@@ -282,7 +292,7 @@ namespace PresentationLayer.Views.UserControls
             txtDateGranted.Font = new Font("Segoe UI", 9F);
             txtDateGranted.ForeColor = Color.White;
             txtDateGranted.Format = DateTimePickerFormat.Long;
-            txtDateGranted.Location = new Point(91, 307);
+            txtDateGranted.Location = new Point(107, 326);
             txtDateGranted.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtDateGranted.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtDateGranted.Name = "txtDateGranted";
@@ -296,7 +306,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel5.Anchor = AnchorStyles.None;
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel5.Location = new Point(674, 282);
+            guna2HtmlLabel5.Location = new Point(690, 301);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(69, 19);
             guna2HtmlLabel5.TabIndex = 17;
@@ -314,7 +324,7 @@ namespace PresentationLayer.Views.UserControls
             txtDescription.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtDescription.Font = new Font("Segoe UI", 10F);
             txtDescription.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtDescription.Location = new Point(674, 307);
+            txtDescription.Location = new Point(690, 326);
             txtDescription.Margin = new Padding(4, 7, 4, 7);
             txtDescription.Name = "txtDescription";
             txtDescription.PasswordChar = '\0';
@@ -338,7 +348,7 @@ namespace PresentationLayer.Views.UserControls
             txtAllowanceType.ForeColor = Color.FromArgb(68, 88, 112);
             txtAllowanceType.IntegralHeight = false;
             txtAllowanceType.ItemHeight = 50;
-            txtAllowanceType.Location = new Point(90, 206);
+            txtAllowanceType.Location = new Point(106, 225);
             txtAllowanceType.Name = "txtAllowanceType";
             txtAllowanceType.ShadowDecoration.CustomizableEdges = customizableEdges6;
             txtAllowanceType.Size = new Size(514, 56);
@@ -358,7 +368,7 @@ namespace PresentationLayer.Views.UserControls
             txtEmployee.ForeColor = Color.FromArgb(68, 88, 112);
             txtEmployee.IntegralHeight = false;
             txtEmployee.ItemHeight = 50;
-            txtEmployee.Location = new Point(90, 99);
+            txtEmployee.Location = new Point(106, 118);
             txtEmployee.Name = "txtEmployee";
             txtEmployee.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtEmployee.Size = new Size(1099, 56);
@@ -369,18 +379,18 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel4.Anchor = AnchorStyles.None;
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel4.Location = new Point(90, 74);
+            guna2HtmlLabel4.Location = new Point(106, 93);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(60, 19);
+            guna2HtmlLabel4.Size = new Size(98, 19);
             guna2HtmlLabel4.TabIndex = 13;
-            guna2HtmlLabel4.Text = "Employee";
+            guna2HtmlLabel4.Text = "Select Employee";
             // 
             // guna2HtmlLabel3
             // 
             guna2HtmlLabel3.Anchor = AnchorStyles.None;
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel3.Location = new Point(674, 181);
+            guna2HtmlLabel3.Location = new Point(690, 200);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(48, 19);
             guna2HtmlLabel3.TabIndex = 12;
@@ -391,11 +401,11 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Anchor = AnchorStyles.None;
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel2.Location = new Point(90, 181);
+            guna2HtmlLabel2.Location = new Point(106, 200);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(93, 19);
+            guna2HtmlLabel2.Size = new Size(131, 19);
             guna2HtmlLabel2.TabIndex = 11;
-            guna2HtmlLabel2.Text = "Allowance Type";
+            guna2HtmlLabel2.Text = "Select Allowance Type";
             // 
             // txtAmount
             // 
@@ -409,7 +419,7 @@ namespace PresentationLayer.Views.UserControls
             txtAmount.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtAmount.Font = new Font("Segoe UI", 10F);
             txtAmount.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtAmount.Location = new Point(674, 206);
+            txtAmount.Location = new Point(690, 225);
             txtAmount.Margin = new Padding(4, 7, 4, 7);
             txtAmount.Name = "txtAmount";
             txtAmount.PasswordChar = '\0';
@@ -445,7 +455,7 @@ namespace PresentationLayer.Views.UserControls
             label2.AutoSize = true;
             label2.Dock = DockStyle.Right;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(470, 0);
+            label2.Location = new Point(466, 0);
             label2.Name = "label2";
             label2.Size = new Size(47, 21);
             label2.TabIndex = 34;
@@ -459,12 +469,12 @@ namespace PresentationLayer.Views.UserControls
             txtStartDate.FillColor = Color.White;
             txtStartDate.Font = new Font("Segoe UI", 9F);
             txtStartDate.Format = DateTimePickerFormat.Long;
-            txtStartDate.Location = new Point(517, 0);
+            txtStartDate.Location = new Point(513, 0);
             txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtStartDate.Name = "txtStartDate";
             txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtStartDate.Size = new Size(199, 62);
+            txtStartDate.Size = new Size(215, 62);
             txtStartDate.TabIndex = 33;
             txtStartDate.Value = new DateTime(2025, 2, 26, 9, 16, 55, 624);
             // 
@@ -473,7 +483,7 @@ namespace PresentationLayer.Views.UserControls
             label1.AutoSize = true;
             label1.Dock = DockStyle.Right;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(716, 0);
+            label1.Location = new Point(728, 0);
             label1.Name = "label1";
             label1.Size = new Size(25, 21);
             label1.TabIndex = 32;
@@ -487,12 +497,12 @@ namespace PresentationLayer.Views.UserControls
             txtEndDate.FillColor = Color.White;
             txtEndDate.Font = new Font("Segoe UI", 9F);
             txtEndDate.Format = DateTimePickerFormat.Long;
-            txtEndDate.Location = new Point(741, 0);
+            txtEndDate.Location = new Point(753, 0);
             txtEndDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtEndDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtEndDate.Name = "txtEndDate";
             txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            txtEndDate.Size = new Size(205, 62);
+            txtEndDate.Size = new Size(215, 62);
             txtEndDate.TabIndex = 31;
             txtEndDate.Value = new DateTime(2025, 2, 26, 9, 16, 55, 624);
             // 
@@ -613,14 +623,14 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(946, 0);
+            txtSearch.Location = new Point(968, 0);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
             txtSearch.Name = "txtSearch";
             txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            txtSearch.Size = new Size(378, 62);
+            txtSearch.Size = new Size(356, 62);
             txtSearch.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -668,7 +678,7 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.Name = "materialLabel1";
             materialLabel1.Size = new Size(1318, 53);
             materialLabel1.TabIndex = 3;
-            materialLabel1.Text = "Allowance Details";
+            materialLabel1.Text = "Allowance Management";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // guna2Separator1
@@ -691,6 +701,8 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.ResumeLayout(false);
             Guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            materialCard4.ResumeLayout(false);
+            panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             tabPage2.ResumeLayout(false);
             materialCard2.ResumeLayout(false);
@@ -713,7 +725,6 @@ namespace PresentationLayer.Views.UserControls
         private TableLayoutPanel tableLayoutPanel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Guna2Separator guna2Separator1;
-        private Guna2DataGridView dgList;
         private MaterialSkin.Controls.MaterialCard materialCard2;
         private Guna2TextBox txtAmount;
         private Guna2HtmlLabel guna2HtmlLabel3;
@@ -739,5 +750,9 @@ namespace PresentationLayer.Views.UserControls
         private Guna2DateTimePicker txtStartDate;
         private Label label1;
         private Guna2DateTimePicker txtEndDate;
+        private MaterialSkin.Controls.MaterialCard materialCard4;
+        private Panel panel1;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid dgList;
+        private Syncfusion.WinForms.DataPager.SfDataPager dgPager;
     }
 }

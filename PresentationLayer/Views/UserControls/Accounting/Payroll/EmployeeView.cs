@@ -7,6 +7,8 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -105,8 +107,14 @@ namespace PresentationLayer.Views.UserControls
                 }
                 btnReturn.Visible = false;
             };
+
+            dgList.CellDoubleClick += (s, e) =>
+            {
+                UserInformationEvent?.Invoke(this, EventArgs.Empty);
+            };
         }
 
+        public SfDataGrid DataGrid => dgList;
         //Properties
         public int EmployeeId
         {
@@ -209,8 +217,8 @@ namespace PresentationLayer.Views.UserControls
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
-            dgList.DataSource = EmployeeList;
-            DataGridHelper.ApplyDisplayNames<EmployeeViewModel>(EmployeeList, dgList);
+            dgPager.DataSource = EmployeeList.ToList<EmployeeViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public void SetGenderListBindingSource(BindingSource GenderList)
@@ -246,6 +254,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler DeleteEvent;
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
+        public event EventHandler UserInformationEvent;
 
         private static EmployeeView? instance;
         public static EmployeeView GetInstance(TabPage parentContainer)

@@ -9,7 +9,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using RavenTech_ERP.Properties;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters.Account
 {
@@ -34,7 +34,7 @@ namespace PresentationLayer.Presenters.Account
         private void Save(object? sender, EventArgs e)
         {
             string userId = Settings.Default.User_Id;
-            var user = _unitOfWork.ApplicationUser.Get(c => c.Id == userId);
+            var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId);
 
             try
             {
@@ -45,7 +45,7 @@ namespace PresentationLayer.Presenters.Account
                 if (passwordVerificationResult == PasswordVerificationResult.Success)
                 {
                     user.PasswordHash = _view.NewPassword;
-                    _unitOfWork.ApplicationUser.Update(user);
+                    _unitOfWork.ApplicationUser.Value.Update(user);
                     _view.Message = "Password updated successfully";
                     _unitOfWork.Save();
                     _view.IsSuccessful = true;

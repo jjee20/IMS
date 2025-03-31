@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -35,7 +35,6 @@ namespace PresentationLayer.Presenters
             LoadAllCustomerTypeList();
 
             //Source Binding
-            _view.SetCustomerTypeListBindingSource(CustomerTypeBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.CustomerType.Get(c => c.CustomerTypeId == _view.CustomerTypeId, tracked: true);
+            var model = _unitOfWork.CustomerType.Value.Get(c => c.CustomerTypeId == _view.CustomerTypeId, tracked: true);
             if (model == null) model = new CustomerType();
-            else _unitOfWork.CustomerType.Detach(model);
+            else _unitOfWork.CustomerType.Value.Detach(model);
 
             model.CustomerTypeId = _view.CustomerTypeId;
             model.CustomerTypeName = _view.CustomerTypeName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.CustomerType.Update(model);
+                    _unitOfWork.CustomerType.Value.Update(model);
                     _view.Message = "Customer type edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.CustomerType.Add(model);
+                    _unitOfWork.CustomerType.Value.Add(model);
                     _view.Message = "Customer type added successfully";
                 }
                 _unitOfWork.Save();
@@ -84,7 +83,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                CustomerTypeList = _unitOfWork.CustomerType.GetAll(c => c.CustomerTypeName.Contains(_view.SearchValue));
+                CustomerTypeList = _unitOfWork.CustomerType.Value.GetAll(c => c.CustomerTypeName.Contains(_view.SearchValue));
                 CustomerTypeBindingSource.DataSource = CustomerTypeList;
             }
             else
@@ -95,7 +94,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (CustomerType)CustomerTypeBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (CustomerType)_view.DataGrid.SelectedItem;
             _view.CustomerTypeId = entity.CustomerTypeId;
             _view.CustomerTypeName = entity.CustomerTypeName;
             _view.Description = entity.Description;
@@ -104,8 +110,15 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var entity = (CustomerType)CustomerTypeBindingSource.Current;
-                _unitOfWork.CustomerType.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (CustomerType)_view.DataGrid.SelectedItem;
+                _unitOfWork.CustomerType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Customer type deleted successfully";
@@ -141,8 +154,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllCustomerTypeList()
         {
-            CustomerTypeList = _unitOfWork.CustomerType.GetAll();
+            CustomerTypeList = _unitOfWork.CustomerType.Value.GetAll();
             CustomerTypeBindingSource.DataSource = CustomerTypeList;//Set data source.
+            _view.SetCustomerTypeListBindingSource(CustomerTypeBindingSource);
         }
     }
 }

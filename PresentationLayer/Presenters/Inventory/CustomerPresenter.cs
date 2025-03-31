@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using static PresentationLayer.Json.Address;
 
 namespace PresentationLayer.Presenters
@@ -21,14 +21,6 @@ namespace PresentationLayer.Presenters
 
         private IEnumerable<CustomerViewModel> CustomerList;
         private IEnumerable<CustomerType> CustomerTypeList;
-
-        //private List<string> GetBarangayList;
-        //private List<string> GetMunicipalityList;
-        //private List<string> GetProvinceList;
-        //private List<string> GetRegionList;
-
-        string reportFileName = "philippine_provinces_cities_municipalities_and_barangays_2019v2.json";
-        string reportDirectory = Path.Combine(Application.StartupPath, "Json");
         public CustomerPresenter(ICustomerView view, IUnitOfWork unitOfWork)
         {
 
@@ -38,10 +30,6 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
             CustomerBindingSource = new BindingSource();
             CustomerTypeBindingSource = new BindingSource();
-            //GetBarangayList = new List<string>();
-            //GetMunicipalityList = new List<string>();
-            //GetProvinceList = new List<string>();
-            //GetRegionList = new List<string>();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -59,8 +47,6 @@ namespace PresentationLayer.Presenters
             //LoadAddress();
 
             //Source Binding
-            _view.SetCustomerListBindingSource(CustomerBindingSource);
-            _view.SetCustomerTypeListBindingSource(CustomerTypeBindingSource);
             //_view.SetAddressBindingSource(GetBarangayList, GetMunicipalityList,
             //                              GetProvinceList, GetRegionList);
         }
@@ -95,9 +81,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Customer.Get(c => c.CustomerId == _view.CustomerId, tracked: true);
+            var model = _unitOfWork.Customer.Value.Get(c => c.CustomerId == _view.CustomerId, tracked: true);
             if (model == null) model = new Customer();
-            else _unitOfWork.Customer.Detach(model);
+            else _unitOfWork.Customer.Value.Detach(model);
 
             model.CustomerId = _view.CustomerId;
             model.CustomerName = _view.CustomerName;
@@ -112,12 +98,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Customer.Update(model);
+                    _unitOfWork.Customer.Value.Update(model);
                     _view.Message = "Customer edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Customer.Add(model);
+                    _unitOfWork.Customer.Value.Add(model);
                     _view.Message = "Customer added successfully";
                 }
                 _unitOfWork.Save();
@@ -135,7 +121,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.GetAll(c => c.CustomerName.Contains(_view.SearchValue), includeProperties: "CustomerType"));
+                CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll(c => c.CustomerName.Contains(_view.SearchValue), includeProperties: "CustomerType"));
                 CustomerBindingSource.DataSource = CustomerList;
             }
             else
@@ -146,8 +132,15 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var customer = (CustomerViewModel)CustomerBindingSource.Current;
-            var entity = _unitOfWork.Customer.Get(c => c.CustomerId == customer.CustomerId);
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var customer = (CustomerViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Customer.Value.Get(c => c.CustomerId == customer.CustomerId);
             _view.CustomerId = entity.CustomerId;
             _view.CustomerName = entity.CustomerName;
             _view.CustomerTypeId = entity.CustomerTypeId;
@@ -160,9 +153,16 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var customer = (CustomerViewModel)CustomerBindingSource.Current;
-                var entity = _unitOfWork.Customer.Get(c => c.CustomerId == customer.CustomerId);
-                _unitOfWork.Customer.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to edit";
+                    return;
+                }
+
+                var customer = (CustomerViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Customer.Value.Get(c => c.CustomerId == customer.CustomerId);
+                _unitOfWork.Customer.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Customer deleted successfully";
@@ -203,13 +203,15 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllCustomerList()
         {
-            CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.GetAll(includeProperties: "CustomerType"));
+            CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll(includeProperties: "CustomerType"));
             CustomerBindingSource.DataSource = CustomerList;//Set data source.
+            _view.SetCustomerListBindingSource(CustomerBindingSource);
         }
         private void LoadAllCustomerTypeList()
         {
-            CustomerTypeList = _unitOfWork.CustomerType.GetAll();
+            CustomerTypeList = _unitOfWork.CustomerType.Value.GetAll();
             CustomerTypeBindingSource.DataSource = CustomerTypeList;//Set data source.
+            _view.SetCustomerTypeListBindingSource(CustomerTypeBindingSource);
         }
 
     }

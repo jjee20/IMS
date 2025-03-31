@@ -9,8 +9,9 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.Helpers;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -27,7 +28,8 @@ namespace PresentationLayer.Presenters
         private IEnumerable<ProjectViewModel> ProjectList;
         private ProjectViewModel ProjectVM;
         private IEnumerable<Product> ProductList;
-        public ProjectManagementPresenter(IProjectManagementView view, IUnitOfWork unitOfWork) {
+        public ProjectManagementPresenter(IProjectManagementView view, IUnitOfWork unitOfWork)
+        {
 
             //Initialize
 
@@ -50,7 +52,7 @@ namespace PresentationLayer.Presenters
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
             _view.ProductAddEvent += ProductAdd;
-            _view.PrintSOEvent += PrintSO;
+            _view.PrintProjectEvent += PrintProject;
             _view.DeleteProductEvent += ProductDelete;
             _view.UpdateComputationEvent += UpdateComputation;
 
@@ -59,39 +61,39 @@ namespace PresentationLayer.Presenters
             LoadAllProductList();
 
             //Source Binding
-            _view.SetProjectListBindingSource(ProjectBindingSource);
-            _view.SetProductListBindingSource(ProductBindingSource);
         }
-        private void UpdateComputation(object? sender, DataGridViewCellEventArgs e)
+        private void UpdateComputation(object? sender, EventArgs e)
         {
             _view.Total = _view.ProjectLines.Select(c => c.SubTotal).Sum();
         }
 
-        private void PrintSO(object? sender, DataGridViewCellEventArgs e)
+        private void PrintProject(object? sender, EventArgs e)
         {
-            var Project = (ProjectViewModel)ProjectBindingSource.Current;
-            var ProjectLine = _unitOfWork.ProjectLine.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product", tracked: true);
-            var projectLineVM = ProjectLine.Select(c => new ProjectLineViewModel
+            try
             {
-                ProductId = (int)c.ProductId,
-                ProductName = c.Product.ProductName,
-                Price = c.Price,
-                DiscountPercentage = c.DiscountPercentage * 100,
-                Quantity = c.Quantity,
-                SubTotal = c.SubTotal,  
-            });
-            ProjectVM = Project;
+                var Project = (ProjectViewModel)_view.DataGrid.SelectedItem;
+                var ProjectLine = _unitOfWork.ProjectLine.Value.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product", tracked: true);
+                var projectLineVM = ProjectLine.Select(c => new ProjectLineViewModel
+                {
+                    ProductId = (int)c.ProductId,
+                    ProductName = c.Product.ProductName,
+                    Price = c.Price,
+                    DiscountPercentage = c.DiscountPercentage * 100,
+                    Quantity = c.Quantity,
+                    SubTotal = c.SubTotal,
+                });
+                ProjectVM = Project;
 
-            string reportFileName = "ProjectReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
-            string reportPath = Path.Combine(reportDirectory, reportFileName);
+                string reportFileName = "ProjectReport.rdlc";
+                string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
+                string reportPath = Path.Combine(reportDirectory, reportFileName);
 
-            var localReport = new LocalReport();
+                var localReport = new LocalReport();
 
-            var reportDataSource = new ReportDataSource("ProjectLine", projectLineVM);
-            //localReport.DataSources.Add(reportDataSource);
+                var reportDataSource = new ReportDataSource("ProjectLine", projectLineVM);
+                //localReport.DataSources.Add(reportDataSource);
 
-            var parameters = new List<ReportParameter>
+                var parameters = new List<ReportParameter>
             {
                 new ReportParameter("ProjectName", ProjectVM.ProjectName ?? string.Empty),
                 new ReportParameter("StartDate", ProjectVM.StartDate.Value.ToString("MMM dd, yyyy")),
@@ -102,13 +104,19 @@ namespace PresentationLayer.Presenters
                 new ReportParameter("Revenue", ProjectVM.Revenue.Value.ToString("N2")),
             };
 
-            //localReport.SetParameters(parameters);
+                //localReport.SetParameters(parameters);
 
-            var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
-            reportView.ShowDialog();
+                var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
+                reportView.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = ex.Message;
+            }
         }
 
-        private void ProductDelete(object? sender, DataGridViewCellEventArgs e)
+        private void ProductDelete(object? sender, EventArgs e)
         {
             try
             {
@@ -125,7 +133,7 @@ namespace PresentationLayer.Presenters
 
         private void ProductAdd(object? sender, EventArgs e)
         {
-            var product = _unitOfWork.Product.Get(c => c.ProductId == _view.ProductId);
+            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == _view.ProductId);
 
             // Initialize ProjectLines if it's null
             _view.ProjectLines ??= new List<ProjectLineViewModel>();
@@ -157,7 +165,7 @@ namespace PresentationLayer.Presenters
             var productItem = name;
             var quantity = _view.ProductQuantity;
             var amount = productprice * quantity;
-            var discount = _view.ProductDiscount/100;
+            var discount = _view.ProductDiscount / 100;
             var discountAmount = productprice * discount;
 
             _view.ProjectLines.Add(new ProjectLineViewModel
@@ -183,9 +191,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Project.Get(c => c.ProjectId == _view.ProjectId, tracked: true);
+            var model = _unitOfWork.Project.Value.Get(c => c.ProjectId == _view.ProjectId, tracked: true);
             if (model == null) model = new Project();
-            else _unitOfWork.Project.Detach(model);
+            else _unitOfWork.Project.Value.Detach(model);
 
             model.ProjectId = _view.ProjectId;
             model.ProjectName = _view.ProjectName;
@@ -204,15 +212,15 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Project.Update(model);
+                    _unitOfWork.Project.Value.Update(model);
                     _view.Message = "Project edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Project.Add(model);
+                    _unitOfWork.Project.Value.Add(model);
                     _view.Message = "Project added successfully";
                 }
-                    _unitOfWork.Save();
+                _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 CleanviewFields();
             }
@@ -252,7 +260,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(_unitOfWork.Project.GetAll(c => c.ProjectName.Contains(_view.SearchValue)));
+                ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(_unitOfWork.Project.Value.GetAll(c => c.ProjectName.Contains(_view.SearchValue)));
                 ProjectBindingSource.DataSource = ProjectList;
             }
             else
@@ -263,9 +271,16 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var Project = (ProjectViewModel)ProjectBindingSource.Current;
-            var entity = _unitOfWork.Project.Get(c => c.ProjectId == Project.ProjectId);
-            var ProjectLines = _unitOfWork.ProjectLine.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product");
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var Project = (ProjectViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == Project.ProjectId);
+            var ProjectLines = _unitOfWork.ProjectLine.Value.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product");
             _view.ProjectId = entity.ProjectId;
             _view.ProjectName = entity.ProjectName;
             _view.Description = entity.Description;
@@ -280,9 +295,16 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var Project = (ProjectViewModel)ProjectBindingSource.Current;
-                var entity = _unitOfWork.Project.Get(c => c.ProjectId ==  Project.ProjectId);
-                _unitOfWork.Project.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var Project = (ProjectViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == Project.ProjectId);
+                _unitOfWork.Project.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Project deleted successfully";
@@ -296,16 +318,11 @@ namespace PresentationLayer.Presenters
         }
         private void Print(object? sender, EventArgs e)
         {
-            string reportFileName = "SalesReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
-            string reportPath = Path.Combine(reportDirectory, reportFileName);
+            var project = (ProjectViewModel)ProjectBindingSource.Current;
+            var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == project.ProjectId, includeProperties: "ProjectLines");
 
-            var localReport = new LocalReport();
-
-            var reportDataSource = new ReportDataSource("Project", ProjectList);
-
-            var reportView = new ReportView(reportPath, reportDataSource, localReport);
-            reportView.ShowDialog();
+            var projectInformation = new ProjectInformationView(entity, project, _unitOfWork);
+            projectInformation.ShowDialog();
         }
         private void Return(object? sender, EventArgs e)
         {
@@ -325,8 +342,17 @@ namespace PresentationLayer.Presenters
             _view.ProjectLines = new List<ProjectLineViewModel>();
         }
 
-        private void LoadAllProjectList() => ProjectBindingSource.DataSource = ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(
-            _unitOfWork.Project.GetAll());
-        private void LoadAllProductList() => ProductBindingSource.DataSource =  ProductList = _unitOfWork.Product.GetAll();
+        private void LoadAllProjectList()
+        {
+            ProjectBindingSource.DataSource = ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(
+            _unitOfWork.Project.Value.GetAll());
+
+            _view.SetProjectListBindingSource(ProjectBindingSource);
+        }
+        private void LoadAllProductList()
+        {
+            ProductBindingSource.DataSource = ProductList = _unitOfWork.Product.Value.GetAll();
+            _view.SetProductListBindingSource(ProductBindingSource);
+        }
     }
 }

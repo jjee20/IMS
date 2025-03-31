@@ -4,7 +4,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -50,10 +50,6 @@ namespace PresentationLayer.Presenters
             LoadAllBranchList();
 
             //Source Binding
-            _view.SetProductListBindingSource(ProductBindingSource);
-            _view.SetProductTypeListBindingSource(ProductTypeBindingSource);
-            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureBindingSource);
-            _view.SetBranchListBindingSource(BranchBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -63,9 +59,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Product.Get(c => c.ProductId == _view.ProductId, tracked: true);
+            var model = _unitOfWork.Product.Value.Get(c => c.ProductId == _view.ProductId, tracked: true);
             if (model == null) model = new Product();
-            else _unitOfWork.Product.Detach(model);
+            else _unitOfWork.Product.Value.Detach(model);
 
             model.ProductId = _view.ProductId;
             model.ProductName = _view.ProductName ?? "";
@@ -87,12 +83,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Product.Update(model);
+                    _unitOfWork.Product.Value.Update(model);
                     _view.Message = "Product edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Product.Add(model);
+                    _unitOfWork.Product.Value.Add(model);
                     _view.Message = "Product added successfully";
                 }
                     _unitOfWork.Save();
@@ -110,7 +106,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.GetAll(c => c.ProductName.Contains(_view.SearchValue), includeProperties: "UnitOfMeasure,Branch"));
+                ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll(c => c.ProductName.Contains(_view.SearchValue), includeProperties: "UnitOfMeasure,Branch"));
                 ProductBindingSource.DataSource = ProductList;
             }
             else
@@ -121,8 +117,15 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var product = (ProductViewModel)ProductBindingSource.Current;
-            var entity = _unitOfWork.Product.Get(c => c.ProductId == product.ProductId);
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var product = (ProductViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Product.Value.Get(c => c.ProductId == product.ProductId);
             _view.ProductId = entity.ProductId;
             _view.ProductName = entity.ProductName;
             _view.ProductCode = entity.ProductCode;
@@ -142,9 +145,16 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var product = (ProductViewModel)ProductBindingSource.Current;
-                var entity = _unitOfWork.Product.Get(c => c.ProductId == product.ProductId);
-                _unitOfWork.Product.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var product = (ProductViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Product.Value.Get(c => c.ProductId == product.ProductId);
+                _unitOfWork.Product.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Product deleted successfully";
@@ -188,23 +198,27 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllProductList()
         {
-            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.GetAll(includeProperties: "UnitOfMeasure,Branch"));
+            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll(includeProperties: "UnitOfMeasure,Branch"));
             ProductBindingSource.DataSource = ProductList;//Set data source.
+            _view.SetProductListBindingSource(ProductBindingSource);
         }
         private void LoadAllProductTypeList()
         {
-            ProductTypeList = _unitOfWork.ProductType.GetAll();
+            ProductTypeList = _unitOfWork.ProductType.Value.GetAll();
             ProductTypeBindingSource.DataSource = ProductTypeList;//Set data source.
+            _view.SetProductTypeListBindingSource(ProductTypeBindingSource);
         }
         private void LoadAllUnitOfMeasureList()
         {
-            UnitOfMeasureList = _unitOfWork.UnitOfMeasure.GetAll();
+            UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll();
             UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;//Set data source.
+            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureBindingSource);
         }
         private void LoadAllBranchList()
         {
-            BranchList = _unitOfWork.Branch.GetAll();
+            BranchList = _unitOfWork.Branch.Value.GetAll();
             BranchBindingSource.DataSource = BranchList;//Set data source.
+            _view.SetBranchListBindingSource(BranchBindingSource);
         }
     }
 }

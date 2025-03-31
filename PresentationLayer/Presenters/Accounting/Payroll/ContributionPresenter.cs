@@ -9,7 +9,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -46,8 +46,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllContributionTypeList();
 
             //Source Binding
-            _view.SetContributionListBindingSource(ContributionBindingSource);
-            _view.SetContributionTypeListBindingSource(ContributionTypeBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -57,9 +55,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Contribution.Get(c => c.ContributionId == _view.ContributionId, tracked: true);
+            var model = _unitOfWork.Contribution.Value.Get(c => c.ContributionId == _view.ContributionId, tracked: true);
             if (model == null) model = new Contribution();
-            else _unitOfWork.Contribution.Detach(model);
+            else _unitOfWork.Contribution.Value.Detach(model);
 
             model.ContributionId = _view.ContributionId;
             model.ContributionType = _view.ContributionType;
@@ -73,19 +71,19 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Contribution.Update(model);
+                    _unitOfWork.Contribution.Value.Update(model);
                     _view.Message = "Contribution edited successfully";
                 }
                 else //Add new model
                 {
-                    var Entity = _unitOfWork.Contribution.Get(c => c.ContributionType == _view.ContributionType && c.MinimumLimit == _view.MinimumLimit && c.MaximumLimit == _view.MaximumLimit);
+                    var Entity = _unitOfWork.Contribution.Value.Get(c => c.ContributionType == _view.ContributionType && c.MinimumLimit == _view.MinimumLimit && c.MaximumLimit == _view.MaximumLimit);
                     if (Entity != null)
                     {
                         _view.Message = "Contribution is already added.";
                         return;
                     }
 
-                    _unitOfWork.Contribution.Add(model);
+                    _unitOfWork.Contribution.Value.Add(model);
                     _view.Message = "Contribution added successfully";
                 }
                 _unitOfWork.Save();
@@ -106,7 +104,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 // Safely parse and filter contributions
                 if (Enum.TryParse(typeof(ContributionType), _view.SearchValue?.ToString(), out var parsedType))
                 {
-                    ContributionList = _unitOfWork.Contribution.GetAll(c => c.ContributionType == (ContributionType)parsedType);
+                    ContributionList = _unitOfWork.Contribution.Value.GetAll(c => c.ContributionType == (ContributionType)parsedType);
                 }
                 else
                 {
@@ -124,7 +122,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Contribution)ContributionBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (Contribution)_view.DataGrid.SelectedItem;
             _view.ContributionId = entity.ContributionId;
             _view.ContributionType = entity.ContributionType;
             _view.Rate = entity.EmployeeRate;
@@ -136,8 +141,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var entity = (Contribution)ContributionBindingSource.Current;
-                _unitOfWork.Contribution.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (Contribution)_view.DataGrid.SelectedItem;
+                _unitOfWork.Contribution.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Contribution deleted successfully";
@@ -175,13 +187,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllContributionList()
         {
-            ContributionList = _unitOfWork.Contribution.GetAll();
+            ContributionList = _unitOfWork.Contribution.Value.GetAll();
             ContributionBindingSource.DataSource = ContributionList;//Set data source.
+            _view.SetContributionListBindingSource(ContributionBindingSource);
         }
         private void LoadAllContributionTypeList()
         {
             ContributionTypeList = EnumHelper.EnumToEnumerable<ContributionType>();
             ContributionTypeBindingSource.DataSource = ContributionTypeList;//Set data source.
+            _view.SetContributionTypeListBindingSource(ContributionTypeBindingSource);
         }
     }
 }

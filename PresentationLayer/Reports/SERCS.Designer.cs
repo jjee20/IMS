@@ -124,6 +124,8 @@ namespace RavenTech_ERP.Reports {
         
         private StockInLogsDataTable tableStockInLogs;
         
+        private EmployeeContributionDataTable tableEmployeeContribution;
+        
         private global::System.Data.DataRelation relationFK_AspNetRoleClaims_AspNetRoles_RoleId;
         
         private global::System.Data.DataRelation relationFK_AspNetUserClaims_AspNetUsers_UserId;
@@ -319,6 +321,9 @@ namespace RavenTech_ERP.Reports {
                 }
                 if ((ds.Tables["StockInLogs"] != null)) {
                     base.Tables.Add(new StockInLogsDataTable(ds.Tables["StockInLogs"]));
+                }
+                if ((ds.Tables["EmployeeContribution"] != null)) {
+                    base.Tables.Add(new EmployeeContributionDataTable(ds.Tables["EmployeeContribution"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -840,6 +845,16 @@ namespace RavenTech_ERP.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public EmployeeContributionDataTable EmployeeContribution {
+            get {
+                return this.tableEmployeeContribution;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -1054,6 +1069,9 @@ namespace RavenTech_ERP.Reports {
                 }
                 if ((ds.Tables["StockInLogs"] != null)) {
                     base.Tables.Add(new StockInLogsDataTable(ds.Tables["StockInLogs"]));
+                }
+                if ((ds.Tables["EmployeeContribution"] != null)) {
+                    base.Tables.Add(new EmployeeContributionDataTable(ds.Tables["EmployeeContribution"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1388,6 +1406,12 @@ namespace RavenTech_ERP.Reports {
                     this.tableStockInLogs.InitVars();
                 }
             }
+            this.tableEmployeeContribution = ((EmployeeContributionDataTable)(base.Tables["EmployeeContribution"]));
+            if ((initTable == true)) {
+                if ((this.tableEmployeeContribution != null)) {
+                    this.tableEmployeeContribution.InitVars();
+                }
+            }
             this.relationFK_AspNetRoleClaims_AspNetRoles_RoleId = this.Relations["FK_AspNetRoleClaims_AspNetRoles_RoleId"];
             this.relationFK_AspNetUserClaims_AspNetUsers_UserId = this.Relations["FK_AspNetUserClaims_AspNetUsers_UserId"];
             this.relationFK_AspNetUserLogins_AspNetUsers_UserId = this.Relations["FK_AspNetUserLogins_AspNetUsers_UserId"];
@@ -1506,6 +1530,8 @@ namespace RavenTech_ERP.Reports {
             base.Tables.Add(this.tableContribution);
             this.tableStockInLogs = new StockInLogsDataTable();
             base.Tables.Add(this.tableStockInLogs);
+            this.tableEmployeeContribution = new EmployeeContributionDataTable();
+            base.Tables.Add(this.tableEmployeeContribution);
             this.relationFK_AspNetRoleClaims_AspNetRoles_RoleId = new global::System.Data.DataRelation("FK_AspNetRoleClaims_AspNetRoles_RoleId", new global::System.Data.DataColumn[] {
                         this.tableAspNetRoles.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableAspNetRoleClaims.RoleIdColumn}, false);
@@ -1842,6 +1868,12 @@ namespace RavenTech_ERP.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeEmployeeContribution() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -2044,6 +2076,9 @@ namespace RavenTech_ERP.Reports {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void StockInLogsRowChangeEventHandler(object sender, StockInLogsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void EmployeeContributionRowChangeEventHandler(object sender, EmployeeContributionRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -18885,6 +18920,325 @@ namespace RavenTech_ERP.Reports {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class EmployeeContributionDataTable : global::System.Data.TypedTableBase<EmployeeContributionRow> {
+            
+            private global::System.Data.DataColumn columnEmployeeContributionId;
+            
+            private global::System.Data.DataColumn columnEmployee;
+            
+            private global::System.Data.DataColumn columnSSS;
+            
+            private global::System.Data.DataColumn columnSSSWISP;
+            
+            private global::System.Data.DataColumn columnPagIbig;
+            
+            private global::System.Data.DataColumn columnPhilHealth;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public EmployeeContributionDataTable() {
+                this.TableName = "EmployeeContribution";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal EmployeeContributionDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called" +
+                " or extended by application code.", DiagnosticId="SYSLIB0051")]
+            protected EmployeeContributionDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn EmployeeContributionIdColumn {
+                get {
+                    return this.columnEmployeeContributionId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn EmployeeColumn {
+                get {
+                    return this.columnEmployee;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn SSSColumn {
+                get {
+                    return this.columnSSS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn SSSWISPColumn {
+                get {
+                    return this.columnSSSWISP;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn PagIbigColumn {
+                get {
+                    return this.columnPagIbig;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn PhilHealthColumn {
+                get {
+                    return this.columnPhilHealth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public EmployeeContributionRow this[int index] {
+                get {
+                    return ((EmployeeContributionRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event EmployeeContributionRowChangeEventHandler EmployeeContributionRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event EmployeeContributionRowChangeEventHandler EmployeeContributionRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event EmployeeContributionRowChangeEventHandler EmployeeContributionRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event EmployeeContributionRowChangeEventHandler EmployeeContributionRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddEmployeeContributionRow(EmployeeContributionRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public EmployeeContributionRow AddEmployeeContributionRow(string EmployeeContributionId, string Employee, string SSS, string SSSWISP, string PagIbig, string PhilHealth) {
+                EmployeeContributionRow rowEmployeeContributionRow = ((EmployeeContributionRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        EmployeeContributionId,
+                        Employee,
+                        SSS,
+                        SSSWISP,
+                        PagIbig,
+                        PhilHealth};
+                rowEmployeeContributionRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowEmployeeContributionRow);
+                return rowEmployeeContributionRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                EmployeeContributionDataTable cln = ((EmployeeContributionDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new EmployeeContributionDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnEmployeeContributionId = base.Columns["EmployeeContributionId"];
+                this.columnEmployee = base.Columns["Employee"];
+                this.columnSSS = base.Columns["SSS"];
+                this.columnSSSWISP = base.Columns["SSSWISP"];
+                this.columnPagIbig = base.Columns["PagIbig"];
+                this.columnPhilHealth = base.Columns["PhilHealth"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnEmployeeContributionId = new global::System.Data.DataColumn("EmployeeContributionId", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmployeeContributionId);
+                this.columnEmployee = new global::System.Data.DataColumn("Employee", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmployee);
+                this.columnSSS = new global::System.Data.DataColumn("SSS", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSSS);
+                this.columnSSSWISP = new global::System.Data.DataColumn("SSSWISP", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSSSWISP);
+                this.columnPagIbig = new global::System.Data.DataColumn("PagIbig", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPagIbig);
+                this.columnPhilHealth = new global::System.Data.DataColumn("PhilHealth", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPhilHealth);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public EmployeeContributionRow NewEmployeeContributionRow() {
+                return ((EmployeeContributionRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new EmployeeContributionRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(EmployeeContributionRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.EmployeeContributionRowChanged != null)) {
+                    this.EmployeeContributionRowChanged(this, new EmployeeContributionRowChangeEvent(((EmployeeContributionRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.EmployeeContributionRowChanging != null)) {
+                    this.EmployeeContributionRowChanging(this, new EmployeeContributionRowChangeEvent(((EmployeeContributionRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.EmployeeContributionRowDeleted != null)) {
+                    this.EmployeeContributionRowDeleted(this, new EmployeeContributionRowChangeEvent(((EmployeeContributionRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.EmployeeContributionRowDeleting != null)) {
+                    this.EmployeeContributionRowDeleting(this, new EmployeeContributionRowChangeEvent(((EmployeeContributionRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveEmployeeContributionRow(EmployeeContributionRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SERCS ds = new SERCS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "EmployeeContributionDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class AspNetRoleClaimsRow : global::System.Data.DataRow {
@@ -25156,6 +25510,190 @@ namespace RavenTech_ERP.Reports {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class EmployeeContributionRow : global::System.Data.DataRow {
+            
+            private EmployeeContributionDataTable tableEmployeeContribution;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal EmployeeContributionRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableEmployeeContribution = ((EmployeeContributionDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string EmployeeContributionId {
+                get {
+                    try {
+                        return ((string)(this[this.tableEmployeeContribution.EmployeeContributionIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EmployeeContributionId\' in table \'EmployeeContribution\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmployeeContribution.EmployeeContributionIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Employee {
+                get {
+                    try {
+                        return ((string)(this[this.tableEmployeeContribution.EmployeeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Employee\' in table \'EmployeeContribution\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmployeeContribution.EmployeeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string SSS {
+                get {
+                    try {
+                        return ((string)(this[this.tableEmployeeContribution.SSSColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SSS\' in table \'EmployeeContribution\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmployeeContribution.SSSColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string SSSWISP {
+                get {
+                    try {
+                        return ((string)(this[this.tableEmployeeContribution.SSSWISPColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SSSWISP\' in table \'EmployeeContribution\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmployeeContribution.SSSWISPColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string PagIbig {
+                get {
+                    try {
+                        return ((string)(this[this.tableEmployeeContribution.PagIbigColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PagIbig\' in table \'EmployeeContribution\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmployeeContribution.PagIbigColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string PhilHealth {
+                get {
+                    try {
+                        return ((string)(this[this.tableEmployeeContribution.PhilHealthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PhilHealth\' in table \'EmployeeContribution\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmployeeContribution.PhilHealthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsEmployeeContributionIdNull() {
+                return this.IsNull(this.tableEmployeeContribution.EmployeeContributionIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetEmployeeContributionIdNull() {
+                this[this.tableEmployeeContribution.EmployeeContributionIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsEmployeeNull() {
+                return this.IsNull(this.tableEmployeeContribution.EmployeeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetEmployeeNull() {
+                this[this.tableEmployeeContribution.EmployeeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSSSNull() {
+                return this.IsNull(this.tableEmployeeContribution.SSSColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSSSNull() {
+                this[this.tableEmployeeContribution.SSSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSSSWISPNull() {
+                return this.IsNull(this.tableEmployeeContribution.SSSWISPColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSSSWISPNull() {
+                this[this.tableEmployeeContribution.SSSWISPColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsPagIbigNull() {
+                return this.IsNull(this.tableEmployeeContribution.PagIbigColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetPagIbigNull() {
+                this[this.tableEmployeeContribution.PagIbigColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsPhilHealthNull() {
+                return this.IsNull(this.tableEmployeeContribution.PhilHealthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetPhilHealthNull() {
+                this[this.tableEmployeeContribution.PhilHealthColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -26841,6 +27379,40 @@ namespace RavenTech_ERP.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public StockInLogsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class EmployeeContributionRowChangeEvent : global::System.EventArgs {
+            
+            private EmployeeContributionRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public EmployeeContributionRowChangeEvent(EmployeeContributionRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public EmployeeContributionRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -37439,15 +38011,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._salesTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SalesType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._salesTypeTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._shipmentTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ShipmentType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -37481,6 +38044,24 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._vendorTypeTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._salesTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SalesType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._salesTypeTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._purchaseTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._purchaseTypeTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -37547,12 +38128,12 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._purchaseTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._customerTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.CustomerType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._purchaseTypeTableAdapter.Update(updatedRows));
+                    result = (result + this._customerTypeTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -37592,15 +38173,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._customerTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CustomerType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._customerTypeTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             return result;
         }
         
@@ -37635,14 +38207,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._salesTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SalesType.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._salesTypeTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._shipmentTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ShipmentType.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -37672,6 +38236,22 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._vendorTypeTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._salesTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SalesType.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._salesTypeTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._purchaseTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._purchaseTypeTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -37731,11 +38311,11 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._purchaseTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._customerTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.CustomerType.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._purchaseTypeTableAdapter.Update(addedRows));
+                    result = (result + this._customerTypeTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -37771,14 +38351,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._customerTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CustomerType.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._customerTypeTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -37789,14 +38361,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(SERCS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._customerTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.CustomerType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._customerTypeTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._productTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.ProductType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -37829,11 +38393,11 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._purchaseTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._customerTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.CustomerType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._purchaseTypeTableAdapter.Update(deletedRows));
+                    result = (result + this._customerTypeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -37893,6 +38457,22 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._purchaseTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._purchaseTypeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._salesTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SalesType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._salesTypeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._vendorTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.VendorType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -37922,14 +38502,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._shipmentTypeTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._salesTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SalesType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._salesTypeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

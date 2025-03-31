@@ -24,11 +24,9 @@ namespace PresentationLayer.Views
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             var colorScheme = new ColorScheme(
-                                ColorTranslator.FromHtml("#457b9d"),
-                                ColorTranslator.FromHtml("#1d3557"),
-                                ColorTranslator.FromHtml("#f1faee"),
-                                ColorTranslator.FromHtml("#457b9d"),
-                                TextShade.WHITE // text shade
+                                Primary.Blue400, Primary.Blue500,
+                Primary.Blue500, Accent.LightBlue200,
+                TextShade.WHITE
             );
 
             materialSkinManager.ColorScheme = colorScheme;
@@ -67,6 +65,30 @@ namespace PresentationLayer.Views
                 {
                     ShowPurchaseReport?.Invoke(this, EventArgs.Empty);
                 }
+                else if (tcMain.SelectedTab == tbCustomer)
+                {
+                    ShowCustomers?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbVendor)
+                {
+                    ShowVendors?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbWarehouse)
+                {
+                    ShowWarehouse?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbCashBank)
+                {
+                    ShowCashBank?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbSettings)
+                {
+                    ShowSettings?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tcMain.SelectedTab == tbProfile)
+                {
+                    ShowProfile?.Invoke(this, EventArgs.Empty);
+                }
             };
         }
         public TabPage Guna2TabControlPage
@@ -81,7 +103,12 @@ namespace PresentationLayer.Views
 
         private void InventoryView_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Restart();
+           
+        }
+
+        private void InventoryView_Load(object sender, EventArgs e)
+        {
+            
         }
 
         public event EventHandler ShowDashboard;
@@ -92,5 +119,11 @@ namespace PresentationLayer.Views
         public event EventHandler ShowTargetGoals;
         public event EventHandler ShowSalesReport;
         public event EventHandler ShowPurchaseReport;
+        public event EventHandler ShowCustomers;
+        public event EventHandler ShowVendors;
+        public event EventHandler ShowWarehouse;
+        public event EventHandler ShowCashBank;
+        public event EventHandler ShowSettings;
+        public event EventHandler ShowProfile;
     }
 }

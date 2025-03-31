@@ -3,7 +3,7 @@ using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
 using PresentationLayer;
 using RavenTech_ERP.Views.UserControls.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,8 +50,8 @@ namespace RavenTech_ERP.Views.UserControls
                 payments.Add(payment);
 
                 _salesOrder.PaymentReceive = payments;
-                _unitOfWork.SalesOrder.Detach(_salesOrder);
-                _unitOfWork.SalesOrder.Update(_salesOrder);
+                _unitOfWork.SalesOrder.Value.Detach(_salesOrder);
+                _unitOfWork.SalesOrder.Value.Update(_salesOrder);
                 _unitOfWork.Save();
 
                 MessageBox.Show("Payment Received Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -64,7 +64,7 @@ namespace RavenTech_ERP.Views.UserControls
 
         private void LoadAllPaymentType()
         {
-            txtPaymentType.DataSource = _unitOfWork.PaymentType.GetAll();
+            txtPaymentType.DataSource = _unitOfWork.PaymentType.Value.GetAll();
             txtPaymentType.ValueMember = "PaymentTypeId";
             txtPaymentType.DisplayMember = "PaymentTypeName";
         }

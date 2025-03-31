@@ -1,12 +1,15 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,8 +65,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetPayrollListBindingSource(BindingSource PayrollList)
         {
-            dgList.DataSource = PayrollList;
-            DataGridHelper.ApplyDisplayNames<DomainLayer.ViewModels.PayrollViewModels.PayrollViewModel>(PayrollList, dgList);
+            dgPager.DataSource = PayrollList.ToList<PayrollViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetProjectListBindingSource(BindingSource ProjectList)
         {
@@ -93,8 +96,10 @@ namespace PresentationLayer.Views.UserControls
             set { message = value; }
         }
 
+        public SfDataGrid DataGrid => dgList;
+
         public event EventHandler PrintPayrollEvent;
-        public event DataGridViewCellEventHandler PrintPayslipEvent;
+        public event EventHandler PrintPayslipEvent;
         public event EventHandler SearchEvent;
         public event EventHandler IncludeBenefitsEvent;
         public event EventHandler ProjectEvent;

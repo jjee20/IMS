@@ -3,6 +3,8 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -101,6 +103,7 @@ namespace PresentationLayer.Views.UserControls
                 btnReturn.Visible = false;
             };
         }
+        public SfDataGrid DataGrid => dgList;
 
         //Properties
         public int CashBankId
@@ -145,8 +148,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetCashBankListBindingSource(BindingSource CashBankList)
         {
-            dgList.DataSource = CashBankList;
-            DataGridHelper.ApplyDisplayNames<CashBank>(CashBankList, dgList);
+            dgPager.DataSource = CashBankList.ToList<CashBank>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

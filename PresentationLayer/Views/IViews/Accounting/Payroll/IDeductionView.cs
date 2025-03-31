@@ -1,10 +1,12 @@
 ﻿using DomainLayer.Enums;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IDeductionView
     {
+        SfDataGrid DataGrid { get; }
         int DeductionId { get; set; }
         public DeductionType DeductionType { get; set; }
         double Amount { get; set; }

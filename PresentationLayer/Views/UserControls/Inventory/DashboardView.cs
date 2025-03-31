@@ -2,6 +2,7 @@
 using DomainLayer.ViewModels.Inventory;
 using Guna.Charts.WinForms;
 using Guna.UI2.WinForms;
+using MaterialSkin.Controls;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
@@ -39,6 +40,16 @@ namespace PresentationLayer.Views.UserControls
 
         private static DashboardView? instance;
         public static DashboardView GetInstance(TabPage parentContainer)
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new DashboardView();
+                parentContainer.Controls.Add(instance);
+                instance.Dock = DockStyle.Fill;
+            }
+            return instance;
+        }
+        public static DashboardView GetNewInstance(MaterialCard parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {

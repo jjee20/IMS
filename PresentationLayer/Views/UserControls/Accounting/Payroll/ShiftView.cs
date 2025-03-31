@@ -7,6 +7,8 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -107,6 +109,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         //Properties
+        public SfDataGrid DataGrid => dgList;
         public int ShiftId
         {
             get { return id; }
@@ -163,8 +166,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetShiftListBindingSource(BindingSource ShiftList)
         {
-            dgList.DataSource = ShiftList;
-            DataGridHelper.ApplyDisplayNames<ShiftViewModel>(ShiftList, dgList);
+            dgPager.DataSource = ShiftList.ToList<ShiftViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

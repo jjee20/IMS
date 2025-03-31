@@ -3,7 +3,7 @@ using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.InventoryViewModels;
 using Guna.Charts.WinForms;
 using RavenTech_ERP.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,8 +89,8 @@ namespace RavenTech_ERP.Presenters.Inventory
                 month = DateTime.Now.Month;
             }
 
-            var sales = _unitOfWork.SalesOrder.GetAll(includeProperties: "SalesOrderLines");
-            var purchases = _unitOfWork.PurchaseOrder.GetAll(includeProperties: "PurchaseOrderLines");
+            var sales = _unitOfWork.SalesOrder.Value.GetAll(includeProperties: "SalesOrderLines");
+            var purchases = _unitOfWork.PurchaseOrder.Value.GetAll(includeProperties: "PurchaseOrderLines");
 
             _view.ItemSold = sales.Where(c => c.OrderDate.Year == year.Value).SelectMany(c => c.SalesOrderLines).Sum(c => c.Quantity).ToString();
             _view.Sales = sales.Where(c => c.OrderDate.Year == year.Value).Sum(c => c.Total);

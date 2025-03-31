@@ -30,10 +30,10 @@
         {
             tcMain = new Guna.UI2.WinForms.Guna2TabControl();
             tbProduct = new TabPage();
-            tbProductType = new TabPage();
-            tbUnitOfMeasure = new TabPage();
             tbStockIn = new TabPage();
             tbStockMonitoring = new TabPage();
+            tbProductType = new TabPage();
+            tbUnitOfMeasure = new TabPage();
             tcMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -57,18 +57,18 @@
             tcMain.TabButtonHoverState.ForeColor = Color.White;
             tcMain.TabButtonHoverState.InnerColor = Color.FromArgb(40, 52, 70);
             tcMain.TabButtonIdleState.BorderColor = Color.Empty;
-            tcMain.TabButtonIdleState.FillColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabButtonIdleState.FillColor = Color.Transparent;
             tcMain.TabButtonIdleState.Font = new Font("Segoe UI Semibold", 10F);
-            tcMain.TabButtonIdleState.ForeColor = Color.FromArgb(156, 160, 167);
-            tcMain.TabButtonIdleState.InnerColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabButtonIdleState.ForeColor = Color.MidnightBlue;
+            tcMain.TabButtonIdleState.InnerColor = Color.LightCyan;
             tcMain.TabButtonSelectedState.BorderColor = Color.Empty;
-            tcMain.TabButtonSelectedState.FillColor = Color.FromArgb(29, 37, 49);
+            tcMain.TabButtonSelectedState.FillColor = Color.Transparent;
             tcMain.TabButtonSelectedState.Font = new Font("Segoe UI Semibold", 10F);
-            tcMain.TabButtonSelectedState.ForeColor = Color.White;
-            tcMain.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
+            tcMain.TabButtonSelectedState.ForeColor = Color.MidnightBlue;
+            tcMain.TabButtonSelectedState.InnerColor = Color.MidnightBlue;
             tcMain.TabButtonSize = new Size(180, 40);
             tcMain.TabIndex = 0;
-            tcMain.TabMenuBackColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabMenuBackColor = Color.White;
             tcMain.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
             // 
             // tbProduct
@@ -80,6 +80,25 @@
             tbProduct.TabIndex = 2;
             tbProduct.Text = "Product/Service";
             tbProduct.UseVisualStyleBackColor = true;
+            // 
+            // tbStockIn
+            // 
+            tbStockIn.Location = new Point(4, 44);
+            tbStockIn.Name = "tbStockIn";
+            tbStockIn.Padding = new Padding(3);
+            tbStockIn.Size = new Size(1348, 653);
+            tbStockIn.TabIndex = 3;
+            tbStockIn.Text = "Stock In Log";
+            tbStockIn.UseVisualStyleBackColor = true;
+            // 
+            // tbStockMonitoring
+            // 
+            tbStockMonitoring.Location = new Point(4, 44);
+            tbStockMonitoring.Name = "tbStockMonitoring";
+            tbStockMonitoring.Size = new Size(1348, 653);
+            tbStockMonitoring.TabIndex = 4;
+            tbStockMonitoring.Text = "Stock Monitoring";
+            tbStockMonitoring.UseVisualStyleBackColor = true;
             // 
             // tbProductType
             // 
@@ -102,25 +121,6 @@
             tbUnitOfMeasure.TabIndex = 1;
             tbUnitOfMeasure.Text = "Unit Of Measure";
             tbUnitOfMeasure.UseVisualStyleBackColor = true;
-            // 
-            // tbStockIn
-            // 
-            tbStockIn.Location = new Point(4, 44);
-            tbStockIn.Name = "tbStockIn";
-            tbStockIn.Padding = new Padding(3);
-            tbStockIn.Size = new Size(1348, 653);
-            tbStockIn.TabIndex = 3;
-            tbStockIn.Text = "Stock In Log";
-            tbStockIn.UseVisualStyleBackColor = true;
-            // 
-            // tbStockMonitoring
-            // 
-            tbStockMonitoring.Location = new Point(4, 44);
-            tbStockMonitoring.Name = "tbStockMonitoring";
-            tbStockMonitoring.Size = new Size(1348, 653);
-            tbStockMonitoring.TabIndex = 4;
-            tbStockMonitoring.Text = "Stock Monitoring";
-            tbStockMonitoring.UseVisualStyleBackColor = true;
             // 
             // ProductInventoryView
             // 

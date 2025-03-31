@@ -10,6 +10,12 @@
         event EventHandler ShowTargetGoals;
         event EventHandler ShowSalesReport;
         event EventHandler ShowPurchaseReport;
+        event EventHandler ShowCustomers;
+        event EventHandler ShowVendors;
+        event EventHandler ShowWarehouse;
+        event EventHandler ShowCashBank;
+        event EventHandler ShowSettings;
+        event EventHandler ShowProfile;
         TabPage Guna2TabControlPage { get; }
 
         void ShowForm();

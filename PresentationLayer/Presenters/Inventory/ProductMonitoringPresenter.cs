@@ -2,7 +2,7 @@
 using DomainLayer.ViewModels.Inventory;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,6 @@ namespace RavenTech_ERP.Presenters.Inventory
             LowStockBindingSource = new BindingSource();
             OutOfStockBindingSource = new BindingSource();
 
-            _view.SearchEvent += Search;
             _view.PrintEvent += Print;
 
             LoadInStock();
@@ -43,7 +42,7 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void LoadOutOfStock()
         {
-            OutOfStockList = _unitOfWork.Product.GetAll(includeProperties: "ProductStockInLogs")
+            OutOfStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
                .Where(p => p.ProductStockInLogs.Sum(c => c.StockQuantity) == 0) // Ensure total stock is 0
                .GroupBy(p => p.ProductName)
                .Select(g => new StockViewModel
@@ -58,7 +57,7 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void LoadLowStock()
         {
-            LowStockList = _unitOfWork.Product.GetAll(includeProperties: "ProductStockInLogs")
+            LowStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
                .Where(p => p.ProductStockInLogs.Sum(c => c.StockQuantity) <= p.ReorderLevel && p.ProductStockInLogs.Sum(c => c.StockQuantity) != 0) // Ensure total stock is 0
                .GroupBy(p => p.ProductName)
                .Select(g => new StockViewModel
@@ -74,7 +73,7 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void LoadInStock()
         {
-            InStockList = _unitOfWork.Product.GetAll(includeProperties: "ProductStockInLogs")
+            InStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
                .GroupBy(p => p.ProductName)
                .Select(g => new StockViewModel
                {

@@ -4,6 +4,8 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -103,7 +105,8 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
-        //Properties
+        //PropertiesdgList
+        public SfDataGrid DataGrid => dgList;
         public int VendorId
         {
             get { return id; }
@@ -166,8 +169,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetVendorListBindingSource(BindingSource VendorList)
         {
-            dgList.DataSource = VendorList;
-            DataGridHelper.ApplyDisplayNames<VendorViewModel>(VendorList, dgList);
+            dgPager.DataSource = VendorList.ToList<VendorViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetVendorTypeListBindingSource(BindingSource VendorTypeBindingSource)
         {

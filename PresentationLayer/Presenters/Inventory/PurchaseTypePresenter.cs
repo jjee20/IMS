@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenters
             LoadAllPurchaseTypeList();
 
             //Source Binding
-            _view.SetPurchaseTypeListBindingSource(PurchaseTypeBindingSource);
 
         }
 
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.PurchaseType.Get(c => c.PurchaseTypeId == _view.PurchaseTypeId, tracked: true);
+            var model = _unitOfWork.PurchaseType.Value.Get(c => c.PurchaseTypeId == _view.PurchaseTypeId, tracked: true);
             if (model == null) model = new PurchaseType();
-            else _unitOfWork.PurchaseType.Detach(model);
+            else _unitOfWork.PurchaseType.Value.Detach(model);
 
             model.PurchaseTypeId = _view.PurchaseTypeId;
             model.PurchaseTypeName = _view.PurchaseTypeName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.PurchaseType.Update(model);
+                    _unitOfWork.PurchaseType.Value.Update(model);
                     _view.Message = "Purchase type edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.PurchaseType.Add(model);
+                    _unitOfWork.PurchaseType.Value.Add(model);
                     _view.Message = "Purchase type added successfully";
                 }
                 _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                PurchaseTypeList = _unitOfWork.PurchaseType.GetAll(c => c.PurchaseTypeName.Contains(_view.SearchValue));
+                PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll(c => c.PurchaseTypeName.Contains(_view.SearchValue));
                 PurchaseTypeBindingSource.DataSource = PurchaseTypeList;
             }
             else
@@ -92,7 +91,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (PurchaseType)PurchaseTypeBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (PurchaseType)_view.DataGrid.SelectedItem;
             _view.PurchaseTypeId = entity.PurchaseTypeId;
             _view.PurchaseTypeName = entity.PurchaseTypeName;
             _view.Description = entity.Description;
@@ -101,8 +107,15 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var entity = (PurchaseType)PurchaseTypeBindingSource.Current;
-                _unitOfWork.PurchaseType.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (PurchaseType)_view.DataGrid.SelectedItem;
+                _unitOfWork.PurchaseType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Purchase type deleted successfully";
@@ -138,8 +151,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllPurchaseTypeList()
         {
-            PurchaseTypeList = _unitOfWork.PurchaseType.GetAll();
+            PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll();
             PurchaseTypeBindingSource.DataSource = PurchaseTypeList;//Set data source.
+            _view.SetPurchaseTypeListBindingSource(PurchaseTypeBindingSource);
         }
     }
 }
