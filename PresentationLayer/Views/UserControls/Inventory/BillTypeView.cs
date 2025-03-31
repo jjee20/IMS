@@ -2,6 +2,7 @@
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -92,6 +93,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         //Properties
+        public SfDataGrid DataGrid => dgList;
         public int BillTypeId
         {
             get { return id; }

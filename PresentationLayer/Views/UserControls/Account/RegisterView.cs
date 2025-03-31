@@ -9,6 +9,7 @@ using PresentationLayer.Views.IViews.Account;
 using RavenTech_ERP.Properties;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -187,6 +188,8 @@ namespace PresentationLayer.Views.UserControls
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
+
+        public SfDataGrid DataGrid => dgList;
 
         public void SetRegisterListBindingSource(BindingSource RegisterList)
         {

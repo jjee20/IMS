@@ -9,6 +9,7 @@ using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -163,6 +164,7 @@ namespace PresentationLayer.Views.UserControls
             set { txtSearch.Text = value; }
         }
 
+        public SfDataGrid DataGrid => dgList;
         public void SetBonusListBindingSource(BindingSource BonusList)
         {
             dgPager.DataSource = BonusList.ToList<BonusViewModel>();

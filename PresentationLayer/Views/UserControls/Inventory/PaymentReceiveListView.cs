@@ -38,7 +38,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void dgList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var paymentReceive = (PaymentReceiveViewModel)_bindingSource.Current;
+            var paymentReceive = (PaymentReceiveViewModel)dgList.SelectedItem;
             var entity = _unitOfWork.PaymentReceive.Value.Get(c => c.PaymentReceiveId == paymentReceive.PaymentReceiveId, tracked: true);
 
             var result = MessageBox.Show("Are you sure you want to delete the selected payment?", "Warning",

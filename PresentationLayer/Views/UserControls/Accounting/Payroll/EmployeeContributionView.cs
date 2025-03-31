@@ -9,6 +9,7 @@ using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -109,6 +110,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         //Properties
+        public SfDataGrid DataGrid => dgList;
         public int EmployeeContributionId
         {
             get { return id; }

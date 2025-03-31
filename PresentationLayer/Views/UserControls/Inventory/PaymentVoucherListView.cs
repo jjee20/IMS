@@ -38,7 +38,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void dgList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var PaymentVoucher = (PaymentVoucherViewModel)_bindingSource.Current;
+            var PaymentVoucher = (PaymentVoucherViewModel)dgList.SelectedItem;
             var entity = _unitOfWork.PaymentVoucher.Value.Get(c => c.PaymentVoucherId == PaymentVoucher.PaymentVoucherId, tracked: true);
 
             var result = MessageBox.Show("Are you sure you want to delete the selected payment voucher?", "Warning",

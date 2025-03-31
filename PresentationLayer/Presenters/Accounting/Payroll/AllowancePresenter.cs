@@ -118,6 +118,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
+
             var allowance = (AllowanceViewModel)AllowanceBindingSource.Current;
             var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == allowance.AllowanceId);
             _view.AllowanceId = entity.AllowanceId;

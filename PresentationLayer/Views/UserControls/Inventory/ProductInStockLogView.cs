@@ -5,6 +5,7 @@ using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -94,7 +95,8 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
-        //Properties
+        //PropertiesdgList
+        public SfDataGrid DataGrid => dgList;
         public int ProductStockInLogId
         {
             get { return id; }

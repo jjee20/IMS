@@ -5,6 +5,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -98,6 +99,7 @@ namespace PresentationLayer.Views.UserControls
                 RefreshEvent?.Invoke(this, EventArgs.Empty);
             };
         }
+        public SfDataGrid DataGrid => dgList;
 
         //Properties
         public int BranchId

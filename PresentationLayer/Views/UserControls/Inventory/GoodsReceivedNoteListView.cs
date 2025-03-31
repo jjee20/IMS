@@ -38,7 +38,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void dgList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var GoodsReceivedNote = (GoodsReceiveNoteViewModel)_bindingSource.Current;
+            var GoodsReceivedNote = (GoodsReceiveNoteViewModel)dgList.SelectedItem;
             var entity = _unitOfWork.GoodsReceivedNote.Value.Get(c => c.GoodsReceivedNoteId == GoodsReceivedNote.GoodsReceivedNoteId, tracked: true);
 
             var result = MessageBox.Show("Are you sure you want to delete the selected GRN?", "Warning",
