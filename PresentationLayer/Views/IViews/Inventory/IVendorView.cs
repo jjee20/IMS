@@ -1,7 +1,10 @@
-﻿namespace PresentationLayer.Views.IViews
+﻿using Syncfusion.WinForms.DataGrid;
+
+namespace PresentationLayer.Views.IViews
 {
     public interface IVendorView
     {
+        SfDataGrid DataGrid { get; }
         int VendorId { get; set; }
         string VendorName { get; set; }
         int VendorTypeId { get; set; }

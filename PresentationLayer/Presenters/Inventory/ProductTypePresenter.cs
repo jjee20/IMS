@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenters
             LoadAllProductTypeList();
 
             //Source Binding
-            _view.SetProductTypeListBindingSource(ProductTypeBindingSource);
 
         }
 
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.ProductType.Get(c => c.ProductTypeId == _view.ProductTypeId, tracked: true);
+            var model = _unitOfWork.ProductType.Value.Get(c => c.ProductTypeId == _view.ProductTypeId, tracked: true);
             if (model == null) model = new ProductType();
-            else _unitOfWork.ProductType.Detach(model);
+            else _unitOfWork.ProductType.Value.Detach(model);
 
             model.ProductTypeId = _view.ProductTypeId;
             model.ProductTypeName = _view.ProductTypeName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.ProductType.Update(model);
+                    _unitOfWork.ProductType.Value.Update(model);
                     _view.Message = "Product type edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.ProductType.Add(model);
+                    _unitOfWork.ProductType.Value.Add(model);
                     _view.Message = "Product type added successfully";
                 }
                 _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                ProductTypeList = _unitOfWork.ProductType.GetAll(c => c.ProductTypeName.Contains(_view.SearchValue));
+                ProductTypeList = _unitOfWork.ProductType.Value.GetAll(c => c.ProductTypeName.Contains(_view.SearchValue));
                 ProductTypeBindingSource.DataSource = ProductTypeList;
             }
             else
@@ -102,7 +101,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var entity = (ProductType)ProductTypeBindingSource.Current;
-                _unitOfWork.ProductType.Remove(entity);
+                _unitOfWork.ProductType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Product type deleted successfully";
@@ -138,8 +137,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllProductTypeList()
         {
-            ProductTypeList = _unitOfWork.ProductType.GetAll();
+            ProductTypeList = _unitOfWork.ProductType.Value.GetAll();
             ProductTypeBindingSource.DataSource = ProductTypeList;//Set data source.
+            _view.SetProductTypeListBindingSource(ProductTypeBindingSource);
         }
     }
 }

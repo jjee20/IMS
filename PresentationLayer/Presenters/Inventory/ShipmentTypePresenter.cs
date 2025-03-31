@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenters
             LoadAllShipmentTypeList();
 
             //Source Binding
-            _view.SetShipmentTypeListBindingSource(ShipmentTypeBindingSource);
 
         }
 
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.ShipmentType.Get(c => c.ShipmentTypeId == _view.ShipmentTypeId, tracked: true);
+            var model = _unitOfWork.ShipmentType.Value.Get(c => c.ShipmentTypeId == _view.ShipmentTypeId, tracked: true);
             if (model == null) model = new ShipmentType();
-            else _unitOfWork.ShipmentType.Detach(model);
+            else _unitOfWork.ShipmentType.Value.Detach(model);
 
             model.ShipmentTypeId = _view.ShipmentTypeId;
             model.ShipmentTypeName = _view.ShipmentTypeName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.ShipmentType.Update(model);
+                    _unitOfWork.ShipmentType.Value.Update(model);
                     _view.Message = "Shipment type edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.ShipmentType.Add(model);
+                    _unitOfWork.ShipmentType.Value.Add(model);
                     _view.Message = "Shipment type added successfully";
                 }
                 _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                ShipmentTypeList = _unitOfWork.ShipmentType.GetAll(c => c.ShipmentTypeName.Contains(_view.SearchValue));
+                ShipmentTypeList = _unitOfWork.ShipmentType.Value.GetAll(c => c.ShipmentTypeName.Contains(_view.SearchValue));
                 ShipmentTypeBindingSource.DataSource = ShipmentTypeList;
             }
             else
@@ -102,7 +101,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var entity = (ShipmentType)ShipmentTypeBindingSource.Current;
-                _unitOfWork.ShipmentType.Remove(entity);
+                _unitOfWork.ShipmentType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Shipment type deleted successfully";
@@ -138,8 +137,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllShipmentTypeList()
         {
-            ShipmentTypeList = _unitOfWork.ShipmentType.GetAll();
+            ShipmentTypeList = _unitOfWork.ShipmentType.Value.GetAll();
             ShipmentTypeBindingSource.DataSource = ShipmentTypeList;//Set data source.
+            _view.SetShipmentTypeListBindingSource(ShipmentTypeBindingSource);
         }
     }
 }

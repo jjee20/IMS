@@ -185,9 +185,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         public List<PayrollViewModel> CalculatePayroll(DateTime startDate, DateTime endDate, int? projectId = 0)
         {
-            var employees = _unitOfWork.Employee.GetAll(includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
-            var contributions = _unitOfWork.Contribution.GetAll();
-            var project = _unitOfWork.Project.Get(c => c.ProjectId == projectId);
+            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
+            var contributions = _unitOfWork.Contribution.Value.GetAll();
+            var project = _unitOfWork.Project.Value.Get(c => c.ProjectId == projectId);
             var projectName = "";
             if(project != null)
                 projectName = $"Project: {project.ProjectName}";
@@ -265,7 +265,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void LoadAllProjectList()
         {
-            ProjectList = _unitOfWork.Project.GetAll();
+            ProjectList = _unitOfWork.Project.Value.GetAll();
             ProjectBindingSource.DataSource = ProjectList;
         }
     }

@@ -49,8 +49,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllEmployeeList();
 
             //Source Binding
-            _view.SetEmployeeContributionListBindingSource(EmployeeContributionBindingSource);
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -60,9 +58,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.EmployeeContribution.Get(c => c.EmployeeContributionId == _view.EmployeeContributionId, tracked: true);
+            var model = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == _view.EmployeeContributionId, tracked: true);
             if (model == null) model = new EmployeeContribution();
-            else _unitOfWork.EmployeeContribution.Detach(model);
+            else _unitOfWork.EmployeeContribution.Value.Detach(model);
 
             model.EmployeeContributionId = _view.EmployeeContributionId;
             model.EmployeeId = _view.EmployeeId;
@@ -76,19 +74,19 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.EmployeeContribution.Update(model);
+                    _unitOfWork.EmployeeContribution.Value.Update(model);
                     _view.Message = "EmployeeContribution edited successfully";
                 }
                 else //Add new model
                 {
-                    var Entity = _unitOfWork.EmployeeContribution.Get(c => c.EmployeeId == _view.EmployeeId);
+                    var Entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeId == _view.EmployeeId);
                     if (Entity != null)
                     {
                         _view.Message = "EmployeeContribution is already added.";
                         return;
                     }
 
-                    _unitOfWork.EmployeeContribution.Add(model);
+                    _unitOfWork.EmployeeContribution.Value.Add(model);
                     _view.Message = "EmployeeContribution added successfully";
                 }
                 _unitOfWork.Save();
@@ -107,7 +105,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             if (!emptyValue)
             {
                 // Safely parse and filter EmployeeContributions
-                EmployeeContributionList = _unitOfWork.EmployeeContribution.GetAll(c => c.Employee.LastName == _view.SearchValue || c.Employee.FirstName == _view.SearchValue, includeProperties: "Employee");
+                EmployeeContributionList = _unitOfWork.EmployeeContribution.Value.GetAll(c => c.Employee.LastName == _view.SearchValue || c.Employee.FirstName == _view.SearchValue, includeProperties: "Employee");
                 EmployeeContributionBindingSource.DataSource = EmployeeContributionList;
             }
             else
@@ -131,7 +129,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             try
             {
                 var entity = (EmployeeContribution)EmployeeContributionBindingSource.Current;
-                _unitOfWork.EmployeeContribution.Remove(entity);
+                _unitOfWork.EmployeeContribution.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "EmployeeContribution deleted successfully";
@@ -165,13 +163,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllEmployeeContributionList()
         {
-            EmployeeContributionList = _unitOfWork.EmployeeContribution.GetAll();
+            EmployeeContributionList = _unitOfWork.EmployeeContribution.Value.GetAll();
             EmployeeContributionBindingSource.DataSource = EmployeeContributionList;//Set data source.
+            _view.SetEmployeeContributionListBindingSource(EmployeeContributionBindingSource);
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
             EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
     }
 }

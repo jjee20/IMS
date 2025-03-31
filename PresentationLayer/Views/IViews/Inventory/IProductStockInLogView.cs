@@ -1,9 +1,11 @@
 ﻿using DomainLayer.Enums;
+using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.IViews.Inventory
 {
     public interface IProductStockInLogView
     {
+        SfDataGrid DataGrid { get; }
         DateTime DateAdded { get; set; }
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }

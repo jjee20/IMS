@@ -1,10 +1,12 @@
 ﻿using DomainLayer.Enums;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IEmployeeView
     {
+        SfDataGrid DataGrid { get; }
         int EmployeeId { get; set; }
         string EmployeeFirstName { get; set; }
         string EmployeeLastName { get; set; }

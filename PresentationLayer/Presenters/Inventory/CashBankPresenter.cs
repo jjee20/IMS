@@ -35,7 +35,6 @@ namespace PresentationLayer.Presenters
             LoadAllCashBankList();
 
             //Source Binding
-            _view.SetCashBankListBindingSource(CashBankBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.CashBank.Get(c => c.CashBankId == _view.CashBankId, tracked: true);
+            var model = _unitOfWork.CashBank.Value.Get(c => c.CashBankId == _view.CashBankId, tracked: true);
             if (model == null) model = new CashBank();
-            else _unitOfWork.CashBank.Detach(model);
+            else _unitOfWork.CashBank.Value.Detach(model);
 
             model.CashBankId = _view.CashBankId;
             model.CashBankName = _view.CashBankName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.CashBank.Update(model);
+                    _unitOfWork.CashBank.Value.Update(model);
                     _view.Message = "Cash bank edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.CashBank.Add(model);
+                    _unitOfWork.CashBank.Value.Add(model);
                     _view.Message = "Cash bank added successfully";
                 }
                     _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                CashBankList = _unitOfWork.CashBank.GetAll(c => c.CashBankName.Contains(_view.SearchValue));
+                CashBankList = _unitOfWork.CashBank.Value.GetAll(c => c.CashBankName.Contains(_view.SearchValue));
                 CashBankBindingSource.DataSource = CashBankList;
             }
             else
@@ -102,7 +101,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var entity = (CashBank)CashBankBindingSource.Current;
-                _unitOfWork.CashBank.Remove(entity);
+                _unitOfWork.CashBank.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Cash bank deleted successfully";
@@ -138,8 +137,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllCashBankList()
         {
-            CashBankList = _unitOfWork.CashBank.GetAll();
+            CashBankList = _unitOfWork.CashBank.Value.GetAll();
             CashBankBindingSource.DataSource = CashBankList;//Set data source.
+            _view.SetCashBankListBindingSource(CashBankBindingSource);
         }
     }
 }

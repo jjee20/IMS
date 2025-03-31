@@ -60,8 +60,6 @@ namespace PresentationLayer.Presenters
             LoadAllProductList();
 
             //Source Binding
-            _view.SetProjectListBindingSource(ProjectBindingSource);
-            _view.SetProductListBindingSource(ProductBindingSource);
         }
         private void UpdateComputation(object? sender, EventArgs e)
         {
@@ -73,7 +71,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var Project = (ProjectViewModel)ProjectBindingSource.Current;
-                var ProjectLine = _unitOfWork.ProjectLine.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product", tracked: true);
+                var ProjectLine = _unitOfWork.ProjectLine.Value.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product", tracked: true);
                 var projectLineVM = ProjectLine.Select(c => new ProjectLineViewModel
                 {
                     ProductId = (int)c.ProductId,
@@ -134,7 +132,7 @@ namespace PresentationLayer.Presenters
 
         private void ProductAdd(object? sender, EventArgs e)
         {
-            var product = _unitOfWork.Product.Get(c => c.ProductId == _view.ProductId);
+            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == _view.ProductId);
 
             // Initialize ProjectLines if it's null
             _view.ProjectLines ??= new List<ProjectLineViewModel>();
@@ -192,9 +190,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Project.Get(c => c.ProjectId == _view.ProjectId, tracked: true);
+            var model = _unitOfWork.Project.Value.Get(c => c.ProjectId == _view.ProjectId, tracked: true);
             if (model == null) model = new Project();
-            else _unitOfWork.Project.Detach(model);
+            else _unitOfWork.Project.Value.Detach(model);
 
             model.ProjectId = _view.ProjectId;
             model.ProjectName = _view.ProjectName;
@@ -213,12 +211,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Project.Update(model);
+                    _unitOfWork.Project.Value.Update(model);
                     _view.Message = "Project edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Project.Add(model);
+                    _unitOfWork.Project.Value.Add(model);
                     _view.Message = "Project added successfully";
                 }
                     _unitOfWork.Save();
@@ -261,7 +259,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(_unitOfWork.Project.GetAll(c => c.ProjectName.Contains(_view.SearchValue)));
+                ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(_unitOfWork.Project.Value.GetAll(c => c.ProjectName.Contains(_view.SearchValue)));
                 ProjectBindingSource.DataSource = ProjectList;
             }
             else
@@ -273,8 +271,8 @@ namespace PresentationLayer.Presenters
         {
             _view.IsEdit = true;
             var Project = (ProjectViewModel)ProjectBindingSource.Current;
-            var entity = _unitOfWork.Project.Get(c => c.ProjectId == Project.ProjectId);
-            var ProjectLines = _unitOfWork.ProjectLine.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product");
+            var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == Project.ProjectId);
+            var ProjectLines = _unitOfWork.ProjectLine.Value.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product");
             _view.ProjectId = entity.ProjectId;
             _view.ProjectName = entity.ProjectName;
             _view.Description = entity.Description;
@@ -290,8 +288,8 @@ namespace PresentationLayer.Presenters
             try
             {
                 var Project = (ProjectViewModel)ProjectBindingSource.Current;
-                var entity = _unitOfWork.Project.Get(c => c.ProjectId ==  Project.ProjectId);
-                _unitOfWork.Project.Remove(entity);
+                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId ==  Project.ProjectId);
+                _unitOfWork.Project.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Project deleted successfully";
@@ -306,7 +304,7 @@ namespace PresentationLayer.Presenters
         private void Print(object? sender, EventArgs e)
         {
             var project = (ProjectViewModel)ProjectBindingSource.Current;
-            var entity = _unitOfWork.Project.Get(c => c.ProjectId == project.ProjectId, includeProperties: "ProjectLines");
+            var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == project.ProjectId, includeProperties: "ProjectLines");
 
             var projectInformation = new ProjectInformationView(entity, project, _unitOfWork);
             projectInformation.ShowDialog();
@@ -329,8 +327,16 @@ namespace PresentationLayer.Presenters
             _view.ProjectLines = new List<ProjectLineViewModel>();
         }
 
-        private void LoadAllProjectList() => ProjectBindingSource.DataSource = ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(
-            _unitOfWork.Project.GetAll());
-        private void LoadAllProductList() => ProductBindingSource.DataSource =  ProductList = _unitOfWork.Product.GetAll();
-    }
+        private void LoadAllProjectList()
+        {
+            ProjectBindingSource.DataSource = ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(
+            _unitOfWork.Project.Value.GetAll());
+
+            _view.SetProjectListBindingSource(ProjectBindingSource);
+        }
+        private void LoadAllProductList()
+        {
+            ProductBindingSource.DataSource = ProductList = _unitOfWork.Product.Value.GetAll();
+            _view.SetProductListBindingSource(ProductBindingSource);
+        }
 }

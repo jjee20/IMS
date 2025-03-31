@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenters
             LoadAllPaymentTypeList();
 
             //Source Binding
-            _view.SetPaymentTypeListBindingSource(PaymentTypeBindingSource);
 
         }
 
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.PaymentType.Get(c => c.PaymentTypeId == _view.PaymentTypeId, tracked: true);
+            var model = _unitOfWork.PaymentType.Value.Get(c => c.PaymentTypeId == _view.PaymentTypeId, tracked: true);
             if (model == null) model = new PaymentType();
-            else _unitOfWork.PaymentType.Detach(model);
+            else _unitOfWork.PaymentType.Value.Detach(model);
 
             model.PaymentTypeId = _view.PaymentTypeId;
             model.PaymentTypeName = _view.PaymentTypeName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.PaymentType.Update(model);
+                    _unitOfWork.PaymentType.Value.Update(model);
                     _view.Message = "Payment type edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.PaymentType.Add(model);
+                    _unitOfWork.PaymentType.Value.Add(model);
                     _view.Message = "Payment type added successfully";
                 }
                 _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                PaymentTypeList = _unitOfWork.PaymentType.GetAll(c => c.PaymentTypeName.Contains(_view.SearchValue));
+                PaymentTypeList = _unitOfWork.PaymentType.Value.GetAll(c => c.PaymentTypeName.Contains(_view.SearchValue));
                 PaymentTypeBindingSource.DataSource = PaymentTypeList;
             }
             else
@@ -102,7 +101,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var entity = (PaymentType)PaymentTypeBindingSource.Current;
-                _unitOfWork.PaymentType.Remove(entity);
+                _unitOfWork.PaymentType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Payment type deleted successfully";
@@ -138,8 +137,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllPaymentTypeList()
         {
-            PaymentTypeList = _unitOfWork.PaymentType.GetAll();
+            PaymentTypeList = _unitOfWork.PaymentType.Value.GetAll();
             PaymentTypeBindingSource.DataSource = PaymentTypeList;//Set data source.
+            _view.SetPaymentTypeListBindingSource(PaymentTypeBindingSource);
         }
     }
 }

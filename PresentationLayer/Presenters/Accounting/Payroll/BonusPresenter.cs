@@ -52,9 +52,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllEmployeeList();
 
             //Source Binding
-            _view.SetBonusListBindingSource(BonusBindingSource);
-            _view.SetBonusTypeListBindingSource(BonusTypeBindingSource);
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -64,9 +61,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Bonus.Get(c => c.BonusId == _view.BonusId, tracked: true);
+            var model = _unitOfWork.Bonus.Value.Get(c => c.BonusId == _view.BonusId, tracked: true);
             if (model == null) model = new Bonus();
-            else _unitOfWork.Bonus.Detach(model);
+            else _unitOfWork.Bonus.Value.Detach(model);
 
             model.BonusId = _view.BonusId;
             model.BonusType = _view.BonusType;
@@ -80,12 +77,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Bonus.Update(model);
+                    _unitOfWork.Bonus.Value.Update(model);
                     _view.Message = "Bonus edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Bonus.Add(model);
+                    _unitOfWork.Bonus.Value.Add(model);
                     _view.Message = "Bonus added successfully";
                 }
                 _unitOfWork.Save();
@@ -103,7 +100,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
+                BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
                 BonusBindingSource.DataSource = BonusList;
             }
             else
@@ -127,7 +124,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             try
             {
                 var entity = (Bonus)BonusBindingSource.Current;
-                _unitOfWork.Bonus.Remove(entity);
+                _unitOfWork.Bonus.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Bonus deleted successfully";
@@ -165,18 +162,21 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllBonusList()
         {
-            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.GetAll(includeProperties:"Employee"));
-            BonusBindingSource.DataSource = BonusList;//Set data source.
+            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll(includeProperties:"Employee"));
+            BonusBindingSource.DataSource = BonusList;//Set data source
+            _view.SetBonusListBindingSource(BonusBindingSource);
         }
         private void LoadAllBonusTypeList()
         {
             BonusTypeList = EnumHelper.EnumToEnumerable<BonusType>();
             BonusTypeBindingSource.DataSource = BonusTypeList;//Set data source.
+            _view.SetBonusTypeListBindingSource(BonusTypeBindingSource);
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
             EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
     }
 }

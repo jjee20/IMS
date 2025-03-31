@@ -1,9 +1,11 @@
 ﻿using PresentationLayer.Views.UserControls;
+using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IEmployeeContributionView
     {
+        SfDataGrid DataGrid { get; }
         int EmployeeContributionId { get; set; }
         int EmployeeId { get; set; }
         bool IsEdit { get; set; }

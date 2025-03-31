@@ -89,8 +89,8 @@ namespace PresentationLayer.Presenters
             year = year == 0 ? DateTime.Now.Year : _view.Year;
             var today = DateTime.Now;
             var newToday = year == 0 ? DateTime.Now : new DateTime(year.Value, today.Month, today.Day);
-            var salesOrder = _unitOfWork.SalesOrder.GetAll(c => c.OrderDate.Year == year, includeProperties: "SalesOrderLines.Product");
-            var purchaseOrder = _unitOfWork.PurchaseOrder.GetAll(c => c.OrderDate.Year == year, includeProperties: "PurchaseOrderLines.Product");
+            var salesOrder = _unitOfWork.SalesOrder.Value.GetAll(c => c.OrderDate.Year == year, includeProperties: "SalesOrderLines.Product");
+            var purchaseOrder = _unitOfWork.PurchaseOrder.Value.GetAll(c => c.OrderDate.Year == year, includeProperties: "PurchaseOrderLines.Product");
 
             var sales = salesOrder.Select(c => c.SalesOrderLines).Sum(c => c.Sum(c => c.SubTotal));
             _view.Sales = sales.ToString("N2");
@@ -157,7 +157,7 @@ namespace PresentationLayer.Presenters
         private void LoadTopSellingItems(int year)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
-            var topSellingItems = _unitOfWork.SalesOrderLine.GetAll(c => c.SalesOrder.OrderDate.Year == year,
+            var topSellingItems = _unitOfWork.SalesOrderLine.Value.GetAll(c => c.SalesOrder.OrderDate.Year == year,
                 includeProperties: "Product,SalesOrder")
                 .GroupBy(c => c.Product.ProductName)
                 .Select(g => new { ProductName = g.Key, Quantity = g.Sum(c => c.Quantity) })
@@ -175,7 +175,7 @@ namespace PresentationLayer.Presenters
         private void LoadProjectExpenseDistribution(int year)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
-            var projectExpenses = _unitOfWork.Project.GetAll(includeProperties: "ProjectLines")
+            var projectExpenses = _unitOfWork.Project.Value.GetAll(includeProperties: "ProjectLines")
             .GroupBy(c => c.ProjectName)
             .Select(g => new ProjectExpenseDistributionViewModel
             {
@@ -193,7 +193,7 @@ namespace PresentationLayer.Presenters
 
         private void LoadInventoryStatus()
         {
-            var products = _unitOfWork.Product.GetAll(includeProperties: "ProductStockInLogs");
+            var products = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs");
 
             var inventoryData = new List<InventoryStatusViewModel>
                 {
@@ -214,7 +214,7 @@ namespace PresentationLayer.Presenters
         {
             var today = year == 0 && month == 0 ? DateTime.Now : new DateTime(year.Value, month.Value, 1);
             var days = DateTime.DaysInMonth(today.Year, today.Month);
-            var sales = _unitOfWork.SalesOrderLine.GetAll(includeProperties: "SalesOrder");
+            var sales = _unitOfWork.SalesOrderLine.Value.GetAll(includeProperties: "SalesOrder");
 
             DailySalesTrendDataSet.DataPoints.Clear();
             DailySalesTrendDataSet.Label = "Qty";
@@ -241,12 +241,12 @@ namespace PresentationLayer.Presenters
             {
                 int monthNumber = Array.IndexOf(CultureInfo.CurrentCulture.DateTimeFormat.MonthNames, m) + 1;
 
-                var sales = _unitOfWork.SalesOrder.GetAll(
+                var sales = _unitOfWork.SalesOrder.Value.GetAll(
                     c => c.OrderDate.Month == monthNumber && c.OrderDate.Year == date.Year,
                     includeProperties: "SalesOrderLines"
                 ).SelectMany(c => c.SalesOrderLines).Sum(c => c.Quantity);
 
-                var purchase = _unitOfWork.PurchaseOrder.GetAll(
+                var purchase = _unitOfWork.PurchaseOrder.Value.GetAll(
                     c => c.OrderDate.Month == monthNumber && c.OrderDate.Year == date.Year,
                     includeProperties: "PurchaseOrderLines"
                 ).SelectMany(c => c.PurchaseOrderLines).Sum(c => c.Quantity);

@@ -42,7 +42,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllShiftList();
 
             //Source Binding
-            _view.SetShiftListBindingSource(ShiftBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -52,10 +51,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Shift.Get(c => c.ShiftId == _view.ShiftId, tracked: true);
+            var model = _unitOfWork.Shift.Value.Get(c => c.ShiftId == _view.ShiftId, tracked: true);
 
             if (model == null) model = new Shift();
-            else _unitOfWork.Shift.Detach(model);
+            else _unitOfWork.Shift.Value.Detach(model);
 
             model.ShiftId = _view.ShiftId;
             model.ShiftName = _view.ShiftName;
@@ -70,18 +69,18 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 if (_view.IsEdit)//Edit model
                 {
 
-                    _unitOfWork.Shift.Update(model);
+                    _unitOfWork.Shift.Value.Update(model);
                     _view.Message = "Shift edited successfully";
                 }
                 else //Add new model
                 {
-                    var Entity = _unitOfWork.Shift.Get(c => c.ShiftName == _view.ShiftName);
+                    var Entity = _unitOfWork.Shift.Value.Get(c => c.ShiftName == _view.ShiftName);
                     if (Entity != null)
                     {
                         _view.Message = "Shift is already added.";
                         return;
                     }
-                    _unitOfWork.Shift.Add(model);
+                    _unitOfWork.Shift.Value.Add(model);
                     _view.Message = "Shift added successfully";
                 }
                 _unitOfWork.Save();
@@ -99,7 +98,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.GetAll(c => c.ShiftName.Contains(_view.SearchValue)));
+                ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.Value.GetAll(c => c.ShiftName.Contains(_view.SearchValue)));
                 ShiftBindingSource.DataSource = ShiftList;
             }
             else
@@ -111,7 +110,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             _view.IsEdit = true;
             var shift = (ShiftViewModel)ShiftBindingSource.Current;
-            var entity = _unitOfWork.Shift.Get(c => c.ShiftId == shift.ShiftId);
+            var entity = _unitOfWork.Shift.Value.Get(c => c.ShiftId == shift.ShiftId);
             _view.ShiftId = entity.ShiftId;
             _view.ShiftName = entity.ShiftName;
             _view.StartTime = entity.StartTime;
@@ -124,8 +123,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             try
             {
                 var shift = (ShiftViewModel)ShiftBindingSource.Current;
-                var entity = _unitOfWork.Shift.Get(c => c.ShiftId == shift.ShiftId);
-                _unitOfWork.Shift.Remove(entity);
+                var entity = _unitOfWork.Shift.Value.Get(c => c.ShiftId == shift.ShiftId);
+                _unitOfWork.Shift.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Shift deleted successfully";
@@ -160,8 +159,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllShiftList()
         {
-            ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.GetAll());
+            ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.Value.GetAll());
             ShiftBindingSource.DataSource = ShiftList;//Set data source.
+            _view.SetShiftListBindingSource(ShiftBindingSource);
         }
     }
 }

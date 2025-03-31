@@ -35,7 +35,6 @@ namespace PresentationLayer.Presenters
             LoadAllBillTypeList();
 
             //Source Binding
-            _view.SetBillTypeListBindingSource(BillTypeBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.BillType.Get(c => c.BillTypeId == _view.BillTypeId, tracked: true);
+            var model = _unitOfWork.BillType.Value.Get(c => c.BillTypeId == _view.BillTypeId, tracked: true);
             if (model == null) model = new BillType();
-            else _unitOfWork.BillType.Detach(model);
+            else _unitOfWork.BillType.Value.Detach(model);
 
             model.BillTypeId = _view.BillTypeId;
             model.BillTypeName = _view.BillTypeName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.BillType.Update(model);
+                    _unitOfWork.BillType.Value.Update(model);
                     _view.Message = "Bill type edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.BillType.Add(model);
+                    _unitOfWork.BillType.Value.Add(model);
                     _view.Message = "Bill type added successfully";
                 }
                     _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                BillTypeList = _unitOfWork.BillType.GetAll(c => c.BillTypeName.Contains(_view.SearchValue));
+                BillTypeList = _unitOfWork.BillType.Value.GetAll(c => c.BillTypeName.Contains(_view.SearchValue));
                 BillTypeBindingSource.DataSource = BillTypeList;
             }
             else
@@ -102,7 +101,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var entity = (BillType)BillTypeBindingSource.Current;
-                _unitOfWork.BillType.Remove(entity);
+                _unitOfWork.BillType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Bill type deleted successfully";
@@ -138,8 +137,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllBillTypeList()
         {
-            BillTypeList = _unitOfWork.BillType.GetAll();
+            BillTypeList = _unitOfWork.BillType.Value.GetAll();
             BillTypeBindingSource.DataSource = BillTypeList;//Set data source.
+            _view.SetBillTypeListBindingSource(BillTypeBindingSource);
         }
     }
 }

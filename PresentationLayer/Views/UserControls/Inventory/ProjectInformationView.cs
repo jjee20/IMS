@@ -49,8 +49,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             var projectLines = Program.Mapper.Map<IEnumerable<ProjectLineViewModel>>(_project.ProjectLines);
             dgProjectLines.DataSource = projectLines;
 
-            var employees = _unitOfWork.Employee.GetAll(c => c.Attendances.Any(c => c.ProjectId == _project.ProjectId) , includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
-            var contributions = _unitOfWork.Contribution.GetAll();
+            var employees = _unitOfWork.Employee.Value.GetAll(c => c.Attendances.Any(c => c.ProjectId == _project.ProjectId) , includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
+            var contributions = _unitOfWork.Contribution.Value.GetAll();
             var payroll = PayrollHelper.CalculatePayroll(employees, contributions, _project, _projectVM.StartDate.Value.Date, _projectVM.EndDate.Value.Date);
         
             dgPayroll.DataSource = payroll;

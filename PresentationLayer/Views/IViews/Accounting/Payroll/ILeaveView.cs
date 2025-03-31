@@ -1,10 +1,12 @@
 ﻿using DomainLayer.Enums;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface ILeaveView
     {
+        SfDataGrid DataGrid { get; }
         int LeaveId { get; set; }
         int EmployeeId { get; set; }
         DateTime StartDate { get; set; }

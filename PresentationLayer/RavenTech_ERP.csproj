@@ -49,6 +49,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.19" />
+    <PackageReference Include="Syncfusion.Licensing" Version="29.1.33" />
     <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="28.2.12" />
     <PackageReference Include="Syncfusion.Tools.Windows" Version="28.2.12" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />

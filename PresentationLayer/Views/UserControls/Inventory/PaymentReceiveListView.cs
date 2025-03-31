@@ -39,15 +39,15 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private void dgList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var paymentReceive = (PaymentReceiveViewModel)_bindingSource.Current;
-            var entity = _unitOfWork.PaymentReceive.Get(c => c.PaymentReceiveId == paymentReceive.PaymentReceiveId, tracked: true);
+            var entity = _unitOfWork.PaymentReceive.Value.Get(c => c.PaymentReceiveId == paymentReceive.PaymentReceiveId, tracked: true);
 
             var result = MessageBox.Show("Are you sure you want to delete the selected payment?", "Warning",
                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                _unitOfWork.PaymentReceive.Detach(entity);
-                _unitOfWork.PaymentReceive.Remove(entity);
+                _unitOfWork.PaymentReceive.Value.Detach(entity);
+                _unitOfWork.PaymentReceive.Value.Remove(entity);
                 _unitOfWork.Save();
 
                 MessageBox.Show("Payment deleted successfully", "Delete Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);

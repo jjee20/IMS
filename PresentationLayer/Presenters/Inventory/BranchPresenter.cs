@@ -40,7 +40,6 @@ namespace PresentationLayer.Presenters
             LoadAllBranchList();
 
             //Source Binding
-            _view.SetBranchListBindingSource(BranchBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -50,9 +49,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Branch.Get(c => c.BranchId == _view.BranchId, tracked: true);
+            var model = _unitOfWork.Branch.Value.Get(c => c.BranchId == _view.BranchId, tracked: true);
             if (model == null) model = new Branch();
-            else _unitOfWork.Branch.Detach(model);
+            else _unitOfWork.Branch.Value.Detach(model);
 
             model.BranchId = _view.BranchId;
             model.BranchName = _view.BranchName;
@@ -67,12 +66,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Branch.Update(model);
+                    _unitOfWork.Branch.Value.Update(model);
                     _view.Message = "Branch edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Branch.Add(model);
+                    _unitOfWork.Branch.Value.Add(model);
                     _view.Message = "Branch added successfully";
                 }
                 _unitOfWork.Save();
@@ -90,7 +89,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.GetAll(c => c.BranchName.Contains(_view.SearchValue)));
+                BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.Value.GetAll(c => c.BranchName.Contains(_view.SearchValue)));
                 BranchBindingSource.DataSource = BranchList;
             }
             else
@@ -102,7 +101,7 @@ namespace PresentationLayer.Presenters
         {
             _view.IsEdit = true;
             var branch = (BranchViewModel)BranchBindingSource.Current;
-            var entity = _unitOfWork.Branch.Get(c => c.BranchId == branch.BranchId);
+            var entity = _unitOfWork.Branch.Value.Get(c => c.BranchId == branch.BranchId);
             _view.BranchId = entity.BranchId;
             _view.BranchName = entity.BranchName;
             _view.Description = entity.Description;
@@ -116,8 +115,8 @@ namespace PresentationLayer.Presenters
             try
             {
                 var branch = (BranchViewModel)BranchBindingSource.Current;
-                var entity = _unitOfWork.Branch.Get(c => c.BranchId == branch.BranchId);
-                _unitOfWork.Branch.Remove(entity);
+                var entity = _unitOfWork.Branch.Value.Get(c => c.BranchId == branch.BranchId);
+                _unitOfWork.Branch.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Branch deleted successfully";
@@ -157,8 +156,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllBranchList()
         {
-            BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.GetAll());
+            BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.Value.GetAll());
             BranchBindingSource.DataSource = BranchList;//Set data source.
+            _view.SetBranchListBindingSource(BranchBindingSource);
         }
     }
 }

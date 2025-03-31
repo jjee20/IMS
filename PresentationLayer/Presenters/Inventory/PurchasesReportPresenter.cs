@@ -85,7 +85,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 month = DateTime.Now.Month;
             }
 
-            var purchases = _unitOfWork.PurchaseOrder.GetAll(includeProperties: "PurchaseOrderLines");
+            var purchases = _unitOfWork.PurchaseOrder.Value.GetAll(includeProperties: "PurchaseOrderLines");
 
             _view.Purchases = purchases.Where(c => c.OrderDate.Year == year.Value).Sum(c => c.Total);
             

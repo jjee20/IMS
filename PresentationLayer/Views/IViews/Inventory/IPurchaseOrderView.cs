@@ -1,11 +1,13 @@
 ﻿using DomainLayer.Models;
 using DomainLayer.ViewModels.Inventory;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
 {
     public interface IPurchaseOrderView
     {
+        SfDataGrid DataGrid { get; }
         int PurchaseOrderId { get; set; }
         string PurchaseOrderName { get; set; }
         int BranchId { get; set; }

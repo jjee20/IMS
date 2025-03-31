@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Syncfusion.WinForms.DataGrid;
+using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IAttendanceView
     {
+        SfDataGrid DataGrid { get; }
         int AttendanceId { get; set; }
         int EmployeeId { get; set; }
         string EmployeeName { get; set; }

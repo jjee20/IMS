@@ -44,8 +44,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                     InvoiceTypeId = (int)txtInvoiceType.SelectedValue
                 };
             }
-            _unitOfWork.SalesOrder.Detach(_salesOrder);
-            _unitOfWork.SalesOrder.Update(_salesOrder);
+            _unitOfWork.SalesOrder.Value.Detach(_salesOrder);
+            _unitOfWork.SalesOrder.Value.Update(_salesOrder);
             _unitOfWork.Save();
 
             string reportFileName = "InvoiceReport.rdlc";
@@ -70,7 +70,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadAllInvoiceTypes()
         {
-            var invoiceTypes = _unitOfWork.InvoiceType.GetAll();
+            var invoiceTypes = _unitOfWork.InvoiceType.Value.GetAll();
             txtInvoiceType.DataSource = invoiceTypes;
             txtInvoiceType.DisplayMember = "InvoiceTypeName";
             txtInvoiceType.ValueMember = "InvoiceTypeId";

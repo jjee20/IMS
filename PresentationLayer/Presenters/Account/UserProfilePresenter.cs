@@ -37,7 +37,7 @@ namespace PresentationLayer.Presenters.Account
             string userId = Settings.Default.User_Id;
             if (!string.IsNullOrEmpty(userId))
             {
-                var user = _unitOfWork.ApplicationUser.Get(c => c.Id == userId, includeProperties: "Profile");
+                var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId, includeProperties: "Profile");
 
                 if (user.Profile == null) user.Profile = new UserProfile();
                 _view.PhoneNumber = user.PhoneNumber;
@@ -50,11 +50,11 @@ namespace PresentationLayer.Presenters.Account
         private void Save(object? sender, EventArgs e)
         {
             string userId = Settings.Default.User_Id;
-            var user = _unitOfWork.ApplicationUser.Get(c => c.Id == userId, includeProperties: "Profile");
+            var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId, includeProperties: "Profile");
 
             if (user == null) user = new ApplicationUser();
             if (user.Profile == null) user.Profile = new UserProfile();
-            else _unitOfWork.ApplicationUser.Detach(user);
+            else _unitOfWork.ApplicationUser.Value.Detach(user);
 
             user.Profile.FirstName = _view.FirstName;
             user.Profile.LastName = _view.LastName;
@@ -66,7 +66,7 @@ namespace PresentationLayer.Presenters.Account
             try
             {
                 new ModelDataValidation().Validate(user);
-                _unitOfWork.ApplicationUser.Update(user);
+                _unitOfWork.ApplicationUser.Value.Update(user);
                 _view.Message = "Profile edited successfully";
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;

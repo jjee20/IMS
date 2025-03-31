@@ -55,9 +55,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.DateGranted = DateTime.Now;
 
             //Source Binding
-            _view.SetAllowanceListBindingSource(AllowanceBindingSource);
-            _view.SetAllowanceTypeListBindingSource(AllowanceTypeBindingSource);
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -67,9 +64,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Allowance.Get(c => c.AllowanceId == _view.AllowanceId, tracked: true);
+            var model = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == _view.AllowanceId, tracked: true);
             if (model == null) model = new Allowance();
-            else _unitOfWork.Allowance.Detach(model);
+            else _unitOfWork.Allowance.Value.Detach(model);
 
             model.AllowanceId = _view.AllowanceId;
             model.AllowanceType = _view.AllowanceType;
@@ -83,12 +80,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Allowance.Update(model);
+                    _unitOfWork.Allowance.Value.Update(model);
                     _view.Message = "Allowance edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Allowance.Add(model);
+                    _unitOfWork.Allowance.Value.Add(model);
                     _view.Message = "Allowance added successfully";
                 }
                 _unitOfWork.Save();
@@ -107,7 +104,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             if (!emptyValue)
             {
                 AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(
-                    _unitOfWork.Allowance.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
+                    _unitOfWork.Allowance.Value.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
                     c.Employee.FirstName.Contains(_view.SearchValue) ||
                     (c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date),
                     includeProperties: "Employee"));
@@ -122,7 +119,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             _view.IsEdit = true;
             var allowance = (AllowanceViewModel)AllowanceBindingSource.Current;
-            var entity = _unitOfWork.Allowance.Get(c => c.AllowanceId == allowance.AllowanceId);
+            var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == allowance.AllowanceId);
             _view.AllowanceId = entity.AllowanceId;
             _view.AllowanceType = entity.AllowanceType;
             _view.Amount = entity.Amount;
@@ -136,8 +133,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             try
             {
                 var allowance = (AllowanceViewModel)AllowanceBindingSource.Current;
-                var entity = _unitOfWork.Allowance.Get(c => c.AllowanceId == allowance.AllowanceId);
-                _unitOfWork.Allowance.Remove(entity);
+                var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == allowance.AllowanceId);
+                _unitOfWork.Allowance.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Allowance deleted successfully";
@@ -175,19 +172,22 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllAllowanceList()
         {
-            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.GetAll(c => c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date, 
+            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(c => c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date, 
                 includeProperties: "Employee"));
             AllowanceBindingSource.DataSource = AllowanceList;//Set data source.
+            _view.SetAllowanceListBindingSource(AllowanceBindingSource);
         }
         private void LoadAllAllowanceTypeList()
         {
             AllowanceTypeList = EnumHelper.EnumToEnumerable<AllowanceType>();
             AllowanceTypeBindingSource.DataSource = AllowanceTypeList;//Set data source.
+            _view.SetAllowanceTypeListBindingSource(AllowanceTypeBindingSource);
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
             EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
     }
 }

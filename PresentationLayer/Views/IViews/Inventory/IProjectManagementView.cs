@@ -1,9 +1,11 @@
 ﻿using DomainLayer.ViewModels.PayrollViewModels;
+using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.IViews.Inventory
 {
     public interface IProjectManagementView
     {
+        SfDataGrid DataGrid { get; }
         double Budget { get; set; }
         string Client { get; set; }
         string Description { get; set; }

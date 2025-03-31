@@ -69,11 +69,6 @@ namespace PresentationLayer.Presenters
             LoadAllProductList();
 
             //Source Binding
-            _view.SetPurchaseOrderListBindingSource(PurchaseOrderBindingSource);
-            _view.SetPurchaseTypeListBindingSource(PurchaseTypeBindingSource);
-            _view.SetBranchListBindingSource(BranchBindingSource);
-            _view.SetVendorListBindingSource(VendorBindingSource);
-            _view.SetProductListBindingSource(ProductBindingSource);
         }
 
         private void OpenPurchaseOrderView<T>(Func<PurchaseOrder, T> viewCreator, string titlePrefix) where T : Form
@@ -81,7 +76,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var purchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
-                var entity = _unitOfWork.PurchaseOrder.Get(
+                var entity = _unitOfWork.PurchaseOrder.Value.Get(
                     c => c.PurchaseOrderId == purchaseOrder.PurchaseOrderId,
                     includeProperties: "PurchaseOrderLines,GoodsReceivedNote,Bill,PaymentVoucher",
                     tracked: true
@@ -135,7 +130,7 @@ namespace PresentationLayer.Presenters
         private void PrintPO(object? sender, EventArgs e)
         {
             var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
-            var PurchaseOrderLine = _unitOfWork.PurchaseOrderLine.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product", tracked: true);
+            var PurchaseOrderLine = _unitOfWork.PurchaseOrderLine.Value.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product", tracked: true);
             var purchaseOrderLineVM = PurchaseOrderLine.Select(c => new PurchaseOrderLineViewModel
             {
                 ProductId = (int)c.ProductId,
@@ -143,7 +138,7 @@ namespace PresentationLayer.Presenters
                 Price = c.Price,
                 DiscountPercentage = c.DiscountPercentage * 100,
                 Quantity = c.Quantity,
-                SubTotal = c.SubTotal,  
+                SubTotal = c.SubTotal,
             });
             PurchaseOrderVM = PurchaseOrder;
 
@@ -196,7 +191,7 @@ namespace PresentationLayer.Presenters
 
         private void ProductAdd(object? sender, EventArgs e)
         {
-            var product = _unitOfWork.Product.Get(c => c.ProductId == _view.ProductId);
+            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == _view.ProductId);
 
             // Initialize PurchaseOrderLines if it's null
             _view.PurchaseOrderLines ??= new List<PurchaseOrderLineViewModel>();
@@ -228,7 +223,7 @@ namespace PresentationLayer.Presenters
             var productItem = name;
             var quantity = _view.ProductQuantity;
             var amount = productprice * quantity;
-            var discount = _view.ProductDiscount/100;
+            var discount = _view.ProductDiscount / 100;
             var discountAmount = productprice * discount;
             _view.PurchaseOrderLines.Add(new PurchaseOrderLineViewModel
             {
@@ -258,9 +253,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.PurchaseOrder.Get(c => c.PurchaseOrderId == _view.PurchaseOrderId, tracked: true);
+            var model = _unitOfWork.PurchaseOrder.Value.Get(c => c.PurchaseOrderId == _view.PurchaseOrderId, tracked: true);
             if (model == null) model = new PurchaseOrder();
-            else _unitOfWork.PurchaseOrder.Detach(model);
+            else _unitOfWork.PurchaseOrder.Value.Detach(model);
 
             model.PurchaseOrderId = _view.PurchaseOrderId;
             model.PurchaseOrderName = _view.PurchaseOrderName;
@@ -285,15 +280,15 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.PurchaseOrder.Update(model);
+                    _unitOfWork.PurchaseOrder.Value.Update(model);
                     _view.Message = "Purchase Order edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.PurchaseOrder.Add(model);
+                    _unitOfWork.PurchaseOrder.Value.Add(model);
                     _view.Message = "Purchase Order added successfully";
                 }
-                    _unitOfWork.Save();
+                _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 CleanviewFields();
             }
@@ -333,7 +328,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.GetAll(c => c.PurchaseOrderName.Contains(_view.SearchValue), includeProperties: "Branch,PurchaseType,Vendor"));
+                PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll(c => c.PurchaseOrderName.Contains(_view.SearchValue), includeProperties: "Branch,PurchaseType,Vendor"));
                 PurchaseOrderBindingSource.DataSource = PurchaseOrderList;
             }
             else
@@ -345,8 +340,8 @@ namespace PresentationLayer.Presenters
         {
             _view.IsEdit = true;
             var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
-            var entity = _unitOfWork.PurchaseOrder.Get(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId);
-            var PurchaseOrderLines = _unitOfWork.PurchaseOrderLine.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product");
+            var entity = _unitOfWork.PurchaseOrder.Value.Get(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId);
+            var PurchaseOrderLines = _unitOfWork.PurchaseOrderLine.Value.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product");
             _view.PurchaseOrderId = entity.PurchaseOrderId;
             _view.PurchaseOrderName = entity.PurchaseOrderName;
             _view.BranchId = entity.BranchId;
@@ -368,8 +363,8 @@ namespace PresentationLayer.Presenters
             try
             {
                 var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
-                var entity = _unitOfWork.PurchaseOrder.Get(c => c.PurchaseOrderId ==  PurchaseOrder.PurchaseOrderId);
-                _unitOfWork.PurchaseOrder.Remove(entity);
+                var entity = _unitOfWork.PurchaseOrder.Value.Get(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId);
+                _unitOfWork.PurchaseOrder.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Purchase Order deleted successfully";
@@ -418,10 +413,27 @@ namespace PresentationLayer.Presenters
             _view.PurchaseOrderLines = new List<PurchaseOrderLineViewModel>();
         }
 
-        private void LoadAllPurchaseOrderList() => PurchaseOrderBindingSource.DataSource = PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.GetAll(includeProperties: "Branch,PurchaseType,Vendor"));
-        private void LoadAllPurchaseTypeList() => PurchaseTypeBindingSource.DataSource = PurchaseTypeList = _unitOfWork.PurchaseType.GetAll();
-        private void LoadAllBranchList() => BranchBindingSource.DataSource = BranchList = _unitOfWork.Branch.GetAll();
-        private void LoadAllVendorList() => VendorBindingSource.DataSource = VendorList = _unitOfWork.Vendor.GetAll();
-        private void LoadAllProductList() => ProductBindingSource.DataSource =  ProductList = _unitOfWork.Product.GetAll();
+        private void LoadAllPurchaseOrderList()
+        {
+            PurchaseOrderBindingSource.DataSource = PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll(includeProperties: "Branch,PurchaseType,Vendor"));
+
+            _view.SetPurchaseOrderListBindingSource(PurchaseOrderBindingSource);
+        }
+        private void LoadAllPurchaseTypeList() {
+            PurchaseTypeBindingSource.DataSource = PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll();
+            _view.SetPurchaseTypeListBindingSource(PurchaseTypeBindingSource);
+        }
+        private void LoadAllBranchList() {
+            BranchBindingSource.DataSource = BranchList = _unitOfWork.Branch.Value.GetAll();
+            _view.SetBranchListBindingSource(BranchBindingSource);
+        }
+        private void LoadAllVendorList() {
+            VendorBindingSource.DataSource = VendorList = _unitOfWork.Vendor.Value.GetAll();
+            _view.SetVendorListBindingSource(VendorBindingSource);
+        }
+        private void LoadAllProductList() {
+            ProductBindingSource.DataSource =  ProductList = _unitOfWork.Product.Value.GetAll();
+            _view.SetProductListBindingSource(ProductBindingSource);
+        }
     }
 }

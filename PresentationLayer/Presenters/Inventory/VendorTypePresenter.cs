@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenters
             LoadAllVendorTypeList();
 
             //Source Binding
-            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
 
         }
 
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.VendorType.Get(c => c.VendorTypeId == _view.VendorTypeId, tracked: true);
+            var model = _unitOfWork.VendorType.Value.Get(c => c.VendorTypeId == _view.VendorTypeId, tracked: true);
             if (model == null) model = new VendorType();
-            else _unitOfWork.VendorType.Detach(model);
+            else _unitOfWork.VendorType.Value.Detach(model);
 
             model.VendorTypeId = _view.VendorTypeId;
             model.VendorTypeName = _view.VendorTypeName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.VendorType.Update(model);
+                    _unitOfWork.VendorType.Value.Update(model);
                     _view.Message = "Vendor type edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.VendorType.Add(model);
+                    _unitOfWork.VendorType.Value.Add(model);
                     _view.Message = "Vendor type added successfully";
                 }
                 _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                VendorTypeList = _unitOfWork.VendorType.GetAll(c => c.VendorTypeName.Contains(_view.SearchValue));
+                VendorTypeList = _unitOfWork.VendorType.Value.GetAll(c => c.VendorTypeName.Contains(_view.SearchValue));
                 VendorTypeBindingSource.DataSource = VendorTypeList;
             }
             else
@@ -102,7 +101,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var entity = (VendorType)VendorTypeBindingSource.Current;
-                _unitOfWork.VendorType.Remove(entity);
+                _unitOfWork.VendorType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Vendor type deleted successfully";
@@ -138,8 +137,9 @@ namespace PresentationLayer.Presenters
 
         private void LoadAllVendorTypeList()
         {
-            VendorTypeList = _unitOfWork.VendorType.GetAll();
+            VendorTypeList = _unitOfWork.VendorType.Value.GetAll();
             VendorTypeBindingSource.DataSource = VendorTypeList;//Set data source.
+            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
         }
     }
 }

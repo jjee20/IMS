@@ -49,9 +49,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllEmployeeList();
 
             //Source Binding
-            _view.SetBenefitListBindingSource(BenefitBindingSource);
-            _view.SetBenefitTypeListBindingSource(BenefitTypeBindingSource);
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -61,9 +58,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Benefit.Get(c => c.BenefitId == _view.BenefitId, tracked: true);
+            var model = _unitOfWork.Benefit.Value.Get(c => c.BenefitId == _view.BenefitId, tracked: true);
             if (model == null) model = new Benefit();
-            else _unitOfWork.Benefit.Detach(model);
+            else _unitOfWork.Benefit.Value.Detach(model);
 
             model.BenefitId = _view.BenefitId;
             model.BenefitType = _view.BenefitType;
@@ -76,12 +73,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Benefit.Update(model);
+                    _unitOfWork.Benefit.Value.Update(model);
                     _view.Message = "Benefit edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Benefit.Add(model);
+                    _unitOfWork.Benefit.Value.Add(model);
                     _view.Message = "Benefit added successfully";
                 }
                 _unitOfWork.Save();
@@ -99,7 +96,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.GetAll(
+                BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll(
                     c => c.Employee.LastName.Contains(_view.SearchValue) ||
                     c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
                 BenefitBindingSource.DataSource = BenefitList;
@@ -113,7 +110,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             _view.IsEdit = true;
             var benefit = (BenefitViewModel)BenefitBindingSource.Current;
-            var entity = _unitOfWork.Benefit.Get(c => c.BenefitId == benefit.BenefitId);
+            var entity = _unitOfWork.Benefit.Value.Get(c => c.BenefitId == benefit.BenefitId);
             _view.BenefitId = entity.BenefitId;
             _view.BenefitType = entity.BenefitType;
             _view.Amount = entity.Amount;
@@ -125,8 +122,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             try
             {
                 var benefit = (BenefitViewModel)BenefitBindingSource.Current;
-                var entity = _unitOfWork.Benefit.Get(c => c.BenefitId == benefit.BenefitId);
-                _unitOfWork.Benefit.Remove(entity);
+                var entity = _unitOfWork.Benefit.Value.Get(c => c.BenefitId == benefit.BenefitId);
+                _unitOfWork.Benefit.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Benefit deleted successfully";
@@ -163,18 +160,21 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllBenefitList()
         {
-            BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.GetAll(includeProperties: "Employee"));
+            BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll(includeProperties: "Employee"));
             BenefitBindingSource.DataSource = BenefitList;//Set data source.
+            _view.SetBenefitListBindingSource(BenefitBindingSource);
         }
         private void LoadAllBenefitTypeList()
         {
             BenefitTypeList = EnumHelper.EnumToEnumerable<BenefitType>();
             BenefitTypeBindingSource.DataSource = BenefitTypeList;//Set data source.
+            _view.SetBenefitTypeListBindingSource(BenefitTypeBindingSource);
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
             EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
     }
 }

@@ -2,7 +2,6 @@
 using DomainLayer.Models.Inventory;
 
 using InfastructureLayer.DataAccess.Data;
-using InfastructureLayer.Repositories.Inventory;
 using ServiceLayer.Services.IRepositories;
 
 namespace InfastructureLayer.Repositories

@@ -58,8 +58,6 @@ namespace PresentationLayer.Presenters
             //LoadAddress();
 
             //Source Binding
-            _view.SetVendorListBindingSource(VendorBindingSource);
-            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
             //_view.SetAddressBindingSource(GetBarangayList, GetMunicipalityList,
             //                              GetProvinceList, GetRegionList);
 
@@ -95,9 +93,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Vendor.Get(c => c.VendorId == _view.VendorId, tracked: true);
+            var model = _unitOfWork.Vendor.Value.Get(c => c.VendorId == _view.VendorId, tracked: true);
             if (model == null) model = new Vendor();
-            else _unitOfWork.Vendor.Detach(model);
+            else _unitOfWork.Vendor.Value.Detach(model);
 
             model.VendorId = _view.VendorId;
             model.VendorName = _view.VendorName;
@@ -112,12 +110,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Vendor.Update(model);
+                    _unitOfWork.Vendor.Value.Update(model);
                     _view.Message = "Vendor edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Vendor.Add(model);
+                    _unitOfWork.Vendor.Value.Add(model);
                     _view.Message = "Vendor added successfully";
                 }
                 _unitOfWork.Save();
@@ -135,7 +133,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.GetAll(c => c.VendorName.Contains(_view.SearchValue), includeProperties: "VendorType"));
+                VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(c => c.VendorName.Contains(_view.SearchValue), includeProperties: "VendorType"));
                 VendorBindingSource.DataSource = VendorList;
             }
             else
@@ -160,7 +158,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var entity = (Vendor)VendorBindingSource.Current;
-                _unitOfWork.Vendor.Remove(entity);
+                _unitOfWork.Vendor.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Vendor deleted successfully";
@@ -201,13 +199,15 @@ namespace PresentationLayer.Presenters
 
         private void LoadAllVendorList()
         {
-            VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.GetAll(includeProperties: "VendorType"));
+            VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(includeProperties: "VendorType"));
             VendorBindingSource.DataSource = VendorList;//Set data source.
+            _view.SetVendorListBindingSource(VendorBindingSource);
         }
         private void LoadAllVendorTypeList()
         {
-            VendorTypeList = _unitOfWork.VendorType.GetAll();
+            VendorTypeList = _unitOfWork.VendorType.Value.GetAll();
             VendorTypeBindingSource.DataSource = VendorTypeList;//Set data source.
+            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
         }
 
     }

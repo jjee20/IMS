@@ -39,7 +39,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllProjectList();
 
             //Source Binding
-            _view.SetProjectListBindingSource(ProjectBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -49,10 +48,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Project.Get(c => c.ProjectId == _view.ProjectId, tracked: true);
+            var model = _unitOfWork.Project.Value.Get(c => c.ProjectId == _view.ProjectId, tracked: true);
 
             if (model == null) model = new Project();
-            else _unitOfWork.Project.Detach(model);
+            else _unitOfWork.Project.Value.Detach(model);
 
             model.ProjectId = _view.ProjectId;
             model.ProjectName = _view.ProjectName;
@@ -63,12 +62,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Project.Update(model);
+                    _unitOfWork.Project.Value.Update(model);
                     _view.Message = "Project edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Project.Add(model);
+                    _unitOfWork.Project.Value.Add(model);
                     _view.Message = "Project added successfully";
                 }
                 _unitOfWork.Save();
@@ -86,7 +85,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                ProjectList = _unitOfWork.Project.GetAll(c => c.ProjectName.Contains(_view.SearchValue));
+                ProjectList = _unitOfWork.Project.Value.GetAll(c => c.ProjectName.Contains(_view.SearchValue));
                 ProjectBindingSource.DataSource = ProjectList;
             }
             else
@@ -107,7 +106,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             try
             {
                 var entity = (Project)ProjectBindingSource.Current;
-                _unitOfWork.Project.Remove(entity);
+                _unitOfWork.Project.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Project deleted successfully";
@@ -143,8 +142,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllProjectList()
         {
-            ProjectList = _unitOfWork.Project.GetAll();
+            ProjectList = _unitOfWork.Project.Value.GetAll();
             ProjectBindingSource.DataSource = ProjectList;//Set data source.
+            _view.SetProjectListBindingSource(ProjectBindingSource);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
 using InfastructureLayer.DataAccess.Data;
-using InfastructureLayer.Repositories.Inventory;
 using ServiceLayer.Services.IRepositories;
 using ServiceLayer.Services.IRepositories.IAccounts;
 

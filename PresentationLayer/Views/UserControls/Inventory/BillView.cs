@@ -55,8 +55,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                         VendorInvoiceNumber = txtVendorInvoiceNumber.Text,
                     };
 
-                _unitOfWork.PurchaseOrder.Detach(_purchaseOrder);
-                _unitOfWork.PurchaseOrder.Update(_purchaseOrder);
+                _unitOfWork.PurchaseOrder.Value.Detach(_purchaseOrder);
+                _unitOfWork.PurchaseOrder.Value.Update(_purchaseOrder);
                 _unitOfWork.Save();
 
                 MessageBox.Show("Goods Received Note created successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

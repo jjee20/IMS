@@ -35,7 +35,6 @@ namespace PresentationLayer.Presenters
             LoadAllUnitOfMeasureList();
 
             //Source Binding
-            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.UnitOfMeasure.Get(c => c.UnitOfMeasureId == _view.UnitOfMeasureId, tracked: true);
+            var model = _unitOfWork.UnitOfMeasure.Value.Get(c => c.UnitOfMeasureId == _view.UnitOfMeasureId, tracked: true);
             if (model == null) model = new UnitOfMeasure();
-            else _unitOfWork.UnitOfMeasure.Detach(model);
+            else _unitOfWork.UnitOfMeasure.Value.Detach(model);
 
             model.UnitOfMeasureId = _view.UnitOfMeasureId;
             model.UnitOfMeasureName = _view.UnitOfMeasureName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.UnitOfMeasure.Update(model);
+                    _unitOfWork.UnitOfMeasure.Value.Update(model);
                     _view.Message = "Unit Of Measure edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.UnitOfMeasure.Add(model);
+                    _unitOfWork.UnitOfMeasure.Value.Add(model);
                     _view.Message = "Unit Of Measure added successfully";
                 }
                 _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                UnitOfMeasureList = _unitOfWork.UnitOfMeasure.GetAll(c => c.UnitOfMeasureName.Contains(_view.SearchValue));
+                UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll(c => c.UnitOfMeasureName.Contains(_view.SearchValue));
                 UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;
             }
             else
@@ -102,7 +101,7 @@ namespace PresentationLayer.Presenters
             try
             {
                 var entity = (UnitOfMeasure)UnitOfMeasureBindingSource.Current;
-                _unitOfWork.UnitOfMeasure.Remove(entity);
+                _unitOfWork.UnitOfMeasure.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Unit Of Measure deleted successfully";
@@ -138,8 +137,9 @@ namespace PresentationLayer.Presenters
 
         private void LoadAllUnitOfMeasureList()
         {
-            UnitOfMeasureList = _unitOfWork.UnitOfMeasure.GetAll();
+            UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll();
             UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;//Set data source.
+            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureBindingSource);
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
+﻿using Syncfusion.WinForms.DataGrid;
+
+namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IPayrollSystemView
     {
+        SfDataGrid DataGrid { get; }
         TabPage Guna2TabControlPage { get; }
 
         event EventHandler ShowAttendance;

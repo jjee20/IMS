@@ -38,7 +38,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllDepartmentList();
 
             //Source Binding
-            _view.SetDepartmentListBindingSource(DepartmentBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -48,9 +47,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Department.Get(c => c.DepartmentId == _view.DepartmentId, tracked: true);
+            var model = _unitOfWork.Department.Value.Get(c => c.DepartmentId == _view.DepartmentId, tracked: true);
             if (model == null) model = new Department();
-            else _unitOfWork.Department.Detach(model);
+            else _unitOfWork.Department.Value.Detach(model);
 
             model.DepartmentId = _view.DepartmentId;
             model.Name = _view.DepartmentName;
@@ -61,12 +60,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Department.Update(model);
+                    _unitOfWork.Department.Value.Update(model);
                     _view.Message = "Department edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Department.Add(model);
+                    _unitOfWork.Department.Value.Add(model);
                     _view.Message = "Department added successfully";
                 }
                 _unitOfWork.Save();
@@ -84,7 +83,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                DepartmentList = _unitOfWork.Department.GetAll(c => c.Name.Contains(_view.SearchValue));
+                DepartmentList = _unitOfWork.Department.Value.GetAll(c => c.Name.Contains(_view.SearchValue));
                 DepartmentBindingSource.DataSource = DepartmentList;
             }
             else
@@ -105,7 +104,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             try
             {
                 var entity = (Department)DepartmentBindingSource.Current;
-                _unitOfWork.Department.Remove(entity);
+                _unitOfWork.Department.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Department deleted successfully";
@@ -141,8 +140,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllDepartmentList()
         {
-            DepartmentList = _unitOfWork.Department.GetAll();
+            DepartmentList = _unitOfWork.Department.Value.GetAll();
             DepartmentBindingSource.DataSource = DepartmentList;//Set data source.
+            _view.SetDepartmentListBindingSource(DepartmentBindingSource);
         }
     }
 }

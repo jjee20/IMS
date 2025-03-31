@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.IViews.Account
 {
@@ -18,6 +19,7 @@ namespace PresentationLayer.Views.IViews.Account
         bool Deleting { get; set; }
         bool Viewing { get; set; }
         bool Overriding { get; set; }
+        SfDataGrid DataGrid { get; }
         void SetRegisterListBindingSource(BindingSource RegisterList);
         void SetDepartmentListBindingSource(BindingSource departmentBindingSource);
 
