@@ -23,7 +23,6 @@ namespace PresentationLayer.Presenters
     {
         private IDashboardView _view;
         private IUnitOfWork _unitOfWork;
-        private IEnumerable<TopSellingItemViewModel> TopSellingItemList;
         private GunaHorizontalBarDataset TopSellingDataSet;
         private GunaBarDataset InventoryStatusDataSet;
         private GunaLineDataset DailySalesTrendDataSet;

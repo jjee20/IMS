@@ -191,8 +191,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin Management System";
             WindowState = FormWindowState.Maximized;
-            FormClosing += AdminView_FormClosing;
-            Load += AdminView_Load;
             tcMain.ResumeLayout(false);
             contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);

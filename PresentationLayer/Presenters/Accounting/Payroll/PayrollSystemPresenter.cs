@@ -18,7 +18,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view.ShowAttendance += ShowAttendance;
             _view.ShowProject += ShowProject;
-            _view.ShowContribution += ShowContribution;
             _view.ShowDeduction += ShowDeduction;
             _view.ShowDepartment += ShowDepartment;
             _view.ShowEmployee += ShowEmployee;

@@ -32,8 +32,6 @@ namespace RavenTech_ERP.Views.IViews.Inventory
         event EventHandler DeleteProductEvent;
         event EventHandler UpdateComputationEvent;
         event EventHandler EditEvent;
-        event EventHandler FreightEvent;
-        event EventHandler PaymentDiscountEvent;
         event EventHandler PrintEvent;
         event EventHandler PrintProjectEvent;
         event EventHandler ProductAddEvent;

@@ -75,7 +75,7 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var purchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
+                var purchaseOrder = (PurchaseOrderViewModel)_view.DataGrid.SelectedItem;
                 var entity = _unitOfWork.PurchaseOrder.Value.Get(
                     c => c.PurchaseOrderId == purchaseOrder.PurchaseOrderId,
                     includeProperties: "PurchaseOrderLines,GoodsReceivedNote,Bill,PaymentVoucher",
@@ -129,7 +129,7 @@ namespace PresentationLayer.Presenters
 
         private void PrintPO(object? sender, EventArgs e)
         {
-            var PurchaseOrder = (PurchaseOrderViewModel)PurchaseOrderBindingSource.Current;
+            var PurchaseOrder = (PurchaseOrderViewModel)_view.DataGrid.SelectedItem;
             var PurchaseOrderLine = _unitOfWork.PurchaseOrderLine.Value.GetAll(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId, includeProperties: "Product", tracked: true);
             var purchaseOrderLineVM = PurchaseOrderLine.Select(c => new PurchaseOrderLineViewModel
             {

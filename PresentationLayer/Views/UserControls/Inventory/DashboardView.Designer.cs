@@ -1579,7 +1579,6 @@ namespace PresentationLayer.Views.UserControls
         #endregion
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
-        private Guna.UI2.WinForms.Guna2Transition guna2Transition1;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private MaterialSkin.Controls.MaterialComboBox txtYear;
         private MaterialSkin.Controls.MaterialComboBox txtMonth;

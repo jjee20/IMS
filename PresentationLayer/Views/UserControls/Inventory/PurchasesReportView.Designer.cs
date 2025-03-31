@@ -672,7 +672,6 @@
         private MaterialSkin.Controls.MaterialComboBox txtYear;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private TableLayoutPanel tableLayoutPanel4;
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel3;
         private Label label4;
         private TableLayoutPanel tableLayoutPanel5;
         private Label txtPurchases;

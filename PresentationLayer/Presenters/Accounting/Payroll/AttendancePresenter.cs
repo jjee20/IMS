@@ -52,7 +52,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
             _view.ShowAttendanceEvent += ShowAttendance;
-            _view.ImportEvent += Import;
 
             //Load
 
@@ -179,7 +178,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void ShowAttendance(object? sender, EventArgs e)
         {
             _view.IsIndividual = true;
-            var attendanceVM = (AttendanceViewModel)AttendanceBindingSource.Current;
+            var attendanceVM = (AttendanceViewModel)_view.DataGrid.SelectedItem;
 
             if (attendanceVM == null)
             {

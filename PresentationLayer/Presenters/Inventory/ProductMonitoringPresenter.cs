@@ -29,7 +29,6 @@ namespace RavenTech_ERP.Presenters.Inventory
             LowStockBindingSource = new BindingSource();
             OutOfStockBindingSource = new BindingSource();
 
-            _view.SearchEvent += Search;
             _view.PrintEvent += Print;
 
             LoadInStock();

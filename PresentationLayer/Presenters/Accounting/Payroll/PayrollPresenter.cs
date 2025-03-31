@@ -77,7 +77,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 string reportDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
                 string reportPath = Path.Combine(reportDirectory, reportFileName);
 
-                var payslip = (PayrollViewModel)PayrollBindingSource.Current;
+                var payslip = (PayrollViewModel)_view.DataGrid.SelectedItem;
                 var payslipList = new[]
                 {
                     payslip

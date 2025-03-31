@@ -24,8 +24,6 @@ namespace PresentationLayer.Views.UserControls
     {
         private BindingSource _ProjectLineBindingSource = new BindingSource();
         private int id = 0;
-        private double productPrice = 0;
-        private double productSubtotal = 0;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
@@ -295,8 +293,6 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
         public event EventHandler ProductAddEvent;
-        public event EventHandler PaymentDiscountEvent;
-        public event EventHandler FreightEvent;
         public event EventHandler PrintProjectEvent;
         public event EventHandler DeleteProductEvent;
         public event EventHandler UpdateComputationEvent;

@@ -18,9 +18,10 @@ namespace DomainLayer.ViewModels.Inventory
         [Display(Name = "Code")]
         public string ProductCode { get; set; }
         public string Barcode { get; set; }
+        public string? Brand { get; set; }
+        public string? Color { get; set; }
+        public string? Size { get; set; }
         public string Description { get; set; }
-        [Display(Name = "Image")]
-        public string? ProductImageUrl { get; set; }
         [Display(Name = "UOM")]
         public string UnitOfMeasure { get; set; }
         [Display(Name = "Buying Price")]

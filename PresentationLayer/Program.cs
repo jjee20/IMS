@@ -14,6 +14,7 @@ using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using PresentationLayer.Views.UserControls;
 using RevenTech_ERP.Presenters.Accounting.Payroll;
 using PresentationLayer.Presenters.Inventory;
+using PresentationLayer.Views.UserControls.Payroll;
 
 namespace PresentationLayer
 {
@@ -44,12 +45,12 @@ namespace PresentationLayer
             var unitOfWork = UnityC.Resolve<IUnitOfWork>();
 
             //Pass dependencies to the presenter
-            //ILoginView mainView = new LoginView();
-            //var presenter = new LoginPresenter(mainView, unitOfWork);
-            //IPayrollView mainView = new PayrollView();
-            //var presenter = new PayrollPresenter(mainView, unitOfWork);
-            IInventoryView mainView = new InventoryView();
-            var presenter = new InventoryPresenter(mainView, unitOfWork);
+            ILoginView mainView = new LoginView();
+            var presenter = new LoginPresenter(mainView, unitOfWork);
+            //IPayrollSystemView mainView = new PayrollSystemView();
+            //var presenter = new PayrollSystemPresenter(mainView, unitOfWork);
+            //IInventoryView mainView = new InventoryView();
+            //var presenter = new InventoryPresenter(mainView, unitOfWork);
             //IAdminView mainView = new AdminView();
             //var presenter = new AdminPresenter(mainView, unitOfWork);
 

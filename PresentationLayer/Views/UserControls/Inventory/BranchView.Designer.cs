@@ -691,12 +691,7 @@ namespace PresentationLayer.Views.UserControls
         private Guna2Separator guna2Separator1;
         private TabPage tabPage1;
         private MaterialSkin.Controls.MaterialCard materialCard2;
-        private Guna2ComboBox txtGoodsReceivedNote;
-        private Guna2TextBox txtVendorInvoiceNumber;
         private Guna2TextBox txtAddress;
-        private Guna2DateTimePicker txtBillDueDate;
-        private Guna2DateTimePicker txtBillDate;
-        private Guna2HtmlLabel guna2HtmlLabel8;
         private Guna2HtmlLabel guna2HtmlLabel5;
         private Guna2HtmlLabel guna2HtmlLabel6;
         private Guna2HtmlLabel guna2HtmlLabel4;

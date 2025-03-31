@@ -98,16 +98,12 @@ namespace PresentationLayer.Views.UserControls.Payroll
         }
 
         public event EventHandler ShowAttendance;
-        public event EventHandler ShowAuditLog;
-        public event EventHandler ShowContribution;
-        public event EventHandler ShowDashboard;
         public event EventHandler ShowDeduction;
         public event EventHandler ShowDepartment;
         public event EventHandler ShowEmployee;
         public event EventHandler ShowJobPosition;
         public event EventHandler ShowLeave;
         public event EventHandler ShowPayroll;
-        public event EventHandler ShowPerformanceReview;
         public event EventHandler ShowProfile;
         public event EventHandler ShowShift;
         public event EventHandler ShowTax;

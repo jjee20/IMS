@@ -65,9 +65,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void UserInformation(object? sender, EventArgs e)
         {
-            var employee = (EmployeeViewModel)EmployeeBindingSource.Current;
+            var employee = (EmployeeViewModel)_view.DataGrid.SelectedItem;
             var user = Program.Mapper.Map<UserInformationViewModel>(_unitOfWork.Employee.Value.Get(c => c.EmployeeId == employee.EmployeeId, includeProperties: "Department,JobPosition,Shift,Attendances.Project,Leaves,Bonuses,Benefits,Deductions,Allowances,Contribution"));
-            var userInformation = new ProfileInformationView(user);
+            var userInformation = new EmployeeInformationView(user);
             userInformation.ShowDialog();   
         }
 

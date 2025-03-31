@@ -455,7 +455,7 @@ namespace PresentationLayer.Views.UserControls
             label2.AutoSize = true;
             label2.Dock = DockStyle.Right;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(470, 0);
+            label2.Location = new Point(466, 0);
             label2.Name = "label2";
             label2.Size = new Size(47, 21);
             label2.TabIndex = 34;
@@ -469,12 +469,12 @@ namespace PresentationLayer.Views.UserControls
             txtStartDate.FillColor = Color.White;
             txtStartDate.Font = new Font("Segoe UI", 9F);
             txtStartDate.Format = DateTimePickerFormat.Long;
-            txtStartDate.Location = new Point(517, 0);
+            txtStartDate.Location = new Point(513, 0);
             txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtStartDate.Name = "txtStartDate";
             txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtStartDate.Size = new Size(199, 62);
+            txtStartDate.Size = new Size(215, 62);
             txtStartDate.TabIndex = 33;
             txtStartDate.Value = new DateTime(2025, 2, 26, 9, 16, 55, 624);
             // 
@@ -483,7 +483,7 @@ namespace PresentationLayer.Views.UserControls
             label1.AutoSize = true;
             label1.Dock = DockStyle.Right;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(716, 0);
+            label1.Location = new Point(728, 0);
             label1.Name = "label1";
             label1.Size = new Size(25, 21);
             label1.TabIndex = 32;
@@ -497,12 +497,12 @@ namespace PresentationLayer.Views.UserControls
             txtEndDate.FillColor = Color.White;
             txtEndDate.Font = new Font("Segoe UI", 9F);
             txtEndDate.Format = DateTimePickerFormat.Long;
-            txtEndDate.Location = new Point(741, 0);
+            txtEndDate.Location = new Point(753, 0);
             txtEndDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtEndDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtEndDate.Name = "txtEndDate";
             txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            txtEndDate.Size = new Size(205, 62);
+            txtEndDate.Size = new Size(215, 62);
             txtEndDate.TabIndex = 31;
             txtEndDate.Value = new DateTime(2025, 2, 26, 9, 16, 55, 624);
             // 
@@ -623,14 +623,14 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(946, 0);
+            txtSearch.Location = new Point(968, 0);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
             txtSearch.Name = "txtSearch";
             txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            txtSearch.Size = new Size(378, 62);
+            txtSearch.Size = new Size(356, 62);
             txtSearch.TabIndex = 11;
             // 
             // tableLayoutPanel1

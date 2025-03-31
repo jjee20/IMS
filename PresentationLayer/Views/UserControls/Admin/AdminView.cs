@@ -40,8 +40,7 @@ namespace PresentationLayer.Views
                 }
                 else if (tcMain.SelectedTab == tbInventory)
                 {
-                    //customDropdownMenu1.Show(tbInventory, tbInventory.Width, 0);
-                    //ShowInventory?.Invoke(this, EventArgs.Empty);
+                    ShowInventory?.Invoke(this, EventArgs.Empty);
                 }
                 else if (tcMain.SelectedTab == tbPayroll)
                 {
@@ -61,16 +60,6 @@ namespace PresentationLayer.Views
         public void ShowForm()
         {
             Show();
-        }
-
-        private void AdminView_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
-        }
-
-        private void AdminView_Load(object sender, EventArgs e)
-        {
-            //customDropdownMenu1.IsMainMenu = true;
         }
 
         public event EventHandler ShowRegister;

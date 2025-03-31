@@ -23,8 +23,6 @@ namespace PresentationLayer.Views.UserControls
     {
         private BindingSource _salesOrderLineBindingSource = new BindingSource();
         private int id = 0;
-        private double productPrice = 0;
-        private double productSubtotal = 0;
         private string message;
         private bool isSuccessful;
         public bool isEdit;

@@ -567,7 +567,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel14.Location = new Point(14, 119);
             guna2HtmlLabel14.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel14.Name = "guna2HtmlLabel14";
-            guna2HtmlLabel14.Size = new Size(1066, 17);
+            guna2HtmlLabel14.Size = new Size(74, 17);
             guna2HtmlLabel14.TabIndex = 30;
             guna2HtmlLabel14.Text = "Select Branch";
             // 
@@ -597,7 +597,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel10.Location = new Point(14, 66);
             guna2HtmlLabel10.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel10.Name = "guna2HtmlLabel10";
-            guna2HtmlLabel10.Size = new Size(1066, 17);
+            guna2HtmlLabel10.Size = new Size(113, 17);
             guna2HtmlLabel10.TabIndex = 7;
             guna2HtmlLabel10.Text = "Select Purchase Type";
             // 
@@ -642,7 +642,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage5.Padding = new Padding(3);
             tabPage5.Size = new Size(1100, 477);
             tabPage5.TabIndex = 1;
-            tabPage5.Text = "Purchase Order Line";
+            tabPage5.Text = "Product Details";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // materialCard4

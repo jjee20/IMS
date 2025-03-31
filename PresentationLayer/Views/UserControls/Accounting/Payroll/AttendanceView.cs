@@ -332,7 +332,6 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler DeleteEvent;
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
-        public event EventHandler ImportEvent;
         public event EventHandler ShowAttendanceEvent;
 
         private static AttendanceView? instance;

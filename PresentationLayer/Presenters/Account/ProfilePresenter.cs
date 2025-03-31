@@ -1,7 +1,10 @@
-﻿using PresentationLayer.Views;
+﻿using DomainLayer.Enums;
+using PresentationLayer.Views;
 using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Properties;
+using RavenTech_ERP.Views.UserControls.Account;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -20,21 +23,45 @@ namespace PresentationLayer.Presenters.Account
         {
             _view = view;
             _unitOfWork = unitOfWork;
-            _view.ShowUserProfile += ShowUserProfile;
+            _view.ShowEditProfile += ShowEditProfile;
             _view.ShowChangePassword += ShowChangePassword;
-            ShowUserProfile(this, EventArgs.Empty);
+
+            LoadDetails();
+        }
+
+        private void LoadDetails()
+        {
+            var userId = Settings.Default.User_Id;
+            var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId, includeProperties: "Profile");
+
+            _view.AppUserName = user.Profile != null ? $"{user.Profile.FirstName} {user.Profile.LastName}" ?? "{Needs Updating}" : "{Needs Updating}";
+            _view.Email = user.Email ?? "{Needs Updating}";
+            _view.Phone = user.PhoneNumber ?? "{Needs Updating}";
+            _view.UserName = user.UserName ?? "{Needs Updating}";
+            _view.Department = user.Department.ToString() ?? "{Needs Updating}";
+            _view.GetTaskRoles(user.TaskRoles.ToList());
         }
 
         private void ShowChangePassword(object? sender, EventArgs e)
         {
-            IChangePasswordView view = ChangePasswordView.GetInstance((TabPage)_view.Guna2TabControlPage);
-            new ChangePasswordPresenter(view, _unitOfWork);
+            var userId = Settings.Default.User_Id;
+            var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId, includeProperties: "Profile");
+            var changePassword = new ChangePasswordView(user, _unitOfWork);
+            changePassword.ShowDialog();
         }
 
-        private void ShowUserProfile(object? sender, EventArgs e)
+        private void ShowEditProfile(object? sender, EventArgs e)
         {
-            IUserProfileView view = UserProfileView.GetInstance((TabPage)_view.Guna2TabControlPage);
-            new UserProfilePresenter(view, _unitOfWork);
+            var userId = Settings.Default.User_Id;
+            var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId, includeProperties: "Profile");
+            using (var accountInformation = new EditAccountInformationView(user, _unitOfWork))
+            {
+                if(accountInformation.ShowDialog() == DialogResult.OK)
+                {
+                    LoadDetails();
+                }
+            } 
+            
         }
     }
 }

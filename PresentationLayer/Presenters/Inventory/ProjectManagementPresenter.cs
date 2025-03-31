@@ -71,7 +71,7 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var Project = (ProjectViewModel)ProjectBindingSource.Current;
+                var Project = (ProjectViewModel)_view.DataGrid.SelectedItem;
                 var ProjectLine = _unitOfWork.ProjectLine.Value.GetAll(c => c.ProjectId == Project.ProjectId, includeProperties: "Product", tracked: true);
                 var projectLineVM = ProjectLine.Select(c => new ProjectLineViewModel
                 {

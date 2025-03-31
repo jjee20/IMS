@@ -89,7 +89,7 @@
     <Compile Update="Views\UserControls\Account\RegisterView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Account\ChangePasswordView.cs">
+    <Compile Update="Views\UserControls\Account\ChangePasswordViewOld.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\AttendanceView.cs">
@@ -151,9 +151,6 @@
     </Compile>
     <Compile Update="Views\UserControls\Admin\AdminView.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Account\UserProfileView.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\ProductMonitoringView.cs">
       <SubType>UserControl</SubType>

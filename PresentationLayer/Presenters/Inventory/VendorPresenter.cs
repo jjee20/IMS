@@ -21,14 +21,6 @@ namespace PresentationLayer.Presenters
 
         private IEnumerable<VendorViewModel> VendorList;
         private IEnumerable<VendorType> VendorTypeList;
-
-        //private List<string> GetBarangayList;
-        //private List<string> GetMunicipalityList;
-        //private List<string> GetProvinceList;
-        //private List<string> GetRegionList;
-
-        string reportFileName = "philippine_provinces_cities_municipalities_and_barangays_2019v2.json";
-        string reportDirectory = Path.Combine(Application.StartupPath, "Json");
         public VendorPresenter(IVendorView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -37,11 +29,6 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
             VendorBindingSource = new BindingSource();
             VendorTypeBindingSource = new BindingSource();
-
-            //GetBarangayList = new List<string>();
-            //GetMunicipalityList = new List<string>();
-            //GetProvinceList = new List<string>();
-            //GetRegionList = new List<string>();
 
             //Events
             _view.AddNewEvent += AddNew;

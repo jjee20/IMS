@@ -75,6 +75,10 @@ namespace PresentationLayer.Views.UserControls
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
+            materialCard3 = new MaterialSkin.Controls.MaterialCard();
+            panel1 = new Panel();
+            dgList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            dgPager = new Syncfusion.WinForms.DataPager.SfDataPager();
             tabPage2 = new TabPage();
             guna2TabControl2 = new Guna2TabControl();
             tabPage4 = new TabPage();
@@ -140,13 +144,12 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel8 = new Guna2HtmlLabel();
             guna2HtmlLabel7 = new Guna2HtmlLabel();
             guna2HtmlLabel10 = new Guna2HtmlLabel();
-            materialCard3 = new MaterialSkin.Controls.MaterialCard();
-            panel1 = new Panel();
-            dgList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
-            dgPager = new Syncfusion.WinForms.DataPager.SfDataPager();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            materialCard3.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             tabPage2.SuspendLayout();
             guna2TabControl2.SuspendLayout();
             tabPage4.SuspendLayout();
@@ -164,9 +167,6 @@ namespace PresentationLayer.Views.UserControls
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            materialCard3.SuspendLayout();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             SuspendLayout();
             // 
             // materialCard1
@@ -226,6 +226,67 @@ namespace PresentationLayer.Views.UserControls
             tabPage1.TabIndex = 0;
             tabPage1.Text = "List";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // materialCard3
+            // 
+            materialCard3.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard3.Controls.Add(panel1);
+            materialCard3.Depth = 0;
+            materialCard3.Dock = DockStyle.Fill;
+            materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard3.Location = new Point(3, 3);
+            materialCard3.Margin = new Padding(14);
+            materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard3.Name = "materialCard3";
+            materialCard3.Padding = new Padding(14);
+            materialCard3.Size = new Size(1314, 507);
+            materialCard3.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(dgList);
+            panel1.Controls.Add(dgPager);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(14, 14);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1286, 479);
+            panel1.TabIndex = 1;
+            // 
+            // dgList
+            // 
+            dgList.AccessibleName = "Table";
+            dgList.AllowFiltering = true;
+            dgList.AllowTriStateSorting = true;
+            dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            dgList.Dock = DockStyle.Fill;
+            dgList.FrozenColumnCount = 2;
+            dgList.FrozenRowCount = 1;
+            dgList.Location = new Point(0, 0);
+            dgList.Name = "dgList";
+            dgList.ShowGroupDropArea = true;
+            dgList.Size = new Size(1286, 443);
+            dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            dgList.TabIndex = 7;
+            dgList.Text = "sfDataGrid1";
+            // 
+            // dgPager
+            // 
+            dgPager.AccessibleName = "DataPager";
+            dgPager.CanOverrideStyle = true;
+            dgPager.DataSource = dgList.DataBindings;
+            dgPager.Dock = DockStyle.Bottom;
+            dgPager.HorizontalAlignment = HorizontalAlignment.Center;
+            dgPager.Location = new Point(0, 443);
+            dgPager.Name = "dgPager";
+            dgPager.PageCount = 1;
+            dgPager.PageSize = 15;
+            dgPager.Size = new Size(1286, 36);
+            dgPager.TabIndex = 8;
+            dgPager.Text = "sfDataPager1";
             // 
             // tabPage2
             // 
@@ -540,7 +601,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage5.Padding = new Padding(3);
             tabPage5.Size = new Size(1126, 499);
             tabPage5.TabIndex = 1;
-            tabPage5.Text = "Project Line";
+            tabPage5.Text = "Product Details";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // materialCard4
@@ -1231,67 +1292,6 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel10.TabIndex = 6;
             guna2HtmlLabel10.Text = "Sales Type";
             // 
-            // materialCard3
-            // 
-            materialCard3.BackColor = Color.FromArgb(255, 255, 255);
-            materialCard3.Controls.Add(panel1);
-            materialCard3.Depth = 0;
-            materialCard3.Dock = DockStyle.Fill;
-            materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard3.Location = new Point(3, 3);
-            materialCard3.Margin = new Padding(14);
-            materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
-            materialCard3.Name = "materialCard3";
-            materialCard3.Padding = new Padding(14);
-            materialCard3.Size = new Size(1314, 507);
-            materialCard3.TabIndex = 3;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(dgList);
-            panel1.Controls.Add(dgPager);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(14, 14);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1286, 479);
-            panel1.TabIndex = 1;
-            // 
-            // dgList
-            // 
-            dgList.AccessibleName = "Table";
-            dgList.AllowFiltering = true;
-            dgList.AllowTriStateSorting = true;
-            dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
-            dgList.Dock = DockStyle.Fill;
-            dgList.FrozenColumnCount = 2;
-            dgList.FrozenRowCount = 1;
-            dgList.Location = new Point(0, 0);
-            dgList.Name = "dgList";
-            dgList.ShowGroupDropArea = true;
-            dgList.Size = new Size(1286, 443);
-            dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
-            dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
-            dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
-            dgList.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
-            dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
-            dgList.TabIndex = 7;
-            dgList.Text = "sfDataGrid1";
-            // 
-            // dgPager
-            // 
-            dgPager.AccessibleName = "DataPager";
-            dgPager.CanOverrideStyle = true;
-            dgPager.DataSource = dgList.DataBindings;
-            dgPager.Dock = DockStyle.Bottom;
-            dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 443);
-            dgPager.Name = "dgPager";
-            dgPager.PageCount = 1;
-            dgPager.PageSize = 15;
-            dgPager.Size = new Size(1286, 36);
-            dgPager.TabIndex = 8;
-            dgPager.Text = "sfDataPager1";
-            // 
             // ProjectManagementView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -1301,6 +1301,9 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.ResumeLayout(false);
             Guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            materialCard3.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             tabPage2.ResumeLayout(false);
             guna2TabControl2.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
@@ -1325,9 +1328,6 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
-            materialCard3.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             ResumeLayout(false);
         }
 

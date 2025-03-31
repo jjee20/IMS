@@ -80,7 +80,7 @@ namespace PresentationLayer.Presenters
 
         private void ShowSalesOrderView<T>(Func<SalesOrder, T> viewCreator, string titlePrefix) where T : Form
         {
-            var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
+            var salesOrder = (SalesOrderViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.SalesOrder.Value.Get(
                 c => c.SalesOrderId == salesOrder.SalesOrderId,
                 includeProperties: "SalesOrderLines,Invoice,Customer,Shipment,PaymentReceive",
@@ -124,7 +124,7 @@ namespace PresentationLayer.Presenters
 
         private void PrintSO(object? sender, EventArgs e)
         {
-            var salesOrder = (SalesOrderViewModel)SalesOrderBindingSource.Current;
+            var salesOrder = (SalesOrderViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.SalesOrder.Value.Get(c => c.SalesOrderId == salesOrder.SalesOrderId, includeProperties: "SalesOrderLines,Shipment.ShipmentType,Invoice.InvoiceType,PaymentReceive.PaymentType");
 
             var salesOrderInformation = new SalesOrderInformationView(entity, salesOrder, _unitOfWork);

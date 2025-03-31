@@ -29,8 +29,8 @@ namespace PresentationLayer.Presenters.Admin
         }
         private void ShowProfile(object? sender, EventArgs e)
         {
-            IUserProfileView view = UserProfileView.GetInstance(_view.Guna2TabControlPage);
-            new UserProfilePresenter(view, _unitOfWork);
+            IProfileView view = ProfileView.GetInstance(_view.Guna2TabControlPage);
+            new ProfilePresenter(view, _unitOfWork);
         }
 
         private void ShowRegister(object? sender, EventArgs e)
