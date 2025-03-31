@@ -7,7 +7,6 @@
         double OutOfStock { set; }
 
         event EventHandler PrintEvent;
-        event EventHandler SearchEvent;
 
         void SetInStockListBindingSource(BindingSource source);
         void SetLowStockListBindingSource(BindingSource source);

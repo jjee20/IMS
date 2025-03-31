@@ -12,7 +12,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.UserControls.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System.Formats.Asn1;
 using System.Globalization;
 using Windows.Devices.Usb;
@@ -52,7 +52,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
             _view.ShowAttendanceEvent += ShowAttendance;
-            _view.ImportEvent += Import;
 
             //Load
 
@@ -61,26 +60,24 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllAttendanceList();
 
             //Source Binding
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
-            _view.SetProjectListBindingSource(ProjectBindingSource);
-            _view.SetAttendanceListBindingSource(AttendanceBindingSource);
 
         }
 
         private void Delete(object? sender, EventArgs e)
         {
-            var attendanceVM = (IndividualAttendanceViewModel)IndividualAttendanceBindingSource.Current;
 
-            if (attendanceVM == null)
+            if (_view.DataGrid.SelectedItem == null)
             {
-                _view.Message = "Please select individual attendance. Double click the name you want to check the attendance details";
+                _view.IsSuccessful = false;
+                _view.Message = "Please select an Allowance to delete";
                 return;
             }
 
-            var attendance = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee", tracked: true);
+            var attendanceVM = (IndividualAttendanceViewModel)_view.DataGrid.SelectedItem;
+            var attendance = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee", tracked: true);
 
-            _unitOfWork.Attendance.Detach(attendance);
-            _unitOfWork.Attendance.Remove(attendance);
+            _unitOfWork.Attendance.Value.Detach(attendance);
+            _unitOfWork.Attendance.Value.Remove(attendance);
             _unitOfWork.Save();
 
             _view.Message = "Attendance deleted successfully";
@@ -90,17 +87,17 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var attendanceVM = (IndividualAttendanceViewModel)IndividualAttendanceBindingSource.Current;
 
-            if (attendanceVM == null)
+
+            if (_view.DataGrid.SelectedItem == null)
             {
-                _view.Message = "Please select individual attendance. Double click the name you want to check the attendance details";
+                _view.IsSuccessful = false;
+                _view.Message = "Please select an Allowance to edit";
                 return;
             }
 
-
-
-            var attendance = _unitOfWork.Attendance.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee,Project");
+            var attendanceVM = (IndividualAttendanceViewModel)_view.DataGrid.SelectedItem;
+            var attendance = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee,Project");
 
 
             _view.AttendanceId = attendance.AttendanceId;
@@ -116,7 +113,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void Import(object? sender, EventArgs e)
         {
-            _unitOfWork.Attendance.AddRange(ImportAttendance());
+            _unitOfWork.Attendance.Value.AddRange(ImportAttendance());
             _unitOfWork.Save();
 
             _view.Message = "Attendance imported successfully.";
@@ -178,10 +175,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             return attendanceList;
         }
 
-        private void ShowAttendance(object? sender, DataGridViewCellEventArgs e)
+        private void ShowAttendance(object? sender, EventArgs e)
         {
             _view.IsIndividual = true;
-            var attendanceVM = (AttendanceViewModel)AttendanceBindingSource.Current;
+            var attendanceVM = (AttendanceViewModel)_view.DataGrid.SelectedItem;
 
             if (attendanceVM == null)
             {
@@ -204,11 +201,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Save(object? sender, EventArgs e)
         {
             // Retrieve the specific attendance record based on the _view.AttendanceId
-            var model = _unitOfWork.Attendance.Get(c => c.AttendanceId == _view.AttendanceId, tracked: true);
+            var model = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == _view.AttendanceId, tracked: true);
 
             // If no record exists, create a new instance
             if (model == null) model = new Attendance();
-            else _unitOfWork.Attendance.Detach(model);
+            else _unitOfWork.Attendance.Value.Detach(model);
 
             // Assign updated values from the view
             model.EmployeeId = _view.EmployeeId;
@@ -227,12 +224,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
                 if (_view.IsEdit) // Editing existing record
                 {
-                    _unitOfWork.Attendance.Update(model);
+                    _unitOfWork.Attendance.Value.Update(model);
                     _view.Message = "Attendance edited successfully";
                 }
                 else // Adding a new record
                 {
-                    _unitOfWork.Attendance.Add(model);
+                    _unitOfWork.Attendance.Value.Add(model);
                     _view.Message = "Attendance added successfully";
                 }
 
@@ -307,7 +304,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
-            var employees = _unitOfWork.Employee.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
+            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
             var summaryList = new List<AttendanceViewModel>();
 
             int totalDays = 0;
@@ -371,22 +368,25 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
             AttendanceBindingSource.DataSource = AttendanceList.OrderBy(c => c.Employee);//Set data source.
+            _view.SetAttendanceListBindingSource(AttendanceBindingSource);
         }
         private void LoadAllIndividualAttendanceList(int id)
         {
-            IndividualAttendanceList = Program.Mapper.Map<IEnumerable<IndividualAttendanceViewModel>>(_unitOfWork.Attendance.GetAll(c => c.EmployeeId == id &&
+            IndividualAttendanceList = Program.Mapper.Map<IEnumerable<IndividualAttendanceViewModel>>(_unitOfWork.Attendance.Value.GetAll(c => c.EmployeeId == id &&
                 c.Date.Date >= _view.StartDate.Date && c.Date.Date <= _view.EndDate.Date, includeProperties: "Project,Employee"));
             IndividualAttendanceBindingSource.DataSource = IndividualAttendanceList;//Set data source.
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
             EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
         private void LoadAllProjectList()
         {
-            ProjectList = _unitOfWork.Project.GetAll();
+            ProjectList = _unitOfWork.Project.Value.GetAll();
             ProjectBindingSource.DataSource = ProjectList;//Set data source.
+            _view.SetProjectListBindingSource(ProjectBindingSource);
         }
     }
 }

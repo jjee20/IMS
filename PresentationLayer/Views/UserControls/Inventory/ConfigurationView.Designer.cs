@@ -60,7 +60,7 @@
             tcMain.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
             tcMain.TabButtonSize = new Size(180, 40);
             tcMain.TabIndex = 0;
-            tcMain.TabMenuBackColor = Color.FromArgb(33, 42, 57);
+            tcMain.TabMenuBackColor = Color.White;
             tcMain.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
             // 
             // tbUserRole

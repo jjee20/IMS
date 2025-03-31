@@ -12,7 +12,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -53,9 +53,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllEmployeeList();
 
             //Source Binding
-            _view.SetDeductionListBindingSource(DeductionBindingSource);
-            _view.SetDeductionTypeListBindingSource(DeductionTypeBindingSource);
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -65,9 +62,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Deduction.Get(c => c.DeductionId == _view.DeductionId, tracked: true);
+            var model = _unitOfWork.Deduction.Value.Get(c => c.DeductionId == _view.DeductionId, tracked: true);
             if (model == null) model = new Deduction();
-            else _unitOfWork.Deduction.Detach(model);
+            else _unitOfWork.Deduction.Value.Detach(model);
 
             model.DeductionId = _view.DeductionId;
             model.DeductionType = _view.DeductionType;
@@ -81,12 +78,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Deduction.Update(model);
+                    _unitOfWork.Deduction.Value.Update(model);
                     _view.Message = "Deduction edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Deduction.Add(model);
+                    _unitOfWork.Deduction.Value.Add(model);
                     _view.Message = "Deduction added successfully";
                 }
                 _unitOfWork.Save();
@@ -105,7 +102,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             if (!emptyValue)
             {
                 DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(
-                    _unitOfWork.Deduction.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
+                    _unitOfWork.Deduction.Value.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
                     c.Employee.FirstName.Contains(_view.SearchValue) ||
                     (c.DateDeducted.Date >= _view.StartDate.Date && c.DateDeducted.Date <= _view.EndDate.Date), 
                     includeProperties: "Employee"));
@@ -119,8 +116,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var deduction = (DeductionViewModel)DeductionBindingSource.Current;
-            var entity = _unitOfWork.Deduction.Get(c => c.DeductionId == deduction.DeductionId);
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var deduction = (DeductionViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Deduction.Value.Get(c => c.DeductionId == deduction.DeductionId);
             _view.DeductionId = entity.DeductionId;
             _view.DeductionType = entity.DeductionType;
             _view.Amount = entity.Amount;
@@ -132,9 +136,16 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var deduction = (DeductionViewModel)DeductionBindingSource.Current;
-                var entity = _unitOfWork.Deduction.Get(c => c.DeductionId == deduction.DeductionId);
-                _unitOfWork.Deduction.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var deduction = (DeductionViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Deduction.Value.Get(c => c.DeductionId == deduction.DeductionId);
+                _unitOfWork.Deduction.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Deduction deleted successfully";
@@ -173,19 +184,22 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void LoadAllDeductionList()
         {
             DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(
-                _unitOfWork.Deduction.GetAll(c => c.DateDeducted.Date >= _view.StartDate.Date && c.DateDeducted.Date <= _view.EndDate.Date, 
+                _unitOfWork.Deduction.Value.GetAll(c => c.DateDeducted.Date >= _view.StartDate.Date && c.DateDeducted.Date <= _view.EndDate.Date, 
                 includeProperties: "Employee"));
             DeductionBindingSource.DataSource = DeductionList;//Set data source.
+            _view.SetDeductionListBindingSource(DeductionBindingSource);
         }
         private void LoadAllDeductionTypeList()
         {
             DeductionTypeList = EnumHelper.EnumToEnumerable<DeductionType>();
             DeductionTypeBindingSource.DataSource = DeductionTypeList;//Set data source.
+            _view.SetDeductionTypeListBindingSource(DeductionTypeBindingSource);
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
             EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
     }
 }

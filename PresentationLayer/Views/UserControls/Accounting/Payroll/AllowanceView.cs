@@ -8,6 +8,8 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -121,6 +123,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         //Properties
+        public SfDataGrid DataGrid => dgList;
         public int AllowanceId
         {
             get { return id; }
@@ -192,8 +195,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetAllowanceListBindingSource(BindingSource AllowanceList)
         {
-            dgList.DataSource = AllowanceList;
-            DataGridHelper.ApplyDisplayNames<AllowanceViewModel>(AllowanceList, dgList);
+            dgPager.DataSource = AllowanceList.ToList<AllowanceViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {

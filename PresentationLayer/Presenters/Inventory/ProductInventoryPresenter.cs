@@ -4,7 +4,7 @@ using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Presenters.Inventory;
 using RavenTech_ERP.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

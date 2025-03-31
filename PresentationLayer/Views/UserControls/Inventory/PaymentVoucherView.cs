@@ -3,7 +3,7 @@ using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
 using PresentationLayer;
 using RavenTech_ERP.Views.UserControls.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +33,7 @@ namespace RavenTech_ERP.Views.UserControls
 
         private void LoadAllCashBank()
         {
-            txtCashBank.DataSource = _unitOfWork.CashBank.GetAll();
+            txtCashBank.DataSource = _unitOfWork.CashBank.Value.GetAll();
             txtCashBank.ValueMember = "CashBankId";
             txtCashBank.DisplayMember = "CashBankName";
         }
@@ -59,8 +59,8 @@ namespace RavenTech_ERP.Views.UserControls
                 payments.Add(payment);
 
                 _PurchaseOrder.PaymentVoucher = payments;
-                _unitOfWork.PurchaseOrder.Detach(_PurchaseOrder);
-                _unitOfWork.PurchaseOrder.Update(_PurchaseOrder);
+                _unitOfWork.PurchaseOrder.Value.Detach(_PurchaseOrder);
+                _unitOfWork.PurchaseOrder.Value.Update(_PurchaseOrder);
                 _unitOfWork.Save();
 
                 MessageBox.Show("Payment Voucher created successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -73,7 +73,7 @@ namespace RavenTech_ERP.Views.UserControls
 
         private void LoadAllPaymentType()
         {
-            txtPaymentType.DataSource = _unitOfWork.PaymentType.GetAll();
+            txtPaymentType.DataSource = _unitOfWork.PaymentType.Value.GetAll();
             txtPaymentType.ValueMember = "PaymentTypeId";
             txtPaymentType.DisplayMember = "PaymentTypeName";
         }

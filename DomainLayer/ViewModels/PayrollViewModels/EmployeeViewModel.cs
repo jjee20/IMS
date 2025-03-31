@@ -19,10 +19,11 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public double LeaveCredits { get; set; }
         public string Address { get; set; }
 
-        public string Department { get; set; } 
+        public string Department { get; set; }
+        [Display(Name = "Job Position")]
         public string JobPosition { get; set; }
         public string Shift { get; set; }
-        [Display(Name = "Deducted?")]
+        [Display(Name = "Is Deducted?")]
         public string isDeducted { get; set; }
 
     }

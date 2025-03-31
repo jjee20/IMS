@@ -6,6 +6,8 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,6 +106,7 @@ namespace PresentationLayer.Views.UserControls
                 btnReturn.Visible = false;
             };
         }
+        public SfDataGrid DataGrid => dgList;
 
         //Properties
         public int TaxId
@@ -153,8 +156,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetTaxListBindingSource(BindingSource TaxList)
         {
-            dgList.DataSource = TaxList;
-            DataGridHelper.ApplyDisplayNames<Tax>(TaxList, dgList);
+            dgPager.DataSource = TaxList.ToList<Tax>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

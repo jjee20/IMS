@@ -17,7 +17,9 @@ namespace DomainLayer.Models.Accounting.Payroll
         public string ProjectName { get; set; }
         public string Description { get; set; }
         public string? Client { get; set; }
+        [Display(Name = "Start Date")]
         public DateTime? StartDate { get; set; }
+        [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
         public double? Budget { get; set; }
 

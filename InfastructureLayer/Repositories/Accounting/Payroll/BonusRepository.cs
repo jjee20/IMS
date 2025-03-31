@@ -2,7 +2,6 @@
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.PayrollViewModels;
 using InfastructureLayer.DataAccess.Data;
-using InfastructureLayer.Repositories.Inventory;
 using ServiceLayer.Services.IRepositories;
 using ServiceLayer.Services.IRepositories.IAccounting.IPayroll;
 

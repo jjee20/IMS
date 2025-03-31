@@ -1976,7 +1976,6 @@ namespace RavenTech_ERP.Views.UserControls.POS
         private Guna2Button guna2Button1;
         private MaterialSkin.Controls.MaterialCard materialCard2;
         private Guna2ImageButton guna2ImageButton2;
-        private Guna2ImageButton btnClose;
         private Guna2Separator guna2Separator1;
         private Guna2Button guna2Button2;
         private MaterialSkin.Controls.MaterialCard materialCard3;

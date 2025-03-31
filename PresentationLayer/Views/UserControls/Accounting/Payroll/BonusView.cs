@@ -8,6 +8,8 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -144,6 +146,11 @@ namespace PresentationLayer.Views.UserControls
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
+        public bool IsOneTime
+        {
+            get { return txtIsOneTime.Checked; }
+            set { txtIsOneTime.Checked = value; }
+        }
 
         public string Message
         {
@@ -157,10 +164,11 @@ namespace PresentationLayer.Views.UserControls
             set { txtSearch.Text = value; }
         }
 
+        public SfDataGrid DataGrid => dgList;
         public void SetBonusListBindingSource(BindingSource BonusList)
         {
-            dgList.DataSource = BonusList;
-            DataGridHelper.ApplyDisplayNames<Bonus>(BonusList, dgList);
+            dgPager.DataSource = BonusList.ToList<BonusViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {

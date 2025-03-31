@@ -510,7 +510,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Payment Receive List</Value>
+                  <Value>Payment Receive Report</Value>
                   <Style>
                     <FontSize>14pt</FontSize>
                   </Style>

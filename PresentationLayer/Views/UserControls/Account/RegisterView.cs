@@ -8,6 +8,8 @@ using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Account;
 using RavenTech_ERP.Properties;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +25,7 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class RegisterView : UserControl, IRegisterView
     {
+        private string _id;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
@@ -109,8 +112,8 @@ namespace PresentationLayer.Views.UserControls
         //Properties
         public string Id
         {
-            get { return txtId.Text; }
-            set { txtId.Text = value; }
+            get { return _id; }
+            set { _id = value; }
         }
 
         public string Username
@@ -186,10 +189,12 @@ namespace PresentationLayer.Views.UserControls
             set { txtSearch.Text = value; }
         }
 
+        public SfDataGrid DataGrid => dgList;
+
         public void SetRegisterListBindingSource(BindingSource RegisterList)
         {
-            dgList.DataSource = RegisterList;
-            DataGridHelper.ApplyDisplayNames<AccountViewModel>(RegisterList, dgList);
+            dgPager.DataSource = RegisterList.ToList<AccountViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

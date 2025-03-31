@@ -1,8 +1,9 @@
 ﻿using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -17,7 +18,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view.ShowAttendance += ShowAttendance;
             _view.ShowProject += ShowProject;
-            _view.ShowContribution += ShowContribution;
             _view.ShowDeduction += ShowDeduction;
             _view.ShowDepartment += ShowDepartment;
             _view.ShowEmployee += ShowEmployee;
@@ -28,7 +28,19 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.ShowShift += ShowShift;
             _view.ShowTax += ShowTax;
             _view.ShowAllowance += ShowAllowance;
+            _view.ShowEmployeeContribution += ShowEmployeeContribution;
+            _view.ShowProfile += ShowProfile;
             ShowAttendance(this, EventArgs.Empty);
+        }
+        private void ShowProfile(object? sender, EventArgs e)
+        {
+            IProfileView view = ProfileView.GetInstance(_view.Guna2TabControlPage);
+            new ProfilePresenter(view, _unitOfWork);
+        }
+        private void ShowEmployeeContribution(object? sender, EventArgs e)
+        {
+            IEmployeeContributionView view = EmployeeContributionView.GetInstance(_view.Guna2TabControlPage);
+            new EmployeeContributionPresenter(view, _unitOfWork);
         }
 
         private void ShowAllowance(object? sender, EventArgs e)
@@ -106,12 +118,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             IAttendanceView view = AttendanceView.GetInstance(_view.Guna2TabControlPage);
             new AttendancePresenter(view, _unitOfWork);
-        }
-
-        private void ShowProfile(object? sender, EventArgs e)
-        {
-            IProfileView view = ProfileView.GetInstance(_view.Guna2TabControlPage);
-            new ProfilePresenter(view, _unitOfWork);
         }
         private void ShowBenefit(object? sender, EventArgs e)
         {

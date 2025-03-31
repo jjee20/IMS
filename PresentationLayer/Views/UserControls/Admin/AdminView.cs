@@ -24,11 +24,9 @@ namespace PresentationLayer.Views
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             var colorScheme = new ColorScheme(
-                                ColorTranslator.FromHtml("#457b9d"),
-                                ColorTranslator.FromHtml("#1d3557"),
-                                ColorTranslator.FromHtml("#f1faee"),
-                                ColorTranslator.FromHtml("#457b9d"),
-                                TextShade.WHITE // text shade
+                Primary.Blue400, Primary.Blue500,
+                Primary.Blue500, Accent.LightBlue200,
+                TextShade.WHITE
             );
 
             materialSkinManager.ColorScheme = colorScheme;
@@ -62,11 +60,6 @@ namespace PresentationLayer.Views
         public void ShowForm()
         {
             Show();
-        }
-
-        private void AdminView_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Restart();
         }
 
         public event EventHandler ShowRegister;

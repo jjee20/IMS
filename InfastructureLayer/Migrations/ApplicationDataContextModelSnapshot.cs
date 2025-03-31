@@ -271,6 +271,37 @@ namespace InfastructureLayer.Migrations
                     b.ToTable("Deductions");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.EmployeeContribution", b =>
+                {
+                    b.Property<int>("EmployeeContributionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeContributionId"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PagIbig")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PhilHealth")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SSS")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SSSWISP")
+                        .HasColumnType("float");
+
+                    b.HasKey("EmployeeContributionId");
+
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
+
+                    b.ToTable("EmployeeContribution");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.JobPosition", b =>
                 {
                     b.Property<int>("JobPositionId")
@@ -990,6 +1021,12 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("DefaultBuyingPrice")
                         .HasColumnType("float");
 
@@ -1016,6 +1053,9 @@ namespace InfastructureLayer.Migrations
 
                     b.Property<int>("ReorderLevel")
                         .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UnitOfMeasureId")
                         .HasColumnType("int");
@@ -1818,6 +1858,17 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.EmployeeContribution", b =>
+                {
+                    b.HasOne("Employee", "Employee")
+                        .WithOne("Contribution")
+                        .HasForeignKey("DomainLayer.Models.Accounting.Payroll.EmployeeContribution", "EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Leave", b =>
                 {
                     b.HasOne("Employee", "Employee")
@@ -2281,6 +2332,9 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("Benefits");
 
                     b.Navigation("Bonuses");
+
+                    b.Navigation("Contribution")
+                        .IsRequired();
 
                     b.Navigation("Deductions");
 

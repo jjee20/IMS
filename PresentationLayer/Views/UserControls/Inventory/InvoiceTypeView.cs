@@ -3,6 +3,8 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -102,6 +104,7 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
+        public SfDataGrid DataGrid => dgList;
         //Properties
         public int InvoiceTypeId
         {
@@ -145,8 +148,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetInvoiceTypeListBindingSource(BindingSource InvoiceTypeList)
         {
-            dgList.DataSource = InvoiceTypeList;
-            DataGridHelper.ApplyDisplayNames<InvoiceType>(InvoiceTypeList, dgList);
+            dgPager.DataSource = InvoiceTypeList.ToList<InvoiceType>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

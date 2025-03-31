@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenters
             LoadAllSalesTypeList();
 
             //Source Binding
-            _view.SetSalesTypeListBindingSource(SalesTypeBindingSource);
 
         }
 
@@ -48,9 +47,9 @@ namespace PresentationLayer.Presenters
             try
             {
                 // Check if SalesType already exists
-                var model = _unitOfWork.SalesType.Get(c => c.SalesTypeId == _view.SalesTypeId, tracked: true);
+                var model = _unitOfWork.SalesType.Value.Get(c => c.SalesTypeId == _view.SalesTypeId, tracked: true);
                 if (model == null) model = new SalesType();
-                else _unitOfWork.SalesType.Detach(model);
+                else _unitOfWork.SalesType.Value.Detach(model);
 
                 model.SalesTypeId = _view.SalesTypeId;
                 model.SalesTypeName = _view.SalesTypeName;
@@ -61,12 +60,12 @@ namespace PresentationLayer.Presenters
 
                 if (_view.IsEdit)
                 {
-                    _unitOfWork.SalesType.Update(model); // Update existing entity
+                    _unitOfWork.SalesType.Value.Update(model); // Update existing entity
                     _view.Message = "Sales type edited successfully.";
                 }
                 else
                 {
-                    _unitOfWork.SalesType.Add(model); // Add new entity
+                    _unitOfWork.SalesType.Value.Add(model); // Add new entity
                     _view.Message = "Sales type added successfully.";
                 }
 
@@ -88,7 +87,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                SalesTypeList = _unitOfWork.SalesType.GetAll(c => c.SalesTypeName.Contains(_view.SearchValue));
+                SalesTypeList = _unitOfWork.SalesType.Value.GetAll(c => c.SalesTypeName.Contains(_view.SearchValue));
                 SalesTypeBindingSource.DataSource = SalesTypeList;
             }
             else
@@ -99,7 +98,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (SalesType)SalesTypeBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (SalesType)_view.DataGrid.SelectedItem;
             _view.SalesTypeId = entity.SalesTypeId;
             _view.SalesTypeName = entity.SalesTypeName;
             _view.Description = entity.Description;
@@ -108,8 +114,15 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var entity = (SalesType)SalesTypeBindingSource.Current;
-                _unitOfWork.SalesType.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (SalesType)_view.DataGrid.SelectedItem; 
+                _unitOfWork.SalesType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Sales type deleted successfully";
@@ -145,8 +158,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllSalesTypeList()
         {
-            SalesTypeList = _unitOfWork.SalesType.GetAll();
+            SalesTypeList = _unitOfWork.SalesType.Value.GetAll();
             SalesTypeBindingSource.DataSource = SalesTypeList;//Set data source.
+            _view.SetSalesTypeListBindingSource(SalesTypeBindingSource);
         }
     }
 }

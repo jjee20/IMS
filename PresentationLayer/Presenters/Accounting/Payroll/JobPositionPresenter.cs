@@ -6,7 +6,7 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -39,7 +39,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllJobPositionList();
 
             //Source Binding
-            _view.SetJobPositionListBindingSource(JobPositionBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -49,10 +48,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.JobPosition.Get(c => c.JobPositionId == _view.JobPositionId, tracked: true);
+            var model = _unitOfWork.JobPosition.Value.Get(c => c.JobPositionId == _view.JobPositionId, tracked: true);
 
             if (model == null) model = new JobPosition();
-            else _unitOfWork.JobPosition.Detach(model);
+            else _unitOfWork.JobPosition.Value.Detach(model);
 
             model.JobPositionId = _view.JobPositionId;
             model.Title = _view.Title;
@@ -63,12 +62,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.JobPosition.Update(model);
+                    _unitOfWork.JobPosition.Value.Update(model);
                     _view.Message = "JobPosition edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.JobPosition.Add(model);
+                    _unitOfWork.JobPosition.Value.Add(model);
                     _view.Message = "JobPosition added successfully";
                 }
                 _unitOfWork.Save();
@@ -86,7 +85,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                JobPositionList = _unitOfWork.JobPosition.GetAll(c => c.Title.Contains(_view.SearchValue));
+                JobPositionList = _unitOfWork.JobPosition.Value.GetAll(c => c.Title.Contains(_view.SearchValue));
                 JobPositionBindingSource.DataSource = JobPositionList;
             }
             else
@@ -97,7 +96,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (JobPosition)JobPositionBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (JobPosition)_view.DataGrid.SelectedItem;
             _view.JobPositionId = entity.JobPositionId;
             _view.Title = entity.Title;
             _view.Description = entity.Description;
@@ -106,8 +112,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var entity = (JobPosition)JobPositionBindingSource.Current;
-                _unitOfWork.JobPosition.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var entity = (JobPosition)_view.DataGrid.SelectedItem;
+                _unitOfWork.JobPosition.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Job Position deleted successfully";
@@ -143,8 +156,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllJobPositionList()
         {
-            JobPositionList = _unitOfWork.JobPosition.GetAll();
+            JobPositionList = _unitOfWork.JobPosition.Value.GetAll();
             JobPositionBindingSource.DataSource = JobPositionList;//Set data source.
+            _view.SetJobPositionListBindingSource(JobPositionBindingSource);
         }
     }
 }

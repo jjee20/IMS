@@ -10,7 +10,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
 {
     public class AllowanceViewModel
     {
-        [Display(Name = "#")]
+        [Display(Name = "Id")]
         public int AllowanceId { get; set; } 
         public string Employee { get; set; } 
 

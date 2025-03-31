@@ -1,4 +1,5 @@
-﻿using PresentationLayer.Views.IViews.Account;
+﻿using DomainLayer.Enums;
+using PresentationLayer.Views.IViews.Account;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,27 +15,33 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class ProfileView : UserControl, IProfileView
     {
+        private List<TaskRoles> items;
         public ProfileView()
         {
             InitializeComponent();
+            items = new List<TaskRoles>();
 
-            tcMain.SelectedIndexChanged += delegate
-            {
-                // Check if the selected tab is the one where you want to raise the event
-                if (tcMain.SelectedTab == tbEditProfile)
-                {
-                    ShowUserProfile?.Invoke(this, EventArgs.Empty);
-                }
-                else if (tcMain.SelectedTab == tbChangePassword)
-                {
-                    ShowChangePassword?.Invoke(this, EventArgs.Empty);
-                }
-            };
+            btnEditProfile.Click += delegate { ShowEditProfile?.Invoke(this, EventArgs.Empty); };
+            btnChangePassword.Click += delegate { ShowChangePassword?.Invoke(this, EventArgs.Empty); };
         }
 
-        public event EventHandler ShowUserProfile;
+        public void GetTaskRoles(List<TaskRoles> taskRoles)
+        {
+            listTask.Items.Clear();
+            foreach (TaskRoles item in taskRoles)
+            {
+                listTask.Items.Add(item.ToString());
+            }
+        }
+
+        public string AppUserName { set => txtName.Text = value; }
+        public string UserName { set => txtUsername.Text = value; }
+        public string Email { set => txtEmail.Text = value; }
+        public string Phone { set => txtPhone.Text = value; }
+        public string Department { set => txtDepartment.Text = value; }
+
+        public event EventHandler ShowEditProfile;
         public event EventHandler ShowChangePassword;
-        public TabPage Guna2TabControlPage => tcMain.SelectedTab;
 
         private static ProfileView? instance;
         public static ProfileView GetInstance(TabPage parentContainer)

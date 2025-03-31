@@ -8,9 +8,10 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.Payroll;
+using RavenTech_ERP.Views.UserControls.Account;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -49,6 +50,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.DeleteEvent += Delete;
             _view.PrintEvent += Print;
             _view.RefreshEvent += Return;
+            _view.UserInformationEvent += UserInformation;
 
             //Load
 
@@ -59,11 +61,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllEmployeeList();
 
             //Source Binding
-            _view.SetGenderListBindingSource(GenderBindingSource);
-            _view.SetDepartmentListBindingSource(DepartmentBindingSource);
-            _view.SetJobPositionListBindingSource(JobPositionBindingSource);
-            _view.SetShiftListBindingSource(ShiftBindingSource);
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
+        }
+
+        private void UserInformation(object? sender, EventArgs e)
+        {
+            var employee = (EmployeeViewModel)_view.DataGrid.SelectedItem;
+            var user = Program.Mapper.Map<UserInformationViewModel>(_unitOfWork.Employee.Value.Get(c => c.EmployeeId == employee.EmployeeId, includeProperties: "Department,JobPosition,Shift,Attendances.Project,Leaves,Bonuses,Benefits,Deductions,Allowances,Contribution"));
+            var userInformation = new EmployeeInformationView(user);
+            userInformation.ShowDialog();   
         }
 
         private void ReloadAll(object? sender, EventArgs e)
@@ -83,9 +88,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             _view.SaveButton = false;
 
-            var model = _unitOfWork.Employee.Get(c => c.EmployeeId == _view.EmployeeId, tracked: true);
+            var model = _unitOfWork.Employee.Value.Get(c => c.EmployeeId == _view.EmployeeId, tracked: true);
             if (model == null) model = new Employee();
-            else _unitOfWork.Employee.Detach(model);
+            else _unitOfWork.Employee.Value.Detach(model);
 
             model.EmployeeId = _view.EmployeeId;
             model.FirstName = _view.EmployeeFirstName;
@@ -107,12 +112,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Employee.Update(model);
+                    _unitOfWork.Employee.Value.Update(model);
                     _view.Message = "Employee edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Employee.Add(model);
+                    _unitOfWork.Employee.Value.Add(model);
                     _view.Message = "Employee added successfully";
                 }
 
@@ -135,7 +140,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll(
+                EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll(
                     c => c.FirstName.Contains(_view.SearchValue) ||
                     c.LastName.Contains(_view.SearchValue), includeProperties: "Department,JobPosition,Shift"));
                 EmployeeBindingSource.DataSource = EmployeeList;
@@ -148,8 +153,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var employee = (EmployeeViewModel)EmployeeBindingSource.Current;
-            var entity = _unitOfWork.Employee.Get(c => c.EmployeeId == employee.EmployeeId);
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var employee = (EmployeeViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Employee.Value.Get(c => c.EmployeeId == employee.EmployeeId);
 
             if (entity == null)
             {
@@ -176,9 +188,16 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var employee = (EmployeeViewModel)EmployeeBindingSource.Current;
-                var entity = _unitOfWork.Employee.Get(c => c.EmployeeId == employee.EmployeeId);
-                _unitOfWork.Employee.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var employee = (EmployeeViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Employee.Value.Get(c => c.EmployeeId == employee.EmployeeId);
+                _unitOfWork.Employee.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Employee deleted successfully";
@@ -225,28 +244,33 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllEmployeeList()
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll(includeProperties: "Department,JobPosition,Shift"));
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll(includeProperties: "Department,JobPosition,Shift"));
             EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
         private void LoadAllGenderList()
         {
             GenderList = EnumHelper.EnumToEnumerable<Gender>();
             GenderBindingSource.DataSource = GenderList;//Set data source.
+            _view.SetGenderListBindingSource(GenderBindingSource);
         }
         private void LoadAllDepartmentList()
         {
-            DepartmentList = _unitOfWork.Department.GetAll();
+            DepartmentList = _unitOfWork.Department.Value.GetAll();
             DepartmentBindingSource.DataSource = DepartmentList;//Set data source.
+            _view.SetDepartmentListBindingSource(DepartmentBindingSource);
         }
         private void LoadAllJobPositionList()
         {
-            JobPositionList = _unitOfWork.JobPosition.GetAll();
+            JobPositionList = _unitOfWork.JobPosition.Value.GetAll();
             JobPositionBindingSource.DataSource = JobPositionList;//Set data source.
+            _view.SetJobPositionListBindingSource(JobPositionBindingSource);
         }
         private void LoadAllShiftList()
         {
-            ShiftList = _unitOfWork.Shift.GetAll();
+            ShiftList = _unitOfWork.Shift.Value.GetAll();
             ShiftBindingSource.DataSource = ShiftList;//Set data source.
+            _view.SetShiftListBindingSource(ShiftBindingSource);
         }
     }
 }

@@ -127,6 +127,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<ProjectLine> ProjectLines { get; set; }
         public DbSet<Allowance> Allowances { get; set; }
         public DbSet<Bonus> Bonuses { get; set; }
+        public DbSet<DomainLayer.Models.Accounting.Payroll.EmployeeContribution> EmployeeContributions { get; set; }
         #endregion
         #endregion
     }

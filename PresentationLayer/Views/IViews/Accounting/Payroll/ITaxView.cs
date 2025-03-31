@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Syncfusion.WinForms.DataGrid;
+using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface ITaxView
     {
+        SfDataGrid DataGrid { get; }
         int TaxId { get; set; }
         double MinimumSalary { get; set; }
         double MaximumSalary { get; set; }

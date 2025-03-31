@@ -12,5 +12,10 @@ namespace ServiceLayer.Services.IRepositories
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entity);
         void Detach(T entity);
+
+        Task AddAsync(T entity);
+        Task AddRangeAsync(IEnumerable<T> entity);
+        Task<T> GetAsync(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false);
+        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool tracked = false);
     }
 }

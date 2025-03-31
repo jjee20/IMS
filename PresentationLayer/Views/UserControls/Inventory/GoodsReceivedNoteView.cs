@@ -2,7 +2,7 @@
 using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
 using PresentationLayer;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,8 +48,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 grns.Add(grn);
 
                 _purchaseOrder.GoodsReceivedNote = grns;
-                _unitOfWork.PurchaseOrder.Detach(_purchaseOrder);
-                _unitOfWork.PurchaseOrder.Update(_purchaseOrder);
+                _unitOfWork.PurchaseOrder.Value.Detach(_purchaseOrder);
+                _unitOfWork.PurchaseOrder.Value.Update(_purchaseOrder);
                 _unitOfWork.Save();
 
                 MessageBox.Show("Goods Received Note created successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -9,7 +9,7 @@ using PresentationLayer.Views.UserControls.Payroll;
 using RevenTech_ERP.Presenters.Accounting.Payroll;
 using RavenTech_ERP.Properties;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters.Account
 {
@@ -44,7 +44,7 @@ namespace PresentationLayer.Presenters.Account
                 }
 
                 // Retrieve the user from the database based on the username
-                var user = _unitOfWork.ApplicationUser.Get(c => c.UserName == username);
+                var user = _unitOfWork.ApplicationUser.Value.Get(c => c.UserName == username);
 
                 if (user == null)
                 {

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using ServiceLayer.Services.IRepositories;
 using ServiceLayer.Services.IRepositories.IInventory;
 using static PresentationLayer.Json.Address;
 
@@ -20,14 +21,6 @@ namespace PresentationLayer.Presenters
 
         private IEnumerable<VendorViewModel> VendorList;
         private IEnumerable<VendorType> VendorTypeList;
-
-        //private List<string> GetBarangayList;
-        //private List<string> GetMunicipalityList;
-        //private List<string> GetProvinceList;
-        //private List<string> GetRegionList;
-
-        string reportFileName = "philippine_provinces_cities_municipalities_and_barangays_2019v2.json";
-        string reportDirectory = Path.Combine(Application.StartupPath, "Json");
         public VendorPresenter(IVendorView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -36,11 +29,6 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
             VendorBindingSource = new BindingSource();
             VendorTypeBindingSource = new BindingSource();
-
-            //GetBarangayList = new List<string>();
-            //GetMunicipalityList = new List<string>();
-            //GetProvinceList = new List<string>();
-            //GetRegionList = new List<string>();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -57,8 +45,6 @@ namespace PresentationLayer.Presenters
             //LoadAddress();
 
             //Source Binding
-            _view.SetVendorListBindingSource(VendorBindingSource);
-            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
             //_view.SetAddressBindingSource(GetBarangayList, GetMunicipalityList,
             //                              GetProvinceList, GetRegionList);
 
@@ -94,9 +80,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Vendor.Get(c => c.VendorId == _view.VendorId, tracked: true);
+            var model = _unitOfWork.Vendor.Value.Get(c => c.VendorId == _view.VendorId, tracked: true);
             if (model == null) model = new Vendor();
-            else _unitOfWork.Vendor.Detach(model);
+            else _unitOfWork.Vendor.Value.Detach(model);
 
             model.VendorId = _view.VendorId;
             model.VendorName = _view.VendorName;
@@ -111,12 +97,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Vendor.Update(model);
+                    _unitOfWork.Vendor.Value.Update(model);
                     _view.Message = "Vendor edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Vendor.Add(model);
+                    _unitOfWork.Vendor.Value.Add(model);
                     _view.Message = "Vendor added successfully";
                 }
                 _unitOfWork.Save();
@@ -134,7 +120,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.GetAll(c => c.VendorName.Contains(_view.SearchValue), includeProperties: "VendorType"));
+                VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(c => c.VendorName.Contains(_view.SearchValue), includeProperties: "VendorType"));
                 VendorBindingSource.DataSource = VendorList;
             }
             else
@@ -145,7 +131,15 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (Vendor)VendorBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var vendor = (VendorViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Vendor.Value.Get(c => c.VendorId == vendor.VendorId);
             _view.VendorId = entity.VendorId;
             _view.VendorName = entity.VendorName;
             _view.VendorTypeId = entity.VendorTypeId;
@@ -158,8 +152,16 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var entity = (Vendor)VendorBindingSource.Current;
-                _unitOfWork.Vendor.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to edit";
+                    return;
+                }
+
+                var vendor = (VendorViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Vendor.Value.Get(c => c.VendorId == vendor.VendorId);
+                _unitOfWork.Vendor.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Vendor deleted successfully";
@@ -200,13 +202,15 @@ namespace PresentationLayer.Presenters
 
         private void LoadAllVendorList()
         {
-            VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.GetAll(includeProperties: "VendorType"));
+            VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(includeProperties: "VendorType"));
             VendorBindingSource.DataSource = VendorList;//Set data source.
+            _view.SetVendorListBindingSource(VendorBindingSource);
         }
         private void LoadAllVendorTypeList()
         {
-            VendorTypeList = _unitOfWork.VendorType.GetAll();
+            VendorTypeList = _unitOfWork.VendorType.Value.GetAll();
             VendorTypeBindingSource.DataSource = VendorTypeList;//Set data source.
+            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
         }
 
     }

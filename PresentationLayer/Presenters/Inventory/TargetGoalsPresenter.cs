@@ -1,6 +1,6 @@
 ﻿using DomainLayer.Models.Inventory;
 using RavenTech_ERP.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void LoadAll()
         {
-            var targetGoals = _unitOfWork.TargetGoals.GetAll().FirstOrDefault();
+            var targetGoals = _unitOfWork.TargetGoals.Value.GetAll().FirstOrDefault();
 
             if (targetGoals == null)
             {
@@ -35,7 +35,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                     MonthlySales = 0,
                     AnnualSales = 0
                 };
-                _unitOfWork.TargetGoals.Add(targetGoals);
+                _unitOfWork.TargetGoals.Value.Add(targetGoals);
                 _unitOfWork.Save();
             }
 
@@ -48,7 +48,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.YearTarget = annualSalesTarget;
 
             var date = DateTime.Now;
-            var salesOrders = _unitOfWork.SalesOrder.GetAll(c => c.OrderDate.Date.Year == date.Date.Year, includeProperties: "SalesOrderLines");
+            var salesOrders = _unitOfWork.SalesOrder.Value.GetAll(c => c.OrderDate.Date.Year == date.Date.Year, includeProperties: "SalesOrderLines");
             var salesOrdersMonthly = salesOrders.Where(c => c.OrderDate.Date.Month == date.Date.Month);
             var itemSold = salesOrdersMonthly.SelectMany(c => c.SalesOrderLines).Sum(c => c.Quantity);
             var sales = salesOrdersMonthly.Sum(c => c.Total);
@@ -64,7 +64,7 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void Save(object? sender, EventArgs e)
         {
-            var targetGoals = _unitOfWork.TargetGoals.GetAll().FirstOrDefault();
+            var targetGoals = _unitOfWork.TargetGoals.Value.GetAll().FirstOrDefault();
 
             if (targetGoals == null)
             {
@@ -74,15 +74,15 @@ namespace RavenTech_ERP.Presenters.Inventory
                     MonthlySales = 0,
                     AnnualSales = 0
                 };
-                _unitOfWork.TargetGoals.Add(targetGoals);
+                _unitOfWork.TargetGoals.Value.Add(targetGoals);
             }
             else
             {
                 targetGoals.MonthlyItemSold = _view.ItemSoldTarget;
                 targetGoals.MonthlySales = _view.SalesTarget;
                 targetGoals.AnnualSales = _view.YearTarget;
-                _unitOfWork.TargetGoals.Detach(targetGoals);
-                _unitOfWork.TargetGoals.Update(targetGoals);
+                _unitOfWork.TargetGoals.Value.Detach(targetGoals);
+                _unitOfWork.TargetGoals.Value.Update(targetGoals);
             }
             _unitOfWork.Save();
 

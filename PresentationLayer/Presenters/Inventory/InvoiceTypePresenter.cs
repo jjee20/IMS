@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace PresentationLayer.Presenters
 {
@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenters
             LoadAllInvoiceTypeList();
 
             //Source Binding
-            _view.SetInvoiceTypeListBindingSource(InvoiceTypeBindingSource);
 
         }
 
@@ -45,9 +44,9 @@ namespace PresentationLayer.Presenters
         }
         private void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.InvoiceType.Get(c => c.InvoiceTypeId == _view.InvoiceTypeId, tracked: true);
+            var model = _unitOfWork.InvoiceType.Value.Get(c => c.InvoiceTypeId == _view.InvoiceTypeId, tracked: true);
             if (model == null) model = new InvoiceType();
-            else _unitOfWork.InvoiceType.Detach(model);
+            else _unitOfWork.InvoiceType.Value.Detach(model);
 
             model.InvoiceTypeId = _view.InvoiceTypeId;
             model.InvoiceTypeName = _view.InvoiceTypeName;
@@ -58,12 +57,12 @@ namespace PresentationLayer.Presenters
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.InvoiceType.Update(model);
+                    _unitOfWork.InvoiceType.Value.Update(model);
                     _view.Message = "Invoice edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.InvoiceType.Add(model);
+                    _unitOfWork.InvoiceType.Value.Add(model);
                     _view.Message = "Invoice added successfully";
                 }
                 _unitOfWork.Save();
@@ -81,7 +80,7 @@ namespace PresentationLayer.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (emptyValue == false)
             {
-                InvoiceTypeList = _unitOfWork.InvoiceType.GetAll(c => c.InvoiceTypeName.Contains(_view.SearchValue));
+                InvoiceTypeList = _unitOfWork.InvoiceType.Value.GetAll(c => c.InvoiceTypeName.Contains(_view.SearchValue));
                 InvoiceTypeBindingSource.DataSource = InvoiceTypeList;
             }
             else
@@ -92,7 +91,14 @@ namespace PresentationLayer.Presenters
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (InvoiceType)InvoiceTypeBindingSource.Current;
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var entity = (InvoiceType)_view.DataGrid.SelectedItem;
             _view.InvoiceTypeId = entity.InvoiceTypeId;
             _view.InvoiceTypeName = entity.InvoiceTypeName;
             _view.Description = entity.Description;
@@ -101,8 +107,15 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                var entity = (InvoiceType)InvoiceTypeBindingSource.Current;
-                _unitOfWork.InvoiceType.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to edit";
+                    return;
+                }
+
+                var entity = (InvoiceType)_view.DataGrid.SelectedItem;
+                _unitOfWork.InvoiceType.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Invoice deleted successfully";
@@ -138,8 +151,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllInvoiceTypeList()
         {
-            InvoiceTypeList = _unitOfWork.InvoiceType.GetAll();
+            InvoiceTypeList = _unitOfWork.InvoiceType.Value.GetAll();
             InvoiceTypeBindingSource.DataSource = InvoiceTypeList;//Set data source.
+            _view.SetInvoiceTypeListBindingSource(InvoiceTypeBindingSource);
         }
     }
 }

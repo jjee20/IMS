@@ -6,11 +6,15 @@ using AutoMapper;
 using PresentationLayer.Views.UserControls.Inventory;
 using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
-using RavenTech_ERP.Views.UserControls.POS;
+using ServiceLayer.Services.IRepositories;
 using PresentationLayer.Views.IViews.Admin;
 using PresentationLayer.Views;
 using PresentationLayer.Presenters.Admin;
+using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using PresentationLayer.Views.UserControls;
+using RevenTech_ERP.Presenters.Accounting.Payroll;
+using PresentationLayer.Presenters.Inventory;
+using PresentationLayer.Views.UserControls.Payroll;
 
 namespace PresentationLayer
 {
@@ -21,6 +25,7 @@ namespace PresentationLayer
         static void Main()
         {
             IUnityContainer UnityC = new UnityContainer();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NNaF5cXmBCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWXxdcHZUR2BZUkVyWEVWYUA=");
 
             UnityC.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
 
@@ -35,12 +40,20 @@ namespace PresentationLayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
+
             // Resolve InventoryView and Presenter
             var unitOfWork = UnityC.Resolve<IUnitOfWork>();
 
             //Pass dependencies to the presenter
             ILoginView mainView = new LoginView();
             var presenter = new LoginPresenter(mainView, unitOfWork);
+            //IPayrollSystemView mainView = new PayrollSystemView();
+            //var presenter = new PayrollSystemPresenter(mainView, unitOfWork);
+            //IInventoryView mainView = new InventoryView();
+            //var presenter = new InventoryPresenter(mainView, unitOfWork);
+            //IAdminView mainView = new AdminView();
+            //var presenter = new AdminPresenter(mainView, unitOfWork);
+
             Application.Run((Form)mainView);
             //Application.Run(new POSView());
         }

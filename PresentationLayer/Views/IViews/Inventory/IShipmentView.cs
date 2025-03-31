@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Syncfusion.WinForms.DataGrid;
+using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
 {
     public interface IShipmentView
     {
+        SfDataGrid DataGrid { get; }
         int ShipmentId { get; set; }
         string ShipmentName { get; set; }
         int SalesOrderId { get; set; }

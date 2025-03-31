@@ -4,6 +4,8 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,8 +23,6 @@ namespace PresentationLayer.Views.UserControls
     {
         private BindingSource _PurchaseOrderLineBindingSource = new BindingSource();
         private int id = 0;
-        private double productPrice = 0;
-        private double productSubtotal = 0;
         private string message;
         private bool isSuccessful;
         public bool isEdit;
@@ -133,11 +133,11 @@ namespace PresentationLayer.Views.UserControls
             {
                 PrintPOEvent?.Invoke(this, e);
             };
-            dgOrderLine.CellEndEdit += (sender, e) =>
+            dgPurchaseLine.CellEndEdit += (sender, e) =>
             {
                 UpdateComputationEvent?.Invoke(this, e);
             };
-            dgOrderLine.CellDoubleClick += (sender, e) =>
+            dgPurchaseLine.CellDoubleClick += (sender, e) =>
             {
                 var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -163,7 +163,8 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
-        //Properties
+        //PropertiesdgList
+        public SfDataGrid DataGrid => dgList;
         public int PurchaseOrderId
         {
             get { return Convert.ToInt32(id); }
@@ -266,8 +267,8 @@ namespace PresentationLayer.Views.UserControls
             set
             {
                 _PurchaseOrderLineBindingSource.DataSource = value;
-                dgOrderLine.DataSource = _PurchaseOrderLineBindingSource;
-                DataGridHelper.ApplyDisplayNames<PurchaseOrderLineViewModel>(_PurchaseOrderLineBindingSource, dgOrderLine);
+                dgPurchaseLine.DataSource = _PurchaseOrderLineBindingSource;
+                DataGridHelper.ApplyDisplayNames<PurchaseOrderLineViewModel>(_PurchaseOrderLineBindingSource, dgPurchaseLine);
             }
         }
         public bool IsEdit
@@ -339,13 +340,13 @@ namespace PresentationLayer.Views.UserControls
         }
         public void SetPurchaseOrderListBindingSource(BindingSource PurchaseOrderList)
         {
-            dgList.DataSource = PurchaseOrderList;
-            DataGridHelper.ApplyDisplayNames<PurchaseOrderViewModel>(PurchaseOrderList, dgList);
+            dgPager.DataSource = PurchaseOrderList.ToList<PurchaseOrderViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetPurchaseOrderLineListBindingSource(BindingSource PurchaseOrderLineList)
         {
-            dgOrderLine.DataSource = PurchaseOrderLineList;
-            DataGridHelper.ApplyDisplayNames<PurchaseOrderLineViewModel>(PurchaseOrderLineList, dgOrderLine);
+            dgPurchaseLine.DataSource = PurchaseOrderLineList;
+            DataGridHelper.ApplyDisplayNames<PurchaseOrderLineViewModel>(PurchaseOrderLineList, dgPurchaseLine);
         }
 
         public void SetPurchaseTypeListBindingSource(BindingSource PurchaseTypeBindingSource)
@@ -386,9 +387,9 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler GRNEvent;
         public event EventHandler BillEvent;
         public event EventHandler PaymentVoucherEvent;
-        public event DataGridViewCellEventHandler PrintPOEvent;
-        public event DataGridViewCellEventHandler DeleteProductEvent;
-        public event DataGridViewCellEventHandler UpdateComputationEvent;
+        public event EventHandler PrintPOEvent;
+        public event EventHandler DeleteProductEvent;
+        public event EventHandler UpdateComputationEvent;
 
         private static PurchaseOrderView? instance;
         public static PurchaseOrderView GetInstance(TabPage parentContainer)
@@ -415,14 +416,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        private void dgOrderLine_CellEndEdit_1(object sender, DataGridViewCellEventArgs e)
+        private void dgPurchaseLine_CellEndEdit_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgOrderLine.Columns["Price"].Index || e.ColumnIndex == dgOrderLine.Columns["Quantity"].Index || e.ColumnIndex == dgOrderLine.Columns["DiscountPercentage"].Index)
+            if (e.ColumnIndex == dgPurchaseLine.Columns["Price"].Index || e.ColumnIndex == dgPurchaseLine.Columns["Quantity"].Index || e.ColumnIndex == dgPurchaseLine.Columns["DiscountPercentage"].Index)
             {
                 // Get the value from Column1
-                var editedValue = dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value;
-                var qtyValue = dgOrderLine.Rows[e.RowIndex].Cells["Quantity"].Value;
-                var discountValue = dgOrderLine.Rows[e.RowIndex].Cells["DiscountPercentage"].Value;
+                var editedValue = dgPurchaseLine.Rows[e.RowIndex].Cells["Price"].Value;
+                var qtyValue = dgPurchaseLine.Rows[e.RowIndex].Cells["Quantity"].Value;
+                var discountValue = dgPurchaseLine.Rows[e.RowIndex].Cells["DiscountPercentage"].Value;
 
                 // Perform some computation or logic (example: doubling the value)
                 if (int.TryParse(editedValue?.ToString(), out int result))
@@ -433,14 +434,14 @@ namespace PresentationLayer.Views.UserControls
                         {
                             // Update the value in Column2
                             var subTotal = result * qtyResult;
-                            dgOrderLine.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal - (subTotal * discountResult/ 100);
+                            dgPurchaseLine.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal - (subTotal * discountResult/ 100);
                         }
                     }
                 }
                 else
                 {
                     // Handle invalid input (optional)
-                    dgOrderLine.Rows[e.RowIndex].Cells["Price"].Value = "Invalid";
+                    dgPurchaseLine.Rows[e.RowIndex].Cells["Price"].Value = "Invalid";
                 }
             }
         }

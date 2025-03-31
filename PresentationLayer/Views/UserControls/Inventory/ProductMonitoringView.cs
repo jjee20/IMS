@@ -63,7 +63,6 @@ namespace PresentationLayer.Views.UserControls
             DataGridHelper.ApplyDisplayNames<StockViewModel>(source, dgOutOfStock);
         }
 
-        public event EventHandler SearchEvent;
         public event EventHandler PrintEvent;
 
         private static ProductMonitoringView? instance;

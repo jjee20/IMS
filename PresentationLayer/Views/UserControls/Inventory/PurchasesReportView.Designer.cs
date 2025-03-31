@@ -627,7 +627,7 @@
             materialLabel1.Location = new Point(0, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(221, 52);
+            materialLabel1.Size = new Size(569, 52);
             materialLabel1.TabIndex = 4;
             materialLabel1.Text = "Purchases Report";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
@@ -672,7 +672,6 @@
         private MaterialSkin.Controls.MaterialComboBox txtYear;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private TableLayoutPanel tableLayoutPanel4;
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel3;
         private Label label4;
         private TableLayoutPanel tableLayoutPanel5;
         private Label txtPurchases;

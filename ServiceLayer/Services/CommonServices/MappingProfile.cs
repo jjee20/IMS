@@ -141,6 +141,9 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                  .ForMember(dest => dest.DateGranted, opt => opt.MapFrom(src => src.DateGranted.ToLongDateString()))
                 .ReverseMap();
+            CreateMap<EmployeeContribution, EmployeeContributionViewModel>()
+                 .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
+                .ReverseMap();
             CreateMap<Employee, EmployeeViewModel>()
                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.LastName}, {src.FirstName}"))
                  .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department.Name))
@@ -148,6 +151,21 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.JobPosition, opt => opt.MapFrom(src => src.JobPosition.Title))
                  .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.ToLongDateString()))
                  .ForMember(dest => dest.isDeducted, opt => opt.MapFrom(src => src.isDeducted ? "Yes" : "No"))
+                .ReverseMap();
+            CreateMap<Employee, UserInformationViewModel>()
+                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.LastName}, {src.FirstName}"))
+                 .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department.Name))
+                 .ForMember(dest => dest.Shift, opt => opt.MapFrom(src => src.Shift.ShiftName))
+                 .ForMember(dest => dest.JobPosition, opt => opt.MapFrom(src => src.JobPosition.Title))
+                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.ToLongDateString()))
+                 .ForMember(dest => dest.isDeducted, opt => opt.MapFrom(src => src.isDeducted ? "Yes" : "No"))
+                 .ForMember(dest => dest.Allowances, opt => opt.MapFrom(src => src.Allowances ?? new List<Allowance>()))
+                 .ForMember(dest => dest.Leaves, opt => opt.MapFrom(src => src.Leaves ?? new List<Leave>()))
+                 .ForMember(dest => dest.Benefits, opt => opt.MapFrom(src => src.Benefits ?? new List<Benefit>()))
+                 .ForMember(dest => dest.Deductions, opt => opt.MapFrom(src => src.Deductions ?? new List<Deduction>()))
+                 .ForMember(dest => dest.Bonuses, opt => opt.MapFrom(src => src.Bonuses ?? new List<Bonus>()))
+                 .ForMember(dest => dest.Attendances, opt => opt.MapFrom(src => src.Attendances ?? new List<Attendance>()))
+                 .ForMember(dest => dest.Contribution, opt => opt.MapFrom(src => src.Contribution ?? new EmployeeContribution()))
                 .ReverseMap();
             CreateMap<Leave, LeaveViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))

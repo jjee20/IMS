@@ -1,4 +1,6 @@
-﻿namespace PresentationLayer.Views.IViews.Inventory
+﻿using Syncfusion.WinForms.DataGrid;
+
+namespace PresentationLayer.Views.IViews.Inventory
 {
     public interface IChangePasswordView
     {

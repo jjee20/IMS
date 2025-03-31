@@ -10,6 +10,8 @@ using RavenTech_ERP.Properties;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -165,6 +167,7 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
+        public SfDataGrid DataGrid => dgList;
         //Properties
         public int AttendanceId
         {
@@ -289,13 +292,14 @@ namespace PresentationLayer.Views.UserControls
         }
         public void SetAttendanceListBindingSource(BindingSource AttendanceList)
         {
-            dgList.DataSource = AttendanceList;
-            DataGridHelper.ApplyDisplayNames<AttendanceViewModel>(AttendanceList, dgList);
+            dgPager.DataSource = AttendanceList.ToList<AttendanceViewModel>();
+            dgList.DataSource = dgPager.PagedSource;
         }
         public void SetIndividualAttendanceListBindingSource(BindingSource IndividualAttendanceList)
         {
-            dgListInvidivual.DataSource = IndividualAttendanceList;
-            DataGridHelper.ApplyDisplayNames<IndividualAttendanceViewModel>(IndividualAttendanceList, dgListInvidivual);
+            dgPagerIndividual.DataSource = IndividualAttendanceList.ToList<IndividualAttendanceViewModel>();
+            dgListInvidivual.DataSource = dgPagerIndividual.PagedSource;
+            //DataGridHelper.ApplyDisplayNames<IndividualAttendanceViewModel>(IndividualAttendanceList, dgListInvidivual);
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
         {
@@ -328,8 +332,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler DeleteEvent;
         public event EventHandler PrintEvent;
         public event EventHandler RefreshEvent;
-        public event EventHandler ImportEvent;
-        public event DataGridViewCellEventHandler ShowAttendanceEvent;
+        public event EventHandler ShowAttendanceEvent;
 
         private static AttendanceView? instance;
         public static AttendanceView GetInstance(TabPage parentContainer)

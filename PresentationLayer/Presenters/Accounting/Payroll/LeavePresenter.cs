@@ -12,7 +12,7 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -57,10 +57,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             LoadAllStatusList();
 
             //Source Binding
-            _view.SetLeaveListBindingSource(LeaveBindingSource);
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
-            _view.SetLeaveTypeListBindingSource(LeaveTypeBindingSource);
-            _view.SetStatusListBindingSource(StatusBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -75,7 +71,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var startDate = new DateTime(year, 1, 1);
             var endDate = new DateTime(year, 12, 31);
 
-            var employee = _unitOfWork.Employee.Get(c => c.EmployeeId == _view.EmployeeId, includeProperties: "Leaves");
+            var employee = _unitOfWork.Employee.Value.Get(c => c.EmployeeId == _view.EmployeeId, includeProperties: "Leaves");
             var totalLeave = employee.Leaves.Where(c => c.StartDate >= startDate && c.EndDate <= endDate).Count();
 
             if (totalLeave > employee.LeaveCredits)
@@ -84,10 +80,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 return;
             }
 
-            var model = _unitOfWork.Leave.Get(c => c.LeaveId == _view.LeaveId, tracked: true);
+            var model = _unitOfWork.Leave.Value.Get(c => c.LeaveId == _view.LeaveId, tracked: true);
 
             if (model == null) model = new Leave();
-            else _unitOfWork.Leave.Detach(model);
+            else _unitOfWork.Leave.Value.Detach(model);
 
             model.LeaveId = _view.LeaveId;
             model.EmployeeId = _view.EmployeeId;
@@ -103,12 +99,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 new ModelDataValidation().Validate(model);
                 if (_view.IsEdit)//Edit model
                 {
-                    _unitOfWork.Leave.Update(model);
+                    _unitOfWork.Leave.Value.Update(model);
                     _view.Message = "Leave edited successfully";
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Leave.Add(model);
+                    _unitOfWork.Leave.Value.Add(model);
                     _view.Message = "Leave added successfully";
                 }
 
@@ -128,7 +124,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             bool hasDateRange = _view.StartDate != null && _view.EndDate != null;
             if (!emptyValue || hasDateRange)
             {
-                LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.GetAll(
+                LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.Value.GetAll(
                     c => c.Employee.LastName.Contains(_view.SearchValue) ||
                     c.Employee.FirstName.Contains(_view.SearchValue) || 
                     (c.StartDate.Date >= _view.SearchStartDate.Date && c.EndDate.Date <= _view.SearchEndDate.Date), 
@@ -143,8 +139,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var leave = (LeaveViewModel)LeaveBindingSource.Current;
-            var entity = _unitOfWork.Leave.Get(c => c.LeaveId == leave.LeaveId);
+            if (_view.DataGrid.SelectedItem == null)
+            {
+                _view.IsSuccessful = false;
+                _view.Message = "Please select one to edit";
+                return;
+            }
+
+            var leave = (LeaveViewModel)_view.DataGrid.SelectedItem;
+            var entity = _unitOfWork.Leave.Value.Get(c => c.LeaveId == leave.LeaveId);
             _view.LeaveId = entity.LeaveId;
             _view.EmployeeId = entity.EmployeeId;
             _view.StartDate = entity.StartDate;
@@ -158,9 +161,16 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                var leave = (LeaveViewModel)LeaveBindingSource.Current;
-                var entity = _unitOfWork.Leave.Get(c => c.LeaveId == leave.LeaveId);
-                _unitOfWork.Leave.Remove(entity);
+                if (_view.DataGrid.SelectedItem == null)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select one to delete";
+                    return;
+                }
+
+                var leave = (LeaveViewModel)_view.DataGrid.SelectedItem;
+                var entity = _unitOfWork.Leave.Value.Get(c => c.LeaveId == leave.LeaveId);
+                _unitOfWork.Leave.Value.Remove(entity);
                 _unitOfWork.Save();
                 _view.IsSuccessful = true;
                 _view.Message = "Leave deleted successfully";
@@ -199,24 +209,28 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void LoadAllLeaveList()
         {
             LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(
-                _unitOfWork.Leave.GetAll(c => c.StartDate.Date >= _view.StartDate.Date && c.EndDate.Date <= _view.EndDate.Date,
+                _unitOfWork.Leave.Value.GetAll(c => c.StartDate.Date >= _view.StartDate.Date && c.EndDate.Date <= _view.EndDate.Date,
                     includeProperties: "Employee"));
             LeaveBindingSource.DataSource = LeaveList;//Set data source.
+            _view.SetLeaveListBindingSource(LeaveBindingSource);
         }
         private void LoadAllEmployeeList()
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.GetAll());
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
             EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
+            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
         private void LoadAllLeaveTypeList()
         {
             LeaveTypeList = EnumHelper.EnumToEnumerable<LeaveType>();
             LeaveTypeBindingSource.DataSource = LeaveTypeList;//Set data source.
+            _view.SetLeaveTypeListBindingSource(LeaveTypeBindingSource);
         }
         private void LoadAllStatusList()
         {
             StatusList = EnumHelper.EnumToEnumerable<Status>();
             StatusBindingSource.DataSource = StatusList;//Set data source.
+            _view.SetStatusListBindingSource(StatusBindingSource);
         }
     }
 }

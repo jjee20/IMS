@@ -3,6 +3,8 @@ using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -102,7 +104,8 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
-        //Properties
+        //PropertiesdgList
+        public SfDataGrid DataGrid => dgList;
         public int ShipmentTypeId
         {
             get { return id; }
@@ -145,8 +148,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetShipmentTypeListBindingSource(BindingSource ShipmentTypeList)
         {
-            dgList.DataSource = ShipmentTypeList;
-            DataGridHelper.ApplyDisplayNames<ShipmentType>(ShipmentTypeList, dgList);
+            dgPager.DataSource = ShipmentTypeList.ToList<ShipmentType>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;

@@ -1,5 +1,6 @@
 ﻿using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views;
+using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
@@ -7,7 +8,7 @@ using PresentationLayer.Views.UserControls.Inventory;
 using RavenTech_ERP.Presenters.Inventory;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory;
-using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,49 @@ namespace PresentationLayer.Presenters.Inventory
             _view.ShowTargetGoals += ShowTargetGoals;
             _view.ShowSalesReport += ShowSalesReport;
             _view.ShowPurchaseReport += ShowPurchaseReport;
+            _view.ShowCustomers += ShowCustomers;
+            _view.ShowCashBank += ShowCashBank;
+            _view.ShowVendors += ShowVendors;
+            _view.ShowWarehouse += ShowWarehouse;
+            _view.ShowSettings += ShowSettings;
+            _view.ShowProfile += ShowProfile;
             ShowDashboard(this, EventArgs.Empty);
+        }
+
+        private void ShowProfile(object? sender, EventArgs e)
+        {
+            IProfileView view = ProfileView.GetInstance(_view.Guna2TabControlPage);
+            new ProfilePresenter(view, _unitOfWork);
+        }
+
+        private void ShowSettings(object? sender, EventArgs e)
+        {
+            ISettingsView view = SettingsView.GetInstance(_view.Guna2TabControlPage);
+            new SettingsPresenter(view, _unitOfWork);
+        }
+
+        private void ShowWarehouse(object? sender, EventArgs e)
+        {
+            IWarehouseView view = WarehouseView.GetInstance(_view.Guna2TabControlPage);
+            new WarehousePresenter(view, _unitOfWork);
+        }
+
+        private void ShowVendors(object? sender, EventArgs e)
+        {
+            IVendorView view = VendorView.GetInstance(_view.Guna2TabControlPage);
+            new VendorPresenter(view, _unitOfWork);
+        }
+
+        private void ShowCashBank(object? sender, EventArgs e)
+        {
+            ICashBankView view = CashBankView.GetInstance(_view.Guna2TabControlPage);
+            new CashBankPresenter(view, _unitOfWork);
+        }
+
+        private void ShowCustomers(object? sender, EventArgs e)
+        {
+            ICustomerView view = CustomerView.GetInstance(_view.Guna2TabControlPage);
+            new CustomerPresenter(view, _unitOfWork);
         }
 
         private void ShowPurchaseReport(object? sender, EventArgs e)
@@ -62,13 +105,13 @@ namespace PresentationLayer.Presenters.Inventory
         }
         private void ShowSales(object? sender, EventArgs e)
         {
-            ISalesView view = SalesView.GetInstance(_view.Guna2TabControlPage);
-            new SalesPresenter(view, _unitOfWork);
+            ISalesOrderView view = SalesOrderView.GetInstance(_view.Guna2TabControlPage);
+            new SalesOrderPresenter(view, _unitOfWork);
         }
         private void ShowPurchase(object? sender, EventArgs e)
         {
-            IPurchaseView view = PurchaseView.GetInstance(_view.Guna2TabControlPage);
-            new PurchasePresenter(view, _unitOfWork);
+            IPurchaseOrderView view = PurchaseOrderView.GetInstance(_view.Guna2TabControlPage);
+            new PurchaseOrderPresenter(view, _unitOfWork);
         }
         private void ShowInventory(object? sender, EventArgs e)
         {

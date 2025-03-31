@@ -6,6 +6,8 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -105,6 +107,7 @@ namespace PresentationLayer.Views.UserControls
             };
         }
 
+        public SfDataGrid DataGrid => dgList;
         //Properties
         public int JobPositionId
         {
@@ -148,8 +151,8 @@ namespace PresentationLayer.Views.UserControls
 
         public void SetJobPositionListBindingSource(BindingSource JobPositionList)
         {
-            dgList.DataSource = JobPositionList;
-            DataGridHelper.ApplyDisplayNames<JobPosition>(JobPositionList, dgList);
+            dgPager.DataSource = JobPositionList.ToList<JobPosition>();
+            dgList.DataSource = dgPager.PagedSource;
         }
 
         public event EventHandler AddNewEvent;
