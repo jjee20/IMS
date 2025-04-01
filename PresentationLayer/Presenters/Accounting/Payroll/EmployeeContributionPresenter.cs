@@ -189,7 +189,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void LoadAllEmployeeList()
         {
             EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            EmployeeBindingSource.DataSource = EmployeeList;//Set data source.
+            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
             _view.SetEmployeeListBindingSource(EmployeeBindingSource);
         }
     }
