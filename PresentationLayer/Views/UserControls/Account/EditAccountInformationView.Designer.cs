@@ -139,6 +139,7 @@
             Controls.Add(txtLastName);
             Controls.Add(txtFirstName);
             Name = "EditAccountInformationView";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Edit Account Information";
             ResumeLayout(false);
             PerformLayout();
