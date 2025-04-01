@@ -28,20 +28,25 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             InitializeComponent();
             _project = Project;
             _projectVM = ProjectVM;
+            _unitOfWork = unitOfWork;
 
             LoadProjectInformation();
-            _unitOfWork = unitOfWork;
         }
 
         private void LoadProjectInformation()
         {
-            txtProjectName.Text = _project.ProjectName ?? "";
-            txtClient.Text = _projectVM.Client ?? "";
-            txtRevenue.Text = _projectVM.Revenue.ToString() ?? "0";
-            txtBudget.Text = _projectVM.Budget.ToString() ?? "0";
-            txtStartDate.Text = _projectVM.StartDate.Value.Date.ToLongDateString() ?? "";
-            txtEndDate.Text = _projectVM.EndDate.Value.Date.ToLongDateString() ?? "";
-            txtDescription.Text = _projectVM.Description ?? "";
+            double budget = _projectVM.Budget ?? 0;
+            double revenue = _projectVM.Revenue ?? 0;
+
+            var startDate = _projectVM.StartDate.HasValue ? _projectVM.StartDate.Value.Date : DateTime.Now.Date;
+            var endDate = _projectVM.EndDate.HasValue ? _projectVM.EndDate.Value.Date : DateTime.Now.Date;
+            txtProjectName.Text = _project.ProjectName ?? "{Needs Updating}";
+            txtClient.Text = _projectVM.Client ?? "{Needs Updating}";
+            txtRevenue.Text = budget.ToString() ?? "{Needs Updating}";
+            txtBudget.Text = revenue.ToString() ?? "{Needs Updating}";
+            txtStartDate.Text = startDate.ToLongDateString(); 
+            txtEndDate.Text = endDate.ToLongDateString();
+            txtDescription.Text = _projectVM.Description ?? "{Needs Updating}";
 
             double totalPurchase = _project.ProjectLines.Sum(c => c.SubTotal);
             txtProjectTotalPurchase.Text = totalPurchase.ToString("N2") ?? "0";
@@ -51,7 +56,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
             var employees = _unitOfWork.Employee.Value.GetAll(c => c.Attendances.Any(c => c.ProjectId == _project.ProjectId) , includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
             var contributions = _unitOfWork.Contribution.Value.GetAll();
-            var payroll = PayrollHelper.CalculatePayroll(employees, contributions, _project, _projectVM.StartDate.Value.Date, _projectVM.EndDate.Value.Date);
+            var payroll = PayrollHelper.CalculatePayroll(employees, contributions, _project, startDate, endDate);
         
             dgPayroll.DataSource = payroll;
 
@@ -62,13 +67,11 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             // Compute deductions (Total Purchase + Payroll)
             double totalDeductions = totalPurchase + totalPayroll;
             txtDeduction.Text = totalDeductions.ToString("N2");
-
             // Compute Total Revenue (Budget - Deductions)
-            double totalRevenue = (double)(_projectVM.Budget - totalDeductions);
+            double totalRevenue = (double)(budget - totalDeductions);
             txtTotalRevenue.Text = totalRevenue.ToString("N2");
-
             // Compute Variance (Total Revenue - Actual Revenue)
-            double variance = (double)(totalRevenue - _projectVM.Revenue);
+            double variance = (double)(totalRevenue - revenue);
             txtVariance.Text = variance.ToString("N2");
         }
     }
