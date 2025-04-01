@@ -67,7 +67,7 @@ namespace PresentationLayer.Presenters
             _view.Total = _view.ProjectLines.Select(c => c.SubTotal).Sum();
         }
 
-        private void PrintProject(object? sender, EventArgs e)
+        private void Print(object? sender, EventArgs e)
         {
             try
             {
@@ -316,7 +316,7 @@ namespace PresentationLayer.Presenters
                 _view.Message = "An error ocurred, could not delete Project";
             }
         }
-        private void Print(object? sender, EventArgs e)
+        private void PrintProject(object? sender, EventArgs e)
         {
             var project = (ProjectViewModel)ProjectBindingSource.Current;
             var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == project.ProjectId, includeProperties: "ProjectLines");
