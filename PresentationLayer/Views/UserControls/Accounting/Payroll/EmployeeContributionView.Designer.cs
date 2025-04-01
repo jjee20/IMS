@@ -31,8 +31,6 @@ namespace PresentationLayer.Views.UserControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -44,6 +42,8 @@ namespace PresentationLayer.Views.UserControls
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeContributionView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
@@ -56,7 +56,6 @@ namespace PresentationLayer.Views.UserControls
             txtSSSWISP = new Guna2TextBox();
             lblMadatoryProvidentFund = new Guna2HtmlLabel();
             guna2HtmlLabel5 = new Guna2HtmlLabel();
-            txtEmployeeId = new Guna2ComboBox();
             txtSSS = new Guna2TextBox();
             txtPagIbig = new Guna2TextBox();
             guna2HtmlLabel4 = new Guna2HtmlLabel();
@@ -77,6 +76,7 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
             guna2HtmlToolTip2 = new Guna2HtmlToolTip();
+            txtEmployeeId = new Guna2ComboBox();
             materialCard1.SuspendLayout();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -227,10 +227,10 @@ namespace PresentationLayer.Views.UserControls
             // materialCard2
             // 
             materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(txtEmployeeId);
             materialCard2.Controls.Add(txtSSSWISP);
             materialCard2.Controls.Add(lblMadatoryProvidentFund);
             materialCard2.Controls.Add(guna2HtmlLabel5);
-            materialCard2.Controls.Add(txtEmployeeId);
             materialCard2.Controls.Add(txtSSS);
             materialCard2.Controls.Add(txtPagIbig);
             materialCard2.Controls.Add(guna2HtmlLabel4);
@@ -251,7 +251,7 @@ namespace PresentationLayer.Views.UserControls
             // txtSSSWISP
             // 
             txtSSSWISP.Anchor = AnchorStyles.None;
-            txtSSSWISP.CustomizableEdges = customizableEdges1;
+            txtSSSWISP.CustomizableEdges = customizableEdges3;
             txtSSSWISP.DefaultText = "";
             txtSSSWISP.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtSSSWISP.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -266,7 +266,7 @@ namespace PresentationLayer.Views.UserControls
             txtSSSWISP.PasswordChar = '\0';
             txtSSSWISP.PlaceholderText = "Enter Mandatory Provident Fund (WISP)";
             txtSSSWISP.SelectedText = "";
-            txtSSSWISP.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtSSSWISP.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtSSSWISP.Size = new Size(514, 56);
             txtSSSWISP.TabIndex = 20;
             // 
@@ -291,24 +291,6 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel5.Size = new Size(98, 19);
             guna2HtmlLabel5.TabIndex = 18;
             guna2HtmlLabel5.Text = "Select Employee";
-            // 
-            // txtEmployeeId
-            // 
-            txtEmployeeId.Anchor = AnchorStyles.None;
-            txtEmployeeId.BackColor = Color.Transparent;
-            txtEmployeeId.CustomizableEdges = customizableEdges3;
-            txtEmployeeId.DrawMode = DrawMode.OwnerDrawFixed;
-            txtEmployeeId.DropDownStyle = ComboBoxStyle.DropDownList;
-            txtEmployeeId.FocusedColor = Color.FromArgb(94, 148, 255);
-            txtEmployeeId.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmployeeId.Font = new Font("Segoe UI", 10F);
-            txtEmployeeId.ForeColor = Color.FromArgb(68, 88, 112);
-            txtEmployeeId.ItemHeight = 50;
-            txtEmployeeId.Location = new Point(398, 41);
-            txtEmployeeId.Name = "txtEmployeeId";
-            txtEmployeeId.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            txtEmployeeId.Size = new Size(514, 56);
-            txtEmployeeId.TabIndex = 17;
             // 
             // txtSSS
             // 
@@ -618,6 +600,29 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlToolTip2.ReshowDelay = 100;
             guna2HtmlToolTip2.ToolTipIcon = ToolTipIcon.Info;
             // 
+            // txtEmployeeId
+            // 
+            txtEmployeeId.Anchor = AnchorStyles.None;
+            txtEmployeeId.BackColor = Color.Transparent;
+            txtEmployeeId.CustomizableEdges = customizableEdges1;
+            txtEmployeeId.DisplayMember = "EmployeeId";
+            txtEmployeeId.DrawMode = DrawMode.OwnerDrawFixed;
+            txtEmployeeId.DropDownHeight = 400;
+            txtEmployeeId.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtEmployeeId.DropDownWidth = 500;
+            txtEmployeeId.FocusedColor = Color.FromArgb(94, 148, 255);
+            txtEmployeeId.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtEmployeeId.Font = new Font("Segoe UI", 10F);
+            txtEmployeeId.ForeColor = Color.FromArgb(68, 88, 112);
+            txtEmployeeId.IntegralHeight = false;
+            txtEmployeeId.ItemHeight = 50;
+            txtEmployeeId.Location = new Point(398, 41);
+            txtEmployeeId.Name = "txtEmployeeId";
+            txtEmployeeId.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtEmployeeId.Size = new Size(513, 56);
+            txtEmployeeId.TabIndex = 30;
+            txtEmployeeId.ValueMember = "EmployeeId";
+            // 
             // EmployeeContributionView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -660,7 +665,6 @@ namespace PresentationLayer.Views.UserControls
         private Guna2TextBox txtSSS;
         private Guna2TextBox txtPagIbig;
         private Guna2HtmlLabel guna2HtmlLabel5;
-        private Guna2ComboBox txtEmployeeId;
         private Guna2HtmlToolTip guna2HtmlToolTip2;
         private Panel panel2;
         private Button btnPrint;
@@ -677,5 +681,6 @@ namespace PresentationLayer.Views.UserControls
         private Panel panel1;
         private Syncfusion.WinForms.DataGrid.SfDataGrid dgList;
         private Syncfusion.WinForms.DataPager.SfDataPager dgPager;
+        private Guna2ComboBox txtEmployeeId;
     }
 }
