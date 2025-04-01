@@ -144,6 +144,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     c => c.FirstName.Contains(_view.SearchValue) ||
                     c.LastName.Contains(_view.SearchValue), includeProperties: "Department,JobPosition,Shift"));
                 EmployeeBindingSource.DataSource = EmployeeList;
+                _view.SetEmployeeListBindingSource(EmployeeBindingSource);
             }
             else
             {

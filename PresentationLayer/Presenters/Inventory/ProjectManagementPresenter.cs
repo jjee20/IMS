@@ -203,6 +203,7 @@ namespace PresentationLayer.Presenters
             model.EndDate = _view.EndDate;
             model.Budget = _view.Budget;
             model.Revenue = _view.Revenue;
+
             model.ProjectLines = _view.ProjectLines
                 .Select(ToProjectLine)
                 .ToList();
@@ -318,11 +319,13 @@ namespace PresentationLayer.Presenters
         }
         private void PrintProject(object? sender, EventArgs e)
         {
-            var project = (ProjectViewModel)ProjectBindingSource.Current;
+            var project = (ProjectViewModel)_view.DataGrid.SelectedItem;
             var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == project.ProjectId, includeProperties: "ProjectLines");
 
-            var projectInformation = new ProjectInformationView(entity, project, _unitOfWork);
-            projectInformation.ShowDialog();
+            using (var projectInformation = new ProjectInformationView(entity, project, _unitOfWork))
+            {
+                projectInformation.ShowDialog();
+            } 
         }
         private void Return(object? sender, EventArgs e)
         {
