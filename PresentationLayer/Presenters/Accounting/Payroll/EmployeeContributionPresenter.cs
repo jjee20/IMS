@@ -102,18 +102,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                // Safely parse and filter EmployeeContributions
-                EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(_unitOfWork.EmployeeContribution.Value.GetAll(
-                    c => c.Employee.LastName == _view.SearchValue || c.Employee.FirstName == _view.SearchValue, 
-                    includeProperties: "Employee"));
-                EmployeeContributionBindingSource.DataSource = EmployeeContributionList;
-            }
-            else
-            {
-                LoadAllEmployeeContributionList();
-            }
+            LoadAllEmployeeContributionList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -179,11 +168,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.EmployeeContributionId = 0;
         }
 
-        private void LoadAllEmployeeContributionList()
+        private void LoadAllEmployeeContributionList(bool emptyValue = false)
         {
             EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(
                 _unitOfWork.EmployeeContribution.Value.GetAll(includeProperties:"Employee"));
-            EmployeeContributionBindingSource.DataSource = EmployeeContributionList;//Set data source.
+
+            if (!emptyValue)
+                EmployeeContributionList = EmployeeContributionList.Where(c => c.Employee.Equals(_view.SearchValue));
+
+            EmployeeContributionBindingSource.DataSource = EmployeeContributionList.OrderBy(c => c.Employee);//Set data source.
             _view.SetEmployeeContributionListBindingSource(EmployeeContributionBindingSource);
         }
         private void LoadAllEmployeeList()

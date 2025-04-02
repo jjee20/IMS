@@ -312,15 +312,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                SalesOrderList = Program.Mapper.Map<IEnumerable<SalesOrderViewModel>>(_unitOfWork.SalesOrder.Value.GetAll(c => c.SalesOrderName.Contains(_view.SearchValue), includeProperties: "Branch,SalesType,Customer"));
-                SalesOrderBindingSource.DataSource = SalesOrderList;
-            }
-            else
-            {
-                LoadAllSalesOrderList();
-            }
+            LoadAllSalesOrderList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -426,9 +418,19 @@ namespace PresentationLayer.Presenters
             _view.Total = 0;
             _view.SalesOrderLines = new List<SalesOrderLineViewModel>();
         }
-        private void LoadAllSalesOrderList()
+        private void LoadAllSalesOrderList(bool emptyValue = false)
         {
-            SalesOrderBindingSource.DataSource = SalesOrderList = Program.Mapper.Map<IEnumerable<SalesOrderViewModel>>(_unitOfWork.SalesOrder.Value.GetAll(includeProperties: "Branch,SalesType,Customer"));
+            SalesOrderList = Program.Mapper.Map<IEnumerable<SalesOrderViewModel>>(_unitOfWork.SalesOrder.Value.GetAll(includeProperties: "Branch,SalesType,Customer"));
+
+            if (!emptyValue)
+                SalesOrderList = SalesOrderList.Where(c =>
+                    c.SalesOrderName.Contains(_view.SearchValue) ||
+                    c.Branch.Contains(_view.SearchValue) ||
+                    c.Customer.Contains(_view.SearchValue) ||
+                    c.SalesType.Contains(_view.SearchValue)
+                );
+
+            SalesOrderBindingSource.DataSource = SalesOrderList;
             _view.SetSalesOrderListBindingSource(SalesOrderBindingSource);
         }
         private void LoadAllSalesTypeList() {

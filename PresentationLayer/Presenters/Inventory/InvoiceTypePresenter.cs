@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                InvoiceTypeList = _unitOfWork.InvoiceType.Value.GetAll(c => c.InvoiceTypeName.Contains(_view.SearchValue));
-                InvoiceTypeBindingSource.DataSource = InvoiceTypeList;
-            }
-            else
-            {
-                LoadAllInvoiceTypeList();
-            }
+            LoadAllInvoiceTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllInvoiceTypeList()
+        private void LoadAllInvoiceTypeList(bool emptyValue = false)
         {
             InvoiceTypeList = _unitOfWork.InvoiceType.Value.GetAll();
+
+            if (emptyValue)
+            {
+                InvoiceTypeList = InvoiceTypeList.Where(c => c.InvoiceTypeName.Contains(_view.SearchValue));
+            }
+
             InvoiceTypeBindingSource.DataSource = InvoiceTypeList;//Set data source.
             _view.SetInvoiceTypeListBindingSource(InvoiceTypeBindingSource);
         }

@@ -83,15 +83,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                JobPositionList = _unitOfWork.JobPosition.Value.GetAll(c => c.Title.Contains(_view.SearchValue));
-                JobPositionBindingSource.DataSource = JobPositionList;
-            }
-            else
-            {
-                LoadAllJobPositionList();
-            }
+            LoadAllJobPositionList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -154,9 +146,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Description = "";
         }
 
-        private void LoadAllJobPositionList()
+        private void LoadAllJobPositionList(bool emptyValue = false)
         {
             JobPositionList = _unitOfWork.JobPosition.Value.GetAll();
+
+            if (!emptyValue)
+            {
+                JobPositionList = JobPositionList.Where(c => c.Title.Contains(_view.SearchValue));
+            }
+
             JobPositionBindingSource.DataSource = JobPositionList;//Set data source.
             _view.SetJobPositionListBindingSource(JobPositionBindingSource);
         }

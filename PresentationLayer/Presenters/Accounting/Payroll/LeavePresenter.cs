@@ -121,20 +121,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            bool hasDateRange = _view.StartDate != null && _view.EndDate != null;
-            if (!emptyValue || hasDateRange)
-            {
-                LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.Value.GetAll(
-                    c => c.Employee.LastName.Contains(_view.SearchValue) ||
-                    c.Employee.FirstName.Contains(_view.SearchValue) || 
-                    (c.StartDate.Date >= _view.SearchStartDate.Date && c.EndDate.Date <= _view.SearchEndDate.Date), 
-                    includeProperties: "Employee"));
-                LeaveBindingSource.DataSource = LeaveList;
-            }
-            else
-            {
-                LoadAllLeaveList();
-            }
+            LoadAllLeaveList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -206,12 +193,16 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Other = "";
         }
 
-        private void LoadAllLeaveList()
+        private void LoadAllLeaveList(bool emptyValue = false)
         {
             LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(
                 _unitOfWork.Leave.Value.GetAll(c => c.StartDate.Date >= _view.StartDate.Date && c.EndDate.Date <= _view.EndDate.Date,
                     includeProperties: "Employee"));
-            LeaveBindingSource.DataSource = LeaveList;//Set data source.
+
+            if (!emptyValue)
+                LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue) || c.LeaveType.Contains(_view.SearchValue));
+
+            LeaveBindingSource.DataSource = LeaveList.OrderByDescending(c => c.StartDate);//Set data source.
             _view.SetLeaveListBindingSource(LeaveBindingSource);
         }
         private void LoadAllEmployeeList()

@@ -118,15 +118,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(c => c.VendorName.Contains(_view.SearchValue), includeProperties: "VendorType"));
-                VendorBindingSource.DataSource = VendorList;
-            }
-            else
-            {
-                LoadAllVendorList();
-            }
+            LoadAllVendorList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -200,9 +192,15 @@ namespace PresentationLayer.Presenters
             _view.ContactPerson = "";
         }
 
-        private void LoadAllVendorList()
+        private void LoadAllVendorList(bool emptyValue = false)
         {
             VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(includeProperties: "VendorType"));
+
+            if (!emptyValue)
+            {
+                VendorList = VendorList.Where(c => c.VendorName.Contains(_view.SearchValue));
+            }
+
             VendorBindingSource.DataSource = VendorList;//Set data source.
             _view.SetVendorListBindingSource(VendorBindingSource);
         }

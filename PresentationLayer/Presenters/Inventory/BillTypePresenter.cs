@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                BillTypeList = _unitOfWork.BillType.Value.GetAll(c => c.BillTypeName.Contains(_view.SearchValue));
-                BillTypeBindingSource.DataSource = BillTypeList;
-            }
-            else
-            {
-                LoadAllBillTypeList();
-            }
+            LoadAllBillTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllBillTypeList()
+        private void LoadAllBillTypeList(bool emptyValue = false)
         {
             BillTypeList = _unitOfWork.BillType.Value.GetAll();
+
+            if (!emptyValue)
+            {
+                BillTypeList = BillTypeList.Where(c => c.BillTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
+            }
+
             BillTypeBindingSource.DataSource = BillTypeList;//Set data source.
             _view.SetBillTypeListBindingSource(BillTypeBindingSource);
         }

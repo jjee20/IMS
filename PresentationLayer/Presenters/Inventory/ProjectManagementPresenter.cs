@@ -259,15 +259,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(_unitOfWork.Project.Value.GetAll(c => c.ProjectName.Contains(_view.SearchValue)));
-                ProjectBindingSource.DataSource = ProjectList;
-            }
-            else
-            {
-                LoadAllProjectList();
-            }
+            LoadAllProjectList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -345,10 +337,15 @@ namespace PresentationLayer.Presenters
             _view.ProjectLines = new List<ProjectLineViewModel>();
         }
 
-        private void LoadAllProjectList()
+        private void LoadAllProjectList(bool emptyValue = false)
         {
             ProjectBindingSource.DataSource = ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(
             _unitOfWork.Project.Value.GetAll());
+
+            if (!emptyValue)
+            {
+                ProjectList = ProjectList.Where(c => c.ProjectName.Contains(_view.SearchValue));
+            }
 
             _view.SetProjectListBindingSource(ProjectBindingSource);
         }

@@ -258,15 +258,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             }
             else
             {
-                if (!emptyValue || hasDateRange)
-                {
-                    AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date).Where(c => emptyValue || c.Employee.Contains(_view.SearchValue) || c.Employee.Contains(_view.SearchValue));
-                    AttendanceBindingSource.DataSource = AttendanceList;
-                }
-                else
-                {
-                    LoadAllAttendanceList();
-                }
+                LoadAllAttendanceList(emptyValue);
             }
         }
 
@@ -365,9 +357,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             return approvedLeaves.Any(leave => date >= leave.StartDate && date <= leave.EndDate);
         }
-        private void LoadAllAttendanceList()
+        private void LoadAllAttendanceList(bool emptyValue = false)
         {
             AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
+
+            if(!emptyValue)
+            {
+                AttendanceList = AttendanceList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
+            }
+
             AttendanceBindingSource.DataSource = AttendanceList.OrderBy(c => c.Employee);//Set data source.
             _view.SetAttendanceListBindingSource(AttendanceBindingSource);
         }

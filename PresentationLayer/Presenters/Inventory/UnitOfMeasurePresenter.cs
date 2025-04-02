@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll(c => c.UnitOfMeasureName.Contains(_view.SearchValue));
-                UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;
-            }
-            else
-            {
-                LoadAllUnitOfMeasureList();
-            }
+            LoadAllUnitOfMeasureList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
 
-        private void LoadAllUnitOfMeasureList()
+        private void LoadAllUnitOfMeasureList(bool emptyValue = false)
         {
             UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll();
+
+            if (emptyValue)
+            {
+                UnitOfMeasureList = UnitOfMeasureList.Where(C => C.UnitOfMeasureName.Contains(_view.SearchValue));
+            }
+
             UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;//Set data source.
             _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureBindingSource);
         }

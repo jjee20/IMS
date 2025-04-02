@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                VendorTypeList = _unitOfWork.VendorType.Value.GetAll(c => c.VendorTypeName.Contains(_view.SearchValue));
-                VendorTypeBindingSource.DataSource = VendorTypeList;
-            }
-            else
-            {
-                LoadAllVendorTypeList();
-            }
+            LoadAllVendorTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
 
-        private void LoadAllVendorTypeList()
+        private void LoadAllVendorTypeList(bool emptyValue = false)
         {
             VendorTypeList = _unitOfWork.VendorType.Value.GetAll();
+
+            if (!emptyValue)
+            {
+                VendorTypeList = VendorTypeList.Where(c => c.VendorTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
+            }
+
             VendorTypeBindingSource.DataSource = VendorTypeList;//Set data source.
             _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
         }

@@ -87,15 +87,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.Value.GetAll(c => c.BranchName.Contains(_view.SearchValue)));
-                BranchBindingSource.DataSource = BranchList;
-            }
-            else
-            {
-                LoadAllBranchList();
-            }
+            LoadAllBranchList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -168,9 +160,15 @@ namespace PresentationLayer.Presenters
             _view.ContactPerson = "";
         }
         
-        private void LoadAllBranchList()
+        private void LoadAllBranchList(bool emptyValue = false)
         {
             BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.Value.GetAll());
+
+            if (!emptyValue)
+            {
+                BranchList = BranchList.Where(c => c.BranchName.ToLower().Contains(_view.SearchValue.ToLower()));
+            }
+
             BranchBindingSource.DataSource = BranchList;//Set data source.
             _view.SetBranchListBindingSource(BranchBindingSource);
         }

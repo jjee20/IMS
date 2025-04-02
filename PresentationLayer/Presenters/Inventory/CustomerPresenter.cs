@@ -119,15 +119,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll(c => c.CustomerName.Contains(_view.SearchValue), includeProperties: "CustomerType"));
-                CustomerBindingSource.DataSource = CustomerList;
-            }
-            else
-            {
-                LoadAllCustomerList();
-            }
+            LoadAllCustomerList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -201,10 +193,16 @@ namespace PresentationLayer.Presenters
             _view.ContactPerson = "";
         }
         
-        private void LoadAllCustomerList()
+        private void LoadAllCustomerList(bool emptyValue = false)
         {
             CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll(includeProperties: "CustomerType"));
-            CustomerBindingSource.DataSource = CustomerList;//Set data source.
+
+            if (!emptyValue)
+            {
+                CustomerList = CustomerList.Where(c => c.CustomerName.Contains(_view.SearchValue));
+            }
+
+            CustomerBindingSource.DataSource = CustomerList.OrderBy(c => c.CustomerName);//Set data source.
             _view.SetCustomerListBindingSource(CustomerBindingSource);
         }
         private void LoadAllCustomerTypeList()

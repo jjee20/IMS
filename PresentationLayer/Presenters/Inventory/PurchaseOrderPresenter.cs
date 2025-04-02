@@ -326,15 +326,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll(c => c.PurchaseOrderName.Contains(_view.SearchValue), includeProperties: "Branch,PurchaseType,Vendor"));
-                PurchaseOrderBindingSource.DataSource = PurchaseOrderList;
-            }
-            else
-            {
-                LoadAllPurchaseOrderList();
-            }
+            LoadAllPurchaseOrderList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -427,10 +419,22 @@ namespace PresentationLayer.Presenters
             _view.PurchaseOrderLines = new List<PurchaseOrderLineViewModel>();
         }
 
-        private void LoadAllPurchaseOrderList()
+        private void LoadAllPurchaseOrderList(bool emptyValue = false)
         {
-            PurchaseOrderBindingSource.DataSource = PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll(includeProperties: "Branch,PurchaseType,Vendor"));
+            
+            PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll(includeProperties: "Branch,PurchaseType,Vendor"));
 
+            if (!emptyValue)
+            {
+                PurchaseOrderList = PurchaseOrderList.Where(c =>
+                    c.PurchaseOrderName.ToLower().Contains(_view.SearchValue.ToLower()) ||
+                    c.Branch.ToLower().Contains(_view.SearchValue.ToLower()) ||
+                    c.Vendor.ToLower().Contains(_view.SearchValue.ToLower()) ||
+                    c.PurchaseType.ToLower().Contains(_view.SearchValue.ToLower())
+                );
+            }
+
+            PurchaseOrderBindingSource.DataSource = PurchaseOrderList.OrderByDescending(c => c.OrderDate);
             _view.SetPurchaseOrderListBindingSource(PurchaseOrderBindingSource);
         }
         private void LoadAllPurchaseTypeList() {

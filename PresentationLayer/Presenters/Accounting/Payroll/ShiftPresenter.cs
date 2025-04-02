@@ -96,15 +96,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.Value.GetAll(c => c.ShiftName.Contains(_view.SearchValue)));
-                ShiftBindingSource.DataSource = ShiftList;
-            }
-            else
-            {
-                LoadAllShiftList();
-            }
+            LoadAllShiftList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -171,9 +163,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.ShiftName = "";
         }
 
-        private void LoadAllShiftList()
+        private void LoadAllShiftList(bool emptyValue = false)
         {
             ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.Value.GetAll());
+
+            if (!emptyValue)
+            {
+                ShiftList = ShiftList.Where(c => c.ShiftName.Contains(_view.SearchValue));
+            }
+
             ShiftBindingSource.DataSource = ShiftList;//Set data source.
             _view.SetShiftListBindingSource(ShiftBindingSource);
         }

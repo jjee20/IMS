@@ -94,15 +94,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll(c => c.Product.ProductName.Contains(_view.SearchValue), includeProperties: "Product"));
-                ProductStockInLogBindingSource.DataSource = ProductStockInLogList;
-            }
-            else
-            {
-                LoadAllProductStockInLogList();
-            }
+            LoadAllProductStockInLogList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -169,9 +161,15 @@ namespace PresentationLayer.Presenters
             _view.Notes = "";
         }
         
-        private void LoadAllProductStockInLogList()
+        private void LoadAllProductStockInLogList(bool emptyValue = false)
         {
             ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll(includeProperties: "Product"));
+
+            if (!emptyValue)
+            {
+                ProductStockInLogList = ProductStockInLogList.Where(c => c.Product.ToLower().Contains(_view.SearchValue.ToLower()));
+            }
+
             ProductStockInLogBindingSource.DataSource = ProductStockInLogList;//Set data source.
             _view.SetProductStockInLogListBindingSource(ProductStockInLogBindingSource);
         }

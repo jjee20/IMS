@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                PaymentTypeList = _unitOfWork.PaymentType.Value.GetAll(c => c.PaymentTypeName.Contains(_view.SearchValue));
-                PaymentTypeBindingSource.DataSource = PaymentTypeList;
-            }
-            else
-            {
-                LoadAllPaymentTypeList();
-            }
+            LoadAllPaymentTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllPaymentTypeList()
+        private void LoadAllPaymentTypeList(bool emptyValue = false)
         {
             PaymentTypeList = _unitOfWork.PaymentType.Value.GetAll();
+
+            if (emptyValue)
+            {
+                PaymentTypeList = PaymentTypeList.Where(c => c.PaymentTypeName.Contains(_view.SearchValue));
+            }
+
             PaymentTypeBindingSource.DataSource = PaymentTypeList;//Set data source.
             _view.SetPaymentTypeListBindingSource(PaymentTypeBindingSource);
         }

@@ -83,15 +83,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                ProjectList = _unitOfWork.Project.Value.GetAll(c => c.ProjectName.Contains(_view.SearchValue));
-                ProjectBindingSource.DataSource = ProjectList;
-            }
-            else
-            {
-                LoadAllProjectList();
-            }
+            LoadAllProjectList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -154,10 +146,16 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Description = "";
         }
 
-        private void LoadAllProjectList()
+        private void LoadAllProjectList(bool emptyValue = false)
         {
             ProjectList = _unitOfWork.Project.Value.GetAll();
-            ProjectBindingSource.DataSource = ProjectList;//Set data source.
+
+            if (!emptyValue)
+            {
+                ProjectList = ProjectList.Where(c => c.ProjectName.Contains(_view.SearchValue));
+            }
+
+            ProjectBindingSource.DataSource = ProjectList.OrderByDescending(c => c.StartDate);//Set data source.
             _view.SetProjectListBindingSource(ProjectBindingSource);
         }
     }

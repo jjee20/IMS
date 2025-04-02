@@ -99,19 +99,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(
-                    _unitOfWork.Deduction.Value.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
-                    c.Employee.FirstName.Contains(_view.SearchValue) ||
-                    (c.DateDeducted.Date >= _view.StartDate.Date && c.DateDeducted.Date <= _view.EndDate.Date), 
-                    includeProperties: "Employee"));
-                DeductionBindingSource.DataSource = DeductionList;
-            }
-            else
-            {
-                LoadAllDeductionList();
-            }
+            LoadAllDeductionList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -181,12 +169,16 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Description = "";
         }
 
-        private void LoadAllDeductionList()
+        private void LoadAllDeductionList(bool emptyValue = false)
         {
             DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(
                 _unitOfWork.Deduction.Value.GetAll(c => c.DateDeducted.Date >= _view.StartDate.Date && c.DateDeducted.Date <= _view.EndDate.Date, 
                 includeProperties: "Employee"));
-            DeductionBindingSource.DataSource = DeductionList;//Set data source.
+            if (!emptyValue)
+            {
+                DeductionList = DeductionList.Where(c => c.Employee.Contains(_view.SearchValue));
+            }
+            DeductionBindingSource.DataSource = DeductionList.OrderByDescending(c => c.DateDeducted);//Set data source.
             _view.SetDeductionListBindingSource(DeductionBindingSource);
         }
         private void LoadAllDeductionTypeList()

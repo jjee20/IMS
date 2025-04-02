@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                ShipmentTypeList = _unitOfWork.ShipmentType.Value.GetAll(c => c.ShipmentTypeName.Contains(_view.SearchValue));
-                ShipmentTypeBindingSource.DataSource = ShipmentTypeList;
-            }
-            else
-            {
-                LoadAllShipmentTypeList();
-            }
+            LoadAllShipmentTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllShipmentTypeList()
+        private void LoadAllShipmentTypeList(bool emptyValue = false)
         {
             ShipmentTypeList = _unitOfWork.ShipmentType.Value.GetAll();
+
+            if (emptyValue)
+            {
+                ShipmentTypeList = ShipmentTypeList.Where(c => c.ShipmentTypeName.Contains(_view.SearchValue));
+            }
+
             ShipmentTypeBindingSource.DataSource = ShipmentTypeList;//Set data source.
             _view.SetShipmentTypeListBindingSource(ShipmentTypeBindingSource);
         }

@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private async  void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                ProductTypeList = _unitOfWork.ProductType.Value.GetAll(c => c.ProductTypeName.Contains(_view.SearchValue));
-                ProductTypeBindingSource.DataSource = ProductTypeList;
-            }
-            else
-            {
-                LoadAllProductTypeList();
-            }
+            LoadAllProductTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllProductTypeList()
+        private void LoadAllProductTypeList(bool emptyValue = false)
         {
             ProductTypeList = _unitOfWork.ProductType.Value.GetAll();
+
+            if (emptyValue)
+            {
+                ProductTypeList = ProductTypeList.Where(c => c.ProductTypeName.Contains(_view.SearchValue));
+            }
+
             ProductTypeBindingSource.DataSource = ProductTypeList;//Set data source.
             _view.SetProductTypeListBindingSource(ProductTypeBindingSource);
         }

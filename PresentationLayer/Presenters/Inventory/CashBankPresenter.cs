@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                CashBankList = _unitOfWork.CashBank.Value.GetAll(c => c.CashBankName.Contains(_view.SearchValue));
-                CashBankBindingSource.DataSource = CashBankList;
-            }
-            else
-            {
-                LoadAllCashBankList();
-            }
+            LoadAllCashBankList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllCashBankList()
+        private void LoadAllCashBankList(bool emptyValue = false)
         {
             CashBankList = _unitOfWork.CashBank.Value.GetAll();
+
+            if (emptyValue)
+            {
+                CashBankList = CashBankList.Where(c => c.CashBankName.Contains(_view.SearchValue));
+            }
+
             CashBankBindingSource.DataSource = CashBankList;//Set data source.
             _view.SetCashBankListBindingSource(CashBankBindingSource);
         }

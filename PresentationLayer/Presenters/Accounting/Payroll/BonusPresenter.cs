@@ -98,15 +98,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
-                BonusBindingSource.DataSource = BonusList;
-            }
-            else
-            {
-                LoadAllBonusList();
-            }
+            LoadAllBonusList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -175,10 +167,16 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Description = "";
         }
 
-        private void LoadAllBonusList()
+        private void LoadAllBonusList(bool emptyValue = false)
         {
             BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll(includeProperties:"Employee"));
-            BonusBindingSource.DataSource = BonusList;//Set data source
+
+            if (!emptyValue)
+            {
+                BonusList = BonusList.Where(c => c.Employee.Contains(_view.SearchValue) || c.BonusType.Contains(_view.SearchValue));
+            }
+
+            BonusBindingSource.DataSource = BonusList.OrderByDescending(c => c.DateGranted);//Set data source
             _view.SetBonusListBindingSource(BonusBindingSource);
         }
         private void LoadAllBonusTypeList()

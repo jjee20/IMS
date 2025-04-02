@@ -101,19 +101,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(
-                    _unitOfWork.Allowance.Value.GetAll(c => c.Employee.LastName.Contains(_view.SearchValue) || 
-                    c.Employee.FirstName.Contains(_view.SearchValue) ||
-                    (c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date),
-                    includeProperties: "Employee"));
-                AllowanceBindingSource.DataSource = AllowanceList;
-            }
-            else
-            {
-                LoadAllAllowanceList();
-            }
+            LoadAllAllowanceList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -186,11 +174,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Description = "";
         }
 
-        private void LoadAllAllowanceList()
+        private void LoadAllAllowanceList(bool emptyValue = false)
         {
-            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(c => c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date, 
+            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(c => c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date,
                 includeProperties: "Employee"));
-            AllowanceBindingSource.DataSource = AllowanceList;//Set data source.
+            if (!emptyValue)
+                AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
+            AllowanceBindingSource.DataSource = AllowanceList.OrderByDescending(c => c.DateGranted); ;//Set data source.
             _view.SetAllowanceListBindingSource(AllowanceBindingSource);
         }
         private void LoadAllAllowanceTypeList()

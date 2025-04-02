@@ -86,15 +86,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.Value.GetAll(c => c.WarehouseName.Contains(_view.SearchValue), includeProperties: "Branch"));
-                WarehouseBindingSource.DataSource = WarehouseList;
-            }
-            else
-            {
-                LoadAllWarehouseList();
-            }
+            LoadAllWarehouseList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -159,9 +151,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllWarehouseList()
+        private void LoadAllWarehouseList(bool emptyValue = false)
         {
             WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.Value.GetAll(includeProperties: "Branch")); ;
+
+            if (!emptyValue)
+            {
+                WarehouseList = WarehouseList.Where(c => c.WarehouseName.Contains(_view.SearchValue));
+            }
+
             WarehouseBindingSource.DataSource = WarehouseList;//Set data source.
             _view.SetWarehouseListBindingSource(WarehouseBindingSource);
         }

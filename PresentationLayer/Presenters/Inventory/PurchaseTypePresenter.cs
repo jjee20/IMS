@@ -78,15 +78,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll(c => c.PurchaseTypeName.Contains(_view.SearchValue));
-                PurchaseTypeBindingSource.DataSource = PurchaseTypeList;
-            }
-            else
-            {
-                LoadAllPurchaseTypeList();
-            }
+            LoadAllPurchaseTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,9 +141,15 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllPurchaseTypeList()
+        private void LoadAllPurchaseTypeList(bool emptyValue = false)
         {
             PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll();
+
+            if (emptyValue)
+            {
+                PurchaseTypeList = PurchaseTypeList.Where(c => c.PurchaseTypeName.Contains(_view.SearchValue));
+            }
+
             PurchaseTypeBindingSource.DataSource = PurchaseTypeList;//Set data source.
             _view.SetPurchaseTypeListBindingSource(PurchaseTypeBindingSource);
         }

@@ -94,17 +94,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll(
-                    c => c.Employee.LastName.Contains(_view.SearchValue) ||
-                    c.Employee.FirstName.Contains(_view.SearchValue), includeProperties: "Employee"));
-                BenefitBindingSource.DataSource = BenefitList;
-            }
-            else
-            {
-                LoadAllBenefitList();
-            }
+            LoadAllBenefitList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -174,9 +164,15 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.EmployeeId = 0;
         }
 
-        private void LoadAllBenefitList()
+        private void LoadAllBenefitList(bool emptyValue = false)
         {
             BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll(includeProperties: "Employee"));
+
+            if (!emptyValue)
+            {
+                BenefitList = BenefitList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
+            }
+
             BenefitBindingSource.DataSource = BenefitList;//Set data source.
             _view.SetBenefitListBindingSource(BenefitBindingSource);
         }
