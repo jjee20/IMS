@@ -67,8 +67,15 @@ namespace RavenTech_ERP.Presenters
             _mainForm.ProductMonitoringEvent += ProductMonitoringEvent;
             _mainForm.ProfileEvent += ProfileEvent;
             _mainForm.RegisterAccountEvent += RegisterAccountEvent;
+            _mainForm.PayrollEvent += PayrollEvent;
 
             DashboardEvent(this, EventArgs.Empty);
+        }
+
+        private void PayrollEvent(object? sender, EventArgs e)
+        {
+            IPayrollView _view = ChildManager<PayrollView>.GetChildInstance((MainForm)_mainForm);
+            new PayrollPresenter(_view, _unitOfWork);
         }
 
         private void RegisterAccountEvent(object? sender, EventArgs e)
