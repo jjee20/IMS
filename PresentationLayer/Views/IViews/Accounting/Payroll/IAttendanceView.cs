@@ -7,6 +7,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
     public interface IAttendanceView
     {
         SfDataGrid DataGrid { get; }
+        SfDataGrid IndividualDataGrid { get; }
         int AttendanceId { get; set; }
         int EmployeeId { get; set; }
         string EmployeeName { get; set; }
