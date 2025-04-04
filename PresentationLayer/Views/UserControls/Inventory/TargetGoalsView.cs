@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RavenTech_ERP.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
+using Syncfusion.WinForms.Controls;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class TargetGoalsView : UserControl, ITargetGoalsView
+    public partial class TargetGoalsView : SfForm, ITargetGoalsView
     {
         private string _message;
         public TargetGoalsView()
@@ -26,19 +27,37 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             };
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double SalesCurrent { get => double.Parse(txtSales.Text); set => txtSales.Text = value.ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double SalesTarget { get => double.Parse(txtSalesTarget.Text.Trim()); set => txtSalesTarget.Text = value.ToString("N2"); }
-        public double SalesRemaining{  set => txtSalesRemaining.Text = (SalesTarget-SalesCurrent).ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public double SalesRemaining { set => txtSalesRemaining.Text = (SalesTarget - SalesCurrent).ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SalesProgress {  set => txtSalesProgress.Text = $"{SalesCurrent / SalesTarget * 100:N2}%" ?? "0%"; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ItemSoldCurrent { get => double.Parse(txtItemSold.Text); set => txtItemSold.Text = value.ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ItemSoldTarget { get => double.Parse(txtItemSoldTarget.Text.Trim()); set => txtItemSoldTarget.Text = value.ToString("N2"); }
-        public double ItemSoldRemaining{  set => txtItemSoldRemaining.Text =  (ItemSoldTarget-ItemSoldCurrent).ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public double ItemSoldRemaining { set => txtItemSoldRemaining.Text = (ItemSoldTarget - ItemSoldCurrent).ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ItemSoldProgress {  set => txtItemSoldProgress.Text = $"{ItemSoldCurrent / ItemSoldTarget * 100:N2}%" ?? "0%"; }
-        public string Year { set => txtYear.Text = value; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string Year
+        {
+            set => txtYear.Text = value;
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double YearCurrent { get => double.Parse(txtYearCurrent.Text); set => txtYearCurrent.Text = value.ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double YearTarget { get => double.Parse(txtYearTarget.Text.Trim()); set => txtYearTarget.Text = value.ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double YearRemaining {  set => txtYearRemaining.Text = (YearTarget-YearCurrent).ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string YearProgress { set => txtYearProgress.Text = $"{YearCurrent / YearTarget * 100:N2}%" ?? "0%"; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message { set => _message = value; }
 
         public event EventHandler SaveClicked;

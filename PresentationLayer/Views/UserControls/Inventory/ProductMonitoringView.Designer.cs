@@ -119,7 +119,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1356, 701);
+            materialCard1.Size = new Size(1340, 662);
             materialCard1.TabIndex = 2;
             // 
             // tableLayoutPanel3
@@ -137,7 +137,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel3.Size = new Size(1328, 561);
+            tableLayoutPanel3.Size = new Size(1312, 522);
             tableLayoutPanel3.TabIndex = 6;
             // 
             // guna2GradientPanel3
@@ -148,10 +148,10 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel3.Dock = DockStyle.Fill;
             guna2GradientPanel3.FillColor = Color.IndianRed;
             guna2GradientPanel3.FillColor2 = Color.White;
-            guna2GradientPanel3.Location = new Point(887, 3);
+            guna2GradientPanel3.Location = new Point(877, 3);
             guna2GradientPanel3.Name = "guna2GradientPanel3";
             guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2GradientPanel3.Size = new Size(438, 535);
+            guna2GradientPanel3.Size = new Size(432, 496);
             guna2GradientPanel3.TabIndex = 2;
             // 
             // dgOutOfStock
@@ -181,7 +181,7 @@ namespace PresentationLayer.Views.UserControls
             dgOutOfStock.Location = new Point(0, 23);
             dgOutOfStock.Name = "dgOutOfStock";
             dgOutOfStock.RowHeadersVisible = false;
-            dgOutOfStock.Size = new Size(438, 512);
+            dgOutOfStock.Size = new Size(432, 473);
             dgOutOfStock.TabIndex = 2;
             dgOutOfStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgOutOfStock.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -226,10 +226,10 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel2.Dock = DockStyle.Fill;
             guna2GradientPanel2.FillColor = Color.LightGoldenrodYellow;
             guna2GradientPanel2.FillColor2 = Color.White;
-            guna2GradientPanel2.Location = new Point(445, 3);
+            guna2GradientPanel2.Location = new Point(440, 3);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
             guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2GradientPanel2.Size = new Size(436, 535);
+            guna2GradientPanel2.Size = new Size(431, 496);
             guna2GradientPanel2.TabIndex = 1;
             // 
             // dgLowStock
@@ -259,7 +259,7 @@ namespace PresentationLayer.Views.UserControls
             dgLowStock.Location = new Point(0, 23);
             dgLowStock.Name = "dgLowStock";
             dgLowStock.RowHeadersVisible = false;
-            dgLowStock.Size = new Size(436, 512);
+            dgLowStock.Size = new Size(431, 473);
             dgLowStock.TabIndex = 2;
             dgLowStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgLowStock.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -306,7 +306,7 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel1.Location = new Point(3, 3);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
             guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GradientPanel1.Size = new Size(436, 535);
+            guna2GradientPanel1.Size = new Size(431, 496);
             guna2GradientPanel1.TabIndex = 0;
             // 
             // dgInStock
@@ -336,7 +336,7 @@ namespace PresentationLayer.Views.UserControls
             dgInStock.Location = new Point(0, 23);
             dgInStock.Name = "dgInStock";
             dgInStock.RowHeadersVisible = false;
-            dgInStock.Size = new Size(436, 512);
+            dgInStock.Size = new Size(431, 473);
             dgInStock.TabIndex = 1;
             dgInStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgInStock.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -381,7 +381,7 @@ namespace PresentationLayer.Views.UserControls
             panel2.Location = new Point(14, 64);
             panel2.Margin = new Padding(3, 13, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1328, 62);
+            panel2.Size = new Size(1312, 62);
             panel2.TabIndex = 5;
             // 
             // tableLayoutPanel4
@@ -408,14 +408,14 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Size = new Size(1253, 62);
+            tableLayoutPanel4.Size = new Size(1237, 62);
             tableLayoutPanel4.TabIndex = 12;
             // 
             // guna2HtmlLabel6
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel6.Location = new Point(469, 19);
+            guna2HtmlLabel6.Location = new Point(461, 19);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(127, 23);
             guna2HtmlLabel6.TabIndex = 3;
@@ -426,7 +426,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel4.Location = new Point(149, 19);
+            guna2HtmlLabel4.Location = new Point(141, 19);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(111, 23);
             guna2HtmlLabel4.TabIndex = 1;
@@ -437,7 +437,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel9.BackColor = Color.Transparent;
             guna2HtmlLabel9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel9.Location = new Point(789, 19);
+            guna2HtmlLabel9.Location = new Point(781, 19);
             guna2HtmlLabel9.Name = "guna2HtmlLabel9";
             guna2HtmlLabel9.Size = new Size(144, 23);
             guna2HtmlLabel9.TabIndex = 6;
@@ -451,7 +451,7 @@ namespace PresentationLayer.Views.UserControls
             txtInStock.Dock = DockStyle.Fill;
             txtInStock.FillColor = Color.PaleGreen;
             txtInStock.FillColor2 = Color.White;
-            txtInStock.Location = new Point(349, 19);
+            txtInStock.Location = new Point(341, 19);
             txtInStock.Name = "txtInStock";
             txtInStock.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtInStock.Size = new Size(114, 24);
@@ -476,7 +476,7 @@ namespace PresentationLayer.Views.UserControls
             txtLowStock.Dock = DockStyle.Fill;
             txtLowStock.FillColor = Color.LightGoldenrodYellow;
             txtLowStock.FillColor2 = Color.White;
-            txtLowStock.Location = new Point(669, 19);
+            txtLowStock.Location = new Point(661, 19);
             txtLowStock.Name = "txtLowStock";
             txtLowStock.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtLowStock.Size = new Size(114, 24);
@@ -502,7 +502,7 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel6.Dock = DockStyle.Fill;
             guna2GradientPanel6.FillColor = Color.IndianRed;
             guna2GradientPanel6.FillColor2 = Color.White;
-            guna2GradientPanel6.Location = new Point(989, 19);
+            guna2GradientPanel6.Location = new Point(981, 19);
             guna2GradientPanel6.Name = "guna2GradientPanel6";
             guna2GradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2GradientPanel6.Size = new Size(114, 24);
@@ -579,7 +579,7 @@ namespace PresentationLayer.Views.UserControls
             btnPrint.FlatStyle = FlatStyle.Flat;
             btnPrint.ImageKey = "printing.png";
             btnPrint.ImageList = imageList1;
-            btnPrint.Location = new Point(1253, 0);
+            btnPrint.Location = new Point(1237, 0);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(75, 62);
             btnPrint.TabIndex = 25;
@@ -613,7 +613,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1328, 50);
+            tableLayoutPanel1.Size = new Size(1312, 50);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // guna2Separator1
@@ -622,7 +622,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Location = new Point(3, 40);
             guna2Separator1.Margin = new Padding(3, 2, 3, 2);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1322, 8);
+            guna2Separator1.Size = new Size(1306, 8);
             guna2Separator1.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -637,7 +637,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1328, 38);
+            tableLayoutPanel2.Size = new Size(1312, 38);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -681,9 +681,10 @@ namespace PresentationLayer.Views.UserControls
             // ProductMonitoringView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
+            ClientSize = new Size(1340, 662);
             Controls.Add(materialCard1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "ProductMonitoringView";
-            Size = new Size(1356, 701);
             materialCard1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             guna2GradientPanel3.ResumeLayout(false);

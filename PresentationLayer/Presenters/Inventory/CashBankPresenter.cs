@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public ICashBankView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource CashBankBindingSource;
         private IEnumerable<CashBank> CashBankList;
         public CashBankPresenter(ICashBankView view, IUnitOfWork unitOfWork)
         {
@@ -20,7 +19,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            CashBankBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -78,15 +76,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                CashBankList = _unitOfWork.CashBank.Value.GetAll(c => c.CashBankName.Contains(_view.SearchValue));
-                CashBankBindingSource.DataSource = CashBankList;
-            }
-            else
-            {
-                LoadAllCashBankList();
-            }
+            LoadAllCashBankList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,11 +139,12 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllCashBankList()
+        private void LoadAllCashBankList(bool emptyValue = false)
         {
             CashBankList = _unitOfWork.CashBank.Value.GetAll();
-            CashBankBindingSource.DataSource = CashBankList;//Set data source.
-            _view.SetCashBankListBindingSource(CashBankBindingSource);
+
+            if (!emptyValue) CashBankList = CashBankList.Where(c => c.CashBankName.Contains(_view.SearchValue));
+            _view.SetCashBankListBindingSource(CashBankList);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using PresentationLayer.Views.UserControls;
-using PresentationLayer.Views.UserControls.Payroll;
 using RavenTech_ERP.Views.IViews.Accounting;
 using RevenTech_ERP.Presenters.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
@@ -47,9 +46,9 @@ namespace PresentationLayer.Presenters.Accounting
 
         private void ShowPayroll(object? sender, EventArgs e)
         {
-            IPayrollSystemView view = new PayrollSystemView();
-            var presenter = new PayrollSystemPresenter(view, _unitOfWork);
-            view.ShowForm();
+            //IPayrollSystemView view = new PayrollSystemView();
+            //var presenter = new PayrollSystemPresenter(view, _unitOfWork);
+            //view.ShowForm();
         }
         private void ShowAccount(object? sender, EventArgs e)
         {

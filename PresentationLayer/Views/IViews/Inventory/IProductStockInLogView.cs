@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.ViewModels.Inventory;
 using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.IViews.Inventory
@@ -25,7 +26,7 @@ namespace RavenTech_ERP.Views.IViews.Inventory
         event EventHandler SaveEvent;
         event EventHandler SearchEvent;
 
-        void SetProductStockInLogListBindingSource(BindingSource ProductStockInLogList);
+        void SetProductStockInLogListBindingSource(IEnumerable<ProductStockInLogViewModel> ProductStockInLogList);
         void SetProductListBindingSource(BindingSource bindingSource);
         void SetProductStatusListBindingSource(BindingSource bindingSource);
     }

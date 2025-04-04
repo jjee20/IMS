@@ -14,7 +14,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IDepartmentView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource DepartmentBindingSource;
         private IEnumerable<Department> DepartmentList;
         public DepartmentPresenter(IDepartmentView view, IUnitOfWork unitOfWork)
         {
@@ -23,7 +22,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            DepartmentBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -82,15 +80,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                DepartmentList = _unitOfWork.Department.Value.GetAll(c => c.Name.Contains(_view.SearchValue));
-                DepartmentBindingSource.DataSource = DepartmentList;
-            }
-            else
-            {
-                LoadAllDepartmentList();
-            }
+            LoadAllDepartmentList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -153,11 +143,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Description = "";
         }
 
-        private void LoadAllDepartmentList()
+        private void LoadAllDepartmentList(bool emptyValue = false)
         {
             DepartmentList = _unitOfWork.Department.Value.GetAll();
-            DepartmentBindingSource.DataSource = DepartmentList;//Set data source.
-            _view.SetDepartmentListBindingSource(DepartmentBindingSource);
+
+            if (!emptyValue) DepartmentList = DepartmentList.Where(c => c.Name.Contains(_view.SearchValue)); 
+            _view.SetDepartmentListBindingSource(DepartmentList);
         }
     }
 }

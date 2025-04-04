@@ -16,7 +16,6 @@ namespace PresentationLayer.Presenters
     {
         public ICustomerView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource CustomerBindingSource;
         private BindingSource CustomerTypeBindingSource;
 
         private IEnumerable<CustomerViewModel> CustomerList;
@@ -28,7 +27,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            CustomerBindingSource = new BindingSource();
             CustomerTypeBindingSource = new BindingSource();
 
             //Events
@@ -119,15 +117,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll(c => c.CustomerName.Contains(_view.SearchValue), includeProperties: "CustomerType"));
-                CustomerBindingSource.DataSource = CustomerList;
-            }
-            else
-            {
-                LoadAllCustomerList();
-            }
+            LoadAllCustomerList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -201,11 +191,12 @@ namespace PresentationLayer.Presenters
             _view.ContactPerson = "";
         }
         
-        private void LoadAllCustomerList()
+        private void LoadAllCustomerList(bool emptyValue = false)
         {
             CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll(includeProperties: "CustomerType"));
-            CustomerBindingSource.DataSource = CustomerList;//Set data source.
-            _view.SetCustomerListBindingSource(CustomerBindingSource);
+
+            if (!emptyValue) CustomerList = CustomerList.Where(c => c.CustomerName.Contains(_view.SearchValue));
+            _view.SetCustomerListBindingSource(CustomerList.OrderBy(c => c.CustomerName));
         }
         private void LoadAllCustomerTypeList()
         {

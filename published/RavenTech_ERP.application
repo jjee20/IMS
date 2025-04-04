@@ -14,14 +14,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Application Files\RavenTech_ERP_1_0_0_16\RavenTech_ERP.dll.manifest" size="81644">
-      <assemblyIdentity name="RavenTech_ERP.exe" version="1.0.0.16" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+    <dependentAssembly dependencyType="install" codebase="Application Files\RavenTech_ERP_1_0_0_18\RavenTech_ERP.dll.manifest" size="88013">
+      <assemblyIdentity name="RavenTech_ERP.exe" version="1.0.0.18" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ODD+HgS+iCI5BjXBypd60h0hsNfeYpzxMCALelqBEIc=</dsig:DigestValue>
+        <dsig:DigestValue>94HUZzK0l29mtyf+7/OgYLuGv3bhJREyedklkpxCdvY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

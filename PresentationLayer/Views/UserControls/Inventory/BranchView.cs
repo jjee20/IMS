@@ -5,6 +5,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class BranchView : UserControl, IBranchView
+    public partial class BranchView : SfForm, IBranchView
     {
         private int id;
         private string message;
@@ -57,9 +58,11 @@ namespace PresentationLayer.Views.UserControls
                 }
                 MessageBox.Show(Message);
             };
-            txtSearch.TextChanged += (s, e) =>
+            txtSearch.KeyDown += (s, e) =>
             {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
+                if (e.KeyCode == Keys.Enter)
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                txtSearch.Focus();
             };
             //Edit
             btnEdit.Click += delegate
@@ -102,69 +105,80 @@ namespace PresentationLayer.Views.UserControls
         public SfDataGrid DataGrid => dgList;
 
         //Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BranchId
         {
             get { return id; }
             set { id = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public string BranchName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Address
         {
             get { return txtAddress.Text.Trim().ToString(); }
             set { txtAddress.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Phone
         {
             get { return txtPhone.Text; }
             set { txtPhone.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Email
         {
             get { return txtEmail.Text; }
             set { txtEmail.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ContactPerson
         {
             get { return txtContactPerson.Text; }
             set { txtContactPerson.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
 
-        public void SetBranchListBindingSource(BindingSource BranchList)
+        public void SetBranchListBindingSource(IEnumerable<BranchViewModel> BranchList)
         {
-            dgPager.DataSource = BranchList.ToList<BranchViewModel>();
+            dgPager.DataSource = BranchList;
             dgList.DataSource = dgPager.PagedSource;
         }
 

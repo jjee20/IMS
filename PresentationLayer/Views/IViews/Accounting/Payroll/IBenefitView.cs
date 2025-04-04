@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
@@ -25,7 +26,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetBenefitListBindingSource(BindingSource BenefitList);
+        void SetBenefitListBindingSource(IEnumerable<BenefitViewModel> BenefitList);
         void SetBenefitTypeListBindingSource(BindingSource BenefitTypeList);
         void SetEmployeeListBindingSource(BindingSource EmployeeList);
     }

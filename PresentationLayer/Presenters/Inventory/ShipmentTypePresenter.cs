@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IShipmentTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ShipmentTypeBindingSource;
         private IEnumerable<ShipmentType> ShipmentTypeList;
         public ShipmentTypePresenter(IShipmentTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ShipmentTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -78,15 +76,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                ShipmentTypeList = _unitOfWork.ShipmentType.Value.GetAll(c => c.ShipmentTypeName.Contains(_view.SearchValue));
-                ShipmentTypeBindingSource.DataSource = ShipmentTypeList;
-            }
-            else
-            {
-                LoadAllShipmentTypeList();
-            }
+            LoadAllShipmentTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,11 +139,12 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllShipmentTypeList()
+        private void LoadAllShipmentTypeList(bool emptyValue = false)
         {
             ShipmentTypeList = _unitOfWork.ShipmentType.Value.GetAll();
-            ShipmentTypeBindingSource.DataSource = ShipmentTypeList;//Set data source.
-            _view.SetShipmentTypeListBindingSource(ShipmentTypeBindingSource);
+
+            if (!emptyValue) ShipmentTypeList = ShipmentTypeList.Where(c => c.ShipmentTypeName.Contains(_view.SearchValue));
+            _view.SetShipmentTypeListBindingSource(ShipmentTypeList);
         }
     }
 }

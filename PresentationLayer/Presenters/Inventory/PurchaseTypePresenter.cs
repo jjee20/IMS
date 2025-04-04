@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IPurchaseTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource PurchaseTypeBindingSource;
         private IEnumerable<PurchaseType> PurchaseTypeList;
         public PurchaseTypePresenter(IPurchaseTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            PurchaseTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -78,15 +76,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll(c => c.PurchaseTypeName.Contains(_view.SearchValue));
-                PurchaseTypeBindingSource.DataSource = PurchaseTypeList;
-            }
-            else
-            {
-                LoadAllPurchaseTypeList();
-            }
+            LoadAllPurchaseTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,11 +139,12 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllPurchaseTypeList()
+        private void LoadAllPurchaseTypeList(bool emptyValue = false)
         {
             PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll();
-            PurchaseTypeBindingSource.DataSource = PurchaseTypeList;//Set data source.
-            _view.SetPurchaseTypeListBindingSource(PurchaseTypeBindingSource);
+
+            if (!emptyValue) PurchaseTypeList = PurchaseTypeList.Where(c => c.PurchaseTypeName.Contains(_view.SearchValue));
+            _view.SetPurchaseTypeListBindingSource(PurchaseTypeList);
         }
     }
 }

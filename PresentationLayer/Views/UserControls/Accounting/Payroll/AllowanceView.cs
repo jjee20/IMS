@@ -9,6 +9,7 @@ using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class AllowanceView : UserControl, IAllowanceView
+    public partial class AllowanceView : SfForm, IAllowanceView
     {
         private int id;
         private string message;
@@ -67,9 +68,11 @@ namespace PresentationLayer.Views.UserControls
                 }
                 MessageBox.Show(Message);
             };
-            txtSearch.TextChanged += (s, e) =>
+            txtSearch.KeyDown += (s, e) =>
             {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
+                if (e.KeyCode == Keys.Enter)
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                txtSearch.Focus();
             };
             //Edit
             btnEdit.Click += delegate
@@ -124,78 +127,91 @@ namespace PresentationLayer.Views.UserControls
 
         //Properties
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int AllowanceId
         {
             get { return id; }
             set { id = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public AllowanceType AllowanceType
         {
             get { return (AllowanceType)txtAllowanceType.SelectedValue; }
             set { txtAllowanceType.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Amount
         {
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime DateGranted
         {
             get { return txtDateGranted.Value; }
             set { txtDateGranted.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int EmployeeId
         {
             get { return (int)txtEmployee.SelectedValue; }
             set { txtEmployee.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime StartDate
         {
             get { return txtStartDate.Value; }
             set { txtStartDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime EndDate
         {
             get { return txtEndDate.Value; }
             set { txtEndDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsRecurring
         {
             get { return txtIsRecurring.Checked; }
             set { txtIsRecurring.Checked = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
 
-        public void SetAllowanceListBindingSource(BindingSource AllowanceList)
+        public void SetAllowanceListBindingSource(IEnumerable<AllowanceViewModel> AllowanceList)
         {
-            dgPager.DataSource = AllowanceList.ToList<AllowanceViewModel>();
+            dgPager.DataSource = AllowanceList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)
@@ -227,6 +243,22 @@ namespace PresentationLayer.Views.UserControls
                 instance = new AllowanceView();
                 parentContainer.Controls.Add(instance);
                 instance.Dock = DockStyle.Fill;
+            }
+            return instance;
+        }
+        public static AllowanceView GetMdiInstance(Form mdiParent)
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new AllowanceView(); // UserControl
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.StartPosition = FormStartPosition.CenterScreen;
+                instance.MdiParent = mdiParent;
+                instance.Show();
+            }
+            else
+            {
+                instance.BringToFront();
             }
             return instance;
         }

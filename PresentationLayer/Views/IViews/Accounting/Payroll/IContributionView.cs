@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
@@ -26,7 +27,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetContributionListBindingSource(BindingSource ContributionList);
+        void SetContributionListBindingSource(IEnumerable<Contribution> ContributionList);
         void SetContributionTypeListBindingSource(BindingSource ContributionTypeList);
     }
 }

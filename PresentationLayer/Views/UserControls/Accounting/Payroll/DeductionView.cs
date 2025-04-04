@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
 
 using DomainLayer.ViewModels.PayrollViewModels;
@@ -9,6 +10,7 @@ using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class DeductionView : UserControl, IDeductionView
+    public partial class DeductionView : SfForm, IDeductionView
     {
         private int id;
         private string message;
@@ -62,9 +64,11 @@ namespace PresentationLayer.Views.UserControls
                 }
                 MessageBox.Show(Message);
             };
-            txtSearch.TextChanged += (s, e) =>
+            txtSearch.KeyDown += (s, e) =>
             {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
+                if (e.KeyCode == Keys.Enter)
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                txtSearch.Focus();
             };
             //Edit
             btnEdit.Click += delegate
@@ -119,73 +123,85 @@ namespace PresentationLayer.Views.UserControls
 
         //Properties
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int DeductionId
         {
             get { return id; }
             set { id = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DeductionType DeductionType
         {
             get { return (DeductionType)txtDeductionType.SelectedValue; }
             set { txtDeductionType.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Amount
         {
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime DateDeducted
         {
             get { return txtDateDeducted.Value; }
             set { txtDateDeducted.Value = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int EmployeeId
         {
             get { return (int)txtEmployee.SelectedValue; }
             set { txtEmployee.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime StartDate
         {
             get { return txtStartDate.Value; }
             set { txtStartDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime EndDate
         {
             get { return txtEndDate.Value; }
             set { txtEndDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
 
-        public void SetDeductionListBindingSource(BindingSource DeductionList)
+        public void SetDeductionListBindingSource(IEnumerable<DeductionViewModel>  DeductionList)
         {
-            dgPager.DataSource = DeductionList.ToList<DeductionViewModel>();
+            dgPager.DataSource = DeductionList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)

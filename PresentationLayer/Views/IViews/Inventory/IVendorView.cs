@@ -1,4 +1,6 @@
-﻿using Syncfusion.WinForms.DataGrid;
+﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.Inventory;
+using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.IViews
 {
@@ -29,7 +31,7 @@ namespace PresentationLayer.Views.IViews
         //                             List<string> municipalityBindingSource, 
         //                             List<string> provinceBindingSource, 
         //                             List<string> regionBindingSource);
-        void SetVendorListBindingSource(BindingSource VendorList);
+        void SetVendorListBindingSource(IEnumerable<VendorViewModel> VendorList);
         void SetVendorTypeListBindingSource(BindingSource VendorTypeBindingSource);
     }
 }

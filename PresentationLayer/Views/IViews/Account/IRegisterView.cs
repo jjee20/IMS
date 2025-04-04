@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.ViewModels.AccountViewModels;
 using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.IViews.Account
@@ -20,7 +21,7 @@ namespace PresentationLayer.Views.IViews.Account
         bool Viewing { get; set; }
         bool Overriding { get; set; }
         SfDataGrid DataGrid { get; }
-        void SetRegisterListBindingSource(BindingSource RegisterList);
+        void SetRegisterListBindingSource(IEnumerable<AccountViewModel> RegisterList);
         void SetDepartmentListBindingSource(BindingSource departmentBindingSource);
 
         event EventHandler AddNewEvent;

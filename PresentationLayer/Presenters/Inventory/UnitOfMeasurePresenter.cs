@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IUnitOfMeasureView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource UnitOfMeasureBindingSource;
         private IEnumerable<UnitOfMeasure> UnitOfMeasureList;
         public UnitOfMeasurePresenter(IUnitOfMeasureView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            UnitOfMeasureBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -78,15 +76,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll(c => c.UnitOfMeasureName.Contains(_view.SearchValue));
-                UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;
-            }
-            else
-            {
-                LoadAllUnitOfMeasureList();
-            }
+            LoadAllUnitOfMeasureList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,11 +139,12 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
 
-        private void LoadAllUnitOfMeasureList()
+        private void LoadAllUnitOfMeasureList(bool emptyValue = false)
         {
             UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll();
-            UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;//Set data source.
-            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureBindingSource);
+
+            if (!emptyValue) UnitOfMeasureList = UnitOfMeasureList.Where(C => C.UnitOfMeasureName.Contains(_view.SearchValue));
+            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureList);
         }
     }
 }

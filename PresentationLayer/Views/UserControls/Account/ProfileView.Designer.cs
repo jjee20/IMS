@@ -42,6 +42,11 @@
             btnChangePassword = new Guna.UI2.WinForms.Guna2Button();
             btnEditProfile = new Guna.UI2.WinForms.Guna2Button();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
             listTask = new MaterialSkin.Controls.MaterialListView();
             txtDepartment = new MaterialSkin.Controls.MaterialLabel();
@@ -51,11 +56,6 @@
             txtUsername = new MaterialSkin.Controls.MaterialLabel();
             txtName = new MaterialSkin.Controls.MaterialLabel();
             guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             materialCard1.SuspendLayout();
             materialCard2.SuspendLayout();
             guna2GroupBox1.SuspendLayout();
@@ -79,7 +79,7 @@
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1356, 701);
+            materialCard1.Size = new Size(1340, 662);
             materialCard1.TabIndex = 0;
             // 
             // guna2Separator2
@@ -88,7 +88,7 @@
             guna2Separator2.Location = new Point(14, 54);
             guna2Separator2.Margin = new Padding(3, 2, 3, 2);
             guna2Separator2.Name = "guna2Separator2";
-            guna2Separator2.Size = new Size(1328, 9);
+            guna2Separator2.Size = new Size(1312, 9);
             guna2Separator2.TabIndex = 13;
             // 
             // materialLabel1
@@ -102,7 +102,7 @@
             materialLabel1.Location = new Point(14, 14);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(1328, 40);
+            materialLabel1.Size = new Size(1312, 40);
             materialLabel1.TabIndex = 12;
             materialLabel1.Text = "Account Information";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
@@ -117,7 +117,7 @@
             btnChangePassword.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnChangePassword.Font = new Font("Segoe UI", 9F);
             btnChangePassword.ForeColor = Color.White;
-            btnChangePassword.Location = new Point(148, 515);
+            btnChangePassword.Location = new Point(140, 496);
             btnChangePassword.Name = "btnChangePassword";
             btnChangePassword.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnChangePassword.Size = new Size(200, 45);
@@ -134,7 +134,7 @@
             btnEditProfile.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnEditProfile.Font = new Font("Segoe UI", 9F);
             btnEditProfile.ForeColor = Color.White;
-            btnEditProfile.Location = new Point(148, 467);
+            btnEditProfile.Location = new Point(140, 448);
             btnEditProfile.Name = "btnEditProfile";
             btnEditProfile.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnEditProfile.Size = new Size(200, 45);
@@ -159,13 +159,73 @@
             materialCard2.Controls.Add(txtName);
             materialCard2.Depth = 0;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(471, 140);
+            materialCard2.Location = new Point(463, 121);
             materialCard2.Margin = new Padding(14);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
             materialCard2.Size = new Size(791, 421);
             materialCard2.TabIndex = 9;
+            // 
+            // materialLabel6
+            // 
+            materialLabel6.AutoSize = true;
+            materialLabel6.Depth = 0;
+            materialLabel6.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel6.Location = new Point(17, 169);
+            materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel6.Name = "materialLabel6";
+            materialLabel6.Size = new Size(84, 19);
+            materialLabel6.TabIndex = 11;
+            materialLabel6.Text = "Department";
+            // 
+            // materialLabel2
+            // 
+            materialLabel2.AutoSize = true;
+            materialLabel2.Depth = 0;
+            materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel2.Location = new Point(17, 119);
+            materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel2.Name = "materialLabel2";
+            materialLabel2.Size = new Size(46, 19);
+            materialLabel2.TabIndex = 10;
+            materialLabel2.Text = "Phone";
+            // 
+            // materialLabel3
+            // 
+            materialLabel3.AutoSize = true;
+            materialLabel3.Depth = 0;
+            materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel3.Location = new Point(17, 84);
+            materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel3.Name = "materialLabel3";
+            materialLabel3.Size = new Size(41, 19);
+            materialLabel3.TabIndex = 9;
+            materialLabel3.Text = "Email";
+            // 
+            // materialLabel4
+            // 
+            materialLabel4.AutoSize = true;
+            materialLabel4.Depth = 0;
+            materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel4.Location = new Point(17, 49);
+            materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel4.Name = "materialLabel4";
+            materialLabel4.Size = new Size(72, 19);
+            materialLabel4.TabIndex = 8;
+            materialLabel4.Text = "Username";
+            // 
+            // materialLabel5
+            // 
+            materialLabel5.AutoSize = true;
+            materialLabel5.Depth = 0;
+            materialLabel5.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel5.Location = new Point(17, 14);
+            materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel5.Name = "materialLabel5";
+            materialLabel5.Size = new Size(43, 19);
+            materialLabel5.TabIndex = 7;
+            materialLabel5.Text = "Name";
             // 
             // guna2GroupBox1
             // 
@@ -273,7 +333,7 @@
             guna2CirclePictureBox1.Anchor = AnchorStyles.None;
             guna2CirclePictureBox1.Image = (Image)resources.GetObject("guna2CirclePictureBox1.Image");
             guna2CirclePictureBox1.ImageRotate = 0F;
-            guna2CirclePictureBox1.Location = new Point(95, 140);
+            guna2CirclePictureBox1.Location = new Point(87, 121);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             guna2CirclePictureBox1.Padding = new Padding(5);
             guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges7;
@@ -283,74 +343,15 @@
             guna2CirclePictureBox1.TabIndex = 8;
             guna2CirclePictureBox1.TabStop = false;
             // 
-            // materialLabel2
-            // 
-            materialLabel2.AutoSize = true;
-            materialLabel2.Depth = 0;
-            materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel2.Location = new Point(17, 119);
-            materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel2.Name = "materialLabel2";
-            materialLabel2.Size = new Size(46, 19);
-            materialLabel2.TabIndex = 10;
-            materialLabel2.Text = "Phone";
-            // 
-            // materialLabel3
-            // 
-            materialLabel3.AutoSize = true;
-            materialLabel3.Depth = 0;
-            materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel3.Location = new Point(17, 84);
-            materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel3.Name = "materialLabel3";
-            materialLabel3.Size = new Size(41, 19);
-            materialLabel3.TabIndex = 9;
-            materialLabel3.Text = "Email";
-            // 
-            // materialLabel4
-            // 
-            materialLabel4.AutoSize = true;
-            materialLabel4.Depth = 0;
-            materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel4.Location = new Point(17, 49);
-            materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel4.Name = "materialLabel4";
-            materialLabel4.Size = new Size(72, 19);
-            materialLabel4.TabIndex = 8;
-            materialLabel4.Text = "Username";
-            // 
-            // materialLabel5
-            // 
-            materialLabel5.AutoSize = true;
-            materialLabel5.Depth = 0;
-            materialLabel5.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel5.Location = new Point(17, 14);
-            materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel5.Name = "materialLabel5";
-            materialLabel5.Size = new Size(43, 19);
-            materialLabel5.TabIndex = 7;
-            materialLabel5.Text = "Name";
-            // 
-            // materialLabel6
-            // 
-            materialLabel6.AutoSize = true;
-            materialLabel6.Depth = 0;
-            materialLabel6.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel6.Location = new Point(17, 169);
-            materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel6.Name = "materialLabel6";
-            materialLabel6.Size = new Size(84, 19);
-            materialLabel6.TabIndex = 11;
-            materialLabel6.Text = "Department";
-            // 
             // ProfileView
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(1340, 662);
             Controls.Add(materialCard1);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
             Name = "ProfileView";
-            Size = new Size(1356, 701);
             materialCard1.ResumeLayout(false);
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
