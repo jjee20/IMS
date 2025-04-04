@@ -1,4 +1,7 @@
-﻿using Syncfusion.WinForms.Controls;
+﻿using DomainLayer.Models.Accounts;
+using DomainLayer.ViewModels.PayrollViewModels;
+using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +16,13 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
 {
     public partial class _13thMonthView : SfForm
     {
-        public _13thMonthView()
+        private EmployeeViewModel _employee;
+        private IUnitOfWork _unitOfWork;
+        public _13thMonthView(EmployeeViewModel employee, IUnitOfWork unitOfWork)
         {
             InitializeComponent();
+            _employee = employee;
+            _unitOfWork = unitOfWork;
         }
     }
 }
