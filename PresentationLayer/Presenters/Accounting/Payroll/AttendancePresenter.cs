@@ -64,14 +64,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Delete(object? sender, EventArgs e)
         {
 
-            if (_view.DataGrid.SelectedItem == null)
+            if (_view.IndividualDataGrid.SelectedItem == null)
             {
                 _view.IsSuccessful = false;
                 _view.Message = "Please select an Allowance to delete";
                 return;
             }
 
-            var attendanceVM = (IndividualAttendanceViewModel)_view.DataGrid.SelectedItem;
+            var attendanceVM = (IndividualAttendanceViewModel)_view.IndividualDataGrid.SelectedItem;
             var attendance = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee", tracked: true);
 
             _unitOfWork.Attendance.Value.Detach(attendance);

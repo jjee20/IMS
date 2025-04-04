@@ -171,6 +171,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public SfDataGrid DataGrid => dgList;
+        public SfDataGrid IndividualDataGrid => dgListInvidivual;
         //Properties
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int AttendanceId
