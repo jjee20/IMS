@@ -1,25 +1,13 @@
-﻿using DomainLayer.Models;
-using DomainLayer.ViewModels.Inventory;
-using MaterialSkin;
-using PresentationLayer.Presenters;
+﻿using DomainLayer.ViewModels.Inventory;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
-using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class SalesOrderView : UserControl, ISalesOrderView
+    public partial class SalesOrderView : SfForm, ISalesOrderView
     {
         private BindingSource _salesOrderLineBindingSource = new BindingSource();
         private int id = 0;
@@ -67,9 +55,11 @@ namespace PresentationLayer.Views.UserControls
                 }
                 MessageBox.Show(Message);
             };
-            txtSearch.TextChanged += (s, e) =>
+            txtSearch.KeyDown += (s, e) =>
             {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
+                if (e.KeyCode == Keys.Enter)
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                txtSearch.Focus();
             };
             //Edit
             btnEdit.Click += delegate
@@ -163,73 +153,100 @@ namespace PresentationLayer.Views.UserControls
         }
 
         //PropertiesdgList
-        public SfDataGrid DataGrid => dgList;
+        public SfDataGrid DataGrid => dgList; 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SalesOrderId
         {
             get { return Convert.ToInt32(id); }
             set { id = value; }
         }
-
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SalesOrderName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime StartDate
         {
             get { return txtStartDate.Value; }
             set { txtStartDate.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime EndDate
         {
             get { return txtEndDate.Value; }
             set { txtEndDate.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BranchId
         {
             get { return (int)txtBranch.SelectedValue; }
             set { txtBranch.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int CustomerId
         {
             get { return (int)txtCustomer.SelectedValue; }
             set { txtCustomer.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTimeOffset OrderDate
         {
             get { return txtSalesOrderDate.Value; }
             set { txtSalesOrderDate.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTimeOffset DeliveryDate
         {
             get { return txtDeliveryDate.Value; }
             set { txtDeliveryDate.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SalesTypeId
         {
             get { return (int)txtSalesType.SelectedValue; }
             set { txtSalesType.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Remarks
         {
             get { return txtRemarks.Text; }
             set { txtRemarks.Text = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string CustomerRefNumber
         {
             get { return txtCustomerRefNumber.Text; }
             set { txtCustomerRefNumber.Text = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Amount
         {
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString("N2"); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double SubTotal
         {
             get { return Convert.ToDouble(txtSubTotal.Text); }
             set { txtSubTotal.Text = value.ToString("N2"); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Discount
         {
             get
@@ -243,11 +260,15 @@ namespace PresentationLayer.Views.UserControls
             }
             set { txtDiscount.Text = value.ToString("N2"); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Tax
         {
             get { return Convert.ToDouble(txtTax.Text); }
             set { txtTax.Text = value.ToString("N2"); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Freight
         {
             get
@@ -260,11 +281,15 @@ namespace PresentationLayer.Views.UserControls
             }
             set { txtFreight.Text = value.ToString("N2"); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Total
         {
             get { return Convert.ToDouble(txtTotal.Text); }
             set { txtTotal.Text = value.ToString("N2"); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<SalesOrderLineViewModel> SalesOrderLines
         {
             get { return _salesOrderLineBindingSource.DataSource as List<SalesOrderLineViewModel>; }
@@ -275,53 +300,71 @@ namespace PresentationLayer.Views.UserControls
                 DataGridHelper.ApplyDisplayNames<SalesOrderLineViewModel>(_salesOrderLineBindingSource, dgOrderLine);
             }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ShipmentId
         {
             get { return id; }
             set { id = value; }
         }
-
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ShipmentName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTimeOffset ShipmentDate
         {
             get { return txtShipmentDate.Value; }
             set { txtShipmentDate.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ShipmentTypeId
         {
             get { return (int)txtShipmentType.SelectedValue; }
             set { txtShipmentType.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int WarehouseId
         {
             get { return (int)txtWarehouse.SelectedValue; }
             set { txtWarehouse.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsFullShipment
         {
             get { return txtIsFullShipment.Checked; }
             set { txtIsFullShipment.Checked = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
-
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public string SearchValue
         {
@@ -330,22 +373,29 @@ namespace PresentationLayer.Views.UserControls
         }
 
         //Add Product
-
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProductId
         {
             get { return Convert.ToInt32(txtProduct.SelectedValue); }
             set { txtProduct.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductQuantity
         {
             get { return Convert.ToDouble(txtProductQty.Text); }
             set { txtProductQty.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductPrice
         {
             get { return Convert.ToDouble(txtProductQty.Text); }
             set { txtProductQty.Text = value.ToString(); }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductDiscount
         {
             get
@@ -361,17 +411,22 @@ namespace PresentationLayer.Views.UserControls
                 txtProductDiscount.Text = value.ToString("N2");
             }
         }
-
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool NonStock
         {
             get { return btnNonStock.Checked; }
             set { btnNonStock.Checked = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool NoShipment
         {
             get { return txtShipment.Checked; }
             set { txtShipment.Checked = value; }
         }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string NonStockProductName
         {
             get { return txtNonStock.Text; }
@@ -389,14 +444,14 @@ namespace PresentationLayer.Views.UserControls
             txtWarehouse.DisplayMember = "WarehouseName";
             txtWarehouse.ValueMember = "WarehouseId";
         }
-        public void SetSalesOrderListBindingSource(BindingSource SalesOrderList)
+        public void SetSalesOrderListBindingSource(IEnumerable<SalesOrderViewModel> SalesOrderList)
         {
-            dgPager.DataSource = SalesOrderList.ToList<SalesOrderViewModel>();
+            dgPager.DataSource = SalesOrderList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetSalesOrderLineListBindingSource(BindingSource SalesOrderLineList)
         {
-            dgOrderLine.DataSource = SalesOrderLineList.ToList<SalesOrderLineViewModel>();
+            dgOrderLine.DataSource = SalesOrderLineList;
         }
 
         public void SetSalesTypeListBindingSource(BindingSource SalesTypeBindingSource)

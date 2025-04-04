@@ -7,7 +7,6 @@ using PresentationLayer;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.UserControls;
-using PresentationLayer.Views.UserControls.Payroll;
 using RavenTech_ERP.Views.UserControls.Account;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
@@ -19,7 +18,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IEmployeeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource EmployeeBindingSource;
         private BindingSource GenderBindingSource;
         private BindingSource DepartmentBindingSource;
         private BindingSource JobPositionBindingSource;
@@ -36,7 +34,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            EmployeeBindingSource = new BindingSource();
             GenderBindingSource = new BindingSource();
             DepartmentBindingSource = new BindingSource();
             JobPositionBindingSource = new BindingSource();
@@ -138,17 +135,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll(
-                    c => c.FirstName.Contains(_view.SearchValue) ||
-                    c.LastName.Contains(_view.SearchValue), includeProperties: "Department,JobPosition,Shift"));
-                EmployeeBindingSource.DataSource = EmployeeList;
-            }
-            else
-            {
-                LoadAllEmployeeList();
-            }
+            LoadAllEmployeeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -242,11 +229,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.isDeducted = true;
         }
 
-        private void LoadAllEmployeeList()
+        private void LoadAllEmployeeList(bool emptyValue = false)
         {
             EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll(includeProperties: "Department,JobPosition,Shift"));
-            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
+
+            if (!emptyValue) EmployeeList = EmployeeList.Where(c => c.Name.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetEmployeeListBindingSource(EmployeeList.OrderBy(c => c.Name));
         }
         private void LoadAllGenderList()
         {

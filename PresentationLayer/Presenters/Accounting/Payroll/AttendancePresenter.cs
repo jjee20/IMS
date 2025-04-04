@@ -11,7 +11,6 @@ using PresentationLayer;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
-using PresentationLayer.Views.UserControls.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.IRepositories;
 using System.Formats.Asn1;
@@ -24,7 +23,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IAttendanceView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource AttendanceBindingSource;
         private BindingSource IndividualAttendanceBindingSource;
         private BindingSource EmployeeBindingSource;
         private BindingSource ProjectBindingSource;
@@ -39,7 +37,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            AttendanceBindingSource = new BindingSource();
             IndividualAttendanceBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
             ProjectBindingSource = new BindingSource();
@@ -190,7 +187,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.EmployeeName = attendanceVM.Employee;
             _view.EmployeeIdFromTextBox = attendanceVM.EmployeeId;
             LoadAllIndividualAttendanceList(attendanceVM.EmployeeId);
-            _view.SetIndividualAttendanceListBindingSource(IndividualAttendanceBindingSource);
         }
 
         private void AddNew(object? sender, EventArgs e)
@@ -248,25 +244,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            bool hasDateRange = _view.StartDate != null && _view.EndDate != null;
-
-            AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
-
             if (_view.IsIndividual)
             {
                 LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
             }
             else
             {
-                if (!emptyValue || hasDateRange)
-                {
-                    AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date).Where(c => emptyValue || c.Employee.Contains(_view.SearchValue) || c.Employee.Contains(_view.SearchValue));
-                    AttendanceBindingSource.DataSource = AttendanceList;
-                }
-                else
-                {
-                    LoadAllAttendanceList();
-                }
+                LoadAllAttendanceList(emptyValue);
             }
         }
 
@@ -365,17 +349,18 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             return approvedLeaves.Any(leave => date >= leave.StartDate && date <= leave.EndDate);
         }
-        private void LoadAllAttendanceList()
+        private void LoadAllAttendanceList(bool emptyValue = false)
         {
             AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
-            AttendanceBindingSource.DataSource = AttendanceList.OrderBy(c => c.Employee);//Set data source.
-            _view.SetAttendanceListBindingSource(AttendanceBindingSource);
+
+            if(!emptyValue) AttendanceList = AttendanceList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower())); 
+            _view.SetAttendanceListBindingSource(AttendanceList.OrderBy(c => c.Employee));
         }
         private void LoadAllIndividualAttendanceList(int id)
         {
             IndividualAttendanceList = Program.Mapper.Map<IEnumerable<IndividualAttendanceViewModel>>(_unitOfWork.Attendance.Value.GetAll(c => c.EmployeeId == id &&
                 c.Date.Date >= _view.StartDate.Date && c.Date.Date <= _view.EndDate.Date, includeProperties: "Project,Employee"));
-            IndividualAttendanceBindingSource.DataSource = IndividualAttendanceList;//Set data source.
+            _view.SetIndividualAttendanceListBindingSource(IndividualAttendanceList);
         }
         private void LoadAllEmployeeList()
         {

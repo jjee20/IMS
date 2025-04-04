@@ -1,4 +1,6 @@
-﻿using Syncfusion.WinForms.DataGrid;
+﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.Inventory;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews.Inventory
@@ -22,6 +24,6 @@ namespace PresentationLayer.Views.IViews.Inventory
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetInvoiceTypeListBindingSource(BindingSource InvoiceTypeList);
+        void SetInvoiceTypeListBindingSource(IEnumerable<InvoiceType> InvoiceTypeList);
     }
 }

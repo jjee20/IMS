@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IVendorTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource VendorTypeBindingSource;
         private IEnumerable<VendorType> VendorTypeList;
         public VendorTypePresenter(IVendorTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            VendorTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -78,15 +76,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                VendorTypeList = _unitOfWork.VendorType.Value.GetAll(c => c.VendorTypeName.Contains(_view.SearchValue));
-                VendorTypeBindingSource.DataSource = VendorTypeList;
-            }
-            else
-            {
-                LoadAllVendorTypeList();
-            }
+            LoadAllVendorTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,11 +139,12 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
 
-        private void LoadAllVendorTypeList()
+        private void LoadAllVendorTypeList(bool emptyValue = false)
         {
             VendorTypeList = _unitOfWork.VendorType.Value.GetAll();
-            VendorTypeBindingSource.DataSource = VendorTypeList;//Set data source.
-            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
+
+            if (!emptyValue) VendorTypeList = VendorTypeList.Where(c => c.VendorTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetVendorTypeListBindingSource(VendorTypeList);
         }
     }
 }

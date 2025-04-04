@@ -1,4 +1,5 @@
-﻿using Syncfusion.WinForms.DataGrid;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
@@ -24,6 +25,6 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetShiftListBindingSource(BindingSource ShiftList);
+        void SetShiftListBindingSource(IEnumerable<ShiftViewModel> ShiftList);
     }
 }

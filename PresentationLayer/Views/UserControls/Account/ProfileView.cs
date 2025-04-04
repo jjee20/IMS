@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Enums;
 using PresentationLayer.Views.IViews.Account;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class ProfileView : UserControl, IProfileView
+    public partial class ProfileView : SfForm, IProfileView
     {
         private List<TaskRoles> items;
         public ProfileView()
@@ -34,11 +35,23 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string AppUserName { set => txtName.Text = value; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string UserName { set => txtUsername.Text = value; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Email { set => txtEmail.Text = value; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Phone { set => txtPhone.Text = value; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Department { set => txtDepartment.Text = value; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public event EventHandler ShowEditProfile;
         public event EventHandler ShowChangePassword;

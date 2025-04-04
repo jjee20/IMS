@@ -1,0 +1,247 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialSkin.2" Version="2.3.1" />
+    <PackageReference Include="Syncfusion.Licensing" Version="29.1.35" />
+    <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="29.1.35" />
+    <PackageReference Include="Syncfusion.Tools.Windows" Version="29.1.35" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\AccountingView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\AllowanceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\AttendanceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\BenefitView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\BonusView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\ContributionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\DeductionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\DepartmentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\EmployeeContributionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\EmployeeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\JobPositionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\LeaveView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\PayrollSystemView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\PayrollView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\ProjectView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\ShiftView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\TaxView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\ChangePasswordView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\ChangePasswordViewOld.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\EditAccountInformationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\EmployeeInformationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\LoginView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\ProfileView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\RegisterView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Admin\AdminView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BillTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BillView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BranchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\CashBankView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ConfigurationView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\CustomerTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\CustomerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\DashboardView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\InventoryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\InvoiceTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\InvoiceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentReceiveListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentReceiveView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentVoucherListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentVoucherView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductInStockLogView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductInventoryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductMonitoringView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProjectInformationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProjectManagmentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchaseOrderInformationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchasesReportView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchaseTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\SalesOrderInformationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\SalesOrderView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\SalesReportView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\SalesTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\SettingsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ShipmentTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\TargetGoalsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\UnitOfMeasureView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\VendorTypeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\VendorView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\WarehouseView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\POS\POSView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\POS\ProductControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\POS\ProductListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UserControls\Inventory\SalesTypeView.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UserControls\Inventory\VendorTypeView.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

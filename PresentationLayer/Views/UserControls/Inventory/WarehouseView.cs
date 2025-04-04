@@ -5,6 +5,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class WarehouseView : UserControl, IWarehouseView
+    public partial class WarehouseView : SfForm, IWarehouseView
     {
         private int id;
         private string message;
@@ -58,9 +59,11 @@ namespace PresentationLayer.Views.UserControls
                 }
                 MessageBox.Show(Message);
             };
-            txtSearch.TextChanged += (s, e) =>
+            txtSearch.KeyDown += (s, e) =>
             {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
+                if (e.KeyCode == Keys.Enter)
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                txtSearch.Focus();
             };
             //Edit
             btnEdit.Click += delegate
@@ -107,44 +110,52 @@ namespace PresentationLayer.Views.UserControls
 
         //Properties
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int WarehouseId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string WarehouseName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BranchId
         {
             get { return (int)txtBranch.SelectedValue; }
             set { txtBranch.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public string SearchValue
         {
@@ -152,7 +163,7 @@ namespace PresentationLayer.Views.UserControls
             set { txtSearch.Text = value; }
         }
 
-        public void SetWarehouseListBindingSource(BindingSource WarehouseList)
+        public void SetWarehouseListBindingSource(IEnumerable<WarehouseViewModel> WarehouseList)
         {
             dgPager.DataSource = WarehouseList.ToList<WarehouseViewModel>();
             dgList.DataSource = dgPager.PagedSource;

@@ -1,4 +1,6 @@
-﻿using Syncfusion.WinForms.DataGrid;
+﻿using DomainLayer.Models.Inventory;
+using PresentationLayer.Views.UserControls;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
@@ -22,6 +24,6 @@ namespace PresentationLayer.Views.IViews
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetShipmentTypeListBindingSource(BindingSource ShipmentTypeList);
+        void SetShipmentTypeListBindingSource(IEnumerable<ShipmentType> ShipmentTypeList);
     }
 }

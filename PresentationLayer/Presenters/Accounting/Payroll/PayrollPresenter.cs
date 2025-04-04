@@ -21,7 +21,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IPayrollView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource PayrollBindingSource;
         private BindingSource ProjectBindingSource;
         private List<PayrollViewModel> PayrollList;
         private IEnumerable<Project> ProjectList;
@@ -33,7 +32,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            PayrollBindingSource = new BindingSource();
             ProjectBindingSource = new BindingSource();
             PayrollList = new List<PayrollViewModel>();
             //Load
@@ -48,25 +46,24 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.AllEvent += SelectAll;
 
             _view.SetProjectListBindingSource(ProjectBindingSource);
-            _view.SetPayrollListBindingSource(PayrollBindingSource);
         }
 
         private void SelectAll(object? sender, EventArgs e)
         {
             PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
-            PayrollBindingSource.DataSource = PayrollList;
+            _view.SetPayrollListBindingSource(PayrollList);
         }
 
         private void SelectProject(object? sender, EventArgs e)
         {
             PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
-            PayrollBindingSource.DataSource = PayrollList;
+            _view.SetPayrollListBindingSource(PayrollList);
         }
 
         private void OnIncludeBenefits(object? sender, EventArgs e)
         {
             PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date);
-            PayrollBindingSource.DataSource = PayrollList;
+            _view.SetPayrollListBindingSource(PayrollList);
         }
 
         private void PrintPayslip(object? sender, EventArgs e)
@@ -134,9 +131,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
                 // Perform payroll calculation
                 PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date);
-
-                // Bind the results to the UI
-                PayrollBindingSource.DataSource = PayrollList;
+                _view.SetPayrollListBindingSource(PayrollList);
 
             }
             catch (Exception ex)
@@ -180,7 +175,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void LoadAllPayrollList()
         {
             PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
-            PayrollBindingSource.DataSource = PayrollList;
+            _view.SetPayrollListBindingSource(PayrollList);
         }
 
         public List<PayrollViewModel> CalculatePayroll(DateTime startDate, DateTime endDate, int? projectId = 0)

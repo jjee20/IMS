@@ -16,7 +16,6 @@ namespace PresentationLayer.Presenters
     {
         public IVendorView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource VendorBindingSource;
         private BindingSource VendorTypeBindingSource;
 
         private IEnumerable<VendorViewModel> VendorList;
@@ -27,7 +26,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            VendorBindingSource = new BindingSource();
             VendorTypeBindingSource = new BindingSource();
 
             //Events
@@ -118,15 +116,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(c => c.VendorName.Contains(_view.SearchValue), includeProperties: "VendorType"));
-                VendorBindingSource.DataSource = VendorList;
-            }
-            else
-            {
-                LoadAllVendorList();
-            }
+            LoadAllVendorList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -200,11 +190,12 @@ namespace PresentationLayer.Presenters
             _view.ContactPerson = "";
         }
 
-        private void LoadAllVendorList()
+        private void LoadAllVendorList(bool emptyValue = false)
         {
             VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(includeProperties: "VendorType"));
-            VendorBindingSource.DataSource = VendorList;//Set data source.
-            _view.SetVendorListBindingSource(VendorBindingSource);
+
+            if (!emptyValue) VendorList = VendorList.Where(c => c.VendorName.Contains(_view.SearchValue));
+            _view.SetVendorListBindingSource(VendorList);
         }
         private void LoadAllVendorTypeList()
         {

@@ -14,7 +14,6 @@ namespace PresentationLayer.Presenters
     {
         public IWarehouseView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource WarehouseBindingSource;
         private BindingSource BranchBindingSource;
         private IEnumerable<WarehouseViewModel> WarehouseList;
         private IEnumerable<Branch> BranchList;
@@ -24,7 +23,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            WarehouseBindingSource = new BindingSource();
             BranchBindingSource = new BindingSource();
 
             //Events
@@ -86,15 +84,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.Value.GetAll(c => c.WarehouseName.Contains(_view.SearchValue), includeProperties: "Branch"));
-                WarehouseBindingSource.DataSource = WarehouseList;
-            }
-            else
-            {
-                LoadAllWarehouseList();
-            }
+            LoadAllWarehouseList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -159,11 +149,12 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllWarehouseList()
+        private void LoadAllWarehouseList(bool emptyValue = false)
         {
             WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.Value.GetAll(includeProperties: "Branch")); ;
-            WarehouseBindingSource.DataSource = WarehouseList;//Set data source.
-            _view.SetWarehouseListBindingSource(WarehouseBindingSource);
+
+            if (!emptyValue) WarehouseList = WarehouseList.Where(c => c.WarehouseName.Contains(_view.SearchValue)); 
+            _view.SetWarehouseListBindingSource(WarehouseList);
         }
 
         private void LoadAllBranchList()

@@ -1,4 +1,5 @@
-﻿using Syncfusion.WinForms.DataGrid;
+﻿using DomainLayer.Models.Accounting.Payroll;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
@@ -23,6 +24,6 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetTaxListBindingSource(BindingSource TaxList);
+        void SetTaxListBindingSource(IEnumerable<Tax> TaxList);
     }
 }

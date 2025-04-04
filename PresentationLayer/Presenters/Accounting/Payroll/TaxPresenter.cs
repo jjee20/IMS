@@ -14,7 +14,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public ITaxView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource TaxBindingSource;
         private IEnumerable<Tax> TaxList;
         public TaxPresenter(ITaxView view, IUnitOfWork unitOfWork)
         {
@@ -23,7 +22,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            TaxBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -84,15 +82,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                TaxList = _unitOfWork.Tax.Value.GetAll(c => c.MinimumSalary == Convert.ToDouble(_view.SearchValue));
-                TaxBindingSource.DataSource = TaxList;
-            }
-            else
-            {
-                LoadAllTaxList();
-            }
+            LoadAllTaxList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -157,11 +147,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.TaxRate = 0;
         }
 
-        private void LoadAllTaxList()
+        private void LoadAllTaxList(bool emptyValue = false)
         {
             TaxList = _unitOfWork.Tax.Value.GetAll();
-            TaxBindingSource.DataSource = TaxList;//Set data source.
-            _view.SetTaxListBindingSource(TaxBindingSource);
+
+            if(!emptyValue) TaxList = TaxList.Where(c => c.TaxRate.ToString().Contains(_view.SearchValue));
+            _view.SetTaxListBindingSource(TaxList);
         }
     }
 }

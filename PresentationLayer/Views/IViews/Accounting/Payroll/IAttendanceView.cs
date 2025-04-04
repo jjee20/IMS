@@ -1,4 +1,5 @@
-﻿using Syncfusion.WinForms.DataGrid;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
@@ -34,8 +35,8 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
         event EventHandler ShowAttendanceEvent;
-        void SetAttendanceListBindingSource(BindingSource AttendanceList);
-        void SetIndividualAttendanceListBindingSource(BindingSource IndividualAttendanceList);
+        void SetAttendanceListBindingSource(IEnumerable<AttendanceViewModel> AttendanceList);
+        void SetIndividualAttendanceListBindingSource(IEnumerable<IndividualAttendanceViewModel> IndividualAttendanceList);
         void SetEmployeeListBindingSource(BindingSource EmployeeList);
         void SetProjectListBindingSource(BindingSource ProjectList);
         void SetEmployeeItem(Employee employee);

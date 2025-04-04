@@ -14,7 +14,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IJobPositionView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource JobPositionBindingSource;
         private IEnumerable<JobPosition> JobPositionList;
         public JobPositionPresenter(IJobPositionView view, IUnitOfWork unitOfWork)
         {
@@ -23,7 +22,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            JobPositionBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -83,15 +81,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                JobPositionList = _unitOfWork.JobPosition.Value.GetAll(c => c.Title.Contains(_view.SearchValue));
-                JobPositionBindingSource.DataSource = JobPositionList;
-            }
-            else
-            {
-                LoadAllJobPositionList();
-            }
+            LoadAllJobPositionList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -154,11 +144,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Description = "";
         }
 
-        private void LoadAllJobPositionList()
+        private void LoadAllJobPositionList(bool emptyValue = false)
         {
             JobPositionList = _unitOfWork.JobPosition.Value.GetAll();
-            JobPositionBindingSource.DataSource = JobPositionList;//Set data source.
-            _view.SetJobPositionListBindingSource(JobPositionBindingSource);
+
+            if (!emptyValue) JobPositionList = JobPositionList.Where(c => c.Title.Contains(_view.SearchValue)); 
+            _view.SetJobPositionListBindingSource(JobPositionList);
         }
     }
 }

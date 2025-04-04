@@ -53,7 +53,7 @@ namespace PresentationLayer.Views.IViews
         event EventHandler DeleteProductEvent;
         event EventHandler UpdateComputationEvent;
 
-        void SetPurchaseOrderListBindingSource(BindingSource PurchaseOrderList);
+        void SetPurchaseOrderListBindingSource(IEnumerable<PurchaseOrderViewModel> PurchaseOrderList);
         void SetPurchaseOrderLineListBindingSource(BindingSource PurchaseOrderLineList);
         void SetPurchaseTypeListBindingSource(BindingSource PurchaseTypeBindingSource);
         void SetBranchListBindingSource(BindingSource BranchBindingSource);

@@ -90,7 +90,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 81.8181839F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 18.181818F));
-            tableLayoutPanel1.Size = new Size(1356, 71);
+            tableLayoutPanel1.Size = new Size(1340, 71);
             tableLayoutPanel1.TabIndex = 7;
             // 
             // guna2Separator1
@@ -99,7 +99,7 @@
             guna2Separator1.Location = new Point(3, 60);
             guna2Separator1.Margin = new Padding(3, 2, 3, 2);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1350, 9);
+            guna2Separator1.Size = new Size(1334, 9);
             guna2Separator1.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -114,7 +114,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1356, 58);
+            tableLayoutPanel2.Size = new Size(1340, 58);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -145,7 +145,7 @@
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1356, 630);
+            materialCard1.Size = new Size(1340, 591);
             materialCard1.TabIndex = 8;
             // 
             // tableLayoutPanel3
@@ -162,7 +162,7 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel3.Size = new Size(1328, 602);
+            tableLayoutPanel3.Size = new Size(1312, 563);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // btnSave
@@ -173,12 +173,12 @@
             btnSave.Dock = DockStyle.Bottom;
             btnSave.HighEmphasis = true;
             btnSave.Icon = null;
-            btnSave.Location = new Point(4, 560);
+            btnSave.Location = new Point(4, 521);
             btnSave.Margin = new Padding(4, 6, 4, 6);
             btnSave.MouseState = MaterialSkin.MouseState.HOVER;
             btnSave.Name = "btnSave";
             btnSave.NoAccentTextColor = Color.Empty;
-            btnSave.Size = new Size(1320, 36);
+            btnSave.Size = new Size(1304, 36);
             btnSave.TabIndex = 3;
             btnSave.Text = "SAVE";
             btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -194,12 +194,12 @@
             materialCard3.Depth = 0;
             materialCard3.Dock = DockStyle.Fill;
             materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard3.Location = new Point(14, 290);
+            materialCard3.Location = new Point(14, 270);
             materialCard3.Margin = new Padding(14);
             materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard3.Name = "materialCard3";
             materialCard3.Padding = new Padding(14);
-            materialCard3.Size = new Size(1300, 248);
+            materialCard3.Size = new Size(1284, 228);
             materialCard3.TabIndex = 2;
             // 
             // tableLayoutPanel5
@@ -231,7 +231,7 @@
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new Size(1272, 171);
+            tableLayoutPanel5.Size = new Size(1256, 151);
             tableLayoutPanel5.TabIndex = 8;
             // 
             // txtYear
@@ -241,7 +241,7 @@
             txtYear.Dock = DockStyle.Fill;
             txtYear.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtYear.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            txtYear.Location = new Point(139, 85);
+            txtYear.Location = new Point(131, 75);
             txtYear.MouseState = MaterialSkin.MouseState.HOVER;
             txtYear.Name = "txtYear";
             txtYear.Size = new Size(194, 36);
@@ -256,7 +256,7 @@
             txtYearCurrent.Dock = DockStyle.Fill;
             txtYearCurrent.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtYearCurrent.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            txtYearCurrent.Location = new Point(339, 85);
+            txtYearCurrent.Location = new Point(331, 75);
             txtYearCurrent.MouseState = MaterialSkin.MouseState.HOVER;
             txtYearCurrent.Name = "txtYearCurrent";
             txtYearCurrent.Size = new Size(194, 36);
@@ -270,7 +270,7 @@
             txtYearRemaining.Depth = 0;
             txtYearRemaining.Dock = DockStyle.Fill;
             txtYearRemaining.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtYearRemaining.Location = new Point(739, 85);
+            txtYearRemaining.Location = new Point(731, 75);
             txtYearRemaining.MouseState = MaterialSkin.MouseState.HOVER;
             txtYearRemaining.Name = "txtYearRemaining";
             txtYearRemaining.Size = new Size(194, 36);
@@ -284,7 +284,7 @@
             txtYearProgress.Depth = 0;
             txtYearProgress.Dock = DockStyle.Fill;
             txtYearProgress.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtYearProgress.Location = new Point(939, 85);
+            txtYearProgress.Location = new Point(931, 75);
             txtYearProgress.MouseState = MaterialSkin.MouseState.HOVER;
             txtYearProgress.Name = "txtYearProgress";
             txtYearProgress.Size = new Size(194, 36);
@@ -301,7 +301,7 @@
             txtYearTarget.Font = new Font("Microsoft Sans Serif", 12F);
             txtYearTarget.LeadingIcon = null;
             txtYearTarget.LeaveOnEnterKey = true;
-            txtYearTarget.Location = new Point(539, 88);
+            txtYearTarget.Location = new Point(531, 78);
             txtYearTarget.MaxLength = 50;
             txtYearTarget.MouseState = MaterialSkin.MouseState.OUT;
             txtYearTarget.Multiline = false;
@@ -319,7 +319,7 @@
             label5.Dock = DockStyle.Fill;
             label5.Font = new Font("Segoe UI", 12F);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(339, 49);
+            label5.Location = new Point(331, 39);
             label5.Name = "label5";
             label5.Size = new Size(194, 36);
             label5.TabIndex = 15;
@@ -333,7 +333,7 @@
             label6.Dock = DockStyle.Fill;
             label6.Font = new Font("Segoe UI", 12F);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(539, 49);
+            label6.Location = new Point(531, 39);
             label6.Name = "label6";
             label6.Size = new Size(194, 36);
             label6.TabIndex = 16;
@@ -347,7 +347,7 @@
             label7.Dock = DockStyle.Fill;
             label7.Font = new Font("Segoe UI", 12F);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(739, 49);
+            label7.Location = new Point(731, 39);
             label7.Name = "label7";
             label7.Size = new Size(194, 36);
             label7.TabIndex = 17;
@@ -361,7 +361,7 @@
             label8.Dock = DockStyle.Fill;
             label8.Font = new Font("Segoe UI", 12F);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(939, 49);
+            label8.Location = new Point(931, 39);
             label8.Name = "label8";
             label8.Size = new Size(194, 36);
             label8.TabIndex = 18;
@@ -375,7 +375,7 @@
             label9.Dock = DockStyle.Fill;
             label9.Font = new Font("Segoe UI", 12F);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(139, 49);
+            label9.Location = new Point(131, 39);
             label9.Name = "label9";
             label9.Size = new Size(194, 36);
             label9.TabIndex = 19;
@@ -388,7 +388,7 @@
             guna2Separator3.Location = new Point(14, 54);
             guna2Separator3.Margin = new Padding(3, 2, 3, 2);
             guna2Separator3.Name = "guna2Separator3";
-            guna2Separator3.Size = new Size(1272, 9);
+            guna2Separator3.Size = new Size(1256, 9);
             guna2Separator3.TabIndex = 7;
             // 
             // materialLabel3
@@ -402,7 +402,7 @@
             materialLabel3.Location = new Point(14, 14);
             materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel3.Name = "materialLabel3";
-            materialLabel3.Size = new Size(1272, 40);
+            materialLabel3.Size = new Size(1256, 40);
             materialLabel3.TabIndex = 5;
             materialLabel3.Text = "Annual Sales Revenue";
             materialLabel3.TextAlign = ContentAlignment.MiddleLeft;
@@ -421,7 +421,7 @@
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
-            materialCard2.Size = new Size(1300, 248);
+            materialCard2.Size = new Size(1284, 228);
             materialCard2.TabIndex = 0;
             // 
             // tableLayoutPanel4
@@ -457,7 +457,7 @@
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Size = new Size(1272, 171);
+            tableLayoutPanel4.Size = new Size(1256, 151);
             tableLayoutPanel4.TabIndex = 7;
             // 
             // materialLabel4
@@ -467,7 +467,7 @@
             materialLabel4.Dock = DockStyle.Fill;
             materialLabel4.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel4.Location = new Point(139, 67);
+            materialLabel4.Location = new Point(131, 57);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
             materialLabel4.Size = new Size(194, 36);
@@ -482,7 +482,7 @@
             materialLabel5.Dock = DockStyle.Fill;
             materialLabel5.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel5.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel5.Location = new Point(139, 103);
+            materialLabel5.Location = new Point(131, 93);
             materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel5.Name = "materialLabel5";
             materialLabel5.Size = new Size(194, 36);
@@ -497,7 +497,7 @@
             txtItemSold.Dock = DockStyle.Fill;
             txtItemSold.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtItemSold.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            txtItemSold.Location = new Point(339, 67);
+            txtItemSold.Location = new Point(331, 57);
             txtItemSold.MouseState = MaterialSkin.MouseState.HOVER;
             txtItemSold.Name = "txtItemSold";
             txtItemSold.Size = new Size(194, 36);
@@ -512,7 +512,7 @@
             txtSales.Dock = DockStyle.Fill;
             txtSales.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSales.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            txtSales.Location = new Point(339, 103);
+            txtSales.Location = new Point(331, 93);
             txtSales.MouseState = MaterialSkin.MouseState.HOVER;
             txtSales.Name = "txtSales";
             txtSales.Size = new Size(194, 36);
@@ -526,7 +526,7 @@
             txtItemSoldRemaining.Depth = 0;
             txtItemSoldRemaining.Dock = DockStyle.Fill;
             txtItemSoldRemaining.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtItemSoldRemaining.Location = new Point(739, 67);
+            txtItemSoldRemaining.Location = new Point(731, 57);
             txtItemSoldRemaining.MouseState = MaterialSkin.MouseState.HOVER;
             txtItemSoldRemaining.Name = "txtItemSoldRemaining";
             txtItemSoldRemaining.Size = new Size(194, 36);
@@ -540,7 +540,7 @@
             txtSalesRemaining.Depth = 0;
             txtSalesRemaining.Dock = DockStyle.Fill;
             txtSalesRemaining.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtSalesRemaining.Location = new Point(739, 103);
+            txtSalesRemaining.Location = new Point(731, 93);
             txtSalesRemaining.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesRemaining.Name = "txtSalesRemaining";
             txtSalesRemaining.Size = new Size(194, 36);
@@ -554,7 +554,7 @@
             txtItemSoldProgress.Depth = 0;
             txtItemSoldProgress.Dock = DockStyle.Fill;
             txtItemSoldProgress.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtItemSoldProgress.Location = new Point(939, 67);
+            txtItemSoldProgress.Location = new Point(931, 57);
             txtItemSoldProgress.MouseState = MaterialSkin.MouseState.HOVER;
             txtItemSoldProgress.Name = "txtItemSoldProgress";
             txtItemSoldProgress.Size = new Size(194, 36);
@@ -568,7 +568,7 @@
             txtSalesProgress.Depth = 0;
             txtSalesProgress.Dock = DockStyle.Fill;
             txtSalesProgress.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtSalesProgress.Location = new Point(939, 103);
+            txtSalesProgress.Location = new Point(931, 93);
             txtSalesProgress.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesProgress.Name = "txtSalesProgress";
             txtSalesProgress.Size = new Size(194, 36);
@@ -585,7 +585,7 @@
             txtItemSoldTarget.Font = new Font("Microsoft Sans Serif", 12F);
             txtItemSoldTarget.LeadingIcon = null;
             txtItemSoldTarget.LeaveOnEnterKey = true;
-            txtItemSoldTarget.Location = new Point(539, 70);
+            txtItemSoldTarget.Location = new Point(531, 60);
             txtItemSoldTarget.MaxLength = 50;
             txtItemSoldTarget.MouseState = MaterialSkin.MouseState.OUT;
             txtItemSoldTarget.Multiline = false;
@@ -605,7 +605,7 @@
             txtSalesTarget.Font = new Font("Microsoft Sans Serif", 12F);
             txtSalesTarget.LeadingIcon = null;
             txtSalesTarget.LeaveOnEnterKey = true;
-            txtSalesTarget.Location = new Point(539, 106);
+            txtSalesTarget.Location = new Point(531, 96);
             txtSalesTarget.MaxLength = 50;
             txtSalesTarget.MouseState = MaterialSkin.MouseState.OUT;
             txtSalesTarget.Multiline = false;
@@ -623,7 +623,7 @@
             label1.Dock = DockStyle.Fill;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(339, 31);
+            label1.Location = new Point(331, 21);
             label1.Name = "label1";
             label1.Size = new Size(194, 36);
             label1.TabIndex = 15;
@@ -637,7 +637,7 @@
             label2.Dock = DockStyle.Fill;
             label2.Font = new Font("Segoe UI", 12F);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(539, 31);
+            label2.Location = new Point(531, 21);
             label2.Name = "label2";
             label2.Size = new Size(194, 36);
             label2.TabIndex = 16;
@@ -651,7 +651,7 @@
             label3.Dock = DockStyle.Fill;
             label3.Font = new Font("Segoe UI", 12F);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(739, 31);
+            label3.Location = new Point(731, 21);
             label3.Name = "label3";
             label3.Size = new Size(194, 36);
             label3.TabIndex = 17;
@@ -665,7 +665,7 @@
             label4.Dock = DockStyle.Fill;
             label4.Font = new Font("Segoe UI", 12F);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(939, 31);
+            label4.Location = new Point(931, 21);
             label4.Name = "label4";
             label4.Size = new Size(194, 36);
             label4.TabIndex = 18;
@@ -678,7 +678,7 @@
             guna2Separator2.Location = new Point(14, 54);
             guna2Separator2.Margin = new Padding(3, 2, 3, 2);
             guna2Separator2.Name = "guna2Separator2";
-            guna2Separator2.Size = new Size(1272, 9);
+            guna2Separator2.Size = new Size(1256, 9);
             guna2Separator2.TabIndex = 6;
             // 
             // materialLabel2
@@ -692,7 +692,7 @@
             materialLabel2.Location = new Point(14, 14);
             materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel2.Name = "materialLabel2";
-            materialLabel2.Size = new Size(1272, 40);
+            materialLabel2.Size = new Size(1256, 40);
             materialLabel2.TabIndex = 4;
             materialLabel2.Text = "Monthly Metrics Target";
             materialLabel2.TextAlign = ContentAlignment.MiddleLeft;
@@ -701,10 +701,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1340, 662);
             Controls.Add(materialCard1);
             Controls.Add(tableLayoutPanel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "TargetGoalsView";
-            Size = new Size(1356, 701);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             materialCard1.ResumeLayout(false);

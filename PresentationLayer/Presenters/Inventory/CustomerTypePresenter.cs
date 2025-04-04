@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public ICustomerTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource CustomerTypeBindingSource;
         private IEnumerable<CustomerType> CustomerTypeList;
         public CustomerTypePresenter(ICustomerTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            CustomerTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -81,15 +79,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                CustomerTypeList = _unitOfWork.CustomerType.Value.GetAll(c => c.CustomerTypeName.Contains(_view.SearchValue));
-                CustomerTypeBindingSource.DataSource = CustomerTypeList;
-            }
-            else
-            {
-                LoadAllCustomerTypeList();
-            }
+            LoadAllCustomerTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -152,11 +142,12 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllCustomerTypeList()
+        private void LoadAllCustomerTypeList(bool emptyValue = false)
         {
             CustomerTypeList = _unitOfWork.CustomerType.Value.GetAll();
-            CustomerTypeBindingSource.DataSource = CustomerTypeList;//Set data source.
-            _view.SetCustomerTypeListBindingSource(CustomerTypeBindingSource);
+
+            if (!emptyValue) CustomerTypeList = CustomerTypeList.Where(c => c.CustomerTypeName.Contains(_view.SearchValue));
+            _view.SetCustomerTypeListBindingSource(CustomerTypeList);
         }
     }
 }

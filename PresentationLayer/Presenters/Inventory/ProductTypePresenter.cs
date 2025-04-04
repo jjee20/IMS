@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IProductTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ProductTypeBindingSource;
         private IEnumerable<ProductType> ProductTypeList;
         public ProductTypePresenter(IProductTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ProductTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -78,15 +76,7 @@ namespace PresentationLayer.Presenters
         private async  void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                ProductTypeList = _unitOfWork.ProductType.Value.GetAll(c => c.ProductTypeName.Contains(_view.SearchValue));
-                ProductTypeBindingSource.DataSource = ProductTypeList;
-            }
-            else
-            {
-                LoadAllProductTypeList();
-            }
+            LoadAllProductTypeList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -149,11 +139,12 @@ namespace PresentationLayer.Presenters
             _view.Description = "";
         }
         
-        private void LoadAllProductTypeList()
+        private void LoadAllProductTypeList(bool emptyValue = false)
         {
             ProductTypeList = _unitOfWork.ProductType.Value.GetAll();
-            ProductTypeBindingSource.DataSource = ProductTypeList;//Set data source.
-            _view.SetProductTypeListBindingSource(ProductTypeBindingSource);
+
+            if (!emptyValue) ProductTypeList = ProductTypeList.Where(c => c.ProductTypeName.Contains(_view.SearchValue));
+            _view.SetProductTypeListBindingSource(ProductTypeList);
         }
     }
 }

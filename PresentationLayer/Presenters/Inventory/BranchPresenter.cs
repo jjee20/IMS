@@ -14,7 +14,6 @@ namespace PresentationLayer.Presenters
     {
         public IBranchView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource BranchBindingSource;
         private BindingSource CurrencyBindingSource;
         private IEnumerable<BranchViewModel> BranchList;
        
@@ -24,7 +23,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            BranchBindingSource = new BindingSource();
             CurrencyBindingSource = new BindingSource();
 
             //Events
@@ -87,15 +85,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.Value.GetAll(c => c.BranchName.Contains(_view.SearchValue)));
-                BranchBindingSource.DataSource = BranchList;
-            }
-            else
-            {
-                LoadAllBranchList();
-            }
+            LoadAllBranchList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -168,11 +158,12 @@ namespace PresentationLayer.Presenters
             _view.ContactPerson = "";
         }
         
-        private void LoadAllBranchList()
+        private void LoadAllBranchList(bool emptyValue = false)
         {
             BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.Value.GetAll());
-            BranchBindingSource.DataSource = BranchList;//Set data source.
-            _view.SetBranchListBindingSource(BranchBindingSource);
+
+            if (!emptyValue) BranchList = BranchList.Where(c => c.BranchName.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetBranchListBindingSource(BranchList);
         }
     }
 }

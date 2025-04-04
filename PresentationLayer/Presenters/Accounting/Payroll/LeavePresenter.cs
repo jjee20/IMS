@@ -20,7 +20,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public ILeaveView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource LeaveBindingSource;
         private BindingSource EmployeeBindingSource;
         private BindingSource LeaveTypeBindingSource;
         private BindingSource StatusBindingSource;
@@ -35,7 +34,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            LeaveBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
             LeaveTypeBindingSource = new BindingSource();
             StatusBindingSource = new BindingSource();
@@ -121,20 +119,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            bool hasDateRange = _view.StartDate != null && _view.EndDate != null;
-            if (!emptyValue || hasDateRange)
-            {
-                LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.Value.GetAll(
-                    c => c.Employee.LastName.Contains(_view.SearchValue) ||
-                    c.Employee.FirstName.Contains(_view.SearchValue) || 
-                    (c.StartDate.Date >= _view.SearchStartDate.Date && c.EndDate.Date <= _view.SearchEndDate.Date), 
-                    includeProperties: "Employee"));
-                LeaveBindingSource.DataSource = LeaveList;
-            }
-            else
-            {
-                LoadAllLeaveList();
-            }
+            LoadAllLeaveList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -206,13 +191,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.Other = "";
         }
 
-        private void LoadAllLeaveList()
+        private void LoadAllLeaveList(bool emptyValue = false)
         {
             LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(
                 _unitOfWork.Leave.Value.GetAll(c => c.StartDate.Date >= _view.StartDate.Date && c.EndDate.Date <= _view.EndDate.Date,
                     includeProperties: "Employee"));
-            LeaveBindingSource.DataSource = LeaveList;//Set data source.
-            _view.SetLeaveListBindingSource(LeaveBindingSource);
+
+            if (!emptyValue) LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue) || c.LeaveType.Contains(_view.SearchValue));
+            _view.SetLeaveListBindingSource(LeaveList.OrderByDescending(c => c.StartDate));
         }
         private void LoadAllEmployeeList()
         {

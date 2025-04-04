@@ -17,7 +17,6 @@ namespace PresentationLayer.Presenters
     {
         public IPurchaseOrderView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource PurchaseOrderBindingSource;
         private BindingSource PurchaseOrderLineBindingSource;
         private BindingSource PurchaseTypeBindingSource;
         private BindingSource BranchBindingSource;
@@ -35,7 +34,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            PurchaseOrderBindingSource = new BindingSource();
             PurchaseOrderLineBindingSource = new BindingSource();
             PurchaseTypeBindingSource = new BindingSource();
             BranchBindingSource = new BindingSource();
@@ -326,15 +324,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll(c => c.PurchaseOrderName.Contains(_view.SearchValue), includeProperties: "Branch,PurchaseType,Vendor"));
-                PurchaseOrderBindingSource.DataSource = PurchaseOrderList;
-            }
-            else
-            {
-                LoadAllPurchaseOrderList();
-            }
+            LoadAllPurchaseOrderList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -427,11 +417,21 @@ namespace PresentationLayer.Presenters
             _view.PurchaseOrderLines = new List<PurchaseOrderLineViewModel>();
         }
 
-        private void LoadAllPurchaseOrderList()
+        private void LoadAllPurchaseOrderList(bool emptyValue = false)
         {
-            PurchaseOrderBindingSource.DataSource = PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll(includeProperties: "Branch,PurchaseType,Vendor"));
+            
+            PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll(includeProperties: "Branch,PurchaseType,Vendor"));
 
-            _view.SetPurchaseOrderListBindingSource(PurchaseOrderBindingSource);
+            if (!emptyValue)
+            {
+                PurchaseOrderList = PurchaseOrderList.Where(c =>
+                    c.PurchaseOrderName.ToLower().Contains(_view.SearchValue.ToLower()) ||
+                    c.Branch.ToLower().Contains(_view.SearchValue.ToLower()) ||
+                    c.Vendor.ToLower().Contains(_view.SearchValue.ToLower()) ||
+                    c.PurchaseType.ToLower().Contains(_view.SearchValue.ToLower())
+                );
+            }
+            _view.SetPurchaseOrderListBindingSource(PurchaseOrderList.OrderByDescending(c => c.OrderDate));
         }
         private void LoadAllPurchaseTypeList() {
             PurchaseTypeBindingSource.DataSource = PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll();

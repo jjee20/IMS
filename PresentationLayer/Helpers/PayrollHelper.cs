@@ -142,7 +142,8 @@ namespace RavenTech_ERP.Helpers
             }
             return days;
         }
-        public static List<PayrollViewModel> CalculatePayroll(IEnumerable<Employee> employees, 
+        public static List<PayrollViewModel> 
+            CalculatePayroll(IEnumerable<Employee> employees, 
             IEnumerable<Contribution> contributions,
             Project project,
             DateTime startDate, DateTime endDate, int? projectId = 0)
@@ -181,10 +182,15 @@ namespace RavenTech_ERP.Helpers
                 double lateDeductions = CalculateLateDeductions(employee, employeeAttendances, hourlyRate);
                 double earlyOutDeductions = CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate);
 
+                double sss = (employeeContributions != null) ? employeeContributions.SSS : 0; 
+                double sssWisp = (employeeContributions != null) ? employeeContributions.SSSWISP : 0;
+                double pagIbig = (employeeContributions != null) ? employeeContributions.PagIbig : 0;
+                double philHealth = (employeeContributions != null) ? employeeContributions.PhilHealth : 0;
+
                 double monthlySalary = employee.BasicSalary * NonSundays(employee.Attendances, startDate);
-                double sssDeduction = employee.isDeducted ? employeeContributions.SSS + employeeContributions.SSSWISP : 0;
-                double pagIbigDeduction = employee.isDeducted ? employeeContributions.PagIbig : 0 ;
-                double philHealthDeduction = employee.isDeducted ? employeeContributions.PhilHealth : 0;
+                double sssDeduction = employee.isDeducted ? sss + sssWisp : 0;
+                double pagIbigDeduction = employee.isDeducted ? pagIbig : 0;
+                double philHealthDeduction = employee.isDeducted ? philHealth : 0;
                 //double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.SSS, monthlySalary) / 2 : 0 : 0;
                 //double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PagIbig, monthlySalary) / 2 : 0 : 0;
                 //double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PhilHealth, monthlySalary) / 2 : 0 : 0;

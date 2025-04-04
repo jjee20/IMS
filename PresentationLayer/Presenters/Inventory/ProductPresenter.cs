@@ -12,7 +12,6 @@ namespace PresentationLayer.Presenters
     {
         public IProductView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ProductBindingSource;
         private BindingSource ProductTypeBindingSource;
         private BindingSource UnitOfMeasureBindingSource;
         private BindingSource BranchBindingSource;
@@ -27,7 +26,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ProductBindingSource = new BindingSource();
             ProductTypeBindingSource = new BindingSource();
             UnitOfMeasureBindingSource = new BindingSource();
             BranchBindingSource = new BindingSource();
@@ -104,15 +102,7 @@ namespace PresentationLayer.Presenters
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (emptyValue == false)
-            {
-                ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll(c => c.ProductName.Contains(_view.SearchValue), includeProperties: "UnitOfMeasure,Branch"));
-                ProductBindingSource.DataSource = ProductList;
-            }
-            else
-            {
-                LoadAllProductList();
-            }
+            LoadAllProductList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -196,11 +186,12 @@ namespace PresentationLayer.Presenters
             _view.BranchId = 0;
         }
         
-        private void LoadAllProductList()
+        private void LoadAllProductList(bool emptyValue = false)
         {
             ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll(includeProperties: "UnitOfMeasure,Branch"));
-            ProductBindingSource.DataSource = ProductList;//Set data source.
-            _view.SetProductListBindingSource(ProductBindingSource);
+
+            if (!emptyValue) ProductList = ProductList.Where(c => c.ProductName.Contains(_view.SearchValue) || c.ProductCode.Contains(_view.SearchValue) || c.Barcode.Contains(_view.SearchValue));
+            _view.SetProductListBindingSource(ProductList.OrderBy(c => c.ProductName));
         }
         private void LoadAllProductTypeList()
         {

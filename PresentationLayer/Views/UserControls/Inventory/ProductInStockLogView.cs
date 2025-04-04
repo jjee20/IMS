@@ -5,11 +5,13 @@ using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
+using System.ComponentModel;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class ProductStockInLogView : UserControl, IProductStockInLogView
+    public partial class ProductStockInLogView : SfForm, IProductStockInLogView
     {
         private int id;
         private string message;
@@ -48,9 +50,11 @@ namespace PresentationLayer.Views.UserControls
                 }
                 MessageBox.Show(Message);
             };
-            txtSearch.TextChanged += (s, e) =>
+            txtSearch.KeyDown += (s, e) =>
             {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
+                if (e.KeyCode == Keys.Enter)
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                txtSearch.Focus();
             };
             //Edit
             btnEdit.Click += delegate
@@ -97,43 +101,51 @@ namespace PresentationLayer.Views.UserControls
 
         //PropertiesdgList
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProductStockInLogId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProductId
         {
             get { return (int)txtProduct.SelectedValue; }
             set { txtProduct.SelectedValue = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ProductStatus ProductStatus
         {
             get { return (ProductStatus)txtStatus.SelectedValue; }
             set { txtStatus.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double StockQuantity
         {
             get { return Convert.ToDouble(txtQuantity.Text); }
             set { txtQuantity.Text = value.ToString(); }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime DateAdded
         {
             get { return txtDate.Value; }
             set { txtDate.Value = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Notes
         {
             get { return txtNotes.Text; }
             set { txtNotes.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public bool IsSuccessful
         {
@@ -141,12 +153,14 @@ namespace PresentationLayer.Views.UserControls
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
@@ -165,9 +179,9 @@ namespace PresentationLayer.Views.UserControls
             txtStatus.DisplayMember = "Name";
             txtStatus.ValueMember = "Id";
         }
-        public void SetProductStockInLogListBindingSource(BindingSource ProductStockInLogList)
+        public void SetProductStockInLogListBindingSource(IEnumerable<ProductStockInLogViewModel> ProductStockInLogList)
         {
-            dgPager.DataSource = ProductStockInLogList.ToList<ProductStockInLogViewModel>();
+            dgPager.DataSource = ProductStockInLogList;
             dgList.DataSource = dgPager.PagedSource;
         }
 

@@ -17,7 +17,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IContributionView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ContributionBindingSource;
         private BindingSource ContributionTypeBindingSource;
         private IEnumerable<Contribution> ContributionList;
         private IEnumerable<EnumItemViewModel> ContributionTypeList;
@@ -28,7 +27,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ContributionBindingSource = new BindingSource();
             ContributionTypeBindingSource = new BindingSource();
 
             //Events
@@ -99,25 +97,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (!emptyValue)
-            {
-                // Safely parse and filter contributions
-                if (Enum.TryParse(typeof(ContributionType), _view.SearchValue?.ToString(), out var parsedType))
-                {
-                    ContributionList = _unitOfWork.Contribution.Value.GetAll(c => c.ContributionType == (ContributionType)parsedType);
-                }
-                else
-                {
-                    // Handle invalid search value (e.g., set an empty list or log an error)
-                    ContributionList = new List<Contribution>();
-                }
-
-                ContributionBindingSource.DataSource = ContributionList;
-            }
-            else
-            {
-                LoadAllContributionList();
-            }
+            LoadAllContributionList(emptyValue);
         }
         private void Edit(object? sender, EventArgs e)
         {
@@ -185,11 +165,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.MaximumLimit = 0;
         }
 
-        private void LoadAllContributionList()
+        private void LoadAllContributionList(bool emptyValue = false)
         {
             ContributionList = _unitOfWork.Contribution.Value.GetAll();
-            ContributionBindingSource.DataSource = ContributionList;//Set data source.
-            _view.SetContributionListBindingSource(ContributionBindingSource);
+            if (!emptyValue) ContributionList = ContributionList.Where(c => c.ContributionType.ToString().Contains(_view.SearchValue));
+            _view.SetContributionListBindingSource(ContributionList);
         }
         private void LoadAllContributionTypeList()
         {
