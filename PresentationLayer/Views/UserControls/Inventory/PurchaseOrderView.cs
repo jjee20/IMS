@@ -5,6 +5,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class PurchaseOrderView : UserControl, IPurchaseOrderView
+    public partial class PurchaseOrderView : SfForm, IPurchaseOrderView
     {
         private BindingSource _PurchaseOrderLineBindingSource = new BindingSource();
         private int id = 0;
@@ -167,67 +168,80 @@ namespace PresentationLayer.Views.UserControls
 
         //PropertiesdgList
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int PurchaseOrderId
         {
             get { return Convert.ToInt32(id); }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PurchaseOrderName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime StartDate
         {
             get { return txtStartDate.Value; }
             set { txtStartDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime EndDate
         {
             get { return txtEndDate.Value; }
             set { txtEndDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BranchId
         {
             get { return (int)txtBranch.SelectedValue; }
             set { txtBranch.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int VendorId
         {
             get { return (int)txtVendor.SelectedValue; }
             set { txtVendor.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTimeOffset OrderDate
         {
             get { return txtPurchaseOrderDate.Value; }
             set { txtPurchaseOrderDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTimeOffset DeliveryDate
         {
             get { return txtDeliveryDate.Value; }
             set { txtDeliveryDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int PurchaseTypeId
         {
             get { return (int)txtPurchaseType.SelectedValue; }
             set { txtPurchaseType.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Remarks
         {
             get { return txtRemarks.Text; }
             set { txtRemarks.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Amount
         {
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double SubTotal
         {
             get { return Convert.ToDouble(txtSubTotal.Text); }
             set { txtSubTotal.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Discount
         {
             get
@@ -241,11 +255,13 @@ namespace PresentationLayer.Views.UserControls
             }
             set { txtDiscount.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Tax
         {
             get { return Convert.ToDouble(txtTax.Text); }
             set { txtTax.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Freight
         {
             get
@@ -258,11 +274,13 @@ namespace PresentationLayer.Views.UserControls
             }
             set { txtFreight.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Total
         {
             get { return Convert.ToDouble(txtTotal.Text); }
             set { txtTotal.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<PurchaseOrderLineViewModel> PurchaseOrderLines
         {
             get { return _PurchaseOrderLineBindingSource.DataSource as List<PurchaseOrderLineViewModel>; }
@@ -273,24 +291,28 @@ namespace PresentationLayer.Views.UserControls
                 DataGridHelper.ApplyDisplayNames<PurchaseOrderLineViewModel>(_PurchaseOrderLineBindingSource, dgPurchaseLine);
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
@@ -299,21 +321,25 @@ namespace PresentationLayer.Views.UserControls
 
         //Add Product
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProductId
         {
             get { return Convert.ToInt32(txtProduct.SelectedValue); }
             set { txtProduct.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductQuantity
         {
             get { return Convert.ToDouble(txtProductQty.Text); }
             set { txtProductQty.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductPrice
         {
             get { return Convert.ToDouble(txtProductQty.Text); }
             set { txtProductQty.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductDiscount
         {
             get
@@ -330,19 +356,21 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool NonStock
         {
             get { return btnNonStock.Checked; }
             set { btnNonStock.Checked = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string NonStockProductName
         {
             get { return txtNonStock.Text; }
             set { txtNonStock.Text = value; }
         }
-        public void SetPurchaseOrderListBindingSource(BindingSource PurchaseOrderList)
+        public void SetPurchaseOrderListBindingSource(IEnumerable<PurchaseOrderViewModel> PurchaseOrderList)
         {
-            dgPager.DataSource = PurchaseOrderList.ToList<PurchaseOrderViewModel>();
+            dgPager.DataSource = PurchaseOrderList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetPurchaseOrderLineListBindingSource(BindingSource PurchaseOrderLineList)

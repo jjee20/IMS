@@ -5,6 +5,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class ProductMonitoringView : UserControl, IProductMonitoringView
+    public partial class ProductMonitoringView : SfForm, IProductMonitoringView
     {
         public ProductMonitoringView()
         {
@@ -34,14 +35,17 @@ namespace PresentationLayer.Views.UserControls
                 PrintEvent?.Invoke(this, EventArgs.Empty);
             };
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double InStock
         {
             set { txtInStock.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double LowStock
         {
             set { txtLowStock.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double OutOfStock
         {
             set { txtOutOfStock.Text = value.ToString(); }

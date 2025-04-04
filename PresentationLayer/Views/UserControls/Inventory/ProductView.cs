@@ -5,6 +5,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class ProductView : UserControl, IProductView
+    public partial class ProductView : SfForm, IProductView
     {
         private int id;
         private string message;
@@ -109,107 +110,125 @@ namespace PresentationLayer.Views.UserControls
 
         //PropertiesdgList
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProductId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ProductName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ProductCode
         {
             get { return txtProductCode.Text; }
             set { txtProductCode.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Barcode
         {
             get { return txtBarcode.Text; }
             set { txtBarcode.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ReorderLevel
         {
             get { return Convert.ToInt16(txtReorderLevel.Text); }
             set { txtReorderLevel.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int UnitOfMeasureId
         {
             get { return (int)txtUnitOfMeasure.SelectedValue; }
             set { txtUnitOfMeasure.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProductTypeId
         {
             get { return (int)txtProductType.SelectedValue; }
             set { txtProductType.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double DefaultBuyingPrice
         {
             get { return Convert.ToDouble(txtDefaultBuyingPrice.Text); }
             set { txtDefaultBuyingPrice.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double DefaultSellingPrice
         {
             get { return Convert.ToDouble(txtDefaultSellingPrice.Text); }
             set { txtDefaultSellingPrice.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BranchId
         {
             get { return (int)txtBranch.SelectedValue; }
             set { txtBranch.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PSize
         {
             get { return txtSize.Text; }
             set { txtSize.Text = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Brand
         {
             get { return txtBrand.Text; }
             set { txtBrand.Text = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PColor
         {
             get { return txtColor.Text; }
             set { txtColor.Text = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
 
-        public void SetProductListBindingSource(BindingSource ProductList)
+        public void SetProductListBindingSource(IEnumerable<ProductViewModel> ProductList)
         {
-            dgPager.DataSource = ProductList.ToList<ProductViewModel>();
+            dgPager.DataSource = ProductList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetProductTypeListBindingSource(BindingSource ProductTypeBindingSource)

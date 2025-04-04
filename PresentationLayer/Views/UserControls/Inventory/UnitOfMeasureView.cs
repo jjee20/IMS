@@ -4,6 +4,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class UnitOfMeasureView : UserControl, IUnitOfMeasureView
+    public partial class UnitOfMeasureView : SfForm, IUnitOfMeasureView
     {
         private int id;
         private string message;
@@ -108,33 +109,39 @@ namespace PresentationLayer.Views.UserControls
 
         //PropertiesdgList
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int UnitOfMeasureId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string UnitOfMeasureName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public string Message
         {
@@ -142,15 +149,16 @@ namespace PresentationLayer.Views.UserControls
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
 
-        public void SetUnitOfMeasureListBindingSource(BindingSource UnitOfMeasureList)
+        public void SetUnitOfMeasureListBindingSource(IEnumerable<UnitOfMeasure> UnitOfMeasureList)
         {
-            dgPager.DataSource = UnitOfMeasureList.ToList<UnitOfMeasure>();
+            dgPager.DataSource = UnitOfMeasureList;
             dgList.DataSource = dgPager.PagedSource;
         }
 

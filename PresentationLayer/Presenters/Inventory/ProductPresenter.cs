@@ -12,7 +12,6 @@ namespace PresentationLayer.Presenters
     {
         public IProductView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ProductBindingSource;
         private BindingSource ProductTypeBindingSource;
         private BindingSource UnitOfMeasureBindingSource;
         private BindingSource BranchBindingSource;
@@ -27,7 +26,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ProductBindingSource = new BindingSource();
             ProductTypeBindingSource = new BindingSource();
             UnitOfMeasureBindingSource = new BindingSource();
             BranchBindingSource = new BindingSource();
@@ -192,13 +190,8 @@ namespace PresentationLayer.Presenters
         {
             ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll(includeProperties: "UnitOfMeasure,Branch"));
 
-            if (!emptyValue)
-            {
-                ProductList = ProductList.Where(c => c.ProductName.Contains(_view.SearchValue) || c.ProductCode.Contains(_view.SearchValue) || c.Barcode.Contains(_view.SearchValue));
-            }
-
-            ProductBindingSource.DataSource = ProductList.OrderBy(c => c.ProductName);//Set data source.
-            _view.SetProductListBindingSource(ProductBindingSource);
+            if (!emptyValue) ProductList = ProductList.Where(c => c.ProductName.Contains(_view.SearchValue) || c.ProductCode.Contains(_view.SearchValue) || c.Barcode.Contains(_view.SearchValue));
+            _view.SetProductListBindingSource(ProductList.OrderBy(c => c.ProductName));
         }
         private void LoadAllProductTypeList()
         {

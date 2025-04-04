@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using Guna.Charts.WinForms;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
+using Syncfusion.WinForms.Controls;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class SalesReportView : UserControl, ISalesReportView
+    public partial class SalesReportView : SfForm, ISalesReportView
     {
         public SalesReportView()
         {
@@ -28,6 +29,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             };
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Year
         {
             get
@@ -37,13 +39,18 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 else return 0;
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Month
         {
             get { return (int)txtMonth.SelectedValue; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ItemSold { set => txtItemSold.Text = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Sales { get => double.Parse(txtSales.Text); set => txtSales.Text = value.ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Purchases { get => double.Parse(txtPurchases.Text); set => txtPurchases.Text = value.ToString("N2"); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Net { set => txtNet.Text = value; }
 
         public void SetDailySalesChart(GunaBarDataset salesbarDataset, GunaBarDataset purchasesbarDataset)

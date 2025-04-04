@@ -6,6 +6,7 @@ using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class ProjectManagementView : UserControl, IProjectManagementView
+    public partial class ProjectManagementView : SfForm, IProjectManagementView
     {
         private BindingSource _ProjectLineBindingSource = new BindingSource();
         private int id = 0;
@@ -144,47 +145,56 @@ namespace PresentationLayer.Views.UserControls
 
         //PropertiesdgList
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProjectId
         {
             get { return Convert.ToInt32(id); }
             set { id = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public string ProjectName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Client
         {
             get { return txtClient.Text; }
             set { txtClient.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime StartDate
         {
             get { return txtStartDate.Value; }
             set { txtStartDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime EndDate
         {
             get { return txtEndDate.Value; }
             set { txtEndDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Budget
         {
             get { return Convert.ToDouble(txtBudget.Text); }
             set { txtBudget.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Revenue
         {
             get { return Convert.ToDouble(txtRevenue.Text); }
             set { txtRevenue.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<ProjectLineViewModel> ProjectLines
         {
             get { return _ProjectLineBindingSource.DataSource as List<ProjectLineViewModel>; }
@@ -195,24 +205,28 @@ namespace PresentationLayer.Views.UserControls
                 DataGridHelper.ApplyDisplayNames<ProjectLineViewModel>(_ProjectLineBindingSource, dgOrderLine);
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
@@ -221,21 +235,25 @@ namespace PresentationLayer.Views.UserControls
 
         //Add Product
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProductId
         {
             get { return Convert.ToInt32(txtProduct.SelectedValue); }
             set { txtProduct.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductQuantity
         {
             get { return Convert.ToDouble(txtProductQty.Text); }
             set { txtProductQty.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductPrice
         {
             get { return Convert.ToDouble(txtProductQty.Text); }
             set { txtProductQty.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProductDiscount
         {
             get
@@ -252,27 +270,28 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool NonStock
         {
             get { return btnNonStock.Checked; }
             set { btnNonStock.Checked = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Total
         {
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string NonStockProductName
         {
             get { return txtNonStock.Text; }
             set { txtNonStock.Text = value; }
         }
-        public void SetProjectListBindingSource(BindingSource ProjectList)
+        public void SetProjectListBindingSource(IEnumerable<ProjectViewModel> ProjectList)
         {
-            dgPager.DataSource = ProjectList.ToList<ProjectViewModel>();
+            dgPager.DataSource = ProjectList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetProjectLineListBindingSource(BindingSource ProjectLineList)

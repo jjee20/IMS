@@ -1,4 +1,5 @@
-﻿using Syncfusion.WinForms.DataGrid;
+﻿using DomainLayer.Models.Accounts;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
@@ -22,6 +23,6 @@ namespace PresentationLayer.Views.IViews
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetCustomerTypeListBindingSource(BindingSource CustomerTypeList);
+        void SetCustomerTypeListBindingSource(IEnumerable<CustomerType> CustomerTypeList);
     }
 }

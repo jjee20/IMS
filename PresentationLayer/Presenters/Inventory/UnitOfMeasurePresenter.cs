@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IUnitOfMeasureView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource UnitOfMeasureBindingSource;
         private IEnumerable<UnitOfMeasure> UnitOfMeasureList;
         public UnitOfMeasurePresenter(IUnitOfMeasureView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            UnitOfMeasureBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -145,13 +143,8 @@ namespace PresentationLayer.Presenters
         {
             UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll();
 
-            if (emptyValue)
-            {
-                UnitOfMeasureList = UnitOfMeasureList.Where(C => C.UnitOfMeasureName.Contains(_view.SearchValue));
-            }
-
-            UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;//Set data source.
-            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureBindingSource);
+            if (!emptyValue) UnitOfMeasureList = UnitOfMeasureList.Where(C => C.UnitOfMeasureName.Contains(_view.SearchValue));
+            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureList);
         }
     }
 }

@@ -17,7 +17,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IContributionView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ContributionBindingSource;
         private BindingSource ContributionTypeBindingSource;
         private IEnumerable<Contribution> ContributionList;
         private IEnumerable<EnumItemViewModel> ContributionTypeList;
@@ -28,7 +27,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ContributionBindingSource = new BindingSource();
             ContributionTypeBindingSource = new BindingSource();
 
             //Events
@@ -170,15 +168,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void LoadAllContributionList(bool emptyValue = false)
         {
             ContributionList = _unitOfWork.Contribution.Value.GetAll();
-            if (!emptyValue)
-            {
-                if (!string.IsNullOrWhiteSpace(_view.SearchValue))
-                {
-                    ContributionList = ContributionList.Where(c => c.ContributionType.ToString().Contains(_view.SearchValue));
-                }
-            }
-            ContributionBindingSource.DataSource = ContributionList;//Set data source.
-            _view.SetContributionListBindingSource(ContributionBindingSource);
+            if (!emptyValue) ContributionList = ContributionList.Where(c => c.ContributionType.ToString().Contains(_view.SearchValue));
+            _view.SetContributionListBindingSource(ContributionList);
         }
         private void LoadAllContributionTypeList()
         {

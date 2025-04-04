@@ -16,7 +16,6 @@ namespace PresentationLayer.Presenters
     {
         public ICustomerView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource CustomerBindingSource;
         private BindingSource CustomerTypeBindingSource;
 
         private IEnumerable<CustomerViewModel> CustomerList;
@@ -28,7 +27,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            CustomerBindingSource = new BindingSource();
             CustomerTypeBindingSource = new BindingSource();
 
             //Events
@@ -197,13 +195,8 @@ namespace PresentationLayer.Presenters
         {
             CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll(includeProperties: "CustomerType"));
 
-            if (!emptyValue)
-            {
-                CustomerList = CustomerList.Where(c => c.CustomerName.Contains(_view.SearchValue));
-            }
-
-            CustomerBindingSource.DataSource = CustomerList.OrderBy(c => c.CustomerName);//Set data source.
-            _view.SetCustomerListBindingSource(CustomerBindingSource);
+            if (!emptyValue) CustomerList = CustomerList.Where(c => c.CustomerName.Contains(_view.SearchValue));
+            _view.SetCustomerListBindingSource(CustomerList.OrderBy(c => c.CustomerName));
         }
         private void LoadAllCustomerTypeList()
         {

@@ -6,6 +6,7 @@ using MaterialSkin.Controls;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ using System.Xml.Linq;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class DashboardView : UserControl, IDashboardView
+    public partial class DashboardView : SfForm, IDashboardView
     {
         public DashboardView()
         {
@@ -60,33 +61,40 @@ namespace PresentationLayer.Views.UserControls
             return instance;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Gross
         {
             set { txtGross.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Sales
         {
             set { txtSales.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Expense
         {
             set { txtExpense.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SalesToday
         {
             set { txtSalesToday.Text = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ItemSoldToday
         {
             set { txtItemSoldToday.Text = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ExpenseToday
         {
             set { txtExpenseToday.Text = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Year
         {
             get {
@@ -95,30 +103,37 @@ namespace PresentationLayer.Views.UserControls
                     else return 0;
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Month
         {
             get { return (int)txtMonth.SelectedValue; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ExpenseTodayItemsSold
         {
             set { txtExpenseItemsSold.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ExpenseTodayItemsSoldTarget
         {
             set { txtExpenseItemsSoldTarget.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ExpenseTodaySales
         {
             set { txtExpenseSales.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ExpenseTodaySalesTarget
         {
             set { txtExpenseSalesTarget.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double TotalExpense
         {
             set { txtTotalExpenses.Text = value.ToString("N2"); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double TotalProfit
         {
             set { txtTotalProfit.Text = value.ToString("N2"); }

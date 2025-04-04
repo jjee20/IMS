@@ -20,7 +20,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IEmployeeContributionView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource EmployeeContributionBindingSource;
         private BindingSource EmployeeBindingSource;
         private IEnumerable<EmployeeContributionViewModel> EmployeeContributionList;
         private IEnumerable<EmployeeViewModel> EmployeeList;
@@ -31,7 +30,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            EmployeeContributionBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
 
             //Events
@@ -173,11 +171,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(
                 _unitOfWork.EmployeeContribution.Value.GetAll(includeProperties:"Employee"));
 
-            if (!emptyValue)
-                EmployeeContributionList = EmployeeContributionList.Where(c => c.Employee.Equals(_view.SearchValue));
-
-            EmployeeContributionBindingSource.DataSource = EmployeeContributionList.OrderBy(c => c.Employee);//Set data source.
-            _view.SetEmployeeContributionListBindingSource(EmployeeContributionBindingSource);
+            if (!emptyValue) EmployeeContributionList = EmployeeContributionList.Where(c => c.Employee.Equals(_view.SearchValue));
+            _view.SetEmployeeContributionListBindingSource(EmployeeContributionList.OrderBy(c => c.Employee));
         }
         private void LoadAllEmployeeList()
         {

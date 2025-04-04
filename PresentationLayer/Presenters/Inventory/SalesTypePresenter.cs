@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public ISalesTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource SalesTypeBindingSource;
         private IEnumerable<SalesType> SalesTypeList;
         public SalesTypePresenter(ISalesTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            SalesTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -152,13 +150,8 @@ namespace PresentationLayer.Presenters
         {
             SalesTypeList = _unitOfWork.SalesType.Value.GetAll();
 
-            if (emptyValue)
-            {
-                SalesTypeList = SalesTypeList.Where(C => C.SalesTypeName.Contains(_view.SearchValue));
-            }
-
-            SalesTypeBindingSource.DataSource = SalesTypeList;//Set data source.
-            _view.SetSalesTypeListBindingSource(SalesTypeBindingSource);
+            if (!emptyValue) SalesTypeList = SalesTypeList.Where(C => C.SalesTypeName.Contains(_view.SearchValue));
+            _view.SetSalesTypeListBindingSource(SalesTypeList);
         }
     }
 }

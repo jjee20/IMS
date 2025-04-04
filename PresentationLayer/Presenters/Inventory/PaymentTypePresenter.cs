@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IPaymentTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource PaymentTypeBindingSource;
         private IEnumerable<PaymentType> PaymentTypeList;
         public PaymentTypePresenter(IPaymentTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            PaymentTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -145,13 +143,8 @@ namespace PresentationLayer.Presenters
         {
             PaymentTypeList = _unitOfWork.PaymentType.Value.GetAll();
 
-            if (emptyValue)
-            {
-                PaymentTypeList = PaymentTypeList.Where(c => c.PaymentTypeName.Contains(_view.SearchValue));
-            }
-
-            PaymentTypeBindingSource.DataSource = PaymentTypeList;//Set data source.
-            _view.SetPaymentTypeListBindingSource(PaymentTypeBindingSource);
+            if (!emptyValue) PaymentTypeList = PaymentTypeList.Where(c => c.PaymentTypeName.Contains(_view.SearchValue));
+            _view.SetPaymentTypeListBindingSource(PaymentTypeList);
         }
     }
 }

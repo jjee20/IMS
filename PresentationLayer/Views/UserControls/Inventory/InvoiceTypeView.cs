@@ -1,9 +1,11 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.Inventory;
 using MaterialSkin;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews.Inventory;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class InvoiceTypeView : UserControl, IInvoiceTypeView
+    public partial class InvoiceTypeView : SfForm, IInvoiceTypeView
     {
         private int id;
         private string message;
@@ -108,49 +110,56 @@ namespace PresentationLayer.Views.UserControls
 
         public SfDataGrid DataGrid => dgList;
         //Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int InvoiceTypeId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string InvoiceTypeName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
 
-        public void SetInvoiceTypeListBindingSource(BindingSource InvoiceTypeList)
+        public void SetInvoiceTypeListBindingSource(IEnumerable<InvoiceType> InvoiceTypeList)
         {
-            dgPager.DataSource = InvoiceTypeList.ToList<InvoiceType>();
+            dgPager.DataSource = InvoiceTypeList;
             dgList.DataSource = dgPager.PagedSource;
         }
 

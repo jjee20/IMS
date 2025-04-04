@@ -9,6 +9,7 @@ using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class BenefitView : UserControl, IBenefitView
+    public partial class BenefitView : SfForm, IBenefitView
     {
         private int id;
         private string message;
@@ -112,49 +113,58 @@ namespace PresentationLayer.Views.UserControls
         }
 
         //Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BenefitId
         {
             get { return id; }
             set { id = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BenefitType BenefitType
         {
             get { return (BenefitType)txtBenefitType.SelectedValue; }
             set { txtBenefitType.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Amount
         {
             get { return Convert.ToDouble(txtAmount.Text); }
             set { txtAmount.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Other
         {
             get { return txtOther.Text.Trim(); }
             set { txtOther.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int EmployeeId
         {
             get { return (int)txtEmployee.SelectedValue; }
             set { txtEmployee.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
@@ -162,9 +172,9 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public SfDataGrid DataGrid => dgList;
-        public void SetBenefitListBindingSource(BindingSource BenefitList)
+        public void SetBenefitListBindingSource(IEnumerable<BenefitViewModel> BenefitList)
         {
-            dgPager.DataSource = BenefitList.ToList<BenefitViewModel>();
+            dgPager.DataSource = BenefitList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetEmployeeListBindingSource(BindingSource EmployeeList)

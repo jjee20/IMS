@@ -19,7 +19,6 @@ namespace PresentationLayer.Presenters
     {
         public IProjectManagementView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ProjectBindingSource;
         private BindingSource ProjectLineBindingSource;
         private BindingSource SalesTypeBindingSource;
         private BindingSource BranchBindingSource;
@@ -35,7 +34,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ProjectBindingSource = new BindingSource();
             ProjectLineBindingSource = new BindingSource();
             SalesTypeBindingSource = new BindingSource();
             BranchBindingSource = new BindingSource();
@@ -339,15 +337,11 @@ namespace PresentationLayer.Presenters
 
         private void LoadAllProjectList(bool emptyValue = false)
         {
-            ProjectBindingSource.DataSource = ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(
-            _unitOfWork.Project.Value.GetAll());
+            ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>( _unitOfWork.Project.Value.GetAll());
 
-            if (!emptyValue)
-            {
-                ProjectList = ProjectList.Where(c => c.ProjectName.Contains(_view.SearchValue));
-            }
+            if (!emptyValue) ProjectList = ProjectList.Where(c => c.ProjectName.Contains(_view.SearchValue));
 
-            _view.SetProjectListBindingSource(ProjectBindingSource);
+            _view.SetProjectListBindingSource(ProjectList);
         }
         private void LoadAllProductList()
         {

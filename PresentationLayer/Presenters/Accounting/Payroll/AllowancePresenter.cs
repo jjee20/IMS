@@ -20,7 +20,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IAllowanceView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource AllowanceBindingSource;
         private BindingSource AllowanceTypeBindingSource;
         private BindingSource EmployeeBindingSource;
         private IEnumerable<AllowanceViewModel> AllowanceList;
@@ -33,7 +32,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            AllowanceBindingSource = new BindingSource();
             AllowanceTypeBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
 
@@ -178,10 +176,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(c => c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date,
                 includeProperties: "Employee"));
-            if (!emptyValue)
-                AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
-            AllowanceBindingSource.DataSource = AllowanceList.OrderByDescending(c => c.DateGranted); ;//Set data source.
-            _view.SetAllowanceListBindingSource(AllowanceBindingSource);
+            if (!emptyValue) AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
+            _view.SetAllowanceListBindingSource(AllowanceList.OrderByDescending(c => c.DateGranted));
         }
         private void LoadAllAllowanceTypeList()
         {

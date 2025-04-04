@@ -14,7 +14,6 @@ namespace PresentationLayer.Presenters
     {
         public IBranchView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource BranchBindingSource;
         private BindingSource CurrencyBindingSource;
         private IEnumerable<BranchViewModel> BranchList;
        
@@ -24,7 +23,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            BranchBindingSource = new BindingSource();
             CurrencyBindingSource = new BindingSource();
 
             //Events
@@ -164,13 +162,8 @@ namespace PresentationLayer.Presenters
         {
             BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.Value.GetAll());
 
-            if (!emptyValue)
-            {
-                BranchList = BranchList.Where(c => c.BranchName.ToLower().Contains(_view.SearchValue.ToLower()));
-            }
-
-            BranchBindingSource.DataSource = BranchList;//Set data source.
-            _view.SetBranchListBindingSource(BranchBindingSource);
+            if (!emptyValue) BranchList = BranchList.Where(c => c.BranchName.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetBranchListBindingSource(BranchList);
         }
     }
 }

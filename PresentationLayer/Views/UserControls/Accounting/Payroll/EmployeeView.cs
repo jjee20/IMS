@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
@@ -8,6 +9,7 @@ using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class EmployeeView : UserControl, IEmployeeView
+    public partial class EmployeeView : SfForm, IEmployeeView
     {
         private int id;
         private string message;
@@ -118,108 +120,127 @@ namespace PresentationLayer.Views.UserControls
 
         public SfDataGrid DataGrid => dgList;
         //Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int EmployeeId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string EmployeeFirstName
         {
             get { return txtFirstName.Text; }
             set { txtFirstName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string EmployeeLastName
         {
             get { return txtLastName.Text; }
             set { txtLastName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime DateOfBirth
         {
             get { return txtDateOfBirth.Value; }
             set { txtDateOfBirth.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Gender Gender
         {
             get { return (Gender)txtGender.SelectedValue; }
             set { txtGender.SelectedValue = (int)value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ContactNumber
         {
             get { return txtContactNumber.Text; }
             set { txtContactNumber.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Email
         {
             get { return txtEmail.Text; }
             set { txtEmail.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Address
         {
             get { return txtAddress.Text; }
             set { txtAddress.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int DepartmentId
         {
             get { return (int)txtDepartment.SelectedValue; }
             set { txtDepartment.SelectedValue = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int JobPositionId
         {
             get { return (int)txtJobPosition.SelectedValue; }
             set { txtJobPosition.SelectedValue = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ShiftId
         {
             get { return (int)txtShift.SelectedValue; }
             set { txtShift.SelectedValue = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double BasicSalary
         {
             get { return Convert.ToDouble(txtBasicSalary.Text); }
             set { txtBasicSalary.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double LeaveCredits
         {
             get { return Convert.ToDouble(txtLeaveCredits.Text); }
             set { txtLeaveCredits.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool SaveButton
         {
             get { return btnSave.Enabled; }
             set { btnSave.Enabled = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool isDeducted
         {
             get { return txtisDeducted.Checked; }
             set { txtisDeducted.Checked = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
-        public void SetEmployeeListBindingSource(BindingSource EmployeeList)
+        public void SetEmployeeListBindingSource(IEnumerable<EmployeeViewModel> EmployeeList)
         {
-            dgPager.DataSource = EmployeeList.ToList<EmployeeViewModel>();
+            dgPager.DataSource = EmployeeList;
             dgList.DataSource = dgPager.PagedSource;
         }
 

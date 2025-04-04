@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IVendorTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource VendorTypeBindingSource;
         private IEnumerable<VendorType> VendorTypeList;
         public VendorTypePresenter(IVendorTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            VendorTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -145,13 +143,8 @@ namespace PresentationLayer.Presenters
         {
             VendorTypeList = _unitOfWork.VendorType.Value.GetAll();
 
-            if (!emptyValue)
-            {
-                VendorTypeList = VendorTypeList.Where(c => c.VendorTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
-            }
-
-            VendorTypeBindingSource.DataSource = VendorTypeList;//Set data source.
-            _view.SetVendorTypeListBindingSource(VendorTypeBindingSource);
+            if (!emptyValue) VendorTypeList = VendorTypeList.Where(c => c.VendorTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetVendorTypeListBindingSource(VendorTypeList);
         }
     }
 }

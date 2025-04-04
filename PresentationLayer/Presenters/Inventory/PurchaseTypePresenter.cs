@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IPurchaseTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource PurchaseTypeBindingSource;
         private IEnumerable<PurchaseType> PurchaseTypeList;
         public PurchaseTypePresenter(IPurchaseTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            PurchaseTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -145,13 +143,8 @@ namespace PresentationLayer.Presenters
         {
             PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll();
 
-            if (emptyValue)
-            {
-                PurchaseTypeList = PurchaseTypeList.Where(c => c.PurchaseTypeName.Contains(_view.SearchValue));
-            }
-
-            PurchaseTypeBindingSource.DataSource = PurchaseTypeList;//Set data source.
-            _view.SetPurchaseTypeListBindingSource(PurchaseTypeBindingSource);
+            if (!emptyValue) PurchaseTypeList = PurchaseTypeList.Where(c => c.PurchaseTypeName.Contains(_view.SearchValue));
+            _view.SetPurchaseTypeListBindingSource(PurchaseTypeList);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using PresentationLayer.Views.UserControls;
+﻿using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.ViewModels.PayrollViewModels;
+using PresentationLayer.Views.UserControls;
 using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.IViews.Accounting.Payroll
@@ -26,7 +28,7 @@ namespace RavenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SearchEvent;
 
         static abstract EmployeeContributionView GetInstance(TabPage parentContainer);
-        void SetEmployeeContributionListBindingSource(BindingSource EmployeeContributionList);
+        void SetEmployeeContributionListBindingSource(IEnumerable<EmployeeContributionViewModel> EmployeeContributionList);
         void SetEmployeeListBindingSource(BindingSource EmployeeList);
     }
 }

@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public ICustomerTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource CustomerTypeBindingSource;
         private IEnumerable<CustomerType> CustomerTypeList;
         public CustomerTypePresenter(ICustomerTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            CustomerTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -148,13 +146,8 @@ namespace PresentationLayer.Presenters
         {
             CustomerTypeList = _unitOfWork.CustomerType.Value.GetAll();
 
-            if (!emptyValue)
-            {
-                CustomerTypeList = CustomerTypeList.Where(c => c.CustomerTypeName.Contains(_view.SearchValue));
-            }
-
-            CustomerTypeBindingSource.DataSource = CustomerTypeList;//Set data source.
-            _view.SetCustomerTypeListBindingSource(CustomerTypeBindingSource);
+            if (!emptyValue) CustomerTypeList = CustomerTypeList.Where(c => c.CustomerTypeName.Contains(_view.SearchValue));
+            _view.SetCustomerTypeListBindingSource(CustomerTypeList);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public ITaxView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource TaxBindingSource;
         private IEnumerable<Tax> TaxList;
         public TaxPresenter(ITaxView view, IUnitOfWork unitOfWork)
         {
@@ -23,7 +22,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            TaxBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -153,13 +151,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             TaxList = _unitOfWork.Tax.Value.GetAll();
 
-            if(!emptyValue)
-            {
-                TaxList = TaxList.Where(c => c.TaxRate.ToString().Contains(_view.SearchValue));
-            }
-
-            TaxBindingSource.DataSource = TaxList;//Set data source.
-            _view.SetTaxListBindingSource(TaxBindingSource);
+            if(!emptyValue) TaxList = TaxList.Where(c => c.TaxRate.ToString().Contains(_view.SearchValue));
+            _view.SetTaxListBindingSource(TaxList);
         }
     }
 }

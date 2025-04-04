@@ -2,11 +2,13 @@
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
+using System.ComponentModel;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class BillTypeView : UserControl, IBillTypeView
+    public partial class BillTypeView : SfForm, IBillTypeView
     {
         private int id;
         private string message;
@@ -96,49 +98,56 @@ namespace PresentationLayer.Views.UserControls
 
         //Properties
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BillTypeId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string BillTypeName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Description
         {
             get { return txtDescription.Text; }
             set { txtDescription.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
 
-        public void SetBillTypeListBindingSource(BindingSource BillTypeList)
+        public void SetBillTypeListBindingSource(IEnumerable<BillType> BillTypeList)
         {
-            dgPager.DataSource = BillTypeList.ToList<BillType>();
+            dgPager.DataSource = BillTypeList;
             dgList.DataSource = dgPager.PagedSource;
         }
 

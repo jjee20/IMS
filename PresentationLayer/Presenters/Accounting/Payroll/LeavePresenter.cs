@@ -20,7 +20,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public ILeaveView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource LeaveBindingSource;
         private BindingSource EmployeeBindingSource;
         private BindingSource LeaveTypeBindingSource;
         private BindingSource StatusBindingSource;
@@ -35,7 +34,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            LeaveBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
             LeaveTypeBindingSource = new BindingSource();
             StatusBindingSource = new BindingSource();
@@ -199,11 +197,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 _unitOfWork.Leave.Value.GetAll(c => c.StartDate.Date >= _view.StartDate.Date && c.EndDate.Date <= _view.EndDate.Date,
                     includeProperties: "Employee"));
 
-            if (!emptyValue)
-                LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue) || c.LeaveType.Contains(_view.SearchValue));
-
-            LeaveBindingSource.DataSource = LeaveList.OrderByDescending(c => c.StartDate);//Set data source.
-            _view.SetLeaveListBindingSource(LeaveBindingSource);
+            if (!emptyValue) LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue) || c.LeaveType.Contains(_view.SearchValue));
+            _view.SetLeaveListBindingSource(LeaveList.OrderByDescending(c => c.StartDate));
         }
         private void LoadAllEmployeeList()
         {

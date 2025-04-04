@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -37,21 +37,21 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="Guna.Charts.WinForms" Version="1.1.0" />
-    <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.6" />
+    <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.7" />
     <PackageReference Include="MaterialSkin.2" Version="2.3.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.13.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
     <PackageReference Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" />
     <PackageReference Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
-    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.19" />
-    <PackageReference Include="Syncfusion.Licensing" Version="29.1.33" />
-    <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="28.2.12" />
-    <PackageReference Include="Syncfusion.Tools.Windows" Version="28.2.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.26" />
+    <PackageReference Include="Syncfusion.Licensing" Version="29.1.35" />
+    <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="29.1.35" />
+    <PackageReference Include="Syncfusion.Tools.Windows" Version="29.1.35" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
@@ -67,6 +67,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>inventorymanagementsystemDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -89,9 +92,6 @@
     <Compile Update="Views\UserControls\Account\RegisterView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Account\ChangePasswordViewOld.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\AttendanceView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,9 +105,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\PayrollView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\ProjectView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\LeaveView.cs">
@@ -149,9 +146,6 @@
     <Compile Update="Views\UserControls\Inventory\DashboardView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Admin\AdminView.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Inventory\ProductMonitoringView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -159,12 +153,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\ProductInventoryView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\ConfigurationView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">

@@ -16,7 +16,6 @@ namespace PresentationLayer.Presenters
     {
         public IProductStockInLogView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ProductStockInLogBindingSource;
         private BindingSource StatusBindingSource;
         private BindingSource ProductBindingSource;
         private IEnumerable<ProductStockInLogViewModel> ProductStockInLogList;
@@ -28,7 +27,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ProductStockInLogBindingSource = new BindingSource();
             StatusBindingSource = new BindingSource();
             ProductBindingSource = new BindingSource();
 
@@ -165,13 +163,8 @@ namespace PresentationLayer.Presenters
         {
             ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll(includeProperties: "Product"));
 
-            if (!emptyValue)
-            {
-                ProductStockInLogList = ProductStockInLogList.Where(c => c.Product.ToLower().Contains(_view.SearchValue.ToLower()));
-            }
-
-            ProductStockInLogBindingSource.DataSource = ProductStockInLogList;//Set data source.
-            _view.SetProductStockInLogListBindingSource(ProductStockInLogBindingSource);
+            if (!emptyValue) ProductStockInLogList = ProductStockInLogList.Where(c => c.Product.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetProductStockInLogListBindingSource(ProductStockInLogList);
         }
         private void LoadAllStatus()
         {

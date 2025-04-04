@@ -31,6 +31,7 @@ namespace PresentationLayer.Views.UserControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BranchView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -43,9 +44,10 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BranchView));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            imageList1 = new ImageList(components);
+            guna2HtmlToolTip2 = new Guna2HtmlToolTip();
             Guna2TabControl1 = new Guna2TabControl();
             tabPage1 = new TabPage();
             materialCard4 = new MaterialSkin.Controls.MaterialCard();
@@ -66,10 +68,8 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel3 = new Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna2HtmlLabel();
             txtName = new Guna2TextBox();
-            materialCard1 = new MaterialSkin.Controls.MaterialCard();
             panel2 = new Panel();
             btnPrint = new Button();
-            imageList1 = new ImageList(components);
             btnDelete = new Button();
             btnSave = new Button();
             btnEdit = new Button();
@@ -80,7 +80,6 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1 = new Guna2Separator();
             tableLayoutPanel2 = new TableLayoutPanel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            guna2HtmlToolTip2 = new Guna2HtmlToolTip();
             Guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             materialCard4.SuspendLayout();
@@ -88,11 +87,31 @@ namespace PresentationLayer.Views.UserControls
             ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             tabPage2.SuspendLayout();
             materialCard2.SuspendLayout();
-            materialCard1.SuspendLayout();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "add.png");
+            imageList1.Images.SetKeyName(1, "delete.png");
+            imageList1.Images.SetKeyName(2, "diskette.png");
+            imageList1.Images.SetKeyName(3, "edit-text.png");
+            imageList1.Images.SetKeyName(4, "printing.png");
+            imageList1.Images.SetKeyName(5, "return.png");
+            // 
+            // guna2HtmlToolTip2
+            // 
+            guna2HtmlToolTip2.AllowLinksHandling = true;
+            guna2HtmlToolTip2.AutoPopDelay = 5000;
+            guna2HtmlToolTip2.InitialDelay = 500;
+            guna2HtmlToolTip2.MaximumSize = new Size(0, 0);
+            guna2HtmlToolTip2.ReshowDelay = 100;
+            guna2HtmlToolTip2.ToolTipIcon = ToolTipIcon.Info;
             // 
             // Guna2TabControl1
             // 
@@ -100,10 +119,10 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.Controls.Add(tabPage2);
             Guna2TabControl1.Dock = DockStyle.Fill;
             Guna2TabControl1.ItemSize = new Size(180, 40);
-            Guna2TabControl1.Location = new Point(14, 124);
+            Guna2TabControl1.Location = new Point(0, 111);
             Guna2TabControl1.Name = "Guna2TabControl1";
             Guna2TabControl1.SelectedIndex = 0;
-            Guna2TabControl1.Size = new Size(1328, 564);
+            Guna2TabControl1.Size = new Size(1340, 551);
             Guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             Guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             Guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -120,7 +139,7 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.TabButtonSelectedState.ForeColor = Color.White;
             Guna2TabControl1.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
             Guna2TabControl1.TabButtonSize = new Size(180, 40);
-            Guna2TabControl1.TabIndex = 4;
+            Guna2TabControl1.TabIndex = 7;
             Guna2TabControl1.TabMenuBackColor = Color.White;
             Guna2TabControl1.TabMenuOrientation = TabMenuOrientation.HorizontalTop;
             // 
@@ -130,7 +149,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage1.Location = new Point(4, 44);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1320, 516);
+            tabPage1.Size = new Size(1332, 503);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "List";
             tabPage1.UseVisualStyleBackColor = true;
@@ -147,7 +166,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(1314, 510);
+            materialCard4.Size = new Size(1326, 497);
             materialCard4.TabIndex = 2;
             // 
             // panel1
@@ -157,7 +176,7 @@ namespace PresentationLayer.Views.UserControls
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(14, 14);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1286, 482);
+            panel1.Size = new Size(1298, 469);
             panel1.TabIndex = 1;
             // 
             // dgList
@@ -172,7 +191,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Location = new Point(0, 0);
             dgList.Name = "dgList";
             dgList.ShowGroupDropArea = true;
-            dgList.Size = new Size(1286, 446);
+            dgList.Size = new Size(1298, 433);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -188,11 +207,11 @@ namespace PresentationLayer.Views.UserControls
             dgPager.DataSource = dgList.DataBindings;
             dgPager.Dock = DockStyle.Bottom;
             dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 446);
+            dgPager.Location = new Point(0, 433);
             dgPager.Name = "dgPager";
             dgPager.PageCount = 1;
             dgPager.PageSize = 15;
-            dgPager.Size = new Size(1286, 36);
+            dgPager.Size = new Size(1298, 36);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
@@ -202,7 +221,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage2.Location = new Point(4, 44);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1320, 516);
+            tabPage2.Size = new Size(1304, 477);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Add New";
             tabPage2.UseVisualStyleBackColor = true;
@@ -230,7 +249,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14, 13, 14, 13);
-            materialCard2.Size = new Size(1314, 510);
+            materialCard2.Size = new Size(1298, 471);
             materialCard2.TabIndex = 1;
             // 
             // guna2HtmlLabel7
@@ -238,7 +257,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel7.Anchor = AnchorStyles.None;
             guna2HtmlLabel7.BackColor = Color.Transparent;
             guna2HtmlLabel7.Font = new Font("Segoe UI", 12F);
-            guna2HtmlLabel7.Location = new Point(180, 220);
+            guna2HtmlLabel7.Location = new Point(721, 385);
             guna2HtmlLabel7.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             guna2HtmlLabel7.Size = new Size(134, 23);
@@ -257,9 +276,8 @@ namespace PresentationLayer.Views.UserControls
             txtDescription.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtDescription.Font = new Font("Segoe UI", 9F);
             txtDescription.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtDescription.Location = new Point(180, 248);
+            txtDescription.Location = new Point(721, 413);
             txtDescription.Name = "txtDescription";
-            txtDescription.PasswordChar = '\0';
             txtDescription.PlaceholderText = "Enter Branch Description";
             txtDescription.SelectedText = "";
             txtDescription.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -278,9 +296,8 @@ namespace PresentationLayer.Views.UserControls
             txtPhone.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPhone.Font = new Font("Segoe UI", 9F);
             txtPhone.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPhone.Location = new Point(685, 154);
+            txtPhone.Location = new Point(1226, 319);
             txtPhone.Name = "txtPhone";
-            txtPhone.PasswordChar = '\0';
             txtPhone.PlaceholderText = "Enter Phone Number";
             txtPhone.SelectedText = "";
             txtPhone.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -299,9 +316,8 @@ namespace PresentationLayer.Views.UserControls
             txtContactPerson.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtContactPerson.Font = new Font("Segoe UI", 9F);
             txtContactPerson.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtContactPerson.Location = new Point(685, 340);
+            txtContactPerson.Location = new Point(1226, 505);
             txtContactPerson.Name = "txtContactPerson";
-            txtContactPerson.PasswordChar = '\0';
             txtContactPerson.PlaceholderText = "Enter Contact Person";
             txtContactPerson.SelectedText = "";
             txtContactPerson.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -320,9 +336,8 @@ namespace PresentationLayer.Views.UserControls
             txtEmail.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmail.Font = new Font("Segoe UI", 9F);
             txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmail.Location = new Point(685, 248);
+            txtEmail.Location = new Point(1226, 413);
             txtEmail.Name = "txtEmail";
-            txtEmail.PasswordChar = '\0';
             txtEmail.PlaceholderText = "Enter Email Address";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -341,9 +356,8 @@ namespace PresentationLayer.Views.UserControls
             txtAddress.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtAddress.Font = new Font("Segoe UI", 9F);
             txtAddress.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtAddress.Location = new Point(180, 340);
+            txtAddress.Location = new Point(721, 505);
             txtAddress.Name = "txtAddress";
-            txtAddress.PasswordChar = '\0';
             txtAddress.PlaceholderText = "Enter Address";
             txtAddress.SelectedText = "";
             txtAddress.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -355,7 +369,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel5.Anchor = AnchorStyles.None;
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 12F);
-            guna2HtmlLabel5.Location = new Point(685, 312);
+            guna2HtmlLabel5.Location = new Point(1226, 477);
             guna2HtmlLabel5.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(108, 23);
@@ -367,7 +381,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel6.Anchor = AnchorStyles.None;
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 12F);
-            guna2HtmlLabel6.Location = new Point(685, 220);
+            guna2HtmlLabel6.Location = new Point(1226, 385);
             guna2HtmlLabel6.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(101, 23);
@@ -379,7 +393,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel4.Anchor = AnchorStyles.None;
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 12F);
-            guna2HtmlLabel4.Location = new Point(685, 126);
+            guna2HtmlLabel4.Location = new Point(1226, 291);
             guna2HtmlLabel4.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(60, 23);
@@ -391,7 +405,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel3.Anchor = AnchorStyles.None;
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 12F);
-            guna2HtmlLabel3.Location = new Point(180, 312);
+            guna2HtmlLabel3.Location = new Point(721, 477);
             guna2HtmlLabel3.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(59, 23);
@@ -403,7 +417,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Anchor = AnchorStyles.None;
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 12F);
-            guna2HtmlLabel2.Location = new Point(180, 126);
+            guna2HtmlLabel2.Location = new Point(721, 291);
             guna2HtmlLabel2.Margin = new Padding(3, 2, 3, 2);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(97, 23);
@@ -422,31 +436,13 @@ namespace PresentationLayer.Views.UserControls
             txtName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtName.Font = new Font("Segoe UI", 9F);
             txtName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtName.Location = new Point(180, 154);
+            txtName.Location = new Point(721, 319);
             txtName.Name = "txtName";
-            txtName.PasswordChar = '\0';
             txtName.PlaceholderText = "Enter Branch Name";
             txtName.SelectedText = "";
             txtName.ShadowDecoration.CustomizableEdges = customizableEdges12;
             txtName.Size = new Size(449, 45);
             txtName.TabIndex = 44;
-            // 
-            // materialCard1
-            // 
-            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
-            materialCard1.Controls.Add(Guna2TabControl1);
-            materialCard1.Controls.Add(panel2);
-            materialCard1.Controls.Add(tableLayoutPanel1);
-            materialCard1.Depth = 0;
-            materialCard1.Dock = DockStyle.Fill;
-            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(0, 0);
-            materialCard1.Margin = new Padding(14, 13, 14, 13);
-            materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(14, 13, 14, 13);
-            materialCard1.Size = new Size(1356, 701);
-            materialCard1.TabIndex = 2;
             // 
             // panel2
             // 
@@ -459,11 +455,11 @@ namespace PresentationLayer.Views.UserControls
             panel2.Controls.Add(btnReturn);
             panel2.Controls.Add(txtSearch);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(14, 62);
+            panel2.Location = new Point(0, 49);
             panel2.Margin = new Padding(3, 13, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1328, 62);
-            panel2.TabIndex = 6;
+            panel2.Size = new Size(1340, 62);
+            panel2.TabIndex = 9;
             // 
             // btnPrint
             // 
@@ -479,18 +475,6 @@ namespace PresentationLayer.Views.UserControls
             btnPrint.Text = "Print";
             btnPrint.TextImageRelation = TextImageRelation.ImageAboveText;
             btnPrint.UseVisualStyleBackColor = true;
-            // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth32Bit;
-            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
-            imageList1.TransparentColor = Color.Transparent;
-            imageList1.Images.SetKeyName(0, "add.png");
-            imageList1.Images.SetKeyName(1, "delete.png");
-            imageList1.Images.SetKeyName(2, "diskette.png");
-            imageList1.Images.SetKeyName(3, "edit-text.png");
-            imageList1.Images.SetKeyName(4, "printing.png");
-            imageList1.Images.SetKeyName(5, "return.png");
             // 
             // btnDelete
             // 
@@ -582,10 +566,9 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(950, 0);
+            txtSearch.Location = new Point(962, 0);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
             txtSearch.Name = "txtSearch";
-            txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges14;
@@ -600,13 +583,13 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.Controls.Add(guna2Separator1, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(14, 13);
+            tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1328, 49);
-            tableLayoutPanel1.TabIndex = 5;
+            tableLayoutPanel1.Size = new Size(1340, 49);
+            tableLayoutPanel1.TabIndex = 8;
             // 
             // guna2Separator1
             // 
@@ -614,7 +597,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Location = new Point(3, 39);
             guna2Separator1.Margin = new Padding(3, 2, 3, 2);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1322, 8);
+            guna2Separator1.Size = new Size(1334, 8);
             guna2Separator1.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -629,7 +612,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1328, 37);
+            tableLayoutPanel2.Size = new Size(1340, 37);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -649,21 +632,15 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.Text = "Branch Management";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // guna2HtmlToolTip2
-            // 
-            guna2HtmlToolTip2.AllowLinksHandling = true;
-            guna2HtmlToolTip2.AutoPopDelay = 5000;
-            guna2HtmlToolTip2.InitialDelay = 500;
-            guna2HtmlToolTip2.MaximumSize = new Size(0, 0);
-            guna2HtmlToolTip2.ReshowDelay = 100;
-            guna2HtmlToolTip2.ToolTipIcon = ToolTipIcon.Info;
-            // 
             // BranchView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
-            Controls.Add(materialCard1);
+            ClientSize = new Size(1340, 662);
+            Controls.Add(Guna2TabControl1);
+            Controls.Add(panel2);
+            Controls.Add(tableLayoutPanel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "BranchView";
-            Size = new Size(1356, 701);
             Guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             materialCard4.ResumeLayout(false);
@@ -672,7 +649,6 @@ namespace PresentationLayer.Views.UserControls
             tabPage2.ResumeLayout(false);
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
-            materialCard1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
@@ -681,16 +657,21 @@ namespace PresentationLayer.Views.UserControls
         }
 
         #endregion
-
+        private Guna2HtmlToolTip guna2HtmlToolTip2;
+        private ImageList imageList1;
         private Guna2TabControl Guna2TabControl1;
-        private TabPage tabPage2;
-        private MaterialSkin.Controls.MaterialCard materialCard1;
-        private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private Guna2Separator guna2Separator1;
         private TabPage tabPage1;
+        private MaterialSkin.Controls.MaterialCard materialCard4;
+        private Panel panel1;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid dgList;
+        private Syncfusion.WinForms.DataPager.SfDataPager dgPager;
+        private TabPage tabPage2;
         private MaterialSkin.Controls.MaterialCard materialCard2;
+        private Guna2HtmlLabel guna2HtmlLabel7;
+        private Guna2TextBox txtDescription;
+        private Guna2TextBox txtPhone;
+        private Guna2TextBox txtContactPerson;
+        private Guna2TextBox txtEmail;
         private Guna2TextBox txtAddress;
         private Guna2HtmlLabel guna2HtmlLabel5;
         private Guna2HtmlLabel guna2HtmlLabel6;
@@ -698,24 +679,17 @@ namespace PresentationLayer.Views.UserControls
         private Guna2HtmlLabel guna2HtmlLabel3;
         private Guna2HtmlLabel guna2HtmlLabel2;
         private Guna2TextBox txtName;
-        private Guna2TextBox txtEmail;
-        private Guna2TextBox txtContactPerson;
-        private Guna2TextBox txtPhone;
-        private Guna2HtmlLabel guna2HtmlLabel7;
-        private Guna2TextBox txtDescription;
-        private Guna2HtmlToolTip guna2HtmlToolTip2;
-        private ImageList imageList1;
         private Panel panel2;
         private Button btnPrint;
         private Button btnDelete;
+        private Button btnSave;
         private Button btnEdit;
         private Button btnAdd;
         private Button btnReturn;
         private Guna2TextBox txtSearch;
-        private Button btnSave;
-        private MaterialSkin.Controls.MaterialCard materialCard4;
-        private Panel panel1;
-        private Syncfusion.WinForms.DataGrid.SfDataGrid dgList;
-        private Syncfusion.WinForms.DataPager.SfDataPager dgPager;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Guna2Separator guna2Separator1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

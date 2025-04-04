@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IBillTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource BillTypeBindingSource;
         private IEnumerable<BillType> BillTypeList;
         public BillTypePresenter(IBillTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            BillTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -145,13 +143,8 @@ namespace PresentationLayer.Presenters
         {
             BillTypeList = _unitOfWork.BillType.Value.GetAll();
 
-            if (!emptyValue)
-            {
-                BillTypeList = BillTypeList.Where(c => c.BillTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
-            }
-
-            BillTypeBindingSource.DataSource = BillTypeList;//Set data source.
-            _view.SetBillTypeListBindingSource(BillTypeBindingSource);
+            if (!emptyValue) BillTypeList = BillTypeList.Where(c => c.BillTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetBillTypeListBindingSource(BillTypeList);
         }
     }
 }

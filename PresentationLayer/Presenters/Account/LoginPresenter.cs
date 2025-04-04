@@ -1,15 +1,14 @@
 ﻿using DomainLayer.Models.Accounts;
 using Microsoft.AspNetCore.Identity;
-using PresentationLayer.Presenters.Admin;
-using PresentationLayer.Presenters.Inventory;
-using PresentationLayer.Views;
-using PresentationLayer.Views.IViews.Admin;
 using PresentationLayer.Views.IViews.Inventory;
-using PresentationLayer.Views.UserControls.Payroll;
 using RevenTech_ERP.Presenters.Accounting.Payroll;
 using RavenTech_ERP.Properties;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.IRepositories;
+using RavenTech_ERP.Views.IViews;
+using RavenTech_ERP;
+using RavenTech_ERP.Presenters;
+using DomainLayer.Enums;
 
 namespace PresentationLayer.Presenters.Account
 {
@@ -57,14 +56,33 @@ namespace PresentationLayer.Presenters.Account
 
                 if (passwordVerificationResult == PasswordVerificationResult.Success)
                 {
+                    var department = user.Department;
                     Settings.Default.User_Id = user.Id;
                     if(user.TaskRoles != null) Settings.Default.Roles = string.Join(",",user.TaskRoles);
-                    if (user.Department == DomainLayer.Enums.Departments.Admin)
-                        ShowAdmin();
-                    else if (user.Department == DomainLayer.Enums.Departments.Inventory)
-                        ShowInventory();
-                    else if (user.Department == DomainLayer.Enums.Departments.Payroll)
-                        ShowPayroll();
+                    Settings.Default.Department = department.ToString();
+
+                    IMainForm mainForm = new MainForm(_unitOfWork);
+                    new MainPresenter(mainForm, _unitOfWork);
+                    if(department == Departments.Inventory)
+                    {
+                        mainForm.InventoryTab.Visible = true;
+                        mainForm.PayrollTab.Visible = false;
+                        mainForm.RegisterButton.Visible = true;
+                    } 
+                    if(department == Departments.Payroll)
+                    {
+                        mainForm.PayrollTab.Visible = true;
+                        mainForm.InventoryTab.Visible = false;
+                        mainForm.RegisterButton.Visible = true;
+                    }
+                    mainForm.ShowForm();
+                    _view.Hide();
+                    //if (user.Department == DomainLayer.Enums.Departments.Admin)
+                    //    ShowAdmin();
+                    //else if (user.Department == DomainLayer.Enums.Departments.Inventory)
+                    //    ShowInventory();
+                    //else if (user.Department == DomainLayer.Enums.Departments.Payroll)
+                    //    ShowPayroll();
                 }
                 else
                 {
@@ -76,61 +94,6 @@ namespace PresentationLayer.Presenters.Account
             {
                 // Handle unexpected exceptions
                 MessageBox.Show($"An error occurred during login: {ex.Message}");
-            }
-        }
-
-        private void ShowPayroll()
-        {
-            try
-            {
-                // Create the Inventory view
-                IPayrollSystemView view = new PayrollSystemView();
-                var presenter = new PayrollSystemPresenter(view, _unitOfWork);
-
-                // Show the PayrollView (assuming it's a form or user control)
-                view.ShowForm();
-                _view.Hide();
-            }
-            catch (Exception ex)
-            {
-                // Handle errors when trying to show the Inventory view
-                MessageBox.Show($"An error occurred while showing the Payroll view: {ex.Message}");
-            }
-        }
-
-        private void ShowAdmin()
-        {
-            try
-            {
-                IAdminView view = new AdminView();
-                var presenter = new AdminPresenter(view, _unitOfWork);
-
-                view.ShowForm();
-                _view.Hide();
-            }
-            catch (Exception ex)
-            {
-                // Handle errors when trying to show the Inventory view
-                MessageBox.Show($"An error occurred while showing the Inventory view: {ex.Message}");
-            }
-        }
-
-        private void ShowInventory()
-        {
-            try
-            {
-                // Create the Inventory view
-                IInventoryView view = new InventoryView();
-                var presenter = new InventoryPresenter(view, _unitOfWork);
-
-                // Show the InventoryView (assuming it's a form or user control)
-                view.ShowForm();
-                _view.Hide();
-            }
-            catch (Exception ex)
-            {
-                // Handle errors when trying to show the Inventory view
-                MessageBox.Show($"An error occurred while showing the Inventory view: {ex.Message}");
             }
         }
     }

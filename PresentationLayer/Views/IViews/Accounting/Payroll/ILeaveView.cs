@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.ViewModels.PayrollViewModels;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
@@ -30,7 +31,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetLeaveListBindingSource(BindingSource LeaveList);
+        void SetLeaveListBindingSource(IEnumerable<LeaveViewModel> LeaveList);
         void SetEmployeeListBindingSource(BindingSource EmployeeList);
         void SetLeaveTypeListBindingSource(BindingSource LeaveTypeList);
         void SetStatusListBindingSource(BindingSource StatusList);

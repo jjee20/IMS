@@ -16,7 +16,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IBenefitView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource BenefitBindingSource;
         private BindingSource BenefitTypeBindingSource;
         private BindingSource EmployeeBindingSource;
         private IEnumerable<BenefitViewModel> BenefitList;
@@ -29,7 +28,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            BenefitBindingSource = new BindingSource();
             BenefitTypeBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
 
@@ -168,13 +166,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll(includeProperties: "Employee"));
 
-            if (!emptyValue)
-            {
-                BenefitList = BenefitList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
-            }
-
-            BenefitBindingSource.DataSource = BenefitList;//Set data source.
-            _view.SetBenefitListBindingSource(BenefitBindingSource);
+            if (!emptyValue) BenefitList = BenefitList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower())); 
+            _view.SetBenefitListBindingSource(BenefitList);
         }
         private void LoadAllBenefitTypeList()
         {

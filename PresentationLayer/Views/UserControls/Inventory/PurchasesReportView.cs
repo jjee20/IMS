@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using Guna.Charts.WinForms;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
+using Syncfusion.WinForms.Controls;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class PurchasesReportView : UserControl, IPurchasesReportView
+    public partial class PurchasesReportView : SfForm, IPurchasesReportView
     {
         public PurchasesReportView()
         {
@@ -28,6 +29,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             };
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Year
         {
             get
@@ -37,10 +39,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 else return 0;
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Month
         {
             get { return (int)txtMonth.SelectedValue; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Purchases { set => txtPurchases.Text = value.ToString("N2"); }
 
         public void SetDailyPurchasesChart(GunaBarDataset purchasesbarDataset)

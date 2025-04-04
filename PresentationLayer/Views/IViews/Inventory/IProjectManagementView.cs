@@ -41,6 +41,6 @@ namespace RavenTech_ERP.Views.IViews.Inventory
 
         void SetProductListBindingSource(BindingSource ProductBindingSource);
         void SetProjectLineListBindingSource(BindingSource ProjectLineList);
-        void SetProjectListBindingSource(BindingSource ProjectList);
+        void SetProjectListBindingSource(IEnumerable<ProjectViewModel> ProjectList);
     }
 }

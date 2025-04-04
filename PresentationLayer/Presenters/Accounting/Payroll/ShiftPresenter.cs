@@ -17,7 +17,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IShiftView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ShiftBindingSource;
         private IEnumerable<ShiftViewModel> ShiftList;
         public ShiftPresenter(IShiftView view, IUnitOfWork unitOfWork)
         {
@@ -26,7 +25,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ShiftBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -167,13 +165,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.Value.GetAll());
 
-            if (!emptyValue)
-            {
-                ShiftList = ShiftList.Where(c => c.ShiftName.Contains(_view.SearchValue));
-            }
-
-            ShiftBindingSource.DataSource = ShiftList;//Set data source.
-            _view.SetShiftListBindingSource(ShiftBindingSource);
+            if (!emptyValue) ShiftList = ShiftList.Where(c => c.ShiftName.Contains(_view.SearchValue));
+            _view.SetShiftListBindingSource(ShiftList);
         }
     }
 }

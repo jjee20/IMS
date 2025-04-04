@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IInvoiceTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource InvoiceTypeBindingSource;
         private IEnumerable<InvoiceType> InvoiceTypeList;
         public InvoiceTypePresenter(IInvoiceTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            InvoiceTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -145,13 +143,8 @@ namespace PresentationLayer.Presenters
         {
             InvoiceTypeList = _unitOfWork.InvoiceType.Value.GetAll();
 
-            if (emptyValue)
-            {
-                InvoiceTypeList = InvoiceTypeList.Where(c => c.InvoiceTypeName.Contains(_view.SearchValue));
-            }
-
-            InvoiceTypeBindingSource.DataSource = InvoiceTypeList;//Set data source.
-            _view.SetInvoiceTypeListBindingSource(InvoiceTypeBindingSource);
+            if (!emptyValue) InvoiceTypeList = InvoiceTypeList.Where(c => c.InvoiceTypeName.Contains(_view.SearchValue));
+            _view.SetInvoiceTypeListBindingSource(InvoiceTypeList);
         }
     }
 }

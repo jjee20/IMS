@@ -11,7 +11,6 @@ namespace PresentationLayer.Presenters
     {
         public IShipmentTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ShipmentTypeBindingSource;
         private IEnumerable<ShipmentType> ShipmentTypeList;
         public ShipmentTypePresenter(IShipmentTypeView view, IUnitOfWork unitOfWork) {
 
@@ -19,7 +18,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ShipmentTypeBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -145,13 +143,8 @@ namespace PresentationLayer.Presenters
         {
             ShipmentTypeList = _unitOfWork.ShipmentType.Value.GetAll();
 
-            if (emptyValue)
-            {
-                ShipmentTypeList = ShipmentTypeList.Where(c => c.ShipmentTypeName.Contains(_view.SearchValue));
-            }
-
-            ShipmentTypeBindingSource.DataSource = ShipmentTypeList;//Set data source.
-            _view.SetShipmentTypeListBindingSource(ShipmentTypeBindingSource);
+            if (!emptyValue) ShipmentTypeList = ShipmentTypeList.Where(c => c.ShipmentTypeName.Contains(_view.SearchValue));
+            _view.SetShipmentTypeListBindingSource(ShipmentTypeList);
         }
     }
 }

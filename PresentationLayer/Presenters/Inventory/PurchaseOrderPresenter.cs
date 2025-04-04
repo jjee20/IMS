@@ -17,7 +17,6 @@ namespace PresentationLayer.Presenters
     {
         public IPurchaseOrderView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource PurchaseOrderBindingSource;
         private BindingSource PurchaseOrderLineBindingSource;
         private BindingSource PurchaseTypeBindingSource;
         private BindingSource BranchBindingSource;
@@ -35,7 +34,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            PurchaseOrderBindingSource = new BindingSource();
             PurchaseOrderLineBindingSource = new BindingSource();
             PurchaseTypeBindingSource = new BindingSource();
             BranchBindingSource = new BindingSource();
@@ -433,9 +431,7 @@ namespace PresentationLayer.Presenters
                     c.PurchaseType.ToLower().Contains(_view.SearchValue.ToLower())
                 );
             }
-
-            PurchaseOrderBindingSource.DataSource = PurchaseOrderList.OrderByDescending(c => c.OrderDate);
-            _view.SetPurchaseOrderListBindingSource(PurchaseOrderBindingSource);
+            _view.SetPurchaseOrderListBindingSource(PurchaseOrderList.OrderByDescending(c => c.OrderDate));
         }
         private void LoadAllPurchaseTypeList() {
             PurchaseTypeBindingSource.DataSource = PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll();

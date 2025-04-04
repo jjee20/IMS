@@ -9,6 +9,7 @@ using PresentationLayer.Views.IViews.Account;
 using RavenTech_ERP.Properties;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class RegisterView : UserControl, IRegisterView
+    public partial class RegisterView : SfForm, IRegisterView
     {
         private string _id;
         private string message;
@@ -112,78 +113,92 @@ namespace PresentationLayer.Views.UserControls
         }
 
         //Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Id
         {
             get { return _id; }
             set { _id = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public string Username
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Password
         {
             get { return txtPassword.Text; }
             set { txtPassword.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ConfirmPassword
         {
             get { return txtConfirmPassword.Text; }
             set { txtConfirmPassword.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Department
         {
             get { return (int)txtDepartments.SelectedValue; }
             set { txtConfirmPassword.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
-        
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+
         public bool Adding
         {
             get { return txtAdding.Checked; }
             set { txtAdding.Checked = value; }
         }
-        
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+
         public bool Editing
         {
             get { return txtEditing.Checked; }
             set { txtEditing.Checked = value; }
         }
-        
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+
         public bool Deleting
         {
             get { return txtDeleting.Checked; }
             set { txtDeleting.Checked = value; }
         }
-        
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Viewing
         {
             get { return txtViewing.Checked; }
             set { txtViewing.Checked = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Overriding
         {
             get { return txtOverriding.Checked; }
             set { txtOverriding.Checked = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public string SearchValue
         {
@@ -193,9 +208,9 @@ namespace PresentationLayer.Views.UserControls
 
         public SfDataGrid DataGrid => dgList;
 
-        public void SetRegisterListBindingSource(BindingSource RegisterList)
+        public void SetRegisterListBindingSource(IEnumerable<AccountViewModel> RegisterList)
         {
-            dgPager.DataSource = RegisterList.ToList<AccountViewModel>();
+            dgPager.DataSource = RegisterList;
             dgList.DataSource = dgPager.PagedSource;
         }
 

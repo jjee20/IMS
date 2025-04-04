@@ -9,6 +9,7 @@ using PresentationLayer.Views.IViews;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+    
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class PayrollView : UserControl, IPayrollView
+    public partial class PayrollView : SfForm, IPayrollView
     {
         private string message;
         public PayrollView()
@@ -63,9 +64,9 @@ namespace PresentationLayer.Views.UserControls
             btnBenifits.CheckedChanged += (s, e) => IncludeBenefitsEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        public void SetPayrollListBindingSource(BindingSource PayrollList)
+        public void SetPayrollListBindingSource(IEnumerable<PayrollViewModel> PayrollList)
         {
-            dgPager.DataSource = PayrollList.ToList<PayrollViewModel>();
+            dgPager.DataSource = PayrollList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetProjectListBindingSource(BindingSource ProjectList)
@@ -77,8 +78,11 @@ namespace PresentationLayer.Views.UserControls
 
         private static PayrollView? instance;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime StartDate { get => txtStartDate.Value.Date; set => txtStartDate.Value = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime EndDate { get => txtEndDate.Value.Date; set => txtEndDate.Value = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProjectId {
             get
             {
@@ -87,9 +91,13 @@ namespace PresentationLayer.Views.UserControls
                 return 0;
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IncludeContribution { get => btnContribution.Checked; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IncludeBenefits { get => btnBenifits.Checked; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool All { get => btnAll.Checked; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }

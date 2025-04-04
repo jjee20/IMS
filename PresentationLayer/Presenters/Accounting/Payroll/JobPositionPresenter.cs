@@ -14,7 +14,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IJobPositionView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource JobPositionBindingSource;
         private IEnumerable<JobPosition> JobPositionList;
         public JobPositionPresenter(IJobPositionView view, IUnitOfWork unitOfWork)
         {
@@ -23,7 +22,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            JobPositionBindingSource = new BindingSource();
 
             //Events
             _view.AddNewEvent += AddNew;
@@ -150,13 +148,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             JobPositionList = _unitOfWork.JobPosition.Value.GetAll();
 
-            if (!emptyValue)
-            {
-                JobPositionList = JobPositionList.Where(c => c.Title.Contains(_view.SearchValue));
-            }
-
-            JobPositionBindingSource.DataSource = JobPositionList;//Set data source.
-            _view.SetJobPositionListBindingSource(JobPositionBindingSource);
+            if (!emptyValue) JobPositionList = JobPositionList.Where(c => c.Title.Contains(_view.SearchValue)); 
+            _view.SetJobPositionListBindingSource(JobPositionList);
         }
     }
 }

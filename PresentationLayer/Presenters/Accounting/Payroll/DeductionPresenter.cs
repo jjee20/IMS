@@ -20,7 +20,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IDeductionView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource DeductionBindingSource;
         private BindingSource DeductionTypeBindingSource;
         private BindingSource EmployeeBindingSource;
         private IEnumerable<DeductionViewModel> DeductionList;
@@ -33,7 +32,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            DeductionBindingSource = new BindingSource();
             DeductionTypeBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
 
@@ -174,12 +172,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(
                 _unitOfWork.Deduction.Value.GetAll(c => c.DateDeducted.Date >= _view.StartDate.Date && c.DateDeducted.Date <= _view.EndDate.Date, 
                 includeProperties: "Employee"));
-            if (!emptyValue)
-            {
-                DeductionList = DeductionList.Where(c => c.Employee.Contains(_view.SearchValue));
-            }
-            DeductionBindingSource.DataSource = DeductionList.OrderByDescending(c => c.DateDeducted);//Set data source.
-            _view.SetDeductionListBindingSource(DeductionBindingSource);
+            if (!emptyValue) DeductionList = DeductionList.Where(c => c.Employee.Contains(_view.SearchValue));
+            _view.SetDeductionListBindingSource(DeductionList.OrderByDescending(c => c.DateDeducted));
         }
         private void LoadAllDeductionTypeList()
         {

@@ -17,7 +17,6 @@ namespace PresentationLayer.Presenters
     {
         public ISalesOrderView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource SalesOrderBindingSource;
         private BindingSource SalesOrderLineBindingSource;
         private BindingSource SalesTypeBindingSource;
         private BindingSource BranchBindingSource;
@@ -39,7 +38,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            SalesOrderBindingSource = new BindingSource();
             SalesOrderLineBindingSource = new BindingSource();
             SalesTypeBindingSource = new BindingSource();
             BranchBindingSource = new BindingSource();
@@ -429,9 +427,7 @@ namespace PresentationLayer.Presenters
                     c.Customer.Contains(_view.SearchValue) ||
                     c.SalesType.Contains(_view.SearchValue)
                 );
-
-            SalesOrderBindingSource.DataSource = SalesOrderList;
-            _view.SetSalesOrderListBindingSource(SalesOrderBindingSource);
+            _view.SetSalesOrderListBindingSource(SalesOrderList);
         }
         private void LoadAllSalesTypeList() {
             SalesTypeBindingSource.DataSource = SalesTypeList = _unitOfWork.SalesType.Value.GetAll();

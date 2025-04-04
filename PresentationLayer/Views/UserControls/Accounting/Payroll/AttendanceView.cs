@@ -11,6 +11,7 @@ using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class AttendanceView : UserControl, IAttendanceView
+    public partial class AttendanceView : SfForm, IAttendanceView
     {
         private int id;
         private string message;
@@ -171,12 +172,14 @@ namespace PresentationLayer.Views.UserControls
 
         public SfDataGrid DataGrid => dgList;
         //Properties
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int AttendanceId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int EmployeeId
         {
             get
@@ -191,6 +194,7 @@ namespace PresentationLayer.Views.UserControls
                 }
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public int ProjectId
         {
@@ -207,82 +211,95 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TimeSpan TimeIn
         {
             get { return txtTimeIn.Value.TimeOfDay; }
             set { txtTimeIn.Value = DateTime.Today.Add(value); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TimeSpan TimeOut
         {
             get { return txtTimeOut.Value.TimeOfDay; }
             set { txtTimeOut.Value = DateTime.Today.Add(value); }
         }
-
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime Date
         {
             get { return txtDate.Value; }
             set { txtDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsPresent
         {
             get { return txtIsPresent.Checked; }
             set { txtIsPresent.Checked = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsHalfDay
         {
             get { return txtHalfDay.Checked; }
             set { txtHalfDay.Checked = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double HoursWorked
         {
             get { return Convert.ToDouble(txtHoursWorked.Text); }
             set { txtHoursWorked.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsIndividual
         {
             get { return isIndividual; }
             set { isIndividual = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime StartDate
         {
             get { return txtStartDate.Value; }
             set { txtStartDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime EndDate
         {
             get { return txtEndDate.Value; }
             set { txtEndDate.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int EmployeeIdFromTextBox
         {
             get { return Convert.ToInt16(txtEmployeeId.Text); }
             set { txtEmployeeId.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string EmployeeName
         {
             get { return txtName.Text; }
@@ -292,12 +309,12 @@ namespace PresentationLayer.Views.UserControls
         {
             get { return OpenFileDialog; }
         }
-        public void SetAttendanceListBindingSource(BindingSource AttendanceList)
+        public void SetAttendanceListBindingSource(IEnumerable<AttendanceViewModel> AttendanceList)
         {
-            dgPager.DataSource = AttendanceList.ToList<AttendanceViewModel>();
+            dgPager.DataSource = AttendanceList;
             dgList.DataSource = dgPager.PagedSource;
         }
-        public void SetIndividualAttendanceListBindingSource(BindingSource IndividualAttendanceList)
+        public void SetIndividualAttendanceListBindingSource(IEnumerable<IndividualAttendanceViewModel> IndividualAttendanceList)
         {
             dgPagerIndividual.DataSource = IndividualAttendanceList.ToList<IndividualAttendanceViewModel>();
             dgListInvidivual.DataSource = dgPagerIndividual.PagedSource;

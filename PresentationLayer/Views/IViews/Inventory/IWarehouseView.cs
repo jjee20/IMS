@@ -1,4 +1,5 @@
-﻿using Syncfusion.WinForms.DataGrid;
+﻿using DomainLayer.ViewModels.Inventory;
+using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
@@ -23,7 +24,7 @@ namespace PresentationLayer.Views.IViews
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
 
-        void SetWarehouseListBindingSource(BindingSource WarehouseList);
+        void SetWarehouseListBindingSource(IEnumerable<WarehouseViewModel> WarehouseList);
         void SetBranchListBindingSource(BindingSource BranchList);
     }
 }

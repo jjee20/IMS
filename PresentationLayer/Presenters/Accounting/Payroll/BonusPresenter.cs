@@ -19,7 +19,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IBonusView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource BonusBindingSource;
         private BindingSource BonusTypeBindingSource;
         private BindingSource EmployeeBindingSource;
         private IEnumerable<BonusViewModel> BonusList;
@@ -32,7 +31,6 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
             _view = view;
             _unitOfWork = unitOfWork;
-            BonusBindingSource = new BindingSource();
             BonusTypeBindingSource = new BindingSource();
             EmployeeBindingSource = new BindingSource();
 
@@ -176,8 +174,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 BonusList = BonusList.Where(c => c.Employee.Contains(_view.SearchValue) || c.BonusType.Contains(_view.SearchValue));
             }
 
-            BonusBindingSource.DataSource = BonusList.OrderByDescending(c => c.DateGranted);//Set data source
-            _view.SetBonusListBindingSource(BonusBindingSource);
+            _view.SetBonusListBindingSource(BonusList.OrderByDescending(c => c.DateGranted));
         }
         private void LoadAllBonusTypeList()
         {

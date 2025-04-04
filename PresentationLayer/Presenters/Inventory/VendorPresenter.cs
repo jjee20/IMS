@@ -16,7 +16,6 @@ namespace PresentationLayer.Presenters
     {
         public IVendorView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource VendorBindingSource;
         private BindingSource VendorTypeBindingSource;
 
         private IEnumerable<VendorViewModel> VendorList;
@@ -27,7 +26,6 @@ namespace PresentationLayer.Presenters
 
             _view = view;
             _unitOfWork = unitOfWork;
-            VendorBindingSource = new BindingSource();
             VendorTypeBindingSource = new BindingSource();
 
             //Events
@@ -196,13 +194,8 @@ namespace PresentationLayer.Presenters
         {
             VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(includeProperties: "VendorType"));
 
-            if (!emptyValue)
-            {
-                VendorList = VendorList.Where(c => c.VendorName.Contains(_view.SearchValue));
-            }
-
-            VendorBindingSource.DataSource = VendorList;//Set data source.
-            _view.SetVendorListBindingSource(VendorBindingSource);
+            if (!emptyValue) VendorList = VendorList.Where(c => c.VendorName.Contains(_view.SearchValue));
+            _view.SetVendorListBindingSource(VendorList);
         }
         private void LoadAllVendorTypeList()
         {

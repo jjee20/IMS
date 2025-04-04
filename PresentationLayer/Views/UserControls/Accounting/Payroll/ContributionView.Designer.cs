@@ -105,7 +105,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(16, 19, 16, 19);
-            materialCard1.Size = new Size(1356, 701);
+            materialCard1.Size = new Size(1340, 662);
             materialCard1.TabIndex = 2;
             // 
             // Guna2TabControl1
@@ -118,7 +118,7 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.Margin = new Padding(3, 4, 3, 4);
             Guna2TabControl1.Name = "Guna2TabControl1";
             Guna2TabControl1.SelectedIndex = 0;
-            Guna2TabControl1.Size = new Size(1324, 531);
+            Guna2TabControl1.Size = new Size(1308, 492);
             Guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             Guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             Guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -146,7 +146,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage1.Margin = new Padding(3, 4, 3, 4);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3, 4, 3, 4);
-            tabPage1.Size = new Size(1316, 483);
+            tabPage1.Size = new Size(1300, 444);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "List";
             tabPage1.UseVisualStyleBackColor = true;
@@ -163,7 +163,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(1310, 475);
+            materialCard4.Size = new Size(1294, 436);
             materialCard4.TabIndex = 2;
             // 
             // panel1
@@ -173,7 +173,7 @@ namespace PresentationLayer.Views.UserControls
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(14, 14);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1282, 447);
+            panel1.Size = new Size(1266, 408);
             panel1.TabIndex = 1;
             // 
             // dgList
@@ -188,7 +188,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Location = new Point(0, 0);
             dgList.Name = "dgList";
             dgList.ShowGroupDropArea = true;
-            dgList.Size = new Size(1282, 411);
+            dgList.Size = new Size(1266, 372);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -204,11 +204,11 @@ namespace PresentationLayer.Views.UserControls
             dgPager.DataSource = dgList.DataBindings;
             dgPager.Dock = DockStyle.Bottom;
             dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 411);
+            dgPager.Location = new Point(0, 372);
             dgPager.Name = "dgPager";
             dgPager.PageCount = 1;
             dgPager.PageSize = 15;
-            dgPager.Size = new Size(1282, 36);
+            dgPager.Size = new Size(1266, 36);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
@@ -263,7 +263,6 @@ namespace PresentationLayer.Views.UserControls
             lblMandatoryProvidentFund.Location = new Point(108, 327);
             lblMandatoryProvidentFund.Margin = new Padding(3, 5, 3, 5);
             lblMandatoryProvidentFund.Name = "lblMandatoryProvidentFund";
-            lblMandatoryProvidentFund.PasswordChar = '\0';
             lblMandatoryProvidentFund.PlaceholderText = "Enter Mandatory Provident Fund (WISP)";
             lblMandatoryProvidentFund.SelectedText = "";
             lblMandatoryProvidentFund.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -328,7 +327,6 @@ namespace PresentationLayer.Views.UserControls
             txtRate.Location = new Point(108, 222);
             txtRate.Margin = new Padding(3, 5, 3, 5);
             txtRate.Name = "txtRate";
-            txtRate.PasswordChar = '\0';
             txtRate.PlaceholderText = "Enter Amount";
             txtRate.SelectedText = "";
             txtRate.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -350,7 +348,6 @@ namespace PresentationLayer.Views.UserControls
             txtMaximumLimit.Location = new Point(688, 222);
             txtMaximumLimit.Margin = new Padding(3, 5, 3, 5);
             txtMaximumLimit.Name = "txtMaximumLimit";
-            txtMaximumLimit.PasswordChar = '\0';
             txtMaximumLimit.PlaceholderText = "Enter Maximum Range";
             txtMaximumLimit.SelectedText = "";
             txtMaximumLimit.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -405,7 +402,6 @@ namespace PresentationLayer.Views.UserControls
             txtMinimumLimit.Location = new Point(688, 119);
             txtMinimumLimit.Margin = new Padding(3, 5, 3, 5);
             txtMinimumLimit.Name = "txtMinimumLimit";
-            txtMinimumLimit.PasswordChar = '\0';
             txtMinimumLimit.PlaceholderText = "Enter Minimum Range";
             txtMinimumLimit.SelectedText = "";
             txtMinimumLimit.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -426,7 +422,7 @@ namespace PresentationLayer.Views.UserControls
             panel2.Location = new Point(16, 89);
             panel2.Margin = new Padding(3, 13, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1324, 62);
+            panel2.Size = new Size(1308, 62);
             panel2.TabIndex = 5;
             // 
             // btnPrint
@@ -546,10 +542,9 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(946, 0);
+            txtSearch.Location = new Point(930, 0);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
             txtSearch.Name = "txtSearch";
-            txtSearch.PasswordChar = '\0';
             txtSearch.PlaceholderText = "Search here";
             txtSearch.SelectedText = "";
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges12;
@@ -570,7 +565,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1324, 70);
+            tableLayoutPanel1.Size = new Size(1308, 70);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // tableLayoutPanel2
@@ -585,7 +580,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1324, 53);
+            tableLayoutPanel2.Size = new Size(1308, 53);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -599,7 +594,7 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.Location = new Point(3, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(1318, 53);
+            materialLabel1.Size = new Size(1302, 53);
             materialLabel1.TabIndex = 3;
             materialLabel1.Text = "Contribution Management";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
@@ -609,7 +604,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Dock = DockStyle.Fill;
             guna2Separator1.Location = new Point(3, 56);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1318, 11);
+            guna2Separator1.Size = new Size(1302, 11);
             guna2Separator1.TabIndex = 1;
             // 
             // guna2HtmlToolTip2
@@ -625,10 +620,11 @@ namespace PresentationLayer.Views.UserControls
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             AutoSize = true;
+            ClientSize = new Size(1340, 662);
             Controls.Add(materialCard1);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ContributionView";
-            Size = new Size(1356, 701);
             materialCard1.ResumeLayout(false);
             Guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);

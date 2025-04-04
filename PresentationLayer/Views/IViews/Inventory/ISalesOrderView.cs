@@ -57,7 +57,7 @@ namespace PresentationLayer.Views.IViews
         event EventHandler DeleteProductEvent; 
         event EventHandler UpdateComputationEvent;
 
-        void SetSalesOrderListBindingSource(BindingSource SalesOrderList);
+        void SetSalesOrderListBindingSource(IEnumerable<SalesOrderViewModel> SalesOrderList);
         void SetSalesOrderLineListBindingSource(BindingSource SalesOrderLineList);
         void SetSalesTypeListBindingSource(BindingSource SalesTypeBindingSource);
         void SetBranchListBindingSource(BindingSource BranchBindingSource);

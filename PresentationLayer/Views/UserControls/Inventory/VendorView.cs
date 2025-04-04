@@ -5,6 +5,7 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class VendorView : UserControl, IVendorView
+    public partial class VendorView : SfForm, IVendorView
     {
         private int id;
         private string message;
@@ -109,47 +110,56 @@ namespace PresentationLayer.Views.UserControls
 
         //PropertiesdgList
         public SfDataGrid DataGrid => dgList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int VendorId
         {
             get { return id; }
             set { id = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string VendorName
         {
             get { return txtName.Text; }
             set { txtName.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int VendorTypeId
         {
             get { return (int)txtVendorType.SelectedValue; }
             set { txtVendorType.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Address
         {
             get { return txtAddress.Text.Trim().ToString(); }
             set { txtAddress.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Phone
         {
             get { return txtPhone.Text; }
             set { txtPhone.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Email
         {
             get { return txtEmail.Text; }
             set { txtEmail.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ContactPerson
         {
             get { return txtContactPerson.Text; }
             set { txtContactPerson.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 
         public bool IsSuccessful
         {
@@ -157,21 +167,23 @@ namespace PresentationLayer.Views.UserControls
             set { isSuccessful = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             get { return message; }
             set { message = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
             get { return txtSearch.Text; }
             set { txtSearch.Text = value; }
         }
 
-        public void SetVendorListBindingSource(BindingSource VendorList)
+        public void SetVendorListBindingSource(IEnumerable<VendorViewModel> VendorList)
         {
-            dgPager.DataSource = VendorList.ToList<VendorViewModel>();
+            dgPager.DataSource = VendorList;
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetVendorTypeListBindingSource(BindingSource VendorTypeBindingSource)

@@ -22,7 +22,6 @@ namespace PresentationLayer.Presenters.Account
     {
         public IRegisterView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource RegisterBindingSource;
         private BindingSource DepartmentBindingSource;
         private IEnumerable<AccountViewModel> RegisterList;
         private IEnumerable<EnumItemViewModel> DepartmentList;
@@ -35,7 +34,6 @@ namespace PresentationLayer.Presenters.Account
             _view = view;
             _unitOfWork = unitOfWork;
             _passwordHasher = new PasswordHasher<ApplicationUser>();
-            RegisterBindingSource = new BindingSource();
             DepartmentBindingSource = new BindingSource();
 
             //Events
@@ -53,7 +51,6 @@ namespace PresentationLayer.Presenters.Account
             LoadAllDepartmentList();
 
             //Source Binding
-            _view.SetRegisterListBindingSource(RegisterBindingSource);
             _view.SetDepartmentListBindingSource(DepartmentBindingSource);
         }
 
@@ -125,7 +122,6 @@ namespace PresentationLayer.Presenters.Account
             {
                 var user = _unitOfWork.ApplicationUser.Value.GetAll(c => c.UserName.Contains(_view.SearchValue), includeProperties: "Profile");
                 RegisterList = Program.Mapper.Map<IEnumerable<AccountViewModel>>(user);
-                RegisterBindingSource.DataSource = RegisterList;
             }
             else
             {
@@ -135,7 +131,7 @@ namespace PresentationLayer.Presenters.Account
         private void Edit(object? sender, EventArgs e)
         {
             _view.IsEdit = true;
-            var entity = (AccountViewModel)RegisterBindingSource.Current;
+            var entity = (AccountViewModel)_view.DataGrid.CurrentItem;
             var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == entity.Id, includeProperties: "Profile");
             _view.Id = entity.Id;
             _view.Username = entity.Username;
@@ -156,7 +152,7 @@ namespace PresentationLayer.Presenters.Account
         {
             try
             {
-                var entity = (AccountViewModel)RegisterBindingSource.Current;
+                var entity = (AccountViewModel)_view.DataGrid.CurrentItem;
                 var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == entity.Id, includeProperties: "Profile");
                 _unitOfWork.ApplicationUser.Value.Remove(user);
                 _unitOfWork.Save();
@@ -197,7 +193,7 @@ namespace PresentationLayer.Presenters.Account
         {
             var user = _unitOfWork.ApplicationUser.Value.GetAll(includeProperties: "Profile");
             RegisterList = Program.Mapper.Map<IEnumerable<AccountViewModel>>(user);
-            RegisterBindingSource.DataSource = RegisterList;//Set data source.
+            _view.SetRegisterListBindingSource(RegisterList);
         }
     }
 }
