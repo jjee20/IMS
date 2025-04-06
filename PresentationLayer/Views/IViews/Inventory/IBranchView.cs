@@ -1,9 +1,10 @@
 ﻿using DomainLayer.ViewModels.Inventory;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.IViews
 {
-    public interface IBranchView
+    public interface IBranchView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         int BranchId { get; set; }

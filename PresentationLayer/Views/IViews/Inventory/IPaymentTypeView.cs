@@ -1,10 +1,11 @@
 ﻿using DomainLayer.Models.Inventory;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
 {
-    public interface IPaymentTypeView
+    public interface IPaymentTypeView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         int PaymentTypeId { get; set; }

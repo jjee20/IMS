@@ -100,12 +100,12 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(0, 0);
+            materialCard1.Location = new Point(2, 2);
             materialCard1.Margin = new Padding(16, 19, 16, 19);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(16, 19, 16, 19);
-            materialCard1.Size = new Size(1340, 662);
+            materialCard1.Size = new Size(1368, 736);
             materialCard1.TabIndex = 2;
             // 
             // Guna2TabControl1
@@ -118,7 +118,7 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.Margin = new Padding(3, 4, 3, 4);
             Guna2TabControl1.Name = "Guna2TabControl1";
             Guna2TabControl1.SelectedIndex = 0;
-            Guna2TabControl1.Size = new Size(1308, 492);
+            Guna2TabControl1.Size = new Size(1336, 566);
             Guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             Guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             Guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -146,7 +146,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage1.Margin = new Padding(3, 4, 3, 4);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3, 4, 3, 4);
-            tabPage1.Size = new Size(1300, 444);
+            tabPage1.Size = new Size(1328, 518);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "List";
             tabPage1.UseVisualStyleBackColor = true;
@@ -163,7 +163,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(1294, 436);
+            materialCard4.Size = new Size(1322, 510);
             materialCard4.TabIndex = 2;
             // 
             // panel1
@@ -173,7 +173,7 @@ namespace PresentationLayer.Views.UserControls
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(14, 14);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1266, 408);
+            panel1.Size = new Size(1294, 482);
             panel1.TabIndex = 1;
             // 
             // dgList
@@ -187,8 +187,9 @@ namespace PresentationLayer.Views.UserControls
             dgList.FrozenRowCount = 1;
             dgList.Location = new Point(0, 0);
             dgList.Name = "dgList";
+            dgList.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
             dgList.ShowGroupDropArea = true;
-            dgList.Size = new Size(1266, 372);
+            dgList.Size = new Size(1294, 446);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -204,11 +205,11 @@ namespace PresentationLayer.Views.UserControls
             dgPager.DataSource = dgList.DataBindings;
             dgPager.Dock = DockStyle.Bottom;
             dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 372);
+            dgPager.Location = new Point(0, 446);
             dgPager.Name = "dgPager";
             dgPager.PageCount = 1;
             dgPager.PageSize = 15;
-            dgPager.Size = new Size(1266, 36);
+            dgPager.Size = new Size(1294, 36);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
@@ -219,7 +220,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage2.Margin = new Padding(3, 4, 3, 4);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3, 4, 3, 4);
-            tabPage2.Size = new Size(1316, 483);
+            tabPage2.Size = new Size(1300, 444);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Add New";
             tabPage2.UseVisualStyleBackColor = true;
@@ -245,7 +246,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(16, 19, 16, 19);
-            materialCard2.Size = new Size(1310, 475);
+            materialCard2.Size = new Size(1294, 436);
             materialCard2.TabIndex = 0;
             // 
             // txtEmployeeId
@@ -264,7 +265,7 @@ namespace PresentationLayer.Views.UserControls
             txtEmployeeId.ForeColor = Color.FromArgb(68, 88, 112);
             txtEmployeeId.IntegralHeight = false;
             txtEmployeeId.ItemHeight = 50;
-            txtEmployeeId.Location = new Point(398, 41);
+            txtEmployeeId.Location = new Point(390, 22);
             txtEmployeeId.Name = "txtEmployeeId";
             txtEmployeeId.ShadowDecoration.CustomizableEdges = customizableEdges2;
             txtEmployeeId.Size = new Size(513, 56);
@@ -283,7 +284,7 @@ namespace PresentationLayer.Views.UserControls
             txtSSSWISP.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSSSWISP.Font = new Font("Segoe UI", 10F);
             txtSSSWISP.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSSSWISP.Location = new Point(398, 221);
+            txtSSSWISP.Location = new Point(390, 202);
             txtSSSWISP.Margin = new Padding(3, 5, 3, 5);
             txtSSSWISP.Name = "txtSSSWISP";
             txtSSSWISP.PlaceholderText = "Enter Mandatory Provident Fund (WISP)";
@@ -297,7 +298,7 @@ namespace PresentationLayer.Views.UserControls
             lblMadatoryProvidentFund.Anchor = AnchorStyles.None;
             lblMadatoryProvidentFund.BackColor = Color.Transparent;
             lblMadatoryProvidentFund.Font = new Font("Segoe UI", 10F);
-            lblMadatoryProvidentFund.Location = new Point(398, 194);
+            lblMadatoryProvidentFund.Location = new Point(390, 175);
             lblMadatoryProvidentFund.Name = "lblMadatoryProvidentFund";
             lblMadatoryProvidentFund.Size = new Size(233, 19);
             lblMadatoryProvidentFund.TabIndex = 19;
@@ -308,7 +309,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel5.Anchor = AnchorStyles.None;
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel5.Location = new Point(398, 16);
+            guna2HtmlLabel5.Location = new Point(390, -3);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(98, 19);
             guna2HtmlLabel5.TabIndex = 18;
@@ -326,7 +327,7 @@ namespace PresentationLayer.Views.UserControls
             txtSSS.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSSS.Font = new Font("Segoe UI", 10F);
             txtSSS.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSSS.Location = new Point(398, 130);
+            txtSSS.Location = new Point(390, 111);
             txtSSS.Margin = new Padding(3, 5, 3, 5);
             txtSSS.Name = "txtSSS";
             txtSSS.PlaceholderText = "Enter SSS Amount";
@@ -347,7 +348,7 @@ namespace PresentationLayer.Views.UserControls
             txtPagIbig.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPagIbig.Font = new Font("Segoe UI", 10F);
             txtPagIbig.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPagIbig.Location = new Point(398, 403);
+            txtPagIbig.Location = new Point(390, 384);
             txtPagIbig.Margin = new Padding(3, 5, 3, 5);
             txtPagIbig.Name = "txtPagIbig";
             txtPagIbig.PlaceholderText = "Enter Pag-ibig Amount";
@@ -361,7 +362,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel4.Anchor = AnchorStyles.None;
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel4.Location = new Point(398, 103);
+            guna2HtmlLabel4.Location = new Point(390, 84);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(24, 19);
             guna2HtmlLabel4.TabIndex = 14;
@@ -372,7 +373,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel3.Anchor = AnchorStyles.None;
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel3.Location = new Point(398, 376);
+            guna2HtmlLabel3.Location = new Point(390, 357);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(52, 19);
             guna2HtmlLabel3.TabIndex = 12;
@@ -383,7 +384,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Anchor = AnchorStyles.None;
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 10F);
-            guna2HtmlLabel2.Location = new Point(398, 285);
+            guna2HtmlLabel2.Location = new Point(390, 266);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(60, 19);
             guna2HtmlLabel2.TabIndex = 11;
@@ -401,7 +402,7 @@ namespace PresentationLayer.Views.UserControls
             txtPhilHealth.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPhilHealth.Font = new Font("Segoe UI", 10F);
             txtPhilHealth.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPhilHealth.Location = new Point(398, 312);
+            txtPhilHealth.Location = new Point(390, 293);
             txtPhilHealth.Margin = new Padding(3, 5, 3, 5);
             txtPhilHealth.Name = "txtPhilHealth";
             txtPhilHealth.PlaceholderText = "Enter PhilHealth Amount";
@@ -424,7 +425,7 @@ namespace PresentationLayer.Views.UserControls
             panel2.Location = new Point(16, 89);
             panel2.Margin = new Padding(3, 13, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1308, 62);
+            panel2.Size = new Size(1336, 62);
             panel2.TabIndex = 5;
             // 
             // btnPrint
@@ -544,7 +545,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(930, 0);
+            txtSearch.Location = new Point(958, 0);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search here";
@@ -567,7 +568,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1308, 70);
+            tableLayoutPanel1.Size = new Size(1336, 70);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // tableLayoutPanel2
@@ -582,7 +583,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1308, 53);
+            tableLayoutPanel2.Size = new Size(1336, 53);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -606,7 +607,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Dock = DockStyle.Fill;
             guna2Separator1.Location = new Point(3, 56);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1302, 11);
+            guna2Separator1.Size = new Size(1330, 11);
             guna2Separator1.TabIndex = 1;
             // 
             // guna2HtmlToolTip2
@@ -622,11 +623,13 @@ namespace PresentationLayer.Views.UserControls
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             AutoSize = true;
-            ClientSize = new Size(1340, 662);
+            ClientSize = new Size(1372, 740);
             Controls.Add(materialCard1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "EmployeeContributionView";
+            Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+            Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             materialCard1.ResumeLayout(false);
             Guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);

@@ -4,6 +4,7 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.IRepositories;
+using System.Linq;
 
 namespace PresentationLayer.Presenters
 {
@@ -40,9 +41,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.CashBank.Value.Get(c => c.CashBankId == _view.CashBankId, tracked: true);
+            var model = await _unitOfWork.CashBank.Value.GetAsync(c => c.CashBankId == _view.CashBankId, tracked: true);
             if (model == null) model = new CashBank();
             else _unitOfWork.CashBank.Value.Detach(model);
 
@@ -60,11 +61,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.CashBank.Value.Add(model);
+                    await _unitOfWork.CashBank.Value.AddAsync(model);
                     _view.Message = "Cash bank added successfully";
                 }
-                    _unitOfWork.Save();
+                    await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -97,26 +99,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select items to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (CashBank)_view.DataGrid.SelectedItem;
-                _unitOfWork.CashBank.Value.Remove(entity);
+                var selectedItems = _view.DataGrid.SelectedItems.Cast<CashBank>().ToList();
+                var ids = selectedItems.Select(c => c.CashBankId).ToList();
+
+                var entities = _unitOfWork.CashBank.Value
+                    .GetAll()
+                    .Where(c => ids.Contains(c.CashBankId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected records could not be found in the database.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.CashBank.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Cash bank deleted successfully";
+                _view.Message = $"{entities.Count} cash bank record(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllCashBankList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Cash bank";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "CashBankReport.rdlc";

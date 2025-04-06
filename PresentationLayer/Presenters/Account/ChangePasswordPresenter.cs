@@ -31,7 +31,7 @@ namespace PresentationLayer.Presenters.Account
 
         }
 
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
             string userId = Settings.Default.User_Id;
             var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId);

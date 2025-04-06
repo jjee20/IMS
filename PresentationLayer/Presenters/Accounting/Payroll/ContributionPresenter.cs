@@ -51,9 +51,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Contribution.Value.Get(c => c.ContributionId == _view.ContributionId, tracked: true);
+            var model = await _unitOfWork.Contribution.Value.GetAsync(c => c.ContributionId == _view.ContributionId, tracked: true);
             if (model == null) model = new Contribution();
             else _unitOfWork.Contribution.Value.Detach(model);
 
@@ -74,18 +74,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    var Entity = _unitOfWork.Contribution.Value.Get(c => c.ContributionType == _view.ContributionType && c.MinimumLimit == _view.MinimumLimit && c.MaximumLimit == _view.MaximumLimit);
-                    if (Entity != null)
-                    {
-                        _view.Message = "Contribution is already added.";
-                        return;
-                    }
-
-                    _unitOfWork.Contribution.Value.Add(model);
+                    await _unitOfWork.Contribution.Value.AddAsync(model);
                     _view.Message = "Contribution added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -121,26 +115,40 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select contribution(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (Contribution)_view.DataGrid.SelectedItem;
-                _unitOfWork.Contribution.Value.Remove(entity);
+                var selectedContributions = _view.DataGrid.SelectedItems.Cast<Contribution>().ToList();
+
+                if (!selectedContributions.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid contributions selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Contribution.Value.RemoveRange(selectedContributions);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Contribution deleted successfully";
+                _view.Message = $"{selectedContributions.Count} contribution(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllContributionList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Contribution";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ContributionReport.rdlc";

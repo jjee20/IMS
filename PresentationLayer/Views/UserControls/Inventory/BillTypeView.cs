@@ -1,5 +1,7 @@
 ﻿using DomainLayer.Models.Inventory;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews;
+using RavenTech_ERP.Views.UserControls;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
 using Syncfusion.WinForms.Controls;
@@ -39,14 +41,8 @@ namespace PresentationLayer.Views.UserControls
             btnSave.Click += delegate
             {
                 SaveEvent?.Invoke(this, EventArgs.Empty);
-                if (isSuccessful)
-                {
-                    Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Add(tabPage1);
-                    btnReturn.Visible = false;
-                }
-                MessageBox.Show(Message);
             };
+
             txtSearch.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
@@ -75,7 +71,6 @@ namespace PresentationLayer.Views.UserControls
                 {
                     // Invoke the DeleteEvent with the selected row as an argument
                     DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show(Message);
                 }
             };
             //Print
@@ -95,7 +90,6 @@ namespace PresentationLayer.Views.UserControls
                 btnReturn.Visible = false;
             };
         }
-
         //Properties
         public SfDataGrid DataGrid => dgList;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

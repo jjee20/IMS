@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.ViewModels.PayrollViewModels;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
@@ -21,6 +22,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         event EventHandler IncludeBenefitsEvent;
         event EventHandler ProjectEvent;
         event EventHandler AllEvent;
+        event CellClickEventHandler TMonthEvent;
         void SetPayrollListBindingSource(IEnumerable<PayrollViewModel> PayrollList);
         void SetProjectListBindingSource(BindingSource ProjectList);
     }

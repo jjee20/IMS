@@ -1,10 +1,11 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.ViewModels.AccountViewModels;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.IViews.Account
 {
-    public interface IRegisterView
+    public interface IRegisterView : IMessageBase
     {
         string Id { get; set; }
         string Username { get; set; }

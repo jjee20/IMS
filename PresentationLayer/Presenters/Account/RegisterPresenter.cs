@@ -65,9 +65,9 @@ namespace PresentationLayer.Presenters.Account
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.ApplicationUser.Value.Get(c => c.UserName == _view.Username, tracked: true);
+            var model =await _unitOfWork.ApplicationUser.Value.GetAsync(c => c.UserName == _view.Username, tracked: true);
             if (model == null) model = new ApplicationUser();
             else _unitOfWork.ApplicationUser.Value.Detach(model);
 
@@ -102,10 +102,11 @@ namespace PresentationLayer.Presenters.Account
                 }
                 else //Add new model
                 {
-                    _unitOfWork.ApplicationUser.Value.Add(model);
+                    await _unitOfWork.ApplicationUser.Value.AddAsync(model);
                     _view.Message = "Account added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
+                _view.ShowMessage(_view.Message);
                 _view.IsSuccessful = true;
                 CleanviewFields();
             }
@@ -115,12 +116,12 @@ namespace PresentationLayer.Presenters.Account
                 _view.Message = ex.Message;
             }
         }
-        private void Search(object? sender, EventArgs e)
+        private async void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             if (!emptyValue)
             {
-                var user = _unitOfWork.ApplicationUser.Value.GetAll(c => c.UserName.Contains(_view.SearchValue), includeProperties: "Profile");
+                var user = await _unitOfWork.ApplicationUser.Value.GetAllAsync(c => c.UserName.Contains(_view.SearchValue), includeProperties: "Profile");
                 RegisterList = Program.Mapper.Map<IEnumerable<AccountViewModel>>(user);
             }
             else

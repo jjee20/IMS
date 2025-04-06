@@ -30,7 +30,7 @@
         {
             autoLabel1 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             autoLabel2 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            autoLabel3 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            txtName = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             autoLabel4 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             autoLabel5 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             autoLabel6 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
@@ -61,13 +61,13 @@
             autoLabel2.TabIndex = 3;
             autoLabel2.Text = "I.D.";
             // 
-            // autoLabel3
+            // txtName
             // 
-            autoLabel3.Location = new Point(78, 51);
-            autoLabel3.Name = "autoLabel3";
-            autoLabel3.Size = new Size(39, 15);
-            autoLabel3.TabIndex = 5;
-            autoLabel3.Text = "Name";
+            txtName.Location = new Point(78, 51);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(39, 15);
+            txtName.TabIndex = 5;
+            txtName.Text = "Name";
             // 
             // autoLabel4
             // 
@@ -178,7 +178,7 @@
             Controls.Add(autoLabel8);
             Controls.Add(autoLabel5);
             Controls.Add(autoLabel6);
-            Controls.Add(autoLabel3);
+            Controls.Add(txtName);
             Controls.Add(autoLabel4);
             Controls.Add(autoLabel2);
             Controls.Add(autoLabel1);
@@ -195,7 +195,7 @@
         #endregion
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel1;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel2;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel3;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel txtName;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel4;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel5;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel6;

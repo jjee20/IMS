@@ -1,4 +1,5 @@
-﻿using PresentationLayer.Presenters;
+﻿using DomainLayer.Enums;
+using PresentationLayer.Presenters;
 using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Account;
@@ -6,6 +7,7 @@ using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Helpers;
 using RavenTech_ERP.Presenters.Inventory;
+using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.IViews.Inventory;
@@ -69,7 +71,16 @@ namespace RavenTech_ERP.Presenters
             _mainForm.RegisterAccountEvent += RegisterAccountEvent;
             _mainForm.PayrollEvent += PayrollEvent;
 
-            DashboardEvent(this, EventArgs.Empty);
+            if(!(Settings.Default.Department == Departments.Payroll.ToString()))
+            {
+                _mainForm.ribbonControl.SelectedTab = _mainForm.InventoryTab;
+                DashboardEvent(this, EventArgs.Empty);
+            }
+            else
+            {
+                _mainForm.ribbonControl.SelectedTab = _mainForm.PayrollTab;
+                AttendanceEvent(this, EventArgs.Empty);
+            }
         }
 
         private void PayrollEvent(object? sender, EventArgs e)
@@ -236,8 +247,8 @@ namespace RavenTech_ERP.Presenters
 
         private void ProjectEvent(object? sender, EventArgs e)
         {
-            IProjectManagementView _view = ChildManager<ProjectManagementView>.GetChildInstance((MainForm)_mainForm);
-            new ProjectManagementPresenter(_view, _unitOfWork);
+            IProjectView _view = ChildManager<ProjectManagementView>.GetChildInstance((MainForm)_mainForm);
+            new ProjectPresenter(_view, _unitOfWork);
         }
 
         private void LeaveEvent(object? sender, EventArgs e)

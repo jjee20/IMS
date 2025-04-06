@@ -30,13 +30,31 @@ namespace PresentationLayer.Views.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn18 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn19 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn20 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn21 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn22 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn23 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn24 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn25 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn26 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn27 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn28 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn29 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn30 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn31 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn32 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn33 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn34 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PayrollView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             materialCard4 = new MaterialSkin.Controls.MaterialCard();
             panel1 = new Panel();
@@ -80,7 +98,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(16, 19, 16, 19);
-            materialCard1.Size = new Size(1496, 1048);
+            materialCard1.Size = new Size(1656, 1168);
             materialCard1.TabIndex = 2;
             // 
             // materialCard4
@@ -95,7 +113,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(1464, 883);
+            materialCard4.Size = new Size(1624, 1003);
             materialCard4.TabIndex = 6;
             // 
             // panel1
@@ -105,7 +123,7 @@ namespace PresentationLayer.Views.UserControls
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(14, 14);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1436, 855);
+            panel1.Size = new Size(1596, 975);
             panel1.TabIndex = 1;
             // 
             // dgList
@@ -114,13 +132,106 @@ namespace PresentationLayer.Views.UserControls
             dgList.AllowFiltering = true;
             dgList.AllowTriStateSorting = true;
             dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            gridTextColumn18.AllowFiltering = true;
+            gridTextColumn18.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            gridTextColumn18.HeaderText = "Employee";
+            gridTextColumn18.MappingName = "Employee";
+            gridTextColumn19.AllowFiltering = true;
+            gridTextColumn19.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn19.HeaderText = "Daily Rate";
+            gridTextColumn19.MappingName = "DailyRate";
+            gridTextColumn20.AllowFiltering = true;
+            gridTextColumn20.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn20.HeaderText = "Days Worked";
+            gridTextColumn20.MappingName = "DaysWorked";
+            gridTextColumn21.AllowFiltering = true;
+            gridTextColumn21.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn21.HeaderText = "Basic Salary";
+            gridTextColumn21.MappingName = "BasicSalary";
+            gridTextColumn22.AllowFiltering = true;
+            gridTextColumn22.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn22.HeaderText = "Overtime Pay";
+            gridTextColumn22.MappingName = "OvertimePay";
+            gridTextColumn23.AllowFiltering = true;
+            gridTextColumn23.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn23.HeaderText = "Allowance";
+            gridTextColumn23.MappingName = "Allowances";
+            gridTextColumn24.AllowFiltering = true;
+            gridTextColumn24.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn24.HeaderText = "Benefits";
+            gridTextColumn24.MappingName = "Benefits";
+            gridTextColumn25.AllowFiltering = true;
+            gridTextColumn25.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn25.HeaderText = "Bonus";
+            gridTextColumn25.MappingName = "Bonuses";
+            gridTextColumn26.AllowFiltering = true;
+            gridTextColumn26.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn26.HeaderText = "Gross Pay";
+            gridTextColumn26.MappingName = "GrossPay";
+            gridTextColumn27.AllowFiltering = true;
+            gridTextColumn27.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn27.HeaderText = "Late/Early";
+            gridTextColumn27.MappingName = "LateAndEarly";
+            gridTextColumn28.AllowFiltering = true;
+            gridTextColumn28.HeaderText = "Absent";
+            gridTextColumn28.MappingName = "Absent";
+            gridTextColumn29.AllowFiltering = true;
+            gridTextColumn29.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn29.HeaderText = "SSS";
+            gridTextColumn29.MappingName = "SSSContribution";
+            gridTextColumn30.AllowFiltering = true;
+            gridTextColumn30.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn30.HeaderText = "Pag-Ibig";
+            gridTextColumn30.MappingName = "PagibigContribution";
+            gridTextColumn31.AllowFiltering = true;
+            gridTextColumn31.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn31.HeaderText = "PhilHealth";
+            gridTextColumn31.MappingName = "PhilHealthContribution";
+            gridTextColumn32.AllowFiltering = true;
+            gridTextColumn32.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn32.HeaderText = "Other Deduction";
+            gridTextColumn32.MappingName = "Deductions";
+            gridTextColumn33.AllowFiltering = true;
+            gridTextColumn33.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn33.HeaderText = "Total Deduction";
+            gridTextColumn33.MappingName = "TotalDeduction";
+            gridTextColumn34.AllowFiltering = true;
+            gridTextColumn34.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn34.HeaderText = "Net Pay";
+            gridTextColumn34.MappingName = "NetPay";
+            gridImageColumn2.AllowGrouping = false;
+            gridImageColumn2.AllowSorting = false;
+            gridImageColumn2.HeaderText = "TMonth";
+            gridImageColumn2.ImageLayout = ImageLayout.Zoom;
+            gridImageColumn2.MappingName = "TMonth";
+            gridImageColumn2.MaximumWidth = 30D;
+            gridImageColumn2.MinimumWidth = 30D;
+            gridImageColumn2.Width = 30D;
+            dgList.Columns.Add(gridTextColumn18);
+            dgList.Columns.Add(gridTextColumn19);
+            dgList.Columns.Add(gridTextColumn20);
+            dgList.Columns.Add(gridTextColumn21);
+            dgList.Columns.Add(gridTextColumn22);
+            dgList.Columns.Add(gridTextColumn23);
+            dgList.Columns.Add(gridTextColumn24);
+            dgList.Columns.Add(gridTextColumn25);
+            dgList.Columns.Add(gridTextColumn26);
+            dgList.Columns.Add(gridTextColumn27);
+            dgList.Columns.Add(gridTextColumn28);
+            dgList.Columns.Add(gridTextColumn29);
+            dgList.Columns.Add(gridTextColumn30);
+            dgList.Columns.Add(gridTextColumn31);
+            dgList.Columns.Add(gridTextColumn32);
+            dgList.Columns.Add(gridTextColumn33);
+            dgList.Columns.Add(gridTextColumn34);
+            dgList.Columns.Add(gridImageColumn2);
             dgList.Dock = DockStyle.Fill;
             dgList.FrozenColumnCount = 2;
             dgList.FrozenRowCount = 1;
             dgList.Location = new Point(0, 0);
             dgList.Name = "dgList";
             dgList.ShowGroupDropArea = true;
-            dgList.Size = new Size(1436, 819);
+            dgList.Size = new Size(1596, 939);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -136,11 +247,11 @@ namespace PresentationLayer.Views.UserControls
             dgPager.DataSource = dgList.DataBindings;
             dgPager.Dock = DockStyle.Bottom;
             dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 819);
+            dgPager.Location = new Point(0, 939);
             dgPager.Name = "dgPager";
             dgPager.PageCount = 1;
             dgPager.PageSize = 15;
-            dgPager.Size = new Size(1436, 36);
+            dgPager.Size = new Size(1596, 36);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
@@ -160,7 +271,7 @@ namespace PresentationLayer.Views.UserControls
             panel2.Location = new Point(16, 89);
             panel2.Margin = new Padding(3, 13, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1464, 57);
+            panel2.Size = new Size(1624, 57);
             panel2.TabIndex = 3;
             // 
             // btnAll
@@ -209,7 +320,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel7.BackColor = Color.Transparent;
             guna2HtmlLabel7.Dock = DockStyle.Right;
-            guna2HtmlLabel7.Location = new Point(594, 0);
+            guna2HtmlLabel7.Location = new Point(754, 0);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             guna2HtmlLabel7.Size = new Size(34, 17);
             guna2HtmlLabel7.TabIndex = 14;
@@ -219,16 +330,16 @@ namespace PresentationLayer.Views.UserControls
             // txtStartDate
             // 
             txtStartDate.Checked = true;
-            txtStartDate.CustomizableEdges = customizableEdges1;
+            txtStartDate.CustomizableEdges = customizableEdges7;
             txtStartDate.Dock = DockStyle.Right;
             txtStartDate.FillColor = Color.White;
             txtStartDate.Font = new Font("Segoe UI", 9F);
             txtStartDate.Format = DateTimePickerFormat.Long;
-            txtStartDate.Location = new Point(628, 0);
+            txtStartDate.Location = new Point(788, 0);
             txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtStartDate.Name = "txtStartDate";
-            txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtStartDate.Size = new Size(191, 57);
             txtStartDate.TabIndex = 13;
             txtStartDate.Value = new DateTime(2025, 1, 12, 10, 14, 55, 9);
@@ -237,7 +348,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Dock = DockStyle.Right;
-            guna2HtmlLabel6.Location = new Point(819, 0);
+            guna2HtmlLabel6.Location = new Point(979, 0);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(19, 17);
             guna2HtmlLabel6.TabIndex = 12;
@@ -247,16 +358,16 @@ namespace PresentationLayer.Views.UserControls
             // txtEndDate
             // 
             txtEndDate.Checked = true;
-            txtEndDate.CustomizableEdges = customizableEdges3;
+            txtEndDate.CustomizableEdges = customizableEdges9;
             txtEndDate.Dock = DockStyle.Right;
             txtEndDate.FillColor = Color.White;
             txtEndDate.Font = new Font("Segoe UI", 9F);
             txtEndDate.Format = DateTimePickerFormat.Long;
-            txtEndDate.Location = new Point(838, 0);
+            txtEndDate.Location = new Point(998, 0);
             txtEndDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtEndDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtEndDate.Name = "txtEndDate";
-            txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtEndDate.Size = new Size(197, 57);
             txtEndDate.TabIndex = 11;
             txtEndDate.Value = new DateTime(2025, 1, 12, 10, 14, 55, 9);
@@ -266,7 +377,7 @@ namespace PresentationLayer.Views.UserControls
             btnBenifits.AutoSize = true;
             btnBenifits.Depth = 0;
             btnBenifits.Dock = DockStyle.Right;
-            btnBenifits.Location = new Point(1035, 0);
+            btnBenifits.Location = new Point(1195, 0);
             btnBenifits.Margin = new Padding(0);
             btnBenifits.MouseLocation = new Point(-1, -1);
             btnBenifits.MouseState = MaterialSkin.MouseState.HOVER;
@@ -282,7 +393,7 @@ namespace PresentationLayer.Views.UserControls
             btnContribution.AutoSize = true;
             btnContribution.Depth = 0;
             btnContribution.Dock = DockStyle.Right;
-            btnContribution.Location = new Point(1206, 0);
+            btnContribution.Location = new Point(1366, 0);
             btnContribution.Margin = new Padding(0);
             btnContribution.MouseLocation = new Point(-1, -1);
             btnContribution.MouseState = MaterialSkin.MouseState.HOVER;
@@ -295,7 +406,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             // btnPrint
             // 
-            btnPrint.CustomizableEdges = customizableEdges5;
+            btnPrint.CustomizableEdges = customizableEdges11;
             btnPrint.DisabledState.BorderColor = Color.DarkGray;
             btnPrint.DisabledState.CustomBorderColor = Color.DarkGray;
             btnPrint.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -306,9 +417,9 @@ namespace PresentationLayer.Views.UserControls
             btnPrint.ForeColor = Color.White;
             btnPrint.Image = (Image)resources.GetObject("btnPrint.Image");
             btnPrint.ImageSize = new Size(30, 30);
-            btnPrint.Location = new Point(1414, 0);
+            btnPrint.Location = new Point(1574, 0);
             btnPrint.Name = "btnPrint";
-            btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnPrint.Size = new Size(50, 57);
             btnPrint.TabIndex = 10;
             // 
@@ -326,7 +437,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1464, 70);
+            tableLayoutPanel1.Size = new Size(1624, 70);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // tableLayoutPanel2
@@ -341,7 +452,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1464, 53);
+            tableLayoutPanel2.Size = new Size(1624, 53);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -365,14 +476,14 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Dock = DockStyle.Fill;
             guna2Separator1.Location = new Point(3, 56);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1458, 11);
+            guna2Separator1.Size = new Size(1618, 11);
             guna2Separator1.TabIndex = 1;
             // 
             // PayrollView
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             AutoSize = true;
-            ClientSize = new Size(1500, 1052);
+            ClientSize = new Size(1660, 1172);
             Controls.Add(materialCard1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);

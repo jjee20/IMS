@@ -58,9 +58,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Deduction.Value.Get(c => c.DeductionId == _view.DeductionId, tracked: true);
+            var model = await _unitOfWork.Deduction.Value.GetAsync(c => c.DeductionId == _view.DeductionId, tracked: true);
             if (model == null) model = new Deduction();
             else _unitOfWork.Deduction.Value.Detach(model);
 
@@ -81,10 +81,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Deduction.Value.Add(model);
+                    await _unitOfWork.Deduction.Value.AddAsync(model);
                     _view.Message = "Deduction added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
+
+                _view.ShowMessage(_view.Message);
                 _view.IsSuccessful = true;
                 CleanviewFields();
             }
@@ -122,27 +124,46 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select deduction(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var deduction = (DeductionViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Deduction.Value.Get(c => c.DeductionId == deduction.DeductionId);
-                _unitOfWork.Deduction.Value.Remove(entity);
+                var selectedDeductions = _view.DataGrid.SelectedItems.Cast<DeductionViewModel>().ToList();
+                var ids = selectedDeductions.Select(d => d.DeductionId).ToList();
+
+                var entities = _unitOfWork.Deduction.Value
+                    .GetAll()
+                    .Where(d => ids.Contains(d.DeductionId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected deduction(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Deduction.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Deduction deleted successfully";
+                _view.Message = $"{entities.Count} deduction(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllDeductionList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Deduction";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "DeductionReport.rdlc";

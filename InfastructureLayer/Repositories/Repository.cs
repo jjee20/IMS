@@ -158,5 +158,13 @@ namespace InfastructureLayer.Repositories
             }
             return await query.ToListAsync();
         }
+        public  void Update(T entity)
+        {
+            _db.Set<T>().Update(entity);
+        }
+        public  void UpdateRange(IEnumerable<T> entity)
+        {
+            _db.Set<T>().UpdateRange(entity);
+        }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using DomainLayer.Models.Accounts;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
 {
-    public interface ICustomerTypeView
+    public interface ICustomerTypeView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         int CustomerTypeId { get; set; }

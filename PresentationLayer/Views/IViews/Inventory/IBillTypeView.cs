@@ -1,10 +1,11 @@
 ﻿using DomainLayer.Models.Inventory;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
 {
-    public interface IBillTypeView
+    public interface IBillTypeView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         int BillTypeId { get; set; }
@@ -22,7 +23,6 @@ namespace PresentationLayer.Views.IViews
         event EventHandler SaveEvent;
         event EventHandler SearchEvent;
         event EventHandler RefreshEvent;
-
         void SetBillTypeListBindingSource(IEnumerable<BillType> BillTypeList);
     }
 }

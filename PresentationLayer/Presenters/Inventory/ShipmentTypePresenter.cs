@@ -40,9 +40,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.ShipmentType.Value.Get(c => c.ShipmentTypeId == _view.ShipmentTypeId, tracked: true);
+            var model = await _unitOfWork.ShipmentType.Value.GetAsync(c => c.ShipmentTypeId == _view.ShipmentTypeId, tracked: true);
             if (model == null) model = new ShipmentType();
             else _unitOfWork.ShipmentType.Value.Detach(model);
 
@@ -60,11 +60,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.ShipmentType.Value.Add(model);
+                    await _unitOfWork.ShipmentType.Value.AddAsync(model);
                     _view.Message = "Shipment type added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -97,26 +98,40 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select shipment type(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (ShipmentType)_view.DataGrid.SelectedItem;
-                _unitOfWork.ShipmentType.Value.Remove(entity);
+                var selectedItems = _view.DataGrid.SelectedItems.Cast<ShipmentType>().ToList();
+
+                if (!selectedItems.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid shipment types selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.ShipmentType.Value.RemoveRange(selectedItems);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Shipment type deleted successfully";
+                _view.Message = $"{selectedItems.Count} shipment type(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllShipmentTypeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Shipment type";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ShipmentTypeReport.rdlc";

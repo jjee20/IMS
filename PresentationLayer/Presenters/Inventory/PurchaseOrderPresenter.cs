@@ -249,9 +249,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.PurchaseOrder.Value.Get(c => c.PurchaseOrderId == _view.PurchaseOrderId, tracked: true);
+            var model = await _unitOfWork.PurchaseOrder.Value.GetAsync(c => c.PurchaseOrderId == _view.PurchaseOrderId, tracked: true);
             if (model == null) model = new PurchaseOrder();
             else _unitOfWork.PurchaseOrder.Value.Detach(model);
 
@@ -283,11 +283,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.PurchaseOrder.Value.Add(model);
+                    await _unitOfWork.PurchaseOrder.Value.AddAsync(model);
                     _view.Message = "Purchase Order added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -359,27 +360,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select purchase order(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var PurchaseOrder = (PurchaseOrderViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.PurchaseOrder.Value.Get(c => c.PurchaseOrderId == PurchaseOrder.PurchaseOrderId);
-                _unitOfWork.PurchaseOrder.Value.Remove(entity);
+                var selectedOrders = _view.DataGrid.SelectedItems.Cast<PurchaseOrderViewModel>().ToList();
+                var ids = selectedOrders.Select(po => po.PurchaseOrderId).ToList();
+
+                var entities = _unitOfWork.PurchaseOrder.Value
+                    .GetAll()
+                    .Where(po => ids.Contains(po.PurchaseOrderId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected purchase orders could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.PurchaseOrder.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Purchase Order deleted successfully";
+                _view.Message = $"{entities.Count} purchase order(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllPurchaseOrderList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Purchase Order";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PurchaseReport.rdlc";

@@ -21,7 +21,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class ProjectManagementView : SfForm, IProjectManagementView
+    public partial class ProjectManagementView : SfForm, IProjectView
     {
         private BindingSource _ProjectLineBindingSource = new BindingSource();
         private int id = 0;
@@ -59,7 +59,7 @@ namespace PresentationLayer.Views.UserControls
                     Guna2TabControl1.TabPages.Add(tabPage1);
                     btnReturn.Visible = false;
                 }
-                MessageBox.Show(Message);
+                
             };
             txtSearch.KeyDown += (s, e) =>
             {
@@ -89,7 +89,7 @@ namespace PresentationLayer.Views.UserControls
                 {
                     // Invoke the DeleteEvent with the selected row as an argument
                     DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show(Message);
+                    
                 }
             };
             //Print
@@ -111,7 +111,7 @@ namespace PresentationLayer.Views.UserControls
 
             btnProductAdd.Click += delegate
             {
-                if (!string.IsNullOrEmpty(Message)) MessageBox.Show(Message);
+                if (!string.IsNullOrEmpty(Message)) 
                 ProductAddEvent?.Invoke(this, EventArgs.Empty);
             };
 
@@ -121,7 +121,7 @@ namespace PresentationLayer.Views.UserControls
 
                 if (!isSuccessful)
                 {
-                    MessageBox.Show(Message);
+                    
                 }
             };
 
@@ -134,7 +134,7 @@ namespace PresentationLayer.Views.UserControls
                 {
                     // Invoke the DeleteEvent with the selected row as an argument
                     DeleteProductEvent?.Invoke(this, e);
-                    MessageBox.Show(Message);
+                    
                 }
             };
             dgOrderLine.CellEndEdit += (sender, e) =>

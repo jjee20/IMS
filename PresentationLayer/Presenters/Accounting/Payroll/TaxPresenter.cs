@@ -44,9 +44,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Tax.Value.Get(c => c.TaxId == _view.TaxId, tracked: true);
+            var model = await _unitOfWork.Tax.Value.GetAsync(c => c.TaxId == _view.TaxId, tracked: true);
 
             if (model == null) model = new Tax();
             else _unitOfWork.Tax.Value.Detach(model);
@@ -66,11 +66,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Tax.Value.Add(model);
+                    await _unitOfWork.Tax.Value.AddAsync(model);
                     _view.Message = "Tax added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -104,26 +105,40 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select tax record(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (Tax)_view.DataGrid.SelectedItem;
-                _unitOfWork.Tax.Value.Remove(entity);
+                var selectedTaxes = _view.DataGrid.SelectedItems.Cast<Tax>().ToList();
+
+                if (!selectedTaxes.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid tax records selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Tax.Value.RemoveRange(selectedTaxes);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Tax deleted successfully";
+                _view.Message = $"{selectedTaxes.Count} tax record(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllTaxList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Tax";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "TaxReport.rdlc";

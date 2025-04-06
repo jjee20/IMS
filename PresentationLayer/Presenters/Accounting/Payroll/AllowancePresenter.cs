@@ -60,9 +60,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == _view.AllowanceId, tracked: true);
+            var model = await _unitOfWork.Allowance.Value.GetAsync(c => c.AllowanceId == _view.AllowanceId, tracked: true);
             if (model == null) model = new Allowance();
             else _unitOfWork.Allowance.Value.Detach(model);
 
@@ -83,10 +83,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Allowance.Value.Add(model);
+                    await _unitOfWork.Allowance.Value.AddAsync(model);
                     _view.Message = "Allowance added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
+                _view.ShowMessage(_view.Message);
                 _view.IsSuccessful = true;
                 CleanviewFields();
             }
@@ -126,28 +127,46 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select allowance(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var allowance = (AllowanceViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == allowance.AllowanceId);
-                _unitOfWork.Allowance.Value.Remove(entity);
+                var selectedAllowances = _view.DataGrid.SelectedItems.Cast<AllowanceViewModel>().ToList();
+                var ids = selectedAllowances.Select(a => a.AllowanceId).ToList();
+
+                var entities = _unitOfWork.Allowance.Value
+                    .GetAll()
+                    .Where(a => ids.Contains(a.AllowanceId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected allowance(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Allowance.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Allowance deleted successfully";
+                _view.Message = $"{entities.Count} allowance(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllAllowanceList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Allowance";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "AllowanceReport.rdlc";

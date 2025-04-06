@@ -53,9 +53,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == _view.ProductStockInLogId, tracked: true);
+            var model = await _unitOfWork.StockInLogs.Value.GetAsync(c => c.ProductStockInLogId == _view.ProductStockInLogId, tracked: true);
             if (model == null) model = new ProductStockInLog();
             else _unitOfWork.StockInLogs.Value.Detach(model);
 
@@ -76,11 +76,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.StockInLogs.Value.Add(model);
+                    await _unitOfWork.StockInLogs.Value.AddAsync(model);
                     _view.Message = "Product log added successfully";
                 }
-                    _unitOfWork.Save();
+                    await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -116,27 +117,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select product log(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var productlog = (ProductStockInLogViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == productlog.ProductStockInLogId);
-                _unitOfWork.StockInLogs.Value.Remove(entity);
+                var selectedLogs = _view.DataGrid.SelectedItems.Cast<ProductStockInLogViewModel>().ToList();
+                var ids = selectedLogs.Select(l => l.ProductStockInLogId).ToList();
+
+                var entities = _unitOfWork.StockInLogs.Value
+                    .GetAll()
+                    .Where(l => ids.Contains(l.ProductStockInLogId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected product logs could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.StockInLogs.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Product log deleted successfully";
+                _view.Message = $"{entities.Count} product log(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllProductStockInLogList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Product log";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "StockInLogReport.rdlc";

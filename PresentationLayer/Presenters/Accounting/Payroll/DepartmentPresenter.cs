@@ -44,9 +44,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Department.Value.Get(c => c.DepartmentId == _view.DepartmentId, tracked: true);
+            var model = await _unitOfWork.Department.Value.GetAsync(c => c.DepartmentId == _view.DepartmentId, tracked: true);
             if (model == null) model = new Department();
             else _unitOfWork.Department.Value.Detach(model);
 
@@ -64,11 +64,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Department.Value.Add(model);
+                    await _unitOfWork.Department.Value.AddAsync(model);
                     _view.Message = "Department added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -101,26 +102,40 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select department(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (Department)_view.DataGrid.SelectedItem;
-                _unitOfWork.Department.Value.Remove(entity);
+                var selectedDepartments = _view.DataGrid.SelectedItems.Cast<Department>().ToList();
+
+                if (!selectedDepartments.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid departments selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Department.Value.RemoveRange(selectedDepartments);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Department deleted successfully";
+                _view.Message = $"{selectedDepartments.Count} department(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllDepartmentList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Department";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "DepartmentReport.rdlc";

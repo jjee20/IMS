@@ -47,9 +47,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Shift.Value.Get(c => c.ShiftId == _view.ShiftId, tracked: true);
+            var model = await _unitOfWork.Shift.Value.GetAsync(c => c.ShiftId == _view.ShiftId, tracked: true);
 
             if (model == null) model = new Shift();
             else _unitOfWork.Shift.Value.Detach(model);
@@ -78,11 +78,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                         _view.Message = "Shift is already added.";
                         return;
                     }
-                    _unitOfWork.Shift.Value.Add(model);
+                    await _unitOfWork.Shift.Value.AddAsync(model);
                     _view.Message = "Shift added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -119,27 +120,46 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select shift(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var shift = (ShiftViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Shift.Value.Get(c => c.ShiftId == shift.ShiftId);
-                _unitOfWork.Shift.Value.Remove(entity);
+                var selectedShifts = _view.DataGrid.SelectedItems.Cast<ShiftViewModel>().ToList();
+                var ids = selectedShifts.Select(s => s.ShiftId).ToList();
+
+                var entities = _unitOfWork.Shift.Value
+                    .GetAll()
+                    .Where(s => ids.Contains(s.ShiftId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected shift(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Shift.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Shift deleted successfully";
+                _view.Message = $"{entities.Count} shift(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllShiftList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Shift";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ShiftReport.rdlc";

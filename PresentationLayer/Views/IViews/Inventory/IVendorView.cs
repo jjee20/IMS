@@ -1,10 +1,11 @@
 ﻿using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 
 namespace PresentationLayer.Views.IViews
 {
-    public interface IVendorView
+    public interface IVendorView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         int VendorId { get; set; }

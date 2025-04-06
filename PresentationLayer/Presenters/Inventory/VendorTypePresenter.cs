@@ -40,9 +40,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.VendorType.Value.Get(c => c.VendorTypeId == _view.VendorTypeId, tracked: true);
+            var model = await _unitOfWork.VendorType.Value.GetAsync(c => c.VendorTypeId == _view.VendorTypeId, tracked: true);
             if (model == null) model = new VendorType();
             else _unitOfWork.VendorType.Value.Detach(model);
 
@@ -60,11 +60,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.VendorType.Value.Add(model);
+                    await _unitOfWork.VendorType.Value.AddAsync(model);
                     _view.Message = "Vendor type added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -97,26 +98,40 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to edit";
+                    _view.Message = "Please select vendor type(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (VendorType)_view.DataGrid.SelectedItem;
-                _unitOfWork.VendorType.Value.Remove(entity);
+                var selectedItems = _view.DataGrid.SelectedItems.Cast<VendorType>().ToList();
+
+                if (!selectedItems.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid vendor types selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.VendorType.Value.RemoveRange(selectedItems);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Vendor type deleted successfully";
+                _view.Message = $"{selectedItems.Count} vendor type(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllVendorTypeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Vendor type";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "VendorTypeReport.rdlc";

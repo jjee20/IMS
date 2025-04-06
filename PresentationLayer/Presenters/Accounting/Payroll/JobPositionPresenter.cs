@@ -44,9 +44,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.JobPosition.Value.Get(c => c.JobPositionId == _view.JobPositionId, tracked: true);
+            var model = await _unitOfWork.JobPosition.Value.GetAsync(c => c.JobPositionId == _view.JobPositionId, tracked: true);
 
             if (model == null) model = new JobPosition();
             else _unitOfWork.JobPosition.Value.Detach(model);
@@ -65,11 +65,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.JobPosition.Value.Add(model);
+                    await _unitOfWork.JobPosition.Value.AddAsync(model);
                     _view.Message = "JobPosition added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -102,26 +103,40 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select job position(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (JobPosition)_view.DataGrid.SelectedItem;
-                _unitOfWork.JobPosition.Value.Remove(entity);
+                var selectedPositions = _view.DataGrid.SelectedItems.Cast<JobPosition>().ToList();
+
+                if (!selectedPositions.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid job positions selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.JobPosition.Value.RemoveRange(selectedPositions);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Job Position deleted successfully";
+                _view.Message = $"{selectedPositions.Count} job position(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllJobPositionList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Job Position";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "JobPositionReport.rdlc";

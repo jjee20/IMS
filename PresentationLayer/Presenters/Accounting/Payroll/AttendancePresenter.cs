@@ -63,23 +63,52 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void Delete(object? sender, EventArgs e)
         {
+            try
+            {
+                if (_view.IndividualDataGrid.SelectedItems == null || _view.IndividualDataGrid.SelectedItems.Count == 0)
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Please select attendance record(s) to delete.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
 
-            if (_view.IndividualDataGrid.SelectedItem == null)
+                var selectedItems = _view.IndividualDataGrid.SelectedItems.Cast<IndividualAttendanceViewModel>().ToList();
+                var ids = selectedItems.Select(a => a.AttendanceId).ToList();
+
+                var entities = _unitOfWork.Attendance.Value
+                    .GetAll(includeProperties: "Employee")
+                    .Where(a => ids.Contains(a.AttendanceId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected attendance records could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                // Detach entities if necessary (optional depending on tracking setup)
+                foreach (var entity in entities)
+                {
+                    _unitOfWork.Attendance.Value.Detach(entity);
+                }
+
+                _unitOfWork.Attendance.Value.RemoveRange(entities);
+                _unitOfWork.Save();
+
+                _view.IsSuccessful = true;
+                _view.Message = $"{entities.Count} attendance record(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
+                LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
+            }
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "Please select an Allowance to delete";
-                return;
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
-
-            var attendanceVM = (IndividualAttendanceViewModel)_view.IndividualDataGrid.SelectedItem;
-            var attendance = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee", tracked: true);
-
-            _unitOfWork.Attendance.Value.Detach(attendance);
-            _unitOfWork.Attendance.Value.Remove(attendance);
-            _unitOfWork.Save();
-
-            _view.Message = "Attendance deleted successfully";
-            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
         }
 
         private void Edit(object? sender, EventArgs e)
@@ -195,10 +224,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
             // Retrieve the specific attendance record based on the _view.AttendanceId
-            var model = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == _view.AttendanceId, tracked: true);
+            var model = await _unitOfWork.Attendance.Value.GetAsync(c => c.AttendanceId == _view.AttendanceId, tracked: true);
 
             // If no record exists, create a new instance
             if (model == null) model = new Attendance();
@@ -226,12 +255,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else // Adding a new record
                 {
-                    _unitOfWork.Attendance.Value.Add(model);
+                    await _unitOfWork.Attendance.Value.AddAsync(model);
                     _view.Message = "Attendance added successfully";
                 }
 
                 // Save changes to the database
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
+                _view.ShowMessage(_view.Message);
                 _view.IsSuccessful = true;
             }
             catch (Exception ex)

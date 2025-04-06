@@ -1,10 +1,11 @@
 ﻿using DomainLayer.Models.Accounting.Payroll;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
-    public interface IDepartmentView
+    public interface IDepartmentView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         int DepartmentId { get; set; }

@@ -150,7 +150,7 @@ namespace PresentationLayer.Views.UserControls
             Guna2TabControl1.Location = new Point(2, 113);
             Guna2TabControl1.Name = "Guna2TabControl1";
             Guna2TabControl1.SelectedIndex = 0;
-            Guna2TabControl1.Size = new Size(1368, 625);
+            Guna2TabControl1.Size = new Size(1400, 703);
             Guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             Guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             Guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -177,7 +177,7 @@ namespace PresentationLayer.Views.UserControls
             tabPage1.Location = new Point(4, 44);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1360, 577);
+            tabPage1.Size = new Size(1392, 655);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "List";
             tabPage1.UseVisualStyleBackColor = true;
@@ -194,7 +194,7 @@ namespace PresentationLayer.Views.UserControls
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(1354, 571);
+            materialCard4.Size = new Size(1386, 649);
             materialCard4.TabIndex = 2;
             // 
             // panel1
@@ -204,7 +204,7 @@ namespace PresentationLayer.Views.UserControls
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(14, 14);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1326, 543);
+            panel1.Size = new Size(1358, 621);
             panel1.TabIndex = 1;
             // 
             // dgList
@@ -218,8 +218,9 @@ namespace PresentationLayer.Views.UserControls
             dgList.FrozenRowCount = 1;
             dgList.Location = new Point(0, 0);
             dgList.Name = "dgList";
+            dgList.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
             dgList.ShowGroupDropArea = true;
-            dgList.Size = new Size(1326, 507);
+            dgList.Size = new Size(1358, 585);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -235,11 +236,11 @@ namespace PresentationLayer.Views.UserControls
             dgPager.DataSource = dgList.DataBindings;
             dgPager.Dock = DockStyle.Bottom;
             dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 507);
+            dgPager.Location = new Point(0, 585);
             dgPager.Name = "dgPager";
             dgPager.PageCount = 1;
             dgPager.PageSize = 15;
-            dgPager.Size = new Size(1326, 36);
+            dgPager.Size = new Size(1358, 36);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
@@ -737,7 +738,7 @@ namespace PresentationLayer.Views.UserControls
             panel2.Location = new Point(2, 51);
             panel2.Margin = new Padding(3, 13, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1368, 62);
+            panel2.Size = new Size(1400, 62);
             panel2.TabIndex = 7;
             // 
             // btnPrint
@@ -845,7 +846,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(990, 0);
+            txtSearch.Location = new Point(1022, 0);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search here";
@@ -867,7 +868,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1368, 49);
+            tableLayoutPanel1.Size = new Size(1400, 49);
             tableLayoutPanel1.TabIndex = 8;
             // 
             // guna2Separator1
@@ -876,7 +877,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Location = new Point(3, 39);
             guna2Separator1.Margin = new Padding(3, 2, 3, 2);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1362, 8);
+            guna2Separator1.Size = new Size(1394, 8);
             guna2Separator1.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -891,7 +892,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1368, 37);
+            tableLayoutPanel2.Size = new Size(1400, 37);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -916,7 +917,7 @@ namespace PresentationLayer.Views.UserControls
             AcceptButton = btnSave;
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(1372, 740);
+            ClientSize = new Size(1404, 818);
             Controls.Add(Guna2TabControl1);
             Controls.Add(panel2);
             Controls.Add(tableLayoutPanel1);
