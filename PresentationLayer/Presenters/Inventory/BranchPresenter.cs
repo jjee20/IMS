@@ -45,9 +45,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Branch.Value.Get(c => c.BranchId == _view.BranchId, tracked: true);
+            var model = await _unitOfWork.Branch.Value.GetAsync(c => c.BranchId == _view.BranchId, tracked: true);
             if (model == null) model = new Branch();
             else _unitOfWork.Branch.Value.Detach(model);
 
@@ -69,11 +69,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Branch.Value.Add(model);
+                    await _unitOfWork.Branch.Value.AddAsync(model);
                     _view.Message = "Branch added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -111,27 +112,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select items to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var branch = (BranchViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Branch.Value.Get(c => c.BranchId == branch.BranchId);
-                _unitOfWork.Branch.Value.Remove(entity);
+                var selectedBranches = _view.DataGrid.SelectedItems.Cast<BranchViewModel>().ToList();
+                var ids = selectedBranches.Select(b => b.BranchId).ToList();
+
+                var entities = _unitOfWork.Branch.Value
+                    .GetAll()
+                    .Where(c => ids.Contains(c.BranchId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected branches could not be found in the database.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Branch.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Branch deleted successfully";
+                _view.Message = $"{entities.Count} branch(es) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllBranchList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Branch";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "BranchReport.rdlc";

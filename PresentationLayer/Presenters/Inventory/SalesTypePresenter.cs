@@ -40,12 +40,12 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
             try
             {
                 // Check if SalesType already exists
-                var model = _unitOfWork.SalesType.Value.Get(c => c.SalesTypeId == _view.SalesTypeId, tracked: true);
+                var model = await _unitOfWork.SalesType.Value.GetAsync(c => c.SalesTypeId == _view.SalesTypeId, tracked: true);
                 if (model == null) model = new SalesType();
                 else _unitOfWork.SalesType.Value.Detach(model);
 
@@ -63,13 +63,14 @@ namespace PresentationLayer.Presenters
                 }
                 else
                 {
-                    _unitOfWork.SalesType.Value.Add(model); // Add new entity
+                    await _unitOfWork.SalesType.Value.AddAsync(model); // Add new entity
                     _view.Message = "Sales type added successfully.";
                 }
 
                 // Save changes to database
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
 
                 // Clean fields
                 CleanviewFields();
@@ -104,26 +105,40 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select sales type(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (SalesType)_view.DataGrid.SelectedItem; 
-                _unitOfWork.SalesType.Value.Remove(entity);
+                var selectedItems = _view.DataGrid.SelectedItems.Cast<SalesType>().ToList();
+
+                if (!selectedItems.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid sales types selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.SalesType.Value.RemoveRange(selectedItems);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Sales type deleted successfully";
+                _view.Message = $"{selectedItems.Count} sales type(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllSalesTypeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Sales type";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "SalesTypeReport.rdlc";

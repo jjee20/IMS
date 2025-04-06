@@ -3,11 +3,15 @@ using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
+using PresentationLayer;
 using PresentationLayer.Reports;
 using RavenTech_ERP.Helpers;
+using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.IRepositories;
 using ServiceLayer.Services.IRepositories.IInventory;
+using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,18 +38,36 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _unitOfWork = unitOfWork;
             ProjectBindingSource = new BindingSource();
             PayrollList = new List<PayrollViewModel>();
-            //Load
-
-            LoadAllProjectList();
-            LoadAllPayrollList();
             _view.PrintPayrollEvent += PrintPayroll;
             _view.PrintPayslipEvent += PrintPayslip;
             _view.SearchEvent += Search;
             _view.IncludeBenefitsEvent += OnIncludeBenefits;
             _view.ProjectEvent += SelectProject;
             _view.AllEvent += SelectAll;
+            _view.TMonthEvent += TMonthPayCalculation;
+
+            //Load
+
+            LoadAllProjectList();
+            LoadAllPayrollList();
 
             _view.SetProjectListBindingSource(ProjectBindingSource);
+        }
+
+        private void TMonthPayCalculation(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataColumn.GridColumn.MappingName == "TMonth")
+            {
+                var rowData = e.DataRow.RowData as PayrollViewModel;
+
+                if (rowData != null)
+                {
+                    using (var tmonth = new _13thMonthView(rowData, _unitOfWork))
+                    {
+                        tmonth.ShowDialog();
+                    }
+                }
+            }
         }
 
         private void SelectAll(object? sender, EventArgs e)
@@ -56,8 +78,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void SelectProject(object? sender, EventArgs e)
         {
-            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
-            _view.SetPayrollListBindingSource(PayrollList);
+            if (!_view.All)
+            {
+                PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
+                _view.SetPayrollListBindingSource(PayrollList);
+            }
+
         }
 
         private void OnIncludeBenefits(object? sender, EventArgs e)
@@ -163,8 +189,10 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     new ReportParameter("Project", ProjectName),
                 };
                 //localReport.SetParameters(parameters);
-                var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
-                reportView.ShowDialog();
+                using (var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters))
+                {
+                    reportView.ShowDialog();
+                } 
             }
             catch (Exception ex)
             {

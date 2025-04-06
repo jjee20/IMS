@@ -76,9 +76,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Vendor.Value.Get(c => c.VendorId == _view.VendorId, tracked: true);
+            var model = await _unitOfWork.Vendor.Value.GetAsync(c => c.VendorId == _view.VendorId, tracked: true);
             if (model == null) model = new Vendor();
             else _unitOfWork.Vendor.Value.Detach(model);
 
@@ -100,11 +100,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Vendor.Value.Add(model);
+                    await _unitOfWork.Vendor.Value.AddAsync(model);
                     _view.Message = "Vendor added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -142,27 +143,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to edit";
+                    _view.Message = "Please select vendor(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var vendor = (VendorViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Vendor.Value.Get(c => c.VendorId == vendor.VendorId);
-                _unitOfWork.Vendor.Value.Remove(entity);
+                var selectedVendors = _view.DataGrid.SelectedItems.Cast<VendorViewModel>().ToList();
+                var ids = selectedVendors.Select(v => v.VendorId).ToList();
+
+                var entities = _unitOfWork.Vendor.Value
+                    .GetAll()
+                    .Where(v => ids.Contains(v.VendorId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected vendor(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Vendor.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Vendor deleted successfully";
+                _view.Message = $"{entities.Count} vendor(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllVendorList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Vendor type";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "VendorReport.rdlc";

@@ -63,6 +63,16 @@ namespace RavenTech_ERP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] calendar {
+            get {
+                object obj = ResourceManager.GetObject("calendar", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] eye {
             get {
                 object obj = ResourceManager.GetObject("eye", resourceCulture);
@@ -76,6 +86,16 @@ namespace RavenTech_ERP.Properties {
         internal static byte[] hidden {
             get {
                 object obj = ResourceManager.GetObject("hidden", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] thirteen {
+            get {
+                object obj = ResourceManager.GetObject("thirteen", resourceCulture);
                 return ((byte[])(obj));
             }
         }

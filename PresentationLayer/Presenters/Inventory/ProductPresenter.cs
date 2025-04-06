@@ -55,9 +55,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Product.Value.Get(c => c.ProductId == _view.ProductId, tracked: true);
+            var model = await _unitOfWork.Product.Value.GetAsync(c => c.ProductId == _view.ProductId, tracked: true);
             if (model == null) model = new Product();
             else _unitOfWork.Product.Value.Detach(model);
 
@@ -86,11 +86,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Product.Value.Add(model);
+                    await _unitOfWork.Product.Value.AddAsync(model);
                     _view.Message = "Product added successfully";
                 }
-                    _unitOfWork.Save();
+                    await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -135,27 +136,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select product(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var product = (ProductViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Product.Value.Get(c => c.ProductId == product.ProductId);
-                _unitOfWork.Product.Value.Remove(entity);
+                var selectedProducts = _view.DataGrid.SelectedItems.Cast<ProductViewModel>().ToList();
+                var ids = selectedProducts.Select(p => p.ProductId).ToList();
+
+                var entities = _unitOfWork.Product.Value
+                    .GetAll()
+                    .Where(p => ids.Contains(p.ProductId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected products could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Product.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Product deleted successfully";
+                _view.Message = $"{entities.Count} product(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllProductList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Product";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ProductReport.rdlc";

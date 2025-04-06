@@ -1,10 +1,11 @@
 ﻿using DomainLayer.ViewModels.PayrollViewModels;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
-    public interface IAttendanceView
+    public interface IAttendanceView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         SfDataGrid IndividualDataGrid { get; }

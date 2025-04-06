@@ -77,9 +77,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Customer.Value.Get(c => c.CustomerId == _view.CustomerId, tracked: true);
+            var model = await _unitOfWork.Customer.Value.GetAsync(c => c.CustomerId == _view.CustomerId, tracked: true);
             if (model == null) model = new Customer();
             else _unitOfWork.Customer.Value.Detach(model);
 
@@ -101,11 +101,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Customer.Value.Add(model);
+                    await _unitOfWork.Customer.Value.AddAsync(model);
                     _view.Message = "Customer added successfully";
                 }
-                _unitOfWork.Save();
-                _view.IsSuccessful = true; 
+                await _unitOfWork.SaveAsync();
+                _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -143,27 +144,48 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to edit";
+                    _view.Message = "Please select customer(s) to delete.";
+                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var customer = (CustomerViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Customer.Value.Get(c => c.CustomerId == customer.CustomerId);
-                _unitOfWork.Customer.Value.Remove(entity);
+                var selectedCustomers = _view.DataGrid.SelectedItems.Cast<CustomerViewModel>().ToList();
+                var ids = selectedCustomers.Select(c => c.CustomerId).ToList();
+
+                var entities = _unitOfWork.Customer.Value
+                    .GetAll()
+                    .Where(c => ids.Contains(c.CustomerId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected customers could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Customer.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Customer deleted successfully";
+                _view.Message = $"{entities.Count} customer(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllCustomerList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete customer type";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "CustomerReport.rdlc";

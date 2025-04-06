@@ -198,9 +198,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.SalesOrder.Value.Get(
+            var model = await _unitOfWork.SalesOrder.Value.GetAsync(
                 c => c.SalesOrderId == _view.SalesOrderId,
                 includeProperties: "Shipment",
                 tracked: true
@@ -267,12 +267,13 @@ namespace PresentationLayer.Presenters
                 }
                 else
                 {
-                    _unitOfWork.SalesOrder.Value.Add(model);
+                    await _unitOfWork.SalesOrder.Value.AddAsync(model);
                     _view.Message = "Sales Order added successfully";
                 }
 
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -358,27 +359,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select sales order(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var salesOrder = (SalesOrderViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.SalesOrder.Value.Get(c => c.SalesOrderId ==  salesOrder.SalesOrderId);
-                _unitOfWork.SalesOrder.Value.Remove(entity);
+                var selectedOrders = _view.DataGrid.SelectedItems.Cast<SalesOrderViewModel>().ToList();
+                var ids = selectedOrders.Select(so => so.SalesOrderId).ToList();
+
+                var entities = _unitOfWork.SalesOrder.Value
+                    .GetAll()
+                    .Where(so => ids.Contains(so.SalesOrderId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected sales orders could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.SalesOrder.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Sales Order deleted successfully";
+                _view.Message = $"{entities.Count} sales order(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllSalesOrderList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Sales Order";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "SalesReport.rdlc";

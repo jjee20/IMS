@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Imaging;
 
 namespace DomainLayer.ViewModels.PayrollViewModels
 {
@@ -39,7 +40,8 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public double TotalDeduction => LateAndEarly + Absent + SSSContribution + PagibigContribution + PhilHealthContribution + Deductions;
         [Display(Name = "Net Pay")]
         public double NetPay => GrossPay - TotalDeduction;
-
+        [Display(Name = "")]
+        public byte[] TMonth { get; set; } // ✅ Safe in any .NET layer
     }
 
 }

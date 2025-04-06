@@ -6,11 +6,13 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using PresentationLayer.Presenters;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Properties;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +28,7 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class PayrollView : SfForm, IPayrollView
     {
-        private string message;
+        private string message; 
         public PayrollView()
         {
             InitializeComponent();
@@ -56,17 +58,23 @@ namespace PresentationLayer.Views.UserControls
             {
                 ProjectEvent?.Invoke(this, EventArgs.Empty);
             };
-            btnAll.CheckedChanged += delegate
+            btnAll.CheckStateChanged += delegate
             {
                 AllEvent?.Invoke(this, EventArgs.Empty);
             };
-
+            dgList.CellClick += (sender, e) => { TMonthEvent?.Invoke(sender, e); };
             btnBenifits.CheckedChanged += (s, e) => IncludeBenefitsEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public void SetPayrollListBindingSource(IEnumerable<PayrollViewModel> PayrollList)
         {
             dgPager.DataSource = PayrollList;
+
+            foreach (var payroll in PayrollList)
+            {
+                payroll.TMonth = Resources.thirteen; // Or any other image per row
+            }
+
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetProjectListBindingSource(BindingSource ProjectList)
@@ -112,6 +120,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler IncludeBenefitsEvent;
         public event EventHandler ProjectEvent;
         public event EventHandler AllEvent;
+        public event CellClickEventHandler TMonthEvent;
 
         public static PayrollView GetInstance(TabPage parentContainer)
         {

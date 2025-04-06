@@ -81,11 +81,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
             _view.SaveButton = false;
 
-            var model = _unitOfWork.Employee.Value.Get(c => c.EmployeeId == _view.EmployeeId, tracked: true);
+            var model = await _unitOfWork.Employee.Value.GetAsync(c => c.EmployeeId == _view.EmployeeId, tracked: true);
             if (model == null) model = new Employee();
             else _unitOfWork.Employee.Value.Detach(model);
 
@@ -114,12 +114,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Employee.Value.Add(model);
+                    await _unitOfWork.Employee.Value.AddAsync(model);
                     _view.Message = "Employee added successfully";
                 }
 
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -175,27 +176,46 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select employee(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var employee = (EmployeeViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Employee.Value.Get(c => c.EmployeeId == employee.EmployeeId);
-                _unitOfWork.Employee.Value.Remove(entity);
+                var selectedEmployees = _view.DataGrid.SelectedItems.Cast<EmployeeViewModel>().ToList();
+                var ids = selectedEmployees.Select(emp => emp.EmployeeId).ToList();
+
+                var entities = _unitOfWork.Employee.Value
+                    .GetAll()
+                    .Where(emp => ids.Contains(emp.EmployeeId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected employee(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Employee.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Employee deleted successfully";
+                _view.Message = $"{entities.Count} employee(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllEmployeeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Employee";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "EmployeeReport.rdlc";

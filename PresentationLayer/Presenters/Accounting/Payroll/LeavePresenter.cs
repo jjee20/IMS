@@ -62,14 +62,14 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
 
             var year = DateTime.Now.Year;
             var startDate = new DateTime(year, 1, 1);
             var endDate = new DateTime(year, 12, 31);
 
-            var employee = _unitOfWork.Employee.Value.Get(c => c.EmployeeId == _view.EmployeeId, includeProperties: "Leaves");
+            var employee = await _unitOfWork.Employee.Value.GetAsync(c => c.EmployeeId == _view.EmployeeId, includeProperties: "Leaves");
             var totalLeave = employee.Leaves.Where(c => c.StartDate >= startDate && c.EndDate <= endDate).Count();
 
             if (totalLeave > employee.LeaveCredits)
@@ -78,7 +78,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 return;
             }
 
-            var model = _unitOfWork.Leave.Value.Get(c => c.LeaveId == _view.LeaveId, tracked: true);
+            var model = await _unitOfWork.Leave.Value.GetAsync(c => c.LeaveId == _view.LeaveId, tracked: true);
 
             if (model == null) model = new Leave();
             else _unitOfWork.Leave.Value.Detach(model);
@@ -102,12 +102,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Leave.Value.Add(model);
+                    await _unitOfWork.Leave.Value.AddAsync(model);
                     _view.Message = "Leave added successfully";
                 }
 
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -146,27 +147,46 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select leave(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var leave = (LeaveViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Leave.Value.Get(c => c.LeaveId == leave.LeaveId);
-                _unitOfWork.Leave.Value.Remove(entity);
+                var selectedLeaves = _view.DataGrid.SelectedItems.Cast<LeaveViewModel>().ToList();
+                var ids = selectedLeaves.Select(l => l.LeaveId).ToList();
+
+                var entities = _unitOfWork.Leave.Value
+                    .GetAll()
+                    .Where(l => ids.Contains(l.LeaveId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected leave(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Leave.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Leave deleted successfully";
+                _view.Message = $"{entities.Count} leave record(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllLeaveList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Leave";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "LeaveReport.rdlc";

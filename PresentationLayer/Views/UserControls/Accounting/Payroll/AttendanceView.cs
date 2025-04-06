@@ -86,7 +86,7 @@ namespace PresentationLayer.Views.UserControls
                         btnReturn.Visible = false;
                     }
                 }
-                MessageBox.Show(Message);
+                
             };
             txtStartDate.ValueChanged += delegate
             {
@@ -135,7 +135,7 @@ namespace PresentationLayer.Views.UserControls
                 {
                     // Invoke the DeleteEvent with the selected row as an argument
                     DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show(Message);
+                    
                 }
             };
             //Print

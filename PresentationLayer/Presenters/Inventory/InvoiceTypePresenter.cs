@@ -40,9 +40,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.InvoiceType.Value.Get(c => c.InvoiceTypeId == _view.InvoiceTypeId, tracked: true);
+            var model = await _unitOfWork.InvoiceType.Value.GetAsync(c => c.InvoiceTypeId == _view.InvoiceTypeId, tracked: true);
             if (model == null) model = new InvoiceType();
             else _unitOfWork.InvoiceType.Value.Detach(model);
 
@@ -57,14 +57,17 @@ namespace PresentationLayer.Presenters
                 {
                     _unitOfWork.InvoiceType.Value.Update(model);
                     _view.Message = "Invoice edited successfully";
+                    _view.ShowMessage(_view.Message);
                 }
                 else //Add new model
                 {
-                    _unitOfWork.InvoiceType.Value.Add(model);
+                    await _unitOfWork.InvoiceType.Value.AddAsync(model);
                     _view.Message = "Invoice added successfully";
+                    _view.ShowMessage(_view.Message);
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -97,26 +100,38 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to edit";
+                    _view.Message = "Please select invoice type(s) to delete.";
                     return;
                 }
 
-                var entity = (InvoiceType)_view.DataGrid.SelectedItem;
-                _unitOfWork.InvoiceType.Value.Remove(entity);
+                var selectedItems = _view.DataGrid.SelectedItems.Cast<InvoiceType>().ToList();
+
+                if (!selectedItems.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid invoice types selected.";
+                    return;
+                }
+
+                _unitOfWork.InvoiceType.Value.RemoveRange(selectedItems);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Invoice deleted successfully";
+                _view.Message = $"{selectedItems.Count} invoice type(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllInvoiceTypeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Invoice";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "InvoiceTypeReport.rdlc";

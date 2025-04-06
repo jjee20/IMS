@@ -40,6 +40,8 @@
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.7" />
     <PackageReference Include="MaterialSkin.2" Version="2.3.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.13.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="4.13.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
     <PackageReference Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" />
     <PackageReference Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
@@ -67,6 +69,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>inventorymanagementsystemDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Report.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Update="Views\MainForm.cs">
       <SubType>Form</SubType>
@@ -203,9 +208,7 @@
     <Compile Update="Views\UserControls\Inventory\CashBankView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\BillTypeView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BillTypeView.cs" />
     <Compile Update="Views\UserControls\Inventory\BranchView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -285,6 +288,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Inventory\PurchaseReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\SalesReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\SalesTypeReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Inventory\StockInLogReport.rdlc">

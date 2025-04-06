@@ -40,9 +40,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.PurchaseType.Value.Get(c => c.PurchaseTypeId == _view.PurchaseTypeId, tracked: true);
+            var model = await _unitOfWork.PurchaseType.Value.GetAsync(c => c.PurchaseTypeId == _view.PurchaseTypeId, tracked: true);
             if (model == null) model = new PurchaseType();
             else _unitOfWork.PurchaseType.Value.Detach(model);
 
@@ -60,10 +60,10 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.PurchaseType.Value.Add(model);
+                    await _unitOfWork.PurchaseType.Value.AddAsync(model);
                     _view.Message = "Purchase type added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
                 CleanviewFields();
             }
@@ -97,26 +97,40 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select purchase type(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (PurchaseType)_view.DataGrid.SelectedItem;
-                _unitOfWork.PurchaseType.Value.Remove(entity);
+                var selectedItems = _view.DataGrid.SelectedItems.Cast<PurchaseType>().ToList();
+
+                if (!selectedItems.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid purchase types selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.PurchaseType.Value.RemoveRange(selectedItems);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Purchase type deleted successfully";
+                _view.Message = $"{selectedItems.Count} purchase type(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllPurchaseTypeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Purchase type";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "PurchaseTypeReport.rdlc";

@@ -3,7 +3,7 @@ using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.IViews.Inventory
 {
-    public interface IProjectManagementView
+    public interface IProjectView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         double Budget { get; set; }

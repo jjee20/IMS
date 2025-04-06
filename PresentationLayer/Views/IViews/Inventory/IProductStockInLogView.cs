@@ -4,7 +4,7 @@ using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.IViews.Inventory
 {
-    public interface IProductStockInLogView
+    public interface IProductStockInLogView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         DateTime DateAdded { get; set; }

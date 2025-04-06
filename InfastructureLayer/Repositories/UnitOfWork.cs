@@ -135,7 +135,7 @@ namespace InfastructureLayer.DataAccess.Repositories
             return (IRepository<T>)_repositories[type];
         }
 
-        public void Save() => _db.SaveChanges();
+        public async void Save() => _db.SaveChanges();
         public Task SaveAsync() => _db.SaveChangesAsync();
     }
 }

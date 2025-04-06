@@ -54,9 +54,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Benefit.Value.Get(c => c.BenefitId == _view.BenefitId, tracked: true);
+            var model = await _unitOfWork.Benefit.Value.GetAsync(c => c.BenefitId == _view.BenefitId, tracked: true);
             if (model == null) model = new Benefit();
             else _unitOfWork.Benefit.Value.Detach(model);
 
@@ -76,11 +76,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Benefit.Value.Add(model);
+                    await _unitOfWork.Benefit.Value.AddAsync(model);
                     _view.Message = "Benefit added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -117,28 +119,46 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select benefit(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var benefit = (BenefitViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Benefit.Value.Get(c => c.BenefitId == benefit.BenefitId);
-                _unitOfWork.Benefit.Value.Remove(entity);
+                var selectedBenefits = _view.DataGrid.SelectedItems.Cast<BenefitViewModel>().ToList();
+                var ids = selectedBenefits.Select(b => b.BenefitId).ToList();
+
+                var entities = _unitOfWork.Benefit.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.BenefitId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected benefit(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Benefit.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Benefit deleted successfully";
+                _view.Message = $"{entities.Count} benefit(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllBenefitList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Benefit";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "BenefitReport.rdlc";

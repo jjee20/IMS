@@ -4,6 +4,7 @@ using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using ServiceLayer.Services.IRepositories;
+using System.Linq;
 
 namespace PresentationLayer.Presenters
 {
@@ -40,9 +41,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.BillType.Value.Get(c => c.BillTypeId == _view.BillTypeId, tracked: true);
+            var model = await _unitOfWork.BillType.Value.GetAsync(c => c.BillTypeId == _view.BillTypeId, tracked: true);
             if (model == null) model = new BillType();
             else _unitOfWork.BillType.Value.Detach(model);
 
@@ -60,11 +61,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.BillType.Value.Add(model);
+                    await _unitOfWork.BillType.Value.AddAsync(model);
                     _view.Message = "Bill type added successfully";
                 }
-                    _unitOfWork.Save();
+                    await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -97,26 +99,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select item(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (BillType)_view.DataGrid.SelectedItem;
-                _unitOfWork.BillType.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<BillType>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.BillTypeId).ToList();
+
+                var entities = _unitOfWork.BillType.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.BillTypeId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected records could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.BillType.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Bill type deleted successfully";
+                _view.Message = $"{entities.Count} bill type(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllBillTypeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Bill type";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "BillTypeReport.rdlc";

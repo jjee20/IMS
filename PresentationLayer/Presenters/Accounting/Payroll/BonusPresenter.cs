@@ -57,9 +57,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Bonus.Value.Get(c => c.BonusId == _view.BonusId, tracked: true);
+            var model = await _unitOfWork.Bonus.Value.GetAsync(c => c.BonusId == _view.BonusId, tracked: true);
             if (model == null) model = new Bonus();
             else _unitOfWork.Bonus.Value.Detach(model);
 
@@ -80,11 +80,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Bonus.Value.Add(model);
+                    await _unitOfWork.Bonus.Value.AddAsync(model);
                     _view.Message = "Bonus added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -121,26 +122,40 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select bonus record(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var entity = (Bonus)_view.DataGrid.SelectedItem;
-                _unitOfWork.Bonus.Value.Remove(entity);
+                var selectedBonuses = _view.DataGrid.SelectedItems.Cast<Bonus>().ToList();
+
+                if (!selectedBonuses.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "No valid bonus entries selected.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Bonus.Value.RemoveRange(selectedBonuses);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Bonus deleted successfully";
+                _view.Message = $"{selectedBonuses.Count} bonus record(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllBonusList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Bonus";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "BonusReport.rdlc";

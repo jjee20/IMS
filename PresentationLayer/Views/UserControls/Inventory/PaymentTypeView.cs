@@ -54,7 +54,7 @@ namespace PresentationLayer.Views.UserControls
                 {
                     Guna2TabControl1.TabPages.Remove(tabPage2);
                     Guna2TabControl1.TabPages.Add(tabPage1);
-                    MessageBox.Show(Message);
+                    
                 }
                 btnReturn.Visible = false;
             };
@@ -86,7 +86,7 @@ namespace PresentationLayer.Views.UserControls
                 {
                     // Invoke the DeleteEvent with the selected row as an argument
                     DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show(Message);
+                    
                 }
             };
             //Print

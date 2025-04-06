@@ -54,9 +54,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == _view.EmployeeContributionId, tracked: true);
+            var model = await _unitOfWork.EmployeeContribution.Value.GetAsync(c => c.EmployeeContributionId == _view.EmployeeContributionId, tracked: true);
             if (model == null) model = new EmployeeContribution();
             else _unitOfWork.EmployeeContribution.Value.Detach(model);
 
@@ -77,18 +77,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else //Add new model
                 {
-                    var Entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeId == _view.EmployeeId);
-                    if (Entity != null)
-                    {
-                        _view.Message = "EmployeeContribution is already added.";
-                        return;
-                    }
-
-                    _unitOfWork.EmployeeContribution.Value.Add(model);
+                    await _unitOfWork.EmployeeContribution.Value.AddAsync(model);
                     _view.Message = "EmployeeContribution added successfully";
                 }
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -125,27 +119,46 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.Message = "Please select employee contribution(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var employeeContribution = (EmployeeContributionViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == employeeContribution.EmployeeContributionId);
-                _unitOfWork.EmployeeContribution.Value.Remove(entity);
+                var selectedContributions = _view.DataGrid.SelectedItems.Cast<EmployeeContributionViewModel>().ToList();
+                var ids = selectedContributions.Select(ec => ec.EmployeeContributionId).ToList();
+
+                var entities = _unitOfWork.EmployeeContribution.Value
+                    .GetAll()
+                    .Where(ec => ids.Contains(ec.EmployeeContributionId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected employee contribution(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.EmployeeContribution.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "EmployeeContribution deleted successfully";
+                _view.Message = $"{entities.Count} employee contribution(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllEmployeeContributionList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete EmployeeContribution";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "EmployeeContributionReport.rdlc";

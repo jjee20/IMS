@@ -47,9 +47,9 @@ namespace PresentationLayer.Presenters
             _view.IsEdit = false;
             CleanviewFields();
         }
-        private void Save(object? sender, EventArgs e)
+        private async void Save(object? sender, EventArgs e)
         {
-            var model = _unitOfWork.Warehouse.Value.Get(c => c.WarehouseId == _view.WarehouseId, tracked: true);
+            var model = await _unitOfWork.Warehouse.Value.GetAsync(c => c.WarehouseId == _view.WarehouseId, tracked: true);
             if (model == null) model = new Warehouse();
             else _unitOfWork.Warehouse.Value.Detach(model);
 
@@ -68,11 +68,12 @@ namespace PresentationLayer.Presenters
                 }
                 else //Add new model
                 {
-                    _unitOfWork.Warehouse.Value.Add(model);
+                    await _unitOfWork.Warehouse.Value.AddAsync(model);
                     _view.Message = "Warehouse added successfully";
                 }
-                    _unitOfWork.Save();
+                    await _unitOfWork.SaveAsync();
                 _view.IsSuccessful = true;
+                _view.ShowMessage(_view.Message);
                 CleanviewFields();
             }
             catch (Exception ex)
@@ -106,27 +107,46 @@ namespace PresentationLayer.Presenters
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
                     _view.IsSuccessful = false;
-                    _view.Message = "Please select one to edit";
+                    _view.Message = "Please select warehouse(s) to delete.";
+                    _view.ShowMessage(_view.Message);
                     return;
                 }
 
-                var warehouse = (WarehouseViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Warehouse.Value.Get(c => c.WarehouseId == warehouse.WarehouseId);
-                _unitOfWork.Warehouse.Value.Remove(entity);
+                var selectedWarehouses = _view.DataGrid.SelectedItems.Cast<WarehouseViewModel>().ToList();
+                var ids = selectedWarehouses.Select(w => w.WarehouseId).ToList();
+
+                var entities = _unitOfWork.Warehouse.Value
+                    .GetAll()
+                    .Where(w => ids.Contains(w.WarehouseId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.IsSuccessful = false;
+                    _view.Message = "Selected warehouse(s) could not be found.";
+                    _view.ShowMessage(_view.Message);
+                    return;
+                }
+
+                _unitOfWork.Warehouse.Value.RemoveRange(entities);
                 _unitOfWork.Save();
+
                 _view.IsSuccessful = true;
-                _view.Message = "Warehouse deleted successfully";
+                _view.Message = $"{entities.Count} warehouse(s) deleted successfully.";
+                _view.ShowMessage(_view.Message);
                 LoadAllWarehouseList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Warehouse";
+                _view.Message = $"An error occurred while deleting: {ex.Message}";
+                _view.ShowMessage(_view.Message);
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "WarehouseReport.rdlc";

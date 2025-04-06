@@ -1,11 +1,12 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.ViewModels.PayrollViewModels;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
-    public interface ILeaveView
+    public interface ILeaveView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         int LeaveId { get; set; }

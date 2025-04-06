@@ -5,7 +5,7 @@ using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.IViews.Accounting.Payroll
 {
-    public interface IEmployeeContributionView
+    public interface IEmployeeContributionView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
         int EmployeeContributionId { get; set; }

@@ -16,13 +16,15 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
 {
     public partial class _13thMonthView : SfForm
     {
-        private EmployeeViewModel _employee;
+        private PayrollViewModel _employee;
         private IUnitOfWork _unitOfWork;
-        public _13thMonthView(EmployeeViewModel employee, IUnitOfWork unitOfWork)
+        public _13thMonthView(PayrollViewModel employee, IUnitOfWork unitOfWork)
         {
             InitializeComponent();
             _employee = employee;
             _unitOfWork = unitOfWork;
+
+            txtName.Text = employee.Employee;
         }
     }
 }
