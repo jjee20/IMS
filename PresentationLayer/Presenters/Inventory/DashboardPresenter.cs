@@ -99,23 +99,32 @@ namespace PresentationLayer.Presenters
             var expense = purchaseOrder.Select(c => c.PurchaseOrderLines).Sum(c => c.Sum(c => c.SubTotal));
             _view.Expense = expense.ToString("N2");
 
+            var expenseTarget = _unitOfWork.TargetGoals.Value.GetAll().FirstOrDefault();
 
+            if(expenseTarget == null)
+            {
+                expenseTarget = new TargetGoals
+                {
+                    MonthlySales = 0,
+                    MonthlyItemSold = 0
+                };
+            }
 
             var salesToday = salesOrder.Where(c => c.OrderDate.Date == newToday)
                 .Select(c => c.SalesOrderLines).Sum(c => c.Sum(c => c.SubTotal));
             _view.SalesToday = salesToday.ToString("N2");
             _view.ExpenseTodaySales = salesToday;
-            _view.ExpenseTodaySalesTarget = 100000;
+            _view.ExpenseTodaySalesTarget = expenseTarget.MonthlySales;
 
-            Sales = (int)(salesToday / 100000.00 * 100);
+            Sales = (int)(salesToday / expenseTarget.MonthlySales * 100);
 
             var itemsSoldToday = salesOrder.Where(c => c.OrderDate.Date == newToday)
                 .Select(c => c.SalesOrderLines).Sum(c => c.Sum(c => c.Quantity));
             _view.ItemSoldToday = itemsSoldToday.ToString("N0");
             _view.ExpenseTodayItemsSold = itemsSoldToday;
-            _view.ExpenseTodayItemsSoldTarget = 1000;
+            _view.ExpenseTodayItemsSoldTarget = expenseTarget.MonthlyItemSold;
 
-            ItemSold = (int)(itemsSoldToday / 1000.00 * 100);
+            ItemSold = (int)(itemsSoldToday / expenseTarget.MonthlyItemSold * 100);
 
             var expenseToday = purchaseOrder.Where(c => c.OrderDate.Date == newToday)
                 .Select(c => c.PurchaseOrderLines).Sum(c => c.Sum(c => c.SubTotal));

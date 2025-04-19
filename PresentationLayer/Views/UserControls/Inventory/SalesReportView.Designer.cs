@@ -239,9 +239,9 @@
             materialLabel3.Location = new Point(14, 14);
             materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel3.Name = "materialLabel3";
-            materialLabel3.Size = new Size(237, 19);
+            materialLabel3.Size = new Size(230, 19);
             materialLabel3.TabIndex = 1;
-            materialLabel3.Text = "Daily Sales Trend over Purchases";
+            materialLabel3.Text = "Daily Sales Trend over Expenses";
             materialLabel3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // materialCard3
@@ -304,9 +304,9 @@
             materialLabel4.Location = new Point(14, 14);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
-            materialLabel4.Size = new Size(259, 19);
+            materialLabel4.Size = new Size(252, 19);
             materialLabel4.TabIndex = 2;
-            materialLabel4.Text = "Monthly Sales Trend over Purchases";
+            materialLabel4.Text = "Monthly Sales Trend over Expenses";
             materialLabel4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // materialCard4
@@ -613,9 +613,9 @@
             label4.ForeColor = Color.Black;
             label4.Location = new Point(0, 0);
             label4.Name = "label4";
-            label4.Size = new Size(80, 21);
+            label4.Size = new Size(73, 21);
             label4.TabIndex = 4;
-            label4.Text = "Purchases";
+            label4.Text = "Expenses";
             label4.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // guna2GradientPanel4

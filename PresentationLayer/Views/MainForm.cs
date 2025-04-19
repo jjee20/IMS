@@ -55,6 +55,7 @@ namespace RavenTech_ERP
             btnRegisterAccount.Click += delegate { RegisterAccountEvent?.Invoke(this, EventArgs.Empty); };
             btnDashboard.Click += delegate { DashboardEvent?.Invoke(this, EventArgs.Empty); };
             btnHoliday.Click += delegate { HolidayEvent?.Invoke(this, EventArgs.Empty); };
+            btnStockMonitoring.Click += delegate { ProductMonitoringEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

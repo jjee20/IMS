@@ -77,8 +77,9 @@ namespace RavenTech_ERP.Presenters
             _mainForm.PayrollEvent += PayrollEvent;
             _mainForm.HolidayEvent += HolidayEvent;
             _mainForm.EmployeeEvent += EmployeeEvent;
+            _mainForm.DepartmentEvent += DepartmentEvent;
 
-            if(!(Settings.Default.Department == Departments.Payroll.ToString()))
+            if (!(Settings.Default.Department == Departments.Payroll.ToString()))
             {
                 _mainForm.ribbonControl.SelectedTab = _mainForm.InventoryTab;
                 DashboardEvent(this, EventArgs.Empty);
@@ -88,6 +89,12 @@ namespace RavenTech_ERP.Presenters
                 _mainForm.ribbonControl.SelectedTab = _mainForm.PayrollTab;
                 AttendanceEvent(this, EventArgs.Empty);
             }
+        }
+
+        private void DepartmentEvent(object? sender, EventArgs e)
+        {
+            IDepartmentView _view = ChildManager<DepartmentView>.GetChildInstance((MainForm)_mainForm);
+            new DepartmentPresenter(_view, _unitOfWork);
         }
 
         private void EmployeeEvent(object? sender, EventArgs e)
@@ -104,14 +111,14 @@ namespace RavenTech_ERP.Presenters
 
         private void CustomerTypeEvent(object? sender, EventArgs e)
         {
-            ICustomerView _view = ChildManager<CustomerView>.GetChildInstance((MainForm)_mainForm);
-            new CustomerPresenter(_view, _unitOfWork);
+            ICustomerTypeView _view = ChildManager<CustomerTypeView>.GetChildInstance((MainForm)_mainForm);
+            new CustomerTypePresenter(_view, _unitOfWork);
         }
 
         private void CustomerEvent(object? sender, EventArgs e)
         {
-            ICustomerTypeView _view = ChildManager<CustomerTypeView>.GetChildInstance((MainForm)_mainForm);
-            new CustomerTypePresenter(_view, _unitOfWork);
+            ICustomerView _view = ChildManager<CustomerView>.GetChildInstance((MainForm)_mainForm);
+            new CustomerPresenter(_view, _unitOfWork);
         }
 
         private void PayrollEvent(object? sender, EventArgs e)

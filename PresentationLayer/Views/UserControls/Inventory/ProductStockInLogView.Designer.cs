@@ -191,7 +191,7 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.Name = "materialLabel1";
             materialLabel1.Size = new Size(1306, 40);
             materialLabel1.TabIndex = 3;
-            materialLabel1.Text = "ProductInStockLog Management";
+            materialLabel1.Text = "Product Stock-In Log Management";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // guna2Separator1

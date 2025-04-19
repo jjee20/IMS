@@ -226,6 +226,7 @@
             Controls.Add(materialCard1);
             Controls.Add(guna2PictureBox1);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LoginView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginView";

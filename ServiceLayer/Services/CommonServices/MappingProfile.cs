@@ -17,6 +17,24 @@ namespace ServiceLayer.Services.CommonServices
             #region Inventory
             CreateMap<BillType, BillTypeViewModel>()
                 .ReverseMap();
+            CreateMap<InvoiceType, InvoiceTypeViewModel>()
+                .ReverseMap();
+            CreateMap<PaymentType, PaymentTypeViewModel>()
+                .ReverseMap();
+            CreateMap<ProductType, ProductTypeViewModel>()
+                .ReverseMap();
+            CreateMap<PurchaseType, PurchaseTypeViewModel>()
+                .ReverseMap();
+            CreateMap<SalesType, SalesTypeViewModel>()
+                .ReverseMap();
+            CreateMap<ShipmentType, ShipmentTypeViewModel>()
+                .ReverseMap();
+            CreateMap<VendorType, VendorTypeViewModel>()
+                .ReverseMap();
+            CreateMap<UnitOfMeasure, UnitOfMeasureViewModel>()
+                .ReverseMap();
+            CreateMap<JobPosition, JobPositionViewModel>()
+                .ReverseMap();
             CreateMap<ProductStockInLog, ProductStockInLogViewModel>()
                 .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product.ProductName))
                 .ForMember(dest => dest.DateAdded, opt => opt.MapFrom(src => src.DateAdded.ToLongDateString()))
