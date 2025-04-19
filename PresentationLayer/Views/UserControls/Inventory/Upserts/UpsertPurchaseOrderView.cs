@@ -391,8 +391,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void buttonProductsPrevious_Click(object sender, EventArgs e)
         {
-            panelDetails.Visible = false;
-            panelPayment.Visible = true;
+            panelDetails.Visible = true;
+            panelPayment.Visible = false;
             panelProducts.Visible = false;
             progressBar.Value = 0;
         }
