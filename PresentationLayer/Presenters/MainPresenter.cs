@@ -212,7 +212,7 @@ namespace RavenTech_ERP.Presenters
 
         private void PurchaseOrderEvent(object? sender, EventArgs e)
         {
-            IPurchaseOrderViewOld _view = ChildManager<PurchaseOrderViewOld>.GetChildInstance((MainForm)_mainForm);
+            IPurchaseOrderView _view = ChildManager<PurchaseOrderView>.GetChildInstance((MainForm)_mainForm);
             new PurchaseOrderPresenter(_view, _unitOfWork);
         }
 
