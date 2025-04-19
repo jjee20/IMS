@@ -4,6 +4,7 @@ using MaterialSkin.Controls;
 using ServiceLayer.Services.Helpers;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class PaymentReceiveListView : MaterialForm
+    public partial class PaymentReceiveListView : SfForm
     {
         private readonly BindingSource _bindingSource;
         private readonly IUnitOfWork _unitOfWork;

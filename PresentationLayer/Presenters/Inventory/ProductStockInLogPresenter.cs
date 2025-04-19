@@ -1,14 +1,18 @@
-﻿using DomainLayer.Enums;
-using DomainLayer.Models.Inventory;
+﻿using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels;
-using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
-using ServiceLayer.Services.CommonServices;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -16,33 +20,24 @@ namespace PresentationLayer.Presenters
     {
         public IProductStockInLogView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource StatusBindingSource;
-        private BindingSource ProductBindingSource;
         private IEnumerable<ProductStockInLogViewModel> ProductStockInLogList;
-        private IEnumerable<EnumItemViewModel> StatusList;
-        private IEnumerable<Product> ProductList;
         public ProductStockInLogPresenter(IProductStockInLogView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            StatusBindingSource = new BindingSource();
-            ProductBindingSource = new BindingSource();
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
-            LoadAllProduct();
-            LoadAllStatus();
             LoadAllProductStockInLogList();
 
             //Source Binding
@@ -50,153 +45,105 @@ namespace PresentationLayer.Presenters
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private async void Save(object? sender, EventArgs e)
-        {
-            var model = await _unitOfWork.StockInLogs.Value.GetAsync(c => c.ProductStockInLogId == _view.ProductStockInLogId, tracked: true);
-            if (model == null) model = new ProductStockInLog();
-            else _unitOfWork.StockInLogs.Value.Detach(model);
-
-            model.ProductStockInLogId = _view.ProductStockInLogId;
-            model.ProductId = _view.ProductId;
-            model.ProductStatus = _view.ProductStatus;
-            model.DateAdded = _view.DateAdded;
-            model.Notes = _view.Notes;
-            model.StockQuantity = _view.StockQuantity;
-
-            try
+            using (var form = new UpsertProductStockInLogView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add ProductStockInLog";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.StockInLogs.Value.Update(model);
-                    _view.Message = "Product log edited successfully";
+                    LoadAllProductStockInLogList();
                 }
-                else //Add new model
-                {
-                    await _unitOfWork.StockInLogs.Value.AddAsync(model);
-                    _view.Message = "Product log added successfully";
-                }
-                    await _unitOfWork.SaveAsync();
-                _view.IsSuccessful = true;
-                _view.ShowMessage(_view.Message);
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllProductStockInLogList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if(_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductStockInLogViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId);
+                using (var form = new UpsertProductStockInLogView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit ProductStockInLog";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllProductStockInLogList();
+                    }
+                }
             }
-            var productlog = (ProductStockInLogViewModel)_view.DataGrid.SelectedItem;
-            var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == productlog.ProductStockInLogId);
-            _view.ProductStockInLogId = entity.ProductStockInLogId;
-            _view.ProductId = entity.ProductId;
-            _view.StockQuantity = entity.StockQuantity;
-            _view.DateAdded = entity.DateAdded;
-            _view.Notes = entity.Notes;
-            _view.ProductStatus = entity.ProductStatus;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductStockInLogViewModel row)
+            {
+                var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId);
+                if (entity != null)
+                {
+                    _unitOfWork.StockInLogs.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("ProductStockInLog deleted successfully.");
+
+                    LoadAllProductStockInLogList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
                 if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select product log(s) to delete.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var selectedLogs = _view.DataGrid.SelectedItems.Cast<ProductStockInLogViewModel>().ToList();
-                var ids = selectedLogs.Select(l => l.ProductStockInLogId).ToList();
+                var selected = _view.DataGrid.SelectedItems.Cast<ProductStockInLogViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.ProductStockInLogId).ToList();
 
                 var entities = _unitOfWork.StockInLogs.Value
                     .GetAll()
-                    .Where(l => ids.Contains(l.ProductStockInLogId))
+                    .Where(b => ids.Contains(b.ProductStockInLogId))
                     .ToList();
 
                 if (!entities.Any())
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Selected product logs could not be found.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Selected records could not be found.");
                     return;
                 }
 
                 _unitOfWork.StockInLogs.Value.RemoveRange(entities);
                 _unitOfWork.Save();
 
-                _view.IsSuccessful = true;
-                _view.Message = $"{entities.Count} product log(s) deleted successfully.";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllProductStockInLogList();
             }
             catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = $"An error occurred while deleting: {ex.Message}";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
 
         private void Print(object? sender, EventArgs e)
         {
-            string reportFileName = "StockInLogReport.rdlc";
+            string reportFileName = "ProductStockInLogReport.rdlc";
             string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
-            var reportDataSource = new ReportDataSource("StockInLogs", ProductStockInLogList);
+            var reportDataSource = new ReportDataSource("ProductStockInLog", ProductStockInLogList);
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
-        }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllProductStockInLogList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllProductStockInLogList();
-            _view.ProductStockInLogId = 0;
-            _view.StockQuantity = 1;
-            _view.Notes = "";
         }
         
         private void LoadAllProductStockInLogList(bool emptyValue = false)
         {
-            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll(includeProperties: "Product"));
+            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll());
 
             if (!emptyValue) ProductStockInLogList = ProductStockInLogList.Where(c => c.Product.ToLower().Contains(_view.SearchValue.ToLower()));
-            _view.SetProductStockInLogListBindingSource(ProductStockInLogList);
-        }
-        private void LoadAllStatus()
-        {
-            StatusList = EnumHelper.EnumToEnumerable<ProductStatus>();
-            StatusBindingSource.DataSource = StatusList;//Set data source.
-            _view.SetProductStatusListBindingSource(StatusBindingSource);
-        }
-        private void LoadAllProduct()
-        {
-            ProductList = _unitOfWork.Product.Value.GetAll();
-            ProductBindingSource.DataSource = ProductList;//Set data source.
-            _view.SetProductListBindingSource(ProductBindingSource);
+            _view.SetProductInStockLogListBindingSource(ProductStockInLogList);
         }
     }
 }

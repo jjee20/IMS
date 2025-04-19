@@ -3,6 +3,7 @@ using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
 using PresentationLayer;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,12 @@ using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class PurchaseOrderInformationView: MaterialForm
+    public partial class PurchaseOrderInformationView: SfForm
     {
         private readonly PurchaseOrder _PurchaseOrder;
         private readonly PurchaseOrderViewModel _PurchaseOrderVM;
         private readonly IUnitOfWork _unitOfWork;
-        public PurchaseOrderInformationView(PurchaseOrder PurchaseOrder, PurchaseOrderViewModel PurchaseOrderVM, IUnitOfWork unitOfWork)
+        public PurchaseOrderInformationView(IUnitOfWork unitOfWork, PurchaseOrder PurchaseOrder, PurchaseOrderViewModel PurchaseOrderVM)
         {
             InitializeComponent();
             _PurchaseOrder = PurchaseOrder;

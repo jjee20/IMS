@@ -21,5 +21,8 @@ namespace DomainLayer.ViewModels.Inventory
         public string Email { get; set; }
         [Display(Name = "Contact Person")]
         public string ContactPerson { get; set; }
+
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using MaterialSkin.Controls;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Reports;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,12 +18,12 @@ using static Unity.Storage.RegistrationSet;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class InvoiceView : MaterialForm
+    public partial class InvoiceView : SfForm
     {
         private readonly SalesOrder _salesOrder;
         private readonly IUnitOfWork _unitOfWork;
 
-        public InvoiceView(SalesOrder salesOrder, IUnitOfWork unitOfWork)
+        public InvoiceView(IUnitOfWork unitOfWork, SalesOrder salesOrder)
         {
             InitializeComponent();
             _unitOfWork = unitOfWork;

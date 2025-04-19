@@ -29,6 +29,10 @@ namespace DomainLayer.ViewModels.Inventory
         public double Tax { get; set; }
         public double Freight { get; set; }
         public double Total { get; set; }
-        public List<PurchaseOrderLine> PurchaseOrderLines { get; set; } = new List<PurchaseOrderLine>();
+        public byte[] GRN { get; set; }
+        public byte[] Bill { get; set; }
+        public byte[] Voucher { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

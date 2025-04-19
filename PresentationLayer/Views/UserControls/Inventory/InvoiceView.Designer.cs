@@ -47,11 +47,11 @@
             txtInvoiceType.Hint = "Select Invoice Type";
             txtInvoiceType.IntegralHeight = false;
             txtInvoiceType.ItemHeight = 43;
-            txtInvoiceType.Location = new Point(51, 121);
+            txtInvoiceType.Location = new Point(88, 74);
             txtInvoiceType.MaxDropDownItems = 4;
             txtInvoiceType.MouseState = MaterialSkin.MouseState.OUT;
             txtInvoiceType.Name = "txtInvoiceType";
-            txtInvoiceType.Size = new Size(371, 49);
+            txtInvoiceType.Size = new Size(296, 49);
             txtInvoiceType.StartIndex = 0;
             txtInvoiceType.TabIndex = 0;
             // 
@@ -62,7 +62,7 @@
             btnPrint.Depth = 0;
             btnPrint.HighEmphasis = true;
             btnPrint.Icon = null;
-            btnPrint.Location = new Point(204, 198);
+            btnPrint.Location = new Point(204, 169);
             btnPrint.Margin = new Padding(4, 6, 4, 6);
             btnPrint.MouseState = MaterialSkin.MouseState.HOVER;
             btnPrint.Name = "btnPrint";
@@ -75,15 +75,18 @@
             btnPrint.UseVisualStyleBackColor = true;
             btnPrint.Click += btnPrint_Click;
             // 
-            // GenerateInvoice
+            // InvoiceView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(473, 278);
             Controls.Add(btnPrint);
             Controls.Add(txtInvoiceType);
-            Name = "GenerateInvoice";
+            Name = "InvoiceView";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
+            Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+            Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Generate Invoice";
             ResumeLayout(false);
             PerformLayout();

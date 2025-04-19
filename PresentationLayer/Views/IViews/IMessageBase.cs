@@ -10,7 +10,7 @@ namespace RavenTech_ERP.Views.IViews
     {
         public void ShowMessage(string message)
         {
-            
+            MessageBox.Show(message, "Message");
         }
     }
 }

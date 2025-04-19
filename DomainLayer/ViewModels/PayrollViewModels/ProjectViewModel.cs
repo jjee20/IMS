@@ -15,11 +15,13 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Project Name")]
         public string ProjectName { get; set; }
         public string Description { get; set; }
-        public string? Client { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public double? Budget { get; set; }
+        public string Client { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public double Budget { get; set; } = 0;
 
-        public double? Revenue { get; set; }
+        public double Revenue { get; set; } = 0;
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

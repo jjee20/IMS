@@ -18,5 +18,6 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Disc %")]
         public double DiscountPercentage { get; set; }
         public double SubTotal { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

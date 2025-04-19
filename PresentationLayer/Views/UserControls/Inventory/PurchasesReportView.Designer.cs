@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            Guna.Charts.WinForms.ChartFont chartFont1 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont2 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont3 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont4 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid1 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.Tick tick1 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont5 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid2 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.Tick tick2 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont6 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid3 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.PointLabel pointLabel1 = new Guna.Charts.WinForms.PointLabel();
-            Guna.Charts.WinForms.ChartFont chartFont7 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Tick tick3 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont8 = new Guna.Charts.WinForms.ChartFont();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
+            Guna.Charts.WinForms.ChartFont chartFont17 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont18 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont19 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont20 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid7 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.Tick tick7 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont21 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid8 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.Tick tick8 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont22 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid9 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.PointLabel pointLabel3 = new Guna.Charts.WinForms.PointLabel();
+            Guna.Charts.WinForms.ChartFont chartFont23 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Tick tick9 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont24 = new Guna.Charts.WinForms.ChartFont();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             tableLayoutPanel5 = new TableLayoutPanel();
@@ -102,7 +102,7 @@
             guna2Separator1.Location = new Point(3, 60);
             guna2Separator1.Margin = new Padding(3, 2, 3, 2);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1334, 9);
+            guna2Separator1.Size = new Size(1340, 9);
             guna2Separator1.TabIndex = 2;
             // 
             // materialCard1
@@ -113,12 +113,12 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(0, 71);
+            materialCard1.Location = new Point(2, 73);
             materialCard1.Margin = new Padding(14);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1340, 591);
+            materialCard1.Size = new Size(1346, 654);
             materialCard1.TabIndex = 10;
             // 
             // tableLayoutPanel5
@@ -133,7 +133,7 @@
             tableLayoutPanel5.RowCount = 2;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.Size = new Size(1312, 482);
+            tableLayoutPanel5.Size = new Size(1318, 545);
             tableLayoutPanel5.TabIndex = 2;
             // 
             // tableLayoutPanel3
@@ -149,12 +149,12 @@
             tableLayoutPanel3.Controls.Add(materialCard5, 2, 0);
             tableLayoutPanel3.Controls.Add(materialCard4, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(0, 241);
+            tableLayoutPanel3.Location = new Point(0, 272);
             tableLayoutPanel3.Margin = new Padding(0);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(1312, 241);
+            tableLayoutPanel3.Size = new Size(1318, 273);
             tableLayoutPanel3.TabIndex = 5;
             // 
             // materialCard7
@@ -165,42 +165,42 @@
             materialCard7.Depth = 0;
             materialCard7.Dock = DockStyle.Fill;
             materialCard7.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard7.Location = new Point(902, 14);
+            materialCard7.Location = new Point(906, 14);
             materialCard7.Margin = new Padding(14);
             materialCard7.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard7.Name = "materialCard7";
             materialCard7.Padding = new Padding(14);
-            materialCard7.Size = new Size(396, 213);
+            materialCard7.Size = new Size(398, 245);
             materialCard7.TabIndex = 7;
             // 
             // dgAnnualPurchases
             // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dgAnnualPurchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgAnnualPurchases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle19.BackColor = Color.White;
+            dgAnnualPurchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle20.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle20.ForeColor = Color.White;
+            dataGridViewCellStyle20.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.True;
+            dgAnnualPurchases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             dgAnnualPurchases.ColumnHeadersHeight = 30;
             dgAnnualPurchases.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgAnnualPurchases.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = Color.White;
+            dataGridViewCellStyle21.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle21.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle21.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle21.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.False;
+            dgAnnualPurchases.DefaultCellStyle = dataGridViewCellStyle21;
             dgAnnualPurchases.Dock = DockStyle.Fill;
             dgAnnualPurchases.GridColor = Color.FromArgb(231, 229, 255);
             dgAnnualPurchases.Location = new Point(14, 33);
             dgAnnualPurchases.Name = "dgAnnualPurchases";
             dgAnnualPurchases.RowHeadersVisible = false;
-            dgAnnualPurchases.Size = new Size(368, 166);
+            dgAnnualPurchases.Size = new Size(370, 198);
             dgAnnualPurchases.TabIndex = 3;
             dgAnnualPurchases.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgAnnualPurchases.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -233,9 +233,9 @@
             materialLabel7.Location = new Point(14, 14);
             materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel7.Name = "materialLabel7";
-            materialLabel7.Size = new Size(212, 19);
+            materialLabel7.Size = new Size(205, 19);
             materialLabel7.TabIndex = 2;
-            materialLabel7.Text = "Annual Purchases Breakdown";
+            materialLabel7.Text = "Annual Expenses Breakdown";
             materialLabel7.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // materialCard5
@@ -246,42 +246,42 @@
             materialCard5.Depth = 0;
             materialCard5.Dock = DockStyle.Fill;
             materialCard5.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard5.Location = new Point(458, 14);
+            materialCard5.Location = new Point(460, 14);
             materialCard5.Margin = new Padding(14);
             materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard5.Name = "materialCard5";
             materialCard5.Padding = new Padding(14);
-            materialCard5.Size = new Size(396, 213);
+            materialCard5.Size = new Size(398, 245);
             materialCard5.TabIndex = 5;
             // 
             // dgMonthlyPurchases
             // 
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dgMonthlyPurchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgMonthlyPurchases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle22.BackColor = Color.White;
+            dgMonthlyPurchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle23.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle23.ForeColor = Color.White;
+            dataGridViewCellStyle23.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = DataGridViewTriState.True;
+            dgMonthlyPurchases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             dgMonthlyPurchases.ColumnHeadersHeight = 30;
             dgMonthlyPurchases.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgMonthlyPurchases.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = Color.White;
+            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle24.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle24.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle24.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
+            dgMonthlyPurchases.DefaultCellStyle = dataGridViewCellStyle24;
             dgMonthlyPurchases.Dock = DockStyle.Fill;
             dgMonthlyPurchases.GridColor = Color.FromArgb(231, 229, 255);
             dgMonthlyPurchases.Location = new Point(14, 33);
             dgMonthlyPurchases.Name = "dgMonthlyPurchases";
             dgMonthlyPurchases.RowHeadersVisible = false;
-            dgMonthlyPurchases.Size = new Size(368, 166);
+            dgMonthlyPurchases.Size = new Size(370, 198);
             dgMonthlyPurchases.TabIndex = 3;
             dgMonthlyPurchases.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgMonthlyPurchases.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -314,9 +314,9 @@
             materialLabel4.Location = new Point(14, 14);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
-            materialLabel4.Size = new Size(220, 19);
+            materialLabel4.Size = new Size(213, 19);
             materialLabel4.TabIndex = 2;
-            materialLabel4.Text = "Monthly Purchases Breakdown";
+            materialLabel4.Text = "Monthly Expenses Breakdown";
             materialLabel4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // materialCard4
@@ -332,37 +332,37 @@
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(396, 213);
+            materialCard4.Size = new Size(398, 245);
             materialCard4.TabIndex = 3;
             // 
             // dgDailyPurchases
             // 
-            dataGridViewCellStyle7.BackColor = Color.White;
-            dgDailyPurchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dgDailyPurchases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle25.BackColor = Color.White;
+            dgDailyPurchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle26.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle26.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle26.ForeColor = Color.White;
+            dataGridViewCellStyle26.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = DataGridViewTriState.True;
+            dgDailyPurchases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             dgDailyPurchases.ColumnHeadersHeight = 30;
             dgDailyPurchases.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.White;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            dgDailyPurchases.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = Color.White;
+            dataGridViewCellStyle27.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle27.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle27.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle27.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
+            dgDailyPurchases.DefaultCellStyle = dataGridViewCellStyle27;
             dgDailyPurchases.Dock = DockStyle.Fill;
             dgDailyPurchases.GridColor = Color.FromArgb(231, 229, 255);
             dgDailyPurchases.Location = new Point(14, 33);
             dgDailyPurchases.Name = "dgDailyPurchases";
             dgDailyPurchases.RowHeadersVisible = false;
-            dgDailyPurchases.Size = new Size(368, 166);
+            dgDailyPurchases.Size = new Size(370, 198);
             dgDailyPurchases.TabIndex = 3;
             dgDailyPurchases.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgDailyPurchases.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -395,9 +395,9 @@
             materialLabel5.Location = new Point(14, 14);
             materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel5.Name = "materialLabel5";
-            materialLabel5.Size = new Size(198, 19);
+            materialLabel5.Size = new Size(191, 19);
             materialLabel5.TabIndex = 2;
-            materialLabel5.Text = "Daily Purchases Breakdown";
+            materialLabel5.Text = "Daily Expenses Breakdown";
             materialLabel5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // materialCard2
@@ -413,43 +413,43 @@
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
-            materialCard2.Size = new Size(1284, 213);
+            materialCard2.Size = new Size(1290, 244);
             materialCard2.TabIndex = 3;
             // 
             // chartDailyPurchases
             // 
             chartDailyPurchases.Dock = DockStyle.Fill;
-            chartFont1.FontName = "Arial";
-            chartDailyPurchases.Legend.LabelFont = chartFont1;
+            chartFont17.FontName = "Arial";
+            chartDailyPurchases.Legend.LabelFont = chartFont17;
             chartDailyPurchases.Location = new Point(14, 33);
             chartDailyPurchases.Name = "chartDailyPurchases";
-            chartDailyPurchases.Size = new Size(1256, 166);
+            chartDailyPurchases.Size = new Size(1262, 197);
             chartDailyPurchases.TabIndex = 2;
-            chartFont2.FontName = "Arial";
-            chartFont2.Size = 12;
-            chartFont2.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
-            chartDailyPurchases.Title.Font = chartFont2;
-            chartFont3.FontName = "Arial";
-            chartDailyPurchases.Tooltips.BodyFont = chartFont3;
-            chartFont4.FontName = "Arial";
-            chartFont4.Size = 9;
-            chartFont4.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
-            chartDailyPurchases.Tooltips.TitleFont = chartFont4;
-            chartDailyPurchases.XAxes.GridLines = grid1;
-            chartFont5.FontName = "Arial";
-            tick1.Font = chartFont5;
-            chartDailyPurchases.XAxes.Ticks = tick1;
-            chartDailyPurchases.YAxes.GridLines = grid2;
-            chartFont6.FontName = "Arial";
-            tick2.Font = chartFont6;
-            chartDailyPurchases.YAxes.Ticks = tick2;
-            chartDailyPurchases.ZAxes.GridLines = grid3;
-            chartFont7.FontName = "Arial";
-            pointLabel1.Font = chartFont7;
-            chartDailyPurchases.ZAxes.PointLabels = pointLabel1;
-            chartFont8.FontName = "Arial";
-            tick3.Font = chartFont8;
-            chartDailyPurchases.ZAxes.Ticks = tick3;
+            chartFont18.FontName = "Arial";
+            chartFont18.Size = 12;
+            chartFont18.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
+            chartDailyPurchases.Title.Font = chartFont18;
+            chartFont19.FontName = "Arial";
+            chartDailyPurchases.Tooltips.BodyFont = chartFont19;
+            chartFont20.FontName = "Arial";
+            chartFont20.Size = 9;
+            chartFont20.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
+            chartDailyPurchases.Tooltips.TitleFont = chartFont20;
+            chartDailyPurchases.XAxes.GridLines = grid7;
+            chartFont21.FontName = "Arial";
+            tick7.Font = chartFont21;
+            chartDailyPurchases.XAxes.Ticks = tick7;
+            chartDailyPurchases.YAxes.GridLines = grid8;
+            chartFont22.FontName = "Arial";
+            tick8.Font = chartFont22;
+            chartDailyPurchases.YAxes.Ticks = tick8;
+            chartDailyPurchases.ZAxes.GridLines = grid9;
+            chartFont23.FontName = "Arial";
+            pointLabel3.Font = chartFont23;
+            chartDailyPurchases.ZAxes.PointLabels = pointLabel3;
+            chartFont24.FontName = "Arial";
+            tick9.Font = chartFont24;
+            chartDailyPurchases.ZAxes.Ticks = tick9;
             // 
             // materialLabel3
             // 
@@ -460,9 +460,9 @@
             materialLabel3.Location = new Point(14, 14);
             materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel3.Name = "materialLabel3";
-            materialLabel3.Size = new Size(160, 19);
+            materialLabel3.Size = new Size(153, 19);
             materialLabel3.TabIndex = 1;
-            materialLabel3.Text = "Daily Purchases Trend";
+            materialLabel3.Text = "Daily Expenses Trend";
             materialLabel3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel4
@@ -479,7 +479,7 @@
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 8F));
-            tableLayoutPanel4.Size = new Size(1312, 81);
+            tableLayoutPanel4.Size = new Size(1318, 81);
             tableLayoutPanel4.TabIndex = 1;
             // 
             // txtPurchases
@@ -489,7 +489,7 @@
             txtPurchases.Dock = DockStyle.Fill;
             txtPurchases.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtPurchases.ForeColor = Color.Black;
-            txtPurchases.Location = new Point(459, 38);
+            txtPurchases.Location = new Point(462, 38);
             txtPurchases.Name = "txtPurchases";
             txtPurchases.Size = new Size(394, 43);
             txtPurchases.TabIndex = 6;
@@ -503,11 +503,11 @@
             label1.Dock = DockStyle.Fill;
             label1.Font = new Font("Segoe UI", 20F);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(459, 0);
+            label1.Location = new Point(462, 0);
             label1.Name = "label1";
             label1.Size = new Size(394, 38);
             label1.TabIndex = 7;
-            label1.Text = "ALL-TIME PURCHASES";
+            label1.Text = "ALL-TIME EXPENSES";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -532,12 +532,12 @@
             tableLayoutPanel1.Controls.Add(guna2Separator1, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Location = new Point(2, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 81.8181839F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 18.181818F));
-            tableLayoutPanel1.Size = new Size(1340, 71);
+            tableLayoutPanel1.Size = new Size(1346, 71);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // tableLayoutPanel2
@@ -552,7 +552,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1340, 58);
+            tableLayoutPanel2.Size = new Size(1346, 58);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // guna2Panel1
@@ -560,12 +560,12 @@
             guna2Panel1.Controls.Add(txtMonth);
             guna2Panel1.Controls.Add(txtYear);
             guna2Panel1.Controls.Add(materialLabel1);
-            guna2Panel1.CustomizableEdges = customizableEdges1;
+            guna2Panel1.CustomizableEdges = customizableEdges5;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(3, 3);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel1.Size = new Size(1334, 52);
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2Panel1.Size = new Size(1340, 52);
             guna2Panel1.TabIndex = 0;
             // 
             // txtMonth
@@ -584,7 +584,7 @@
             txtMonth.Hint = "Month";
             txtMonth.IntegralHeight = false;
             txtMonth.ItemHeight = 43;
-            txtMonth.Location = new Point(1023, 0);
+            txtMonth.Location = new Point(1029, 0);
             txtMonth.MaxDropDownItems = 4;
             txtMonth.MouseState = MaterialSkin.MouseState.OUT;
             txtMonth.Name = "txtMonth";
@@ -608,7 +608,7 @@
             txtYear.Hint = "Year";
             txtYear.IntegralHeight = false;
             txtYear.ItemHeight = 43;
-            txtYear.Location = new Point(1211, 0);
+            txtYear.Location = new Point(1217, 0);
             txtYear.MaxDropDownItems = 4;
             txtYear.MouseState = MaterialSkin.MouseState.OUT;
             txtYear.Name = "txtYear";
@@ -629,18 +629,20 @@
             materialLabel1.Name = "materialLabel1";
             materialLabel1.Size = new Size(569, 52);
             materialLabel1.TabIndex = 4;
-            materialLabel1.Text = "Purchases Report";
+            materialLabel1.Text = "Expense Report";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // PurchasesReportView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1340, 662);
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(1350, 729);
             Controls.Add(materialCard1);
             Controls.Add(tableLayoutPanel1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "PurchasesReportView";
+            Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+            Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             materialCard1.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);

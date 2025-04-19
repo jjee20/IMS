@@ -1,9 +1,16 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -11,7 +18,7 @@ namespace PresentationLayer.Presenters
     {
         public ISalesTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private IEnumerable<SalesType> SalesTypeList;
+        private IEnumerable<SalesTypeViewModel> SalesTypeList;
         public SalesTypePresenter(ISalesTypeView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -20,122 +27,101 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
+
             //Load
 
             LoadAllSalesTypeList();
 
             //Source Binding
-
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private async void Save(object? sender, EventArgs e)
-        {
-            try
+            using (var form = new UpsertSalesTypeView(_unitOfWork))
             {
-                // Check if SalesType already exists
-                var model = await _unitOfWork.SalesType.Value.GetAsync(c => c.SalesTypeId == _view.SalesTypeId, tracked: true);
-                if (model == null) model = new SalesType();
-                else _unitOfWork.SalesType.Value.Detach(model);
-
-                model.SalesTypeId = _view.SalesTypeId;
-                model.SalesTypeName = _view.SalesTypeName;
-                model.Description = _view.Description;
-
-                // Validate entity
-                new ModelDataValidation().Validate(model);
-
-                if (_view.IsEdit)
+                form.Text = "Add Sales Type";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.SalesType.Value.Update(model); // Update existing entity
-                    _view.Message = "Sales type edited successfully.";
+                    LoadAllSalesTypeList();
                 }
-                else
-                {
-                    await _unitOfWork.SalesType.Value.AddAsync(model); // Add new entity
-                    _view.Message = "Sales type added successfully.";
-                }
-
-                // Save changes to database
-                await _unitOfWork.SaveAsync();
-                _view.IsSuccessful = true;
-                _view.ShowMessage(_view.Message);
-
-                // Clean fields
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllSalesTypeList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is SalesTypeViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.SalesType.Value.Get(c => c.SalesTypeId == row.SalesTypeId);
+                using (var form = new UpsertSalesTypeView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Sales Type";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllSalesTypeList();
+                    }
+                }
             }
-
-            var entity = (SalesType)_view.DataGrid.SelectedItem;
-            _view.SalesTypeId = entity.SalesTypeId;
-            _view.SalesTypeName = entity.SalesTypeName;
-            _view.Description = entity.Description;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is SalesTypeViewModel row)
+            {
+                var entity = _unitOfWork.SalesType.Value.Get(c => c.SalesTypeId == row.SalesTypeId);
+                if (entity != null)
+                {
+                    _unitOfWork.SalesType.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Sales Type deleted successfully.");
+
+                    LoadAllSalesTypeList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
                 if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select sales type(s) to delete.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var selectedItems = _view.DataGrid.SelectedItems.Cast<SalesType>().ToList();
+                var selected = _view.DataGrid.SelectedItems.Cast<SalesTypeViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.SalesTypeId).ToList();
 
-                if (!selectedItems.Any())
+                var entities = _unitOfWork.SalesType.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.SalesTypeId))
+                    .ToList();
+
+                if (!entities.Any())
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "No valid sales types selected.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Selected records could not be found.");
                     return;
                 }
 
-                _unitOfWork.SalesType.Value.RemoveRange(selectedItems);
+                _unitOfWork.SalesType.Value.RemoveRange(entities);
                 _unitOfWork.Save();
 
-                _view.IsSuccessful = true;
-                _view.Message = $"{selectedItems.Count} sales type(s) deleted successfully.";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllSalesTypeList();
             }
             catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = $"An error occurred while deleting: {ex.Message}";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
 
@@ -149,23 +135,12 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllSalesTypeList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllSalesTypeList();
-            _view.SalesTypeId = 0;
-            _view.SalesTypeName = "";
-            _view.Description = "";
-        }
         
         private void LoadAllSalesTypeList(bool emptyValue = false)
         {
-            SalesTypeList = _unitOfWork.SalesType.Value.GetAll();
+            SalesTypeList = Program.Mapper.Map<IEnumerable<SalesTypeViewModel>>(_unitOfWork.SalesType.Value.GetAll());
 
-            if (!emptyValue) SalesTypeList = SalesTypeList.Where(C => C.SalesTypeName.Contains(_view.SearchValue));
+            if (!emptyValue) SalesTypeList = SalesTypeList.Where(c => c.SalesTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetSalesTypeListBindingSource(SalesTypeList);
         }
     }

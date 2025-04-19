@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePasswordView));
             txtOldPassword = new MaterialSkin.Controls.MaterialTextBox();
             txtNewPassword = new MaterialSkin.Controls.MaterialTextBox();
             txtConfirmNewPassword = new MaterialSkin.Controls.MaterialTextBox();
@@ -42,7 +43,7 @@
             txtOldPassword.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtOldPassword.Hint = "Old Password";
             txtOldPassword.LeadingIcon = null;
-            txtOldPassword.Location = new Point(65, 124);
+            txtOldPassword.Location = new Point(65, 88);
             txtOldPassword.MaxLength = 50;
             txtOldPassword.MouseState = MaterialSkin.MouseState.OUT;
             txtOldPassword.Multiline = false;
@@ -60,7 +61,7 @@
             txtNewPassword.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtNewPassword.Hint = "New Password";
             txtNewPassword.LeadingIcon = null;
-            txtNewPassword.Location = new Point(65, 202);
+            txtNewPassword.Location = new Point(65, 166);
             txtNewPassword.MaxLength = 50;
             txtNewPassword.MouseState = MaterialSkin.MouseState.OUT;
             txtNewPassword.Multiline = false;
@@ -78,7 +79,7 @@
             txtConfirmNewPassword.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtConfirmNewPassword.Hint = "Confirm New Password";
             txtConfirmNewPassword.LeadingIcon = null;
-            txtConfirmNewPassword.Location = new Point(65, 280);
+            txtConfirmNewPassword.Location = new Point(65, 244);
             txtConfirmNewPassword.MaxLength = 50;
             txtConfirmNewPassword.MouseState = MaterialSkin.MouseState.OUT;
             txtConfirmNewPassword.Multiline = false;
@@ -95,7 +96,7 @@
             btnSave.Depth = 0;
             btnSave.HighEmphasis = true;
             btnSave.Icon = null;
-            btnSave.Location = new Point(170, 362);
+            btnSave.Location = new Point(170, 326);
             btnSave.Margin = new Padding(4, 6, 4, 6);
             btnSave.MouseState = MaterialSkin.MouseState.HOVER;
             btnSave.Name = "btnSave";
@@ -118,8 +119,12 @@
             Controls.Add(txtConfirmNewPassword);
             Controls.Add(txtNewPassword);
             Controls.Add(txtOldPassword);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ChangePasswordView";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
+            Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+            Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Change Password";
             ResumeLayout(false);
             PerformLayout();

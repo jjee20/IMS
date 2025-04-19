@@ -174,7 +174,7 @@ namespace PresentationLayer.Presenters
         private void LoadProjectExpenseDistribution(int year)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
-            var projectExpenses = _unitOfWork.Project.Value.GetAll(includeProperties: "ProjectLines")
+            var projectExpenses = _unitOfWork.Project.Value.GetAll(c => c.StartDate.Value.Year == year, includeProperties: "ProjectLines")
             .GroupBy(c => c.ProjectName)
             .Select(g => new ProjectExpenseDistributionViewModel
             {

@@ -39,7 +39,6 @@ namespace RavenTech_ERP
             btnStockInLog.Click += delegate { StockInLogEvent?.Invoke(this, EventArgs.Empty); };
             btnProductType.Click += delegate { ProductTypeEvent?.Invoke(this, EventArgs.Empty); };
             btnProduct.Click += delegate { ProductEvent?.Invoke(this, EventArgs.Empty); };
-            btnProject.Click += delegate { ProjectEvent?.Invoke(this, EventArgs.Empty); };
             btnPurchaseOrder.Click += delegate { PurchaseOrderEvent?.Invoke(this, EventArgs.Empty); };
             btnPurchaseType.Click += delegate { PurchaseTypeEvent?.Invoke(this, EventArgs.Empty); };
             btnSalesOrder.Click += delegate { SalesOrderEvent?.Invoke(this, EventArgs.Empty); };
@@ -55,7 +54,7 @@ namespace RavenTech_ERP
             btnProfile.Click += delegate { ProfileEvent?.Invoke(this, EventArgs.Empty); };
             btnRegisterAccount.Click += delegate { RegisterAccountEvent?.Invoke(this, EventArgs.Empty); };
             btnDashboard.Click += delegate { DashboardEvent?.Invoke(this, EventArgs.Empty); };
-            btnPayroll.Click += delegate { PayrollEvent?.Invoke(this, EventArgs.Empty); };
+            btnHoliday.Click += delegate { HolidayEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -109,6 +108,7 @@ namespace RavenTech_ERP
         public event EventHandler VendorTypeEvent;
         public event EventHandler VendorEvent;
         public event EventHandler WarehouseEvent;
+        public event EventHandler HolidayEvent;
 
         public void ShowForm()
         {

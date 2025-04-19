@@ -2,6 +2,7 @@
 using DomainLayer.Models.Inventory;
 using MaterialSkin.Controls;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Account
 {
-    public partial class EditAccountInformationView : MaterialForm
+    public partial class EditAccountInformationView : SfForm
     {
         private readonly IUnitOfWork _unitOfWork;
         private ApplicationUser _applicationUser;

@@ -1,25 +1,22 @@
-﻿using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.Models.Inventory;
-
-using DomainLayer.ViewModels.Inventory;
-using DomainLayer.ViewModels.PayrollViewModels;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer;
-using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
-using PresentationLayer.Views.IViews;
-using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.IViews.Accounting.Payroll;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Presenters.Accounting.Payroll
+namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
     public class ShiftPresenter
     {
         public IShiftView _view;
         private IUnitOfWork _unitOfWork;
         private IEnumerable<ShiftViewModel> ShiftList;
-        public ShiftPresenter(IShiftView view, IUnitOfWork unitOfWork)
-        {
+        public ShiftPresenter(IShiftView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
@@ -27,13 +24,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _unitOfWork = unitOfWork;
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
@@ -44,119 +40,85 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private async void Save(object? sender, EventArgs e)
-        {
-            var model = await _unitOfWork.Shift.Value.GetAsync(c => c.ShiftId == _view.ShiftId, tracked: true);
-
-            if (model == null) model = new Shift();
-            else _unitOfWork.Shift.Value.Detach(model);
-
-            model.ShiftId = _view.ShiftId;
-            model.ShiftName = _view.ShiftName;
-            model.StartTime = _view.StartTime;
-            model.EndTime = _view.EndTime;
-            model.OvertimeRate = _view.OvertimeRate;
-            model.RegularHours = _view.RegularHours;
-
-            try
+            using (var form = new UpsertShiftView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Shift";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-
-                    _unitOfWork.Shift.Value.Update(model);
-                    _view.Message = "Shift edited successfully";
+                    LoadAllShiftList();
                 }
-                else //Add new model
-                {
-                    var Entity = _unitOfWork.Shift.Value.Get(c => c.ShiftName == _view.ShiftName);
-                    if (Entity != null)
-                    {
-                        _view.Message = "Shift is already added.";
-                        return;
-                    }
-                    await _unitOfWork.Shift.Value.AddAsync(model);
-                    _view.Message = "Shift added successfully";
-                }
-                await _unitOfWork.SaveAsync();
-                _view.IsSuccessful = true;
-                _view.ShowMessage(_view.Message);
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllShiftList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ShiftViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.Shift.Value.Get(c => c.ShiftId == row.ShiftId);
+                using (var form = new UpsertShiftView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Shift";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllShiftList();
+                    }
+                }
             }
-
-            var shift = (ShiftViewModel)_view.DataGrid.SelectedItem;
-            var entity = _unitOfWork.Shift.Value.Get(c => c.ShiftId == shift.ShiftId);
-            _view.ShiftId = entity.ShiftId;
-            _view.ShiftName = entity.ShiftName;
-            _view.StartTime = entity.StartTime;
-            _view.EndTime = entity.EndTime;
-            _view.OvertimeRate = entity.OvertimeRate;
-            _view.RegularHours = entity.RegularHours;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ShiftViewModel row)
+            {
+                var entity = _unitOfWork.Shift.Value.Get(c => c.ShiftId == row.ShiftId);
+                if (entity != null)
+                {
+                    _unitOfWork.Shift.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Shift deleted successfully.");
+
+                    LoadAllShiftList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
                 if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select shift(s) to delete.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var selectedShifts = _view.DataGrid.SelectedItems.Cast<ShiftViewModel>().ToList();
-                var ids = selectedShifts.Select(s => s.ShiftId).ToList();
+                var selected = _view.DataGrid.SelectedItems.Cast<ShiftViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.ShiftId).ToList();
 
                 var entities = _unitOfWork.Shift.Value
                     .GetAll()
-                    .Where(s => ids.Contains(s.ShiftId))
+                    .Where(b => ids.Contains(b.ShiftId))
                     .ToList();
 
                 if (!entities.Any())
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Selected shift(s) could not be found.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Selected records could not be found.");
                     return;
                 }
 
                 _unitOfWork.Shift.Value.RemoveRange(entities);
                 _unitOfWork.Save();
 
-                _view.IsSuccessful = true;
-                _view.Message = $"{entities.Count} shift(s) deleted successfully.";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllShiftList();
             }
             catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = $"An error occurred while deleting: {ex.Message}";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
 
@@ -170,22 +132,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllShiftList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllShiftList();
-            _view.ShiftId = 0;
-            _view.ShiftName = "";
-        }
-
+        
         private void LoadAllShiftList(bool emptyValue = false)
         {
             ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.Value.GetAll());
 
-            if (!emptyValue) ShiftList = ShiftList.Where(c => c.ShiftName.Contains(_view.SearchValue));
+            if (!emptyValue) ShiftList = ShiftList.Where(c => c.ShiftName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetShiftListBindingSource(ShiftList);
         }
     }

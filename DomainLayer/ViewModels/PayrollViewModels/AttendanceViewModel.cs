@@ -21,5 +21,6 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public double DaysAbsent { get; set; }
         [Display(Name = "Days OnLeave")]
         public int DaysOnLeave { get; set; }
+        public byte[] Edit { get; set; }
     }
 }

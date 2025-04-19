@@ -20,5 +20,7 @@ namespace DomainLayer.ViewModels.Inventory
         [Display(Name = "Contact Person")]
         public string ContactPerson { get; set; }
         public string Address { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

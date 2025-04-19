@@ -27,5 +27,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Is Recurring?")]
 
         public string IsRecurring { get; set; } 
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

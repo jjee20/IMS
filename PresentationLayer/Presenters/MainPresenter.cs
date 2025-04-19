@@ -6,12 +6,15 @@ using PresentationLayer.Views.IViews.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Helpers;
+using RavenTech_ERP.Presenters.Accounting.Payroll;
 using RavenTech_ERP.Presenters.Inventory;
 using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
+using RavenTech_ERP.Views.IViews.Accounting;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls.Account;
+using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
 using RevenTech_ERP.Presenters.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
@@ -39,6 +42,8 @@ namespace RavenTech_ERP.Presenters
             _mainForm.BenefitEvent += BenefitEvent;
             _mainForm.BonusEvent += BonusEvent;
             _mainForm.ContributionEvent += ContributionEvent;
+            _mainForm.CustomerEvent += CustomerEvent;
+            _mainForm.CustomerTypeEvent += CustomerTypeEvent;
             _mainForm.DeductionEvent += DeductionEvent;
             _mainForm.JobPositionEvent += JobPositionEvent;
             _mainForm.LeaveEvent += LeaveEvent;
@@ -70,6 +75,8 @@ namespace RavenTech_ERP.Presenters
             _mainForm.ProfileEvent += ProfileEvent;
             _mainForm.RegisterAccountEvent += RegisterAccountEvent;
             _mainForm.PayrollEvent += PayrollEvent;
+            _mainForm.HolidayEvent += HolidayEvent;
+            _mainForm.EmployeeEvent += EmployeeEvent;
 
             if(!(Settings.Default.Department == Departments.Payroll.ToString()))
             {
@@ -81,6 +88,30 @@ namespace RavenTech_ERP.Presenters
                 _mainForm.ribbonControl.SelectedTab = _mainForm.PayrollTab;
                 AttendanceEvent(this, EventArgs.Empty);
             }
+        }
+
+        private void EmployeeEvent(object? sender, EventArgs e)
+        {
+            IEmployeeView _view = ChildManager<EmployeeView>.GetChildInstance((MainForm)_mainForm);
+            new EmployeePresenter(_view, _unitOfWork);
+        }
+
+        private void HolidayEvent(object? sender, EventArgs e)
+        {
+            IHolidayView _view = ChildManager<HolidayView>.GetChildInstance((MainForm)_mainForm);
+            new HolidayPresenter(_view, _unitOfWork);
+        }
+
+        private void CustomerTypeEvent(object? sender, EventArgs e)
+        {
+            ICustomerView _view = ChildManager<CustomerView>.GetChildInstance((MainForm)_mainForm);
+            new CustomerPresenter(_view, _unitOfWork);
+        }
+
+        private void CustomerEvent(object? sender, EventArgs e)
+        {
+            ICustomerTypeView _view = ChildManager<CustomerTypeView>.GetChildInstance((MainForm)_mainForm);
+            new CustomerTypePresenter(_view, _unitOfWork);
         }
 
         private void PayrollEvent(object? sender, EventArgs e)
@@ -181,7 +212,7 @@ namespace RavenTech_ERP.Presenters
 
         private void PurchaseOrderEvent(object? sender, EventArgs e)
         {
-            IPurchaseOrderView _view = ChildManager<PurchaseOrderView>.GetChildInstance((MainForm)_mainForm);
+            IPurchaseOrderViewOld _view = ChildManager<PurchaseOrderViewOld>.GetChildInstance((MainForm)_mainForm);
             new PurchaseOrderPresenter(_view, _unitOfWork);
         }
 
@@ -247,7 +278,7 @@ namespace RavenTech_ERP.Presenters
 
         private void ProjectEvent(object? sender, EventArgs e)
         {
-            IProjectView _view = ChildManager<ProjectManagementView>.GetChildInstance((MainForm)_mainForm);
+            IProjectView _view = ChildManager<ProjectView>.GetChildInstance((MainForm)_mainForm);
             new ProjectPresenter(_view, _unitOfWork);
         }
 
