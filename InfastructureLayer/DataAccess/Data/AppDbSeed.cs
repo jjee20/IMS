@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -82,6 +83,32 @@ namespace InfastructureLayer.DataAccess.Data
             };
             payroll.PasswordHash = hasher.HashPassword(payroll, "pass@123");
             modelBuilder.Entity<ApplicationUser>().HasData(payroll);
+        }
+
+        public static void SeedHolidays(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Holiday>().HasData(
+                new Holiday { HolidayId = 1, HolidayName = "New Year's Day", EffectiveDate = new DateTime(2025, 1, 1), HolidayType = HolidayType.RegularHoliday, Description = "Start of the New Year" },
+                new Holiday { HolidayId = 2, HolidayName = "Maundy Thursday", EffectiveDate = new DateTime(2025, 4, 17), HolidayType = HolidayType.RegularHoliday, Description = "Holy Week" },
+                new Holiday { HolidayId = 3, HolidayName = "Good Friday", EffectiveDate = new DateTime(2025, 4, 18), HolidayType = HolidayType.RegularHoliday, Description = "Holy Week" },
+                new Holiday { HolidayId = 4, HolidayName = "Araw ng Kagitingan", EffectiveDate = new DateTime(2025, 4, 9), HolidayType = HolidayType.RegularHoliday, Description = "Day of Valor" },
+                new Holiday { HolidayId = 5, HolidayName = "Labor Day", EffectiveDate = new DateTime(2025, 5, 1), HolidayType = HolidayType.RegularHoliday, Description = "Workers' holiday" },
+                new Holiday { HolidayId = 6, HolidayName = "Independence Day", EffectiveDate = new DateTime(2025, 6, 12), HolidayType = HolidayType.RegularHoliday, Description = "Philippine independence" },
+                new Holiday { HolidayId = 7, HolidayName = "National Heroes Day", EffectiveDate = new DateTime(2025, 8, 25), HolidayType = HolidayType.RegularHoliday, Description = "Last Monday of August" },
+                new Holiday { HolidayId = 8, HolidayName = "Bonifacio Day", EffectiveDate = new DateTime(2025, 11, 30), HolidayType = HolidayType.RegularHoliday, Description = "Birth of Andres Bonifacio" },
+                new Holiday { HolidayId = 9, HolidayName = "Christmas Day", EffectiveDate = new DateTime(2025, 12, 25), HolidayType = HolidayType.RegularHoliday, Description = "Christmas celebration" },
+                new Holiday { HolidayId = 10, HolidayName = "Rizal Day", EffectiveDate = new DateTime(2025, 12, 30), HolidayType = HolidayType.RegularHoliday, Description = "Jose Rizal's death anniversary" },
+
+                new Holiday { HolidayId = 11, HolidayName = "Chinese New Year", EffectiveDate = new DateTime(2025, 1, 29), HolidayType = HolidayType.SpecialNonWorkingHoliday, Description = "Chinese lunar new year" },
+                new Holiday { HolidayId = 12, HolidayName = "EDSA People Power Revolution", EffectiveDate = new DateTime(2025, 2, 25), HolidayType = HolidayType.SpecialNonWorkingHoliday, Description = "1986 EDSA revolution anniversary" },
+                new Holiday { HolidayId = 13, HolidayName = "Black Saturday", EffectiveDate = new DateTime(2025, 4, 19), HolidayType = HolidayType.SpecialNonWorkingHoliday, Description = "Holy Week" },
+                new Holiday { HolidayId = 14, HolidayName = "Ninoy Aquino Day", EffectiveDate = new DateTime(2025, 8, 21), HolidayType = HolidayType.SpecialNonWorkingHoliday, Description = "In honor of Ninoy Aquino" },
+                new Holiday { HolidayId = 15, HolidayName = "All Saints’ Day", EffectiveDate = new DateTime(2025, 11, 1), HolidayType = HolidayType.SpecialNonWorkingHoliday, Description = "Remembrance of saints" },
+                new Holiday { HolidayId = 16, HolidayName = "All Souls’ Day", EffectiveDate = new DateTime(2025, 11, 2), HolidayType = HolidayType.SpecialWorkingHoliday, Description = "Remembrance of departed" },
+                new Holiday { HolidayId = 17, HolidayName = "Feast of the Immaculate Conception", EffectiveDate = new DateTime(2025, 12, 8), HolidayType = HolidayType.SpecialNonWorkingHoliday, Description = "Catholic feast" },
+                new Holiday { HolidayId = 18, HolidayName = "Christmas Eve", EffectiveDate = new DateTime(2025, 12, 24), HolidayType = HolidayType.SpecialWorkingHoliday, Description = "Night before Christmas" },
+                new Holiday { HolidayId = 19, HolidayName = "New Year's Eve", EffectiveDate = new DateTime(2025, 12, 31), HolidayType = HolidayType.SpecialWorkingHoliday, Description = "End of year celebration" }
+            );
         }
     }
 }

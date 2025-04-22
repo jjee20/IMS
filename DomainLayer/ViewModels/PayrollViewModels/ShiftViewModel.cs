@@ -17,9 +17,9 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public TimeSpan StartTime { get; set; }
         [Display(Name = "End Time")]
         public TimeSpan EndTime { get; set; }
-        [Display(Name = "Overtime Rate (%)")]
-        public double OvertimeRate { get; set; }
         [Display(Name = "Regular Hours")]
         public double RegularHours { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

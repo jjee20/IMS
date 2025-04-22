@@ -1,9 +1,16 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -11,7 +18,7 @@ namespace PresentationLayer.Presenters
     {
         public IPurchaseTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private IEnumerable<PurchaseType> PurchaseTypeList;
+        private IEnumerable<PurchaseTypeViewModel> PurchaseTypeList;
         public PurchaseTypePresenter(IPurchaseTypeView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -20,114 +27,101 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
+
             //Load
 
             LoadAllPurchaseTypeList();
 
             //Source Binding
-
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private async void Save(object? sender, EventArgs e)
-        {
-            var model = await _unitOfWork.PurchaseType.Value.GetAsync(c => c.PurchaseTypeId == _view.PurchaseTypeId, tracked: true);
-            if (model == null) model = new PurchaseType();
-            else _unitOfWork.PurchaseType.Value.Detach(model);
-
-            model.PurchaseTypeId = _view.PurchaseTypeId;
-            model.PurchaseTypeName = _view.PurchaseTypeName;
-            model.Description = _view.Description;
-
-            try
+            using (var form = new UpsertPurchaseTypeView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Purchase Type";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.PurchaseType.Value.Update(model);
-                    _view.Message = "Purchase type edited successfully";
+                    LoadAllPurchaseTypeList();
                 }
-                else //Add new model
-                {
-                    await _unitOfWork.PurchaseType.Value.AddAsync(model);
-                    _view.Message = "Purchase type added successfully";
-                }
-                await _unitOfWork.SaveAsync();
-                _view.IsSuccessful = true;
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllPurchaseTypeList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is PurchaseTypeViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.PurchaseType.Value.Get(c => c.PurchaseTypeId == row.PurchaseTypeId);
+                using (var form = new UpsertPurchaseTypeView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Purchase Type";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllPurchaseTypeList();
+                    }
+                }
             }
-
-            var entity = (PurchaseType)_view.DataGrid.SelectedItem;
-            _view.PurchaseTypeId = entity.PurchaseTypeId;
-            _view.PurchaseTypeName = entity.PurchaseTypeName;
-            _view.Description = entity.Description;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is PurchaseTypeViewModel row)
+            {
+                var entity = _unitOfWork.PurchaseType.Value.Get(c => c.PurchaseTypeId == row.PurchaseTypeId);
+                if (entity != null)
+                {
+                    _unitOfWork.PurchaseType.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Purchase Type deleted successfully.");
+
+                    LoadAllPurchaseTypeList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
                 if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select purchase type(s) to delete.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var selectedItems = _view.DataGrid.SelectedItems.Cast<PurchaseType>().ToList();
+                var selected = _view.DataGrid.SelectedItems.Cast<PurchaseTypeViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.PurchaseTypeId).ToList();
 
-                if (!selectedItems.Any())
+                var entities = _unitOfWork.PurchaseType.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.PurchaseTypeId))
+                    .ToList();
+
+                if (!entities.Any())
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "No valid purchase types selected.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Selected records could not be found.");
                     return;
                 }
 
-                _unitOfWork.PurchaseType.Value.RemoveRange(selectedItems);
+                _unitOfWork.PurchaseType.Value.RemoveRange(entities);
                 _unitOfWork.Save();
 
-                _view.IsSuccessful = true;
-                _view.Message = $"{selectedItems.Count} purchase type(s) deleted successfully.";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllPurchaseTypeList();
             }
             catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = $"An error occurred while deleting: {ex.Message}";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
 
@@ -141,23 +135,12 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllPurchaseTypeList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllPurchaseTypeList();
-            _view.PurchaseTypeId = 0;
-            _view.PurchaseTypeName = "";
-            _view.Description = "";
-        }
         
         private void LoadAllPurchaseTypeList(bool emptyValue = false)
         {
-            PurchaseTypeList = _unitOfWork.PurchaseType.Value.GetAll();
+            PurchaseTypeList = Program.Mapper.Map<IEnumerable<PurchaseTypeViewModel>>(_unitOfWork.PurchaseType.Value.GetAll());
 
-            if (!emptyValue) PurchaseTypeList = PurchaseTypeList.Where(c => c.PurchaseTypeName.Contains(_view.SearchValue));
+            if (!emptyValue) PurchaseTypeList = PurchaseTypeList.Where(c => c.PurchaseTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetPurchaseTypeListBindingSource(PurchaseTypeList);
         }
     }

@@ -1,22 +1,22 @@
-﻿using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels.Inventory;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
-using PresentationLayer.Presenters.Commons;
+using PresentationLayer;
 using PresentationLayer.Reports;
-using PresentationLayer.Views.IViews;
-using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.IViews.Accounting.Payroll;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Presenters.Accounting.Payroll
+namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
     public class TaxPresenter
     {
         public ITaxView _view;
         private IUnitOfWork _unitOfWork;
-        private IEnumerable<Tax> TaxList;
-        public TaxPresenter(ITaxView view, IUnitOfWork unitOfWork)
-        {
+        private IEnumerable<TaxViewModel> TaxList;
+        public TaxPresenter(ITaxView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
@@ -24,13 +24,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _unitOfWork = unitOfWork;
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
@@ -41,101 +40,85 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private async void Save(object? sender, EventArgs e)
-        {
-            var model = await _unitOfWork.Tax.Value.GetAsync(c => c.TaxId == _view.TaxId, tracked: true);
-
-            if (model == null) model = new Tax();
-            else _unitOfWork.Tax.Value.Detach(model);
-
-            model.TaxId = _view.TaxId;
-            model.MinimumSalary = _view.MinimumSalary;
-            model.MaximumSalary = _view.MaximumSalary;
-            model.TaxRate = _view.TaxRate;
-
-            try
+            using (var form = new UpsertTaxView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Tax";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.Tax.Value.Update(model);
-                    _view.Message = "Tax edited successfully";
+                    LoadAllTaxList();
                 }
-                else //Add new model
-                {
-                    await _unitOfWork.Tax.Value.AddAsync(model);
-                    _view.Message = "Tax added successfully";
-                }
-                await _unitOfWork.SaveAsync();
-                _view.IsSuccessful = true;
-                _view.ShowMessage(_view.Message);
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllTaxList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is TaxViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.Tax.Value.Get(c => c.TaxId == row.TaxId);
+                using (var form = new UpsertTaxView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Tax";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllTaxList();
+                    }
+                }
             }
-
-            var entity = (Tax)_view.DataGrid.SelectedItem;
-            _view.TaxId = entity.TaxId;
-            _view.MinimumSalary = entity.MinimumSalary;
-            _view.MaximumSalary = entity.MaximumSalary;
-            _view.TaxRate = entity.TaxRate;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is TaxViewModel row)
+            {
+                var entity = _unitOfWork.Tax.Value.Get(c => c.TaxId == row.TaxId);
+                if (entity != null)
+                {
+                    _unitOfWork.Tax.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Tax deleted successfully.");
+
+                    LoadAllTaxList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
                 if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select tax record(s) to delete.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var selectedTaxes = _view.DataGrid.SelectedItems.Cast<Tax>().ToList();
+                var selected = _view.DataGrid.SelectedItems.Cast<TaxViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.TaxId).ToList();
 
-                if (!selectedTaxes.Any())
+                var entities = _unitOfWork.Tax.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.TaxId))
+                    .ToList();
+
+                if (!entities.Any())
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "No valid tax records selected.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Selected records could not be found.");
                     return;
                 }
 
-                _unitOfWork.Tax.Value.RemoveRange(selectedTaxes);
+                _unitOfWork.Tax.Value.RemoveRange(entities);
                 _unitOfWork.Save();
 
-                _view.IsSuccessful = true;
-                _view.Message = $"{selectedTaxes.Count} tax record(s) deleted successfully.";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllTaxList();
             }
             catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = $"An error occurred while deleting: {ex.Message}";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
 
@@ -149,24 +132,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllTaxList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllTaxList();
-            _view.TaxId = 0;
-            _view.MinimumSalary = 0;
-            _view.MaximumSalary = 0;
-            _view.TaxRate = 0;
-        }
-
+        
         private void LoadAllTaxList(bool emptyValue = false)
         {
-            TaxList = _unitOfWork.Tax.Value.GetAll();
+            TaxList = Program.Mapper.Map<IEnumerable<TaxViewModel>>(_unitOfWork.Tax.Value.GetAll());
 
-            if(!emptyValue) TaxList = TaxList.Where(c => c.TaxRate.ToString().Contains(_view.SearchValue));
+            if (!emptyValue) TaxList = TaxList.Where(c => c.MinimumSalary.ToString().Contains(_view.SearchValue) || c.MaximumSalary.ToString().Contains(_view.SearchValue) || c.TaxRate.ToString().Contains(_view.SearchValue));
             _view.SetTaxListBindingSource(TaxList);
         }
     }

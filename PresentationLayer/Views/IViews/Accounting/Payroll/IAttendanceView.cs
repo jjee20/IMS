@@ -1,46 +1,21 @@
 ﻿using DomainLayer.ViewModels.PayrollViewModels;
-using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
-using System.ComponentModel.DataAnnotations;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
+namespace PresentationLayer.Views.UserControls
 {
-    public interface IAttendanceView : IMessageBase
+    public interface IAttendanceView
     {
         SfDataGrid DataGrid { get; }
-        SfDataGrid IndividualDataGrid { get; }
-        int AttendanceId { get; set; }
-        int EmployeeId { get; set; }
-        string EmployeeName { get; set; }
-        int EmployeeIdFromTextBox { get; set; }
-        int ProjectId { get; set; }
-        TimeSpan TimeIn { get; set; }
-        TimeSpan TimeOut { get; set; }
-        DateTime Date { get; set; }
-        bool IsPresent { get; set; }
-        bool IsHalfDay { get; set; }
-        double HoursWorked { get; set; }
-        bool IsEdit { get; set; }
-        bool IsIndividual { get; set; }
-        bool IsSuccessful { get; set; }
-        string Message { get; set; }
+        DateTime StartDate { get; }
+        DateTime EndDate { get; }
         string SearchValue { get; set; }
-        DateTime StartDate { get; set; }
-        DateTime EndDate { get; set; }
-        OpenFileDialog OpenFileDialog { get; }
 
-        event EventHandler AddNewEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler EditEvent;
+        event EventHandler AddEvent;
         event EventHandler PrintEvent;
-        event EventHandler SaveEvent;
         event EventHandler SearchEvent;
-        event EventHandler RefreshEvent;
-        event EventHandler ShowAttendanceEvent;
+        event CellClickEventHandler ShowAttendanceEvent;
+
         void SetAttendanceListBindingSource(IEnumerable<AttendanceViewModel> AttendanceList);
-        void SetIndividualAttendanceListBindingSource(IEnumerable<IndividualAttendanceViewModel> IndividualAttendanceList);
-        void SetEmployeeListBindingSource(BindingSource EmployeeList);
-        void SetProjectListBindingSource(BindingSource ProjectList);
-        void SetEmployeeItem(Employee employee);
     }
 }

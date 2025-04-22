@@ -11,6 +11,24 @@ namespace RavenTech_ERP.Helpers
 {
     public abstract class PayrollHelper
     {
+        public static double CalculateHolidayOvertimeHours(IEnumerable<Attendance> attendances, List<Holiday> holidays)
+        {
+            double overtimeHours = 0;
+
+            foreach (var attendance in attendances)
+            {
+                bool isHoliday = holidays.Any(h => h.EffectiveDate.Date == attendance.Date.Date);
+
+                if (isHoliday)
+                {
+                    double holidayRegularCap = 6.0; // 8AM–3PM = 7 hours
+                    if (attendance.HoursWorked > holidayRegularCap)
+                        overtimeHours += attendance.HoursWorked - holidayRegularCap;
+                }
+            }
+
+            return overtimeHours;
+        }
         public static double CalculateAllowances(Employee employee, DateTime startDate, DateTime endDate)
         {
             return employee.Allowances?
@@ -217,6 +235,11 @@ namespace RavenTech_ERP.Helpers
             }
 
             return payrollList.OrderBy(c => c.Employee).ToList();
+        }
+
+        public bool IsHoliday(DateTime date, IEnumerable<Holiday> holidays)
+        {
+            return holidays.Any(holiday => holiday.EffectiveDate.Date == date.Date);
         }
     }
 }

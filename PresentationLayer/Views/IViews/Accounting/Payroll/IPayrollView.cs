@@ -8,6 +8,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
 {
     public interface IPayrollView
     {
+        public bool IsSuccessful { get; set; }
         public SfDataGrid DataGrid { get; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -17,12 +18,9 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         public int ProjectId { get; }
         string Message { get; set; }
         event EventHandler PrintPayrollEvent;
-        event EventHandler PrintPayslipEvent;
-        event EventHandler SearchEvent; 
-        event EventHandler IncludeBenefitsEvent;
-        event EventHandler ProjectEvent;
-        event EventHandler AllEvent;
+        event EventHandler SearchEvent;
         event CellClickEventHandler TMonthEvent;
+        event CellClickEventHandler PrintPaySlipEvent;
         void SetPayrollListBindingSource(IEnumerable<PayrollViewModel> PayrollList);
         void SetProjectListBindingSource(BindingSource ProjectList);
     }

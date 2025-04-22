@@ -32,9 +32,10 @@ namespace InfastructureLayer.DataAccess.Data
         {
             base.OnModelCreating(builder);
 
-            //AppDbSeed.SeedRole(builder);
-            //AppDbSeed.SeedUserRoles(builder);
-            //AppDbSeed.SeedUsers(builder);
+            AppDbSeed.SeedRole(builder);
+            AppDbSeed.SeedUserRoles(builder);
+            AppDbSeed.SeedUsers(builder);
+            AppDbSeed.SeedHolidays(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
@@ -111,6 +112,7 @@ namespace InfastructureLayer.DataAccess.Data
         //public DbSet<Account> AccountingAccounts { get; set; }
         //public DbSet<LedgerEntry> LedgerEntries { get; set; }
         #region Payroll
+        public DbSet<ThirteenthMonth> ThirteenthMonths { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<JobPosition> JobPositions { get; set; }
@@ -127,6 +129,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<ProjectLine> ProjectLines { get; set; }
         public DbSet<Allowance> Allowances { get; set; }
         public DbSet<Bonus> Bonuses { get; set; }
+        public DbSet<Holiday> Holidays { get; set; }
         public DbSet<DomainLayer.Models.Accounting.Payroll.EmployeeContribution> EmployeeContributions { get; set; }
         #endregion
         #endregion

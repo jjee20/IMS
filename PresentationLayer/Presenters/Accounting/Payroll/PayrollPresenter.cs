@@ -1,23 +1,13 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
-using PresentationLayer;
 using PresentationLayer.Reports;
 using RavenTech_ERP.Helpers;
 using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.IRepositories;
-using ServiceLayer.Services.IRepositories.IInventory;
-using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Events;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -39,82 +29,43 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             ProjectBindingSource = new BindingSource();
             PayrollList = new List<PayrollViewModel>();
             _view.PrintPayrollEvent += PrintPayroll;
-            _view.PrintPayslipEvent += PrintPayslip;
             _view.SearchEvent += Search;
-            _view.IncludeBenefitsEvent += OnIncludeBenefits;
-            _view.ProjectEvent += SelectProject;
-            _view.AllEvent += SelectAll;
             _view.TMonthEvent += TMonthPayCalculation;
+            _view.PrintPaySlipEvent += PrintPayslip;
 
             //Load
 
             LoadAllProjectList();
-            LoadAllPayrollList();
-
             _view.SetProjectListBindingSource(ProjectBindingSource);
+            LoadAllPayrollList(_view.StartDate.Date, _view.EndDate.Date);
         }
 
-        private void TMonthPayCalculation(object? sender, CellClickEventArgs e)
+        private void PrintPayslip(object sender, CellClickEventArgs e)
         {
-            if (e.DataColumn.GridColumn.MappingName == "TMonth")
-            {
-                var rowData = e.DataRow.RowData as PayrollViewModel;
+            var payslip = e.DataRow.RowData as PayrollViewModel;
 
-                if (rowData != null)
+            if (payslip != null)
+            {
+                try
                 {
-                    using (var tmonth = new _13thMonthView(rowData, _unitOfWork))
+                    string reportFileName = "PayslipReport.rdlc";
+                    string reportDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "Accounting", "Payroll");
+                    string reportPath = Path.Combine(reportDirectory, reportFileName);
+
+                    var payslipList = new[]
                     {
-                        tmonth.ShowDialog();
+                         payslip
+                        };
+
+                    if (!File.Exists(reportPath))
+                    {
+                        _view.Message = "Payslip report template not found.";
+                        return;
                     }
-                }
-            }
-        }
 
-        private void SelectAll(object? sender, EventArgs e)
-        {
-            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
-            _view.SetPayrollListBindingSource(PayrollList);
-        }
-
-        private void SelectProject(object? sender, EventArgs e)
-        {
-            if (!_view.All)
-            {
-                PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
-                _view.SetPayrollListBindingSource(PayrollList);
-            }
-
-        }
-
-        private void OnIncludeBenefits(object? sender, EventArgs e)
-        {
-            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date);
-            _view.SetPayrollListBindingSource(PayrollList);
-        }
-
-        private void PrintPayslip(object? sender, EventArgs e)
-        {
-            try
-            {
-                string reportFileName = "PayslipReport.rdlc";
-                string reportDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
-                string reportPath = Path.Combine(reportDirectory, reportFileName);
-
-                var payslip = (PayrollViewModel)_view.DataGrid.SelectedItem;
-                var payslipList = new[]
-                {
-                    payslip
-                };
-
-                if (!File.Exists(reportPath))
-                {
-                    _view.Message = "Payslip report template not found.";
-                    return;
-                }
-
-                var localReport = new LocalReport();
-                var reportDataSource = new ReportDataSource("Payslip", payslipList);
-                var parameters = new List<ReportParameter>
+                    var localReport = new LocalReport();
+                    var reportDataSource = new ReportDataSource("Payslip", payslipList);
+                    var parameters = new List<ReportParameter>
                 {
                     new ReportParameter("PayrollPeriod", $"Payslip Period: {_view.StartDate.ToShortDateString()} to {_view.EndDate.ToShortDateString()}"),
                     new ReportParameter("Employee", payslip.Employee),
@@ -135,15 +86,100 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     new ReportParameter("TotalDeduction", payslip.TotalDeduction.ToString()),
                     new ReportParameter("NetPay", payslip.NetPay.ToString()),
                 };
-                var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
-                reportView.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                _view.Message = $"An error occurred while generating the report: {ex.Message}";
+                    var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters);
+                    reportView.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    _view.Message = $"An error occurred while generating the report: {ex.Message}";
+                }
             }
         }
 
+        private void TMonthPayCalculation(object? sender, CellClickEventArgs e)
+        {
+            var rowData = e.DataRow.RowData as PayrollViewModel;
+            var employeeName = rowData.Employee.Split(',');
+            var employee = _unitOfWork.Employee.Value.Get(c => c.LastName == employeeName[0].Trim() && c.FirstName == employeeName[1].Trim());
+            if (rowData != null)
+            {
+                using (var tmonth = new _Upsert13thMonthView(rowData, _unitOfWork, employee))
+                {
+                    tmonth.ShowDialog();
+                }
+            }
+        }
+
+        private void LoadAllPayrollList(DateTime startDate, DateTime endDate, int? projectId = 0)
+        {
+            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
+            var contributions = _unitOfWork.Contribution.Value.GetAll();
+            var project = _unitOfWork.Project.Value.Get(c => c.ProjectId == projectId);
+
+            if (!_view.All && projectId.HasValue)
+            {
+                employees = employees.Where(c => c.Attendances.Any(a => a.ProjectId == projectId));
+                ProjectName = $"Project: {project.ProjectName ?? ""}";
+            }
+            else
+            {
+                ProjectName = "Project: All";
+            }
+
+            foreach (var employee in employees.OrderBy(c => c.LastName))
+            {
+                int totalDays = PayrollHelper.TotalDays(employee.Attendances, startDate, endDate);
+                var employeeAttendances = employee.Attendances?.Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date) ?? Enumerable.Empty<Attendance>();
+                var employeeContributions = employee.Contribution;
+
+                var approvedLeaves = employee.Leaves.Where(a => a.LeaveType != LeaveType.UnpaidLeave && a.Status == Status.Approved);
+                double totalPresentWholeDays = employeeAttendances.Count(a => a.IsPresent && !a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves));
+                double totalPresentHalfDays = employeeAttendances.Count(a => a.IsPresent && a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
+                double totalPresentDays = totalPresentWholeDays + totalPresentHalfDays;
+                double regularHours = totalDays * (employee.Shift?.RegularHours ?? 0);
+                double hourlyRate = employee.BasicSalary / (totalDays * (employee.Shift?.RegularHours ?? 8));
+                double regularPay = totalDays * employee.BasicSalary;
+                double overtimeHours = employeeAttendances.Sum(a => Math.Max(0, employee.Shift?.RegularHours > a.HoursWorked ? 0 : a.HoursWorked - (employee.Shift?.RegularHours ?? 8)));
+                double overtimePay = overtimeHours * (employee.BasicSalary / employee.Shift?.RegularHours ?? 0);
+
+                double allowancePay = PayrollHelper.CalculateAllowances(employee, startDate, endDate);
+                double bonusPay = PayrollHelper.CalculateBonuses(employee, startDate, endDate);
+                double deductions = PayrollHelper.CalculateDeductions(employee, startDate, endDate);
+
+                double absentDeductions = PayrollHelper.CalculateAbsentDeductions(totalDays, totalPresentDays, employee.BasicSalary);
+                double lateDeductions = PayrollHelper.CalculateLateDeductions(employee, employeeAttendances, hourlyRate);
+                double earlyOutDeductions = PayrollHelper.CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate);
+
+                double monthlySalary = employee.BasicSalary * PayrollHelper.NonSundays(employee.Attendances, startDate);
+                double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? (employeeContributions != null ? employeeContributions.SSS : 0) + (employeeContributions != null ? employeeContributions.SSSWISP : 0) : 0 : 0;
+                double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? employeeContributions != null ? employeeContributions.PagIbig : 0 : 0 : 0;
+                double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? employeeContributions != null ? employeeContributions.PhilHealth : 0 : 0 : 0;
+                //double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.SSS, monthlySalary) / 2 : 0 : 0;
+                //double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PagIbig, monthlySalary) / 2 : 0 : 0;
+                //double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PhilHealth, monthlySalary) / 2 : 0 : 0;
+
+                double benefitPay = _view.IncludeBenefits ? PayrollHelper.CalcuLateBenefits(employee) : 0;
+
+                PayrollList.Add(new PayrollViewModel
+                {
+                    Employee = $"{employee.LastName}, {employee.FirstName}",
+                    DailyRate = employee.BasicSalary,
+                    DaysWorked = totalPresentDays,
+                    BasicSalary = Math.Round(regularPay, 0),
+                    OvertimePay = Math.Round(overtimePay, 0),
+                    Allowances = Math.Round(allowancePay, 0),
+                    Benefits = Math.Round(benefitPay, 0),
+                    Bonuses = Math.Round(bonusPay, 0),
+                    Deductions = Math.Round(deductions, 0),
+                    Absent = Math.Round(absentDeductions, 0),
+                    LateAndEarly = Math.Round(lateDeductions + earlyOutDeductions, 0),
+                    SSSContribution = Math.Round(sssDeduction, 0),
+                    PagibigContribution = Math.Round(pagIbigDeduction, 0),
+                    PhilHealthContribution = Math.Round(philHealthDeduction, 0),
+                });
+            }
+            _view.SetPayrollListBindingSource(PayrollList.OrderBy(c => c.Employee).ToList());
+        }
         private void Search(object? sender, EventArgs e)
         {
             try
@@ -152,12 +188,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 if (_view.StartDate.Date > _view.EndDate.Date)
                 {
                     _view.Message = "Start date must be earlier than or equal to the end date. Result not found.";
+                    _view.IsSuccessful = false;
                     return;
                 }
 
-                // Perform payroll calculation
-                PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date);
-                _view.SetPayrollListBindingSource(PayrollList);
+                LoadAllPayrollList(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
 
             }
             catch (Exception ex)
@@ -168,6 +203,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void PrintPayroll(object? sender, EventArgs e)
         {
+
             try
             {
                 string reportFileName = "PayrollReport.rdlc";
@@ -192,99 +228,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 using (var reportView = new ReportView(reportPath, reportDataSource, localReport, parameters))
                 {
                     reportView.ShowDialog();
-                } 
+                }
             }
             catch (Exception ex)
             {
                 _view.Message = $"An error occurred while generating the report: {ex.Message}";
             }
-        }
-
-        private void LoadAllPayrollList()
-        {
-            PayrollList = CalculatePayroll(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
-            _view.SetPayrollListBindingSource(PayrollList);
-        }
-
-        public List<PayrollViewModel> CalculatePayroll(DateTime startDate, DateTime endDate, int? projectId = 0)
-        {
-            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
-            var contributions = _unitOfWork.Contribution.Value.GetAll();
-            var project = _unitOfWork.Project.Value.Get(c => c.ProjectId == projectId);
-            var projectName = "";
-            if(project != null)
-                projectName = $"Project: {project.ProjectName}";
-            else
-            {
-                projectName = "Project: All";
-            }
-
-            if (!_view.All)
-            {
-                employees = employees.Where(c => c.Attendances.Any(c => c.ProjectId == projectId));
-                ProjectName = projectName;
-            }
-            else
-            {
-                ProjectName = projectName;
-            }
-
-            var payrollList = new List<PayrollViewModel>();
-            
-            foreach (var employee in employees.OrderBy(c => c.LastName))
-            {
-                int totalDays = PayrollHelper.TotalDays(employee.Attendances, startDate, endDate);
-                var employeeAttendances = employee.Attendances?.Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date) ?? Enumerable.Empty<Attendance>();
-                var employeeContributions = employee.Contribution;
-
-                var approvedLeaves = employee.Leaves.Where(a => a.LeaveType != LeaveType.UnpaidLeave && a.Status == Status.Approved);
-                double totalPresentWholeDays = employeeAttendances.Count(a => a.IsPresent && !a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves));
-                double totalPresentHalfDays = employeeAttendances.Count(a => a.IsPresent && a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
-                double totalPresentDays = totalPresentWholeDays + totalPresentHalfDays;
-                double regularHours = totalDays * (employee.Shift?.RegularHours ?? 0);
-                double hourlyRate = employee.BasicSalary / (totalDays * (employee.Shift?.RegularHours ?? 8));
-                double regularPay = totalDays * employee.BasicSalary;
-                double overtimeHours = employeeAttendances.Sum(a => Math.Max(0, employee.Shift?.RegularHours > a.HoursWorked ? 0 : a.HoursWorked - (employee.Shift?.RegularHours ?? 8)));
-                double overtimePay = overtimeHours * (employee.BasicSalary/employee.Shift?.RegularHours ?? 0);
-
-                double allowancePay = PayrollHelper.CalculateAllowances(employee, startDate, endDate);
-                double bonusPay = PayrollHelper.CalculateBonuses(employee, startDate, endDate);
-                double deductions = PayrollHelper.CalculateDeductions(employee, startDate, endDate);
-
-                double absentDeductions = PayrollHelper.CalculateAbsentDeductions(totalDays, totalPresentDays, employee.BasicSalary);
-                double lateDeductions = PayrollHelper.CalculateLateDeductions(employee, employeeAttendances, hourlyRate);
-                double earlyOutDeductions = PayrollHelper.CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate);
-
-                double monthlySalary = employee.BasicSalary * PayrollHelper.NonSundays(employee.Attendances, startDate);
-                double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? employeeContributions.SSS + employeeContributions.SSSWISP : 0 : 0;
-                double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? employeeContributions.PagIbig : 0 : 0;
-                double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? employeeContributions.PhilHealth : 0 : 0; 
-                //double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.SSS, monthlySalary) / 2 : 0 : 0;
-                //double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PagIbig, monthlySalary) / 2 : 0 : 0;
-                //double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PhilHealth, monthlySalary) / 2 : 0 : 0;
-
-                double benefitPay = _view.IncludeBenefits ? PayrollHelper.CalcuLateBenefits(employee) : 0;
-
-                payrollList.Add(new PayrollViewModel
-                {
-                    Employee = $"{employee.LastName}, {employee.FirstName}",
-                    DailyRate = employee.BasicSalary,
-                    DaysWorked = totalPresentDays,
-                    BasicSalary = Math.Round(regularPay, 0),
-                    OvertimePay = Math.Round(overtimePay, 0),
-                    Allowances = Math.Round(allowancePay, 0),
-                    Benefits = Math.Round(benefitPay, 0),
-                    Bonuses = Math.Round(bonusPay, 0),
-                    Deductions = Math.Round(deductions, 0),
-                    Absent = Math.Round(absentDeductions, 0),
-                    LateAndEarly = Math.Round(lateDeductions + earlyOutDeductions, 0),
-                    SSSContribution = Math.Round(sssDeduction, 0),
-                    PagibigContribution = Math.Round(pagIbigDeduction, 0),
-                    PhilHealthContribution = Math.Round(philHealthDeduction, 0),
-                });
-            }
-
-            return payrollList.OrderBy(c => c.Employee).ToList();
         }
         private void LoadAllProjectList()
         {

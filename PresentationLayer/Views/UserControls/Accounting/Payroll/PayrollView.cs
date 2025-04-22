@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -12,6 +13,7 @@ using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System;
 using System.Collections.Generic;
@@ -28,51 +30,42 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class PayrollView : SfForm, IPayrollView
     {
-        private string message; 
+        private string message;
+        private bool success;
         public PayrollView()
         {
             InitializeComponent();
 
-            btnPrint.Click += delegate
+            btnPrint.Click += (s, e) =>
             {
-                PrintPayrollEvent?.Invoke(this, EventArgs.Empty);
-            };
-            txtStartDate.ValueChanged += delegate
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-            };
-            txtEndDate.ValueChanged += delegate
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-            };
-            btnContribution.CheckedChanged += delegate
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-            };
-            dgList.CellDoubleClick += (sender, e) =>
-            {
-                PrintPayslipEvent?.Invoke(this, e);
-            };
 
-            txtProject.SelectionChangeCommitted += delegate
-            {
-                ProjectEvent?.Invoke(this, EventArgs.Empty);
+                PrintPayrollEvent?.Invoke(s, e);
             };
-            btnAll.CheckStateChanged += delegate
+            dgList.CellClick += (s, e) =>
             {
-                AllEvent?.Invoke(this, EventArgs.Empty);
+
+                if (e.DataColumn.GridColumn.MappingName == "Payslip")
+                {
+                    if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is PayrollViewModel row)
+                    {
+                        PrintPaySlipEvent?.Invoke(s, e);
+                    }
+                }
+                else if (e.DataColumn.GridColumn.MappingName == "TMonth")
+                {
+                    TMonthEvent?.Invoke(s, e);
+                }
             };
-            dgList.CellClick += (sender, e) => { TMonthEvent?.Invoke(sender, e); };
-            btnBenifits.CheckedChanged += (s, e) => IncludeBenefitsEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public void SetPayrollListBindingSource(IEnumerable<PayrollViewModel> PayrollList)
         {
             dgPager.DataSource = PayrollList;
 
-            foreach (var payroll in PayrollList)
+            foreach (var e in PayrollList)
             {
-                payroll.TMonth = Resources.thirteen; // Or any other image per row
+                e.TMonth = Resources.thirteen; // Or any other image per row
+                e.Payslip = Resources.payslip;
             }
 
             dgList.DataSource = dgPager.PagedSource;
@@ -91,7 +84,8 @@ namespace PresentationLayer.Views.UserControls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime EndDate { get => txtEndDate.Value.Date; set => txtEndDate.Value = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int ProjectId {
+        public int ProjectId
+        {
             get
             {
                 if (txtProject.SelectedItem is Project project)
@@ -112,15 +106,16 @@ namespace PresentationLayer.Views.UserControls
             set { message = value; }
         }
 
+
         public SfDataGrid DataGrid => dgList;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool IsSuccessful { get => success; set => success = value; }
+
         public event EventHandler PrintPayrollEvent;
-        public event EventHandler PrintPayslipEvent;
         public event EventHandler SearchEvent;
-        public event EventHandler IncludeBenefitsEvent;
-        public event EventHandler ProjectEvent;
-        public event EventHandler AllEvent;
         public event CellClickEventHandler TMonthEvent;
+        public event CellClickEventHandler PrintPaySlipEvent;
 
         public static PayrollView GetInstance(TabPage parentContainer)
         {
@@ -142,6 +137,45 @@ namespace PresentationLayer.Views.UserControls
 
             txtStartDate.Value = startDate;
             txtEndDate.Value = endDate;
+
+            panelProject.Width = 153;
+        }
+
+        private void btnAll_CheckedChanged(object sender, EventArgs e)
+        {
+            txtProject.Visible = !btnAll.Checked;
+            panelProject.Width = btnAll.Checked ? btnAll.Width : btnAll.Width + txtProject.Width;
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtProject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnBenifits_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnContribution_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtProject_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -15,5 +15,7 @@ namespace DomainLayer.ViewModels.Inventory
         public string WarehouseName { get; set; }
         public string Description { get; set; }
         public string Branch { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

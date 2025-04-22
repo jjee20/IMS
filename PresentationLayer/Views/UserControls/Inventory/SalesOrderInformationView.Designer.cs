@@ -71,8 +71,6 @@
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             txtSalesOrderCustomer = new MaterialSkin.Controls.MaterialLabel();
-            materialLabel15 = new MaterialSkin.Controls.MaterialLabel();
-            txtSalesOrderCustomerRefNo = new MaterialSkin.Controls.MaterialLabel();
             txtSalesOrderDeliveryDate = new MaterialSkin.Controls.MaterialLabel();
             materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             txtSalesOrderDate = new MaterialSkin.Controls.MaterialLabel();
@@ -129,8 +127,6 @@
             materialCard1.Controls.Add(guna2Separator1);
             materialCard1.Controls.Add(materialLabel13);
             materialCard1.Controls.Add(txtSalesOrderCustomer);
-            materialCard1.Controls.Add(materialLabel15);
-            materialCard1.Controls.Add(txtSalesOrderCustomerRefNo);
             materialCard1.Controls.Add(txtSalesOrderDeliveryDate);
             materialCard1.Controls.Add(materialLabel10);
             materialCard1.Controls.Add(txtSalesOrderDate);
@@ -146,12 +142,12 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 64);
+            materialCard1.Location = new Point(2, 2);
             materialCard1.Margin = new Padding(14);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1002, 662);
+            materialCard1.Size = new Size(1004, 725);
             materialCard1.TabIndex = 0;
             // 
             // dgPaymentReceive
@@ -664,31 +660,6 @@
             txtSalesOrderCustomer.TabIndex = 18;
             txtSalesOrderCustomer.Text = "Customer:";
             // 
-            // materialLabel15
-            // 
-            materialLabel15.AutoSize = true;
-            materialLabel15.Depth = 0;
-            materialLabel15.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel15.Location = new Point(560, 52);
-            materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel15.Name = "materialLabel15";
-            materialLabel15.Size = new Size(133, 19);
-            materialLabel15.TabIndex = 17;
-            materialLabel15.Text = "Customer Ref. No.:";
-            // 
-            // txtSalesOrderCustomerRefNo
-            // 
-            txtSalesOrderCustomerRefNo.AutoSize = true;
-            txtSalesOrderCustomerRefNo.Depth = 0;
-            txtSalesOrderCustomerRefNo.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            txtSalesOrderCustomerRefNo.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderCustomerRefNo.Location = new Point(693, 54);
-            txtSalesOrderCustomerRefNo.MouseState = MaterialSkin.MouseState.HOVER;
-            txtSalesOrderCustomerRefNo.Name = "txtSalesOrderCustomerRefNo";
-            txtSalesOrderCustomerRefNo.Size = new Size(121, 17);
-            txtSalesOrderCustomerRefNo.TabIndex = 16;
-            txtSalesOrderCustomerRefNo.Text = "Customer Ref. No.:";
-            // 
             // txtSalesOrderDeliveryDate
             // 
             txtSalesOrderDeliveryDate.AutoSize = true;
@@ -846,7 +817,10 @@
             ClientSize = new Size(1008, 729);
             Controls.Add(materialCard1);
             Name = "SalesOrderInformationView";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
+            Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+            Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Sales Order Information (#: )";
             materialCard1.ResumeLayout(false);
             materialCard1.PerformLayout();
@@ -860,8 +834,6 @@
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private MaterialSkin.Controls.MaterialLabel materialLabel13;
         private MaterialSkin.Controls.MaterialLabel txtSalesOrderCustomer;
-        private MaterialSkin.Controls.MaterialLabel materialLabel15;
-        private MaterialSkin.Controls.MaterialLabel txtSalesOrderCustomerRefNo;
         private MaterialSkin.Controls.MaterialLabel txtSalesOrderDeliveryDate;
         private MaterialSkin.Controls.MaterialLabel materialLabel10;
         private MaterialSkin.Controls.MaterialLabel txtSalesOrderDate;

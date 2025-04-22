@@ -42,6 +42,7 @@ namespace RavenTech_ERP.Views.IViews
         event EventHandler VendorEvent;
         event EventHandler VendorTypeEvent;
         event EventHandler WarehouseEvent;
+        event EventHandler HolidayEvent;
 
         event EventHandler ProfileEvent;
         event EventHandler EditProfileEvent;

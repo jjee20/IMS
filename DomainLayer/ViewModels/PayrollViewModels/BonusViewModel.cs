@@ -23,5 +23,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public DateTime DateGranted { get; set; } // Date the bonus is granted
         [Display(Name = "Is One-time?")]
         public string IsOneTime { get; set; } // True for one-time bonuses, false for recurring bonuses
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

@@ -1,9 +1,16 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -11,7 +18,7 @@ namespace PresentationLayer.Presenters
     {
         public IPaymentTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private IEnumerable<PaymentType> PaymentTypeList;
+        private IEnumerable<PaymentTypeViewModel> PaymentTypeList;
         public PaymentTypePresenter(IPaymentTypeView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -20,115 +27,101 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
+
             //Load
 
             LoadAllPaymentTypeList();
 
             //Source Binding
-
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private async void Save(object? sender, EventArgs e)
-        {
-            var model = await _unitOfWork.PaymentType.Value.GetAsync(c => c.PaymentTypeId == _view.PaymentTypeId, tracked: true);
-            if (model == null) model = new PaymentType();
-            else _unitOfWork.PaymentType.Value.Detach(model);
-
-            model.PaymentTypeId = _view.PaymentTypeId;
-            model.PaymentTypeName = _view.PaymentTypeName;
-            model.Description = _view.Description;
-
-            try
+            using (var form = new UpsertPaymentTypeView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Payment Type";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.PaymentType.Value.Update(model);
-                    _view.Message = "Payment type edited successfully";
+                    LoadAllPaymentTypeList();
                 }
-                else //Add new model
-                {
-                    await _unitOfWork.PaymentType.Value.AddAsync(model);
-                    _view.Message = "Payment type added successfully";
-                }
-                await _unitOfWork.SaveAsync();
-                _view.IsSuccessful = true;
-                _view.ShowMessage(_view.Message);
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllPaymentTypeList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is PaymentTypeViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.PaymentType.Value.Get(c => c.PaymentTypeId == row.PaymentTypeId);
+                using (var form = new UpsertPaymentTypeView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Payment Type";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllPaymentTypeList();
+                    }
+                }
             }
-
-            var entity = (PaymentType)_view.DataGrid.SelectedItem;
-            _view.PaymentTypeId = entity.PaymentTypeId;
-            _view.PaymentTypeName = entity.PaymentTypeName;
-            _view.Description = entity.Description;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is PaymentTypeViewModel row)
+            {
+                var entity = _unitOfWork.PaymentType.Value.Get(c => c.PaymentTypeId == row.PaymentTypeId);
+                if (entity != null)
+                {
+                    _unitOfWork.PaymentType.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Payment Type deleted successfully.");
+
+                    LoadAllPaymentTypeList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
                 if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select payment type(s) to delete.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var selectedItems = _view.DataGrid.SelectedItems.Cast<PaymentType>().ToList();
+                var selected = _view.DataGrid.SelectedItems.Cast<PaymentTypeViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.PaymentTypeId).ToList();
 
-                if (!selectedItems.Any())
+                var entities = _unitOfWork.PaymentType.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.PaymentTypeId))
+                    .ToList();
+
+                if (!entities.Any())
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "No valid payment types selected.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Selected records could not be found.");
                     return;
                 }
 
-                _unitOfWork.PaymentType.Value.RemoveRange(selectedItems);
+                _unitOfWork.PaymentType.Value.RemoveRange(entities);
                 _unitOfWork.Save();
 
-                _view.IsSuccessful = true;
-                _view.Message = $"{selectedItems.Count} payment type(s) deleted successfully.";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllPaymentTypeList();
             }
             catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = $"An error occurred while deleting: {ex.Message}";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
 
@@ -142,23 +135,12 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllPaymentTypeList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllPaymentTypeList();
-            _view.PaymentTypeId = 0;
-            _view.PaymentTypeName = "";
-            _view.Description = "";
-        }
         
         private void LoadAllPaymentTypeList(bool emptyValue = false)
         {
-            PaymentTypeList = _unitOfWork.PaymentType.Value.GetAll();
+            PaymentTypeList = Program.Mapper.Map<IEnumerable<PaymentTypeViewModel>>(_unitOfWork.PaymentType.Value.GetAll());
 
-            if (!emptyValue) PaymentTypeList = PaymentTypeList.Where(c => c.PaymentTypeName.Contains(_view.SearchValue));
+            if (!emptyValue) PaymentTypeList = PaymentTypeList.Where(c => c.PaymentTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetPaymentTypeListBindingSource(PaymentTypeList);
         }
     }

@@ -3,8 +3,10 @@ using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.AccountViewModels;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using DomainLayer.ViewModels.PayrollViewModels;
 
 namespace ServiceLayer.Services.CommonServices
@@ -13,6 +15,28 @@ namespace ServiceLayer.Services.CommonServices
     {
         public MappingProfile() {
             #region Inventory
+            CreateMap<Department, DepartmentViewModel>()
+                .ReverseMap();
+            CreateMap<BillType, BillTypeViewModel>()
+                .ReverseMap();
+            CreateMap<InvoiceType, InvoiceTypeViewModel>()
+                .ReverseMap();
+            CreateMap<PaymentType, PaymentTypeViewModel>()
+                .ReverseMap();
+            CreateMap<ProductType, ProductTypeViewModel>()
+                .ReverseMap();
+            CreateMap<PurchaseType, PurchaseTypeViewModel>()
+                .ReverseMap();
+            CreateMap<SalesType, SalesTypeViewModel>()
+                .ReverseMap();
+            CreateMap<ShipmentType, ShipmentTypeViewModel>()
+                .ReverseMap();
+            CreateMap<VendorType, VendorTypeViewModel>()
+                .ReverseMap();
+            CreateMap<UnitOfMeasure, UnitOfMeasureViewModel>()
+                .ReverseMap();
+            CreateMap<JobPosition, JobPositionViewModel>()
+                .ReverseMap();
             CreateMap<ProductStockInLog, ProductStockInLogViewModel>()
                 .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product.ProductName))
                 .ForMember(dest => dest.DateAdded, opt => opt.MapFrom(src => src.DateAdded.ToLongDateString()))
@@ -79,7 +103,7 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
             CreateMap<SalesOrder, SalesOrderViewModel>()
                 .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName))
-                .ForMember(dest => dest.Customer, opt => opt.MapFrom(src => src.Customer.CustomerName))
+                .ForMember(dest => dest.Customer, opt => opt.MapFrom(src => $"{src.Customer.CustomerName}({src.CustomerRefNumber})"))
                 .ForMember(dest => dest.SalesType, opt => opt.MapFrom(src => src.SalesType.SalesTypeName))
                 .ForMember(dest => dest.OrderDate, opt => opt.MapFrom(src => src.OrderDate.Date.ToLongDateString()))
                 .ForMember(dest => dest.DeliveryDate, opt => opt.MapFrom(src => src.DeliveryDate.Date.ToLongDateString()))
@@ -129,6 +153,9 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                  .ForMember(dest => dest.IsRecurring, opt => opt.MapFrom(src => src.IsRecurring.ToString()))
                  .ForMember(dest => dest.DateGranted, opt => opt.MapFrom(src => src.DateGranted.ToLongDateString()))
+                .ReverseMap();
+            CreateMap<Holiday, HolidayViewModel>()
+                .ForMember(dest => dest.EffectiveDate, opt => opt.MapFrom(src => src.EffectiveDate.ToLongDateString()))
                 .ReverseMap();
             CreateMap<Deduction, DeductionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
@@ -181,7 +208,10 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
 
             CreateMap<Project, ProjectViewModel>()
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.HasValue ? src.StartDate.Value.ToString("yyyy-MM-dd") : null))
+                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.HasValue ? src.EndDate.Value.ToString("yyyy-MM-dd") : null))
                 .ReverseMap();
+
             #endregion
             #region Admin
 

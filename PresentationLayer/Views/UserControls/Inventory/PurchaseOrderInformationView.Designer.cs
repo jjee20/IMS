@@ -28,16 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
+            tabPage1 = new TabPage();
+            dgGoodsReceivedNote = new Guna.UI2.WinForms.Guna2DataGridView();
+            tabPage2 = new TabPage();
+            dgPaymentVoucher = new Guna.UI2.WinForms.Guna2DataGridView();
             materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             txtBillVendorInvoiceNo = new MaterialSkin.Controls.MaterialLabel();
             txtBillVendorDONo = new MaterialSkin.Controls.MaterialLabel();
@@ -80,18 +85,13 @@
             txtPurchaseOrderBranch = new MaterialSkin.Controls.MaterialLabel();
             txtPurchaseOrderName = new MaterialSkin.Controls.MaterialLabel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
-            tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
-            dgGoodsReceivedNote = new Guna.UI2.WinForms.Guna2DataGridView();
-            dgPaymentVoucher = new Guna.UI2.WinForms.Guna2DataGridView();
             materialCard1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgPurchaseOrderLines).BeginInit();
             guna2TabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgGoodsReceivedNote).BeginInit();
+            tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgPaymentVoucher).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgPurchaseOrderLines).BeginInit();
             SuspendLayout();
             // 
             // materialCard1
@@ -143,13 +143,166 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 64);
+            materialCard1.Location = new Point(2, 2);
             materialCard1.Margin = new Padding(14);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1002, 662);
+            materialCard1.Size = new Size(1004, 725);
             materialCard1.TabIndex = 0;
+            // 
+            // guna2TabControl1
+            // 
+            guna2TabControl1.Controls.Add(tabPage1);
+            guna2TabControl1.Controls.Add(tabPage2);
+            guna2TabControl1.ItemSize = new Size(180, 40);
+            guna2TabControl1.Location = new Point(14, 497);
+            guna2TabControl1.Name = "guna2TabControl1";
+            guna2TabControl1.SelectedIndex = 0;
+            guna2TabControl1.Size = new Size(971, 148);
+            guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
+            guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
+            guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
+            guna2TabControl1.TabButtonHoverState.ForeColor = Color.White;
+            guna2TabControl1.TabButtonHoverState.InnerColor = Color.FromArgb(40, 52, 70);
+            guna2TabControl1.TabButtonIdleState.BorderColor = Color.Empty;
+            guna2TabControl1.TabButtonIdleState.FillColor = Color.FromArgb(33, 42, 57);
+            guna2TabControl1.TabButtonIdleState.Font = new Font("Segoe UI Semibold", 10F);
+            guna2TabControl1.TabButtonIdleState.ForeColor = Color.FromArgb(156, 160, 167);
+            guna2TabControl1.TabButtonIdleState.InnerColor = Color.FromArgb(33, 42, 57);
+            guna2TabControl1.TabButtonSelectedState.BorderColor = Color.Empty;
+            guna2TabControl1.TabButtonSelectedState.FillColor = Color.FromArgb(29, 37, 49);
+            guna2TabControl1.TabButtonSelectedState.Font = new Font("Segoe UI Semibold", 10F);
+            guna2TabControl1.TabButtonSelectedState.ForeColor = Color.White;
+            guna2TabControl1.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
+            guna2TabControl1.TabButtonSize = new Size(180, 40);
+            guna2TabControl1.TabIndex = 58;
+            guna2TabControl1.TabMenuBackColor = Color.White;
+            guna2TabControl1.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(dgGoodsReceivedNote);
+            tabPage1.Location = new Point(4, 44);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(963, 100);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Goods Received Note";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgGoodsReceivedNote
+            // 
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dgGoodsReceivedNote.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgGoodsReceivedNote.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgGoodsReceivedNote.ColumnHeadersHeight = 25;
+            dgGoodsReceivedNote.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgGoodsReceivedNote.DefaultCellStyle = dataGridViewCellStyle3;
+            dgGoodsReceivedNote.Dock = DockStyle.Fill;
+            dgGoodsReceivedNote.GridColor = Color.FromArgb(231, 229, 255);
+            dgGoodsReceivedNote.Location = new Point(3, 3);
+            dgGoodsReceivedNote.Name = "dgGoodsReceivedNote";
+            dgGoodsReceivedNote.RowHeadersVisible = false;
+            dgGoodsReceivedNote.Size = new Size(957, 94);
+            dgGoodsReceivedNote.TabIndex = 23;
+            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dgGoodsReceivedNote.ThemeStyle.BackColor = Color.White;
+            dgGoodsReceivedNote.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.Height = 25;
+            dgGoodsReceivedNote.ThemeStyle.ReadOnly = false;
+            dgGoodsReceivedNote.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dgGoodsReceivedNote.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgGoodsReceivedNote.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dgGoodsReceivedNote.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dgGoodsReceivedNote.ThemeStyle.RowsStyle.Height = 25;
+            dgGoodsReceivedNote.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dgGoodsReceivedNote.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(dgPaymentVoucher);
+            tabPage2.Location = new Point(4, 44);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(963, 100);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Payment Voucher";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dgPaymentVoucher
+            // 
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dgPaymentVoucher.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgPaymentVoucher.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dgPaymentVoucher.ColumnHeadersHeight = 25;
+            dgPaymentVoucher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgPaymentVoucher.DefaultCellStyle = dataGridViewCellStyle6;
+            dgPaymentVoucher.Dock = DockStyle.Fill;
+            dgPaymentVoucher.GridColor = Color.FromArgb(231, 229, 255);
+            dgPaymentVoucher.Location = new Point(3, 3);
+            dgPaymentVoucher.Name = "dgPaymentVoucher";
+            dgPaymentVoucher.RowHeadersVisible = false;
+            dgPaymentVoucher.Size = new Size(957, 94);
+            dgPaymentVoucher.TabIndex = 24;
+            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dgPaymentVoucher.ThemeStyle.BackColor = Color.White;
+            dgPaymentVoucher.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            dgPaymentVoucher.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            dgPaymentVoucher.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgPaymentVoucher.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            dgPaymentVoucher.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dgPaymentVoucher.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgPaymentVoucher.ThemeStyle.HeaderStyle.Height = 25;
+            dgPaymentVoucher.ThemeStyle.ReadOnly = false;
+            dgPaymentVoucher.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dgPaymentVoucher.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgPaymentVoucher.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dgPaymentVoucher.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dgPaymentVoucher.ThemeStyle.RowsStyle.Height = 25;
+            dgPaymentVoucher.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dgPaymentVoucher.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
             // materialLabel2
             // 
@@ -455,26 +608,26 @@
             // 
             // dgPurchaseOrderLines
             // 
-            dataGridViewCellStyle10.BackColor = Color.White;
-            dgPurchaseOrderLines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dgPurchaseOrderLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle7.BackColor = Color.White;
+            dgPurchaseOrderLines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            dgPurchaseOrderLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             dgPurchaseOrderLines.ColumnHeadersHeight = 25;
             dgPurchaseOrderLines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            dgPurchaseOrderLines.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.White;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
+            dgPurchaseOrderLines.DefaultCellStyle = dataGridViewCellStyle9;
             dgPurchaseOrderLines.GridColor = Color.FromArgb(231, 229, 255);
             dgPurchaseOrderLines.Location = new Point(14, 133);
             dgPurchaseOrderLines.Name = "dgPurchaseOrderLines";
@@ -698,159 +851,6 @@
             materialLabel1.TabIndex = 4;
             materialLabel1.Text = "No.:";
             // 
-            // guna2TabControl1
-            // 
-            guna2TabControl1.Controls.Add(tabPage1);
-            guna2TabControl1.Controls.Add(tabPage2);
-            guna2TabControl1.ItemSize = new Size(180, 40);
-            guna2TabControl1.Location = new Point(14, 497);
-            guna2TabControl1.Name = "guna2TabControl1";
-            guna2TabControl1.SelectedIndex = 0;
-            guna2TabControl1.Size = new Size(971, 148);
-            guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
-            guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
-            guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
-            guna2TabControl1.TabButtonHoverState.ForeColor = Color.White;
-            guna2TabControl1.TabButtonHoverState.InnerColor = Color.FromArgb(40, 52, 70);
-            guna2TabControl1.TabButtonIdleState.BorderColor = Color.Empty;
-            guna2TabControl1.TabButtonIdleState.FillColor = Color.FromArgb(33, 42, 57);
-            guna2TabControl1.TabButtonIdleState.Font = new Font("Segoe UI Semibold", 10F);
-            guna2TabControl1.TabButtonIdleState.ForeColor = Color.FromArgb(156, 160, 167);
-            guna2TabControl1.TabButtonIdleState.InnerColor = Color.FromArgb(33, 42, 57);
-            guna2TabControl1.TabButtonSelectedState.BorderColor = Color.Empty;
-            guna2TabControl1.TabButtonSelectedState.FillColor = Color.FromArgb(29, 37, 49);
-            guna2TabControl1.TabButtonSelectedState.Font = new Font("Segoe UI Semibold", 10F);
-            guna2TabControl1.TabButtonSelectedState.ForeColor = Color.White;
-            guna2TabControl1.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
-            guna2TabControl1.TabButtonSize = new Size(180, 40);
-            guna2TabControl1.TabIndex = 58;
-            guna2TabControl1.TabMenuBackColor = Color.White;
-            guna2TabControl1.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
-            // 
-            // tabPage1
-            // 
-            tabPage1.Controls.Add(dgGoodsReceivedNote);
-            tabPage1.Location = new Point(4, 44);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(963, 100);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Goods Received Note";
-            tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(dgPaymentVoucher);
-            tabPage2.Location = new Point(4, 44);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(963, 100);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Payment Voucher";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dgGoodsReceivedNote
-            // 
-            dataGridViewCellStyle13.BackColor = Color.White;
-            dgGoodsReceivedNote.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle14.ForeColor = Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
-            dgGoodsReceivedNote.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            dgGoodsReceivedNote.ColumnHeadersHeight = 25;
-            dgGoodsReceivedNote.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = Color.White;
-            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle15.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle15.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
-            dgGoodsReceivedNote.DefaultCellStyle = dataGridViewCellStyle15;
-            dgGoodsReceivedNote.Dock = DockStyle.Fill;
-            dgGoodsReceivedNote.GridColor = Color.FromArgb(231, 229, 255);
-            dgGoodsReceivedNote.Location = new Point(3, 3);
-            dgGoodsReceivedNote.Name = "dgGoodsReceivedNote";
-            dgGoodsReceivedNote.RowHeadersVisible = false;
-            dgGoodsReceivedNote.Size = new Size(957, 94);
-            dgGoodsReceivedNote.TabIndex = 23;
-            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgGoodsReceivedNote.ThemeStyle.BackColor = Color.White;
-            dgGoodsReceivedNote.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgGoodsReceivedNote.ThemeStyle.HeaderStyle.Height = 25;
-            dgGoodsReceivedNote.ThemeStyle.ReadOnly = false;
-            dgGoodsReceivedNote.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgGoodsReceivedNote.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgGoodsReceivedNote.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgGoodsReceivedNote.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgGoodsReceivedNote.ThemeStyle.RowsStyle.Height = 25;
-            dgGoodsReceivedNote.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgGoodsReceivedNote.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // dgPaymentVoucher
-            // 
-            dataGridViewCellStyle16.BackColor = Color.White;
-            dgPaymentVoucher.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle17.ForeColor = Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            dgPaymentVoucher.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            dgPaymentVoucher.ColumnHeadersHeight = 25;
-            dgPaymentVoucher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = Color.White;
-            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle18.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle18.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle18.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
-            dgPaymentVoucher.DefaultCellStyle = dataGridViewCellStyle18;
-            dgPaymentVoucher.Dock = DockStyle.Fill;
-            dgPaymentVoucher.GridColor = Color.FromArgb(231, 229, 255);
-            dgPaymentVoucher.Location = new Point(3, 3);
-            dgPaymentVoucher.Name = "dgPaymentVoucher";
-            dgPaymentVoucher.RowHeadersVisible = false;
-            dgPaymentVoucher.Size = new Size(957, 94);
-            dgPaymentVoucher.TabIndex = 24;
-            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgPaymentVoucher.ThemeStyle.BackColor = Color.White;
-            dgPaymentVoucher.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgPaymentVoucher.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgPaymentVoucher.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgPaymentVoucher.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgPaymentVoucher.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgPaymentVoucher.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgPaymentVoucher.ThemeStyle.HeaderStyle.Height = 25;
-            dgPaymentVoucher.ThemeStyle.ReadOnly = false;
-            dgPaymentVoucher.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgPaymentVoucher.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgPaymentVoucher.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgPaymentVoucher.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgPaymentVoucher.ThemeStyle.RowsStyle.Height = 25;
-            dgPaymentVoucher.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgPaymentVoucher.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
             // PurchaseOrderInformationView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -858,16 +858,19 @@
             ClientSize = new Size(1008, 729);
             Controls.Add(materialCard1);
             Name = "PurchaseOrderInformationView";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
+            Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+            Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Purchase Order Information (#: )";
             materialCard1.ResumeLayout(false);
             materialCard1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgPurchaseOrderLines).EndInit();
             guna2TabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgGoodsReceivedNote).EndInit();
+            tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgPaymentVoucher).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgPurchaseOrderLines).EndInit();
             ResumeLayout(false);
         }
 

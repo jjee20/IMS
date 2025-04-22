@@ -51,9 +51,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.26" />
+    <PackageReference Include="Syncfusion.DataGridExport.WinForms" Version="29.1.35" />
     <PackageReference Include="Syncfusion.Licensing" Version="29.1.35" />
     <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="29.1.35" />
     <PackageReference Include="Syncfusion.Tools.Windows" Version="29.1.35" />
+    <PackageReference Include="Syncfusion.XlsIO.WinForms" Version="29.1.35" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
@@ -91,50 +93,170 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SERCS.xsd</DependentUpon>
     </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\TaxView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\ShiftView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\LeaveView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\JobPositionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\EmployeeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\EmployeeContributionView.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Account\RegisterView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Accounting\Payroll\DepartmentView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\AttendanceView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\BenefitView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\AllowanceView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Accounting\Payroll\DeductionView.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\BonusView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\BenefitView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\AttendanceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\AllowanceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertTaxView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertShiftView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertLeaveView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertJobPositionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertEmployeeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertEmployeeContributionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertDepartmentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertDeductionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertBonusView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertBenefitView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertAllowanceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\RegisterView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\PayrollView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\LeaveView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\DeductionView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\EmployeeView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\JobPositionView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\ContributionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\TaxView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Accounting\Payroll\HolidayView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\ShiftView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\ProductStockInLogView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\DepartmentView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\SalesOrderView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Searches\SearchEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertProductStockInLogView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertPurchaseOrderView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertSalesOrderView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertVendorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\VendorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertWarehouseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\WarehouseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\UnitOfMeasureView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProjectView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertUnitOfMeasureView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertProjectView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertProductView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\VendorTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ShipmentTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\SalesTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PurchaseTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\PaymentTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\InvoiceTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\CustomerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\CustomerTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\CashBankView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\BranchView.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\GoodsReceivedNoteListView.cs">
       <SubType>Form</SubType>
@@ -142,11 +264,8 @@
     <Compile Update="Views\UserControls\Inventory\PaymentVoucherListView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PaymentVoucherView.cs">
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertPaymentVoucherView.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\ProductInStockLogView.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\DashboardView.cs">
       <SubType>UserControl</SubType>
@@ -157,64 +276,49 @@
     <Compile Update="Views\UserControls\Inventory\ProjectInformationView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\PurchaseOrderView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\ProjectManagmentView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Inventory\PurchaseOrderInformationView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\PurchasesReportView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\WarehouseView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertHolidayView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\VendorView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertVendorTypeView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\UnitOfMeasureView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertShipmentTypeView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\VendorTypeView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertSalesTypeView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\ShipmentTypeView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertPurchaseTypeView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PurchaseTypeView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertProductTypeView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PurchaseTypeView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertPaymentTypeView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\ProductView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertInvoiceTypeView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\ProductTypeView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertCustomerView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\PaymentTypeView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertCustomerTypeView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\InvoiceTypeView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertCashBankView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\CashBankView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertBranchView.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\BillTypeView.cs" />
-    <Compile Update="Views\UserControls\Inventory\BranchView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\UserControls\Inventory\CustomerView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -375,6 +479,10 @@
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SERCS.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\UserControls\Inventory\Lists\" />
   </ItemGroup>
 
 </Project>

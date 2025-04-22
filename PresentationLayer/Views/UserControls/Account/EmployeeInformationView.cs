@@ -1,5 +1,6 @@
 ﻿using DomainLayer.ViewModels.PayrollViewModels;
 using MaterialSkin.Controls;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Account
 {
-    public partial class EmployeeInformationView: MaterialForm
+    public partial class EmployeeInformationView: SfForm
     {
         private readonly UserInformationViewModel _employee;
 

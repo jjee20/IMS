@@ -41,7 +41,8 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Net Pay")]
         public double NetPay => GrossPay - TotalDeduction;
         [Display(Name = "")]
-        public byte[] TMonth { get; set; } // ✅ Safe in any .NET layer
+        public byte[] TMonth { get; set; }  // ✅ Safe in any .NET layer
+        public byte[] Payslip { get; set; }  // ✅ Safe in any .NET layer
     }
 
 }

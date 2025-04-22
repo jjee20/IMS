@@ -1,38 +1,22 @@
-﻿using DomainLayer.Models.Accounts;
-using DomainLayer.ViewModels.Inventory;
+﻿using DomainLayer.ViewModels.Inventory;
 using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace PresentationLayer.Views.IViews
+namespace PresentationLayer.Views.UserControls
 {
     public interface ICustomerView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
-        int CustomerId { get; set; }
-        string CustomerName { get; set; }
-        int CustomerTypeId { get; set; }
-        string Address { get; set; }
-        string Phone { get; set; }
-        string Email { get; set; }
-        string ContactPerson { get; set; }
-        bool IsEdit { get; set; }
-        bool IsSuccessful { get; set; }
-        string Message { get; set; }
         string SearchValue { get; set; }
 
-        event EventHandler AddNewEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler EditEvent;
+        event EventHandler AddEvent;
+        event CellClickEventHandler DeleteEvent;
+        event CellClickEventHandler EditEvent;
+        event KeyEventHandler MultipleDeleteEvent;
         event EventHandler PrintEvent;
-        event EventHandler RefreshEvent;
-        event EventHandler SaveEvent;
         event EventHandler SearchEvent;
 
-        //void SetAddressBindingSource(List<string> barangayBindingSource,
-        //                             List<string> municipalityBindingSource,
-        //                             List<string> provinceBindingSource,
-        //                             List<string> regionBindingSource);
         void SetCustomerListBindingSource(IEnumerable<CustomerViewModel> CustomerList);
-        void SetCustomerTypeListBindingSource(BindingSource customerTypeBindingSource);
     }
 }

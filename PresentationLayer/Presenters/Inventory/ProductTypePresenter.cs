@@ -1,9 +1,16 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -11,7 +18,7 @@ namespace PresentationLayer.Presenters
     {
         public IProductTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private IEnumerable<ProductType> ProductTypeList;
+        private IEnumerable<ProductTypeViewModel> ProductTypeList;
         public ProductTypePresenter(IProductTypeView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -20,115 +27,101 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
+
             //Load
 
             LoadAllProductTypeList();
 
             //Source Binding
-
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private async void Save(object? sender, EventArgs e)
-        {
-            var model = await _unitOfWork.ProductType.Value.GetAsync(c => c.ProductTypeId == _view.ProductTypeId, tracked: true);
-            if (model == null) model = new ProductType();
-            else _unitOfWork.ProductType.Value.Detach(model);
-
-            model.ProductTypeId = _view.ProductTypeId;
-            model.ProductTypeName = _view.ProductTypeName;
-            model.Description = _view.Description;
-
-            try
+            using (var form = new UpsertProductTypeView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Product Type";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.ProductType.Value.Update(model);
-                    _view.Message = "Product type edited successfully";
+                    LoadAllProductTypeList();
                 }
-                else //Add new model
-                {
-                    await _unitOfWork.ProductType.Value.AddAsync(model);
-                    _view.Message = "Product type added successfully";
-                }
-                await _unitOfWork.SaveAsync();
-                _view.IsSuccessful = true;
-                _view.ShowMessage(_view.Message);
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
-        private async  void Search(object? sender, EventArgs e)
+        
+        private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllProductTypeList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductTypeViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.ProductType.Value.Get(c => c.ProductTypeId == row.ProductTypeId);
+                using (var form = new UpsertProductTypeView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Product Type";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllProductTypeList();
+                    }
+                }
             }
-
-            var entity = (ProductType)_view.DataGrid.SelectedItem;
-            _view.ProductTypeId = entity.ProductTypeId;
-            _view.ProductTypeName = entity.ProductTypeName;
-            _view.Description = entity.Description;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductTypeViewModel row)
+            {
+                var entity = _unitOfWork.ProductType.Value.Get(c => c.ProductTypeId == row.ProductTypeId);
+                if (entity != null)
+                {
+                    _unitOfWork.ProductType.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Product Type deleted successfully.");
+
+                    LoadAllProductTypeList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
                 if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select product type(s) to delete.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var selectedItems = _view.DataGrid.SelectedItems.Cast<ProductType>().ToList();
+                var selected = _view.DataGrid.SelectedItems.Cast<ProductTypeViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.ProductTypeId).ToList();
 
-                if (!selectedItems.Any())
+                var entities = _unitOfWork.ProductType.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.ProductTypeId))
+                    .ToList();
+
+                if (!entities.Any())
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "No valid product types selected.";
-                    _view.ShowMessage(_view.Message);
+                    _view.ShowMessage("Selected records could not be found.");
                     return;
                 }
 
-                _unitOfWork.ProductType.Value.RemoveRange(selectedItems);
+                _unitOfWork.ProductType.Value.RemoveRange(entities);
                 _unitOfWork.Save();
 
-                _view.IsSuccessful = true;
-                _view.Message = $"{selectedItems.Count} product type(s) deleted successfully.";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllProductTypeList();
             }
             catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = $"An error occurred while deleting: {ex.Message}";
-                _view.ShowMessage(_view.Message);
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
 
@@ -142,23 +135,12 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllProductTypeList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllProductTypeList();
-            _view.ProductTypeId = 0;
-            _view.ProductTypeName = "";
-            _view.Description = "";
-        }
         
         private void LoadAllProductTypeList(bool emptyValue = false)
         {
-            ProductTypeList = _unitOfWork.ProductType.Value.GetAll();
+            ProductTypeList = Program.Mapper.Map<IEnumerable<ProductTypeViewModel>>(_unitOfWork.ProductType.Value.GetAll());
 
-            if (!emptyValue) ProductTypeList = ProductTypeList.Where(c => c.ProductTypeName.Contains(_view.SearchValue));
+            if (!emptyValue) ProductTypeList = ProductTypeList.Where(c => c.ProductTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductTypeListBindingSource(ProductTypeList);
         }
     }

@@ -1,30 +1,21 @@
 ﻿using DomainLayer.ViewModels.PayrollViewModels;
 using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
-using System.ComponentModel.DataAnnotations;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
+namespace PresentationLayer.Views.UserControls
 {
     public interface IShiftView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
-        int ShiftId { get; set; }
-        string ShiftName { get; set; }
-        TimeSpan StartTime { get; set; }
-        TimeSpan EndTime { get; set; }
-        double OvertimeRate { get; set; }
-        double RegularHours { get; set; }
-        bool IsEdit { get; set; }
-        bool IsSuccessful { get; set; }
-        string Message { get; set; }
         string SearchValue { get; set; }
-        event EventHandler AddNewEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler EditEvent;
+
+        event EventHandler AddEvent;
+        event CellClickEventHandler DeleteEvent;
+        event CellClickEventHandler EditEvent;
+        event KeyEventHandler MultipleDeleteEvent;
         event EventHandler PrintEvent;
-        event EventHandler SaveEvent;
         event EventHandler SearchEvent;
-        event EventHandler RefreshEvent;
 
         void SetShiftListBindingSource(IEnumerable<ShiftViewModel> ShiftList);
     }
