@@ -48,16 +48,29 @@ namespace PresentationLayer.Views.UserControls
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductMonitoringView));
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             tableLayoutPanel3 = new TableLayoutPanel();
+            guna2GradientPanel4 = new Guna2GradientPanel();
+            dgProjectFlow = new Guna2DataGridView();
+            guna2HtmlLabel8 = new Guna2HtmlLabel();
             guna2GradientPanel3 = new Guna2GradientPanel();
             dgOutOfStock = new Guna2DataGridView();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
@@ -69,6 +82,9 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel1 = new Guna2HtmlLabel();
             panel2 = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
+            txtTotalProjectFlowPanel = new Guna2GradientPanel();
+            guna2DataGridView2 = new Guna2DataGridView();
+            txtTotalProjectFlow = new Guna2HtmlLabel();
             guna2HtmlLabel6 = new Guna2HtmlLabel();
             guna2HtmlLabel4 = new Guna2HtmlLabel();
             guna2HtmlLabel9 = new Guna2HtmlLabel();
@@ -79,6 +95,7 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel6 = new Guna2GradientPanel();
             guna2DataGridView1 = new Guna2DataGridView();
             txtOutOfStock = new Guna2HtmlLabel();
+            guna2HtmlLabel11 = new Guna2HtmlLabel();
             btnPrint = new Button();
             imageList1 = new ImageList(components);
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -89,6 +106,8 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2 = new Guna2HtmlLabel();
             materialCard1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
+            guna2GradientPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgProjectFlow).BeginInit();
             guna2GradientPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgOutOfStock).BeginInit();
             guna2GradientPanel2.SuspendLayout();
@@ -97,6 +116,8 @@ namespace PresentationLayer.Views.UserControls
             ((System.ComponentModel.ISupportInitialize)dgInStock).BeginInit();
             panel2.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
+            txtTotalProjectFlowPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2DataGridView2).BeginInit();
             txtInStock.SuspendLayout();
             txtLowStock.SuspendLayout();
             guna2GradientPanel6.SuspendLayout();
@@ -124,10 +145,12 @@ namespace PresentationLayer.Views.UserControls
             // 
             // tableLayoutPanel3
             // 
-            tableLayoutPanel3.ColumnCount = 3;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.ColumnCount = 4;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.Controls.Add(guna2GradientPanel4, 3, 0);
             tableLayoutPanel3.Controls.Add(guna2GradientPanel3, 2, 0);
             tableLayoutPanel3.Controls.Add(guna2GradientPanel2, 1, 0);
             tableLayoutPanel3.Controls.Add(guna2GradientPanel1, 0, 0);
@@ -140,24 +163,24 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel3.Size = new Size(1318, 585);
             tableLayoutPanel3.TabIndex = 6;
             // 
-            // guna2GradientPanel3
+            // guna2GradientPanel4
             // 
-            guna2GradientPanel3.Controls.Add(dgOutOfStock);
-            guna2GradientPanel3.Controls.Add(guna2HtmlLabel3);
-            guna2GradientPanel3.CustomizableEdges = customizableEdges1;
-            guna2GradientPanel3.Dock = DockStyle.Fill;
-            guna2GradientPanel3.FillColor = Color.IndianRed;
-            guna2GradientPanel3.FillColor2 = Color.White;
-            guna2GradientPanel3.Location = new Point(881, 3);
-            guna2GradientPanel3.Name = "guna2GradientPanel3";
-            guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2GradientPanel3.Size = new Size(434, 559);
-            guna2GradientPanel3.TabIndex = 2;
+            guna2GradientPanel4.Controls.Add(dgProjectFlow);
+            guna2GradientPanel4.Controls.Add(guna2HtmlLabel8);
+            guna2GradientPanel4.CustomizableEdges = customizableEdges1;
+            guna2GradientPanel4.Dock = DockStyle.Fill;
+            guna2GradientPanel4.FillColor = Color.PowderBlue;
+            guna2GradientPanel4.FillColor2 = Color.White;
+            guna2GradientPanel4.Location = new Point(990, 3);
+            guna2GradientPanel4.Name = "guna2GradientPanel4";
+            guna2GradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2GradientPanel4.Size = new Size(325, 559);
+            guna2GradientPanel4.TabIndex = 3;
             // 
-            // dgOutOfStock
+            // dgProjectFlow
             // 
             dataGridViewCellStyle1.BackColor = Color.White;
-            dgOutOfStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgProjectFlow.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -165,9 +188,9 @@ namespace PresentationLayer.Views.UserControls
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgOutOfStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgOutOfStock.ColumnHeadersHeight = 4;
-            dgOutOfStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgProjectFlow.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgProjectFlow.ColumnHeadersHeight = 4;
+            dgProjectFlow.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -175,13 +198,91 @@ namespace PresentationLayer.Views.UserControls
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgOutOfStock.DefaultCellStyle = dataGridViewCellStyle3;
+            dgProjectFlow.DefaultCellStyle = dataGridViewCellStyle3;
+            dgProjectFlow.Dock = DockStyle.Fill;
+            dgProjectFlow.GridColor = Color.FromArgb(231, 229, 255);
+            dgProjectFlow.Location = new Point(0, 23);
+            dgProjectFlow.Name = "dgProjectFlow";
+            dgProjectFlow.RowHeadersVisible = false;
+            dgProjectFlow.Size = new Size(325, 536);
+            dgProjectFlow.TabIndex = 2;
+            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dgProjectFlow.ThemeStyle.BackColor = Color.White;
+            dgProjectFlow.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            dgProjectFlow.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            dgProjectFlow.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgProjectFlow.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            dgProjectFlow.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dgProjectFlow.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgProjectFlow.ThemeStyle.HeaderStyle.Height = 4;
+            dgProjectFlow.ThemeStyle.ReadOnly = false;
+            dgProjectFlow.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dgProjectFlow.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgProjectFlow.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dgProjectFlow.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dgProjectFlow.ThemeStyle.RowsStyle.Height = 25;
+            dgProjectFlow.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dgProjectFlow.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
+            // guna2HtmlLabel8
+            // 
+            guna2HtmlLabel8.BackColor = Color.Transparent;
+            guna2HtmlLabel8.Dock = DockStyle.Top;
+            guna2HtmlLabel8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            guna2HtmlLabel8.ForeColor = Color.Black;
+            guna2HtmlLabel8.Location = new Point(0, 0);
+            guna2HtmlLabel8.Name = "guna2HtmlLabel8";
+            guna2HtmlLabel8.Size = new Size(97, 23);
+            guna2HtmlLabel8.TabIndex = 1;
+            guna2HtmlLabel8.Text = "Project Flow";
+            guna2HtmlLabel8.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // guna2GradientPanel3
+            // 
+            guna2GradientPanel3.Controls.Add(dgOutOfStock);
+            guna2GradientPanel3.Controls.Add(guna2HtmlLabel3);
+            guna2GradientPanel3.CustomizableEdges = customizableEdges3;
+            guna2GradientPanel3.Dock = DockStyle.Fill;
+            guna2GradientPanel3.FillColor = Color.IndianRed;
+            guna2GradientPanel3.FillColor2 = Color.White;
+            guna2GradientPanel3.Location = new Point(661, 3);
+            guna2GradientPanel3.Name = "guna2GradientPanel3";
+            guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2GradientPanel3.Size = new Size(323, 559);
+            guna2GradientPanel3.TabIndex = 2;
+            // 
+            // dgOutOfStock
+            // 
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dgOutOfStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgOutOfStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dgOutOfStock.ColumnHeadersHeight = 4;
+            dgOutOfStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgOutOfStock.DefaultCellStyle = dataGridViewCellStyle6;
             dgOutOfStock.Dock = DockStyle.Fill;
             dgOutOfStock.GridColor = Color.FromArgb(231, 229, 255);
             dgOutOfStock.Location = new Point(0, 23);
             dgOutOfStock.Name = "dgOutOfStock";
             dgOutOfStock.RowHeadersVisible = false;
-            dgOutOfStock.Size = new Size(434, 536);
+            dgOutOfStock.Size = new Size(323, 536);
             dgOutOfStock.TabIndex = 2;
             dgOutOfStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgOutOfStock.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -222,44 +323,44 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2GradientPanel2.Controls.Add(dgLowStock);
             guna2GradientPanel2.Controls.Add(guna2HtmlLabel5);
-            guna2GradientPanel2.CustomizableEdges = customizableEdges3;
+            guna2GradientPanel2.CustomizableEdges = customizableEdges5;
             guna2GradientPanel2.Dock = DockStyle.Fill;
             guna2GradientPanel2.FillColor = Color.LightGoldenrodYellow;
             guna2GradientPanel2.FillColor2 = Color.White;
-            guna2GradientPanel2.Location = new Point(442, 3);
+            guna2GradientPanel2.Location = new Point(332, 3);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
-            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2GradientPanel2.Size = new Size(433, 559);
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2GradientPanel2.Size = new Size(323, 559);
             guna2GradientPanel2.TabIndex = 1;
             // 
             // dgLowStock
             // 
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dgLowStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgLowStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.BackColor = Color.White;
+            dgLowStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            dgLowStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             dgLowStock.ColumnHeadersHeight = 4;
             dgLowStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgLowStock.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.White;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
+            dgLowStock.DefaultCellStyle = dataGridViewCellStyle9;
             dgLowStock.Dock = DockStyle.Fill;
             dgLowStock.GridColor = Color.FromArgb(231, 229, 255);
             dgLowStock.Location = new Point(0, 23);
             dgLowStock.Name = "dgLowStock";
             dgLowStock.RowHeadersVisible = false;
-            dgLowStock.Size = new Size(433, 536);
+            dgLowStock.Size = new Size(323, 536);
             dgLowStock.TabIndex = 2;
             dgLowStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgLowStock.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -299,44 +400,44 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2GradientPanel1.Controls.Add(dgInStock);
             guna2GradientPanel1.Controls.Add(guna2HtmlLabel1);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges5;
+            guna2GradientPanel1.CustomizableEdges = customizableEdges7;
             guna2GradientPanel1.Dock = DockStyle.Fill;
             guna2GradientPanel1.FillColor = Color.PaleGreen;
             guna2GradientPanel1.FillColor2 = Color.White;
             guna2GradientPanel1.Location = new Point(3, 3);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GradientPanel1.Size = new Size(433, 559);
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2GradientPanel1.Size = new Size(323, 559);
             guna2GradientPanel1.TabIndex = 0;
             // 
             // dgInStock
             // 
-            dataGridViewCellStyle7.BackColor = Color.White;
-            dgInStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dgInStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle10.BackColor = Color.White;
+            dgInStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            dgInStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             dgInStock.ColumnHeadersHeight = 4;
             dgInStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.White;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            dgInStock.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            dgInStock.DefaultCellStyle = dataGridViewCellStyle12;
             dgInStock.Dock = DockStyle.Fill;
             dgInStock.GridColor = Color.FromArgb(231, 229, 255);
             dgInStock.Location = new Point(0, 23);
             dgInStock.Name = "dgInStock";
             dgInStock.RowHeadersVisible = false;
-            dgInStock.Size = new Size(433, 536);
+            dgInStock.Size = new Size(323, 536);
             dgInStock.TabIndex = 1;
             dgInStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgInStock.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -386,7 +487,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             // tableLayoutPanel4
             // 
-            tableLayoutPanel4.ColumnCount = 8;
+            tableLayoutPanel4.ColumnCount = 10;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
@@ -394,13 +495,17 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.Controls.Add(txtTotalProjectFlowPanel, 8, 1);
             tableLayoutPanel4.Controls.Add(guna2HtmlLabel6, 3, 1);
             tableLayoutPanel4.Controls.Add(guna2HtmlLabel4, 1, 1);
             tableLayoutPanel4.Controls.Add(guna2HtmlLabel9, 5, 1);
             tableLayoutPanel4.Controls.Add(txtInStock, 2, 1);
             tableLayoutPanel4.Controls.Add(txtLowStock, 4, 1);
             tableLayoutPanel4.Controls.Add(guna2GradientPanel6, 6, 1);
+            tableLayoutPanel4.Controls.Add(guna2HtmlLabel11, 7, 1);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(0, 0);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -411,11 +516,90 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel4.Size = new Size(1243, 62);
             tableLayoutPanel4.TabIndex = 12;
             // 
+            // txtTotalProjectFlowPanel
+            // 
+            txtTotalProjectFlowPanel.Controls.Add(guna2DataGridView2);
+            txtTotalProjectFlowPanel.Controls.Add(txtTotalProjectFlow);
+            txtTotalProjectFlowPanel.CustomizableEdges = customizableEdges9;
+            txtTotalProjectFlowPanel.Dock = DockStyle.Fill;
+            txtTotalProjectFlowPanel.FillColor = Color.PowderBlue;
+            txtTotalProjectFlowPanel.FillColor2 = Color.White;
+            txtTotalProjectFlowPanel.ForeColor = Color.White;
+            txtTotalProjectFlowPanel.Location = new Point(1145, 19);
+            txtTotalProjectFlowPanel.Name = "txtTotalProjectFlowPanel";
+            txtTotalProjectFlowPanel.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtTotalProjectFlowPanel.Size = new Size(114, 24);
+            txtTotalProjectFlowPanel.TabIndex = 12;
+            // 
+            // guna2DataGridView2
+            // 
+            dataGridViewCellStyle13.BackColor = Color.White;
+            guna2DataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            guna2DataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            guna2DataGridView2.ColumnHeadersHeight = 4;
+            guna2DataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = Color.White;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle15.ForeColor = Color.White;
+            dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle15.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
+            guna2DataGridView2.DefaultCellStyle = dataGridViewCellStyle15;
+            guna2DataGridView2.Dock = DockStyle.Fill;
+            guna2DataGridView2.GridColor = Color.FromArgb(231, 229, 255);
+            guna2DataGridView2.Location = new Point(0, 23);
+            guna2DataGridView2.Name = "guna2DataGridView2";
+            guna2DataGridView2.RowHeadersVisible = false;
+            guna2DataGridView2.Size = new Size(114, 1);
+            guna2DataGridView2.TabIndex = 2;
+            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.Font = null;
+            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            guna2DataGridView2.ThemeStyle.BackColor = Color.White;
+            guna2DataGridView2.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            guna2DataGridView2.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            guna2DataGridView2.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            guna2DataGridView2.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            guna2DataGridView2.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            guna2DataGridView2.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            guna2DataGridView2.ThemeStyle.HeaderStyle.Height = 4;
+            guna2DataGridView2.ThemeStyle.ReadOnly = false;
+            guna2DataGridView2.ThemeStyle.RowsStyle.BackColor = Color.White;
+            guna2DataGridView2.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            guna2DataGridView2.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            guna2DataGridView2.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            guna2DataGridView2.ThemeStyle.RowsStyle.Height = 25;
+            guna2DataGridView2.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            guna2DataGridView2.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
+            // txtTotalProjectFlow
+            // 
+            txtTotalProjectFlow.BackColor = Color.Transparent;
+            txtTotalProjectFlow.Dock = DockStyle.Top;
+            txtTotalProjectFlow.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            txtTotalProjectFlow.ForeColor = Color.Black;
+            txtTotalProjectFlow.Location = new Point(0, 0);
+            txtTotalProjectFlow.Name = "txtTotalProjectFlow";
+            txtTotalProjectFlow.Size = new Size(12, 23);
+            txtTotalProjectFlow.TabIndex = 1;
+            txtTotalProjectFlow.Text = "0";
+            txtTotalProjectFlow.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
             // guna2HtmlLabel6
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel6.Location = new Point(464, 19);
+            guna2HtmlLabel6.Location = new Point(305, 19);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(127, 23);
             guna2HtmlLabel6.TabIndex = 3;
@@ -426,7 +610,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel4.Location = new Point(144, 19);
+            guna2HtmlLabel4.Location = new Point(-15, 19);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(111, 23);
             guna2HtmlLabel4.TabIndex = 1;
@@ -437,7 +621,7 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2HtmlLabel9.BackColor = Color.Transparent;
             guna2HtmlLabel9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel9.Location = new Point(784, 19);
+            guna2HtmlLabel9.Location = new Point(625, 19);
             guna2HtmlLabel9.Name = "guna2HtmlLabel9";
             guna2HtmlLabel9.Size = new Size(144, 23);
             guna2HtmlLabel9.TabIndex = 6;
@@ -447,13 +631,13 @@ namespace PresentationLayer.Views.UserControls
             // txtInStock
             // 
             txtInStock.Controls.Add(guna2HtmlLabel10);
-            txtInStock.CustomizableEdges = customizableEdges7;
+            txtInStock.CustomizableEdges = customizableEdges11;
             txtInStock.Dock = DockStyle.Fill;
             txtInStock.FillColor = Color.PaleGreen;
             txtInStock.FillColor2 = Color.White;
-            txtInStock.Location = new Point(344, 19);
+            txtInStock.Location = new Point(185, 19);
             txtInStock.Name = "txtInStock";
-            txtInStock.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtInStock.ShadowDecoration.CustomizableEdges = customizableEdges12;
             txtInStock.Size = new Size(114, 24);
             txtInStock.TabIndex = 8;
             // 
@@ -464,7 +648,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel10.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel10.Location = new Point(0, 0);
             guna2HtmlLabel10.Name = "guna2HtmlLabel10";
-            guna2HtmlLabel10.Size = new Size(114, 24);
+            guna2HtmlLabel10.Size = new Size(12, 23);
             guna2HtmlLabel10.TabIndex = 5;
             guna2HtmlLabel10.Text = "0";
             guna2HtmlLabel10.TextAlignment = ContentAlignment.MiddleCenter;
@@ -472,13 +656,13 @@ namespace PresentationLayer.Views.UserControls
             // txtLowStock
             // 
             txtLowStock.Controls.Add(guna2HtmlLabel7);
-            txtLowStock.CustomizableEdges = customizableEdges9;
+            txtLowStock.CustomizableEdges = customizableEdges13;
             txtLowStock.Dock = DockStyle.Fill;
             txtLowStock.FillColor = Color.LightGoldenrodYellow;
             txtLowStock.FillColor2 = Color.White;
-            txtLowStock.Location = new Point(664, 19);
+            txtLowStock.Location = new Point(505, 19);
             txtLowStock.Name = "txtLowStock";
-            txtLowStock.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtLowStock.ShadowDecoration.CustomizableEdges = customizableEdges14;
             txtLowStock.Size = new Size(114, 24);
             txtLowStock.TabIndex = 10;
             // 
@@ -489,7 +673,7 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel7.Location = new Point(0, 0);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            guna2HtmlLabel7.Size = new Size(114, 24);
+            guna2HtmlLabel7.Size = new Size(12, 23);
             guna2HtmlLabel7.TabIndex = 10;
             guna2HtmlLabel7.Text = "0";
             guna2HtmlLabel7.TextAlignment = ContentAlignment.MiddleCenter;
@@ -498,38 +682,38 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2GradientPanel6.Controls.Add(guna2DataGridView1);
             guna2GradientPanel6.Controls.Add(txtOutOfStock);
-            guna2GradientPanel6.CustomizableEdges = customizableEdges11;
+            guna2GradientPanel6.CustomizableEdges = customizableEdges15;
             guna2GradientPanel6.Dock = DockStyle.Fill;
             guna2GradientPanel6.FillColor = Color.IndianRed;
             guna2GradientPanel6.FillColor2 = Color.White;
-            guna2GradientPanel6.Location = new Point(984, 19);
+            guna2GradientPanel6.Location = new Point(825, 19);
             guna2GradientPanel6.Name = "guna2GradientPanel6";
-            guna2GradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            guna2GradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2GradientPanel6.Size = new Size(114, 24);
             guna2GradientPanel6.TabIndex = 11;
             // 
             // guna2DataGridView1
             // 
-            dataGridViewCellStyle10.BackColor = Color.White;
-            guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle16.BackColor = Color.White;
+            guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle17.ForeColor = Color.White;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             guna2DataGridView1.ColumnHeadersHeight = 4;
             guna2DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = Color.White;
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle18.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle18.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle18.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
+            guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle18;
             guna2DataGridView1.Dock = DockStyle.Fill;
             guna2DataGridView1.GridColor = Color.FromArgb(231, 229, 255);
             guna2DataGridView1.Location = new Point(0, 23);
@@ -567,10 +751,21 @@ namespace PresentationLayer.Views.UserControls
             txtOutOfStock.ForeColor = Color.MistyRose;
             txtOutOfStock.Location = new Point(0, 0);
             txtOutOfStock.Name = "txtOutOfStock";
-            txtOutOfStock.Size = new Size(114, 23);
+            txtOutOfStock.Size = new Size(12, 23);
             txtOutOfStock.TabIndex = 1;
             txtOutOfStock.Text = "0";
             txtOutOfStock.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // guna2HtmlLabel11
+            // 
+            guna2HtmlLabel11.BackColor = Color.Transparent;
+            guna2HtmlLabel11.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            guna2HtmlLabel11.Location = new Point(945, 19);
+            guna2HtmlLabel11.Name = "guna2HtmlLabel11";
+            guna2HtmlLabel11.Size = new Size(144, 23);
+            guna2HtmlLabel11.TabIndex = 12;
+            guna2HtmlLabel11.Text = "Total Project Flow:";
+            guna2HtmlLabel11.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // btnPrint
             // 
@@ -690,6 +885,9 @@ namespace PresentationLayer.Views.UserControls
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             materialCard1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
+            guna2GradientPanel4.ResumeLayout(false);
+            guna2GradientPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgProjectFlow).EndInit();
             guna2GradientPanel3.ResumeLayout(false);
             guna2GradientPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgOutOfStock).EndInit();
@@ -702,6 +900,9 @@ namespace PresentationLayer.Views.UserControls
             panel2.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
+            txtTotalProjectFlowPanel.ResumeLayout(false);
+            txtTotalProjectFlowPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2DataGridView2).EndInit();
             txtInStock.ResumeLayout(false);
             txtInStock.PerformLayout();
             txtLowStock.ResumeLayout(false);
@@ -748,5 +949,13 @@ namespace PresentationLayer.Views.UserControls
         private Guna2DataGridView guna2DataGridView1;
         private Guna2HtmlLabel txtOutOfStock;
         private Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna2GradientPanel guna2GradientPanel4;
+        private Guna2DataGridView dgProjectFlow;
+        private Guna2HtmlLabel guna2HtmlLabel8;
+        private Guna2DataGridView guna2DataGridView2;
+        private Guna2HtmlLabel guna2HtmlLabel12;
+        private Guna2HtmlLabel guna2HtmlLabel11;
+        private Guna2GradientPanel txtTotalProjectFlowPanel;
+        private Guna2HtmlLabel txtTotalProjectFlow;
     }
 }

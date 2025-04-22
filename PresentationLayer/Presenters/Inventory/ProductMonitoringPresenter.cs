@@ -18,9 +18,11 @@ namespace RavenTech_ERP.Presenters.Inventory
         private IEnumerable<StockViewModel> InStockList;
         private IEnumerable<StockViewModel> LowStockList;
         private IEnumerable<StockViewModel> OutOfStockList;
+        private IEnumerable<ProjectFlowViewModel> ProjectFlowList;
         private BindingSource InStockBindingSource;
         private BindingSource LowStockBindingSource;
         private BindingSource OutOfStockBindingSource;
+        private BindingSource ProjectFlowBindingSource;
         public ProductMonitoringPresenter(IProductMonitoringView view, IUnitOfWork unitOfWork)
         {
             _view = view;
@@ -28,16 +30,38 @@ namespace RavenTech_ERP.Presenters.Inventory
             InStockBindingSource = new BindingSource();
             LowStockBindingSource = new BindingSource();
             OutOfStockBindingSource = new BindingSource();
+            ProjectFlowBindingSource = new BindingSource();
 
             _view.PrintEvent += Print;
 
             LoadInStock();
             LoadLowStock();
             LoadOutOfStock();
+            LoadProjectFlow();
 
             _view.SetInStockListBindingSource(InStockBindingSource);
             _view.SetLowStockListBindingSource(LowStockBindingSource);
             _view.SetOutOfStockListBindingSource(OutOfStockBindingSource);
+            _view.SetProjectFlowListBindingSource(ProjectFlowBindingSource);
+        }
+
+        private void LoadProjectFlow()
+        {
+            ProjectFlowList = _unitOfWork.ProjectLine.Value.GetAll(includeProperties: "Project")
+                .GroupBy(p => new
+                {
+                    p.ProjectId,
+                    ProductName = p.Product?.ProductName ?? p.ProductName // Fallback if navigation is null
+                })
+               .Select(g => new ProjectFlowViewModel
+               {
+                   Product = g.Key.ProductName,
+                   Qty = g.Sum(c => c.Quantity),
+                   Project = g.FirstOrDefault()?.Project?.ProjectName ?? "Unknown"
+               })
+               .ToList();
+            ProjectFlowBindingSource.DataSource = ProjectFlowList;
+            _view.ProjectFlow = ProjectFlowList.Sum(c => c.Qty);
         }
 
         private void LoadOutOfStock()
