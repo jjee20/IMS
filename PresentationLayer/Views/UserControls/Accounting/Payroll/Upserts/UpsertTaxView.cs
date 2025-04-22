@@ -29,9 +29,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            txtMinimumSalary.Text = _entity.MinimumSalary.ToString();
-            txtMaximumSalary.Text = _entity.MaximumSalary.ToString();
-            txtTaxRate.Text = _entity.TaxRate.ToString();
+            if (_entity != null)
+            {
+                txtMinimumSalary.Text = _entity.MinimumSalary.ToString();
+                txtMaximumSalary.Text = _entity.MaximumSalary.ToString();
+                txtTaxRate.Text = _entity.TaxRate.ToString();
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

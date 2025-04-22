@@ -29,11 +29,14 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            txtRegularHours.Text = _entity.RegularHours.ToString();
-            txtName.Text = _entity.ShiftName;
+            if (_entity != null)
+            {
+                txtRegularHours.Text = _entity.RegularHours.ToString();
+                txtName.Text = _entity.ShiftName;
 
-            txtStartTime.Value = DateTime.Today.Add(_entity.StartTime);
-            txtEndTime.Value = DateTime.Today.Add(_entity.EndTime);
+                txtStartTime.Value = DateTime.Today.Add(_entity.StartTime);
+                txtEndTime.Value = DateTime.Today.Add(_entity.EndTime);
+            }
 
         }
 

@@ -95,7 +95,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 .Select(day => new DailyPurchasesBreakdownViewModel
                 {
                     Day = day,
-                    Purchases = purchases.Where(c => c.OrderDate.Month == month.Value && c.OrderDate.Day == day).Sum(c => c.Total)
+                    Expenses = purchases.Where(c => c.OrderDate.Month == month.Value && c.OrderDate.Day == day).Sum(c => c.Total)
                 })
                 .ToList();
             DailyPurchasesBindingSource.DataSource = dailyPurchasesData;
@@ -118,7 +118,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 .Select(m => new MonthlyPurchasesBreakdownViewModel
                 {
                     Month = new DateTime(1, m, 1).ToString("MMMM"),
-                    Purchases = purchases.Where(c => c.OrderDate.Month == m).Sum(c => c.Total)
+                    Expenses = purchases.Where(c => c.OrderDate.Month == m).Sum(c => c.Total)
                 })
                 .ToList();
             MonthlyPurchasesBindingSource.DataSource = monthlyPurchasesData;
@@ -128,7 +128,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 .Select(m => new AnnuallyPurchasesBreakdownViewModel
                 {
                     Year = m,
-                    Purchases = purchases.Where(c => c.OrderDate.Year == m).Sum(c => c.Total)
+                    Expenses = purchases.Where(c => c.OrderDate.Year == m).Sum(c => c.Total)
                 })
                 .ToList().OrderByDescending(c => c.Year);
             AnnuallyPurchasesBindingSource.DataSource = annuallyPurchasesData;

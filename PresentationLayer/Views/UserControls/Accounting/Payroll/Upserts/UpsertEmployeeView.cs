@@ -34,8 +34,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadGender()
         {
-            var entity = EnumHelper.EnumToEnumerable<Gender>();
-            txtGender.DataSource = entity.ToList();
+            txtGender.DataSource = EnumHelper.EnumToEnumerable<Gender>();
             txtGender.DisplayMember = "Name";
             txtGender.ValueMember = "Id";
             txtGender.Text = "~Select Gender~";
@@ -71,19 +70,22 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            txtDepartment.SelectedValue = _entity.DepartmentId;
-            txtJobPosition.SelectedValue = _entity.JobPositionId;
-            txtShift.SelectedValue = _entity.ShiftId;
-            txtGender.SelectedValue = _entity.Gender;
-            txtBasicSalary.Text = _entity.BasicSalary.ToString();
-            txtLeaveCredits.Text = _entity.LeaveCredits.ToString();
-            txtAddress.Text = _entity.Address;
-            txtContactNumber.Text = _entity.ContactNumber;
-            txtEmail.Text = _entity.Email;
-            txtFirstName.Text = _entity.FirstName;
-            txtLastName.Text = _entity.LastName;
-            txtBirthDate.Value = _entity == null ? _entity.DateOfBirth : DateTime.Now;
-            txtIsDeducted.Checked = _entity.isDeducted;
+            if (_entity != null)
+            {
+                txtDepartment.SelectedValue = _entity.DepartmentId;
+                txtJobPosition.SelectedValue = _entity.JobPositionId;
+                txtShift.SelectedValue = _entity.ShiftId;
+                txtGender.SelectedValue = _entity.Gender;
+                txtBasicSalary.Text = _entity.BasicSalary.ToString();
+                txtLeaveCredits.Text = _entity.LeaveCredits.ToString();
+                txtAddress.Text = _entity.Address;
+                txtContactNumber.Text = _entity.ContactNumber;
+                txtEmail.Text = _entity.Email;
+                txtFirstName.Text = _entity.FirstName;
+                txtLastName.Text = _entity.LastName;
+                txtBirthDate.Value = _entity == null ? _entity.DateOfBirth : DateTime.Now;
+                txtIsDeducted.Checked = _entity.isDeducted;
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

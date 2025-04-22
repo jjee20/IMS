@@ -22,7 +22,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Searches
         {
             InitializeComponent();
             _unitOfWork = unitOfWork;
-
             LoadProducts();
         }
 
@@ -33,7 +32,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Searches
 
         private void dgList_CellClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
         {
-           _entity = (Product)dgList.SelectedItem;
+            _entity = (Product)dgList.SelectedItem;
 
             DialogResult = DialogResult.OK;
             Close();

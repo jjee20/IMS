@@ -32,7 +32,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         {
             txtProductStatus.DataSource = EnumHelper.EnumToEnumerable<ProductStatus>();
             txtProductStatus.DisplayMember = "Name";
-            txtProductStatus.ValueMember = "Id";
+            txtProductStatus.ValueMember = "Id";;
             txtProductStatus.Text = "~Select Product Status~";
         }
 
@@ -46,11 +46,14 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            txtProduct.SelectedValue = _entity.ProductId;
-            txtDate.Value = _entity.DateAdded;
-            txtNotes.Text = _entity.Notes;
-            txtProductStatus.SelectedValue = _entity.ProductStatus;
-            txtStockQuantity.Text = _entity.StockQuantity.ToString();
+            if (_entity.ProductStockInLogId > 0)
+            {
+                txtProduct.SelectedValue = _entity.ProductId;
+                txtDate.Value = _entity.DateAdded;
+                txtNotes.Text = _entity.Notes;
+                txtProductStatus.SelectedValue = _entity.ProductStatus;
+                txtStockQuantity.Text = _entity.StockQuantity.ToString();
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
@@ -91,7 +94,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         {
             using (var searchProduct = new SearchProduct(_unitOfWork))
             {
-                if (ShowDialog() == DialogResult.OK)
+                if (searchProduct.ShowDialog() == DialogResult.OK)
                 {
                     var selectedProduct = searchProduct._entity;
                     txtProduct.SelectedValue = selectedProduct.ProductId;

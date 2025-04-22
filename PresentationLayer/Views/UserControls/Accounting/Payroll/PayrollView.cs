@@ -41,7 +41,8 @@ namespace PresentationLayer.Views.UserControls
 
                 PrintPayrollEvent?.Invoke(s, e);
             };
-            dgList.CellClick += (s, e) => {
+            dgList.CellClick += (s, e) =>
+            {
 
                 if (e.DataColumn.GridColumn.MappingName == "Payslip")
                 {
@@ -168,6 +169,11 @@ namespace PresentationLayer.Views.UserControls
         }
 
         private void btnContribution_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtProject_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             SearchEvent?.Invoke(this, EventArgs.Empty);
         }

@@ -481,4 +481,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\UserControls\Inventory\Lists\" />
+  </ItemGroup>
+
 </Project>

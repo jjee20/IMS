@@ -49,12 +49,15 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            txtEmployee.SelectedValue = _entity.EmployeeId;
-            txtBonusType.Text = _entity.BonusType.ToString();
-            txtAmount.Text = _entity.Amount.ToString();
-            txtDescription.Text = _entity.Description;
-            txtDate.Value = _entity == null ? _entity.DateGranted : DateTime.Now;
-            txtIsOneTime.Checked = _entity.IsOneTime;
+            if (_entity != null)
+            {
+                txtEmployee.SelectedValue = _entity.EmployeeId;
+                txtBonusType.Text = _entity.BonusType.ToString();
+                txtAmount.Text = _entity.Amount.ToString();
+                txtDescription.Text = _entity.Description;
+                txtDate.Value = _entity == null ? _entity.DateGranted : DateTime.Now;
+                txtIsOneTime.Checked = _entity.IsOneTime;
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

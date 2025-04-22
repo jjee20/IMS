@@ -39,11 +39,14 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            txtEmployee.SelectedValue = _entity.EmployeeId;
-            txtSSS.Text = _entity.SSS.ToString();
-            txtPagIbig.Text = _entity.PagIbig.ToString();
-            txtPhilHealth.Text = _entity.PhilHealth.ToString();
-            txtSSSWISP.Text = _entity.SSSWISP.ToString();
+            if (_entity != null)
+            {
+                txtEmployee.SelectedValue = _entity.EmployeeId;
+                txtSSS.Text = _entity.SSS.ToString();
+                txtPagIbig.Text = _entity.PagIbig.ToString();
+                txtPhilHealth.Text = _entity.PhilHealth.ToString();
+                txtSSSWISP.Text = _entity.SSSWISP.ToString();
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

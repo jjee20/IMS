@@ -24,59 +24,57 @@ namespace PresentationLayer.Views.UserControls
         public VendorTypeView()
         {
             InitializeComponent();
-            AssociateAndRaiseViewEvents();
         }
 
-        private void AssociateAndRaiseViewEvents()
+
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            btnAdd.Click += delegate
-            {
-                AddEvent?.Invoke(this, EventArgs.Empty);
-            };
-            txtSearch.KeyDown += (s, e) =>
-            {
-                if (e.KeyCode == Keys.Enter)
-                    SearchEvent?.Invoke(this, EventArgs.Empty);
-                txtSearch.Focus();
-            };
-            //Print
-            btnPrint.Click += delegate
-            {
-                PrintEvent?.Invoke(this, EventArgs.Empty);
-            };
-            dgList.CellClick += (sender, e) =>
-            {
-                if (e.DataColumn.GridColumn.MappingName == "Edit")
-                {
-                    if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is VendorTypeViewModel row)
-                    {
-                        EditEvent?.Invoke(sender, e);
-                    }
-                }
-                else if (e.DataColumn.GridColumn.MappingName == "Delete")
-                {
-                    var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            AddEvent?.Invoke(this, EventArgs.Empty);
+        }
 
-                    if (result == DialogResult.Yes)
-                    {
-                        DeleteEvent?.Invoke(sender, e);
-                    }
-                }
-            };
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            PrintEvent?.Invoke(this, EventArgs.Empty);
+        }
 
-            dgList.KeyDown += (sender, e) =>
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            txtSearch.Focus();
+        }
+
+        private void dgList_CellClick(object sender, CellClickEventArgs e)
+        {
+            if (e.DataColumn.GridColumn.MappingName == "Edit")
             {
-                if (e.KeyCode == Keys.Delete)
+                if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is BillTypeViewModel row)
                 {
-                    var result = MessageBox.Show("Are you sure you want to delete the selected items?", "Warning",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        MultipleDeleteEvent?.Invoke(sender, e);
-                    }
+                    EditEvent?.Invoke(sender, e);
                 }
-            };
+            }
+            else if (e.DataColumn.GridColumn.MappingName == "Delete")
+            {
+                var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    DeleteEvent?.Invoke(sender, e);
+                }
+            }
+        }
+        private void Me_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                var result = MessageBox.Show("Are you sure you want to delete the selected items?", "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    MultipleDeleteEvent?.Invoke(sender, e);
+                }
+            }
         }
 
         //Properties

@@ -19,10 +19,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             InitializeComponent();
             _unitOfWork = unitOfWork;
             _entity = entity ?? new Product();
-            LoadEntityToForm();
             LoadProductTypes();
             LoadUOM();
             LoadBranch();
+            LoadEntityToForm();
         }
 
         private void LoadBranch()
@@ -51,6 +51,9 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
+            if(_entity != null)
+            {
+
             txtName.Text = _entity.ProductName;
             txtDescription.Text = _entity.Description;
             txtBarcode.Text = _entity.Barcode;
@@ -64,6 +67,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             txtUOM.SelectedValue = _entity.UnitOfMeasureId;
             txtDefaultBuyingPrice.Text = _entity.DefaultBuyingPrice.ToString();
             txtDefaultSellingPrice.Text = _entity.DefaultSellingPrice.ToString();
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

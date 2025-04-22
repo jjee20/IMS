@@ -56,6 +56,8 @@
             // 
             // txtCashBank
             // 
+            txtCashBank.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtCashBank.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtCashBank.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtCashBank.Location = new Point(171, 163);
             txtCashBank.Name = "txtCashBank";
@@ -115,6 +117,8 @@
             // 
             // txtPaymentType
             // 
+            txtPaymentType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtPaymentType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtPaymentType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtPaymentType.Location = new Point(171, 79);
             txtPaymentType.Name = "txtPaymentType";

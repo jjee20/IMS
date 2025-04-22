@@ -93,6 +93,8 @@
             // 
             // txtBranch
             // 
+            txtBranch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtBranch.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtBranch.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtBranch.Location = new Point(180, 174);
             txtBranch.Name = "txtBranch";

@@ -35,12 +35,16 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
+            if(_entity != null)
+            {
+
             txtName.Text = _entity.VendorName;
             txtVendorType.SelectedValue = _entity.VendorTypeId;
             txtAddress.Text = _entity.Address;
             txtPhone.Text = _entity.Phone;
             txtEmail.Text = _entity.Email;
             txtContactPerson.Text = _entity.ContactPerson;
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

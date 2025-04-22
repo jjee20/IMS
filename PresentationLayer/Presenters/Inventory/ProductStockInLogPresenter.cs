@@ -47,7 +47,7 @@ namespace PresentationLayer.Presenters
         {
             using (var form = new UpsertProductStockInLogView(_unitOfWork))
             {
-                form.Text = "Add ProductStockInLog";
+                form.Text = "Add Product Stock-In Log";
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadAllProductStockInLogList();
@@ -67,7 +67,7 @@ namespace PresentationLayer.Presenters
                 var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId);
                 using (var form = new UpsertProductStockInLogView(_unitOfWork,entity))
                 {
-                    form.Text = "Edit ProductStockInLog";
+                    form.Text = "Edit Product Stock-In Log";
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         LoadAllProductStockInLogList();

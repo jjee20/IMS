@@ -172,6 +172,8 @@
             // 
             // txtProductType
             // 
+            txtProductType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtProductType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtProductType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtProductType.Location = new Point(181, 195);
             txtProductType.Name = "txtProductType";
@@ -217,6 +219,8 @@
             // 
             // txtUOM
             // 
+            txtUOM.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtUOM.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtUOM.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtUOM.Location = new Point(544, 236);
             txtUOM.Name = "txtUOM";
@@ -235,6 +239,8 @@
             // 
             // txtBranch
             // 
+            txtBranch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtBranch.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtBranch.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtBranch.Location = new Point(181, 236);
             txtBranch.Name = "txtBranch";

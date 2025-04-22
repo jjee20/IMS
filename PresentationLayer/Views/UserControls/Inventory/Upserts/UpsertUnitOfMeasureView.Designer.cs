@@ -97,7 +97,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
-            Text = "Add Bill Type";
+            Text = "Add Unit Of Measure";
             ((System.ComponentModel.ISupportInitialize)txtName).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtDescription).EndInit();
             ResumeLayout(false);

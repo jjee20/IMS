@@ -30,23 +30,20 @@ namespace PresentationLayer.Views.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn9 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn10 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn11 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn12 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn13 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn14 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn3 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn4 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AllowanceView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn7 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
-            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel2 = new Panel();
-            btnPrint = new Guna2ImageButton();
-            btnAdd = new Syncfusion.WinForms.Controls.SfButton();
-            txtSearch = new Guna2TextBox();
             toolstripitemExcel = new Syncfusion.Windows.Forms.Tools.toolstripitem();
             toolstripitemPDF = new Syncfusion.Windows.Forms.Tools.toolstripitem();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -57,6 +54,9 @@ namespace PresentationLayer.Views.UserControls
             panel1 = new Panel();
             dgList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             dgPager = new Syncfusion.WinForms.DataPager.SfDataPager();
+            btnPrint = new Guna2ImageButton();
+            btnAdd = new Syncfusion.WinForms.Controls.SfButton();
+            txtSearch = new Guna2TextBox();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -77,62 +77,6 @@ namespace PresentationLayer.Views.UserControls
             panel2.Name = "panel2";
             panel2.Size = new Size(1346, 62);
             panel2.TabIndex = 9;
-            // 
-            // btnPrint
-            // 
-            btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            btnPrint.CheckedState.ImageSize = new Size(64, 64);
-            btnPrint.HoverState.ImageSize = new Size(64, 64);
-            btnPrint.Image = (Image)resources.GetObject("btnPrint.Image");
-            btnPrint.ImageOffset = new Point(0, 0);
-            btnPrint.ImageRotate = 0F;
-            btnPrint.ImageSize = new Size(30, 30);
-            btnPrint.Location = new Point(1292, 10);
-            btnPrint.Name = "btnPrint";
-            btnPrint.PressedState.ImageSize = new Size(64, 64);
-            btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges1;
-            btnPrint.Size = new Size(40, 40);
-            btnPrint.TabIndex = 26;
-            // 
-            // btnAdd
-            // 
-            btnAdd.BackColor = Color.AliceBlue;
-            btnAdd.Font = new Font("Segoe UI Semibold", 9F);
-            btnAdd.ForeColor = Color.Black;
-            btnAdd.ImageMargin = new Padding(5, 3, 3, 3);
-            btnAdd.Location = new Point(15, 10);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(95, 39);
-            btnAdd.Style.BackColor = Color.AliceBlue;
-            btnAdd.Style.ForeColor = Color.Black;
-            btnAdd.Style.Image = (Image)resources.GetObject("resource.Image");
-            btnAdd.TabIndex = 25;
-            btnAdd.Text = "Add New";
-            btnAdd.TextMargin = new Padding(7, 3, 3, 3);
-            btnAdd.UseVisualStyleBackColor = false;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            txtSearch.CharacterCasing = CharacterCasing.Upper;
-            txtSearch.CustomizableEdges = customizableEdges2;
-            txtSearch.DefaultText = "";
-            txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtSearch.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtSearch.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtSearch.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSearch.Font = new Font("Segoe UI", 9F);
-            txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(999, 10);
-            txtSearch.Margin = new Padding(3, 4, 3, 4);
-            txtSearch.Name = "txtSearch";
-            txtSearch.PlaceholderText = "Search here";
-            txtSearch.SelectedText = "";
-            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges3;
-            txtSearch.Size = new Size(287, 39);
-            txtSearch.TabIndex = 11;
             // 
             // toolstripitemExcel
             // 
@@ -235,69 +179,69 @@ namespace PresentationLayer.Views.UserControls
             dgList.AllowFiltering = true;
             dgList.AllowTriStateSorting = true;
             dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
-            gridTextColumn1.AllowFiltering = true;
-            gridTextColumn1.HeaderText = "Id";
-            gridTextColumn1.MappingName = "AllowanceId";
-            gridTextColumn1.MaximumWidth = 100D;
-            gridTextColumn1.MinimumWidth = 100D;
-            gridTextColumn1.Visible = false;
-            gridTextColumn1.Width = 100D;
-            gridTextColumn2.AllowFiltering = true;
-            gridTextColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
-            gridTextColumn2.HeaderText = "Employee";
-            gridTextColumn2.MappingName = "Employee";
-            gridTextColumn3.AllowFiltering = true;
-            gridTextColumn3.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn3.HeaderText = "Type";
-            gridTextColumn3.MappingName = "AllowanceType";
-            gridTextColumn4.AllowFiltering = true;
-            gridTextColumn4.HeaderText = "Date";
-            gridTextColumn4.MappingName = "DateGranted";
-            gridTextColumn5.AllowFiltering = true;
-            gridTextColumn5.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn5.HeaderText = "Amount";
-            gridTextColumn5.MappingName = "Amount";
-            gridTextColumn6.AllowFiltering = true;
-            gridTextColumn6.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn6.HeaderText = "Description";
-            gridTextColumn6.MappingName = "Description";
-            gridTextColumn7.AllowFiltering = true;
-            gridTextColumn7.HeaderText = "Is Recurring?";
-            gridTextColumn7.MappingName = "IsRecurring";
-            gridImageColumn1.AllowEditing = false;
-            gridImageColumn1.AllowGrouping = false;
-            gridImageColumn1.AllowSorting = false;
-            gridImageColumn1.HeaderStyle.HoverTextColor = Color.White;
-            gridImageColumn1.HeaderStyle.PressedTextColor = Color.White;
-            gridImageColumn1.HeaderStyle.TextColor = Color.White;
-            gridImageColumn1.HeaderText = "Edit";
-            gridImageColumn1.ImageLayout = ImageLayout.Zoom;
-            gridImageColumn1.MappingName = "Edit";
-            gridImageColumn1.MaximumWidth = 30D;
-            gridImageColumn1.MinimumWidth = 30D;
-            gridImageColumn1.Width = 30D;
-            gridImageColumn2.AllowEditing = false;
-            gridImageColumn2.AllowGrouping = false;
-            gridImageColumn2.AllowSorting = false;
-            gridImageColumn2.HeaderStyle.HoverTextColor = Color.White;
-            gridImageColumn2.HeaderStyle.PressedTextColor = Color.White;
-            gridImageColumn2.HeaderStyle.TextColor = Color.White;
-            gridImageColumn2.HeaderText = "Delete";
-            gridImageColumn2.ImageLayout = ImageLayout.Zoom;
-            gridImageColumn2.MappingName = "Delete";
-            gridImageColumn2.MaximumWidth = 30D;
-            gridImageColumn2.MinimumWidth = 30D;
-            gridImageColumn2.ShowFilterRowOptions = false;
-            gridImageColumn2.Width = 30D;
-            dgList.Columns.Add(gridTextColumn1);
-            dgList.Columns.Add(gridTextColumn2);
-            dgList.Columns.Add(gridTextColumn3);
-            dgList.Columns.Add(gridTextColumn4);
-            dgList.Columns.Add(gridTextColumn5);
-            dgList.Columns.Add(gridTextColumn6);
-            dgList.Columns.Add(gridTextColumn7);
-            dgList.Columns.Add(gridImageColumn1);
-            dgList.Columns.Add(gridImageColumn2);
+            gridTextColumn8.AllowFiltering = true;
+            gridTextColumn8.HeaderText = "Id";
+            gridTextColumn8.MappingName = "AllowanceId";
+            gridTextColumn8.MaximumWidth = 100D;
+            gridTextColumn8.MinimumWidth = 100D;
+            gridTextColumn8.Visible = false;
+            gridTextColumn8.Width = 100D;
+            gridTextColumn9.AllowFiltering = true;
+            gridTextColumn9.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            gridTextColumn9.HeaderText = "Employee";
+            gridTextColumn9.MappingName = "Employee";
+            gridTextColumn10.AllowFiltering = true;
+            gridTextColumn10.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn10.HeaderText = "Type";
+            gridTextColumn10.MappingName = "AllowanceType";
+            gridTextColumn11.AllowFiltering = true;
+            gridTextColumn11.HeaderText = "Date";
+            gridTextColumn11.MappingName = "DateGranted";
+            gridTextColumn12.AllowFiltering = true;
+            gridTextColumn12.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn12.HeaderText = "Amount";
+            gridTextColumn12.MappingName = "Amount";
+            gridTextColumn13.AllowFiltering = true;
+            gridTextColumn13.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn13.HeaderText = "Description";
+            gridTextColumn13.MappingName = "Description";
+            gridTextColumn14.AllowFiltering = true;
+            gridTextColumn14.HeaderText = "Is Recurring?";
+            gridTextColumn14.MappingName = "IsRecurring";
+            gridImageColumn3.AllowEditing = false;
+            gridImageColumn3.AllowGrouping = false;
+            gridImageColumn3.AllowSorting = false;
+            gridImageColumn3.HeaderStyle.HoverTextColor = Color.White;
+            gridImageColumn3.HeaderStyle.PressedTextColor = Color.White;
+            gridImageColumn3.HeaderStyle.TextColor = Color.White;
+            gridImageColumn3.HeaderText = "Edit";
+            gridImageColumn3.ImageLayout = ImageLayout.Zoom;
+            gridImageColumn3.MappingName = "Edit";
+            gridImageColumn3.MaximumWidth = 30D;
+            gridImageColumn3.MinimumWidth = 30D;
+            gridImageColumn3.Width = 30D;
+            gridImageColumn4.AllowEditing = false;
+            gridImageColumn4.AllowGrouping = false;
+            gridImageColumn4.AllowSorting = false;
+            gridImageColumn4.HeaderStyle.HoverTextColor = Color.White;
+            gridImageColumn4.HeaderStyle.PressedTextColor = Color.White;
+            gridImageColumn4.HeaderStyle.TextColor = Color.White;
+            gridImageColumn4.HeaderText = "Delete";
+            gridImageColumn4.ImageLayout = ImageLayout.Zoom;
+            gridImageColumn4.MappingName = "Delete";
+            gridImageColumn4.MaximumWidth = 30D;
+            gridImageColumn4.MinimumWidth = 30D;
+            gridImageColumn4.ShowFilterRowOptions = false;
+            gridImageColumn4.Width = 30D;
+            dgList.Columns.Add(gridTextColumn8);
+            dgList.Columns.Add(gridTextColumn9);
+            dgList.Columns.Add(gridTextColumn10);
+            dgList.Columns.Add(gridTextColumn11);
+            dgList.Columns.Add(gridTextColumn12);
+            dgList.Columns.Add(gridTextColumn13);
+            dgList.Columns.Add(gridTextColumn14);
+            dgList.Columns.Add(gridImageColumn3);
+            dgList.Columns.Add(gridImageColumn4);
             dgList.Dock = DockStyle.Fill;
             dgList.FrozenColumnCount = 2;
             dgList.FrozenRowCount = 1;
@@ -313,6 +257,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
             dgList.TabIndex = 7;
             dgList.Text = "sfDataGrid1";
+            dgList.CellClick += dgList_CellClick;
             // 
             // dgPager
             // 
@@ -327,6 +272,65 @@ namespace PresentationLayer.Views.UserControls
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
+            // btnPrint
+            // 
+            btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            btnPrint.CheckedState.ImageSize = new Size(64, 64);
+            btnPrint.HoverState.ImageSize = new Size(64, 64);
+            btnPrint.Image = (Image)resources.GetObject("btnPrint.Image");
+            btnPrint.ImageOffset = new Point(0, 0);
+            btnPrint.ImageRotate = 0F;
+            btnPrint.ImageSize = new Size(30, 30);
+            btnPrint.Location = new Point(1292, 11);
+            btnPrint.Name = "btnPrint";
+            btnPrint.PressedState.ImageSize = new Size(64, 64);
+            btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnPrint.Size = new Size(40, 40);
+            btnPrint.TabIndex = 29;
+            btnPrint.Click += btnPrint_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.BackColor = Color.AliceBlue;
+            btnAdd.Font = new Font("Segoe UI Semibold", 9F);
+            btnAdd.ForeColor = Color.Black;
+            btnAdd.ImageMargin = new Padding(5, 3, 3, 3);
+            btnAdd.Location = new Point(15, 11);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(95, 39);
+            btnAdd.Style.BackColor = Color.AliceBlue;
+            btnAdd.Style.ForeColor = Color.Black;
+            btnAdd.Style.Image = (Image)resources.GetObject("resource.Image");
+            btnAdd.TabIndex = 28;
+            btnAdd.Text = "Add New";
+            btnAdd.TextMargin = new Padding(7, 3, 3, 3);
+            btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            txtSearch.CharacterCasing = CharacterCasing.Upper;
+            txtSearch.CustomizableEdges = customizableEdges5;
+            txtSearch.DefaultText = "";
+            txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtSearch.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtSearch.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtSearch.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSearch.Font = new Font("Segoe UI", 9F);
+            txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
+            txtSearch.Location = new Point(999, 11);
+            txtSearch.Margin = new Padding(3, 4, 3, 4);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = "Search here";
+            txtSearch.SelectedText = "";
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtSearch.Size = new Size(287, 39);
+            txtSearch.TabIndex = 27;
+            txtSearch.KeyDown += txtSearch_KeyDown;
+            // 
             // AllowanceView
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -336,9 +340,11 @@ namespace PresentationLayer.Views.UserControls
             Controls.Add(materialCard4);
             Controls.Add(panel2);
             Controls.Add(tableLayoutPanel1);
+            KeyPreview = true;
             Name = "AllowanceView";
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
+            KeyDown += Me_KeyDown;
             panel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
@@ -350,7 +356,6 @@ namespace PresentationLayer.Views.UserControls
 
         #endregion
         private Panel panel2;
-        private Guna2TextBox txtSearch;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
@@ -358,10 +363,11 @@ namespace PresentationLayer.Views.UserControls
         private MaterialSkin.Controls.MaterialCard materialCard4;
         private Panel panel1;
         private Syncfusion.WinForms.DataPager.SfDataPager dgPager;
-        private Syncfusion.WinForms.Controls.SfButton btnAdd;
         private Syncfusion.Windows.Forms.Tools.toolstripitem toolstripitemExcel;
         private Syncfusion.Windows.Forms.Tools.toolstripitem toolstripitemPDF;
-        private Guna2ImageButton btnPrint;
         private Syncfusion.WinForms.DataGrid.SfDataGrid dgList;
+        private Guna2ImageButton btnPrint;
+        private Syncfusion.WinForms.Controls.SfButton btnAdd;
+        private Guna2TextBox txtSearch;
     }
 }

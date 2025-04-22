@@ -57,81 +57,42 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
 
         private void dgList_CellClick(object sender, CellClickEventArgs e)
         {
-            dgList.CellClick += (sender, e) =>
+            if (e.DataColumn.GridColumn.MappingName == "Edit")
             {
-                if (e.DataColumn.GridColumn.MappingName == "Edit")
+                if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is IndividualAttendanceViewModel row)
+                {
+                    var attendance = _unitOfWork.Attendance.Value.Get(
+                        c => c.AttendanceId == row.AttendanceId);
+
+                    using (var upsertAttendance = new UpsertAttendanceView(_unitOfWork, attendance))
+                    {
+                        upsertAttendance.Text = "Edit Attendance";
+                        if (upsertAttendance.ShowDialog() == DialogResult.OK)
+                        {
+                            LoadAllAttendance(_employee.EmployeeId, StartDate.Date, EndDate.Date);
+                        }
+                    }
+                }
+            }
+            else if (e.DataColumn.GridColumn.MappingName == "Delete")
+            {
+                var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
                 {
                     if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is IndividualAttendanceViewModel row)
                     {
                         var attendance = _unitOfWork.Attendance.Value.Get(
                             c => c.AttendanceId == row.AttendanceId);
 
-                        using (var upsertAttendance = new UpsertAttendanceView(_unitOfWork, attendance))
-                        {
-                            upsertAttendance.Text = "Edit Attendance";
-                            if (upsertAttendance.ShowDialog() == DialogResult.OK)
-                            {
-                                LoadAllAttendance(_employee.EmployeeId, StartDate.Date, EndDate.Date);
-                            }
-                        }
-                    }
-                }
-                else if (e.DataColumn.GridColumn.MappingName == "Delete")
-                {
-                    var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is IndividualAttendanceViewModel row)
-                        {
-                            var attendance = _unitOfWork.Attendance.Value.Get(
-                                c => c.AttendanceId == row.AttendanceId);
-
-                            _unitOfWork.Attendance.Value.Remove(attendance);
-                            _unitOfWork.Save();
-
-                            LoadAllAttendance(_employee.EmployeeId, StartDate.Date, EndDate.Date);
-                        }
-                    }
-                }
-            };
-
-            dgList.KeyDown += (sender, e) =>
-            {
-                if (e.KeyCode == Keys.Delete)
-                {
-                    var result = MessageBox.Show("Are you sure you want to delete the selected items?", "Warning",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        if (dgList.SelectedItems == null || dgList.SelectedItems.Count == 0)
-                        {
-                            MessageBox.Show("Please select item(s) to delete.");
-                            return;
-                        }
-
-                        var selected = dgList.SelectedItems.Cast<IndividualAttendanceViewModel>().ToList(); // If you're using view models
-                        var ids = selected.Select(b => b.AttendanceId).ToList();
-
-                        var entities = _unitOfWork.Attendance.Value
-                            .GetAll()
-                            .Where(b => ids.Contains(b.AttendanceId))
-                            .ToList();
-
-                        if (!entities.Any())
-                        {
-                            MessageBox.Show("Selected records could not be found.");
-                            return;
-                        }
-
-                        _unitOfWork.Attendance.Value.RemoveRange(entities);
+                        _unitOfWork.Attendance.Value.Remove(attendance);
                         _unitOfWork.Save();
 
-                        MessageBox.Show($"{entities.Count} entries deleted successfully.");
+                        LoadAllAttendance(_employee.EmployeeId, StartDate.Date, EndDate.Date);
                     }
                 }
-            };
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -165,6 +126,46 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
             var reportDataSource = new ReportDataSource("Attendance", _attendanceList);
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
+        }
+
+        private void IndividualAttendanceView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                var result = MessageBox.Show("Are you sure you want to delete the selected items?", "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    if (dgList.SelectedItems == null || dgList.SelectedItems.Count == 0)
+                    {
+                        MessageBox.Show("Please select item(s) to delete.");
+                        return;
+                    }
+
+                    var selected = dgList.SelectedItems.Cast<IndividualAttendanceViewModel>().ToList(); // If you're using view models
+                    var ids = selected.Select(b => b.AttendanceId).ToList();
+
+                    var entities = _unitOfWork.Attendance.Value
+                        .GetAll()
+                        .Where(b => ids.Contains(b.AttendanceId))
+                        .ToList();
+
+                    if (!entities.Any())
+                    {
+                        MessageBox.Show("Selected records could not be found.");
+                        return;
+                    }
+
+                    _unitOfWork.Attendance.Value.RemoveRange(entities);
+                    _unitOfWork.Save();
+
+                    MessageBox.Show($"{entities.Count} entries deleted successfully.");
+                }
+            }
+        }
+
+        private void IndividualAttendanceView_Load(object sender, EventArgs e)
+        {
         }
 
         public event EventHandler? SearchEvent;

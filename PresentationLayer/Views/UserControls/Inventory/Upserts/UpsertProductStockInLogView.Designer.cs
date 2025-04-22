@@ -44,10 +44,12 @@
             txtDate = new Syncfusion.WinForms.Input.SfDateTimeEdit();
             autoLabel3 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             btnSearchProduct = new Guna.UI2.WinForms.Guna2Button();
+            sERCSBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)txtNotes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtProduct).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtStockQuantity).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtProductStatus).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sERCSBindingSource).BeginInit();
             SuspendLayout();
             // 
             // autoLabel1
@@ -76,7 +78,7 @@
             // 
             // txtNotes
             // 
-            txtNotes.BeforeTouchSize = new Size(161, 23);
+            txtNotes.BeforeTouchSize = new Size(206, 23);
             txtNotes.Location = new Point(189, 216);
             txtNotes.Multiline = true;
             txtNotes.Name = "txtNotes";
@@ -95,10 +97,12 @@
             // 
             // txtProduct
             // 
+            txtProduct.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtProduct.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtProduct.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtProduct.Location = new Point(189, 49);
             txtProduct.Name = "txtProduct";
-            txtProduct.Size = new Size(173, 26);
+            txtProduct.Size = new Size(206, 26);
             txtProduct.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
             txtProduct.TabIndex = 16;
             txtProduct.TabStop = false;
@@ -106,7 +110,7 @@
             // txtStockQuantity
             // 
             txtStockQuantity.AccessibilityEnabled = true;
-            txtStockQuantity.BeforeTouchSize = new Size(161, 23);
+            txtStockQuantity.BeforeTouchSize = new Size(206, 23);
             txtStockQuantity.DoubleValue = 1D;
             txtStockQuantity.Location = new Point(189, 93);
             txtStockQuantity.Name = "txtStockQuantity";
@@ -116,6 +120,8 @@
             // 
             // txtProductStatus
             // 
+            txtProductStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtProductStatus.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtProductStatus.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtProductStatus.Location = new Point(189, 173);
             txtProductStatus.Name = "txtProductStatus";
@@ -160,13 +166,19 @@
             btnSearchProduct.Font = new Font("Segoe UI", 9F);
             btnSearchProduct.ForeColor = Color.White;
             btnSearchProduct.Image = (Image)resources.GetObject("btnSearchProduct.Image");
-            btnSearchProduct.Location = new Point(368, 49);
+            btnSearchProduct.Location = new Point(410, 49);
             btnSearchProduct.Margin = new Padding(3, 2, 3, 2);
             btnSearchProduct.Name = "btnSearchProduct";
             btnSearchProduct.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnSearchProduct.Size = new Size(27, 26);
             btnSearchProduct.TabIndex = 28;
+            btnSearchProduct.Visible = false;
             btnSearchProduct.Click += btnSearchProduct_Click;
+            // 
+            // sERCSBindingSource
+            // 
+            sERCSBindingSource.DataSource = typeof(Reports.SERCS);
+            sERCSBindingSource.Position = 0;
             // 
             // UpsertProductStockInLogView
             // 
@@ -196,6 +208,7 @@
             ((System.ComponentModel.ISupportInitialize)txtProduct).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtStockQuantity).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtProductStatus).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sERCSBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -218,5 +231,6 @@
         private Syncfusion.WinForms.Input.SfDateTimeEdit txtDate;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel3;
         private Guna.UI2.WinForms.Guna2Button btnSearchProduct;
+        private BindingSource sERCSBindingSource;
     }
 }

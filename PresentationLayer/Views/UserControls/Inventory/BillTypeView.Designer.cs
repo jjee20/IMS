@@ -89,6 +89,7 @@ namespace PresentationLayer.Views.UserControls
             btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges1;
             btnPrint.Size = new Size(40, 40);
             btnPrint.TabIndex = 26;
+            btnPrint.Click += btnPrint_Click;
             // 
             // btnAdd
             // 
@@ -106,6 +107,7 @@ namespace PresentationLayer.Views.UserControls
             btnAdd.Text = "Add New";
             btnAdd.TextMargin = new Padding(7, 3, 3, 3);
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // txtSearch
             // 
@@ -129,6 +131,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges3;
             txtSearch.Size = new Size(287, 39);
             txtSearch.TabIndex = 11;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // toolstripitemExcel
             // 
@@ -251,6 +254,7 @@ namespace PresentationLayer.Views.UserControls
             gridImageColumn1.HeaderStyle.HoverTextColor = Color.White;
             gridImageColumn1.HeaderStyle.PressedTextColor = Color.White;
             gridImageColumn1.HeaderStyle.TextColor = Color.White;
+            gridImageColumn1.HeaderText = "Edit";
             gridImageColumn1.ImageLayout = ImageLayout.Zoom;
             gridImageColumn1.MappingName = "Edit";
             gridImageColumn1.MaximumWidth = 30D;
@@ -289,6 +293,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
             dgList.TabIndex = 7;
             dgList.Text = "sfDataGrid1";
+            dgList.CellClick += dgList_CellClick;
             // 
             // dgPager
             // 
@@ -314,9 +319,11 @@ namespace PresentationLayer.Views.UserControls
             Controls.Add(materialCard4);
             Controls.Add(panel2);
             Controls.Add(tableLayoutPanel1);
+            KeyPreview = true;
             Name = "BillTypeView";
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
+            KeyDown += Me_KeyDown;
             panel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);

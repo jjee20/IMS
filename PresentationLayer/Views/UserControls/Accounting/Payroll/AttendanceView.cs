@@ -24,44 +24,6 @@ namespace PresentationLayer.Views.UserControls
         public AttendanceView()
         {
             InitializeComponent();
-            AssociateAndRaiseViewEvents();
-        }
-
-        private void AssociateAndRaiseViewEvents()
-        {
-            btnAdd.Click += delegate
-            {
-                AddEvent?.Invoke(this, EventArgs.Empty);
-            };
-            txtSearch.KeyDown += (s, e) =>
-            {
-                if (e.KeyCode == Keys.Enter)
-                    SearchEvent?.Invoke(this, EventArgs.Empty);
-                txtSearch.Focus();
-            };
-            //Print
-            btnPrint.Click += delegate
-            {
-                PrintEvent?.Invoke(this, EventArgs.Empty);
-            };
-            dgList.CellClick += (sender, e) =>
-            {
-                if (e.DataColumn.GridColumn.MappingName == "Edit")
-                {
-                    if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is AttendanceViewModel row)
-                    {
-                        ShowAttendanceEvent?.Invoke(sender, e);
-                    }
-                }
-            };
-            txtStartDate.ValueChanged += delegate
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-            };
-            txtEndDate.ValueChanged += delegate
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-            };
         }
 
         //Properties
@@ -87,6 +49,56 @@ namespace PresentationLayer.Views.UserControls
             }
 
             dgList.DataSource = dgPager.PagedSource;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            AddEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtStartDate_Click(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtEndDate_Click(object sender, EventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            txtSearch.Focus();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            PrintEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void dgList_CellClick(object sender, CellClickEventArgs e)
+        {
+
+            if (e.DataColumn.GridColumn.MappingName == "Edit")
+            {
+                if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is AttendanceViewModel row)
+                {
+                    ShowAttendanceEvent?.Invoke(sender, e);
+                }
+            }
+        }
+
+        private void AttendanceView_Load(object sender, EventArgs e)
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek - 1);
+            startDate = startDate.DayOfWeek == DayOfWeek.Saturday ? startDate : startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6).Date;
+
+            txtStartDate.Value = startDate;
+            txtEndDate.Value = endDate;
         }
 
         public event EventHandler AddEvent;

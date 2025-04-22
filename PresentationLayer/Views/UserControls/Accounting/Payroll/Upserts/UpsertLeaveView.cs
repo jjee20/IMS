@@ -61,13 +61,16 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            txtEmployee.SelectedValue = _entity.EmployeeId;
-            txtStatus.SelectedValue = _entity.Status;
-            txtLeaveType.SelectedValue = _entity.LeaveType;
-            txtNotes.Text = _entity.Notes.ToString();
-            txtOther.Text = _entity.Other.ToString();
-            txtStartDate.Value = _entity == null ? _entity.StartDate : DateTime.Now;
-            txtEndDate.Value = _entity == null ? _entity.EndDate : DateTime.Now;
+            if (_entity.LeaveId > 0)
+            {
+                txtEmployee.SelectedValue = _entity.EmployeeId;
+                txtStatus.SelectedValue = _entity.Status;
+                txtLeaveType.SelectedValue = _entity.LeaveType;
+                txtNotes.Text = _entity.Notes.ToString() ?? "";
+                txtOther.Text = _entity.Other.ToString() ?? "";
+                txtStartDate.Value = _entity == null ? _entity.StartDate : DateTime.Now;
+                txtEndDate.Value = _entity == null ? _entity.EndDate : DateTime.Now;
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

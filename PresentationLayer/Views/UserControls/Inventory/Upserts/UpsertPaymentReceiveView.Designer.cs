@@ -94,6 +94,8 @@
             // 
             // txtPaymentType
             // 
+            txtPaymentType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtPaymentType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtPaymentType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtPaymentType.Location = new Point(161, 77);
             txtPaymentType.Name = "txtPaymentType";
@@ -130,7 +132,7 @@
             linkPaymentList.Text = "Show Payment List";
             linkPaymentList.LinkClicked += linkPaymentList_LinkClicked;
             // 
-            // PaymentReceiveView
+            // UpsertPaymentReceiveView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -144,7 +146,7 @@
             Controls.Add(txtPaymentDate);
             Controls.Add(autoLabel1);
             Controls.Add(linkPaymentList);
-            Name = "PaymentReceiveView";
+            Name = "UpsertPaymentReceiveView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;

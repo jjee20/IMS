@@ -61,7 +61,7 @@
             // 
             // txtRemarks
             // 
-            txtRemarks.BeforeTouchSize = new Size(265, 26);
+            txtRemarks.BeforeTouchSize = new Size(206, 82);
             txtRemarks.Location = new Point(159, 234);
             txtRemarks.Multiline = true;
             txtRemarks.Name = "txtRemarks";
@@ -102,6 +102,8 @@
             // 
             // txtWarehouse
             // 
+            txtWarehouse.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtWarehouse.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtWarehouse.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtWarehouse.Location = new Point(159, 116);
             txtWarehouse.Name = "txtWarehouse";
@@ -150,7 +152,7 @@
             // 
             // txtVendorDONumber
             // 
-            txtVendorDONumber.BeforeTouchSize = new Size(265, 26);
+            txtVendorDONumber.BeforeTouchSize = new Size(206, 82);
             txtVendorDONumber.Location = new Point(159, 156);
             txtVendorDONumber.Multiline = true;
             txtVendorDONumber.Name = "txtVendorDONumber";
@@ -159,7 +161,7 @@
             // 
             // txtVendorInvoiceNumber
             // 
-            txtVendorInvoiceNumber.BeforeTouchSize = new Size(265, 26);
+            txtVendorInvoiceNumber.BeforeTouchSize = new Size(206, 82);
             txtVendorInvoiceNumber.Location = new Point(159, 195);
             txtVendorInvoiceNumber.Multiline = true;
             txtVendorInvoiceNumber.Name = "txtVendorInvoiceNumber";

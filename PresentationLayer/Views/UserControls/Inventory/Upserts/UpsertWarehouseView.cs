@@ -33,9 +33,13 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
+            if(_entity != null)
+            {
+
             txtName.Text = _entity.WarehouseName;
             txtDescription.Text = _entity.Description;
             txtBranch.SelectedValue = _entity.BranchId;
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

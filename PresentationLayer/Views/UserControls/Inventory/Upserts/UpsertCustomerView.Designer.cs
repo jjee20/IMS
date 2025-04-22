@@ -160,6 +160,8 @@
             // 
             // txtCustomerType
             // 
+            txtCustomerType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtCustomerType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtCustomerType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtCustomerType.Location = new Point(189, 91);
             txtCustomerType.Name = "txtCustomerType";

@@ -54,14 +54,17 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts
 
         private void LoadEntityToForm()
         {
-            txtEmployee.SelectedValue = _entity.EmployeeId;
-            txtDate.Text = _entity == null ? _entity.Date.ToString() : DateTime.Now.ToString();
-            txtHoursWorked.Text = _entity.HoursWorked.ToString();
-            txtIsHalfDay.Checked = _entity.IsHalfDay;
-            txtIsPresent.Checked = _entity.IsPresent;
-            txtProject.SelectedValue = _entity.ProjectId;
-            txtTimein.Text = _entity.TimeIn.ToString();
-            txtTimeout.Text = _entity.TimeOut.ToString();
+            if (_entity != null)
+            {
+                txtEmployee.SelectedValue = _entity.EmployeeId;
+                txtDate.Text = _entity == null ? _entity.Date.ToString() : DateTime.Now.ToString();
+                txtHoursWorked.Text = _entity.HoursWorked.ToString();
+                txtIsHalfDay.Checked = _entity.IsHalfDay;
+                txtIsPresent.Checked = _entity.IsPresent;
+                txtProject.SelectedValue = _entity.ProjectId;
+                txtTimein.Text = _entity.TimeIn.ToString();
+                txtTimeout.Text = _entity.TimeOut.ToString();
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

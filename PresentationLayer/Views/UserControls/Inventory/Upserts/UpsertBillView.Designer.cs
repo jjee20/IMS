@@ -80,6 +80,8 @@
             // 
             // txtBillType
             // 
+            txtBillType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtBillType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtBillType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtBillType.Location = new Point(166, 135);
             txtBillType.Name = "txtBillType";
@@ -138,7 +140,7 @@
             btnSave.Text = "Save";
             btnSave.Click += btnConfirm_Click;
             // 
-            // BillView
+            // UpsertBillView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -154,7 +156,7 @@
             Controls.Add(autoLabel2);
             Controls.Add(txtDate);
             Controls.Add(autoLabel1);
-            Name = "BillView";
+            Name = "UpsertBillView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;

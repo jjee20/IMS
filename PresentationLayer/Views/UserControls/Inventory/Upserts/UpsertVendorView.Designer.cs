@@ -160,6 +160,8 @@
             // 
             // txtVendorType
             // 
+            txtVendorType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtVendorType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtVendorType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
             txtVendorType.Location = new Point(189, 91);
             txtVendorType.Name = "txtVendorType";

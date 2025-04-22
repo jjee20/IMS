@@ -116,7 +116,6 @@ namespace PresentationLayer.Views.UserControls
             txtStartDate.TabIndex = 29;
             txtStartDate.ToolTipText = "";
             txtStartDate.Visible = false;
-            txtStartDate.ValueChanged += txtStartDate_ValueChanged;
             // 
             // autoLabel1
             // 
@@ -138,7 +137,6 @@ namespace PresentationLayer.Views.UserControls
             txtEndDate.TabIndex = 27;
             txtEndDate.ToolTipText = "";
             txtEndDate.Visible = false;
-            txtEndDate.ValueChanged += txtEndDate_ValueChanged;
             // 
             // btnPrint
             // 
@@ -155,6 +153,7 @@ namespace PresentationLayer.Views.UserControls
             btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges1;
             btnPrint.Size = new Size(40, 40);
             btnPrint.TabIndex = 26;
+            btnPrint.Click += btnPrint_Click;
             // 
             // btnAdd
             // 
@@ -196,6 +195,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges3;
             txtSearch.Size = new Size(287, 39);
             txtSearch.TabIndex = 11;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // toolstripitemExcel
             // 
@@ -422,6 +422,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
             dgList.TabIndex = 7;
             dgList.Text = "sfDataGrid1";
+            dgList.CellClick += dgList_CellClick;
             // 
             // dgPager
             // 
@@ -447,9 +448,11 @@ namespace PresentationLayer.Views.UserControls
             Controls.Add(materialCard4);
             Controls.Add(panel2);
             Controls.Add(tableLayoutPanel1);
+            KeyPreview = true;
             Name = "PurchaseOrderView";
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
+            KeyDown += Me_KeyDown;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);

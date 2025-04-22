@@ -37,10 +37,13 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            txtName.Text = _entity.HolidayName;
-            txtDescription.Text = _entity.Description;
-            txtDate.Value = _entity == null ? _entity.EffectiveDate : DateTime.Now;
-            txtHolidayType.SelectedValue = _entity.HolidayType;
+            if (_entity != null)
+            {
+                txtName.Text = _entity.HolidayName;
+                txtDescription.Text = _entity.Description;
+                txtDate.Value = _entity == null ? _entity.EffectiveDate : DateTime.Now;
+                txtHolidayType.SelectedValue = _entity.HolidayType;
+            }
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

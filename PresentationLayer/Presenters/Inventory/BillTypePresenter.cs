@@ -79,6 +79,7 @@ namespace PresentationLayer.Presenters
                 var entity = _unitOfWork.BillType.Value.Get(c => c.BillTypeId == row.BillTypeId);
                 if (entity != null)
                 {
+                    _unitOfWork.BillType.Value.Detach(entity);
                     _unitOfWork.BillType.Value.Remove(entity);
                     _unitOfWork.Save();
 
