@@ -239,15 +239,19 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn1.MappingName = "BillTypeId";
             gridTextColumn1.MaximumWidth = 100D;
             gridTextColumn1.MinimumWidth = 100D;
+            gridTextColumn1.ShowToolTip = true;
+            gridTextColumn1.Visible = false;
             gridTextColumn1.Width = 100D;
             gridTextColumn2.AllowFiltering = true;
-            gridTextColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn2.HeaderText = "Name";
             gridTextColumn2.MappingName = "BillTypeName";
+            gridTextColumn2.ShowToolTip = true;
             gridTextColumn3.AllowFiltering = true;
             gridTextColumn3.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn3.HeaderText = "Description";
             gridTextColumn3.MappingName = "Description";
+            gridTextColumn3.ShowToolTip = true;
             gridImageColumn1.AllowEditing = false;
             gridImageColumn1.AllowGrouping = false;
             gridImageColumn1.AllowSorting = false;
@@ -259,6 +263,7 @@ namespace PresentationLayer.Views.UserControls
             gridImageColumn1.MappingName = "Edit";
             gridImageColumn1.MaximumWidth = 30D;
             gridImageColumn1.MinimumWidth = 30D;
+            gridImageColumn1.ShowToolTip = true;
             gridImageColumn1.Width = 30D;
             gridImageColumn2.AllowEditing = false;
             gridImageColumn2.AllowGrouping = false;
@@ -272,6 +277,7 @@ namespace PresentationLayer.Views.UserControls
             gridImageColumn2.MaximumWidth = 30D;
             gridImageColumn2.MinimumWidth = 30D;
             gridImageColumn2.ShowFilterRowOptions = false;
+            gridImageColumn2.ShowToolTip = true;
             gridImageColumn2.Width = 30D;
             dgList.Columns.Add(gridTextColumn1);
             dgList.Columns.Add(gridTextColumn2);
@@ -285,6 +291,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Name = "dgList";
             dgList.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
             dgList.ShowGroupDropArea = true;
+            dgList.ShowToolTip = true;
             dgList.Size = new Size(1318, 546);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);

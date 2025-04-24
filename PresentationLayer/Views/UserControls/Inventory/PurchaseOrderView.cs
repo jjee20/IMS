@@ -50,10 +50,7 @@ namespace PresentationLayer.Views.UserControls
         {
             if (e.DataColumn.GridColumn.MappingName == "Edit")
             {
-                if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is PurchaseOrderViewModel row)
-                {
-                    EditEvent?.Invoke(sender, e);
-                }
+                EditEvent?.Invoke(sender, e);
             }
             else if (e.DataColumn.GridColumn.MappingName == "Delete")
             {

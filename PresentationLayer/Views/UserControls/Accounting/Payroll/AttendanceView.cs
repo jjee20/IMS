@@ -83,10 +83,7 @@ namespace PresentationLayer.Views.UserControls
 
             if (e.DataColumn.GridColumn.MappingName == "Edit")
             {
-                if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is AttendanceViewModel row)
-                {
-                    ShowAttendanceEvent?.Invoke(sender, e);
-                }
+                ShowAttendanceEvent?.Invoke(sender, e);
             }
         }
 

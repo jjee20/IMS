@@ -26,5 +26,6 @@ namespace DomainLayer.ViewModels.Inventory
         public string CashBank { get; set; }
         [Display(Name = "Full Payment")]
         public bool IsFullPayment { get; set; } = true;
+        public byte[] Delete { get; set; }
     }
 }

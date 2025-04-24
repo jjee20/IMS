@@ -82,9 +82,7 @@ namespace RavenTech_ERP.Views.UserControls
         private void linkPaymentList_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var PaymentVoucherList = Program.Mapper.Map<IEnumerable<PaymentVoucherViewModel>>(_PurchaseOrder.PaymentVoucher);
-            var bindingSource = new BindingSource();
-            bindingSource.DataSource = PaymentVoucherList;
-            var paymentList = new PaymentVoucherListView(bindingSource, _unitOfWork);
+            var paymentList = new PaymentVoucherListView(PaymentVoucherList, _unitOfWork);
             paymentList.Text = $"Payment List for S.O. #: {_PurchaseOrder.PurchaseOrderName}";
             paymentList.ShowDialog();
         }

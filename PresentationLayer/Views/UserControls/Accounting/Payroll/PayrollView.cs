@@ -46,10 +46,7 @@ namespace PresentationLayer.Views.UserControls
 
                 if (e.DataColumn.GridColumn.MappingName == "Payslip")
                 {
-                    if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is PayrollViewModel row)
-                    {
-                        PrintPaySlipEvent?.Invoke(s, e);
-                    }
+                    PrintPaySlipEvent?.Invoke(s, e);
                 }
                 else if (e.DataColumn.GridColumn.MappingName == "TMonth")
                 {

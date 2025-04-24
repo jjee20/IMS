@@ -153,6 +153,7 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                  .ForMember(dest => dest.IsRecurring, opt => opt.MapFrom(src => src.IsRecurring.ToString()))
                  .ForMember(dest => dest.DateGranted, opt => opt.MapFrom(src => src.DateGranted.ToLongDateString()))
+                 .ForMember(dest => dest.AllowanceType, opt => opt.MapFrom(src => src.AllowanceType == AllowanceType.Other ? src.Description : src.AllowanceType.ToString()))
                 .ReverseMap();
             CreateMap<Holiday, HolidayViewModel>()
                 .ForMember(dest => dest.EffectiveDate, opt => opt.MapFrom(src => src.EffectiveDate.ToLongDateString()))
@@ -160,13 +161,16 @@ namespace ServiceLayer.Services.CommonServices
             CreateMap<Deduction, DeductionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                  .ForMember(dest => dest.DateDeducted, opt => opt.MapFrom(src => src.DateDeducted.ToLongDateString()))
+                 .ForMember(dest => dest.DeductionType, opt => opt.MapFrom(src => src.DeductionType == DeductionType.Other ? src.Description : src.DeductionType.ToString()))
                 .ReverseMap();
             CreateMap<Benefit, BenefitViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
+                 .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => src.BenefitType == BenefitType.Other ? src.Other : src.BenefitType.ToString()))
                 .ReverseMap();
             CreateMap<Bonus, BonusViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                  .ForMember(dest => dest.DateGranted, opt => opt.MapFrom(src => src.DateGranted.ToLongDateString()))
+                 .ForMember(dest => dest.BonusType, opt => opt.MapFrom(src => src.BonusType == BonusType.Other ? src.Description : src.BonusType.ToString()))
                 .ReverseMap();
             CreateMap<EmployeeContribution, EmployeeContributionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
@@ -198,6 +202,7 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                  .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.ToLongDateString()))
                  .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.ToLongDateString()))
+                 .ForMember(dest => dest.LeaveType, opt => opt.MapFrom(src => src.LeaveType == LeaveType.Other ? src.Other : src.LeaveType.ToString()))
                 .ReverseMap();
             CreateMap<Benefit, BenefitViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))

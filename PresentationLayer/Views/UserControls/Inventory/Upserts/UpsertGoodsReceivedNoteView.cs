@@ -75,9 +75,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private void linkGRNs_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var grnList = Program.Mapper.Map<IEnumerable<GoodsReceiveNoteViewModel>>(_purchaseOrder.GoodsReceivedNote);
-            var bindingSource = new BindingSource();
-            bindingSource.DataSource = grnList;
-            var grns = new GoodsReceivedNoteListVView(bindingSource, _unitOfWork);
+            var grns = new GoodsReceivedNoteListVView(grnList, _unitOfWork);
             grns.Text = $"GRN List for P.O. #: {_purchaseOrder.PurchaseOrderName}";
             grns.ShowDialog();
         }
