@@ -18,7 +18,6 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Bonus Type")]
         public string BonusType { get; set; } // E.g., "Performance Bonus", "Holiday Bonus"
         public double Amount { get; set; } // Bonus amount
-        public string Description { get; set; } // Optional: Additional details
         [Display(Name = "Date Granted")]
         public DateTime DateGranted { get; set; } // Date the bonus is granted
         [Display(Name = "Is One-time?")]

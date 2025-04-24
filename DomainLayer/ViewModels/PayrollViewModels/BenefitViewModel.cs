@@ -17,7 +17,6 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Benefit Type")]
         public string BenefitType { get; set; } // Example: "Health Insurance", "Transportation"
         public double Amount { get; set; }
-        public string Other { get; set; }
         public byte[] Edit { get; set; }
         public byte[] Delete { get; set; }
     }

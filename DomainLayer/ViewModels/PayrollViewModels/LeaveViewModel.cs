@@ -23,7 +23,6 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public DateTime EndDate { get; set; }
         public string Status { get; set; } // Example: "Approved", "Pending", "Rejected"
         public string Notes { get; set; }
-        public string Other { get; set; }
         public byte[] Edit { get; set; }
         public byte[] Delete { get; set; }
     }

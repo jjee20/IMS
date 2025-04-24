@@ -23,5 +23,6 @@ namespace DomainLayer.ViewModels.Inventory
         public string VendorInvoiceNumber { get; set; }
         public string Warehouse { get; set; }
         public bool IsFullReceive { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

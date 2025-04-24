@@ -19,8 +19,6 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public string AllowanceType { get; set; } 
         public double Amount { get; set; } 
 
-        public string Description { get; set; }
-
         [Required]
         [Display(Name = "Date Granted")]
         public DateTime DateGranted { get; set; }

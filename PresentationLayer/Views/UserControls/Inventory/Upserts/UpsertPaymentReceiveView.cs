@@ -74,10 +74,8 @@ namespace RavenTech_ERP.Views.UserControls
         private void linkPaymentList_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var paymentReceiveList = Program.Mapper.Map<IEnumerable<PaymentReceiveViewModel>>(_salesOrder.PaymentReceive);
-            var bindingSource = new BindingSource();
-            bindingSource.DataSource = paymentReceiveList;
-            var paymentList = new PaymentReceiveListView(bindingSource, _unitOfWork);
-            paymentList.Text = $"Payment List for S.O. #: {_salesOrder.SalesOrderName}";
+            var paymentList = new PaymentReceiveListView(paymentReceiveList, _unitOfWork);
+            paymentList.Text = $"Payment Received List for S.O. #: {_salesOrder.SalesOrderName}";
             paymentList.ShowDialog();
         }
     }
