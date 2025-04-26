@@ -1,142 +1,79 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Properties;
+using RavenTech_ERP.Views.IViews;
+using RavenTech_ERP.Views.UserControls;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.DataGridConverter;
+using Syncfusion.WinForms.DataGridConverter.Events;
 using System.ComponentModel;
 
 namespace PresentationLayer.Views.UserControls
 {
     public partial class BillTypeView : SfForm, IBillTypeView
     {
-        private int id;
-        private string message;
-        private bool isSuccessful;
-        public bool isEdit;
         public BillTypeView()
         {
             InitializeComponent();
-            Guna2TabControl1.TabPages.Remove(tabPage2);
-            AssociateAndRaiseViewEvents();
         }
 
-        private void AssociateAndRaiseViewEvents()
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            //Add New
-            btnAdd.Click += delegate
+            AddEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            PrintEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            txtSearch.Focus();
+        }
+
+        private void dgList_CellClick(object sender, CellClickEventArgs e)
+        {
+            if (e.DataColumn.GridColumn.MappingName == "Edit")
             {
-                if (Guna2TabControl1.TabPages.Contains(tabPage1))
-                {
-                    tabPage2.Text = "Add New";
-                    Guna2TabControl1.TabPages.Remove(tabPage1);
-                    Guna2TabControl1.TabPages.Add(tabPage2);
-                    AddNewEvent?.Invoke(this, EventArgs.Empty);
-                }
-                btnReturn.Visible = true;
-            };
-            //Save changes
-            btnSave.Click += delegate
+                EditEvent?.Invoke(sender, e);
+            }
+            else if (e.DataColumn.GridColumn.MappingName == "Delete")
             {
-                SaveEvent?.Invoke(this, EventArgs.Empty);
-                if (isSuccessful)
-                {
-                    Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Add(tabPage1);
-                    btnReturn.Visible = false;
-                }
-                MessageBox.Show(Message);
-            };
-            txtSearch.KeyDown += (s, e) =>
-            {
-                if (e.KeyCode == Keys.Enter)
-                    SearchEvent?.Invoke(this, EventArgs.Empty);
-                txtSearch.Focus();
-            };
-            //Edit
-            btnEdit.Click += delegate
-            {
-                if (Guna2TabControl1.TabPages.Contains(tabPage1))
-                {
-                    tabPage2.Text = "Edit";
-                    Guna2TabControl1.TabPages.Remove(tabPage1);
-                    Guna2TabControl1.TabPages.Add(tabPage2);
-                    EditEvent?.Invoke(this, EventArgs.Empty);
-                }
-                btnReturn.Visible = true;
-            };
-            //Delete
-            btnDelete.Click += delegate
-            {
-                var result = MessageBox.Show("Are you sure you want to delete the selected bill type?", "Warning",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
-                    // Invoke the DeleteEvent with the selected row as an argument
-                    DeleteEvent?.Invoke(this, EventArgs.Empty);
-                    MessageBox.Show(Message);
+                    DeleteEvent?.Invoke(sender, e);
                 }
-            };
-            //Print
-            btnPrint.Click += delegate
+            }
+        }
+        private void Me_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
             {
-                PrintEvent?.Invoke(this, EventArgs.Empty);
-            };
-            //Refresh
-            btnReturn.Click += delegate
-            {
-                if (!Guna2TabControl1.TabPages.Contains(tabPage1))
+                var result = MessageBox.Show("Are you sure you want to delete the selected items?", "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
                 {
-                    Guna2TabControl1.TabPages.Remove(tabPage2);
-                    Guna2TabControl1.TabPages.Add(tabPage1);
-                    RefreshEvent?.Invoke(this, EventArgs.Empty);
+                    MultipleDeleteEvent?.Invoke(sender, e);
                 }
-                btnReturn.Visible = false;
-            };
+            }
         }
 
         //Properties
         public SfDataGrid DataGrid => dgList;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int BillTypeId
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string BillTypeName
-        {
-            get { return txtName.Text; }
-            set { txtName.Text = value; }
-        }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string Description
-        {
-            get { return txtDescription.Text; }
-            set { txtDescription.Text = value; }
-        }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool IsEdit
-        {
-            get { return isEdit; }
-            set { isEdit = value; }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool IsSuccessful
-        {
-            get { return isSuccessful; }
-            set { isSuccessful = value; }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string Message
-        {
-            get { return message; }
-            set { message = value; }
-        }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
@@ -145,30 +82,24 @@ namespace PresentationLayer.Views.UserControls
             set { txtSearch.Text = value; }
         }
 
-        public void SetBillTypeListBindingSource(IEnumerable<BillType> BillTypeList)
+        public void SetBillTypeListBindingSource(IEnumerable<BillTypeViewModel> BillTypeList)
         {
             dgPager.DataSource = BillTypeList;
+
+            foreach (var entity in BillTypeList)
+            {
+                entity.Edit = Resources.edit; // Or any other image per row
+                entity.Delete = Resources.delete; // Or any other image per row
+            }
+
             dgList.DataSource = dgPager.PagedSource;
         }
 
-        public event EventHandler AddNewEvent;
-        public event EventHandler SaveEvent;
+        public event EventHandler AddEvent;
         public event EventHandler SearchEvent;
-        public event EventHandler EditEvent;
-        public event EventHandler DeleteEvent;
+        public event CellClickEventHandler EditEvent;
+        public event CellClickEventHandler DeleteEvent;
+        public event KeyEventHandler MultipleDeleteEvent;
         public event EventHandler PrintEvent;
-        public event EventHandler RefreshEvent;
-
-        private static BillTypeView? instance;
-        public static BillTypeView GetInstance(TabPage parentContainer)
-        {
-            if (instance == null || instance.IsDisposed)
-            {
-                instance = new BillTypeView();
-                parentContainer.Controls.Add(instance);
-                instance.Dock = DockStyle.Fill;
-            }
-            return instance;
-        }
     }
 }

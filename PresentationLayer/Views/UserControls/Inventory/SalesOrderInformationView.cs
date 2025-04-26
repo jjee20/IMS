@@ -3,6 +3,7 @@ using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
 using PresentationLayer;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,12 @@ using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class SalesOrderInformationView: MaterialForm
+    public partial class SalesOrderInformationView: SfForm
     {
         private readonly SalesOrder _salesOrder;
         private readonly SalesOrderViewModel _salesOrderVM;
         private readonly IUnitOfWork _unitOfWork;
-        public SalesOrderInformationView(SalesOrder salesOrder, SalesOrderViewModel salesOrderVM, IUnitOfWork unitOfWork)
+        public SalesOrderInformationView(IUnitOfWork unitOfWork, SalesOrder salesOrder, SalesOrderViewModel salesOrderVM)
         {
             InitializeComponent();
             _salesOrder = salesOrder;
@@ -36,7 +37,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             txtSalesOrderBranch.Text = _salesOrderVM.Branch ?? "";
             txtSalesOrderRemarks.Text = _salesOrderVM.Remarks ?? "";
             txtSalesOrderCustomer.Text = _salesOrderVM.Customer ?? "";
-            txtSalesOrderCustomerRefNo.Text = _salesOrderVM.CustomerRefNumber ?? "";
             txtSalesOrderDate.Text = _salesOrderVM.OrderDate.Date.ToLongDateString() ?? "";
             txtSalesOrderDeliveryDate.Text = _salesOrderVM.DeliveryDate.Date.ToLongDateString() ?? "";
             txtSalesOrderType.Text = _salesOrderVM.SalesType ?? "";

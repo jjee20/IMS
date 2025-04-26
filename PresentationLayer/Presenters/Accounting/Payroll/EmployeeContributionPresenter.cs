@@ -1,151 +1,127 @@
-﻿using DomainLayer.Enums;
-using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels;
-using DomainLayer.ViewModels.Inventory;
-using DomainLayer.ViewModels.PayrollViewModels;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer;
-using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
-using PresentationLayer.Views.IViews;
+using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
-using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.CommonServices;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Presenters.Accounting.Payroll
+namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
     public class EmployeeContributionPresenter
     {
         public IEmployeeContributionView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource EmployeeBindingSource;
         private IEnumerable<EmployeeContributionViewModel> EmployeeContributionList;
-        private IEnumerable<EmployeeViewModel> EmployeeList;
-        public EmployeeContributionPresenter(IEmployeeContributionView view, IUnitOfWork unitOfWork)
-        {
+        public EmployeeContributionPresenter(IEmployeeContributionView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            EmployeeBindingSource = new BindingSource();
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
             LoadAllEmployeeContributionList();
-            LoadAllEmployeeList();
 
             //Source Binding
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-            var model = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == _view.EmployeeContributionId, tracked: true);
-            if (model == null) model = new EmployeeContribution();
-            else _unitOfWork.EmployeeContribution.Value.Detach(model);
-
-            model.EmployeeContributionId = _view.EmployeeContributionId;
-            model.EmployeeId = _view.EmployeeId;
-            model.SSS = _view.SSS;
-            model.SSSWISP = _view.SSSWISP;
-            model.PhilHealth = _view.PhilHealth;
-            model.PagIbig = _view.PagIbig;
-
-            try
+            using (var form = new UpsertEmployeeContributionView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add EmployeeContribution";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.EmployeeContribution.Value.Update(model);
-                    _view.Message = "EmployeeContribution edited successfully";
+                    LoadAllEmployeeContributionList();
                 }
-                else //Add new model
-                {
-                    var Entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeId == _view.EmployeeId);
-                    if (Entity != null)
-                    {
-                        _view.Message = "EmployeeContribution is already added.";
-                        return;
-                    }
-
-                    _unitOfWork.EmployeeContribution.Value.Add(model);
-                    _view.Message = "EmployeeContribution added successfully";
-                }
-                _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllEmployeeContributionList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is EmployeeContributionViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == row.EmployeeContributionId);
+                using (var form = new UpsertEmployeeContributionView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit EmployeeContribution";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllEmployeeContributionList();
+                    }
+                }
             }
-
-            var employeeContribution = (EmployeeContributionViewModel)_view.DataGrid.SelectedItem;
-            var entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == employeeContribution.EmployeeContributionId);
-            _view.EmployeeContributionId = entity.EmployeeContributionId;
-            _view.SSS = entity.SSS;
-            _view.SSSWISP = entity.SSSWISP;
-            _view.PagIbig = entity.PagIbig;
-            _view.PhilHealth = entity.PhilHealth;
-            _view.EmployeeId = entity.EmployeeId;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is EmployeeContributionViewModel row)
+            {
+                var entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == row.EmployeeContributionId);
+                if (entity != null)
+                {
+                    _unitOfWork.EmployeeContribution.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("EmployeeContribution deleted successfully.");
+
+                    LoadAllEmployeeContributionList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var employeeContribution = (EmployeeContributionViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.EmployeeContribution.Value.Get(c => c.EmployeeContributionId == employeeContribution.EmployeeContributionId);
-                _unitOfWork.EmployeeContribution.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<EmployeeContributionViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.EmployeeContributionId).ToList();
+
+                var entities = _unitOfWork.EmployeeContribution.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.EmployeeContributionId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.ShowMessage("Selected records could not be found.");
+                    return;
+                }
+
+                _unitOfWork.EmployeeContribution.Value.RemoveRange(entities);
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                _view.Message = "EmployeeContribution deleted successfully";
+
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllEmployeeContributionList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete EmployeeContribution";
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "EmployeeContributionReport.rdlc";
@@ -156,29 +132,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllEmployeeContributionList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllEmployeeContributionList();
-            _view.EmployeeContributionId = 0;
-        }
-
+        
         private void LoadAllEmployeeContributionList(bool emptyValue = false)
         {
-            EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(
-                _unitOfWork.EmployeeContribution.Value.GetAll(includeProperties:"Employee"));
+            EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(_unitOfWork.EmployeeContribution.Value.GetAll());
 
-            if (!emptyValue) EmployeeContributionList = EmployeeContributionList.Where(c => c.Employee.Equals(_view.SearchValue));
-            _view.SetEmployeeContributionListBindingSource(EmployeeContributionList.OrderBy(c => c.Employee));
-        }
-        private void LoadAllEmployeeList()
-        {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
+            if (!emptyValue) EmployeeContributionList = EmployeeContributionList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetEmployeeContributionListBindingSource(EmployeeContributionList);
         }
     }
 }

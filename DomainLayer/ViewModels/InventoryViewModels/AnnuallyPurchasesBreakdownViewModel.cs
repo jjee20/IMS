@@ -10,6 +10,6 @@ namespace DomainLayer.ViewModels.InventoryViewModels
     public class AnnuallyPurchasesBreakdownViewModel
     {
         public int Year { get; set; }
-        public double Purchases { get; set; }
+        public double Expenses { get; set; }
     }
 }

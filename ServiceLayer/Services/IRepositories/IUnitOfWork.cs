@@ -6,6 +6,7 @@ namespace ServiceLayer.Services.IRepositories
 {
     public interface IUnitOfWork
     {
+        Lazy<IHolidayRepository> Holiday { get; }
         Lazy<IAllowanceRepository> Allowance { get; }
         Lazy<IApplicationUserRepository> ApplicationUser { get; }
         Lazy<IAttendanceRepository> Attendance { get; }
@@ -54,6 +55,7 @@ namespace ServiceLayer.Services.IRepositories
         Lazy<IVendorRepository> Vendor { get; }
         Lazy<IVendorTypeRepository> VendorType { get; }
         Lazy<IWarehouseRepository> Warehouse { get; }
+        Lazy<IThirteenthMonthRepository> ThirteenthMonth { get; }
 
         IRepository<T> GetRepository<T>() where T : class;
         void Save();

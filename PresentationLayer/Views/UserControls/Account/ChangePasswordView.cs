@@ -4,6 +4,7 @@ using MaterialSkin.Controls;
 using Microsoft.AspNetCore.Identity;
 using PresentationLayer.Presenters.Commons;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Account
 {
-    public partial class ChangePasswordView : MaterialForm
+    public partial class ChangePasswordView : SfForm
     {
         private readonly IUnitOfWork _unitOfWork;
         private ApplicationUser _applicationUser;

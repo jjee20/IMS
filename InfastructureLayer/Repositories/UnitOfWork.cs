@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using DomainLayer.Models.Accounting.Payroll;
 using InfastructureLayer.DataAccess.Data;
 using InfastructureLayer.Repositories;
 using InfastructureLayer.Repositories.Accounting.Payroll;
@@ -23,6 +24,8 @@ namespace InfastructureLayer.DataAccess.Repositories
 
             // Lazy Initialization
             ApplicationUser = new Lazy<IApplicationUserRepository>(() => new ApplicationUserRepository(_db));
+            ThirteenthMonth = new Lazy<IThirteenthMonthRepository>(() => new ThirteenthMonthRepository(_db));
+            Holiday = new Lazy<IHolidayRepository>(() => new HolidayRepository(_db));
             TargetGoals = new Lazy<ITargetGoalsRepository>(() => new TargetGoalsRepository(_db));
             Bill = new Lazy<IBillRepository>(() => new BillRepository(_db));
             BillType = new Lazy<IBillTypeRepository>(() => new BillTypeRepository(_db));
@@ -73,7 +76,9 @@ namespace InfastructureLayer.DataAccess.Repositories
         }
 
         // Lazy Repository Properties
+        public Lazy<IThirteenthMonthRepository> ThirteenthMonth { get; }
         public Lazy<IApplicationUserRepository> ApplicationUser { get; }
+        public Lazy<IHolidayRepository> Holiday { get; }
         public Lazy<ITargetGoalsRepository> TargetGoals { get; }
         public Lazy<IBillRepository> Bill { get; }
         public Lazy<IBillTypeRepository> BillType { get; }
@@ -135,7 +140,7 @@ namespace InfastructureLayer.DataAccess.Repositories
             return (IRepository<T>)_repositories[type];
         }
 
-        public void Save() => _db.SaveChanges();
+        public async void Save() => _db.SaveChanges();
         public Task SaveAsync() => _db.SaveChangesAsync();
     }
 }

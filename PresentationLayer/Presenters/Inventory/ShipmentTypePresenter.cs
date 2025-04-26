@@ -1,9 +1,16 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -11,7 +18,7 @@ namespace PresentationLayer.Presenters
     {
         public IShipmentTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private IEnumerable<ShipmentType> ShipmentTypeList;
+        private IEnumerable<ShipmentTypeViewModel> ShipmentTypeList;
         public ShipmentTypePresenter(IShipmentTypeView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -20,103 +27,104 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
+
             //Load
 
             LoadAllShipmentTypeList();
 
             //Source Binding
-
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-            var model = _unitOfWork.ShipmentType.Value.Get(c => c.ShipmentTypeId == _view.ShipmentTypeId, tracked: true);
-            if (model == null) model = new ShipmentType();
-            else _unitOfWork.ShipmentType.Value.Detach(model);
-
-            model.ShipmentTypeId = _view.ShipmentTypeId;
-            model.ShipmentTypeName = _view.ShipmentTypeName;
-            model.Description = _view.Description;
-
-            try
+            using (var form = new UpsertShipmentTypeView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Shipment Type";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.ShipmentType.Value.Update(model);
-                    _view.Message = "Shipment type edited successfully";
+                    LoadAllShipmentTypeList();
                 }
-                else //Add new model
-                {
-                    _unitOfWork.ShipmentType.Value.Add(model);
-                    _view.Message = "Shipment type added successfully";
-                }
-                _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllShipmentTypeList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ShipmentTypeViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.ShipmentType.Value.Get(c => c.ShipmentTypeId == row.ShipmentTypeId);
+                using (var form = new UpsertShipmentTypeView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Shipment Type";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllShipmentTypeList();
+                    }
+                }
             }
-
-            var entity = (ShipmentType)_view.DataGrid.SelectedItem;
-            _view.ShipmentTypeId = entity.ShipmentTypeId;
-            _view.ShipmentTypeName = entity.ShipmentTypeName;
-            _view.Description = entity.Description;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ShipmentTypeViewModel row)
+            {
+                var entity = _unitOfWork.ShipmentType.Value.Get(c => c.ShipmentTypeId == row.ShipmentTypeId);
+                if (entity != null)
+                {
+                    _unitOfWork.ShipmentType.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Shipment Type deleted successfully.");
+
+                    LoadAllShipmentTypeList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var entity = (ShipmentType)_view.DataGrid.SelectedItem;
-                _unitOfWork.ShipmentType.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<ShipmentTypeViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.ShipmentTypeId).ToList();
+
+                var entities = _unitOfWork.ShipmentType.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.ShipmentTypeId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.ShowMessage("Selected records could not be found.");
+                    return;
+                }
+
+                _unitOfWork.ShipmentType.Value.RemoveRange(entities);
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                _view.Message = "Shipment type deleted successfully";
+
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllShipmentTypeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Shipment type";
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ShipmentTypeReport.rdlc";
@@ -127,23 +135,12 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllShipmentTypeList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllShipmentTypeList();
-            _view.ShipmentTypeId = 0;
-            _view.ShipmentTypeName = "";
-            _view.Description = "";
-        }
         
         private void LoadAllShipmentTypeList(bool emptyValue = false)
         {
-            ShipmentTypeList = _unitOfWork.ShipmentType.Value.GetAll();
+            ShipmentTypeList = Program.Mapper.Map<IEnumerable<ShipmentTypeViewModel>>(_unitOfWork.ShipmentType.Value.GetAll());
 
-            if (!emptyValue) ShipmentTypeList = ShipmentTypeList.Where(c => c.ShipmentTypeName.Contains(_view.SearchValue));
+            if (!emptyValue) ShipmentTypeList = ShipmentTypeList.Where(c => c.ShipmentTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetShipmentTypeListBindingSource(ShipmentTypeList);
         }
     }

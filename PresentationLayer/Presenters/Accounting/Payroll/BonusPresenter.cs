@@ -1,146 +1,127 @@
-﻿using DomainLayer.Enums;
-using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels;
-using DomainLayer.ViewModels.Inventory;
-using DomainLayer.ViewModels.PayrollViewModels;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer;
-using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
-using PresentationLayer.Views.IViews;
-using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.CommonServices;
+using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.IViews.Accounting.Payroll;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Presenters.Accounting.Payroll
+namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
     public class BonusPresenter
     {
         public IBonusView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource BonusTypeBindingSource;
-        private BindingSource EmployeeBindingSource;
         private IEnumerable<BonusViewModel> BonusList;
-        private IEnumerable<EnumItemViewModel> BonusTypeList;
-        private IEnumerable<EmployeeViewModel> EmployeeList;
-        public BonusPresenter(IBonusView view, IUnitOfWork unitOfWork)
-        {
+        public BonusPresenter(IBonusView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            BonusTypeBindingSource = new BindingSource();
-            EmployeeBindingSource = new BindingSource();
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
             LoadAllBonusList();
-            LoadAllBonusTypeList();
-            LoadAllEmployeeList();
 
             //Source Binding
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-            var model = _unitOfWork.Bonus.Value.Get(c => c.BonusId == _view.BonusId, tracked: true);
-            if (model == null) model = new Bonus();
-            else _unitOfWork.Bonus.Value.Detach(model);
-
-            model.BonusId = _view.BonusId;
-            model.BonusType = _view.BonusType;
-            model.Amount = _view.Amount;
-            model.EmployeeId = _view.EmployeeId;
-            model.Description = _view.Description;
-            model.IsOneTime = _view.IsOneTime;
-
-            try
+            using (var form = new UpsertBonusView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Bonus";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.Bonus.Value.Update(model);
-                    _view.Message = "Bonus edited successfully";
+                    LoadAllBonusList();
                 }
-                else //Add new model
-                {
-                    _unitOfWork.Bonus.Value.Add(model);
-                    _view.Message = "Bonus added successfully";
-                }
-                _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllBonusList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is BonusViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.Bonus.Value.Get(c => c.BonusId == row.BonusId);
+                using (var form = new UpsertBonusView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Bonus";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllBonusList();
+                    }
+                }
             }
-
-            var entity = (Bonus)_view.DataGrid.SelectedItem;
-            _view.BonusId = entity.BonusId;
-            _view.BonusType = entity.BonusType;
-            _view.Amount = entity.Amount;
-            _view.EmployeeId = entity.EmployeeId;
-            _view.Description = entity.Description;
-            _view.IsOneTime = entity.IsOneTime;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is BonusViewModel row)
+            {
+                var entity = _unitOfWork.Bonus.Value.Get(c => c.BonusId == row.BonusId);
+                if (entity != null)
+                {
+                    _unitOfWork.Bonus.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Bonus deleted successfully.");
+
+                    LoadAllBonusList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var entity = (Bonus)_view.DataGrid.SelectedItem;
-                _unitOfWork.Bonus.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<BonusViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.BonusId).ToList();
+
+                var entities = _unitOfWork.Bonus.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.BonusId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.ShowMessage("Selected records could not be found.");
+                    return;
+                }
+
+                _unitOfWork.Bonus.Value.RemoveRange(entities);
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                _view.Message = "Bonus deleted successfully";
+
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllBonusList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Bonus";
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "BonusReport.rdlc";
@@ -151,42 +132,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllBonusList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllBonusList();
-            _view.BonusId = 0;
-            _view.BonusType = 0;
-            _view.Amount = 0;
-            _view.EmployeeId = 0;
-            _view.Description = "";
-        }
-
+        
         private void LoadAllBonusList(bool emptyValue = false)
         {
-            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll(includeProperties:"Employee"));
+            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll());
 
-            if (!emptyValue)
-            {
-                BonusList = BonusList.Where(c => c.Employee.Contains(_view.SearchValue) || c.BonusType.Contains(_view.SearchValue));
-            }
-
-            _view.SetBonusListBindingSource(BonusList.OrderByDescending(c => c.DateGranted));
-        }
-        private void LoadAllBonusTypeList()
-        {
-            BonusTypeList = EnumHelper.EnumToEnumerable<BonusType>();
-            BonusTypeBindingSource.DataSource = BonusTypeList;//Set data source.
-            _view.SetBonusTypeListBindingSource(BonusTypeBindingSource);
-        }
-        private void LoadAllEmployeeList()
-        {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
+            if (!emptyValue) BonusList = BonusList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetBonusListBindingSource(BonusList);
         }
     }
 }

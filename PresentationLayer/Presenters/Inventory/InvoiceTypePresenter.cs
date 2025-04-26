@@ -1,9 +1,15 @@
-﻿using DomainLayer.Models.Inventory;
+﻿using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
-using PresentationLayer.Views.IViews.Inventory;
+using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -11,7 +17,7 @@ namespace PresentationLayer.Presenters
     {
         public IInvoiceTypeView _view;
         private IUnitOfWork _unitOfWork;
-        private IEnumerable<InvoiceType> InvoiceTypeList;
+        private IEnumerable<InvoiceTypeViewModel> InvoiceTypeList;
         public InvoiceTypePresenter(IInvoiceTypeView view, IUnitOfWork unitOfWork) {
 
             //Initialize
@@ -20,103 +26,104 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
+
             //Load
 
             LoadAllInvoiceTypeList();
 
             //Source Binding
-
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-            var model = _unitOfWork.InvoiceType.Value.Get(c => c.InvoiceTypeId == _view.InvoiceTypeId, tracked: true);
-            if (model == null) model = new InvoiceType();
-            else _unitOfWork.InvoiceType.Value.Detach(model);
-
-            model.InvoiceTypeId = _view.InvoiceTypeId;
-            model.InvoiceTypeName = _view.InvoiceTypeName;
-            model.Description = _view.Description;
-
-            try
+            using (var form = new UpsertInvoiceTypeView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Invoice Type";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.InvoiceType.Value.Update(model);
-                    _view.Message = "Invoice edited successfully";
+                    LoadAllInvoiceTypeList();
                 }
-                else //Add new model
-                {
-                    _unitOfWork.InvoiceType.Value.Add(model);
-                    _view.Message = "Invoice added successfully";
-                }
-                _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllInvoiceTypeList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is InvoiceTypeViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.InvoiceType.Value.Get(c => c.InvoiceTypeId == row.InvoiceTypeId);
+                using (var form = new UpsertInvoiceTypeView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Invoice Type";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllInvoiceTypeList();
+                    }
+                }
             }
-
-            var entity = (InvoiceType)_view.DataGrid.SelectedItem;
-            _view.InvoiceTypeId = entity.InvoiceTypeId;
-            _view.InvoiceTypeName = entity.InvoiceTypeName;
-            _view.Description = entity.Description;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is InvoiceTypeViewModel row)
+            {
+                var entity = _unitOfWork.InvoiceType.Value.Get(c => c.InvoiceTypeId == row.InvoiceTypeId);
+                if (entity != null)
+                {
+                    _unitOfWork.InvoiceType.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Invoice Type deleted successfully.");
+
+                    LoadAllInvoiceTypeList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select one to edit";
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var entity = (InvoiceType)_view.DataGrid.SelectedItem;
-                _unitOfWork.InvoiceType.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<InvoiceTypeViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.InvoiceTypeId).ToList();
+
+                var entities = _unitOfWork.InvoiceType.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.InvoiceTypeId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.ShowMessage("Selected records could not be found.");
+                    return;
+                }
+
+                _unitOfWork.InvoiceType.Value.RemoveRange(entities);
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                _view.Message = "Invoice deleted successfully";
+
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllInvoiceTypeList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Invoice";
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "InvoiceTypeReport.rdlc";
@@ -127,23 +134,12 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllInvoiceTypeList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllInvoiceTypeList();
-            _view.InvoiceTypeId = 0;
-            _view.InvoiceTypeName = "";
-            _view.Description = "";
-        }
         
         private void LoadAllInvoiceTypeList(bool emptyValue = false)
         {
-            InvoiceTypeList = _unitOfWork.InvoiceType.Value.GetAll();
+            InvoiceTypeList = Program.Mapper.Map<IEnumerable<InvoiceTypeViewModel>>(_unitOfWork.InvoiceType.Value.GetAll());
 
-            if (!emptyValue) InvoiceTypeList = InvoiceTypeList.Where(c => c.InvoiceTypeName.Contains(_view.SearchValue));
+            if (!emptyValue) InvoiceTypeList = InvoiceTypeList.Where(c => c.InvoiceTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetInvoiceTypeListBindingSource(InvoiceTypeList);
         }
     }

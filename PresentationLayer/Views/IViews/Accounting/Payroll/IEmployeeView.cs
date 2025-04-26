@@ -1,47 +1,22 @@
-﻿using DomainLayer.Enums;
-using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.ViewModels.PayrollViewModels;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
 using Syncfusion.WinForms.DataGrid;
-using System.ComponentModel.DataAnnotations;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
+namespace RavenTech_ERP.Views.IViews.Accounting
 {
-    public interface IEmployeeView
+    public interface IEmployeeView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
-        int EmployeeId { get; set; }
-        string EmployeeFirstName { get; set; }
-        string EmployeeLastName { get; set; }
-        DateTime DateOfBirth { get; set; }
-        Gender Gender { get; set; }
-        string ContactNumber { get; set; }
-        string Email { get; set; }
-        string Address { get; set; }
-        int DepartmentId { get; set; }
-        int JobPositionId { get; set; }
-        int ShiftId { get; set; }
-        double BasicSalary { get; set; }
-        double LeaveCredits { get; set; }
-        bool isDeducted { get; set; }
-        bool IsEdit { get; set; }
-        bool IsSuccessful { get; set; }
-        string Message { get; set; }
         string SearchValue { get; set; }
-        bool SaveButton { get; set; }
 
-        event EventHandler AddNewEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler EditEvent;
+        event EventHandler AddEvent;
+        event CellClickEventHandler DeleteEvent;
+        event CellClickEventHandler EditEvent;
+        event KeyEventHandler MultipleDeleteEvent;
         event EventHandler PrintEvent;
-        event EventHandler SaveEvent;
-        event EventHandler SearchEvent;
-        event EventHandler RefreshEvent;
-        event EventHandler UserInformationEvent;
+        event EventHandler SearchEvent; 
+        event CellClickEventHandler DetailsEvent;
 
         void SetEmployeeListBindingSource(IEnumerable<EmployeeViewModel> EmployeeList);
-        void SetGenderListBindingSource(BindingSource GenderList);
-        void SetDepartmentListBindingSource(BindingSource DepartmentList);
-        void SetJobPositionListBindingSource(BindingSource JobPositionList);
-        void SetShiftListBindingSource(BindingSource ShiftList);
     }
 }

@@ -7,6 +7,7 @@ using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views.IViews.Inventory;
 using ServiceLayer.Services.IRepositories;
 using RavenTech_ERP.Views.UserControls.Account;
+using RavenTech_ERP.Views.UserControls.Inventory;
 
 namespace PresentationLayer
 {
@@ -41,7 +42,7 @@ namespace PresentationLayer
             var presenter = new LoginPresenter(mainView, unitOfWork);
 
             Application.Run((Form)mainView);
-            //Application.Run(new POSView());
+            //Application.Run(new UpsertProjectView());
         }
 
     }

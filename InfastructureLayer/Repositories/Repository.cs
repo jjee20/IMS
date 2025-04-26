@@ -82,11 +82,28 @@ namespace InfastructureLayer.Repositories
             }
             return query.ToList();
         }
-
         public void Remove(T entity)
         {
+            var keyName = _db.Model.FindEntityType(typeof(T))
+                            .FindPrimaryKey()
+                            .Properties
+                            .Select(x => x.Name)
+                            .Single();
+
+            var tracked = dbSet.Local
+                .FirstOrDefault(e =>
+                    _db.Entry(e).Property(keyName).CurrentValue
+                    .Equals(_db.Entry(entity).Property(keyName).CurrentValue));
+
+            if (tracked != null && !ReferenceEquals(tracked, entity))
+            {
+                _db.Entry(tracked).State = EntityState.Detached;
+            }
+
+            dbSet.Attach(entity);
             dbSet.Remove(entity);
         }
+
 
         public void RemoveRange(IEnumerable<T> entity)
         {
@@ -157,6 +174,14 @@ namespace InfastructureLayer.Repositories
                 }
             }
             return await query.ToListAsync();
+        }
+        public  void Update(T entity)
+        {
+            _db.Set<T>().Update(entity);
+        }
+        public  void UpdateRange(IEnumerable<T> entity)
+        {
+            _db.Set<T>().UpdateRange(entity);
         }
     }
 }

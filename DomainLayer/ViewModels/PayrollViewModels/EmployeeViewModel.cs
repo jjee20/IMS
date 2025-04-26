@@ -25,6 +25,9 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public string Shift { get; set; }
         [Display(Name = "Is Deducted?")]
         public string isDeducted { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
+        public byte[] Details { get; set; }
 
     }
 }

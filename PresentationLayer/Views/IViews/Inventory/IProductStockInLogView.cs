@@ -1,33 +1,22 @@
-﻿using DomainLayer.Enums;
-using DomainLayer.ViewModels.Inventory;
+﻿using DomainLayer.Models.Inventory;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
 
 namespace RavenTech_ERP.Views.IViews.Inventory
 {
-    public interface IProductStockInLogView
+    public interface IProductStockInLogView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
-        DateTime DateAdded { get; set; }
-        bool IsEdit { get; set; }
-        bool IsSuccessful { get; set; }
-        string Message { get; set; }
-        string Notes { get; set; }
-        int ProductId { get; set; }
-        int ProductStockInLogId { get; set; }
         string SearchValue { get; set; }
-        double StockQuantity { get; set; }
-        ProductStatus ProductStatus { get; set; }
 
-        event EventHandler AddNewEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler EditEvent;
+        event EventHandler AddEvent;
+        event CellClickEventHandler DeleteEvent;
+        event CellClickEventHandler EditEvent;
+        event KeyEventHandler MultipleDeleteEvent;
         event EventHandler PrintEvent;
-        event EventHandler RefreshEvent;
-        event EventHandler SaveEvent;
         event EventHandler SearchEvent;
 
-        void SetProductStockInLogListBindingSource(IEnumerable<ProductStockInLogViewModel> ProductStockInLogList);
-        void SetProductListBindingSource(BindingSource bindingSource);
-        void SetProductStatusListBindingSource(BindingSource bindingSource);
+        void SetProductInStockLogListBindingSource(IEnumerable<ProductStockInLogViewModel> ProductInStockLogList);
     }
 }

@@ -135,7 +135,7 @@
             guna2Separator1.Location = new Point(3, 60);
             guna2Separator1.Margin = new Padding(3, 2, 3, 2);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1334, 9);
+            guna2Separator1.Size = new Size(1340, 9);
             guna2Separator1.TabIndex = 2;
             // 
             // materialCard1
@@ -147,12 +147,12 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(0, 71);
+            materialCard1.Location = new Point(2, 73);
             materialCard1.Margin = new Padding(14);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1340, 591);
+            materialCard1.Size = new Size(1346, 654);
             materialCard1.TabIndex = 10;
             // 
             // tableLayoutPanel5
@@ -176,7 +176,7 @@
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new Size(1312, 442);
+            tableLayoutPanel5.Size = new Size(1318, 505);
             tableLayoutPanel5.TabIndex = 2;
             // 
             // materialCard2
@@ -192,7 +192,7 @@
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
-            materialCard2.Size = new Size(628, 193);
+            materialCard2.Size = new Size(631, 224);
             materialCard2.TabIndex = 0;
             // 
             // chartDailySales
@@ -202,7 +202,7 @@
             chartDailySales.Legend.LabelFont = chartFont1;
             chartDailySales.Location = new Point(14, 33);
             chartDailySales.Name = "chartDailySales";
-            chartDailySales.Size = new Size(600, 146);
+            chartDailySales.Size = new Size(603, 177);
             chartDailySales.TabIndex = 2;
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
@@ -239,9 +239,9 @@
             materialLabel3.Location = new Point(14, 14);
             materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel3.Name = "materialLabel3";
-            materialLabel3.Size = new Size(237, 19);
+            materialLabel3.Size = new Size(230, 19);
             materialLabel3.TabIndex = 1;
-            materialLabel3.Text = "Daily Sales Trend over Purchases";
+            materialLabel3.Text = "Daily Sales Trend over Expenses";
             materialLabel3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // materialCard3
@@ -252,12 +252,12 @@
             materialCard3.Depth = 0;
             materialCard3.Dock = DockStyle.Fill;
             materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard3.Location = new Point(670, 14);
+            materialCard3.Location = new Point(673, 14);
             materialCard3.Margin = new Padding(14);
             materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard3.Name = "materialCard3";
             materialCard3.Padding = new Padding(14);
-            materialCard3.Size = new Size(628, 193);
+            materialCard3.Size = new Size(631, 224);
             materialCard3.TabIndex = 1;
             // 
             // chartMonthlySales
@@ -267,7 +267,7 @@
             chartMonthlySales.Legend.LabelFont = chartFont9;
             chartMonthlySales.Location = new Point(14, 33);
             chartMonthlySales.Name = "chartMonthlySales";
-            chartMonthlySales.Size = new Size(600, 146);
+            chartMonthlySales.Size = new Size(603, 177);
             chartMonthlySales.TabIndex = 3;
             chartFont10.FontName = "Arial";
             chartFont10.Size = 12;
@@ -304,9 +304,9 @@
             materialLabel4.Location = new Point(14, 14);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
-            materialLabel4.Size = new Size(259, 19);
+            materialLabel4.Size = new Size(252, 19);
             materialLabel4.TabIndex = 2;
-            materialLabel4.Text = "Monthly Sales Trend over Purchases";
+            materialLabel4.Text = "Monthly Sales Trend over Expenses";
             materialLabel4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // materialCard4
@@ -317,12 +317,12 @@
             materialCard4.Depth = 0;
             materialCard4.Dock = DockStyle.Fill;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard4.Location = new Point(14, 235);
+            materialCard4.Location = new Point(14, 266);
             materialCard4.Margin = new Padding(14);
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(628, 193);
+            materialCard4.Size = new Size(631, 225);
             materialCard4.TabIndex = 2;
             // 
             // dgDailySales
@@ -352,7 +352,7 @@
             dgDailySales.Location = new Point(14, 33);
             dgDailySales.Name = "dgDailySales";
             dgDailySales.RowHeadersVisible = false;
-            dgDailySales.Size = new Size(600, 146);
+            dgDailySales.Size = new Size(603, 178);
             dgDailySales.TabIndex = 3;
             dgDailySales.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgDailySales.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -398,12 +398,12 @@
             materialCard5.Depth = 0;
             materialCard5.Dock = DockStyle.Fill;
             materialCard5.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard5.Location = new Point(670, 235);
+            materialCard5.Location = new Point(673, 266);
             materialCard5.Margin = new Padding(14);
             materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard5.Name = "materialCard5";
             materialCard5.Padding = new Padding(14);
-            materialCard5.Size = new Size(628, 193);
+            materialCard5.Size = new Size(631, 225);
             materialCard5.TabIndex = 3;
             // 
             // dgMonthlySales
@@ -433,7 +433,7 @@
             dgMonthlySales.Location = new Point(14, 33);
             dgMonthlySales.Name = "dgMonthlySales";
             dgMonthlySales.RowHeadersVisible = false;
-            dgMonthlySales.Size = new Size(600, 146);
+            dgMonthlySales.Size = new Size(603, 178);
             dgMonthlySales.TabIndex = 4;
             dgMonthlySales.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgMonthlySales.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -489,7 +489,7 @@
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Size = new Size(1312, 74);
+            tableLayoutPanel4.Size = new Size(1318, 74);
             tableLayoutPanel4.TabIndex = 1;
             // 
             // guna2GradientPanel1
@@ -503,7 +503,7 @@
             guna2GradientPanel1.Location = new Point(23, 3);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
             guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2GradientPanel1.Size = new Size(312, 68);
+            guna2GradientPanel1.Size = new Size(313, 68);
             guna2GradientPanel1.TabIndex = 0;
             // 
             // txtItemSold
@@ -513,7 +513,7 @@
             txtItemSold.Dock = DockStyle.Right;
             txtItemSold.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtItemSold.ForeColor = Color.Black;
-            txtItemSold.Location = new Point(208, 21);
+            txtItemSold.Location = new Point(209, 21);
             txtItemSold.Name = "txtItemSold";
             txtItemSold.Size = new Size(104, 37);
             txtItemSold.TabIndex = 5;
@@ -542,10 +542,10 @@
             guna2GradientPanel2.Dock = DockStyle.Fill;
             guna2GradientPanel2.FillColor = Color.FromArgb(192, 255, 192);
             guna2GradientPanel2.FillColor2 = Color.FromArgb(128, 255, 128);
-            guna2GradientPanel2.Location = new Point(341, 3);
+            guna2GradientPanel2.Location = new Point(342, 3);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
             guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2GradientPanel2.Size = new Size(312, 68);
+            guna2GradientPanel2.Size = new Size(313, 68);
             guna2GradientPanel2.TabIndex = 1;
             // 
             // txtSales
@@ -555,7 +555,7 @@
             txtSales.Dock = DockStyle.Right;
             txtSales.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtSales.ForeColor = Color.Black;
-            txtSales.Location = new Point(208, 21);
+            txtSales.Location = new Point(209, 21);
             txtSales.Name = "txtSales";
             txtSales.Size = new Size(104, 37);
             txtSales.TabIndex = 5;
@@ -584,10 +584,10 @@
             guna2GradientPanel3.Dock = DockStyle.Fill;
             guna2GradientPanel3.FillColor = Color.FromArgb(255, 192, 192);
             guna2GradientPanel3.FillColor2 = Color.FromArgb(255, 128, 128);
-            guna2GradientPanel3.Location = new Point(659, 3);
+            guna2GradientPanel3.Location = new Point(661, 3);
             guna2GradientPanel3.Name = "guna2GradientPanel3";
             guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GradientPanel3.Size = new Size(312, 68);
+            guna2GradientPanel3.Size = new Size(313, 68);
             guna2GradientPanel3.TabIndex = 2;
             // 
             // txtPurchases
@@ -597,7 +597,7 @@
             txtPurchases.Dock = DockStyle.Right;
             txtPurchases.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtPurchases.ForeColor = Color.Black;
-            txtPurchases.Location = new Point(208, 21);
+            txtPurchases.Location = new Point(209, 21);
             txtPurchases.Name = "txtPurchases";
             txtPurchases.Size = new Size(104, 37);
             txtPurchases.TabIndex = 5;
@@ -613,9 +613,9 @@
             label4.ForeColor = Color.Black;
             label4.Location = new Point(0, 0);
             label4.Name = "label4";
-            label4.Size = new Size(80, 21);
+            label4.Size = new Size(73, 21);
             label4.TabIndex = 4;
-            label4.Text = "Purchases";
+            label4.Text = "Expenses";
             label4.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // guna2GradientPanel4
@@ -626,10 +626,10 @@
             guna2GradientPanel4.Dock = DockStyle.Fill;
             guna2GradientPanel4.FillColor = Color.FromArgb(192, 192, 255);
             guna2GradientPanel4.FillColor2 = Color.FromArgb(128, 128, 255);
-            guna2GradientPanel4.Location = new Point(977, 3);
+            guna2GradientPanel4.Location = new Point(980, 3);
             guna2GradientPanel4.Name = "guna2GradientPanel4";
             guna2GradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2GradientPanel4.Size = new Size(312, 68);
+            guna2GradientPanel4.Size = new Size(313, 68);
             guna2GradientPanel4.TabIndex = 3;
             // 
             // txtNet
@@ -639,7 +639,7 @@
             txtNet.Dock = DockStyle.Right;
             txtNet.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtNet.ForeColor = Color.Black;
-            txtNet.Location = new Point(208, 21);
+            txtNet.Location = new Point(209, 21);
             txtNet.Name = "txtNet";
             txtNet.Size = new Size(104, 37);
             txtNet.TabIndex = 5;
@@ -670,7 +670,7 @@
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(1312, 47);
+            tableLayoutPanel3.Size = new Size(1318, 47);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // materialLabel2
@@ -683,7 +683,7 @@
             materialLabel2.Location = new Point(3, 0);
             materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel2.Name = "materialLabel2";
-            materialLabel2.Size = new Size(1306, 47);
+            materialLabel2.Size = new Size(1312, 47);
             materialLabel2.TabIndex = 0;
             materialLabel2.Text = "ALL-TIME RECORD";
             materialLabel2.TextAlign = ContentAlignment.MiddleCenter;
@@ -696,12 +696,12 @@
             tableLayoutPanel1.Controls.Add(guna2Separator1, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Location = new Point(2, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 81.8181839F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 18.181818F));
-            tableLayoutPanel1.Size = new Size(1340, 71);
+            tableLayoutPanel1.Size = new Size(1346, 71);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // tableLayoutPanel2
@@ -716,7 +716,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1340, 58);
+            tableLayoutPanel2.Size = new Size(1346, 58);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // guna2Panel1
@@ -729,7 +729,7 @@
             guna2Panel1.Location = new Point(3, 3);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Panel1.Size = new Size(1334, 52);
+            guna2Panel1.Size = new Size(1340, 52);
             guna2Panel1.TabIndex = 0;
             // 
             // txtMonth
@@ -748,7 +748,7 @@
             txtMonth.Hint = "Month";
             txtMonth.IntegralHeight = false;
             txtMonth.ItemHeight = 43;
-            txtMonth.Location = new Point(1023, 0);
+            txtMonth.Location = new Point(1029, 0);
             txtMonth.MaxDropDownItems = 4;
             txtMonth.MouseState = MaterialSkin.MouseState.OUT;
             txtMonth.Name = "txtMonth";
@@ -772,7 +772,7 @@
             txtYear.Hint = "Year";
             txtYear.IntegralHeight = false;
             txtYear.ItemHeight = 43;
-            txtYear.Location = new Point(1211, 0);
+            txtYear.Location = new Point(1217, 0);
             txtYear.MaxDropDownItems = 4;
             txtYear.MouseState = MaterialSkin.MouseState.OUT;
             txtYear.Name = "txtYear";
@@ -800,11 +800,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1340, 662);
+            ClientSize = new Size(1350, 729);
             Controls.Add(materialCard1);
             Controls.Add(tableLayoutPanel1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "SalesReportView";
+            Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+            Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             materialCard1.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
             materialCard2.ResumeLayout(false);

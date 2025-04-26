@@ -1,9 +1,14 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.Inventory;
 using MaterialSkin.Controls;
+using RavenTech_ERP.Properties;
 using ServiceLayer.Services.Helpers;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,14 +21,14 @@ using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class GoodsReceivedNoteListVView : MaterialForm
+    public partial class GoodsReceivedNoteListVView : SfForm
     {
-        private readonly BindingSource _bindingSource;
+        private readonly IEnumerable<GoodsReceiveNoteViewModel> _goodsReceiveNotes;
         private readonly IUnitOfWork _unitOfWork;
-        public GoodsReceivedNoteListVView(BindingSource bindingSource, IUnitOfWork unitOfWork)
+        public GoodsReceivedNoteListVView(IEnumerable<GoodsReceiveNoteViewModel> goodsReceiveNotes, IUnitOfWork unitOfWork)
         {
             InitializeComponent();
-            _bindingSource = bindingSource;
+            _goodsReceiveNotes = goodsReceiveNotes;
 
             LoadAllGoodsReceivedNoteList();
             _unitOfWork = unitOfWork;
@@ -31,28 +36,40 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadAllGoodsReceivedNoteList()
         {
+            dgPager.DataSource = _goodsReceiveNotes;
 
-            dgPager.DataSource = _bindingSource.ToList<GoodsReceiveNoteViewModel>();
+            foreach (var item in _goodsReceiveNotes)
+            {
+                item.Delete = Resources.delete;
+            }
+
             dgList.DataSource = dgPager.PagedSource;
         }
 
-        private void dgList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgList_CellClick(object sender, CellClickEventArgs e)
         {
-            var GoodsReceivedNote = (GoodsReceiveNoteViewModel)dgList.SelectedItem;
-            var entity = _unitOfWork.GoodsReceivedNote.Value.Get(c => c.GoodsReceivedNoteId == GoodsReceivedNote.GoodsReceivedNoteId, tracked: true);
-
-            var result = MessageBox.Show("Are you sure you want to delete the selected GRN?", "Warning",
-                       MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (e.DataColumn.GridColumn.MappingName == "Delete")
             {
-                _unitOfWork.GoodsReceivedNote.Value.Detach(entity);
-                _unitOfWork.GoodsReceivedNote.Value.Remove(entity);
-                _unitOfWork.Save();
+                if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is GoodsReceiveNoteViewModel row)
+                {
+                    var entity = _unitOfWork.GoodsReceivedNote.Value.Get(c => c.GoodsReceivedNoteId == row.GoodsReceivedNoteId, tracked: true);
 
-                MessageBox.Show("GRN deleted successfully", "Delete GRN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var result = MessageBox.Show("Are you sure you want to delete the selected GRN?", "Warning",
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                _bindingSource.Remove(GoodsReceivedNote);
+                    if (result == DialogResult.Yes)
+                    {
+                        _unitOfWork.GoodsReceivedNote.Value.Remove(entity);
+                        _unitOfWork.Save();
+
+                        MessageBox.Show("GRN deleted successfully", "Delete GRN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        _goodsReceiveNotes.ToList().Remove(row);
+
+                        dgList.DataSource = null;
+                        dgList.DataSource = _goodsReceiveNotes;
+                    }
+                }
             }
         }
     }

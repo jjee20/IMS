@@ -1,172 +1,127 @@
-﻿using DomainLayer.Enums;
-using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.Models.Inventory;
-
-using DomainLayer.ViewModels;
-using DomainLayer.ViewModels.Inventory;
-using DomainLayer.ViewModels.PayrollViewModels;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer;
-using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
-using PresentationLayer.Views.IViews;
-using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.CommonServices;
+using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.IViews.Accounting.Payroll;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Presenters.Accounting.Payroll
+namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
     public class LeavePresenter
     {
         public ILeaveView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource EmployeeBindingSource;
-        private BindingSource LeaveTypeBindingSource;
-        private BindingSource StatusBindingSource;
         private IEnumerable<LeaveViewModel> LeaveList;
-        private IEnumerable<EmployeeViewModel> EmployeeList;
-        private IEnumerable<EnumItemViewModel> LeaveTypeList;
-        private IEnumerable<EnumItemViewModel> StatusList;
-        public LeavePresenter(ILeaveView view, IUnitOfWork unitOfWork)
-        {
+        public LeavePresenter(ILeaveView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            EmployeeBindingSource = new BindingSource();
-            LeaveTypeBindingSource = new BindingSource();
-            StatusBindingSource = new BindingSource();
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
             LoadAllLeaveList();
-            LoadAllEmployeeList();
-            LoadAllLeaveTypeList();
-            LoadAllStatusList();
 
             //Source Binding
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-
-            var year = DateTime.Now.Year;
-            var startDate = new DateTime(year, 1, 1);
-            var endDate = new DateTime(year, 12, 31);
-
-            var employee = _unitOfWork.Employee.Value.Get(c => c.EmployeeId == _view.EmployeeId, includeProperties: "Leaves");
-            var totalLeave = employee.Leaves.Where(c => c.StartDate >= startDate && c.EndDate <= endDate).Count();
-
-            if (totalLeave > employee.LeaveCredits)
+            using (var form = new UpsertLeaveView(_unitOfWork))
             {
-                _view.Message = $"Employee has {employee.LeaveCredits} leave credits left. You cannot proceed its request.";
-                return;
-            }
-
-            var model = _unitOfWork.Leave.Value.Get(c => c.LeaveId == _view.LeaveId, tracked: true);
-
-            if (model == null) model = new Leave();
-            else _unitOfWork.Leave.Value.Detach(model);
-
-            model.LeaveId = _view.LeaveId;
-            model.EmployeeId = _view.EmployeeId;
-            model.StartDate = _view.StartDate;
-            model.EndDate = _view.EndDate;
-            model.LeaveType = _view.LeaveType;
-            model.Status = _view.Status;
-            model.Notes = _view.Notes;
-            model.Other = _view.Other;
-
-            try
-            {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Leave";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.Leave.Value.Update(model);
-                    _view.Message = "Leave edited successfully";
+                    LoadAllLeaveList();
                 }
-                else //Add new model
-                {
-                    _unitOfWork.Leave.Value.Add(model);
-                    _view.Message = "Leave added successfully";
-                }
-
-                _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllLeaveList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is LeaveViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.Leave.Value.Get(c => c.LeaveId == row.LeaveId);
+                using (var form = new UpsertLeaveView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Leave";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllLeaveList();
+                    }
+                }
             }
-
-            var leave = (LeaveViewModel)_view.DataGrid.SelectedItem;
-            var entity = _unitOfWork.Leave.Value.Get(c => c.LeaveId == leave.LeaveId);
-            _view.LeaveId = entity.LeaveId;
-            _view.EmployeeId = entity.EmployeeId;
-            _view.StartDate = entity.StartDate;
-            _view.EndDate = entity.EndDate;
-            _view.LeaveType = entity.LeaveType;
-            _view.Status = entity.Status;
-            _view.Notes = entity.Notes;
-            _view.Other = entity.Other;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is LeaveViewModel row)
+            {
+                var entity = _unitOfWork.Leave.Value.Get(c => c.LeaveId == row.LeaveId);
+                if (entity != null)
+                {
+                    _unitOfWork.Leave.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Leave deleted successfully.");
+
+                    LoadAllLeaveList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var leave = (LeaveViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Leave.Value.Get(c => c.LeaveId == leave.LeaveId);
-                _unitOfWork.Leave.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<LeaveViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.LeaveId).ToList();
+
+                var entities = _unitOfWork.Leave.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.LeaveId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.ShowMessage("Selected records could not be found.");
+                    return;
+                }
+
+                _unitOfWork.Leave.Value.RemoveRange(entities);
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                _view.Message = "Leave deleted successfully";
+
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllLeaveList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Leave";
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "LeaveReport.rdlc";
@@ -177,46 +132,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllLeaveList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllLeaveList();
-            _view.LeaveId = 0;
-            _view.StartDate = DateTime.Now;
-            _view.EndDate = DateTime.Now;
-            _view.Notes = "";
-            _view.Other = "";
-        }
-
+        
         private void LoadAllLeaveList(bool emptyValue = false)
         {
-            LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(
-                _unitOfWork.Leave.Value.GetAll(c => c.StartDate.Date >= _view.StartDate.Date && c.EndDate.Date <= _view.EndDate.Date,
-                    includeProperties: "Employee"));
+            LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.Value.GetAll(includeProperties: "Employee"));
 
-            if (!emptyValue) LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue) || c.LeaveType.Contains(_view.SearchValue));
-            _view.SetLeaveListBindingSource(LeaveList.OrderByDescending(c => c.StartDate));
-        }
-        private void LoadAllEmployeeList()
-        {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
-        }
-        private void LoadAllLeaveTypeList()
-        {
-            LeaveTypeList = EnumHelper.EnumToEnumerable<LeaveType>();
-            LeaveTypeBindingSource.DataSource = LeaveTypeList;//Set data source.
-            _view.SetLeaveTypeListBindingSource(LeaveTypeBindingSource);
-        }
-        private void LoadAllStatusList()
-        {
-            StatusList = EnumHelper.EnumToEnumerable<Status>();
-            StatusBindingSource.DataSource = StatusList;//Set data source.
-            _view.SetStatusListBindingSource(StatusBindingSource);
+            if (!emptyValue) LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue));
+            _view.SetLeaveListBindingSource(LeaveList);
         }
     }
 }

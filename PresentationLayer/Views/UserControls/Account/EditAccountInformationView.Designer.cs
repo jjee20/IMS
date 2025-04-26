@@ -43,7 +43,7 @@
             txtFirstName.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtFirstName.Hint = "First Name";
             txtFirstName.LeadingIcon = null;
-            txtFirstName.Location = new Point(73, 113);
+            txtFirstName.Location = new Point(75, 77);
             txtFirstName.MaxLength = 50;
             txtFirstName.MouseState = MaterialSkin.MouseState.OUT;
             txtFirstName.Multiline = false;
@@ -61,7 +61,7 @@
             txtLastName.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtLastName.Hint = "Last Name";
             txtLastName.LeadingIcon = null;
-            txtLastName.Location = new Point(282, 113);
+            txtLastName.Location = new Point(284, 77);
             txtLastName.MaxLength = 50;
             txtLastName.MouseState = MaterialSkin.MouseState.OUT;
             txtLastName.Multiline = false;
@@ -79,7 +79,7 @@
             txtEmail.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtEmail.Hint = "Email";
             txtEmail.LeadingIcon = null;
-            txtEmail.Location = new Point(73, 187);
+            txtEmail.Location = new Point(75, 151);
             txtEmail.MaxLength = 50;
             txtEmail.MouseState = MaterialSkin.MouseState.OUT;
             txtEmail.Multiline = false;
@@ -97,7 +97,7 @@
             txtPhone.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtPhone.Hint = "Phone Number";
             txtPhone.LeadingIcon = null;
-            txtPhone.Location = new Point(73, 261);
+            txtPhone.Location = new Point(75, 225);
             txtPhone.MaxLength = 50;
             txtPhone.MouseState = MaterialSkin.MouseState.OUT;
             txtPhone.Multiline = false;
@@ -114,7 +114,7 @@
             btnSave.Depth = 0;
             btnSave.HighEmphasis = true;
             btnSave.Icon = null;
-            btnSave.Location = new Point(217, 342);
+            btnSave.Location = new Point(219, 306);
             btnSave.Margin = new Padding(4, 6, 4, 6);
             btnSave.MouseState = MaterialSkin.MouseState.HOVER;
             btnSave.Name = "btnSave";
@@ -139,7 +139,10 @@
             Controls.Add(txtLastName);
             Controls.Add(txtFirstName);
             Name = "EditAccountInformationView";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
+            Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+            Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Edit Account Information";
             ResumeLayout(false);
             PerformLayout();

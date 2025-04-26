@@ -50,6 +50,11 @@ namespace PresentationLayer.Views.UserControls
         {
             set { txtOutOfStock.Text = value.ToString(); }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public double ProjectFlow
+        {
+            set { txtTotalProjectFlow.Text = value.ToString(); }
+        }
 
         public void SetInStockListBindingSource(BindingSource source)
         {
@@ -65,6 +70,11 @@ namespace PresentationLayer.Views.UserControls
         {
             dgOutOfStock.DataSource = source;
             DataGridHelper.ApplyDisplayNames<StockViewModel>(source, dgOutOfStock);
+        }
+        public void SetProjectFlowListBindingSource(BindingSource source)
+        {
+            dgProjectFlow.DataSource = source;
+            DataGridHelper.ApplyDisplayNames<ProjectFlowViewModel>(source, dgProjectFlow);
         }
 
         public event EventHandler PrintEvent;

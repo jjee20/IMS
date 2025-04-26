@@ -1,10 +1,17 @@
-﻿using DomainLayer.Models.Inventory;
+﻿using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -12,150 +19,113 @@ namespace PresentationLayer.Presenters
     {
         public IProductView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource ProductTypeBindingSource;
-        private BindingSource UnitOfMeasureBindingSource;
-        private BindingSource BranchBindingSource;
-        private BindingSource CurrencyBindingSource;
         private IEnumerable<ProductViewModel> ProductList;
-        private IEnumerable<ProductType> ProductTypeList;
-        private IEnumerable<UnitOfMeasure> UnitOfMeasureList;
-        private IEnumerable<Branch> BranchList;
         public ProductPresenter(IProductView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            ProductTypeBindingSource = new BindingSource();
-            UnitOfMeasureBindingSource = new BindingSource();
-            BranchBindingSource = new BindingSource();
-            CurrencyBindingSource = new BindingSource();
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
             LoadAllProductList();
-            LoadAllProductTypeList();
-            LoadAllUnitOfMeasureList();
-            LoadAllBranchList();
 
             //Source Binding
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-            var model = _unitOfWork.Product.Value.Get(c => c.ProductId == _view.ProductId, tracked: true);
-            if (model == null) model = new Product();
-            else _unitOfWork.Product.Value.Detach(model);
-
-            model.ProductId = _view.ProductId;
-            model.ProductName = _view.ProductName ?? "";
-            model.ProductCode = _view.ProductCode ?? "";
-            model.Barcode = _view.Barcode ?? "";
-            model.Description = _view.Description ?? "";
-            model.ReorderLevel = _view.ReorderLevel;
-            model.ProductTypeId = _view.ProductTypeId;
-            model.UnitOfMeasureId = _view.UnitOfMeasureId;
-            model.DefaultBuyingPrice = _view.DefaultBuyingPrice;
-            model.DefaultSellingPrice = _view.DefaultSellingPrice;
-            model.BranchId = _view.BranchId;
-            model.Color = _view.PColor;
-            model.Size = _view.PSize;
-            model.Brand = _view.Brand;
-
-            try
+            using (var form = new UpsertProductView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Product";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.Product.Value.Update(model);
-                    _view.Message = "Product edited successfully";
+                    LoadAllProductList();
                 }
-                else //Add new model
-                {
-                    _unitOfWork.Product.Value.Add(model);
-                    _view.Message = "Product added successfully";
-                }
-                    _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllProductList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.Product.Value.Get(c => c.ProductId == row.ProductId);
+                using (var form = new UpsertProductView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Product";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllProductList();
+                    }
+                }
             }
-
-            var product = (ProductViewModel)_view.DataGrid.SelectedItem;
-            var entity = _unitOfWork.Product.Value.Get(c => c.ProductId == product.ProductId);
-            _view.ProductId = entity.ProductId;
-            _view.ProductName = entity.ProductName;
-            _view.ProductCode = entity.ProductCode;
-            _view.Barcode = entity.Barcode;
-            _view.Description = entity.Description;
-            _view.ReorderLevel = entity.ReorderLevel;
-            _view.ProductTypeId = entity.ProductTypeId;
-            _view.UnitOfMeasureId = entity.UnitOfMeasureId;
-            _view.DefaultBuyingPrice = entity.DefaultBuyingPrice;
-            _view.DefaultSellingPrice = entity.DefaultSellingPrice;
-            _view.BranchId = entity.BranchId;
-            _view.Brand = entity.Brand;
-            _view.PSize = entity.Size;
-            _view.PColor = entity.Color;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductViewModel row)
+            {
+                var entity = _unitOfWork.Product.Value.Get(c => c.ProductId == row.ProductId);
+                if (entity != null)
+                {
+                    _unitOfWork.Product.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Product deleted successfully.");
+
+                    LoadAllProductList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var product = (ProductViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Product.Value.Get(c => c.ProductId == product.ProductId);
-                _unitOfWork.Product.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<ProductViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.ProductId).ToList();
+
+                var entities = _unitOfWork.Product.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.ProductId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.ShowMessage("Selected records could not be found.");
+                    return;
+                }
+
+                _unitOfWork.Product.Value.RemoveRange(entities);
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                _view.Message = "Product deleted successfully";
+
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllProductList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Product";
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "ProductReport.rdlc";
@@ -166,50 +136,13 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllProductList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllProductList();
-            _view.ProductId = 0;
-            _view.ProductName = "";
-            _view.ProductCode = "";
-            _view.Barcode = "";
-            _view.Description = "";
-            _view.ReorderLevel = 0;
-            _view.ProductTypeId = 0;
-            _view.UnitOfMeasureId = 0;
-            _view.DefaultBuyingPrice = 0;
-            _view.DefaultSellingPrice = 0;
-            _view.BranchId = 0;
-        }
         
         private void LoadAllProductList(bool emptyValue = false)
         {
-            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll(includeProperties: "UnitOfMeasure,Branch"));
+            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll());
 
-            if (!emptyValue) ProductList = ProductList.Where(c => c.ProductName.Contains(_view.SearchValue) || c.ProductCode.Contains(_view.SearchValue) || c.Barcode.Contains(_view.SearchValue));
-            _view.SetProductListBindingSource(ProductList.OrderBy(c => c.ProductName));
-        }
-        private void LoadAllProductTypeList()
-        {
-            ProductTypeList = _unitOfWork.ProductType.Value.GetAll();
-            ProductTypeBindingSource.DataSource = ProductTypeList;//Set data source.
-            _view.SetProductTypeListBindingSource(ProductTypeBindingSource);
-        }
-        private void LoadAllUnitOfMeasureList()
-        {
-            UnitOfMeasureList = _unitOfWork.UnitOfMeasure.Value.GetAll();
-            UnitOfMeasureBindingSource.DataSource = UnitOfMeasureList;//Set data source.
-            _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureBindingSource);
-        }
-        private void LoadAllBranchList()
-        {
-            BranchList = _unitOfWork.Branch.Value.GetAll();
-            BranchBindingSource.DataSource = BranchList;//Set data source.
-            _view.SetBranchListBindingSource(BranchBindingSource);
+            if (!emptyValue) ProductList = ProductList.Where(c => c.ProductName.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetProductListBindingSource(ProductList);
         }
     }
 }

@@ -1,28 +1,23 @@
 ﻿using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
 using System.ComponentModel.DataAnnotations;
 
 namespace PresentationLayer.Views.IViews
 {
-    public interface IBillTypeView
+    public interface IBillTypeView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
-        int BillTypeId { get; set; }
-        string BillTypeName { get; set; }
-        string Description { get; set; }
-        bool IsEdit { get; set; }
-        bool IsSuccessful { get; set; }
-        string Message { get; set; }
         string SearchValue { get; set; }
 
-        event EventHandler AddNewEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler EditEvent;
+        event CellClickEventHandler DeleteEvent;
+        event KeyEventHandler MultipleDeleteEvent;
+        event CellClickEventHandler EditEvent;
+        event EventHandler AddEvent;
         event EventHandler PrintEvent;
-        event EventHandler SaveEvent;
         event EventHandler SearchEvent;
-        event EventHandler RefreshEvent;
-
-        void SetBillTypeListBindingSource(IEnumerable<BillType> BillTypeList);
+        void SetBillTypeListBindingSource(IEnumerable<BillTypeViewModel> BillTypeList);
     }
 }

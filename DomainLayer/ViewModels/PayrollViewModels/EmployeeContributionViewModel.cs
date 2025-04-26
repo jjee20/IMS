@@ -21,5 +21,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Pag-ibig")]
         public double PagIbig { get; set; }
         public double PhilHealth { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

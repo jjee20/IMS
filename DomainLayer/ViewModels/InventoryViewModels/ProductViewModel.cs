@@ -10,10 +10,7 @@ namespace DomainLayer.ViewModels.Inventory
 {
     public class ProductViewModel
     {
-        [Display(Name = "Id")]
         public int ProductId { get; set; }
-        [Display(Name = "Product/Service")]
-        [Required]
         public string ProductName { get; set; }
         [Display(Name = "Code")]
         public string ProductCode { get; set; }
@@ -24,10 +21,10 @@ namespace DomainLayer.ViewModels.Inventory
         public string Description { get; set; }
         [Display(Name = "UOM")]
         public string UnitOfMeasure { get; set; }
-        [Display(Name = "Buying Price")]
         public double DefaultBuyingPrice { get; set; } = 0.0;
-        [Display(Name = "Selling Price")]
         public double DefaultSellingPrice { get; set; } = 0.0;
         public string Branch { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

@@ -1,14 +1,17 @@
-﻿using AutoMapper;
-using DomainLayer.Models.Accounts;
+﻿using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.Inventory;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
+using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
-using Newtonsoft.Json;
 using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
+using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
-using static PresentationLayer.Json.Address;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using System.Linq;
+using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
 {
@@ -16,154 +19,113 @@ namespace PresentationLayer.Presenters
     {
         public ICustomerView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource CustomerTypeBindingSource;
-
         private IEnumerable<CustomerViewModel> CustomerList;
-        private IEnumerable<CustomerType> CustomerTypeList;
-        public CustomerPresenter(ICustomerView view, IUnitOfWork unitOfWork)
-        {
+        public CustomerPresenter(ICustomerView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            CustomerTypeBindingSource = new BindingSource();
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
             LoadAllCustomerList();
-            LoadAllCustomerTypeList();
-            //LoadAddress();
 
             //Source Binding
-            //_view.SetAddressBindingSource(GetBarangayList, GetMunicipalityList,
-            //                              GetProvinceList, GetRegionList);
         }
-
-        //private void LoadAddress()
-        //{
-        //    string reportPath = Path.Combine(reportDirectory, reportFileName);
-        //    string addressData = File.ReadAllText(reportPath);
-        //    var regions = JsonConvert.DeserializeObject<Root>(addressData);
-        //    foreach (var region in regions.Items)
-        //    {
-        //        GetRegionList.Add(region.Value.ToString());
-        //        foreach (var province in region.Value.province.province_list)
-        //        {
-        //            GetProvinceList.Add(province.Value.ToString());
-        //            foreach (var municipality in province.Value.municipality_list)
-        //            {
-        //                GetMunicipalityList.Add(municipality.Value.ToString());
-        //                foreach (var barangay in municipality.Value.barangay_list)
-        //                {
-        //                    GetBarangayList.Add(barangay);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-            var model = _unitOfWork.Customer.Value.Get(c => c.CustomerId == _view.CustomerId, tracked: true);
-            if (model == null) model = new Customer();
-            else _unitOfWork.Customer.Value.Detach(model);
-
-            model.CustomerId = _view.CustomerId;
-            model.CustomerName = _view.CustomerName;
-            model.CustomerTypeId = _view.CustomerTypeId;
-            model.Address = _view.Address;
-            model.Phone = _view.Phone;
-            model.Email = _view.Email;
-            model.ContactPerson = _view.ContactPerson;
-
-            try
+            using (var form = new UpsertCustomerView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Customer";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.Customer.Value.Update(model);
-                    _view.Message = "Customer edited successfully";
+                    LoadAllCustomerList();
                 }
-                else //Add new model
-                {
-                    _unitOfWork.Customer.Value.Add(model);
-                    _view.Message = "Customer added successfully";
-                }
-                _unitOfWork.Save();
-                _view.IsSuccessful = true; 
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllCustomerList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-            if (_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is CustomerViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.Customer.Value.Get(c => c.CustomerId == row.CustomerId);
+                using (var form = new UpsertCustomerView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Customer";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllCustomerList();
+                    }
+                }
             }
-
-            var customer = (CustomerViewModel)_view.DataGrid.SelectedItem;
-            var entity = _unitOfWork.Customer.Value.Get(c => c.CustomerId == customer.CustomerId);
-            _view.CustomerId = entity.CustomerId;
-            _view.CustomerName = entity.CustomerName;
-            _view.CustomerTypeId = entity.CustomerTypeId;
-            _view.Address = entity.Address;
-            _view.Phone = entity.Phone;
-            _view.Email = entity.Email;
-            _view.ContactPerson = entity.ContactPerson;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is CustomerViewModel row)
+            {
+                var entity = _unitOfWork.Customer.Value.Get(c => c.CustomerId == row.CustomerId);
+                if (entity != null)
+                {
+                    _unitOfWork.Customer.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Customer deleted successfully.");
+
+                    LoadAllCustomerList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select one to edit";
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var customer = (CustomerViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Customer.Value.Get(c => c.CustomerId == customer.CustomerId);
-                _unitOfWork.Customer.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<CustomerViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.CustomerId).ToList();
+
+                var entities = _unitOfWork.Customer.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.CustomerId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.ShowMessage("Selected records could not be found.");
+                    return;
+                }
+
+                _unitOfWork.Customer.Value.RemoveRange(entities);
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                _view.Message = "Customer deleted successfully";
+
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllCustomerList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete customer type";
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "CustomerReport.rdlc";
@@ -174,36 +136,13 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllCustomerList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllCustomerList();
-            LoadAllCustomerTypeList();
-            _view.CustomerId = 0;
-            _view.CustomerName = "";
-            _view.CustomerTypeId = 0;
-            _view.Address = "";
-            _view.Phone = "";
-            _view.Email = "";
-            _view.ContactPerson = "";
-        }
         
         private void LoadAllCustomerList(bool emptyValue = false)
         {
-            CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll(includeProperties: "CustomerType"));
+            CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll());
 
-            if (!emptyValue) CustomerList = CustomerList.Where(c => c.CustomerName.Contains(_view.SearchValue));
-            _view.SetCustomerListBindingSource(CustomerList.OrderBy(c => c.CustomerName));
+            if (!emptyValue) CustomerList = CustomerList.Where(c => c.CustomerName.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetCustomerListBindingSource(CustomerList);
         }
-        private void LoadAllCustomerTypeList()
-        {
-            CustomerTypeList = _unitOfWork.CustomerType.Value.GetAll();
-            CustomerTypeBindingSource.DataSource = CustomerTypeList;//Set data source.
-            _view.SetCustomerTypeListBindingSource(CustomerTypeBindingSource);
-        }
-
     }
 }

@@ -6,6 +6,7 @@ using MaterialSkin.Controls;
 using PresentationLayer;
 using RavenTech_ERP.Helpers;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,12 +19,12 @@ using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
-    public partial class ProjectInformationView: MaterialForm
+    public partial class ProjectInformationView: SfForm
     {
-        private readonly Project _project;
+        private readonly Project? _project;
         private readonly ProjectViewModel _projectVM;
         private readonly IUnitOfWork _unitOfWork;
-        public ProjectInformationView(Project Project, ProjectViewModel ProjectVM, IUnitOfWork unitOfWork)
+        public ProjectInformationView(ProjectViewModel ProjectVM, IUnitOfWork unitOfWork, Project? Project = null)
         {
             InitializeComponent();
             _project = Project;
@@ -35,17 +36,17 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadProjectInformation()
         {
-            double budget = _projectVM.Budget ?? 0;
-            double revenue = _projectVM.Revenue ?? 0;
+            double budget = _projectVM.Budget;
+            double revenue = _projectVM.Revenue;
 
-            var startDate = _projectVM.StartDate.HasValue ? _projectVM.StartDate.Value.Date : DateTime.Now.Date;
-            var endDate = _projectVM.EndDate.HasValue ? _projectVM.EndDate.Value.Date : DateTime.Now.Date;
+            var startDate = !string.IsNullOrEmpty(_projectVM.StartDate) ? _projectVM.StartDate : DateTime.Now.Date.ToLongDateString();
+            var endDate = !string.IsNullOrEmpty(_projectVM.EndDate) ? _projectVM.EndDate : DateTime.Now.Date.ToLongDateString();
             txtProjectName.Text = _project.ProjectName ?? "{Needs Updating}";
             txtClient.Text = _projectVM.Client ?? "{Needs Updating}";
             txtRevenue.Text = budget.ToString() ?? "{Needs Updating}";
             txtBudget.Text = revenue.ToString() ?? "{Needs Updating}";
-            txtStartDate.Text = startDate.ToLongDateString(); 
-            txtEndDate.Text = endDate.ToLongDateString();
+            txtStartDate.Text = startDate; 
+            txtEndDate.Text = endDate;
             txtDescription.Text = _projectVM.Description ?? "{Needs Updating}";
 
             double totalPurchase = _project.ProjectLines.Sum(c => c.SubTotal);
@@ -54,9 +55,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             var projectLines = Program.Mapper.Map<IEnumerable<ProjectLineViewModel>>(_project.ProjectLines);
             dgProjectLines.DataSource = projectLines;
 
+            var holidays = _unitOfWork.Holiday.Value.GetAll(c => c.EffectiveDate.Date >= DateTime.Parse(startDate).Date && c.EffectiveDate.Date <= DateTime.Parse(endDate).Date);
             var employees = _unitOfWork.Employee.Value.GetAll(c => c.Attendances.Any(c => c.ProjectId == _project.ProjectId) , includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
             var contributions = _unitOfWork.Contribution.Value.GetAll();
-            var payroll = PayrollHelper.CalculatePayroll(employees, contributions, _project, startDate, endDate);
+            var payroll = PayrollHelper.CalculatePayroll(employees, contributions, _project, DateTime.Parse(startDate), DateTime.Parse(endDate), holidays.ToList());
         
             dgPayroll.DataSource = payroll;
 

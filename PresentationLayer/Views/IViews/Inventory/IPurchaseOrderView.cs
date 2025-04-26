@@ -1,63 +1,25 @@
-﻿using DomainLayer.Models;
-using DomainLayer.ViewModels.Inventory;
+﻿using DomainLayer.ViewModels.Inventory;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
-using System.ComponentModel.DataAnnotations;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace PresentationLayer.Views.IViews
+namespace PresentationLayer.Views.UserControls
 {
-    public interface IPurchaseOrderView
+    public interface IPurchaseOrderView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
-        int PurchaseOrderId { get; set; }
-        string PurchaseOrderName { get; set; }
-        int BranchId { get; set; }
-        int VendorId { get; set; }
-        DateTimeOffset OrderDate { get; set; }
-        DateTimeOffset DeliveryDate { get; set; }
-        DateTime StartDate { get; set; }
-        DateTime EndDate { get; set; }
-        int PurchaseTypeId { get; set; }
-        string Remarks { get; set; }
-        double Amount { get; set; }
-        double SubTotal { get; set; }
-        double Discount { get; set; }
-        double Tax { get; set; }
-        double Freight { get; set; }
-        double Total { get; set; }
-        List<PurchaseOrderLineViewModel> PurchaseOrderLines { get; set; }
-        bool IsEdit { get; set; }
-        bool IsSuccessful { get; set; }
-        string Message { get; set; }
         string SearchValue { get; set; }
 
-        int ProductId { get; set; }
-        double ProductQuantity { get; set; }
-        double ProductDiscount { get; set; }
-        bool NonStock { get; set; }
-        string NonStockProductName { get; set; }
-
-        event EventHandler AddNewEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler EditEvent;
+        event EventHandler AddEvent;
+        event CellClickEventHandler DeleteEvent;
+        event CellClickEventHandler VoucherEvent;
+        event CellClickEventHandler EditEvent;
+        event CellClickEventHandler BillEvent;
+        event KeyEventHandler MultipleDeleteEvent;
+        event CellClickEventHandler GRNEvent;
         event EventHandler PrintEvent;
-        event EventHandler SaveEvent;
         event EventHandler SearchEvent;
-        event EventHandler RefreshEvent;
-        event EventHandler ProductAddEvent;
-        event EventHandler PaymentDiscountEvent;
-        event EventHandler FreightEvent;
-        event EventHandler GRNEvent;
-        event EventHandler BillEvent;
-        event EventHandler PaymentVoucherEvent;
-        event EventHandler PrintPOEvent;
-        event EventHandler DeleteProductEvent;
-        event EventHandler UpdateComputationEvent;
 
         void SetPurchaseOrderListBindingSource(IEnumerable<PurchaseOrderViewModel> PurchaseOrderList);
-        void SetPurchaseOrderLineListBindingSource(BindingSource PurchaseOrderLineList);
-        void SetPurchaseTypeListBindingSource(BindingSource PurchaseTypeBindingSource);
-        void SetBranchListBindingSource(BindingSource BranchBindingSource);
-        void SetVendorListBindingSource(BindingSource VendorBindingSource);
-        void SetProductListBindingSource(BindingSource ProductBindingSource);
     }
 }

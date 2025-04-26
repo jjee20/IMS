@@ -9,7 +9,7 @@ namespace ServiceLayer.Services.CommonServices
 {
     public static class EnumHelper
     {
-        public static IEnumerable<EnumItemViewModel> EnumToEnumerable<T>() where T : Enum
+        public static List<EnumItemViewModel> EnumToEnumerable<T>() where T : Enum
         {
             return Enum.GetValues(typeof(T))
                        .Cast<T>()
@@ -17,7 +17,7 @@ namespace ServiceLayer.Services.CommonServices
                        {
                            Id = Convert.ToInt32(e),
                            Name = GetDisplayNameOrDefault(e)
-                       });
+                       }).ToList();
         }
 
         private static string GetDisplayNameOrDefault<T>(T enumValue) where T : Enum

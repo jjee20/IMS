@@ -15,5 +15,7 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         [Display(Name = "Hours Worked")]
         public double HoursWorked { get; set; }
         public string Status { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

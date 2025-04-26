@@ -1,153 +1,126 @@
-﻿using DomainLayer.Enums;
-using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels;
-using DomainLayer.ViewModels.Inventory;
-using DomainLayer.ViewModels.PayrollViewModels;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer;
-using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
-using PresentationLayer.Views.IViews;
-using RavenTech_ERP.Properties;
-using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.CommonServices;
+using RavenTech_ERP.Views.IViews.Accounting.Payroll;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Presenters.Accounting.Payroll
+namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
     public class AllowancePresenter
     {
         public IAllowanceView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource AllowanceTypeBindingSource;
-        private BindingSource EmployeeBindingSource;
         private IEnumerable<AllowanceViewModel> AllowanceList;
-        private IEnumerable<EnumItemViewModel> AllowanceTypeList;
-        private IEnumerable<EmployeeViewModel> EmployeeList;
-        public AllowancePresenter(IAllowanceView view, IUnitOfWork unitOfWork)
-        {
+        public AllowancePresenter(IAllowanceView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            AllowanceTypeBindingSource = new BindingSource();
-            EmployeeBindingSource = new BindingSource();
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
             _view.SearchEvent += Search;
+            _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
 
             //Load
 
             LoadAllAllowanceList();
-            LoadAllAllowanceTypeList();
-            LoadAllEmployeeList();
-
-            _view.DateGranted = DateTime.Now;
 
             //Source Binding
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-            var model = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == _view.AllowanceId, tracked: true);
-            if (model == null) model = new Allowance();
-            else _unitOfWork.Allowance.Value.Detach(model);
-
-            model.AllowanceId = _view.AllowanceId;
-            model.AllowanceType = _view.AllowanceType;
-            model.Amount = _view.Amount;
-            model.DateGranted = _view.DateGranted;
-            model.EmployeeId = _view.EmployeeId;
-            model.Description = _view.Description;
-            model.IsRecurring = _view.IsRecurring;
-            try
+            using (var form = new UpsertAllowanceView(_unitOfWork))
             {
-                new ModelDataValidation().Validate(model);
-                if (_view.IsEdit)//Edit model
+                form.Text = "Add Allowance";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.Allowance.Value.Update(model);
-                    _view.Message = "Allowance edited successfully";
+                    LoadAllAllowanceList();
                 }
-                else //Add new model
-                {
-                    _unitOfWork.Allowance.Value.Add(model);
-                    _view.Message = "Allowance added successfully";
-                }
-                _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                CleanviewFields();
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = ex.Message;
             }
         }
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
             LoadAllAllowanceList(emptyValue);
         }
-        private void Edit(object? sender, EventArgs e)
+        private void Edit(object? sender, CellClickEventArgs e)
         {
-            _view.IsEdit = true;
-
-            if(_view.DataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is AllowanceViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select one to edit";
-                return;
+                var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == row.AllowanceId);
+                using (var form = new UpsertAllowanceView(_unitOfWork,entity))
+                {
+                    form.Text = "Edit Allowance";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllAllowanceList();
+                    }
+                }
             }
-
-            var allowance = (AllowanceViewModel)_view.DataGrid.SelectedItem;
-            var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == allowance.AllowanceId);
-            _view.AllowanceId = entity.AllowanceId;
-            _view.AllowanceType = entity.AllowanceType;
-            _view.Amount = entity.Amount;
-            _view.EmployeeId = entity.EmployeeId;
-            _view.DateGranted = entity.DateGranted;
-            _view.Description = entity.Description;
-            _view.IsRecurring = entity.IsRecurring;
         }
-        private void Delete(object? sender, EventArgs e)
+        private void Delete(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is AllowanceViewModel row)
+            {
+                var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == row.AllowanceId);
+                if (entity != null)
+                {
+                    _unitOfWork.Allowance.Value.Remove(entity);
+                    _unitOfWork.Save();
+
+                    _view.ShowMessage("Allowance deleted successfully.");
+
+                    LoadAllAllowanceList();
+                }
+            }
+        }
+        private void MultipleDelete(object? sender, EventArgs e)
         {
             try
             {
-
-                if (_view.DataGrid.SelectedItem == null)
+                if (_view.DataGrid.SelectedItems == null || _view.DataGrid.SelectedItems.Count == 0)
                 {
-                    _view.IsSuccessful = false;
-                    _view.Message = "Please select one to delete";
+                    _view.ShowMessage("Please select item(s) to delete.");
                     return;
                 }
 
-                var allowance = (AllowanceViewModel)_view.DataGrid.SelectedItem;
-                var entity = _unitOfWork.Allowance.Value.Get(c => c.AllowanceId == allowance.AllowanceId);
-                _unitOfWork.Allowance.Value.Remove(entity);
+                var selected = _view.DataGrid.SelectedItems.Cast<AllowanceViewModel>().ToList(); // If you're using view models
+                var ids = selected.Select(b => b.AllowanceId).ToList();
+
+                var entities = _unitOfWork.Allowance.Value
+                    .GetAll()
+                    .Where(b => ids.Contains(b.AllowanceId))
+                    .ToList();
+
+                if (!entities.Any())
+                {
+                    _view.ShowMessage("Selected records could not be found.");
+                    return;
+                }
+
+                _unitOfWork.Allowance.Value.RemoveRange(entities);
                 _unitOfWork.Save();
-                _view.IsSuccessful = true;
-                _view.Message = "Allowance deleted successfully";
+
+                _view.ShowMessage($"{entities.Count} entries deleted successfully.");
                 LoadAllAllowanceList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "An error ocurred, could not delete Allowance";
+                _view.ShowMessage($"An error occurred while deleting: {ex.Message}");
             }
         }
+
         private void Print(object? sender, EventArgs e)
         {
             string reportFileName = "AllowanceReport.rdlc";
@@ -158,38 +131,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
-        {
-            LoadAllAllowanceList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllAllowanceList();
-            _view.AllowanceId = 0;
-            _view.AllowanceType = 0;
-            _view.Amount = 0;
-            _view.EmployeeId = 0;
-            _view.Description = "";
-        }
-
+        
         private void LoadAllAllowanceList(bool emptyValue = false)
         {
-            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(c => c.DateGranted.Date >= _view.StartDate.Date && c.DateGranted.Date <= _view.EndDate.Date,
-                includeProperties: "Employee"));
+            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(includeProperties: "Employee"));
+
             if (!emptyValue) AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
-            _view.SetAllowanceListBindingSource(AllowanceList.OrderByDescending(c => c.DateGranted));
-        }
-        private void LoadAllAllowanceTypeList()
-        {
-            AllowanceTypeList = EnumHelper.EnumToEnumerable<AllowanceType>();
-            AllowanceTypeBindingSource.DataSource = AllowanceTypeList;//Set data source.
-            _view.SetAllowanceTypeListBindingSource(AllowanceTypeBindingSource);
-        }
-        private void LoadAllEmployeeList()
-        {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
+            _view.SetAllowanceListBindingSource(AllowanceList);
         }
     }
 }

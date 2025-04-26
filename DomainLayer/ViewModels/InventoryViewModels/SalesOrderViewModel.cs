@@ -20,9 +20,6 @@ namespace DomainLayer.ViewModels.Inventory
         public DateTimeOffset OrderDate { get; set; }
         [Display(Name = "Delivery Date")]
         public DateTimeOffset DeliveryDate { get; set; }
-
-        [Display(Name = "Customer Ref. #")]
-        public string CustomerRefNumber { get; set; }
         [Display(Name = "Sales Type")]
         public string SalesType { get; set; }
         public string Remarks { get; set; }
@@ -32,5 +29,11 @@ namespace DomainLayer.ViewModels.Inventory
         public double Tax { get; set; }
         public double Freight { get; set; }
         public double Total { get; set; }
+
+        public byte[] Payment { get; set; }
+        public byte[] Invoice { get; set; }
+        public byte[] Details { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }

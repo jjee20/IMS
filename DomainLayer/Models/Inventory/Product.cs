@@ -34,7 +34,19 @@ namespace DomainLayer.Models.Inventory
         public int BranchId { get; set; }
 
         [NotMapped]
-        public string DisplayInfo => $"{ProductName} - {DefaultSellingPrice:C}";
+        public string DisplayInfo
+        {
+            get
+            {
+                var brand = string.IsNullOrWhiteSpace(Brand) ? "" : $" ({Brand})";
+                var color = string.IsNullOrWhiteSpace(Color) ? "" : $" - {Color}";
+                var size = string.IsNullOrWhiteSpace(Size) ? "" : $", Size {Size}";
+
+                return $"{ProductName}{brand}{color}{size}";
+            }
+        }
+
+
         public virtual UnitOfMeasure UnitOfMeasure { get; set; }
         public virtual Branch Branch { get; set; }
         public virtual ProductType ProductType { get; set; }

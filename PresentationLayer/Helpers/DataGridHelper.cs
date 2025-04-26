@@ -26,5 +26,12 @@ namespace ServiceLayer.Services.Helpers
                 }
             }
         }
+        public static Image ByteArrayToImage(byte[] byteArray)
+        {
+            using (MemoryStream ms = new MemoryStream(byteArray))
+            {
+                return Image.FromStream(ms);
+            }
+        }
     }
 }

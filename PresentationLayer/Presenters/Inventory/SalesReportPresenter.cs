@@ -115,7 +115,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             DailyPurchasesTrendDataSet.DataPoints.Clear();
             DailySalesTrendDataSet.Label = "Sales";
             DailySalesTrendDataSet.FillColors.Add(Color.Blue);
-            DailyPurchasesTrendDataSet.Label = "Purchases";
+            DailyPurchasesTrendDataSet.Label = "Expenses";
             DailyPurchasesTrendDataSet.FillColors.Add(Color.Red);
 
             for (int day = 1; day < daysRange.LastOrDefault(); day++)
@@ -143,7 +143,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             MonthlyPurchasesTrendDataset.DataPoints.Clear();
             MonthlySalesTrendDataset.Label = "Sales";
             MonthlySalesTrendDataset.FillColors.Add(Color.Blue);
-            MonthlyPurchasesTrendDataset.Label = "Purchases";
+            MonthlyPurchasesTrendDataset.Label = "Expenses";
             MonthlyPurchasesTrendDataset.FillColors.Add(Color.Red);
 
 

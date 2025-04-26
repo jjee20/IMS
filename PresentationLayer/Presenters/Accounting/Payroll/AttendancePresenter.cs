@@ -1,295 +1,105 @@
-﻿
-using CsvHelper;
-using CsvHelper.Configuration;
-using DomainLayer.Enums;
+﻿using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer;
-using PresentationLayer.Presenters.Commons;
 using PresentationLayer.Reports;
-using PresentationLayer.Views.IViews;
-using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Views.IViews.Accounting.Payroll;
+using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
+using RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts;
+using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
-using System.Formats.Asn1;
-using System.Globalization;
-using Windows.Devices.Usb;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Presenters.Accounting.Payroll
+namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
     public class AttendancePresenter
     {
         public IAttendanceView _view;
         private IUnitOfWork _unitOfWork;
-        private BindingSource IndividualAttendanceBindingSource;
-        private BindingSource EmployeeBindingSource;
-        private BindingSource ProjectBindingSource;
         private IEnumerable<AttendanceViewModel> AttendanceList;
-        private IEnumerable<IndividualAttendanceViewModel> IndividualAttendanceList;
-        private IEnumerable<EmployeeViewModel> EmployeeList;
-        private IEnumerable<Project> ProjectList;
-        public AttendancePresenter(IAttendanceView view, IUnitOfWork unitOfWork)
-        {
+        public AttendancePresenter(IAttendanceView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            IndividualAttendanceBindingSource = new BindingSource();
-            EmployeeBindingSource = new BindingSource();
-            ProjectBindingSource = new BindingSource();
 
             //Events
-            _view.AddNewEvent += AddNew;
-            _view.SaveEvent += Save;
-            _view.EditEvent += Edit;
-            _view.DeleteEvent += Delete;
             _view.SearchEvent += Search;
-            _view.PrintEvent += Print;
-            _view.RefreshEvent += Return;
+            _view.AddEvent += AddNew;
             _view.ShowAttendanceEvent += ShowAttendance;
+            _view.PrintEvent += Print;
 
             //Load
 
-            LoadAllEmployeeList();
-            LoadAllProjectList();
             LoadAllAttendanceList();
 
             //Source Binding
-
         }
 
-        private void Delete(object? sender, EventArgs e)
+        private void ShowAttendance(object sender, CellClickEventArgs e)
         {
-
-            if (_view.IndividualDataGrid.SelectedItem == null)
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is AttendanceViewModel row)
             {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select an Allowance to delete";
-                return;
-            }
+                var entity = _unitOfWork.Employee.Value.Get(
+                    c => c.EmployeeId == row.EmployeeId);
 
-            var attendanceVM = (IndividualAttendanceViewModel)_view.IndividualDataGrid.SelectedItem;
-            var attendance = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee", tracked: true);
-
-            _unitOfWork.Attendance.Value.Detach(attendance);
-            _unitOfWork.Attendance.Value.Remove(attendance);
-            _unitOfWork.Save();
-
-            _view.Message = "Attendance deleted successfully";
-            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
-        }
-
-        private void Edit(object? sender, EventArgs e)
-        {
-            _view.IsEdit = true;
-
-
-            if (_view.DataGrid.SelectedItem == null)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = "Please select an Allowance to edit";
-                return;
-            }
-
-            var attendanceVM = (IndividualAttendanceViewModel)_view.DataGrid.SelectedItem;
-            var attendance = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == attendanceVM.AttendanceId, includeProperties: "Employee,Project");
-
-
-            _view.AttendanceId = attendance.AttendanceId;
-            _view.EmployeeId = attendance.EmployeeId;
-            _view.TimeIn = attendance.TimeIn;
-            _view.TimeOut = attendance.TimeOut;
-            _view.Date = attendance.Date;
-            _view.IsPresent = attendance.IsPresent;
-            _view.IsHalfDay = attendance.IsHalfDay;
-            _view.HoursWorked = attendance.HoursWorked;
-            _view.ProjectId = attendance.ProjectId;
-        }
-
-        private void Import(object? sender, EventArgs e)
-        {
-            _unitOfWork.Attendance.Value.AddRange(ImportAttendance());
-            _unitOfWork.Save();
-
-            _view.Message = "Attendance imported successfully.";
-        }
-
-        public static List<Attendance> ImportAttendance()
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.RestoreDirectory = true;
-                openFileDialog.Title = "Select Attendance CSV File";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                using (var form = new IndividualAttendanceView(_unitOfWork, entity))
                 {
-                    string filePath = openFileDialog.FileName; // Get selected file path
-                    return ReadCsv(filePath);
-                }
-            }
-
-            return new List<Attendance>(); // Return empty list if no file is selected
-        }
-
-        private static List<Attendance> ReadCsv(string filePath)
-        {
-            var attendanceList = new List<Attendance>();
-
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = true, // Ensure headers exist
-                Delimiter = ",", // Define CSV delimiter
-            };
-
-            using (var reader = new StreamReader(filePath))
-            using (var csv = new CsvReader(reader, config))
-            {
-                csv.Read();
-                csv.ReadHeader();
-
-                while (csv.Read())
-                {
-                    var record = new Attendance
+                    form.Text = $"{row.Employee} - Attendance";
+                    form.StartDate = _view.StartDate.Date;
+                    form.EndDate = _view.EndDate.Date;
+                    if (form.ShowDialog() == DialogResult.OK)
                     {
-                        AttendanceId = csv.GetField<int>("AttendanceId"),
-                        EmployeeId = csv.GetField<int>("EmployeeId"),
-                        Date = csv.GetField<DateTime>("Date"),
-                        TimeIn = TimeSpan.Parse(csv.GetField<string>("TimeIn")),
-                        TimeOut = TimeSpan.Parse(csv.GetField<string>("TimeOut")),
-                        IsPresent = csv.GetField<bool>("IsPresent"),
-                        HoursWorked = csv.GetField<double>("HoursWorked")
-                    };
-
-                    attendanceList.Add(record);
+                        LoadAllAttendanceList();
+                    }
                 }
             }
-
-            return attendanceList;
-        }
-
-        private void ShowAttendance(object? sender, EventArgs e)
-        {
-            _view.IsIndividual = true;
-            var attendanceVM = (AttendanceViewModel)_view.DataGrid.SelectedItem;
-
-            if (attendanceVM == null)
-            {
-                MessageBox.Show("No attendance record selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            _view.EmployeeName = attendanceVM.Employee;
-            _view.EmployeeIdFromTextBox = attendanceVM.EmployeeId;
-            LoadAllIndividualAttendanceList(attendanceVM.EmployeeId);
         }
 
         private void AddNew(object? sender, EventArgs e)
         {
-            _view.IsIndividual = false;
-            _view.IsEdit = false;
-            CleanviewFields();
-        }
-        private void Save(object? sender, EventArgs e)
-        {
-            // Retrieve the specific attendance record based on the _view.AttendanceId
-            var model = _unitOfWork.Attendance.Value.Get(c => c.AttendanceId == _view.AttendanceId, tracked: true);
-
-            // If no record exists, create a new instance
-            if (model == null) model = new Attendance();
-            else _unitOfWork.Attendance.Value.Detach(model);
-
-            // Assign updated values from the view
-            model.EmployeeId = _view.EmployeeId;
-            model.ProjectId = _view.ProjectId;
-            model.TimeIn = _view.TimeIn;
-            model.TimeOut = _view.TimeOut;
-            model.Date = _view.Date;
-            model.IsHalfDay = _view.IsHalfDay;
-            model.IsPresent = _view.IsPresent;
-            model.HoursWorked = _view.HoursWorked;
-
-            try
+            using (var form = new UpsertAttendanceView(_unitOfWork))
             {
-                // Validate the model
-                new ModelDataValidation().Validate(model);
-
-                if (_view.IsEdit) // Editing existing record
+                form.Text = "Add Attendance";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _unitOfWork.Attendance.Value.Update(model);
-                    _view.Message = "Attendance edited successfully";
+                    LoadAllAttendanceList();
                 }
-                else // Adding a new record
-                {
-                    _unitOfWork.Attendance.Value.Add(model);
-                    _view.Message = "Attendance added successfully";
-                }
-
-                // Save changes to the database
-                _unitOfWork.Save();
-                _view.IsSuccessful = true;
-            }
-            catch (Exception ex)
-            {
-                _view.IsSuccessful = false;
-                _view.Message = $"Error: {ex.Message}";
             }
         }
-
+        
         private void Search(object? sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
-            if (_view.IsIndividual)
-            {
-                LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
-            }
-            else
-            {
-                LoadAllAttendanceList(emptyValue);
-            }
+            LoadAllAttendanceList(emptyValue);
         }
-
+       
         private void Print(object? sender, EventArgs e)
         {
-            string reportFileName = "";
-            ReportDataSource reportDataSource;
-            if (_view.IsIndividual)
-            {
-                reportFileName = "IndividualAttendanceReport.rdlc";
-                reportDataSource = new ReportDataSource("Attendance", IndividualAttendanceList);
-            }
-            else
-            {
-                reportFileName = "AttendanceReport.rdlc";
-                reportDataSource = new ReportDataSource("Attendance", AttendanceList);
-            }
-
-
-            var reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Accounting", "Payroll");
+            string reportFileName = "AttendanceReport.rdlc";
+            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Accounting", "Payroll");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
+            var reportDataSource = new ReportDataSource("Attendance", AttendanceList);
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        private void Return(object? sender, EventArgs e)
+        
+        private void LoadAllAttendanceList(bool emptyValue = false)
         {
-            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
-            LoadAllAttendanceList();
-        }
-        private void CleanviewFields()
-        {
-            LoadAllAttendanceList();
-            LoadAllIndividualAttendanceList(_view.EmployeeIdFromTextBox);
-        }
+            AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
 
+            if (!emptyValue) AttendanceList = AttendanceList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
+            _view.SetAttendanceListBindingSource(AttendanceList);
+        }
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
             var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
+            var holidays = _unitOfWork.Holiday.Value.GetAll().Where(h => h.EffectiveDate >= startDate && h.EffectiveDate <= endDate).ToList();
             var summaryList = new List<AttendanceViewModel>();
 
             int totalDays = 0;
@@ -323,9 +133,50 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 double daysPresent = attendances.Count(a => a.IsPresent && !a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves));
                 double daysHalfDayPresent = attendances.Count(a => a.IsPresent && a.IsHalfDay && !IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
                 double totalPresentDays = daysPresent + daysHalfDayPresent;
-                double totalOvertime = attendances.Sum(c => employee.Shift.RegularHours > c.HoursWorked ? 0 : c.HoursWorked - employee.Shift.RegularHours);
+                double totalOvertime = 0;
+
+                foreach (var att in attendances)
+                {
+                    if (employee.Shift == null || !att.IsPresent) continue;
+
+                    double workedHours = att.HoursWorked;
+                    bool isHoliday = holidays.Any(h => h.EffectiveDate.Date == att.Date.Date);
+
+                    if (isHoliday)
+                    {
+                        // Holiday rule: Regular hours are 8 AM - 3 PM (7 hours), after 3 PM is overtime
+                        TimeSpan holidayCutoff = new TimeSpan(15, 0, 0); // 3:00 PM
+                        if (att.TimeOut > holidayCutoff)
+                        {
+                            totalOvertime += (att.TimeOut - holidayCutoff).TotalHours;
+                        }
+                    }
+                    else
+                    {
+                        // Normal shift overtime logic
+                        double regularHours = employee.Shift.RegularHours;
+                        if (workedHours > regularHours)
+                            totalOvertime += workedHours - regularHours;
+                    }
+                }
+
                 int daysLate = attendances.Count(a => a.TimeIn > shiftStartTime && !a.IsHalfDay);
-                int daysEarlyOut = attendances.Count(a => a.TimeOut.Hours < shiftEndTime.Hours && !a.IsHalfDay);
+                int daysEarlyOut = 0;
+
+                foreach (var att in attendances)
+                {
+                    if (!att.IsPresent || att.IsHalfDay) continue;
+
+                    bool isHoliday = holidays.Any(h => h.EffectiveDate.Date == att.Date.Date);
+
+                    TimeSpan expectedOut = isHoliday
+                        ? new TimeSpan(15, 0, 0)  // 3:00 PM on holidays
+                        : shiftEndTime;           // normal shift end
+
+                    if (att.TimeOut < expectedOut)
+                        daysEarlyOut++;
+                }
+
                 int daysOnLeave = approvedLeaves.Sum(l => (l.EndDate - l.StartDate).Days + 1);
                 double daysAbsent = totalDays > totalPresentDays ? totalDays - (totalPresentDays + daysOnLeave) : 0;
 
@@ -344,35 +195,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             }
             return summaryList.ToList();
         }
-
         private bool IsCoveredByLeave(DateTime date, IEnumerable<Leave> approvedLeaves)
         {
             return approvedLeaves.Any(leave => date >= leave.StartDate && date <= leave.EndDate);
-        }
-        private void LoadAllAttendanceList(bool emptyValue = false)
-        {
-            AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
-
-            if(!emptyValue) AttendanceList = AttendanceList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower())); 
-            _view.SetAttendanceListBindingSource(AttendanceList.OrderBy(c => c.Employee));
-        }
-        private void LoadAllIndividualAttendanceList(int id)
-        {
-            IndividualAttendanceList = Program.Mapper.Map<IEnumerable<IndividualAttendanceViewModel>>(_unitOfWork.Attendance.Value.GetAll(c => c.EmployeeId == id &&
-                c.Date.Date >= _view.StartDate.Date && c.Date.Date <= _view.EndDate.Date, includeProperties: "Project,Employee"));
-            _view.SetIndividualAttendanceListBindingSource(IndividualAttendanceList);
-        }
-        private void LoadAllEmployeeList()
-        {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            EmployeeBindingSource.DataSource = EmployeeList.OrderBy(c => c.Name);//Set data source.
-            _view.SetEmployeeListBindingSource(EmployeeBindingSource);
-        }
-        private void LoadAllProjectList()
-        {
-            ProjectList = _unitOfWork.Project.Value.GetAll();
-            ProjectBindingSource.DataSource = ProjectList;//Set data source.
-            _view.SetProjectListBindingSource(ProjectBindingSource);
         }
     }
 }

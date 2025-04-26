@@ -1,34 +1,22 @@
-﻿using DomainLayer.Enums;
-using DomainLayer.ViewModels.PayrollViewModels;
+﻿using DomainLayer.ViewModels.PayrollViewModels;
+using RavenTech_ERP.Views.IViews;
 using Syncfusion.WinForms.DataGrid;
-using System.ComponentModel.DataAnnotations;
+using Syncfusion.WinForms.DataGrid.Events;
 
-namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
+namespace PresentationLayer.Views.UserControls
 {
-    public interface IBonusView
+    public interface IBonusView : IMessageBase
     {
         SfDataGrid DataGrid { get; }
-        int BonusId { get; set; }
-        public BonusType BonusType { get; set; }
-        double Amount { get; set; }
-        string Description { get; set; }
-        int EmployeeId { get; set; }
-        bool IsEdit { get; set; }
-        bool IsSuccessful { get; set; }
-        bool IsOneTime { get; set; }
-        string Message { get; set; }
         string SearchValue { get; set; }
 
-        event EventHandler AddNewEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler EditEvent;
+        event EventHandler AddEvent;
+        event CellClickEventHandler DeleteEvent;
+        event CellClickEventHandler EditEvent;
+        event KeyEventHandler MultipleDeleteEvent;
         event EventHandler PrintEvent;
-        event EventHandler SaveEvent;
         event EventHandler SearchEvent;
-        event EventHandler RefreshEvent;
 
         void SetBonusListBindingSource(IEnumerable<BonusViewModel> BonusList);
-        void SetBonusTypeListBindingSource(BindingSource BonusTypeList);
-        void SetEmployeeListBindingSource(BindingSource EmployeeList);
     }
 }
