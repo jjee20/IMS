@@ -64,6 +64,12 @@ namespace RavenTech_ERP.Views.UserControls.POS
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -101,12 +107,6 @@ namespace RavenTech_ERP.Views.UserControls.POS
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2BorderlessForm1 = new Guna2BorderlessForm(components);
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             guna2CircleButton1 = new Guna2CircleButton();
@@ -142,6 +142,9 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2HtmlLabel1 = new Guna2HtmlLabel();
             guna2Separator2 = new Guna2Separator();
             guna2Panel4 = new Guna2Panel();
+            guna2Button21 = new Guna2Button();
+            guna2Button20 = new Guna2Button();
+            guna2Button19 = new Guna2Button();
             guna2Button16 = new Guna2Button();
             guna2Elipse1 = new Guna2Elipse(components);
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -197,9 +200,6 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button11 = new Guna2Button();
             guna2Button10 = new Guna2Button();
             guna2Button9 = new Guna2Button();
-            guna2Button19 = new Guna2Button();
-            guna2Button20 = new Guna2Button();
-            guna2Button21 = new Guna2Button();
             materialCard1.SuspendLayout();
             materialCard2.SuspendLayout();
             materialCard3.SuspendLayout();
@@ -950,6 +950,102 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges50;
             guna2Panel4.Size = new Size(561, 40);
             guna2Panel4.TabIndex = 0;
+            // 
+            // guna2Button21
+            // 
+            guna2Button21.BackColor = Color.Transparent;
+            guna2Button21.BorderColor = Color.Transparent;
+            guna2Button21.BorderRadius = 5;
+            guna2Button21.BorderThickness = 1;
+            guna2Button21.CheckedState.BorderColor = Color.Red;
+            guna2Button21.CheckedState.CustomBorderColor = Color.Red;
+            guna2Button21.CheckedState.FillColor = Color.White;
+            guna2Button21.CheckedState.ForeColor = Color.Red;
+            guna2Button21.CustomizableEdges = customizableEdges41;
+            guna2Button21.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button21.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button21.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button21.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button21.Dock = DockStyle.Right;
+            guna2Button21.FillColor = Color.MistyRose;
+            guna2Button21.FocusedColor = Color.White;
+            guna2Button21.Font = new Font("Segoe UI", 9F);
+            guna2Button21.ForeColor = Color.White;
+            guna2Button21.HoverState.BorderColor = Color.OrangeRed;
+            guna2Button21.HoverState.FillColor = Color.White;
+            guna2Button21.HoverState.ForeColor = Color.OrangeRed;
+            guna2Button21.Image = (Image)resources.GetObject("guna2Button21.Image");
+            guna2Button21.IndicateFocus = true;
+            guna2Button21.Location = new Point(429, 0);
+            guna2Button21.Margin = new Padding(3, 3, 15, 3);
+            guna2Button21.Name = "guna2Button21";
+            guna2Button21.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            guna2Button21.Size = new Size(44, 40);
+            guna2Button21.TabIndex = 13;
+            // 
+            // guna2Button20
+            // 
+            guna2Button20.BackColor = Color.Transparent;
+            guna2Button20.BorderColor = Color.Transparent;
+            guna2Button20.BorderRadius = 5;
+            guna2Button20.BorderThickness = 1;
+            guna2Button20.CheckedState.BorderColor = Color.Red;
+            guna2Button20.CheckedState.CustomBorderColor = Color.Red;
+            guna2Button20.CheckedState.FillColor = Color.White;
+            guna2Button20.CheckedState.ForeColor = Color.Red;
+            guna2Button20.CustomizableEdges = customizableEdges43;
+            guna2Button20.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button20.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button20.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button20.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button20.Dock = DockStyle.Right;
+            guna2Button20.FillColor = Color.MistyRose;
+            guna2Button20.FocusedColor = Color.White;
+            guna2Button20.Font = new Font("Segoe UI", 9F);
+            guna2Button20.ForeColor = Color.White;
+            guna2Button20.HoverState.BorderColor = Color.OrangeRed;
+            guna2Button20.HoverState.FillColor = Color.White;
+            guna2Button20.HoverState.ForeColor = Color.OrangeRed;
+            guna2Button20.Image = (Image)resources.GetObject("guna2Button20.Image");
+            guna2Button20.IndicateFocus = true;
+            guna2Button20.Location = new Point(473, 0);
+            guna2Button20.Margin = new Padding(3, 3, 15, 3);
+            guna2Button20.Name = "guna2Button20";
+            guna2Button20.ShadowDecoration.CustomizableEdges = customizableEdges44;
+            guna2Button20.Size = new Size(44, 40);
+            guna2Button20.TabIndex = 12;
+            // 
+            // guna2Button19
+            // 
+            guna2Button19.BackColor = Color.Transparent;
+            guna2Button19.BorderColor = Color.Transparent;
+            guna2Button19.BorderRadius = 5;
+            guna2Button19.BorderThickness = 1;
+            guna2Button19.CheckedState.BorderColor = Color.Red;
+            guna2Button19.CheckedState.CustomBorderColor = Color.Red;
+            guna2Button19.CheckedState.FillColor = Color.White;
+            guna2Button19.CheckedState.ForeColor = Color.Red;
+            guna2Button19.CustomizableEdges = customizableEdges45;
+            guna2Button19.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button19.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button19.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button19.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button19.Dock = DockStyle.Right;
+            guna2Button19.FillColor = Color.MistyRose;
+            guna2Button19.FocusedColor = Color.White;
+            guna2Button19.Font = new Font("Segoe UI", 9F);
+            guna2Button19.ForeColor = Color.White;
+            guna2Button19.HoverState.BorderColor = Color.OrangeRed;
+            guna2Button19.HoverState.FillColor = Color.White;
+            guna2Button19.HoverState.ForeColor = Color.OrangeRed;
+            guna2Button19.Image = (Image)resources.GetObject("guna2Button19.Image");
+            guna2Button19.IndicateFocus = true;
+            guna2Button19.Location = new Point(517, 0);
+            guna2Button19.Margin = new Padding(3, 3, 15, 3);
+            guna2Button19.Name = "guna2Button19";
+            guna2Button19.ShadowDecoration.CustomizableEdges = customizableEdges46;
+            guna2Button19.Size = new Size(44, 40);
+            guna2Button19.TabIndex = 11;
             // 
             // guna2Button16
             // 
@@ -1815,102 +1911,6 @@ namespace RavenTech_ERP.Views.UserControls.POS
             guna2Button9.TabIndex = 2;
             guna2Button9.Text = "Starters";
             guna2Button9.Tile = true;
-            // 
-            // guna2Button19
-            // 
-            guna2Button19.BackColor = Color.Transparent;
-            guna2Button19.BorderColor = Color.Transparent;
-            guna2Button19.BorderRadius = 5;
-            guna2Button19.BorderThickness = 1;
-            guna2Button19.CheckedState.BorderColor = Color.Red;
-            guna2Button19.CheckedState.CustomBorderColor = Color.Red;
-            guna2Button19.CheckedState.FillColor = Color.White;
-            guna2Button19.CheckedState.ForeColor = Color.Red;
-            guna2Button19.CustomizableEdges = customizableEdges45;
-            guna2Button19.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button19.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button19.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button19.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button19.Dock = DockStyle.Right;
-            guna2Button19.FillColor = Color.MistyRose;
-            guna2Button19.FocusedColor = Color.White;
-            guna2Button19.Font = new Font("Segoe UI", 9F);
-            guna2Button19.ForeColor = Color.White;
-            guna2Button19.HoverState.BorderColor = Color.OrangeRed;
-            guna2Button19.HoverState.FillColor = Color.White;
-            guna2Button19.HoverState.ForeColor = Color.OrangeRed;
-            guna2Button19.Image = (Image)resources.GetObject("guna2Button19.Image");
-            guna2Button19.IndicateFocus = true;
-            guna2Button19.Location = new Point(517, 0);
-            guna2Button19.Margin = new Padding(3, 3, 15, 3);
-            guna2Button19.Name = "guna2Button19";
-            guna2Button19.ShadowDecoration.CustomizableEdges = customizableEdges46;
-            guna2Button19.Size = new Size(44, 40);
-            guna2Button19.TabIndex = 11;
-            // 
-            // guna2Button20
-            // 
-            guna2Button20.BackColor = Color.Transparent;
-            guna2Button20.BorderColor = Color.Transparent;
-            guna2Button20.BorderRadius = 5;
-            guna2Button20.BorderThickness = 1;
-            guna2Button20.CheckedState.BorderColor = Color.Red;
-            guna2Button20.CheckedState.CustomBorderColor = Color.Red;
-            guna2Button20.CheckedState.FillColor = Color.White;
-            guna2Button20.CheckedState.ForeColor = Color.Red;
-            guna2Button20.CustomizableEdges = customizableEdges43;
-            guna2Button20.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button20.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button20.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button20.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button20.Dock = DockStyle.Right;
-            guna2Button20.FillColor = Color.MistyRose;
-            guna2Button20.FocusedColor = Color.White;
-            guna2Button20.Font = new Font("Segoe UI", 9F);
-            guna2Button20.ForeColor = Color.White;
-            guna2Button20.HoverState.BorderColor = Color.OrangeRed;
-            guna2Button20.HoverState.FillColor = Color.White;
-            guna2Button20.HoverState.ForeColor = Color.OrangeRed;
-            guna2Button20.Image = (Image)resources.GetObject("guna2Button20.Image");
-            guna2Button20.IndicateFocus = true;
-            guna2Button20.Location = new Point(473, 0);
-            guna2Button20.Margin = new Padding(3, 3, 15, 3);
-            guna2Button20.Name = "guna2Button20";
-            guna2Button20.ShadowDecoration.CustomizableEdges = customizableEdges44;
-            guna2Button20.Size = new Size(44, 40);
-            guna2Button20.TabIndex = 12;
-            // 
-            // guna2Button21
-            // 
-            guna2Button21.BackColor = Color.Transparent;
-            guna2Button21.BorderColor = Color.Transparent;
-            guna2Button21.BorderRadius = 5;
-            guna2Button21.BorderThickness = 1;
-            guna2Button21.CheckedState.BorderColor = Color.Red;
-            guna2Button21.CheckedState.CustomBorderColor = Color.Red;
-            guna2Button21.CheckedState.FillColor = Color.White;
-            guna2Button21.CheckedState.ForeColor = Color.Red;
-            guna2Button21.CustomizableEdges = customizableEdges41;
-            guna2Button21.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button21.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button21.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button21.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button21.Dock = DockStyle.Right;
-            guna2Button21.FillColor = Color.MistyRose;
-            guna2Button21.FocusedColor = Color.White;
-            guna2Button21.Font = new Font("Segoe UI", 9F);
-            guna2Button21.ForeColor = Color.White;
-            guna2Button21.HoverState.BorderColor = Color.OrangeRed;
-            guna2Button21.HoverState.FillColor = Color.White;
-            guna2Button21.HoverState.ForeColor = Color.OrangeRed;
-            guna2Button21.Image = (Image)resources.GetObject("guna2Button21.Image");
-            guna2Button21.IndicateFocus = true;
-            guna2Button21.Location = new Point(429, 0);
-            guna2Button21.Margin = new Padding(3, 3, 15, 3);
-            guna2Button21.Name = "guna2Button21";
-            guna2Button21.ShadowDecoration.CustomizableEdges = customizableEdges42;
-            guna2Button21.Size = new Size(44, 40);
-            guna2Button21.TabIndex = 13;
             // 
             // POSView
             // 

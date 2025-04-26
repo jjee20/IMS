@@ -115,6 +115,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
             var contributions = _unitOfWork.Contribution.Value.GetAll();
             var project = _unitOfWork.Project.Value.Get(c => c.ProjectId == projectId);
+            var holidays = _unitOfWork.Holiday.Value.GetAll(c => c.EffectiveDate.Date >= startDate.Date && c.EffectiveDate.Date <= endDate.Date).ToList();
 
             if (!_view.All && projectId.HasValue)
             {
@@ -148,7 +149,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
                 double absentDeductions = PayrollHelper.CalculateAbsentDeductions(totalDays, totalPresentDays, employee.BasicSalary);
                 double lateDeductions = PayrollHelper.CalculateLateDeductions(employee, employeeAttendances, hourlyRate);
-                double earlyOutDeductions = PayrollHelper.CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate);
+                double earlyOutDeductions = PayrollHelper.CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate, holidays);
 
                 double monthlySalary = employee.BasicSalary * PayrollHelper.NonSundays(employee.Attendances, startDate);
                 double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? (employeeContributions != null ? employeeContributions.SSS : 0) + (employeeContributions != null ? employeeContributions.SSSWISP : 0) : 0 : 0;
