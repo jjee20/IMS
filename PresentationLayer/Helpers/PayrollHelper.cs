@@ -81,6 +81,7 @@ namespace RavenTech_ERP.Helpers
         }
         public static double CalculateLateDeductions(Employee employee, IEnumerable<Attendance> employeeAttendances, double hourlyRate)
         {
+
             var totalLateDuration = employeeAttendances
                 .Where(a => a.TimeIn > employee.Shift?.StartTime && !a.IsHalfDay) // Only consider late arrivals
                 .Aggregate(TimeSpan.Zero, (total, attendance) =>
@@ -94,16 +95,27 @@ namespace RavenTech_ERP.Helpers
                 : hourlyRate / 60 * totalLateMinutes; // Calculate in minutes
         }
 
-        public static double CalculateEarlyOutDeductions(Employee employee, IEnumerable<Attendance> employeeAttendances, double hourlyRate)
+        public static double CalculateEarlyOutDeductions(Employee employee, IEnumerable<Attendance> employeeAttendances, double hourlyRate, List<Holiday> holidays)
         {
-            TimeSpan shiftEndTime = employee.Shift?.EndTime ?? TimeSpan.Zero;
+            if (employee == null || employeeAttendances == null || holidays == null)
+                return 0.0;
 
             var totalEarlyOutDuration = employeeAttendances
-                .Where(a => a.TimeOut < shiftEndTime && !a.IsHalfDay)
+                .Where(a => a.TimeOut != default && !a.IsHalfDay) // Only process if TimeOut is set and not half-day
                 .Aggregate(TimeSpan.Zero, (total, attendance) =>
                 {
-                    var earlyOut = shiftEndTime - attendance.TimeOut;
-                    return earlyOut > TimeSpan.Zero ? total + earlyOut : total;
+                    bool isHoliday = holidays.Any(h => h.EffectiveDate.Date == attendance.Date.Date);
+                    TimeSpan shiftEndTime = isHoliday ? new TimeSpan(15, 0, 0) // 3:00 PM if holiday
+                                                       : (employee.Shift?.EndTime ?? TimeSpan.Zero);
+
+                    if (attendance.TimeOut < shiftEndTime)
+                    {
+                        var earlyOut = shiftEndTime - attendance.TimeOut;
+                        if (earlyOut > TimeSpan.Zero)
+                            total += earlyOut;
+                    }
+
+                    return total;
                 });
 
             double totalEarlyOutHours = totalEarlyOutDuration.TotalHours;
@@ -164,7 +176,7 @@ namespace RavenTech_ERP.Helpers
             CalculatePayroll(IEnumerable<Employee> employees, 
             IEnumerable<Contribution> contributions,
             Project project,
-            DateTime startDate, DateTime endDate, int? projectId = 0)
+            DateTime startDate, DateTime endDate, List<Holiday> holidays, int? projectId = 0)
         {
             var projectName = "";
             if (project != null)
@@ -198,7 +210,7 @@ namespace RavenTech_ERP.Helpers
 
                 double absentDeductions = CalculateAbsentDeductions(totalDays, totalPresentDays, employee.BasicSalary);
                 double lateDeductions = CalculateLateDeductions(employee, employeeAttendances, hourlyRate);
-                double earlyOutDeductions = CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate);
+                double earlyOutDeductions = CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate, holidays);
 
                 double sss = (employeeContributions != null) ? employeeContributions.SSS : 0; 
                 double sssWisp = (employeeContributions != null) ? employeeContributions.SSSWISP : 0;
