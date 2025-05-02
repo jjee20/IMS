@@ -100,7 +100,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         {
             var rowData = e.DataRow.RowData as PayrollViewModel;
             var employeeName = rowData.Employee.Split(',');
-            var employee = _unitOfWork.Employee.Value.Get(c => c.LastName == employeeName[0].Trim() && c.FirstName == employeeName[1].Trim());
+            var employee = _unitOfWork.Employee.Value.Get(c => c.LastName == employeeName[0].Trim() && c.FirstName == employeeName[1].Trim(), includeProperties: "Department,JobPosition,Leaves,Attendances,");
             if (rowData != null)
             {
                 using (var tmonth = new _Upsert13thMonthView(rowData, _unitOfWork, employee))

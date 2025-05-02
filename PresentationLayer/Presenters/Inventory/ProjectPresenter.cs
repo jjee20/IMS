@@ -33,6 +33,7 @@ namespace PresentationLayer.Presenters
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
             _view.DeleteEvent += Delete;
+            _view.ProjectEvent += Project;
             _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
 
@@ -41,6 +42,22 @@ namespace PresentationLayer.Presenters
             LoadAllProjectList();
 
             //Source Binding
+        }
+
+        private void Project(object sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProjectViewModel row)
+            {
+                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId, includeProperties: "ProjectLines");
+                using (var form = new ProjectInformationView(row, _unitOfWork, entity))
+                {
+                    form.Text = "Edit Project";
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAllProjectList();
+                    }
+                }
+            }
         }
 
         private void AddNew(object? sender, EventArgs e)

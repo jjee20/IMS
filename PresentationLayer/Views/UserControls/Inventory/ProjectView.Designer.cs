@@ -44,6 +44,7 @@ namespace PresentationLayer.Views.UserControls
             Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
             Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
             Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn3 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
             panel2 = new Panel();
             autoLabel2 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             txtStartDate = new Syncfusion.WinForms.Input.SfDateTimeEdit();
@@ -354,6 +355,14 @@ namespace PresentationLayer.Views.UserControls
             gridImageColumn2.ShowFilterRowOptions = false;
             gridImageColumn2.ShowToolTip = true;
             gridImageColumn2.Width = 30D;
+            gridImageColumn3.AllowGrouping = false;
+            gridImageColumn3.AllowSorting = false;
+            gridImageColumn3.HeaderText = " ";
+            gridImageColumn3.MappingName = "Details";
+            gridImageColumn3.MaximumWidth = 30D;
+            gridImageColumn3.MinimumWidth = 30D;
+            gridImageColumn3.ShowToolTip = true;
+            gridImageColumn3.Width = 30D;
             dgList.Columns.Add(gridTextColumn1);
             dgList.Columns.Add(gridTextColumn2);
             dgList.Columns.Add(gridTextColumn3);
@@ -364,6 +373,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Columns.Add(gridTextColumn8);
             dgList.Columns.Add(gridImageColumn1);
             dgList.Columns.Add(gridImageColumn2);
+            dgList.Columns.Add(gridImageColumn3);
             dgList.Dock = DockStyle.Fill;
             dgList.FrozenColumnCount = 2;
             dgList.FrozenRowCount = 1;

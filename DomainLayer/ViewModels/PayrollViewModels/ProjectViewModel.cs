@@ -23,5 +23,6 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public double Revenue { get; set; } = 0;
         public byte[] Edit { get; set; }
         public byte[] Delete { get; set; }
+        public byte[] Details { get; set; }
     }
 }
