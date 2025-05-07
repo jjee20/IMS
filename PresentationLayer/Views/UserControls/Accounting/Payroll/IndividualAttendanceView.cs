@@ -27,33 +27,31 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
         private IUnitOfWork _unitOfWork;
         private Employee _employee;
         private Attendance _entity;
+        private DateTime _startDate;
+        private DateTime _endndDate;
         private IEnumerable<IndividualAttendanceViewModel> _attendanceList;
 
-        public IndividualAttendanceView(IUnitOfWork unitOfWork, Employee employee)
+        public IndividualAttendanceView(IUnitOfWork unitOfWork, Employee employee, DateTime startDate, DateTime endndDate)
         {
             InitializeComponent();
             _unitOfWork = unitOfWork;
             _employee = employee;
-
-            LoadAllAttendance(employee.EmployeeId, StartDate.Date, EndDate.Date);
+            _startDate = startDate;
+            _endndDate = endndDate;
+            LoadAllAttendance(employee.EmployeeId, startDate.Date, endndDate.Date);
         }
+        public SfDataGrid DataGrid => dgList;
+
 
         private void LoadAllAttendance(int employeeId, DateTime startDate, DateTime endDate)
         {
             _attendanceList = Program.Mapper.Map<IEnumerable<IndividualAttendanceViewModel>>(_unitOfWork.Attendance.Value.GetAll(
                 c => c.EmployeeId == employeeId &&
-                c.Date.Date >= startDate.Date && c.Date.Date <= endDate.Date));
+                c.Date.Date >= startDate.Date && c.Date.Date <= endDate.Date, includeProperties: "Employee,Project"));
 
             dgPager.DataSource = _attendanceList.ToList();
             dgList.DataSource = dgPager.PagedSource;
         }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DateTime StartDate { get => (DateTime)txtStartDate.Value; set => txtStartDate.Value = value; }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DateTime EndDate { get => (DateTime)txtEndDate.Value; set => txtEndDate.Value = value; }
-        public SfDataGrid DataGrid => dgList;
-
 
         private void dgList_CellClick(object sender, CellClickEventArgs e)
         {
@@ -69,7 +67,7 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
                         upsertAttendance.Text = "Edit Attendance";
                         if (upsertAttendance.ShowDialog() == DialogResult.OK)
                         {
-                            LoadAllAttendance(_employee.EmployeeId, StartDate.Date, EndDate.Date);
+                            LoadAllAttendance(_employee.EmployeeId, _startDate.Date, _endndDate.Date);
                         }
                     }
                 }
@@ -89,7 +87,7 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
                         _unitOfWork.Attendance.Value.Remove(attendance);
                         _unitOfWork.Save();
 
-                        LoadAllAttendance(_employee.EmployeeId, StartDate.Date, EndDate.Date);
+                        LoadAllAttendance(_employee.EmployeeId, _startDate.Date, _endndDate.Date);
                     }
                 }
             }
@@ -97,19 +95,19 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using (var attendance = new UpsertAttendanceView(_unitOfWork))
+            using (var attendance = new UpsertAttendanceView(_unitOfWork, employeeId: _employee.EmployeeId))
             {
-                attendance.Text = "Add Attendance";
+                attendance.Text = $"Add Attendance for {_employee.LastName}, {_employee.FirstName}";
                 if (attendance.ShowDialog() == DialogResult.OK)
                 {
-                    LoadAllAttendance(_employee.EmployeeId, StartDate.Date, EndDate.Date);
+                    LoadAllAttendance(_employee.EmployeeId, _startDate.Date, _endndDate.Date);
                 }
             }
         }
 
         private void txtStartDate_TextChanged(object sender, EventArgs e)
         {
-            LoadAllAttendance(_entity.EmployeeId, StartDate.Date, EndDate.Date);
+            LoadAllAttendance(_entity.EmployeeId, _startDate.Date, _endndDate.Date);
         }
 
         private void txtEndDate_TextChanged(object sender, EventArgs e)
@@ -162,10 +160,6 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
                     MessageBox.Show($"{entities.Count} entries deleted successfully.");
                 }
             }
-        }
-
-        private void IndividualAttendanceView_Load(object sender, EventArgs e)
-        {
         }
 
         public event EventHandler? SearchEvent;

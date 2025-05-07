@@ -315,7 +315,6 @@
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Attendance";
-            Load += IndividualAttendanceView_Load;
             KeyDown += IndividualAttendanceView_KeyDown;
             materialCard4.ResumeLayout(false);
             panel1.ResumeLayout(false);
