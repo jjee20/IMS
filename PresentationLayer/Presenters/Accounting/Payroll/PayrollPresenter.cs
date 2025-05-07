@@ -112,75 +112,80 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
         private void LoadAllPayrollList(DateTime startDate, DateTime endDate, int? projectId = 0)
         {
+            PayrollList.Clear();
+
             var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
             var contributions = _unitOfWork.Contribution.Value.GetAll();
-            var project = _unitOfWork.Project.Value.Get(c => c.ProjectId == projectId);
-            var holidays = _unitOfWork.Holiday.Value.GetAll(c => c.EffectiveDate.Date >= startDate.Date && c.EffectiveDate.Date <= endDate.Date).ToList();
+            var holidays = _unitOfWork.Holiday.Value.GetAll(h => h.EffectiveDate.Date >= startDate && h.EffectiveDate.Date <= endDate).ToList();
 
             if (!_view.All && projectId.HasValue)
             {
-                employees = employees.Where(c => c.Attendances.Any(a => a.ProjectId == projectId));
-                ProjectName = $"Project: {project.ProjectName ?? ""}";
+                employees = employees.Where(e => e.Attendances.Any(a => a.ProjectId == projectId));
+                var project = _unitOfWork.Project.Value.Get(p => p.ProjectId == projectId);
+                ProjectName = $"Project: {project?.ProjectName ?? ""}";
             }
             else
             {
                 ProjectName = "Project: All";
             }
 
-            foreach (var employee in employees.OrderBy(c => c.LastName))
+            var payrollEntries = employees.OrderBy(e => e.LastName).Select(employee =>
             {
-                int totalDays = PayrollHelper.TotalDays(employee.Attendances, startDate, endDate);
-                var employeeAttendances = employee.Attendances?.Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date) ?? Enumerable.Empty<Attendance>();
-                var employeeContributions = employee.Contribution;
+                var attendances = employee.Attendances?.Where(a => a.Date.Date >= startDate && a.Date.Date <= endDate) ?? Enumerable.Empty<Attendance>();
+                var approvedLeaves = employee.Leaves.Where(l => l.LeaveType != LeaveType.UnpaidLeave && l.Status == Status.Approved);
+                var contributionsData = employee.Contribution;
 
-                var approvedLeaves = employee.Leaves.Where(a => a.LeaveType != LeaveType.UnpaidLeave && a.Status == Status.Approved);
-                double totalPresentWholeDays = employeeAttendances.Count(a => a.IsPresent && !a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves));
-                double totalPresentHalfDays = employeeAttendances.Count(a => a.IsPresent && a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
-                double totalPresentDays = totalPresentWholeDays + totalPresentHalfDays;
-                double regularHours = totalDays * (employee.Shift?.RegularHours ?? 0);
-                double hourlyRate = employee.BasicSalary / (totalDays * (employee.Shift?.RegularHours ?? 8));
-                double regularPay = totalDays * employee.BasicSalary;
-                double overtimeHours = employeeAttendances.Sum(a => Math.Max(0, employee.Shift?.RegularHours > a.HoursWorked ? 0 : a.HoursWorked - (employee.Shift?.RegularHours ?? 8)));
-                double overtimePay = overtimeHours * (employee.BasicSalary / employee.Shift?.RegularHours ?? 0);
+                int totalDays = PayrollHelper.TotalDays(employee.Attendances, startDate, endDate);
+                double shiftHours = employee.Shift?.RegularHours ?? 8;
+                double hourlyRate = totalDays > 0 ? employee.BasicSalary / (totalDays * shiftHours) : 0;
+                double regularPay = employee.BasicSalary * totalDays;
+
+                double fullDays = attendances.Count(a => a.IsPresent && !a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves));
+                double halfDays = attendances.Count(a => a.IsPresent && a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves)) * 0.5;
+                double presentDays = fullDays + halfDays;
+
+                double overtimeHours = attendances.Sum(a => Math.Max(0, a.HoursWorked - shiftHours));
+                double overtimePay = overtimeHours * (shiftHours > 0 ? (employee.BasicSalary / shiftHours) : 0);
 
                 double allowancePay = PayrollHelper.CalculateAllowances(employee, startDate, endDate);
                 double bonusPay = PayrollHelper.CalculateBonuses(employee, startDate, endDate);
-                double deductions = PayrollHelper.CalculateDeductions(employee, startDate, endDate);
-
-                double absentDeductions = PayrollHelper.CalculateAbsentDeductions(totalDays, totalPresentDays, employee.BasicSalary);
-                double lateDeductions = PayrollHelper.CalculateLateDeductions(employee, employeeAttendances, hourlyRate);
-                double earlyOutDeductions = PayrollHelper.CalculateEarlyOutDeductions(employee, employeeAttendances, hourlyRate, holidays);
-
-                double monthlySalary = employee.BasicSalary * PayrollHelper.NonSundays(employee.Attendances, startDate);
-                double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? (employeeContributions != null ? employeeContributions.SSS : 0) + (employeeContributions != null ? employeeContributions.SSSWISP : 0) : 0 : 0;
-                double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? employeeContributions != null ? employeeContributions.PagIbig : 0 : 0 : 0;
-                double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? employeeContributions != null ? employeeContributions.PhilHealth : 0 : 0 : 0;
-                //double sssDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.SSS, monthlySalary) / 2 : 0 : 0;
-                //double pagIbigDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PagIbig, monthlySalary) / 2 : 0 : 0;
-                //double philHealthDeduction = _view.IncludeContribution ? employee.isDeducted ? CalculateContributions(contributions, ContributionType.PhilHealth, monthlySalary) / 2 : 0 : 0;
-
                 double benefitPay = _view.IncludeBenefits ? PayrollHelper.CalcuLateBenefits(employee) : 0;
+                double otherDeductions = PayrollHelper.CalculateDeductions(employee, startDate, endDate);
 
-                PayrollList.Add(new PayrollViewModel
+                double absentDeduction = PayrollHelper.CalculateAbsentDeductions(totalDays, presentDays, employee.BasicSalary);
+                double lateDeduction = PayrollHelper.CalculateLateDeductions(employee, attendances, hourlyRate);
+                double earlyOutDeduction = PayrollHelper.CalculateEarlyOutDeductions(employee, attendances, hourlyRate, holidays);
+                double totalLateEarly = lateDeduction + earlyOutDeduction;
+
+                double sss = (_view.IncludeContribution && employee.isDeducted)
+                    ? (contributionsData?.SSS ?? 0) + (contributionsData?.SSSWISP ?? 0)
+                    : 0;
+                double pagibig = (_view.IncludeContribution && employee.isDeducted) ? contributionsData?.PagIbig ?? 0 : 0;
+                double philHealth = (_view.IncludeContribution && employee.isDeducted) ? contributionsData?.PhilHealth ?? 0 : 0;
+
+                return new PayrollViewModel
                 {
                     Employee = $"{employee.LastName}, {employee.FirstName}",
                     DailyRate = employee.BasicSalary,
-                    DaysWorked = totalPresentDays,
+                    DaysWorked = presentDays,
                     BasicSalary = Math.Round(regularPay, 0),
                     OvertimePay = Math.Round(overtimePay, 0),
                     Allowances = Math.Round(allowancePay, 0),
                     Benefits = Math.Round(benefitPay, 0),
                     Bonuses = Math.Round(bonusPay, 0),
-                    Deductions = Math.Round(deductions, 0),
-                    Absent = Math.Round(absentDeductions, 0),
-                    LateAndEarly = Math.Round(lateDeductions + earlyOutDeductions, 0),
-                    SSSContribution = Math.Round(sssDeduction, 0),
-                    PagibigContribution = Math.Round(pagIbigDeduction, 0),
-                    PhilHealthContribution = Math.Round(philHealthDeduction, 0),
-                });
-            }
-            _view.SetPayrollListBindingSource(PayrollList.OrderBy(c => c.Employee).ToList());
+                    Deductions = Math.Round(otherDeductions, 0),
+                    Absent = Math.Round(absentDeduction, 0),
+                    LateAndEarly = Math.Round(totalLateEarly, 0),
+                    SSSContribution = Math.Round(sss, 0),
+                    PagibigContribution = Math.Round(pagibig, 0),
+                    PhilHealthContribution = Math.Round(philHealth, 0),
+                };
+            }).ToList();
+
+            PayrollList.AddRange(payrollEntries);
+            _view.SetPayrollListBindingSource(PayrollList.OrderBy(e => e.Employee).ToList());
         }
+
         private void Search(object? sender, EventArgs e)
         {
             try

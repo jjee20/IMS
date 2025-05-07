@@ -114,7 +114,7 @@ namespace PresentationLayer.Views.UserControls
             txtStartDate.Size = new Size(108, 39);
             txtStartDate.TabIndex = 28;
             txtStartDate.ToolTipText = "";
-            txtStartDate.Click += txtStartDate_Click;
+            txtStartDate.ValueChanged += txtStartDate_ValueChanged;
             // 
             // txtEndDate
             // 
@@ -125,7 +125,7 @@ namespace PresentationLayer.Views.UserControls
             txtEndDate.Size = new Size(108, 39);
             txtEndDate.TabIndex = 27;
             txtEndDate.ToolTipText = "";
-            txtEndDate.Click += txtEndDate_Click;
+            txtEndDate.ValueChanged += txtEndDate_ValueChanged;
             // 
             // btnPrint
             // 

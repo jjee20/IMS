@@ -56,16 +56,6 @@ namespace PresentationLayer.Views.UserControls
             AddEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        private void txtStartDate_Click(object sender, EventArgs e)
-        {
-            SearchEvent?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void txtEndDate_Click(object sender, EventArgs e)
-        {
-            SearchEvent?.Invoke(this, EventArgs.Empty);
-        }
-
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -96,6 +86,16 @@ namespace PresentationLayer.Views.UserControls
 
             txtStartDate.Value = startDate;
             txtEndDate.Value = endDate;
+        }
+
+        private void txtEndDate_ValueChanged(object sender, Syncfusion.WinForms.Input.Events.DateTimeValueChangedEventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void txtStartDate_ValueChanged(object sender, Syncfusion.WinForms.Input.Events.DateTimeValueChangedEventArgs e)
+        {
+            SearchEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler AddEvent;

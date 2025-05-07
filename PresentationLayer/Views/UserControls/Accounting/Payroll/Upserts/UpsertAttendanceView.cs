@@ -22,13 +22,14 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts
         private string message;
         private readonly IUnitOfWork _unitOfWork;
         private readonly Attendance? _entity;
+        private readonly int? _employeeId;
 
-        public UpsertAttendanceView(IUnitOfWork unitOfWork, Attendance? entity = null)
+        public UpsertAttendanceView(IUnitOfWork unitOfWork, Attendance? entity = null, int? employeeId = null)
         {
             InitializeComponent();
             _unitOfWork = unitOfWork;
             _entity = entity ?? new Attendance();
-
+            _employeeId = employeeId;
             LoadEmployees();
             LoadProjects();
             LoadEntityToForm();
@@ -54,11 +55,14 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts
 
         private void LoadEntityToForm()
         {
-            if (_entity != null)
+            if (_employeeId > 0 || _employeeId != null)
+                txtEmployee.SelectedValue = _employeeId;
+
+            if (_entity.AttendanceId > 0)
             {
                 txtEmployee.SelectedValue = _entity.EmployeeId;
                 txtDate.Text = _entity == null ? _entity.Date.ToString() : DateTime.Now.ToString();
-                txtHoursWorked.Text = _entity.HoursWorked.ToString();
+                txtHoursWorked.Text = _entity.HoursWorked.ToString() ?? 8.ToString();
                 txtIsHalfDay.Checked = _entity.IsHalfDay;
                 txtIsPresent.Checked = _entity.IsPresent;
                 txtProject.SelectedValue = _entity.ProjectId;
@@ -101,5 +105,10 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts
         }
         private void ShowSuccess(string message) =>
             MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        private void UpsertAttendanceView_Load(object sender, EventArgs e)
+        {
+            txtDate.Value = DateTime.Now;
+        }
     }
 }

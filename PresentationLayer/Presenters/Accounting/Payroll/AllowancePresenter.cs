@@ -137,7 +137,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
-            _view.SetAllowanceListBindingSource(AllowanceList);
+            _view.SetAllowanceListBindingSource(AllowanceList.OrderByDescending(c => c.DateGranted));
         }
     }
 }
