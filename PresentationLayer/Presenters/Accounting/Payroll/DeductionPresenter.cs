@@ -138,7 +138,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) DeductionList = DeductionList.Where(c => c.Employee.Contains(_view.SearchValue));
-            _view.SetDeductionListBindingSource(DeductionList);
+            _view.SetDeductionListBindingSource(DeductionList.OrderByDescending(c => c.DateDeducted));
         }
     }
 }

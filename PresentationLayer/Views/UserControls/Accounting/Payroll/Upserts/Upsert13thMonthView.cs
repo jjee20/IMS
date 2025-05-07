@@ -31,7 +31,7 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
             txtName.Text = employeePayroll.Employee ?? "{Needs Updating}";
             txtDepartment.Text = employeeDetails.Department.Name ?? "{Needs Updating}";
             txtRoles.Text = employeeDetails.JobPosition.Title ?? "{Needs Updating}";
-            txtRate.Text = employeePayroll.BasicSalary.ToString() ?? "{Needs Updating}";
+            txtRate.Text = employeePayroll.DailyRate.ToString() ?? "{Needs Updating}";
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)
@@ -49,11 +49,12 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
                 .ToList();
 
             var monthlyBreakdowns = coveredAttendances
+                .Where(a => a.IsPresent && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves))
                 .GroupBy(a => a.Date.ToString("yyyy-MM"))
                 .Select(g => new MonthlyBreakdown
                 {
                     Month = g.Key,
-                    DaysWorked = g.Count(),
+                    DaysWorked = g.Count(a => !a.IsHalfDay) + g.Count(a => a.IsHalfDay) * 0.5,
                     Amount = g.Sum(a => _employeeDetails.BasicSalary * (a.IsHalfDay ? 0.5 : 1.0))
                 })
                 .ToList();

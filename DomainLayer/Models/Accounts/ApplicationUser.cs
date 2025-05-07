@@ -8,6 +8,7 @@ namespace DomainLayer.Models.Accounts
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        
         public UserProfile Profile { get; set; }
         public Departments Department { get; set; }
         public IEnumerable<TaskRoles>? TaskRoles { get; set; }

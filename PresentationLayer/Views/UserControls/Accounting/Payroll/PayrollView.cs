@@ -64,7 +64,6 @@ namespace PresentationLayer.Views.UserControls
                 e.TMonth = Resources.thirteen; // Or any other image per row
                 e.Payslip = Resources.payslip;
             }
-
             dgList.DataSource = dgPager.PagedSource;
         }
         public void SetProjectListBindingSource(BindingSource ProjectList)

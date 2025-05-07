@@ -138,7 +138,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue));
-            _view.SetLeaveListBindingSource(LeaveList);
+            _view.SetLeaveListBindingSource(LeaveList.OrderByDescending(c => c.StartDate));
         }
     }
 }

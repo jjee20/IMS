@@ -47,11 +47,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
                 var entity = _unitOfWork.Employee.Value.Get(
                     c => c.EmployeeId == row.EmployeeId);
 
-                using (var form = new IndividualAttendanceView(_unitOfWork, entity))
+                using (var form = new IndividualAttendanceView(_unitOfWork, entity, _view.StartDate.Date, _view.EndDate.Date))
                 {
                     form.Text = $"{row.Employee} - Attendance";
-                    form.StartDate = _view.StartDate.Date;
-                    form.EndDate = _view.EndDate.Date;
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         LoadAllAttendanceList();
@@ -98,7 +96,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
         }
         public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
-            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
+            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project").OrderBy(c => c.LastName);
             var holidays = _unitOfWork.Holiday.Value.GetAll().Where(h => h.EffectiveDate >= startDate && h.EffectiveDate <= endDate).ToList();
             var summaryList = new List<AttendanceViewModel>();
 
@@ -115,7 +113,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
                 currentDate = currentDate.AddDays(1);
             } while (currentDate <= endDate.Date);
 
-            foreach (var employee in employees.OrderBy(c => c.LastName))
+            foreach (var employee in employees)
             {
                 var attendances = employee.Attendances
                     .Where(a => a.Date.Date >= startDate.Date && a.Date.Date <= endDate.Date)
@@ -173,7 +171,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
                         ? new TimeSpan(15, 0, 0)  // 3:00 PM on holidays
                         : shiftEndTime;           // normal shift end
 
-                    if (att.TimeOut < expectedOut)
+                    if (att.TimeOut < new TimeSpan(expectedOut.Hours, expectedOut.Minutes, expectedOut.Seconds))
                         daysEarlyOut++;
                 }
 

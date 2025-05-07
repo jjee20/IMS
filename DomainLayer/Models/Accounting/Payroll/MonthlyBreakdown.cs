@@ -9,7 +9,7 @@ namespace DomainLayer.Models.Accounting.Payroll
     public class MonthlyBreakdown
     {
         public string Month { get; set; }
-        public int DaysWorked { get; set; }
+        public double DaysWorked { get; set; }
         public double Amount { get; set; }
     }
 }

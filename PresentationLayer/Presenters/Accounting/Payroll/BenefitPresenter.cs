@@ -138,7 +138,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll());
 
             if (!emptyValue) BenefitList = BenefitList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
-            _view.SetBenefitListBindingSource(BenefitList);
+            _view.SetBenefitListBindingSource(BenefitList.OrderBy(c => c.Employee));
         }
     }
 }

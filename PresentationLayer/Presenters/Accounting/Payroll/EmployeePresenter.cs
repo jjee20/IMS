@@ -150,7 +150,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll(includeProperties: "JobPosition,Department,Shift"));
 
             if (!emptyValue) EmployeeList = EmployeeList.Where(c => c.Name.ToLower().Contains(_view.SearchValue.ToLower()));
-            _view.SetEmployeeListBindingSource(EmployeeList);
+            _view.SetEmployeeListBindingSource(EmployeeList.OrderBy(c => c.Name));
         }
     }
 }
