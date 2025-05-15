@@ -5,6 +5,5 @@ namespace ServiceLayer.Services.IRepositories.IAccounting.IPayroll
 {
     public interface ILeaveRepository : IRepository<Leave>
     {
-        void Update(Leave obj);
     }
 }

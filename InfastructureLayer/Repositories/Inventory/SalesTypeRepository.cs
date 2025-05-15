@@ -13,10 +13,5 @@ namespace InfastructureLayer.Repositories.Inventory
         {
             _db = db;
         }
-
-        public void Update(SalesType obj)
-        {
-            _db.SalesType.Update(obj);
-        }
     }
 }

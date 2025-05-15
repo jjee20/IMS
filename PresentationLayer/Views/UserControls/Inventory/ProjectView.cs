@@ -61,7 +61,7 @@ namespace PresentationLayer.Views.UserControls
                     DeleteEvent?.Invoke(sender, e);
                 }
             }
-            else if (e.DataColumn.GridColumn.MappingName == "Project")
+            else if (e.DataColumn.GridColumn.MappingName == "Details")
             {
                 ProjectEvent?.Invoke(sender, e);
             }

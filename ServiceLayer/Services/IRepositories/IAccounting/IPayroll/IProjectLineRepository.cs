@@ -5,6 +5,5 @@ namespace ServiceLayer.Services.IRepositories.IAccounting.IPayroll
 {
     public interface IProjectLineRepository : IRepository<ProjectLine>
     {
-        void Update(ProjectLine obj);
     }
 }

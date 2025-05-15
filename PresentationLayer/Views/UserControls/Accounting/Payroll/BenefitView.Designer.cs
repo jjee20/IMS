@@ -248,7 +248,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn2.HeaderText = "Employee";
             gridTextColumn2.MappingName = "Employee";
             gridTextColumn3.AllowFiltering = true;
-            gridTextColumn3.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn3.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn3.HeaderText = "Type";
             gridTextColumn3.MappingName = "BenefitType";
             gridTextColumn4.AllowFiltering = true;

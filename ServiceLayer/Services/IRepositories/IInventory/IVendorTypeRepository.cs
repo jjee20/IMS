@@ -4,6 +4,5 @@ namespace ServiceLayer.Services.IRepositories.IInventory
 {
     public interface IVendorTypeRepository : IRepository<VendorType>
     {
-        void Update(VendorType obj);
     }
 }

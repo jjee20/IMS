@@ -158,6 +158,8 @@ namespace ServiceLayer.Services.CommonServices
             CreateMap<Holiday, HolidayViewModel>()
                 .ForMember(dest => dest.EffectiveDate, opt => opt.MapFrom(src => src.EffectiveDate.ToLongDateString()))
                 .ReverseMap();
+            CreateMap<ProjectLine, ProjectLineViewModel>()
+                .ReverseMap();
             CreateMap<Deduction, DeductionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                  .ForMember(dest => dest.DateDeducted, opt => opt.MapFrom(src => src.DateDeducted.ToLongDateString()))
@@ -165,7 +167,7 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
             CreateMap<Benefit, BenefitViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
-                 .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => src.BenefitType == BenefitType.Other ? src.Other : src.BenefitType.ToString()))
+                 .ForMember(dest => dest.BenefitType, opt => opt.MapFrom(src => src.BenefitType == BenefitType.Other ? src.Other : src.BenefitType.ToString()))
                 .ReverseMap();
             CreateMap<Bonus, BonusViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
@@ -203,6 +205,7 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.ToLongDateString()))
                  .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.ToLongDateString()))
                  .ForMember(dest => dest.LeaveType, opt => opt.MapFrom(src => src.LeaveType == LeaveType.Other ? src.Other : src.LeaveType.ToString()))
+                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
                 .ReverseMap();
             CreateMap<Benefit, BenefitViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))

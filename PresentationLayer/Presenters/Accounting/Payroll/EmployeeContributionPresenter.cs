@@ -135,7 +135,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
         
         private void LoadAllEmployeeContributionList(bool emptyValue = false)
         {
-            EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(_unitOfWork.EmployeeContribution.Value.GetAll());
+            EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(_unitOfWork.EmployeeContribution.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) EmployeeContributionList = EmployeeContributionList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetEmployeeContributionListBindingSource(EmployeeContributionList);

@@ -5,6 +5,5 @@ namespace ServiceLayer.Services.IRepositories.IAccounting.IPayroll
 {
     public interface IAllowanceRepository : IRepository<Allowance>
     {
-        void Update(Allowance obj);
     }
 }

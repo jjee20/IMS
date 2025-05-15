@@ -135,7 +135,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
         
         private void LoadAllBenefitList(bool emptyValue = false)
         {
-            BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll());
+            BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) BenefitList = BenefitList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetBenefitListBindingSource(BenefitList.OrderBy(c => c.Employee));

@@ -5,6 +5,5 @@ namespace ServiceLayer.Services.IRepositories.IAccounting.IPayroll
 {
     public interface ITaxRepository : IRepository<Tax>
     {
-        void Update(Tax obj);
     }
 }

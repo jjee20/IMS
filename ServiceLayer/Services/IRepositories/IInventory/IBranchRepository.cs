@@ -4,6 +4,5 @@ namespace ServiceLayer.Services.IRepositories.IInventory
 {
     public interface IBranchRepository : IRepository<Branch>
     {
-        void Update(Branch obj);
     }
 }

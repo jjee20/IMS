@@ -13,10 +13,5 @@ namespace InfastructureLayer.Repositories.Inventory
         {
             _db = db;
         }
-
-        public void Update(CashBank obj)
-        {
-            _db.CashBank.Update(obj);
-        }
     }
 }

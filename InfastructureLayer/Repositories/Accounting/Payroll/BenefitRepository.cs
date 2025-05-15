@@ -14,10 +14,5 @@ namespace InfastructureLayer.Repositories.Accounting.Payroll
         {
             _db = db;
         }
-
-        public void Update(Benefit obj)
-        {
-            _db.Benefits.Update(obj);
-        }
     }
 }

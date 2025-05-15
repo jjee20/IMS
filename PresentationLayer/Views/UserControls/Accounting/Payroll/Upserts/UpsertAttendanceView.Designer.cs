@@ -210,7 +210,7 @@
             txtTimeout.Calendar.TodayButton.Text = "Today";
             txtTimeout.CalendarForeColor = SystemColors.ControlText;
             txtTimeout.CalendarSize = new Size(189, 176);
-            txtTimeout.CustomFormat = "HH:mm tt";
+            txtTimeout.CustomFormat = "hh:mm tt";
             txtTimeout.DropDownImage = null;
             txtTimeout.Font = new Font("Segoe UI", 9F);
             txtTimeout.Format = DateTimePickerFormat.Custom;
