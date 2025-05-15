@@ -175,13 +175,33 @@ namespace InfastructureLayer.Repositories
             }
             return await query.ToListAsync();
         }
-        public  void Update(T entity)
+        public void Update(T entity)
         {
-            _db.Set<T>().Update(entity);
+            var keyName = _db.Model.FindEntityType(typeof(T))
+                            .FindPrimaryKey()
+                            .Properties
+                            .Select(x => x.Name)
+                            .Single();
+
+            var trackedEntity = dbSet.Local
+                .FirstOrDefault(e =>
+                    _db.Entry(e).Property(keyName).CurrentValue
+                    .Equals(_db.Entry(entity).Property(keyName).CurrentValue));
+
+            if (trackedEntity != null && !ReferenceEquals(trackedEntity, entity))
+            {
+                _db.Entry(trackedEntity).State = EntityState.Detached;
+            }
+
+            _db.Entry(entity).State = EntityState.Modified;
         }
-        public  void UpdateRange(IEnumerable<T> entity)
+
+        public void UpdateRange(IEnumerable<T> entities)
         {
-            _db.Set<T>().UpdateRange(entity);
+            foreach (var entity in entities)
+            {
+                Update(entity); // reuses safe single update
+            }
         }
     }
 }

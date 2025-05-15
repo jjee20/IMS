@@ -38,7 +38,13 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts
         private void LoadEmployees()
         {
             var entity = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            txtEmployee.DataSource = entity.ToList();
+
+            if (_employeeId > 0)
+            {
+                entity = entity.Where(c => c.EmployeeId == _employeeId);
+            }
+
+            txtEmployee.DataSource = entity.OrderBy(c => c.Name).ToList();
             txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
             txtEmployee.Text = "~Select Employee~";

@@ -14,10 +14,5 @@ namespace InfastructureLayer.Repositories.Accounts
         {
             _db = db;
         }
-
-        public void Update(JobPosition obj)
-        {
-            _db.JobPositions.Update(obj);
-        }
     }
 }

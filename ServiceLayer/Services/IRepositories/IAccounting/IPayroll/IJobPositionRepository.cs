@@ -5,6 +5,5 @@ namespace ServiceLayer.Services.IRepositories.IAccounting.IPayroll
 {
     public interface IJobPositionRepository : IRepository<JobPosition>
     {
-        void Update(JobPosition obj);
     }
 }

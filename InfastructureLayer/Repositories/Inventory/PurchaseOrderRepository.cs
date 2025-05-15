@@ -13,10 +13,5 @@ namespace InfastructureLayer.Repositories.Inventory
         {
             _db = db;
         }
-
-        public void Update(PurchaseOrder obj)
-        {
-            _db.PurchaseOrder.Update(obj);
-        }
     }
 }

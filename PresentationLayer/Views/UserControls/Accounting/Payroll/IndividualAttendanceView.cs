@@ -31,14 +31,17 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
         private DateTime _endndDate;
         private IEnumerable<IndividualAttendanceViewModel> _attendanceList;
 
-        public IndividualAttendanceView(IUnitOfWork unitOfWork, Employee employee, DateTime startDate, DateTime endndDate)
+        public IndividualAttendanceView(IUnitOfWork unitOfWork, Employee employee, DateTime startDate, DateTime endDate)
         {
             InitializeComponent();
             _unitOfWork = unitOfWork;
             _employee = employee;
             _startDate = startDate;
-            _endndDate = endndDate;
-            LoadAllAttendance(employee.EmployeeId, startDate.Date, endndDate.Date);
+            _endndDate = endDate;
+
+            txtStartDate.Value = startDate;
+            txtEndDate.Value = endDate;
+            LoadAllAttendance(employee.EmployeeId, startDate.Date, endDate.Date);
         }
         public SfDataGrid DataGrid => dgList;
 

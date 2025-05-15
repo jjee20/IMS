@@ -5,6 +5,5 @@ namespace ServiceLayer.Services.IRepositories.IInventory
 {
     public interface IShipmentRepository : IRepository<Shipment>
     {
-        void Update(Shipment obj);
     }
 }

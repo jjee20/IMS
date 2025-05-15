@@ -96,6 +96,10 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProjectViewModel row)
             {
+                var lineEntity = _unitOfWork.ProjectLine.Value.GetAll().Where(c => c.ProjectId == row.ProjectId).ToList();
+
+                _unitOfWork.ProjectLine.Value.RemoveRange(lineEntity);
+
                 var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId);
                 if (entity != null)
                 {

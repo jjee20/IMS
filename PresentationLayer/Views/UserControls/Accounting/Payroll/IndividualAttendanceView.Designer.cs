@@ -104,7 +104,7 @@
             gridTextColumn2.MappingName = "Project";
             gridTextColumn2.ShowToolTip = true;
             gridDateTimeColumn1.AllowFiltering = true;
-            gridDateTimeColumn1.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridDateTimeColumn1.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridDateTimeColumn1.Format = "MMMM dd, yyyy";
             gridDateTimeColumn1.HeaderText = "Date";
             gridDateTimeColumn1.MappingName = "Date";

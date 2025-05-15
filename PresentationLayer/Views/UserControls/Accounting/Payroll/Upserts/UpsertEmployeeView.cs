@@ -75,7 +75,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 txtDepartment.SelectedValue = _entity.DepartmentId;
                 txtJobPosition.SelectedValue = _entity.JobPositionId;
                 txtShift.SelectedValue = _entity.ShiftId;
-                txtGender.SelectedValue = _entity.Gender;
+                txtGender.Text = _entity.Gender.ToString();
                 txtBasicSalary.Text = _entity.BasicSalary.ToString();
                 txtLeaveCredits.Text = _entity.LeaveCredits.ToString();
                 txtAddress.Text = _entity.Address;

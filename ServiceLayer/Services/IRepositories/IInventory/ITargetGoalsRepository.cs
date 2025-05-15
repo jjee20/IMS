@@ -4,6 +4,5 @@ namespace ServiceLayer.Services.IRepositories.IInventory
 {
     public interface ITargetGoalsRepository : IRepository<TargetGoals>
     {
-        void Update(TargetGoals obj);
     }
 }

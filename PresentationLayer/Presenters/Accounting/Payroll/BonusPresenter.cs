@@ -135,7 +135,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
         
         private void LoadAllBonusList(bool emptyValue = false)
         {
-            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll());
+            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) BonusList = BonusList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetBonusListBindingSource(BonusList.OrderByDescending(c => c.DateGranted));

@@ -140,7 +140,7 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllProductStockInLogList(bool emptyValue = false)
         {
-            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll());
+            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll(includeProperties: "Product"));
 
             if (!emptyValue) ProductStockInLogList = ProductStockInLogList.Where(c => c.Product.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductInStockLogListBindingSource(ProductStockInLogList);
