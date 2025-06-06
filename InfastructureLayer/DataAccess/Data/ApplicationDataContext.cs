@@ -19,15 +19,15 @@ namespace InfastructureLayer.DataAccess.Data
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //// Fetch the corresponding connection string
-            //string environment = ConfigurationManager.AppSettings["Environment"];
+            // Fetch the corresponding connection string
+            string environment = ConfigurationManager.AppSettings["Environment"];
 
-            //// Fetch the corresponding connection string
-            //string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
+            // Fetch the corresponding connection string
+            string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
 
-            //var connection = new SqlConnection(connectionString);
-            //optionsBuilder.UseSqlServer(connection); 
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
+            var connection = new SqlConnection(connectionString);
+            optionsBuilder.UseSqlServer(connection);
+            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
             optionsBuilder.ConfigureWarnings(w =>
             w.Ignore(RelationalEventId.PendingModelChangesWarning));
         }

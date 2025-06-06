@@ -202,36 +202,75 @@ namespace PresentationLayer.Presenters
 
         private void LoadInventoryStatus()
         {
-            var products = _unitOfWork.ProductStockInLogs.Value
+            var productsStockIn = _unitOfWork.ProductStockInLogs.Value
                 .GetAll(includeProperties: "ProductStockInLogLines.Product");
 
-            var allLines = products
+            var productsPullOut = _unitOfWork.ProductPullOutLogs.Value
+                .GetAll(includeProperties: "ProductPullOutLogLines.Product");
+
+            var allStockInLogLines = productsStockIn
                 .SelectMany(log => log.ProductStockInLogLines)
                 .Where(line => line.Product != null)
                 .ToList();
 
+            var allPullOutLogLines = productsPullOut
+                .SelectMany(log => log.ProductPullOutLogLines)
+                .Where(line => line.Product != null)
+                .ToList();
+
+            // Combine stock-in and pull-out by Product
+            var groupedStockIn = allStockInLogLines
+                .GroupBy(l => l.Product.ProductId)
+                .ToDictionary(g => g.Key, g => g.Sum(x => x.StockQuantity));
+
+            var groupedPullOut = allPullOutLogLines
+                .GroupBy(l => l.Product.ProductId)
+                .ToDictionary(g => g.Key, g => g.Sum(x => x.StockQuantity));
+
+            // Compute actual stock per product
+            var productStocks = allStockInLogLines
+                .Select(line => line.Product)
+                .Distinct()
+                .Select(product =>
+                {
+                    groupedStockIn.TryGetValue(product.ProductId, out var stockInQty);
+                    groupedPullOut.TryGetValue(product.ProductId, out var pullOutQty);
+
+                    int currentQty = (int)(stockInQty - pullOutQty);
+
+                    return new
+                    {
+                        Product = product,
+                        Quantity = currentQty
+                    };
+                })
+                .ToList();
+
+            var totalQty = productStocks.Sum(p => p.Quantity);
+            var lowStockQty = productStocks.Count(p => p.Product.ReorderLevel > 0 && p.Quantity <= p.Product.ReorderLevel && p.Quantity > 0);
+            var outOfStockQty = productStocks.Count(p => p.Quantity <= 0);
+
             var inventoryData = new List<InventoryStatusViewModel>
-    {
-        new InventoryStatusViewModel
-        {
-            Category = "Total Stock",
-            Quantity = allLines.Sum(line => line.StockQuantity)
-        },
-        new InventoryStatusViewModel
-        {
-            Category = "Low Stock (< ReorderLevel)",
-            Quantity = allLines
-                .Count(line => line.Product.ReorderLevel > 0 && line.StockQuantity <= line.Product.ReorderLevel)
-        },
-        new InventoryStatusViewModel
-        {
-            Category = "Out of Stock",
-            Quantity = allLines.Count(line => line.StockQuantity == 0)
-        }
-    };
+            {
+                    new InventoryStatusViewModel
+                    {
+                        Category = "Total Stock",
+                        Quantity = totalQty
+                    },
+                    new InventoryStatusViewModel
+                    {
+                        Category = "Low Stock (< ReorderLevel)",
+                        Quantity = lowStockQty
+                    },
+                    new InventoryStatusViewModel
+                    {
+                        Category = "Out of Stock",
+                        Quantity = outOfStockQty
+                    }
+            };
 
             InventoryStatusDataSet.Label = "Qty";
-            InventoryStatusDataSet.DataPoints.Clear(); // Optional: reset before adding
+            InventoryStatusDataSet.DataPoints.Clear();
 
             foreach (var item in inventoryData)
             {
