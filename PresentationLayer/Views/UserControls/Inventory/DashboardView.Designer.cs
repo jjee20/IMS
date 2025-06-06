@@ -257,10 +257,10 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Dock = DockStyle.Top;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            guna2HtmlLabel1.Location = new Point(2, 2);
-            guna2HtmlLabel1.Margin = new Padding(3, 2, 3, 2);
+            guna2HtmlLabel1.Location = new Point(3, 3);
+            guna2HtmlLabel1.Margin = new Padding(4, 3, 4, 3);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(1346, 39);
+            guna2HtmlLabel1.Size = new Size(209, 56);
             guna2HtmlLabel1.TabIndex = 0;
             guna2HtmlLabel1.Text = "Dashboard";
             // 
@@ -268,9 +268,10 @@ namespace PresentationLayer.Views.UserControls
             // 
             guna2Separator2.Dock = DockStyle.Top;
             guna2Separator2.FillColor = Color.SteelBlue;
-            guna2Separator2.Location = new Point(2, 41);
+            guna2Separator2.Location = new Point(3, 59);
+            guna2Separator2.Margin = new Padding(4, 4, 4, 4);
             guna2Separator2.Name = "guna2Separator2";
-            guna2Separator2.Size = new Size(1346, 10);
+            guna2Separator2.Size = new Size(1344, 15);
             guna2Separator2.TabIndex = 20;
             // 
             // guna2CustomGradientPanel2
@@ -284,11 +285,11 @@ namespace PresentationLayer.Views.UserControls
             guna2CustomGradientPanel2.FillColor2 = SystemColors.Control;
             guna2CustomGradientPanel2.FillColor3 = SystemColors.Control;
             guna2CustomGradientPanel2.FillColor4 = SystemColors.Control;
-            guna2CustomGradientPanel2.Location = new Point(2, 51);
-            guna2CustomGradientPanel2.Margin = new Padding(3, 2, 3, 2);
+            guna2CustomGradientPanel2.Location = new Point(3, 74);
+            guna2CustomGradientPanel2.Margin = new Padding(4, 3, 4, 3);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2CustomGradientPanel2.Size = new Size(1346, 50);
+            guna2CustomGradientPanel2.Size = new Size(1344, 75);
             guna2CustomGradientPanel2.TabIndex = 21;
             // 
             // txtYear
@@ -307,11 +308,12 @@ namespace PresentationLayer.Views.UserControls
             txtYear.Hint = "Year";
             txtYear.IntegralHeight = false;
             txtYear.ItemHeight = 43;
-            txtYear.Location = new Point(858, 0);
+            txtYear.Location = new Point(617, 0);
+            txtYear.Margin = new Padding(4, 4, 4, 4);
             txtYear.MaxDropDownItems = 4;
             txtYear.MouseState = MaterialSkin.MouseState.OUT;
             txtYear.Name = "txtYear";
-            txtYear.Size = new Size(239, 49);
+            txtYear.Size = new Size(356, 49);
             txtYear.StartIndex = 0;
             txtYear.TabIndex = 1;
             // 
@@ -320,9 +322,10 @@ namespace PresentationLayer.Views.UserControls
             guna2vSeparator6.BackColor = SystemColors.Control;
             guna2vSeparator6.Dock = DockStyle.Right;
             guna2vSeparator6.FillColor = Color.Transparent;
-            guna2vSeparator6.Location = new Point(1097, 0);
+            guna2vSeparator6.Location = new Point(973, 0);
+            guna2vSeparator6.Margin = new Padding(4, 4, 4, 4);
             guna2vSeparator6.Name = "guna2vSeparator6";
-            guna2vSeparator6.Size = new Size(10, 50);
+            guna2vSeparator6.Size = new Size(15, 75);
             guna2vSeparator6.TabIndex = 17;
             // 
             // txtMonth
@@ -341,11 +344,12 @@ namespace PresentationLayer.Views.UserControls
             txtMonth.Hint = "Month";
             txtMonth.IntegralHeight = false;
             txtMonth.ItemHeight = 43;
-            txtMonth.Location = new Point(1107, 0);
+            txtMonth.Location = new Point(988, 0);
+            txtMonth.Margin = new Padding(4, 4, 4, 4);
             txtMonth.MaxDropDownItems = 4;
             txtMonth.MouseState = MaterialSkin.MouseState.OUT;
             txtMonth.Name = "txtMonth";
-            txtMonth.Size = new Size(239, 49);
+            txtMonth.Size = new Size(356, 49);
             txtMonth.StartIndex = 0;
             txtMonth.TabIndex = 0;
             // 
@@ -355,18 +359,19 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
             tableLayoutPanel7.Controls.Add(guna2GradientPanel2, 2, 0);
             tableLayoutPanel7.Controls.Add(guna2GradientPanel1, 1, 0);
             tableLayoutPanel7.Controls.Add(materialCard5, 0, 0);
             tableLayoutPanel7.Dock = DockStyle.Top;
-            tableLayoutPanel7.Location = new Point(2, 101);
+            tableLayoutPanel7.Location = new Point(3, 149);
+            tableLayoutPanel7.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel7.Name = "tableLayoutPanel7";
             tableLayoutPanel7.RowCount = 1;
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel7.Size = new Size(1346, 103);
+            tableLayoutPanel7.Size = new Size(1344, 154);
             tableLayoutPanel7.TabIndex = 23;
             // 
             // guna2GradientPanel2
@@ -380,12 +385,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel2.FillColor = Color.IndianRed;
             guna2GradientPanel2.FillColor2 = Color.Red;
             guna2GradientPanel2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel2.Location = new Point(910, 14);
-            guna2GradientPanel2.Margin = new Padding(14);
+            guna2GradientPanel2.Location = new Point(917, 21);
+            guna2GradientPanel2.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
-            guna2GradientPanel2.Padding = new Padding(14);
+            guna2GradientPanel2.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2GradientPanel2.Size = new Size(422, 75);
+            guna2GradientPanel2.Size = new Size(406, 112);
             guna2GradientPanel2.TabIndex = 18;
             // 
             // txtExpense
@@ -395,9 +400,10 @@ namespace PresentationLayer.Views.UserControls
             txtExpense.Dock = DockStyle.Right;
             txtExpense.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtExpense.ForeColor = Color.White;
-            txtExpense.Location = new Point(304, 35);
+            txtExpense.Location = new Point(236, 53);
+            txtExpense.Margin = new Padding(4, 0, 4, 0);
             txtExpense.Name = "txtExpense";
-            txtExpense.Size = new Size(104, 37);
+            txtExpense.Size = new Size(149, 54);
             txtExpense.TabIndex = 3;
             txtExpense.Text = "99,999";
             txtExpense.TextAlign = ContentAlignment.MiddleCenter;
@@ -409,9 +415,10 @@ namespace PresentationLayer.Views.UserControls
             label3.Dock = DockStyle.Top;
             label3.Font = new Font("Segoe UI", 12F);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(14, 14);
+            label3.Location = new Point(21, 21);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(73, 21);
+            label3.Size = new Size(111, 32);
             label3.TabIndex = 2;
             label3.Text = "Expenses";
             label3.TextAlign = ContentAlignment.MiddleLeft;
@@ -427,12 +434,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel1.FillColor = Color.DeepSkyBlue;
             guna2GradientPanel1.FillColor2 = Color.Blue;
             guna2GradientPanel1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel1.Location = new Point(462, 14);
-            guna2GradientPanel1.Margin = new Padding(14);
+            guna2GradientPanel1.Location = new Point(469, 21);
+            guna2GradientPanel1.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.Padding = new Padding(14);
+            guna2GradientPanel1.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GradientPanel1.Size = new Size(420, 75);
+            guna2GradientPanel1.Size = new Size(406, 112);
             guna2GradientPanel1.TabIndex = 17;
             // 
             // txtSales
@@ -442,9 +449,10 @@ namespace PresentationLayer.Views.UserControls
             txtSales.Dock = DockStyle.Right;
             txtSales.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtSales.ForeColor = Color.White;
-            txtSales.Location = new Point(302, 35);
+            txtSales.Location = new Point(236, 53);
+            txtSales.Margin = new Padding(4, 0, 4, 0);
             txtSales.Name = "txtSales";
-            txtSales.Size = new Size(104, 37);
+            txtSales.Size = new Size(149, 54);
             txtSales.TabIndex = 3;
             txtSales.Text = "99,999";
             txtSales.TextAlign = ContentAlignment.MiddleCenter;
@@ -456,9 +464,10 @@ namespace PresentationLayer.Views.UserControls
             label2.Dock = DockStyle.Top;
             label2.Font = new Font("Segoe UI", 12F);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(14, 14);
+            label2.Location = new Point(21, 21);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(88, 21);
+            label2.Size = new Size(132, 32);
             label2.TabIndex = 2;
             label2.Text = "Sales Profit";
             label2.TextAlign = ContentAlignment.MiddleLeft;
@@ -474,12 +483,12 @@ namespace PresentationLayer.Views.UserControls
             materialCard5.FillColor = Color.MediumAquamarine;
             materialCard5.FillColor2 = Color.Green;
             materialCard5.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard5.Location = new Point(14, 14);
-            materialCard5.Margin = new Padding(14);
+            materialCard5.Location = new Point(21, 21);
+            materialCard5.Margin = new Padding(21, 21, 21, 21);
             materialCard5.Name = "materialCard5";
-            materialCard5.Padding = new Padding(14);
+            materialCard5.Padding = new Padding(21, 21, 21, 21);
             materialCard5.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            materialCard5.Size = new Size(420, 75);
+            materialCard5.Size = new Size(406, 112);
             materialCard5.TabIndex = 13;
             // 
             // txtGross
@@ -489,9 +498,10 @@ namespace PresentationLayer.Views.UserControls
             txtGross.Dock = DockStyle.Right;
             txtGross.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtGross.ForeColor = Color.White;
-            txtGross.Location = new Point(302, 35);
+            txtGross.Location = new Point(236, 53);
+            txtGross.Margin = new Padding(4, 0, 4, 0);
             txtGross.Name = "txtGross";
-            txtGross.Size = new Size(104, 37);
+            txtGross.Size = new Size(149, 54);
             txtGross.TabIndex = 3;
             txtGross.Text = "99,999";
             txtGross.TextAlign = ContentAlignment.MiddleCenter;
@@ -503,9 +513,10 @@ namespace PresentationLayer.Views.UserControls
             label9.Dock = DockStyle.Top;
             label9.Font = new Font("Segoe UI", 12F);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(14, 14);
+            label9.Location = new Point(21, 21);
+            label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(92, 21);
+            label9.Size = new Size(136, 32);
             label9.TabIndex = 2;
             label9.Text = "Gross Profit";
             label9.TextAlign = ContentAlignment.MiddleLeft;
@@ -515,17 +526,18 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.59292F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.4070778F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
             tableLayoutPanel1.Controls.Add(tableLayoutPanel6, 1, 0);
             tableLayoutPanel1.Controls.Add(panel1, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(2, 204);
+            tableLayoutPanel1.Location = new Point(3, 303);
+            tableLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1346, 523);
+            tableLayoutPanel1.Size = new Size(1344, 423);
             tableLayoutPanel1.TabIndex = 25;
             // 
             // tableLayoutPanel6
@@ -535,12 +547,13 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel6.Controls.Add(guna2GradientPanel11, 0, 1);
             tableLayoutPanel6.Controls.Add(guna2GradientPanel10, 0, 0);
             tableLayoutPanel6.Dock = DockStyle.Fill;
-            tableLayoutPanel6.Location = new Point(899, 3);
+            tableLayoutPanel6.Location = new Point(899, 4);
+            tableLayoutPanel6.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel6.Name = "tableLayoutPanel6";
             tableLayoutPanel6.RowCount = 2;
             tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 60.85193F));
             tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 39.14807F));
-            tableLayoutPanel6.Size = new Size(444, 517);
+            tableLayoutPanel6.Size = new Size(441, 415);
             tableLayoutPanel6.TabIndex = 2;
             // 
             // guna2GradientPanel11
@@ -553,12 +566,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel11.FillColor = Color.White;
             guna2GradientPanel11.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel11.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel11.Location = new Point(14, 328);
-            guna2GradientPanel11.Margin = new Padding(14);
+            guna2GradientPanel11.Location = new Point(21, 273);
+            guna2GradientPanel11.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel11.Name = "guna2GradientPanel11";
-            guna2GradientPanel11.Padding = new Padding(14);
+            guna2GradientPanel11.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel11.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2GradientPanel11.Size = new Size(416, 175);
+            guna2GradientPanel11.Size = new Size(399, 121);
             guna2GradientPanel11.TabIndex = 16;
             // 
             // guna2GradientPanel16
@@ -571,12 +584,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel16.FillColor = Color.White;
             guna2GradientPanel16.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel16.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel16.Location = new Point(14, 14);
-            guna2GradientPanel16.Margin = new Padding(14);
+            guna2GradientPanel16.Location = new Point(21, 21);
+            guna2GradientPanel16.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel16.Name = "guna2GradientPanel16";
-            guna2GradientPanel16.Padding = new Padding(14);
+            guna2GradientPanel16.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel16.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2GradientPanel16.Size = new Size(388, 147);
+            guna2GradientPanel16.Size = new Size(357, 79);
             guna2GradientPanel16.TabIndex = 15;
             // 
             // chartInventoryStatus
@@ -585,9 +598,10 @@ namespace PresentationLayer.Views.UserControls
             chartInventoryStatus.Dock = DockStyle.Fill;
             chartFont1.FontName = "Arial";
             chartInventoryStatus.Legend.LabelFont = chartFont1;
-            chartInventoryStatus.Location = new Point(14, 14);
+            chartInventoryStatus.Location = new Point(21, 21);
+            chartInventoryStatus.Margin = new Padding(4, 4, 4, 4);
             chartInventoryStatus.Name = "chartInventoryStatus";
-            chartInventoryStatus.Size = new Size(360, 119);
+            chartInventoryStatus.Size = new Size(315, 37);
             chartInventoryStatus.TabIndex = 0;
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
@@ -639,12 +653,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel10.FillColor = Color.White;
             guna2GradientPanel10.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel10.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel10.Location = new Point(14, 14);
-            guna2GradientPanel10.Margin = new Padding(14);
+            guna2GradientPanel10.Location = new Point(21, 21);
+            guna2GradientPanel10.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel10.Name = "guna2GradientPanel10";
-            guna2GradientPanel10.Padding = new Padding(14);
+            guna2GradientPanel10.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel10.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            guna2GradientPanel10.Size = new Size(416, 286);
+            guna2GradientPanel10.Size = new Size(399, 210);
             guna2GradientPanel10.TabIndex = 15;
             // 
             // progressBarSales
@@ -652,13 +666,14 @@ namespace PresentationLayer.Views.UserControls
             progressBarSales.CustomizableEdges = customizableEdges13;
             progressBarSales.Dock = DockStyle.Top;
             progressBarSales.FillColor = Color.SkyBlue;
-            progressBarSales.Location = new Point(14, 164);
+            progressBarSales.Location = new Point(21, 246);
+            progressBarSales.Margin = new Padding(4, 4, 4, 4);
             progressBarSales.Name = "progressBarSales";
             progressBarSales.ProgressColor = Color.DarkBlue;
             progressBarSales.ProgressColor2 = Color.DarkBlue;
             progressBarSales.ShadowDecoration.CustomizableEdges = customizableEdges14;
             progressBarSales.ShowText = true;
-            progressBarSales.Size = new Size(388, 20);
+            progressBarSales.Size = new Size(357, 30);
             progressBarSales.TabIndex = 12;
             progressBarSales.Text = "guna2ProgressBar1";
             progressBarSales.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
@@ -671,11 +686,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel15.Controls.Add(label18, 1, 0);
             tableLayoutPanel15.Controls.Add(label19, 0, 0);
             tableLayoutPanel15.Dock = DockStyle.Bottom;
-            tableLayoutPanel15.Location = new Point(14, 204);
+            tableLayoutPanel15.Location = new Point(21, 86);
+            tableLayoutPanel15.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel15.Name = "tableLayoutPanel15";
             tableLayoutPanel15.RowCount = 1;
             tableLayoutPanel15.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel15.Size = new Size(388, 29);
+            tableLayoutPanel15.Size = new Size(357, 44);
             tableLayoutPanel15.TabIndex = 9;
             // 
             // label18
@@ -685,9 +701,10 @@ namespace PresentationLayer.Views.UserControls
             label18.Dock = DockStyle.Top;
             label18.Font = new Font("Segoe UI", 12F);
             label18.ForeColor = Color.Black;
-            label18.Location = new Point(197, 0);
+            label18.Location = new Point(182, 0);
+            label18.Margin = new Padding(4, 0, 4, 0);
             label18.Name = "label18";
-            label18.Size = new Size(188, 21);
+            label18.Size = new Size(171, 32);
             label18.TabIndex = 5;
             label18.Text = "Profit";
             label18.TextAlign = ContentAlignment.MiddleLeft;
@@ -699,9 +716,10 @@ namespace PresentationLayer.Views.UserControls
             label19.Dock = DockStyle.Top;
             label19.Font = new Font("Segoe UI", 12F);
             label19.ForeColor = Color.Black;
-            label19.Location = new Point(3, 0);
+            label19.Location = new Point(4, 0);
+            label19.Margin = new Padding(4, 0, 4, 0);
             label19.Name = "label19";
-            label19.Size = new Size(188, 21);
+            label19.Size = new Size(170, 32);
             label19.TabIndex = 4;
             label19.Text = "Expenses";
             label19.TextAlign = ContentAlignment.MiddleLeft;
@@ -714,11 +732,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel14.Controls.Add(txtTotalProfit, 1, 0);
             tableLayoutPanel14.Controls.Add(txtTotalExpenses, 0, 0);
             tableLayoutPanel14.Dock = DockStyle.Bottom;
-            tableLayoutPanel14.Location = new Point(14, 233);
+            tableLayoutPanel14.Location = new Point(21, 130);
+            tableLayoutPanel14.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel14.Name = "tableLayoutPanel14";
             tableLayoutPanel14.RowCount = 1;
             tableLayoutPanel14.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel14.Size = new Size(388, 29);
+            tableLayoutPanel14.Size = new Size(357, 44);
             tableLayoutPanel14.TabIndex = 8;
             // 
             // txtTotalProfit
@@ -728,9 +747,10 @@ namespace PresentationLayer.Views.UserControls
             txtTotalProfit.Dock = DockStyle.Top;
             txtTotalProfit.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtTotalProfit.ForeColor = Color.Black;
-            txtTotalProfit.Location = new Point(197, 0);
+            txtTotalProfit.Location = new Point(182, 0);
+            txtTotalProfit.Margin = new Padding(4, 0, 4, 0);
             txtTotalProfit.Name = "txtTotalProfit";
-            txtTotalProfit.Size = new Size(188, 21);
+            txtTotalProfit.Size = new Size(171, 32);
             txtTotalProfit.TabIndex = 5;
             txtTotalProfit.Text = "Profit";
             txtTotalProfit.TextAlign = ContentAlignment.MiddleLeft;
@@ -742,9 +762,10 @@ namespace PresentationLayer.Views.UserControls
             txtTotalExpenses.Dock = DockStyle.Top;
             txtTotalExpenses.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtTotalExpenses.ForeColor = Color.Black;
-            txtTotalExpenses.Location = new Point(3, 0);
+            txtTotalExpenses.Location = new Point(4, 0);
+            txtTotalExpenses.Margin = new Padding(4, 0, 4, 0);
             txtTotalExpenses.Name = "txtTotalExpenses";
-            txtTotalExpenses.Size = new Size(188, 21);
+            txtTotalExpenses.Size = new Size(170, 32);
             txtTotalExpenses.TabIndex = 4;
             txtTotalExpenses.Text = "Expenses";
             txtTotalExpenses.TextAlign = ContentAlignment.MiddleLeft;
@@ -757,11 +778,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel16.Controls.Add(guna2GradientPanel13, 1, 0);
             tableLayoutPanel16.Controls.Add(guna2GradientPanel12, 0, 0);
             tableLayoutPanel16.Dock = DockStyle.Bottom;
-            tableLayoutPanel16.Location = new Point(14, 262);
+            tableLayoutPanel16.Location = new Point(21, 174);
+            tableLayoutPanel16.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel16.Name = "tableLayoutPanel16";
             tableLayoutPanel16.RowCount = 1;
             tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel16.Size = new Size(388, 10);
+            tableLayoutPanel16.Size = new Size(357, 15);
             tableLayoutPanel16.TabIndex = 10;
             // 
             // guna2GradientPanel13
@@ -770,10 +792,11 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel13.Dock = DockStyle.Fill;
             guna2GradientPanel13.FillColor = Color.Lime;
             guna2GradientPanel13.FillColor2 = Color.Olive;
-            guna2GradientPanel13.Location = new Point(197, 3);
+            guna2GradientPanel13.Location = new Point(182, 4);
+            guna2GradientPanel13.Margin = new Padding(4, 4, 4, 4);
             guna2GradientPanel13.Name = "guna2GradientPanel13";
             guna2GradientPanel13.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2GradientPanel13.Size = new Size(188, 4);
+            guna2GradientPanel13.Size = new Size(171, 7);
             guna2GradientPanel13.TabIndex = 1;
             // 
             // guna2GradientPanel12
@@ -782,10 +805,11 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel12.Dock = DockStyle.Fill;
             guna2GradientPanel12.FillColor = Color.FromArgb(255, 192, 192);
             guna2GradientPanel12.FillColor2 = Color.Red;
-            guna2GradientPanel12.Location = new Point(3, 3);
+            guna2GradientPanel12.Location = new Point(4, 4);
+            guna2GradientPanel12.Margin = new Padding(4, 4, 4, 4);
             guna2GradientPanel12.Name = "guna2GradientPanel12";
             guna2GradientPanel12.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            guna2GradientPanel12.Size = new Size(188, 4);
+            guna2GradientPanel12.Size = new Size(170, 7);
             guna2GradientPanel12.TabIndex = 0;
             // 
             // tableLayoutPanel12
@@ -796,11 +820,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel12.Controls.Add(txtExpenseSalesTarget, 1, 0);
             tableLayoutPanel12.Controls.Add(txtExpenseSales, 0, 0);
             tableLayoutPanel12.Dock = DockStyle.Top;
-            tableLayoutPanel12.Location = new Point(14, 141);
+            tableLayoutPanel12.Location = new Point(21, 212);
+            tableLayoutPanel12.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel12.Name = "tableLayoutPanel12";
             tableLayoutPanel12.RowCount = 1;
             tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel12.Size = new Size(388, 23);
+            tableLayoutPanel12.Size = new Size(357, 34);
             tableLayoutPanel12.TabIndex = 7;
             // 
             // txtExpenseSalesTarget
@@ -810,9 +835,10 @@ namespace PresentationLayer.Views.UserControls
             txtExpenseSalesTarget.Dock = DockStyle.Top;
             txtExpenseSalesTarget.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             txtExpenseSalesTarget.ForeColor = Color.Black;
-            txtExpenseSalesTarget.Location = new Point(197, 0);
+            txtExpenseSalesTarget.Location = new Point(182, 0);
+            txtExpenseSalesTarget.Margin = new Padding(4, 0, 4, 0);
             txtExpenseSalesTarget.Name = "txtExpenseSalesTarget";
-            txtExpenseSalesTarget.Size = new Size(188, 19);
+            txtExpenseSalesTarget.Size = new Size(171, 28);
             txtExpenseSalesTarget.TabIndex = 5;
             txtExpenseSalesTarget.Text = "Target";
             txtExpenseSalesTarget.TextAlign = ContentAlignment.MiddleRight;
@@ -824,9 +850,10 @@ namespace PresentationLayer.Views.UserControls
             txtExpenseSales.Dock = DockStyle.Top;
             txtExpenseSales.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             txtExpenseSales.ForeColor = Color.Black;
-            txtExpenseSales.Location = new Point(3, 0);
+            txtExpenseSales.Location = new Point(4, 0);
+            txtExpenseSales.Margin = new Padding(4, 0, 4, 0);
             txtExpenseSales.Name = "txtExpenseSales";
-            txtExpenseSales.Size = new Size(188, 19);
+            txtExpenseSales.Size = new Size(170, 28);
             txtExpenseSales.TabIndex = 4;
             txtExpenseSales.Text = "Sales";
             txtExpenseSales.TextAlign = ContentAlignment.MiddleLeft;
@@ -839,11 +866,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel13.Controls.Add(label14, 1, 0);
             tableLayoutPanel13.Controls.Add(label15, 0, 0);
             tableLayoutPanel13.Dock = DockStyle.Top;
-            tableLayoutPanel13.Location = new Point(14, 112);
+            tableLayoutPanel13.Location = new Point(21, 168);
+            tableLayoutPanel13.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel13.Name = "tableLayoutPanel13";
             tableLayoutPanel13.RowCount = 1;
             tableLayoutPanel13.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel13.Size = new Size(388, 29);
+            tableLayoutPanel13.Size = new Size(357, 44);
             tableLayoutPanel13.TabIndex = 5;
             // 
             // label14
@@ -853,9 +881,10 @@ namespace PresentationLayer.Views.UserControls
             label14.Dock = DockStyle.Top;
             label14.Font = new Font("Segoe UI", 12F);
             label14.ForeColor = Color.Black;
-            label14.Location = new Point(197, 0);
+            label14.Location = new Point(182, 0);
+            label14.Margin = new Padding(4, 0, 4, 0);
             label14.Name = "label14";
-            label14.Size = new Size(188, 21);
+            label14.Size = new Size(171, 32);
             label14.TabIndex = 5;
             label14.Text = "Target";
             label14.TextAlign = ContentAlignment.MiddleRight;
@@ -867,9 +896,10 @@ namespace PresentationLayer.Views.UserControls
             label15.Dock = DockStyle.Top;
             label15.Font = new Font("Segoe UI", 12F);
             label15.ForeColor = Color.Black;
-            label15.Location = new Point(3, 0);
+            label15.Location = new Point(4, 0);
+            label15.Margin = new Padding(4, 0, 4, 0);
             label15.Name = "label15";
-            label15.Size = new Size(188, 21);
+            label15.Size = new Size(170, 32);
             label15.TabIndex = 4;
             label15.Text = "Sales";
             label15.TextAlign = ContentAlignment.MiddleLeft;
@@ -879,13 +909,14 @@ namespace PresentationLayer.Views.UserControls
             progressBarItemSold.CustomizableEdges = customizableEdges19;
             progressBarItemSold.Dock = DockStyle.Top;
             progressBarItemSold.FillColor = Color.LightSkyBlue;
-            progressBarItemSold.Location = new Point(14, 92);
+            progressBarItemSold.Location = new Point(21, 138);
+            progressBarItemSold.Margin = new Padding(4, 4, 4, 4);
             progressBarItemSold.Name = "progressBarItemSold";
             progressBarItemSold.ProgressColor = Color.SteelBlue;
             progressBarItemSold.ProgressColor2 = Color.SteelBlue;
             progressBarItemSold.ShadowDecoration.CustomizableEdges = customizableEdges20;
             progressBarItemSold.ShowText = true;
-            progressBarItemSold.Size = new Size(388, 20);
+            progressBarItemSold.Size = new Size(357, 30);
             progressBarItemSold.TabIndex = 11;
             progressBarItemSold.Text = "guna2ProgressBar1";
             progressBarItemSold.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
@@ -898,11 +929,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel11.Controls.Add(txtExpenseItemsSoldTarget, 1, 0);
             tableLayoutPanel11.Controls.Add(txtExpenseItemsSold, 0, 0);
             tableLayoutPanel11.Dock = DockStyle.Top;
-            tableLayoutPanel11.Location = new Point(14, 69);
+            tableLayoutPanel11.Location = new Point(21, 104);
+            tableLayoutPanel11.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel11.Name = "tableLayoutPanel11";
             tableLayoutPanel11.RowCount = 1;
             tableLayoutPanel11.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel11.Size = new Size(388, 23);
+            tableLayoutPanel11.Size = new Size(357, 34);
             tableLayoutPanel11.TabIndex = 4;
             // 
             // txtExpenseItemsSoldTarget
@@ -912,9 +944,10 @@ namespace PresentationLayer.Views.UserControls
             txtExpenseItemsSoldTarget.Dock = DockStyle.Top;
             txtExpenseItemsSoldTarget.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             txtExpenseItemsSoldTarget.ForeColor = Color.Black;
-            txtExpenseItemsSoldTarget.Location = new Point(197, 0);
+            txtExpenseItemsSoldTarget.Location = new Point(182, 0);
+            txtExpenseItemsSoldTarget.Margin = new Padding(4, 0, 4, 0);
             txtExpenseItemsSoldTarget.Name = "txtExpenseItemsSoldTarget";
-            txtExpenseItemsSoldTarget.Size = new Size(188, 19);
+            txtExpenseItemsSoldTarget.Size = new Size(171, 28);
             txtExpenseItemsSoldTarget.TabIndex = 5;
             txtExpenseItemsSoldTarget.Text = "Target";
             txtExpenseItemsSoldTarget.TextAlign = ContentAlignment.MiddleRight;
@@ -926,9 +959,10 @@ namespace PresentationLayer.Views.UserControls
             txtExpenseItemsSold.Dock = DockStyle.Top;
             txtExpenseItemsSold.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             txtExpenseItemsSold.ForeColor = Color.Black;
-            txtExpenseItemsSold.Location = new Point(3, 0);
+            txtExpenseItemsSold.Location = new Point(4, 0);
+            txtExpenseItemsSold.Margin = new Padding(4, 0, 4, 0);
             txtExpenseItemsSold.Name = "txtExpenseItemsSold";
-            txtExpenseItemsSold.Size = new Size(188, 19);
+            txtExpenseItemsSold.Size = new Size(170, 28);
             txtExpenseItemsSold.TabIndex = 4;
             txtExpenseItemsSold.Text = "Items Sold";
             txtExpenseItemsSold.TextAlign = ContentAlignment.MiddleLeft;
@@ -941,11 +975,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel10.Controls.Add(label7, 1, 0);
             tableLayoutPanel10.Controls.Add(label5, 0, 0);
             tableLayoutPanel10.Dock = DockStyle.Top;
-            tableLayoutPanel10.Location = new Point(14, 40);
+            tableLayoutPanel10.Location = new Point(21, 60);
+            tableLayoutPanel10.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel10.Name = "tableLayoutPanel10";
             tableLayoutPanel10.RowCount = 1;
             tableLayoutPanel10.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel10.Size = new Size(388, 29);
+            tableLayoutPanel10.Size = new Size(357, 44);
             tableLayoutPanel10.TabIndex = 2;
             // 
             // label7
@@ -955,9 +990,10 @@ namespace PresentationLayer.Views.UserControls
             label7.Dock = DockStyle.Top;
             label7.Font = new Font("Segoe UI", 12F);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(197, 0);
+            label7.Location = new Point(182, 0);
+            label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(188, 21);
+            label7.Size = new Size(171, 32);
             label7.TabIndex = 5;
             label7.Text = "Target";
             label7.TextAlign = ContentAlignment.MiddleRight;
@@ -969,9 +1005,10 @@ namespace PresentationLayer.Views.UserControls
             label5.Dock = DockStyle.Top;
             label5.Font = new Font("Segoe UI", 12F);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(3, 0);
+            label5.Location = new Point(4, 0);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(188, 21);
+            label5.Size = new Size(170, 32);
             label5.TabIndex = 4;
             label5.Text = "Items Sold";
             label5.TextAlign = ContentAlignment.MiddleLeft;
@@ -982,11 +1019,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel9.Controls.Add(label1, 0, 0);
             tableLayoutPanel9.Dock = DockStyle.Top;
-            tableLayoutPanel9.Location = new Point(14, 14);
+            tableLayoutPanel9.Location = new Point(21, 21);
+            tableLayoutPanel9.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel9.Name = "tableLayoutPanel9";
             tableLayoutPanel9.RowCount = 1;
             tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel9.Size = new Size(388, 26);
+            tableLayoutPanel9.Size = new Size(357, 39);
             tableLayoutPanel9.TabIndex = 1;
             // 
             // label1
@@ -996,9 +1034,10 @@ namespace PresentationLayer.Views.UserControls
             label1.Dock = DockStyle.Top;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(3, 0);
+            label1.Location = new Point(4, 0);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(382, 21);
+            label1.Size = new Size(349, 32);
             label1.TabIndex = 3;
             label1.Text = "Expense Today";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -1011,7 +1050,7 @@ namespace PresentationLayer.Views.UserControls
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(896, 523);
+            panel1.Size = new Size(895, 423);
             panel1.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -1022,11 +1061,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel3.Controls.Add(tableLayoutPanel5, 1, 0);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(0, 90);
+            tableLayoutPanel3.Location = new Point(0, 135);
+            tableLayoutPanel3.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(896, 433);
+            tableLayoutPanel3.Size = new Size(895, 288);
             tableLayoutPanel3.TabIndex = 26;
             // 
             // tableLayoutPanel5
@@ -1036,12 +1076,13 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel5.Controls.Add(guna2GradientPanel9, 0, 1);
             tableLayoutPanel5.Controls.Add(guna2GradientPanel8, 0, 0);
             tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(451, 3);
+            tableLayoutPanel5.Location = new Point(451, 4);
+            tableLayoutPanel5.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 2;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.Size = new Size(442, 427);
+            tableLayoutPanel5.Size = new Size(440, 280);
             tableLayoutPanel5.TabIndex = 1;
             // 
             // guna2GradientPanel9
@@ -1054,12 +1095,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel9.FillColor = Color.White;
             guna2GradientPanel9.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel9.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel9.Location = new Point(14, 227);
-            guna2GradientPanel9.Margin = new Padding(14);
+            guna2GradientPanel9.Location = new Point(21, 161);
+            guna2GradientPanel9.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel9.Name = "guna2GradientPanel9";
-            guna2GradientPanel9.Padding = new Padding(14);
+            guna2GradientPanel9.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel9.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2GradientPanel9.Size = new Size(414, 186);
+            guna2GradientPanel9.Size = new Size(398, 98);
             guna2GradientPanel9.TabIndex = 16;
             // 
             // guna2GradientPanel15
@@ -1072,12 +1113,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel15.FillColor = Color.White;
             guna2GradientPanel15.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel15.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel15.Location = new Point(14, 14);
-            guna2GradientPanel15.Margin = new Padding(14);
+            guna2GradientPanel15.Location = new Point(21, 21);
+            guna2GradientPanel15.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel15.Name = "guna2GradientPanel15";
-            guna2GradientPanel15.Padding = new Padding(14);
+            guna2GradientPanel15.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel15.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2GradientPanel15.Size = new Size(386, 158);
+            guna2GradientPanel15.Size = new Size(356, 56);
             guna2GradientPanel15.TabIndex = 15;
             // 
             // chartMonthlySales
@@ -1086,9 +1127,10 @@ namespace PresentationLayer.Views.UserControls
             chartMonthlySales.Dock = DockStyle.Fill;
             chartFont9.FontName = "Arial";
             chartMonthlySales.Legend.LabelFont = chartFont9;
-            chartMonthlySales.Location = new Point(14, 14);
+            chartMonthlySales.Location = new Point(21, 21);
+            chartMonthlySales.Margin = new Padding(4, 4, 4, 4);
             chartMonthlySales.Name = "chartMonthlySales";
-            chartMonthlySales.Size = new Size(358, 130);
+            chartMonthlySales.Size = new Size(314, 14);
             chartMonthlySales.TabIndex = 0;
             chartFont10.FontName = "Arial";
             chartFont10.Size = 12;
@@ -1131,12 +1173,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel8.FillColor = Color.White;
             guna2GradientPanel8.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel8.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel8.Location = new Point(14, 14);
-            guna2GradientPanel8.Margin = new Padding(14);
+            guna2GradientPanel8.Location = new Point(21, 21);
+            guna2GradientPanel8.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel8.Name = "guna2GradientPanel8";
-            guna2GradientPanel8.Padding = new Padding(14);
+            guna2GradientPanel8.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel8.ShadowDecoration.CustomizableEdges = customizableEdges30;
-            guna2GradientPanel8.Size = new Size(414, 185);
+            guna2GradientPanel8.Size = new Size(398, 98);
             guna2GradientPanel8.TabIndex = 15;
             // 
             // guna2GradientPanel14
@@ -1149,12 +1191,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel14.FillColor = Color.White;
             guna2GradientPanel14.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel14.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel14.Location = new Point(14, 14);
-            guna2GradientPanel14.Margin = new Padding(14);
+            guna2GradientPanel14.Location = new Point(21, 21);
+            guna2GradientPanel14.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel14.Name = "guna2GradientPanel14";
-            guna2GradientPanel14.Padding = new Padding(14);
+            guna2GradientPanel14.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel14.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            guna2GradientPanel14.Size = new Size(386, 157);
+            guna2GradientPanel14.Size = new Size(356, 56);
             guna2GradientPanel14.TabIndex = 15;
             // 
             // chartDailySales
@@ -1163,9 +1205,10 @@ namespace PresentationLayer.Views.UserControls
             chartDailySales.Dock = DockStyle.Fill;
             chartFont17.FontName = "Arial";
             chartDailySales.Legend.LabelFont = chartFont17;
-            chartDailySales.Location = new Point(14, 14);
+            chartDailySales.Location = new Point(21, 21);
+            chartDailySales.Margin = new Padding(4, 4, 4, 4);
             chartDailySales.Name = "chartDailySales";
-            chartDailySales.Size = new Size(358, 129);
+            chartDailySales.Size = new Size(314, 14);
             chartDailySales.TabIndex = 0;
             chartFont18.FontName = "Arial";
             chartFont18.Size = 12;
@@ -1205,12 +1248,13 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel4.Controls.Add(guna2GradientPanel6, 0, 0);
             tableLayoutPanel4.Controls.Add(tableLayoutPanel8, 0, 1);
             tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(3, 3);
+            tableLayoutPanel4.Location = new Point(4, 4);
+            tableLayoutPanel4.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 38.1201057F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 61.8798943F));
-            tableLayoutPanel4.Size = new Size(442, 427);
+            tableLayoutPanel4.Size = new Size(439, 280);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // guna2GradientPanel6
@@ -1223,12 +1267,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel6.FillColor = Color.White;
             guna2GradientPanel6.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel6.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel6.Location = new Point(14, 14);
-            guna2GradientPanel6.Margin = new Padding(14);
+            guna2GradientPanel6.Location = new Point(21, 21);
+            guna2GradientPanel6.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel6.Name = "guna2GradientPanel6";
-            guna2GradientPanel6.Padding = new Padding(14);
+            guna2GradientPanel6.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges32;
-            guna2GradientPanel6.Size = new Size(414, 134);
+            guna2GradientPanel6.Size = new Size(397, 64);
             guna2GradientPanel6.TabIndex = 14;
             // 
             // chartTopSelling
@@ -1238,9 +1282,10 @@ namespace PresentationLayer.Views.UserControls
             chartTopSelling.Legend.Display = false;
             chartFont25.FontName = "Arial";
             chartTopSelling.Legend.LabelFont = chartFont25;
-            chartTopSelling.Location = new Point(14, 14);
+            chartTopSelling.Location = new Point(21, 21);
+            chartTopSelling.Margin = new Padding(4, 4, 4, 4);
             chartTopSelling.Name = "chartTopSelling";
-            chartTopSelling.Size = new Size(386, 106);
+            chartTopSelling.Size = new Size(355, 22);
             chartTopSelling.TabIndex = 0;
             chartFont26.FontName = "Arial";
             chartFont26.Size = 12;
@@ -1283,11 +1328,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel8.Controls.Add(guna2GradientPanel7, 0, 0);
             tableLayoutPanel8.Dock = DockStyle.Fill;
-            tableLayoutPanel8.Location = new Point(3, 165);
+            tableLayoutPanel8.Location = new Point(4, 110);
+            tableLayoutPanel8.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel8.Name = "tableLayoutPanel8";
             tableLayoutPanel8.RowCount = 1;
             tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel8.Size = new Size(436, 259);
+            tableLayoutPanel8.Size = new Size(431, 166);
             tableLayoutPanel8.TabIndex = 15;
             // 
             // guna2GradientPanel7
@@ -1300,12 +1346,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel7.FillColor = Color.White;
             guna2GradientPanel7.FillColor2 = Color.WhiteSmoke;
             guna2GradientPanel7.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel7.Location = new Point(14, 14);
-            guna2GradientPanel7.Margin = new Padding(14);
+            guna2GradientPanel7.Location = new Point(21, 21);
+            guna2GradientPanel7.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel7.Name = "guna2GradientPanel7";
-            guna2GradientPanel7.Padding = new Padding(14);
+            guna2GradientPanel7.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel7.ShadowDecoration.CustomizableEdges = customizableEdges34;
-            guna2GradientPanel7.Size = new Size(408, 231);
+            guna2GradientPanel7.Size = new Size(389, 124);
             guna2GradientPanel7.TabIndex = 15;
             // 
             // chartProjectExpenseDistribution
@@ -1314,9 +1360,10 @@ namespace PresentationLayer.Views.UserControls
             chartProjectExpenseDistribution.Dock = DockStyle.Fill;
             chartFont33.FontName = "Arial";
             chartProjectExpenseDistribution.Legend.LabelFont = chartFont33;
-            chartProjectExpenseDistribution.Location = new Point(14, 14);
+            chartProjectExpenseDistribution.Location = new Point(21, 21);
+            chartProjectExpenseDistribution.Margin = new Padding(4, 4, 4, 4);
             chartProjectExpenseDistribution.Name = "chartProjectExpenseDistribution";
-            chartProjectExpenseDistribution.Size = new Size(380, 203);
+            chartProjectExpenseDistribution.Size = new Size(347, 82);
             chartProjectExpenseDistribution.TabIndex = 0;
             chartFont34.FontName = "Arial";
             chartFont34.Size = 12;
@@ -1359,18 +1406,19 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
             tableLayoutPanel2.Controls.Add(guna2GradientPanel3, 2, 0);
             tableLayoutPanel2.Controls.Add(guna2GradientPanel4, 1, 0);
             tableLayoutPanel2.Controls.Add(guna2GradientPanel5, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Top;
             tableLayoutPanel2.Location = new Point(0, 0);
+            tableLayoutPanel2.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(896, 90);
+            tableLayoutPanel2.Size = new Size(895, 135);
             tableLayoutPanel2.TabIndex = 25;
             // 
             // guna2GradientPanel3
@@ -1384,12 +1432,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel3.FillColor = Color.White;
             guna2GradientPanel3.FillColor2 = Color.PowderBlue;
             guna2GradientPanel3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel3.Location = new Point(610, 14);
-            guna2GradientPanel3.Margin = new Padding(14);
+            guna2GradientPanel3.Location = new Point(617, 21);
+            guna2GradientPanel3.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel3.Name = "guna2GradientPanel3";
-            guna2GradientPanel3.Padding = new Padding(14);
+            guna2GradientPanel3.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges36;
-            guna2GradientPanel3.Size = new Size(272, 62);
+            guna2GradientPanel3.Size = new Size(257, 93);
             guna2GradientPanel3.TabIndex = 18;
             // 
             // txtExpenseToday
@@ -1399,9 +1447,10 @@ namespace PresentationLayer.Views.UserControls
             txtExpenseToday.Dock = DockStyle.Right;
             txtExpenseToday.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             txtExpenseToday.ForeColor = Color.Black;
-            txtExpenseToday.Location = new Point(186, 33);
+            txtExpenseToday.Location = new Point(131, 49);
+            txtExpenseToday.Margin = new Padding(4, 0, 4, 0);
             txtExpenseToday.Name = "txtExpenseToday";
-            txtExpenseToday.Size = new Size(72, 25);
+            txtExpenseToday.Size = new Size(105, 38);
             txtExpenseToday.TabIndex = 3;
             txtExpenseToday.Text = "99,999";
             txtExpenseToday.TextAlign = ContentAlignment.MiddleCenter;
@@ -1413,9 +1462,10 @@ namespace PresentationLayer.Views.UserControls
             label4.Dock = DockStyle.Top;
             label4.Font = new Font("Segoe UI", 10F);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(14, 14);
+            label4.Location = new Point(21, 21);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(98, 19);
+            label4.Size = new Size(139, 28);
             label4.TabIndex = 2;
             label4.Text = "Expense Today";
             label4.TextAlign = ContentAlignment.MiddleLeft;
@@ -1431,12 +1481,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel4.FillColor = Color.White;
             guna2GradientPanel4.FillColor2 = Color.PowderBlue;
             guna2GradientPanel4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel4.Location = new Point(312, 14);
-            guna2GradientPanel4.Margin = new Padding(14);
+            guna2GradientPanel4.Location = new Point(319, 21);
+            guna2GradientPanel4.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel4.Name = "guna2GradientPanel4";
-            guna2GradientPanel4.Padding = new Padding(14);
+            guna2GradientPanel4.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges38;
-            guna2GradientPanel4.Size = new Size(270, 62);
+            guna2GradientPanel4.Size = new Size(256, 93);
             guna2GradientPanel4.TabIndex = 17;
             // 
             // txtItemSoldToday
@@ -1446,9 +1496,10 @@ namespace PresentationLayer.Views.UserControls
             txtItemSoldToday.Dock = DockStyle.Right;
             txtItemSoldToday.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             txtItemSoldToday.ForeColor = Color.Black;
-            txtItemSoldToday.Location = new Point(184, 33);
+            txtItemSoldToday.Location = new Point(130, 49);
+            txtItemSoldToday.Margin = new Padding(4, 0, 4, 0);
             txtItemSoldToday.Name = "txtItemSoldToday";
-            txtItemSoldToday.Size = new Size(72, 25);
+            txtItemSoldToday.Size = new Size(105, 38);
             txtItemSoldToday.TabIndex = 3;
             txtItemSoldToday.Text = "99,999";
             txtItemSoldToday.TextAlign = ContentAlignment.MiddleCenter;
@@ -1460,9 +1511,10 @@ namespace PresentationLayer.Views.UserControls
             label6.Dock = DockStyle.Top;
             label6.Font = new Font("Segoe UI", 10F);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(14, 14);
+            label6.Location = new Point(21, 21);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(107, 19);
+            label6.Size = new Size(153, 28);
             label6.TabIndex = 2;
             label6.Text = "Item Sold Today";
             label6.TextAlign = ContentAlignment.MiddleLeft;
@@ -1478,12 +1530,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel5.FillColor = Color.White;
             guna2GradientPanel5.FillColor2 = Color.PowderBlue;
             guna2GradientPanel5.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel5.Location = new Point(14, 14);
-            guna2GradientPanel5.Margin = new Padding(14);
+            guna2GradientPanel5.Location = new Point(21, 21);
+            guna2GradientPanel5.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel5.Name = "guna2GradientPanel5";
-            guna2GradientPanel5.Padding = new Padding(14);
+            guna2GradientPanel5.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges40;
-            guna2GradientPanel5.Size = new Size(270, 62);
+            guna2GradientPanel5.Size = new Size(256, 93);
             guna2GradientPanel5.TabIndex = 13;
             // 
             // txtSalesToday
@@ -1493,9 +1545,10 @@ namespace PresentationLayer.Views.UserControls
             txtSalesToday.Dock = DockStyle.Right;
             txtSalesToday.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             txtSalesToday.ForeColor = Color.Black;
-            txtSalesToday.Location = new Point(184, 33);
+            txtSalesToday.Location = new Point(130, 49);
+            txtSalesToday.Margin = new Padding(4, 0, 4, 0);
             txtSalesToday.Name = "txtSalesToday";
-            txtSalesToday.Size = new Size(72, 25);
+            txtSalesToday.Size = new Size(105, 38);
             txtSalesToday.TabIndex = 3;
             txtSalesToday.Text = "99,999";
             txtSalesToday.TextAlign = ContentAlignment.MiddleCenter;
@@ -1507,16 +1560,17 @@ namespace PresentationLayer.Views.UserControls
             label8.Dock = DockStyle.Top;
             label8.Font = new Font("Segoe UI", 10F);
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(14, 14);
+            label8.Location = new Point(21, 21);
+            label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(79, 19);
+            label8.Size = new Size(113, 28);
             label8.TabIndex = 2;
             label8.Text = "Sales Today";
             label8.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // DashboardView
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1350, 729);
             Controls.Add(tableLayoutPanel1);
@@ -1525,7 +1579,7 @@ namespace PresentationLayer.Views.UserControls
             Controls.Add(guna2Separator2);
             Controls.Add(guna2HtmlLabel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(3, 2, 3, 2);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "DashboardView";
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;

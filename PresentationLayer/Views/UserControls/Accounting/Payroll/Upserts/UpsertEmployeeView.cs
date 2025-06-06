@@ -85,6 +85,9 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 txtLastName.Text = _entity.LastName;
                 txtBirthDate.Value = _entity == null ? _entity.DateOfBirth : DateTime.Now;
                 txtIsDeducted.Checked = _entity.isDeducted;
+                txtIsActive.Checked = _entity.isActive;
+                txtStartDate.Value = _entity == null ? _entity.ContractStartDate : DateTime.Now;
+                txtEndDate.Value = _entity == null ? _entity.ContractEndDate : DateTime.Now;
             }
         }
 
@@ -125,6 +128,9 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.LastName = txtLastName.Text;
             _entity.DateOfBirth = txtBirthDate.Value;
             _entity.isDeducted = txtIsDeducted.Checked;
+            _entity.isActive = txtIsActive.Checked;
+            _entity.ContractStartDate = txtStartDate.Value;
+            _entity.ContractEndDate = txtEndDate.Value;
         }
 
         private void ShowSuccess(string message) =>

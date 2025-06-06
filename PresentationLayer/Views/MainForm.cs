@@ -110,6 +110,7 @@ namespace RavenTech_ERP
         public event EventHandler VendorEvent;
         public event EventHandler WarehouseEvent;
         public event EventHandler HolidayEvent;
+        public event EventHandler ProductPulloutLogEvent;
 
         public void ShowForm()
         {
@@ -307,6 +308,10 @@ namespace RavenTech_ERP
         private void btnVendorType_Click(object sender, EventArgs e)
         {
             VendorTypeEvent?.Invoke(this, EventArgs.Empty);
+        }
+        private void btnPullOutLog_Click(object sender, EventArgs e)
+        {
+            ProductPulloutLogEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }

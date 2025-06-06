@@ -29,8 +29,8 @@ namespace DomainLayer.Models.Accounting.Payroll
         public string Description { get; set; } // Optional: Additional details
 
         [Required]
-        public DateTime DateGranted { get; set; } // Date the allowance is granted
-
-        public bool IsRecurring { get; set; } // True if allowance is part of regular payroll
+        public DateTime StartDate { get; set; } // Date the allowance is granted
+        [Required]
+        public DateTime EndDate { get; set; } // Date the allowance is granted
     }
 }

@@ -21,10 +21,8 @@ namespace DomainLayer.ViewModels.PayrollViewModels
 
         [Required]
         [Display(Name = "Date Granted")]
-        public DateTime DateGranted { get; set; }
-        [Display(Name = "Is Recurring?")]
-
-        public string IsRecurring { get; set; } 
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public byte[] Edit { get; set; }
         public byte[] Delete { get; set; }
     }

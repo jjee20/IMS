@@ -53,88 +53,99 @@
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(30, 23);
+            autoLabel1.Location = new Point(43, 38);
+            autoLabel1.Margin = new Padding(4, 0, 4, 0);
             autoLabel1.Name = "autoLabel1";
-            autoLabel1.Size = new Size(27, 15);
+            autoLabel1.Size = new Size(42, 25);
             autoLabel1.TabIndex = 2;
             autoLabel1.Text = "I.D.:";
             // 
             // txtId
             // 
-            txtId.Location = new Point(78, 23);
+            txtId.Location = new Point(111, 38);
+            txtId.Margin = new Padding(4, 0, 4, 0);
             txtId.Name = "txtId";
-            txtId.Size = new Size(24, 15);
+            txtId.Size = new Size(38, 25);
             txtId.TabIndex = 3;
             txtId.Text = "I.D.";
             // 
             // txtName
             // 
-            txtName.Location = new Point(78, 38);
+            txtName.Location = new Point(111, 63);
+            txtName.Margin = new Padding(4, 0, 4, 0);
             txtName.Name = "txtName";
-            txtName.Size = new Size(39, 15);
+            txtName.Size = new Size(59, 25);
             txtName.TabIndex = 5;
             txtName.Text = "Name";
             // 
             // autoLabel4
             // 
-            autoLabel4.Location = new Point(30, 38);
+            autoLabel4.Location = new Point(43, 63);
+            autoLabel4.Margin = new Padding(4, 0, 4, 0);
             autoLabel4.Name = "autoLabel4";
-            autoLabel4.Size = new Size(42, 15);
+            autoLabel4.Size = new Size(63, 25);
             autoLabel4.TabIndex = 4;
             autoLabel4.Text = "Name:";
             // 
             // txtDepartment
             // 
-            txtDepartment.Location = new Point(516, 23);
+            txtDepartment.Location = new Point(737, 38);
+            txtDepartment.Margin = new Padding(4, 0, 4, 0);
             txtDepartment.Name = "txtDepartment";
-            txtDepartment.Size = new Size(70, 15);
+            txtDepartment.Size = new Size(107, 25);
             txtDepartment.TabIndex = 7;
             txtDepartment.Text = "Department";
             // 
             // autoLabel6
             // 
-            autoLabel6.Location = new Point(437, 23);
+            autoLabel6.Location = new Point(624, 38);
+            autoLabel6.Margin = new Padding(4, 0, 4, 0);
             autoLabel6.Name = "autoLabel6";
-            autoLabel6.Size = new Size(73, 15);
+            autoLabel6.Size = new Size(111, 25);
             autoLabel6.TabIndex = 6;
             autoLabel6.Text = "Department:";
             // 
             // txtRoles
             // 
-            txtRoles.Location = new Point(516, 38);
+            txtRoles.Location = new Point(737, 63);
+            txtRoles.Margin = new Padding(4, 0, 4, 0);
             txtRoles.Name = "txtRoles";
-            txtRoles.Size = new Size(29, 15);
+            txtRoles.Size = new Size(44, 25);
             txtRoles.TabIndex = 9;
             txtRoles.Text = "Title";
             // 
             // autoLabel8
             // 
-            autoLabel8.Location = new Point(437, 38);
+            autoLabel8.Location = new Point(624, 63);
+            autoLabel8.Margin = new Padding(4, 0, 4, 0);
             autoLabel8.Name = "autoLabel8";
-            autoLabel8.Size = new Size(32, 15);
+            autoLabel8.Size = new Size(48, 25);
             autoLabel8.TabIndex = 8;
             autoLabel8.Text = "Title:";
             // 
             // guna2Separator1
             // 
-            guna2Separator1.Location = new Point(30, 84);
+            guna2Separator1.Location = new Point(43, 140);
+            guna2Separator1.Margin = new Padding(4, 5, 4, 5);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(742, 10);
+            guna2Separator1.Size = new Size(1060, 17);
             guna2Separator1.TabIndex = 10;
             // 
             // txtRate
             // 
-            txtRate.Location = new Point(78, 53);
+            txtRate.Location = new Point(111, 88);
+            txtRate.Margin = new Padding(4, 0, 4, 0);
             txtRate.Name = "txtRate";
-            txtRate.Size = new Size(30, 15);
+            txtRate.Size = new Size(47, 25);
             txtRate.TabIndex = 12;
             txtRate.Text = "Rate";
             // 
             // autoLabel10
             // 
-            autoLabel10.Location = new Point(30, 53);
+            autoLabel10.Location = new Point(43, 88);
+            autoLabel10.Margin = new Padding(4, 0, 4, 0);
             autoLabel10.Name = "autoLabel10";
-            autoLabel10.Size = new Size(33, 15);
+            autoLabel10.Size = new Size(51, 25);
             autoLabel10.TabIndex = 11;
             autoLabel10.Text = "Rate:";
             // 
@@ -154,9 +165,11 @@
             dgList.Columns.Add(gridTextColumn1);
             dgList.Columns.Add(gridTextColumn2);
             dgList.Columns.Add(gridTextColumn3);
-            dgList.Location = new Point(30, 100);
+            dgList.Location = new Point(43, 167);
+            dgList.Margin = new Padding(4, 5, 4, 5);
             dgList.Name = "dgList";
-            dgList.Size = new Size(742, 300);
+            dgList.PreviewRowHeight = 42;
+            dgList.Size = new Size(1059, 499);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -168,17 +181,19 @@
             // txtTotal
             // 
             txtTotal.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            txtTotal.Location = new Point(641, 412);
+            txtTotal.Location = new Point(916, 687);
+            txtTotal.Margin = new Padding(4, 0, 4, 0);
             txtTotal.Name = "txtTotal";
-            txtTotal.Size = new Size(34, 15);
+            txtTotal.Size = new Size(54, 25);
             txtTotal.TabIndex = 15;
             txtTotal.Text = "Total";
             // 
             // autoLabel12
             // 
-            autoLabel12.Location = new Point(593, 412);
+            autoLabel12.Location = new Point(847, 687);
+            autoLabel12.Margin = new Padding(4, 0, 4, 0);
             autoLabel12.Name = "autoLabel12";
-            autoLabel12.Size = new Size(35, 15);
+            autoLabel12.Size = new Size(53, 25);
             autoLabel12.TabIndex = 14;
             autoLabel12.Text = "Total:";
             // 
@@ -186,9 +201,10 @@
             // 
             buttonGenerate.BackColor = Color.FromArgb(192, 255, 192);
             buttonGenerate.Font = new Font("Segoe UI Semibold", 9F);
-            buttonGenerate.Location = new Point(676, 23);
+            buttonGenerate.Location = new Point(966, 38);
+            buttonGenerate.Margin = new Padding(4, 5, 4, 5);
             buttonGenerate.Name = "buttonGenerate";
-            buttonGenerate.Size = new Size(96, 28);
+            buttonGenerate.Size = new Size(137, 47);
             buttonGenerate.Style.BackColor = Color.FromArgb(192, 255, 192);
             buttonGenerate.TabIndex = 16;
             buttonGenerate.Text = "Generate";
@@ -199,9 +215,10 @@
             // 
             buttonSave.BackColor = Color.AliceBlue;
             buttonSave.Font = new Font("Segoe UI Semibold", 9F);
-            buttonSave.Location = new Point(676, 53);
+            buttonSave.Location = new Point(966, 88);
+            buttonSave.Margin = new Padding(4, 5, 4, 5);
             buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(96, 28);
+            buttonSave.Size = new Size(137, 47);
             buttonSave.Style.BackColor = Color.AliceBlue;
             buttonSave.TabIndex = 17;
             buttonSave.Text = "Save";
@@ -210,9 +227,9 @@
             // 
             // _Upsert13thMonthView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1140, 739);
             Controls.Add(buttonSave);
             Controls.Add(buttonGenerate);
             Controls.Add(txtTotal);
@@ -230,6 +247,7 @@
             Controls.Add(txtId);
             Controls.Add(autoLabel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 5, 4, 5);
             Name = "_Upsert13thMonthView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

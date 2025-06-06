@@ -23,6 +23,8 @@ namespace PresentationLayer.Presenters.Account
         {
             _view = view;
             _unitOfWork = unitOfWork;
+            _view.ShowEditProfile -= ShowEditProfile;
+            _view.ShowChangePassword -= ShowChangePassword;
             _view.ShowEditProfile += ShowEditProfile;
             _view.ShowChangePassword += ShowChangePassword;
 

@@ -35,24 +35,6 @@ namespace PresentationLayer.Views.UserControls
         public PayrollView()
         {
             InitializeComponent();
-
-            btnPrint.Click += (s, e) =>
-            {
-
-                PrintPayrollEvent?.Invoke(s, e);
-            };
-            dgList.CellClick += (s, e) =>
-            {
-
-                if (e.DataColumn.GridColumn.MappingName == "Payslip")
-                {
-                    PrintPaySlipEvent?.Invoke(s, e);
-                }
-                else if (e.DataColumn.GridColumn.MappingName == "TMonth")
-                {
-                    TMonthEvent?.Invoke(s, e);
-                }
-            };
         }
 
         public void SetPayrollListBindingSource(IEnumerable<PayrollViewModel> PayrollList)
@@ -172,6 +154,37 @@ namespace PresentationLayer.Views.UserControls
         private void txtProject_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             SearchEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                    "Please review the payroll details before printing.\nDo you want to save and continue to print?",
+                    "Confirm Payroll Save & Print",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+            if (result == DialogResult.Yes)
+            {
+                PrintPayrollEvent?.Invoke(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Payroll printing was canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void dgList_CellClick(object sender, CellClickEventArgs e)
+        {
+            if (e.DataColumn.GridColumn.MappingName == "Payslip")
+            {
+                PrintPaySlipEvent?.Invoke(sender, e);
+            }
+            else if (e.DataColumn.GridColumn.MappingName == "TMonth")
+            {
+                TMonthEvent?.Invoke(sender, e);
+            }
         }
     }
 }

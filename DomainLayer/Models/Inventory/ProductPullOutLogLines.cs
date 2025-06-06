@@ -9,16 +9,22 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models.Inventory
 {
-    public class ProductStockInLog
+    public class ProductPullOutLogLines
     {
         [Key]
-        public int ProductStockInLogId { get; set; }
-        [ForeignKey(nameof(ProductId))]
-        public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
-        public double StockQuantity { get; set; }
+        public int ProductPullOutLogLinesId { get; set; }
+        public int ProductPullOutId { get; set; }
+
+        [ForeignKey("ProductPullOutLogId")]
+        public virtual ProductPullOutLogs ProductPullOutLogs { get; set; }
+
         public DateTime DateAdded { get; set; }
-        public string Notes { get; set; }
-        public ProductStatus ProductStatus { get; set; }
+        public int ProductId { get; set; }
+
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
+
+        public double StockQuantity { get; set; }
     }
+
 }

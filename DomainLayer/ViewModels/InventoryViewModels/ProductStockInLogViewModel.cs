@@ -12,11 +12,13 @@ namespace DomainLayer.Models.Inventory
     public class ProductStockInLogViewModel
     {
         public int ProductStockInLogId { get; set; }
-        public string Product { get; set; }
-        public double StockQuantity { get; set; }
-        public DateTime DateAdded { get; set; }
+        public string ProductStockInLogLines { get; set; }
         public string Notes { get; set; }
         public string ProductStatus { get; set; }
+        public string? DeliveredBy { get; set; }
+        public DateTime? DeliveredDate { get; set; }
+        public string? ReceivedBy { get; set; }
+        public DateTime? ReceivedDate { get; set; }
         public byte[] Edit { get; set; }
         public byte[] Delete { get; set; }
     }

@@ -268,7 +268,7 @@
             // 
             autoLabel10.Location = new Point(706, 330);
             autoLabel10.Name = "autoLabel10";
-            autoLabel10.Size = new Size(35, 15);
+            autoLabel10.Size = new Size(36, 15);
             autoLabel10.TabIndex = 9;
             autoLabel10.Text = "Total:";
             // 

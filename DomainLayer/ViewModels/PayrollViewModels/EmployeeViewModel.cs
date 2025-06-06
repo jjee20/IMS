@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DomainLayer.Models.Accounting.Payroll;
+using System.ComponentModel.DataAnnotations;
 
 namespace DomainLayer.ViewModels.PayrollViewModels
 {
@@ -25,6 +26,11 @@ namespace DomainLayer.ViewModels.PayrollViewModels
         public string Shift { get; set; }
         [Display(Name = "Is Deducted?")]
         public string isDeducted { get; set; }
+        public string isActive { get; set; }
+        public DateTime ContractStartDate { get; set; }
+        public DateTime ContractEndDate { get; set; }
+        public double TotalSalaryClaimed { get; set; }
+        public string Projects { get; set; }
         public byte[] Edit { get; set; }
         public byte[] Delete { get; set; }
         public byte[] Details { get; set; }

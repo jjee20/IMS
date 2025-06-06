@@ -48,6 +48,7 @@ namespace PresentationLayer.Presenters
             YearBindingSource = new BindingSource();
             MonthBindingSource = new BindingSource();
 
+            _view.UpdateDashboardEvent -= UpdateDashboard;
             _view.UpdateDashboardEvent += UpdateDashboard;
 
             LoadAll();
@@ -201,22 +202,43 @@ namespace PresentationLayer.Presenters
 
         private void LoadInventoryStatus()
         {
-            var products = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs");
+            var products = _unitOfWork.ProductStockInLogs.Value
+                .GetAll(includeProperties: "ProductStockInLogLines.Product");
+
+            var allLines = products
+                .SelectMany(log => log.ProductStockInLogLines)
+                .Where(line => line.Product != null)
+                .ToList();
 
             var inventoryData = new List<InventoryStatusViewModel>
-                {
-                    new InventoryStatusViewModel { Category = "Total Stock", Quantity = products.SelectMany(c => c.ProductStockInLogs).Sum(c => c.StockQuantity) },
-                    new InventoryStatusViewModel { Category = "Low Stock (<10)", Quantity = products.SelectMany(c => c.ProductStockInLogs).Where(c => c.StockQuantity <= c.Product.ReorderLevel).Count() },
-                    new InventoryStatusViewModel { Category = "Out of Stock", Quantity = products.SelectMany(c => c.ProductStockInLogs).Where(c => c.StockQuantity == 0).Count() }
-                };
+    {
+        new InventoryStatusViewModel
+        {
+            Category = "Total Stock",
+            Quantity = allLines.Sum(line => line.StockQuantity)
+        },
+        new InventoryStatusViewModel
+        {
+            Category = "Low Stock (< ReorderLevel)",
+            Quantity = allLines
+                .Count(line => line.Product.ReorderLevel > 0 && line.StockQuantity <= line.Product.ReorderLevel)
+        },
+        new InventoryStatusViewModel
+        {
+            Category = "Out of Stock",
+            Quantity = allLines.Count(line => line.StockQuantity == 0)
+        }
+    };
 
             InventoryStatusDataSet.Label = "Qty";
+            InventoryStatusDataSet.DataPoints.Clear(); // Optional: reset before adding
 
             foreach (var item in inventoryData)
             {
                 InventoryStatusDataSet.DataPoints.Add(item.Category, item.Quantity);
             }
         }
+
 
         private void LoadDailySalesTrend(int? year = 0, int? month = 0)
         {

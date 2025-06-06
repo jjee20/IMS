@@ -37,18 +37,20 @@
             autoLabel3 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             autoLabel4 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             txtAllowanceType = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
-            txtDate = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
+            txtStartDate = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
             txtEmployee = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             autoLabel5 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             txtAmount = new Syncfusion.Windows.Forms.Tools.DoubleTextBox();
-            txtIsRecurring = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
+            txtEndDate = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
+            autoLabel6 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             ((System.ComponentModel.ISupportInitialize)txtDescription).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtAllowanceType).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)txtDate).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)txtDate.Calendar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtStartDate).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtStartDate.Calendar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtEmployee).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtAmount).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)txtIsRecurring).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtEndDate).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtEndDate.Calendar).BeginInit();
             SuspendLayout();
             // 
             // autoLabel1
@@ -61,15 +63,15 @@
             // 
             // txtDescription
             // 
-            txtDescription.BeforeTouchSize = new Size(206, 23);
-            txtDescription.Location = new Point(180, 192);
+            txtDescription.BeforeTouchSize = new Size(100, 23);
+            txtDescription.Location = new Point(180, 205);
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(206, 23);
             txtDescription.TabIndex = 3;
             // 
             // autoLabel2
             // 
-            autoLabel2.Location = new Point(98, 195);
+            autoLabel2.Location = new Point(98, 208);
             autoLabel2.Name = "autoLabel2";
             autoLabel2.Size = new Size(67, 15);
             autoLabel2.TabIndex = 2;
@@ -78,7 +80,7 @@
             // btnSave
             // 
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
-            btnSave.Location = new Point(195, 269);
+            btnSave.Location = new Point(193, 278);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(96, 28);
             btnSave.TabIndex = 4;
@@ -89,7 +91,7 @@
             // 
             autoLabel3.Location = new Point(98, 84);
             autoLabel3.Name = "autoLabel3";
-            autoLabel3.Size = new Size(31, 15);
+            autoLabel3.Size = new Size(32, 15);
             autoLabel3.TabIndex = 5;
             autoLabel3.Text = "Type";
             // 
@@ -97,9 +99,9 @@
             // 
             autoLabel4.Location = new Point(98, 123);
             autoLabel4.Name = "autoLabel4";
-            autoLabel4.Size = new Size(31, 15);
+            autoLabel4.Size = new Size(58, 15);
             autoLabel4.TabIndex = 6;
-            autoLabel4.Text = "Date";
+            autoLabel4.Text = "Start Date";
             // 
             // txtAllowanceType
             // 
@@ -114,49 +116,49 @@
             txtAllowanceType.TextBoxHeight = 23;
             txtAllowanceType.ThemeName = "Office2016Colorful";
             // 
-            // txtDate
+            // txtStartDate
             // 
-            txtDate.BorderColor = Color.Empty;
-            // 
-            // 
-            // 
-            txtDate.Calendar.AllowMultipleSelection = false;
-            txtDate.Calendar.BottomHeight = 25;
-            txtDate.Calendar.DayNamesFont = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtDate.Calendar.DaysFont = new Font("Segoe UI", 9F);
-            txtDate.Calendar.Dock = DockStyle.Fill;
-            txtDate.Calendar.Font = new Font("Segoe UI", 9F);
-            txtDate.Calendar.ForeColor = SystemColors.ControlText;
-            txtDate.Calendar.HeaderFont = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtDate.Calendar.Location = new Point(0, 0);
-            txtDate.Calendar.MetroColor = Color.FromArgb(22, 165, 220);
-            txtDate.Calendar.Name = "monthCalendar";
-            txtDate.Calendar.Size = new Size(187, 174);
-            txtDate.Calendar.SizeToFit = true;
-            txtDate.Calendar.TabIndex = 0;
+            txtStartDate.BorderColor = Color.Empty;
             // 
             // 
             // 
-            txtDate.Calendar.NoneButton.AutoSize = true;
-            txtDate.Calendar.NoneButton.Location = new Point(115, 0);
-            txtDate.Calendar.NoneButton.Text = "None";
+            txtStartDate.Calendar.AllowMultipleSelection = false;
+            txtStartDate.Calendar.BottomHeight = 25;
+            txtStartDate.Calendar.DayNamesFont = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtStartDate.Calendar.DaysFont = new Font("Segoe UI", 9F);
+            txtStartDate.Calendar.Dock = DockStyle.Fill;
+            txtStartDate.Calendar.Font = new Font("Segoe UI", 9F);
+            txtStartDate.Calendar.ForeColor = SystemColors.ControlText;
+            txtStartDate.Calendar.HeaderFont = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtStartDate.Calendar.Location = new Point(0, 0);
+            txtStartDate.Calendar.MetroColor = Color.FromArgb(22, 165, 220);
+            txtStartDate.Calendar.Name = "monthCalendar";
+            txtStartDate.Calendar.Size = new Size(187, 174);
+            txtStartDate.Calendar.SizeToFit = true;
+            txtStartDate.Calendar.TabIndex = 0;
             // 
             // 
             // 
-            txtDate.Calendar.TodayButton.AutoSize = true;
-            txtDate.Calendar.TodayButton.Location = new Point(0, 0);
-            txtDate.Calendar.TodayButton.Text = "Today";
-            txtDate.CalendarForeColor = SystemColors.ControlText;
-            txtDate.CalendarSize = new Size(189, 176);
-            txtDate.DropDownImage = null;
-            txtDate.Font = new Font("Segoe UI", 9F);
-            txtDate.Location = new Point(180, 119);
-            txtDate.MetroColor = Color.FromArgb(22, 165, 220);
-            txtDate.MinValue = new DateTime(0L);
-            txtDate.Name = "txtDate";
-            txtDate.Size = new Size(206, 20);
-            txtDate.TabIndex = 8;
-            txtDate.Value = new DateTime(2025, 4, 10, 22, 35, 0, 415);
+            txtStartDate.Calendar.NoneButton.AutoSize = true;
+            txtStartDate.Calendar.NoneButton.Location = new Point(115, 0);
+            txtStartDate.Calendar.NoneButton.Text = "None";
+            // 
+            // 
+            // 
+            txtStartDate.Calendar.TodayButton.AutoSize = true;
+            txtStartDate.Calendar.TodayButton.Location = new Point(0, 0);
+            txtStartDate.Calendar.TodayButton.Text = "Today";
+            txtStartDate.CalendarForeColor = SystemColors.ControlText;
+            txtStartDate.CalendarSize = new Size(189, 176);
+            txtStartDate.DropDownImage = null;
+            txtStartDate.Font = new Font("Segoe UI", 9F);
+            txtStartDate.Location = new Point(180, 119);
+            txtStartDate.MetroColor = Color.FromArgb(22, 165, 220);
+            txtStartDate.MinValue = new DateTime(0L);
+            txtStartDate.Name = "txtStartDate";
+            txtStartDate.Size = new Size(206, 20);
+            txtStartDate.TabIndex = 8;
+            txtStartDate.Value = new DateTime(2025, 4, 10, 22, 35, 0, 415);
             // 
             // txtEmployee
             // 
@@ -173,7 +175,7 @@
             // 
             // autoLabel5
             // 
-            autoLabel5.Location = new Point(98, 156);
+            autoLabel5.Location = new Point(98, 177);
             autoLabel5.Name = "autoLabel5";
             autoLabel5.Size = new Size(51, 15);
             autoLabel5.TabIndex = 10;
@@ -182,23 +184,65 @@
             // txtAmount
             // 
             txtAmount.AccessibilityEnabled = true;
-            txtAmount.BeforeTouchSize = new Size(206, 23);
+            txtAmount.BeforeTouchSize = new Size(100, 23);
             txtAmount.DoubleValue = 0D;
-            txtAmount.Location = new Point(180, 152);
+            txtAmount.Location = new Point(180, 173);
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(206, 23);
             txtAmount.TabIndex = 11;
             txtAmount.Text = "0.00";
             // 
-            // txtIsRecurring
+            // txtEndDate
             // 
-            txtIsRecurring.AccessibilityEnabled = true;
-            txtIsRecurring.Border3DStyle = Border3DStyle.RaisedOuter;
-            txtIsRecurring.Location = new Point(180, 231);
-            txtIsRecurring.Name = "txtIsRecurring";
-            txtIsRecurring.Size = new Size(150, 21);
-            txtIsRecurring.TabIndex = 12;
-            txtIsRecurring.Text = "Is Recurring?";
+            txtEndDate.BorderColor = Color.Empty;
+            // 
+            // 
+            // 
+            txtEndDate.Calendar.AllowMultipleSelection = false;
+            txtEndDate.Calendar.BottomHeight = 25;
+            txtEndDate.Calendar.DayNamesFont = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtEndDate.Calendar.DaysFont = new Font("Segoe UI", 9F);
+            txtEndDate.Calendar.Dock = DockStyle.Fill;
+            txtEndDate.Calendar.Font = new Font("Segoe UI", 9F);
+            txtEndDate.Calendar.ForeColor = SystemColors.ControlText;
+            txtEndDate.Calendar.HeaderFont = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtEndDate.Calendar.Location = new Point(0, 0);
+            txtEndDate.Calendar.MetroColor = Color.FromArgb(22, 165, 220);
+            txtEndDate.Calendar.Name = "monthCalendar";
+            txtEndDate.Calendar.Size = new Size(187, 174);
+            txtEndDate.Calendar.SizeToFit = true;
+            txtEndDate.Calendar.TabIndex = 0;
+            // 
+            // 
+            // 
+            txtEndDate.Calendar.NoneButton.AutoSize = true;
+            txtEndDate.Calendar.NoneButton.Location = new Point(115, 0);
+            txtEndDate.Calendar.NoneButton.Text = "None";
+            // 
+            // 
+            // 
+            txtEndDate.Calendar.TodayButton.AutoSize = true;
+            txtEndDate.Calendar.TodayButton.Location = new Point(0, 0);
+            txtEndDate.Calendar.TodayButton.Text = "Today";
+            txtEndDate.CalendarForeColor = SystemColors.ControlText;
+            txtEndDate.CalendarSize = new Size(189, 176);
+            txtEndDate.DropDownImage = null;
+            txtEndDate.Font = new Font("Segoe UI", 9F);
+            txtEndDate.Location = new Point(180, 146);
+            txtEndDate.MetroColor = Color.FromArgb(22, 165, 220);
+            txtEndDate.MinValue = new DateTime(0L);
+            txtEndDate.Name = "txtEndDate";
+            txtEndDate.Size = new Size(206, 20);
+            txtEndDate.TabIndex = 14;
+            txtEndDate.Value = new DateTime(2025, 4, 10, 22, 35, 0, 415);
+            // 
+            // autoLabel6
+            // 
+            autoLabel6.Location = new Point(98, 150);
+            autoLabel6.Name = "autoLabel6";
+            autoLabel6.Size = new Size(54, 15);
+            autoLabel6.TabIndex = 13;
+            autoLabel6.Text = "End Date";
             // 
             // UpsertAllowanceView
             // 
@@ -206,11 +250,12 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(484, 341);
-            Controls.Add(txtIsRecurring);
+            Controls.Add(txtEndDate);
+            Controls.Add(autoLabel6);
             Controls.Add(txtAmount);
             Controls.Add(autoLabel5);
             Controls.Add(txtEmployee);
-            Controls.Add(txtDate);
+            Controls.Add(txtStartDate);
             Controls.Add(txtAllowanceType);
             Controls.Add(autoLabel4);
             Controls.Add(autoLabel3);
@@ -227,11 +272,12 @@
             Text = "Add Allowance";
             ((System.ComponentModel.ISupportInitialize)txtDescription).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtAllowanceType).EndInit();
-            ((System.ComponentModel.ISupportInitialize)txtDate.Calendar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)txtDate).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtStartDate.Calendar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtStartDate).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtEmployee).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtAmount).EndInit();
-            ((System.ComponentModel.ISupportInitialize)txtIsRecurring).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtEndDate.Calendar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtEndDate).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -245,10 +291,11 @@
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel3;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel4;
         private Syncfusion.Windows.Forms.Tools.ComboBoxAdv txtAllowanceType;
-        private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv txtDate;
+        private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv txtStartDate;
         private Syncfusion.Windows.Forms.Tools.ComboBoxAdv txtEmployee;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel5;
         private Syncfusion.Windows.Forms.Tools.DoubleTextBox txtAmount;
-        private Syncfusion.Windows.Forms.Tools.CheckBoxAdv txtIsRecurring;
+        private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv txtEndDate;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel6;
     }
 }

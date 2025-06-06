@@ -32,6 +32,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             OutOfStockBindingSource = new BindingSource();
             ProjectFlowBindingSource = new BindingSource();
 
+            _view.PrintEvent -= Print;
             _view.PrintEvent += Print;
 
             LoadInStock();
@@ -66,13 +67,13 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void LoadOutOfStock()
         {
-            OutOfStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
-               .Where(p => p.ProductStockInLogs.Sum(c => c.StockQuantity) == 0) // Ensure total stock is 0
+            OutOfStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs.ProductStockInLogLines")
+               .Where(p => p.ProductStockInLogs.SelectMany(c => c.ProductStockInLogLines).Sum(c => c.StockQuantity) == 0) // Ensure total stock is 0
                .GroupBy(p => p.ProductName)
                .Select(g => new StockViewModel
                {
                    Product = g.Key,
-                   Qty = g.Sum(p => p.ProductStockInLogs.Sum(c => c.StockQuantity))
+                   Qty = g.Sum(p => p.ProductStockInLogs.SelectMany(c => c.ProductStockInLogLines).Sum(c => c.StockQuantity))
                })
                .ToList();
             OutOfStockBindingSource.DataSource = OutOfStockList;
@@ -81,13 +82,13 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void LoadLowStock()
         {
-            LowStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
-               .Where(p => p.ProductStockInLogs.Sum(c => c.StockQuantity) <= p.ReorderLevel && p.ProductStockInLogs.Sum(c => c.StockQuantity) != 0) // Ensure total stock is 0
+            LowStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs.ProductStockInLogLines")
+               .Where(p => p.ProductStockInLogs.SelectMany(c => c.ProductStockInLogLines).Sum(c => c.StockQuantity) <= p.ReorderLevel && p.ProductStockInLogs.SelectMany(c => c.ProductStockInLogLines).Sum(c => c.StockQuantity) != 0) // Ensure total stock is 0
                .GroupBy(p => p.ProductName)
                .Select(g => new StockViewModel
                {
                    Product = g.Key,
-                   Qty = g.Sum(p => p.ProductStockInLogs.Sum(c => c.StockQuantity)) // Fix the Sum logic
+                   Qty = g.Sum(p => p.ProductStockInLogs.SelectMany(c => c.ProductStockInLogLines).Sum(c => c.StockQuantity)) // Fix the Sum logic
                })
                .ToList();
             LowStockBindingSource.DataSource = LowStockList;
@@ -97,12 +98,12 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void LoadInStock()
         {
-            InStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
+            InStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs.ProductStockInLogLines")
                .GroupBy(p => p.ProductName)
                .Select(g => new StockViewModel
                {
                    Product = g.Key,
-                   Qty = g.Sum(p => p.ProductStockInLogs.Sum(c => c.StockQuantity)) // Fix the Sum logic
+                   Qty = g.Sum(p => p.ProductStockInLogs.SelectMany(c => c.ProductStockInLogLines).Sum(c => c.StockQuantity)) // Fix the Sum logic
                })
                .ToList();
             InStockBindingSource.DataSource = InStockList;

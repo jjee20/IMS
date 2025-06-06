@@ -7,6 +7,7 @@ using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using System.Runtime.Intrinsics.Arm;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -23,6 +24,13 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.MultipleDeleteEvent -= MultipleDelete;
+            _view.PrintEvent -= Print;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
@@ -137,7 +145,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
-            _view.SetAllowanceListBindingSource(AllowanceList.OrderByDescending(c => c.DateGranted));
+            _view.SetAllowanceListBindingSource(AllowanceList.OrderByDescending(c => c.StartDate));
         }
     }
 }
