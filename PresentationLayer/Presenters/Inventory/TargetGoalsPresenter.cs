@@ -18,6 +18,7 @@ namespace RavenTech_ERP.Presenters.Inventory
         {
             _view = view;
             _unitOfWork = unitOfWork;
+            _view.SaveClicked -= Save;
             _view.SaveClicked += Save;
 
             LoadAll();

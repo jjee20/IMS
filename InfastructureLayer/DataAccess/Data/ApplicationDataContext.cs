@@ -3,11 +3,11 @@ using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
-using DomainLayer.ViewModels.PayrollViewModels;
-using InfastructureLayer.Migrations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 using System.Configuration;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -15,6 +15,7 @@ namespace InfastructureLayer.DataAccess.Data
 {
     public class ApplicationDataContext : IdentityDbContext<ApplicationUser>
     {
+        public ApplicationDataContext() { }
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,7 +27,9 @@ namespace InfastructureLayer.DataAccess.Data
 
             var connection = new SqlConnection(connectionString);
             optionsBuilder.UseSqlServer(connection);
-            //optionsBuilder.UseSqlServer("Data Source=JAYCEE\\SQLEXPRESS;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
+            optionsBuilder.ConfigureWarnings(w =>
+            w.Ignore(RelationalEventId.PendingModelChangesWarning));
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -74,7 +77,10 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<PaymentVoucher> PaymentVoucher { get; set; }
 
         public DbSet<Product> Product { get; set; }
-        public DbSet<ProductStockInLog> StockInLogs { get; set; }
+        public DbSet<ProductStockInLogs> ProductStockInLogs { get; set; }
+        public DbSet<ProductStockInLogLines> ProductStockInLogLines { get; set; }
+        public DbSet<ProductPullOutLogs> ProductPullOutLogs { get; set; }
+        public DbSet<ProductPullOutLogLines> ProductPullOutLogLines { get; set; }
 
         public DbSet<ProductType> ProductType { get; set; }
 
@@ -130,6 +136,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<Allowance> Allowances { get; set; }
         public DbSet<Bonus> Bonuses { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<Payroll> Payrolls { get; set; }
         public DbSet<DomainLayer.Models.Accounting.Payroll.EmployeeContribution> EmployeeContributions { get; set; }
         #endregion
         #endregion

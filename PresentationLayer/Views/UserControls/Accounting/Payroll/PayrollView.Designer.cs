@@ -101,10 +101,10 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard1.Location = new Point(2, 2);
-            materialCard1.Margin = new Padding(16, 19, 16, 19);
+            materialCard1.Margin = new Padding(24, 28, 24, 28);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(16, 19, 16, 19);
+            materialCard1.Padding = new Padding(24, 28, 24, 28);
             materialCard1.Size = new Size(1346, 725);
             materialCard1.TabIndex = 2;
             // 
@@ -115,12 +115,12 @@ namespace PresentationLayer.Views.UserControls
             materialCard4.Depth = 0;
             materialCard4.Dock = DockStyle.Fill;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard4.Location = new Point(16, 139);
-            materialCard4.Margin = new Padding(14);
+            materialCard4.Location = new Point(24, 208);
+            materialCard4.Margin = new Padding(21);
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
-            materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(1314, 567);
+            materialCard4.Padding = new Padding(21);
+            materialCard4.Size = new Size(1298, 489);
             materialCard4.TabIndex = 6;
             // 
             // panel1
@@ -128,9 +128,10 @@ namespace PresentationLayer.Views.UserControls
             panel1.Controls.Add(dgList);
             panel1.Controls.Add(dgPager);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(14, 14);
+            panel1.Location = new Point(21, 21);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1286, 539);
+            panel1.Size = new Size(1256, 447);
             panel1.TabIndex = 1;
             // 
             // dgList
@@ -244,9 +245,11 @@ namespace PresentationLayer.Views.UserControls
             dgList.FrozenColumnCount = 2;
             dgList.FrozenRowCount = 1;
             dgList.Location = new Point(0, 0);
+            dgList.Margin = new Padding(4);
             dgList.Name = "dgList";
+            dgList.PreviewRowHeight = 42;
             dgList.ShowGroupDropArea = true;
-            dgList.Size = new Size(1286, 503);
+            dgList.Size = new Size(1256, 393);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -254,6 +257,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
             dgList.TabIndex = 7;
             dgList.Text = "sfDataGrid1";
+            dgList.CellClick += dgList_CellClick;
             // 
             // dgPager
             // 
@@ -262,11 +266,12 @@ namespace PresentationLayer.Views.UserControls
             dgPager.DataSource = dgList.DataBindings;
             dgPager.Dock = DockStyle.Bottom;
             dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 503);
+            dgPager.Location = new Point(0, 393);
+            dgPager.Margin = new Padding(4);
             dgPager.Name = "dgPager";
             dgPager.PageCount = 1;
             dgPager.PageSize = 15;
-            dgPager.Size = new Size(1286, 36);
+            dgPager.Size = new Size(1256, 54);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
@@ -280,10 +285,10 @@ namespace PresentationLayer.Views.UserControls
             panel2.Controls.Add(btnContribution);
             panel2.Controls.Add(btnPrint);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(16, 89);
-            panel2.Margin = new Padding(3, 13, 3, 4);
+            panel2.Location = new Point(24, 133);
+            panel2.Margin = new Padding(4, 20, 4, 6);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1314, 50);
+            panel2.Size = new Size(1298, 75);
             panel2.TabIndex = 3;
             // 
             // panel3
@@ -291,17 +296,19 @@ namespace PresentationLayer.Views.UserControls
             panel3.Controls.Add(guna2HtmlLabel7);
             panel3.Controls.Add(txtStartDate);
             panel3.Dock = DockStyle.Right;
-            panel3.Location = new Point(148, 0);
+            panel3.Location = new Point(-316, 0);
+            panel3.Margin = new Padding(4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(266, 50);
+            panel3.Size = new Size(399, 75);
             panel3.TabIndex = 20;
             // 
             // guna2HtmlLabel7
             // 
             guna2HtmlLabel7.BackColor = Color.Transparent;
-            guna2HtmlLabel7.Location = new Point(5, 16);
+            guna2HtmlLabel7.Location = new Point(8, 24);
+            guna2HtmlLabel7.Margin = new Padding(4);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            guna2HtmlLabel7.Size = new Size(66, 17);
+            guna2HtmlLabel7.Size = new Size(99, 27);
             guna2HtmlLabel7.TabIndex = 14;
             guna2HtmlLabel7.Text = "Date Range:";
             guna2HtmlLabel7.TextAlignment = ContentAlignment.MiddleRight;
@@ -314,12 +321,13 @@ namespace PresentationLayer.Views.UserControls
             txtStartDate.FillColor = Color.White;
             txtStartDate.Font = new Font("Segoe UI", 9F);
             txtStartDate.Format = DateTimePickerFormat.Long;
-            txtStartDate.Location = new Point(75, 0);
+            txtStartDate.Location = new Point(113, 0);
+            txtStartDate.Margin = new Padding(4);
             txtStartDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtStartDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtStartDate.Name = "txtStartDate";
             txtStartDate.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            txtStartDate.Size = new Size(191, 50);
+            txtStartDate.Size = new Size(286, 75);
             txtStartDate.TabIndex = 13;
             txtStartDate.Value = new DateTime(2025, 1, 12, 10, 14, 55, 9);
             txtStartDate.ValueChanged += txtStartDate_ValueChanged;
@@ -329,17 +337,19 @@ namespace PresentationLayer.Views.UserControls
             panel4.Controls.Add(guna2HtmlLabel6);
             panel4.Controls.Add(txtEndDate);
             panel4.Dock = DockStyle.Right;
-            panel4.Location = new Point(414, 0);
+            panel4.Location = new Point(83, 0);
+            panel4.Margin = new Padding(4);
             panel4.Name = "panel4";
-            panel4.Size = new Size(219, 50);
+            panel4.Size = new Size(328, 75);
             panel4.TabIndex = 21;
             // 
             // guna2HtmlLabel6
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
-            guna2HtmlLabel6.Location = new Point(8, 16);
+            guna2HtmlLabel6.Location = new Point(12, 24);
+            guna2HtmlLabel6.Margin = new Padding(4);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            guna2HtmlLabel6.Size = new Size(8, 17);
+            guna2HtmlLabel6.Size = new Size(10, 27);
             guna2HtmlLabel6.TabIndex = 12;
             guna2HtmlLabel6.Text = "-";
             guna2HtmlLabel6.TextAlignment = ContentAlignment.MiddleRight;
@@ -352,12 +362,13 @@ namespace PresentationLayer.Views.UserControls
             txtEndDate.FillColor = Color.White;
             txtEndDate.Font = new Font("Segoe UI", 9F);
             txtEndDate.Format = DateTimePickerFormat.Long;
-            txtEndDate.Location = new Point(22, 0);
+            txtEndDate.Location = new Point(32, 0);
+            txtEndDate.Margin = new Padding(4);
             txtEndDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             txtEndDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             txtEndDate.Name = "txtEndDate";
             txtEndDate.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            txtEndDate.Size = new Size(197, 50);
+            txtEndDate.Size = new Size(296, 75);
             txtEndDate.TabIndex = 11;
             txtEndDate.Value = new DateTime(2025, 1, 12, 10, 14, 55, 9);
             txtEndDate.ValueChanged += txtEndDate_ValueChanged;
@@ -367,9 +378,10 @@ namespace PresentationLayer.Views.UserControls
             panelProject.Controls.Add(btnAll);
             panelProject.Controls.Add(txtProject);
             panelProject.Dock = DockStyle.Right;
-            panelProject.Location = new Point(633, 0);
+            panelProject.Location = new Point(411, 0);
+            panelProject.Margin = new Padding(4);
             panelProject.Name = "panelProject";
-            panelProject.Size = new Size(362, 50);
+            panelProject.Size = new Size(543, 75);
             panelProject.TabIndex = 19;
             // 
             // btnAll
@@ -379,13 +391,13 @@ namespace PresentationLayer.Views.UserControls
             btnAll.CheckState = CheckState.Checked;
             btnAll.Depth = 0;
             btnAll.Dock = DockStyle.Right;
-            btnAll.Location = new Point(-3, 0);
+            btnAll.Location = new Point(74, 0);
             btnAll.Margin = new Padding(0);
             btnAll.MouseLocation = new Point(-1, -1);
             btnAll.MouseState = MaterialSkin.MouseState.HOVER;
             btnAll.Name = "btnAll";
             btnAll.Ripple = true;
-            btnAll.Size = new Size(153, 50);
+            btnAll.Size = new Size(153, 75);
             btnAll.TabIndex = 19;
             btnAll.Text = "  All Projects  ";
             btnAll.UseVisualStyleBackColor = true;
@@ -407,11 +419,12 @@ namespace PresentationLayer.Views.UserControls
             txtProject.Hint = "Project";
             txtProject.IntegralHeight = false;
             txtProject.ItemHeight = 43;
-            txtProject.Location = new Point(150, 0);
+            txtProject.Location = new Point(227, 0);
+            txtProject.Margin = new Padding(4);
             txtProject.MaxDropDownItems = 4;
             txtProject.MouseState = MaterialSkin.MouseState.OUT;
             txtProject.Name = "txtProject";
-            txtProject.Size = new Size(212, 49);
+            txtProject.Size = new Size(316, 49);
             txtProject.StartIndex = 0;
             txtProject.TabIndex = 18;
             txtProject.Visible = false;
@@ -422,13 +435,13 @@ namespace PresentationLayer.Views.UserControls
             btnBenifits.AutoSize = true;
             btnBenifits.Depth = 0;
             btnBenifits.Dock = DockStyle.Right;
-            btnBenifits.Location = new Point(995, 0);
+            btnBenifits.Location = new Point(954, 0);
             btnBenifits.Margin = new Padding(0);
             btnBenifits.MouseLocation = new Point(-1, -1);
             btnBenifits.MouseState = MaterialSkin.MouseState.HOVER;
             btnBenifits.Name = "btnBenifits";
             btnBenifits.Ripple = true;
-            btnBenifits.Size = new Size(116, 50);
+            btnBenifits.Size = new Size(116, 75);
             btnBenifits.TabIndex = 16;
             btnBenifits.Text = "Benefits";
             btnBenifits.UseVisualStyleBackColor = true;
@@ -439,13 +452,13 @@ namespace PresentationLayer.Views.UserControls
             btnContribution.AutoSize = true;
             btnContribution.Depth = 0;
             btnContribution.Dock = DockStyle.Right;
-            btnContribution.Location = new Point(1111, 0);
+            btnContribution.Location = new Point(1070, 0);
             btnContribution.Margin = new Padding(0);
             btnContribution.MouseLocation = new Point(-1, -1);
             btnContribution.MouseState = MaterialSkin.MouseState.HOVER;
             btnContribution.Name = "btnContribution";
             btnContribution.Ripple = true;
-            btnContribution.Size = new Size(153, 50);
+            btnContribution.Size = new Size(153, 75);
             btnContribution.TabIndex = 15;
             btnContribution.Text = "Contributions";
             btnContribution.UseVisualStyleBackColor = true;
@@ -464,11 +477,13 @@ namespace PresentationLayer.Views.UserControls
             btnPrint.ForeColor = Color.White;
             btnPrint.Image = (Image)resources.GetObject("btnPrint.Image");
             btnPrint.ImageSize = new Size(30, 30);
-            btnPrint.Location = new Point(1264, 0);
+            btnPrint.Location = new Point(1223, 0);
+            btnPrint.Margin = new Padding(4);
             btnPrint.Name = "btnPrint";
             btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnPrint.Size = new Size(50, 50);
+            btnPrint.Size = new Size(75, 75);
             btnPrint.TabIndex = 10;
+            btnPrint.Click += btnPrint_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -478,13 +493,13 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Controls.Add(guna2Separator1, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(16, 19);
-            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Location = new Point(24, 28);
+            tableLayoutPanel1.Margin = new Padding(4, 6, 4, 6);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1314, 70);
+            tableLayoutPanel1.Size = new Size(1298, 105);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // tableLayoutPanel2
@@ -499,7 +514,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1314, 53);
+            tableLayoutPanel2.Size = new Size(1298, 79);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -510,10 +525,11 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
             materialLabel1.ForeColor = Color.FromArgb(255, 246, 233);
             materialLabel1.ImageAlign = ContentAlignment.MiddleLeft;
-            materialLabel1.Location = new Point(3, 0);
+            materialLabel1.Location = new Point(4, 0);
+            materialLabel1.Margin = new Padding(4, 0, 4, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(1302, 53);
+            materialLabel1.Size = new Size(1288, 79);
             materialLabel1.TabIndex = 3;
             materialLabel1.Text = "Payroll Management";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
@@ -521,20 +537,21 @@ namespace PresentationLayer.Views.UserControls
             // guna2Separator1
             // 
             guna2Separator1.Dock = DockStyle.Fill;
-            guna2Separator1.Location = new Point(3, 56);
+            guna2Separator1.Location = new Point(4, 83);
+            guna2Separator1.Margin = new Padding(4);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1308, 11);
+            guna2Separator1.Size = new Size(1290, 18);
             guna2Separator1.TabIndex = 1;
             // 
             // PayrollView
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoSize = true;
             ClientSize = new Size(1350, 729);
             Controls.Add(materialCard1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(4, 6, 4, 6);
             Name = "PayrollView";
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;

@@ -48,6 +48,7 @@ namespace PresentationLayer.Presenters
             YearBindingSource = new BindingSource();
             MonthBindingSource = new BindingSource();
 
+            _view.UpdateDashboardEvent -= UpdateDashboard;
             _view.UpdateDashboardEvent += UpdateDashboard;
 
             LoadAll();
@@ -201,22 +202,82 @@ namespace PresentationLayer.Presenters
 
         private void LoadInventoryStatus()
         {
-            var products = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs");
+            var productsStockIn = _unitOfWork.ProductStockInLogs.Value
+                .GetAll(includeProperties: "ProductStockInLogLines.Product");
+
+            var productsPullOut = _unitOfWork.ProductPullOutLogs.Value
+                .GetAll(includeProperties: "ProductPullOutLogLines.Product");
+
+            var allStockInLogLines = productsStockIn
+                .SelectMany(log => log.ProductStockInLogLines)
+                .Where(line => line.Product != null)
+                .ToList();
+
+            var allPullOutLogLines = productsPullOut
+                .SelectMany(log => log.ProductPullOutLogLines)
+                .Where(line => line.Product != null)
+                .ToList();
+
+            // Combine stock-in and pull-out by Product
+            var groupedStockIn = allStockInLogLines
+                .GroupBy(l => l.Product.ProductId)
+                .ToDictionary(g => g.Key, g => g.Sum(x => x.StockQuantity));
+
+            var groupedPullOut = allPullOutLogLines
+                .GroupBy(l => l.Product.ProductId)
+                .ToDictionary(g => g.Key, g => g.Sum(x => x.StockQuantity));
+
+            // Compute actual stock per product
+            var productStocks = allStockInLogLines
+                .Select(line => line.Product)
+                .Distinct()
+                .Select(product =>
+                {
+                    groupedStockIn.TryGetValue(product.ProductId, out var stockInQty);
+                    groupedPullOut.TryGetValue(product.ProductId, out var pullOutQty);
+
+                    int currentQty = (int)(stockInQty - pullOutQty);
+
+                    return new
+                    {
+                        Product = product,
+                        Quantity = currentQty
+                    };
+                })
+                .ToList();
+
+            var totalQty = productStocks.Sum(p => p.Quantity);
+            var lowStockQty = productStocks.Count(p => p.Product.ReorderLevel > 0 && p.Quantity <= p.Product.ReorderLevel && p.Quantity > 0);
+            var outOfStockQty = productStocks.Count(p => p.Quantity <= 0);
 
             var inventoryData = new List<InventoryStatusViewModel>
-                {
-                    new InventoryStatusViewModel { Category = "Total Stock", Quantity = products.SelectMany(c => c.ProductStockInLogs).Sum(c => c.StockQuantity) },
-                    new InventoryStatusViewModel { Category = "Low Stock (<10)", Quantity = products.SelectMany(c => c.ProductStockInLogs).Where(c => c.StockQuantity <= c.Product.ReorderLevel).Count() },
-                    new InventoryStatusViewModel { Category = "Out of Stock", Quantity = products.SelectMany(c => c.ProductStockInLogs).Where(c => c.StockQuantity == 0).Count() }
-                };
+            {
+                    new InventoryStatusViewModel
+                    {
+                        Category = "Total Stock",
+                        Quantity = totalQty
+                    },
+                    new InventoryStatusViewModel
+                    {
+                        Category = "Low Stock (< ReorderLevel)",
+                        Quantity = lowStockQty
+                    },
+                    new InventoryStatusViewModel
+                    {
+                        Category = "Out of Stock",
+                        Quantity = outOfStockQty
+                    }
+            };
 
             InventoryStatusDataSet.Label = "Qty";
+            InventoryStatusDataSet.DataPoints.Clear();
 
             foreach (var item in inventoryData)
             {
                 InventoryStatusDataSet.DataPoints.Add(item.Category, item.Quantity);
             }
         }
+
 
         private void LoadDailySalesTrend(int? year = 0, int? month = 0)
         {

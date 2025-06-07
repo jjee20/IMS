@@ -37,6 +37,14 @@ namespace PresentationLayer.Presenters.Account
             DepartmentBindingSource = new BindingSource();
 
             //Events
+            _view.AddNewEvent -= AddNew;
+            _view.SaveEvent -= Save;
+            _view.SearchEvent -= Search;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.PrintEvent -= Print;
+            _view.RefreshEvent -= Return;
+
             _view.AddNewEvent += AddNew;
             _view.SaveEvent += Save;
             _view.SearchEvent += Search;

@@ -142,12 +142,12 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(2, 2);
-            materialCard1.Margin = new Padding(14);
+            materialCard1.Location = new Point(3, 3);
+            materialCard1.Margin = new Padding(20, 23, 20, 23);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1004, 725);
+            materialCard1.Padding = new Padding(20, 23, 20, 23);
+            materialCard1.Size = new Size(1344, 723);
             materialCard1.TabIndex = 0;
             // 
             // dgPaymentReceive
@@ -173,10 +173,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgPaymentReceive.DefaultCellStyle = dataGridViewCellStyle3;
             dgPaymentReceive.GridColor = Color.FromArgb(231, 229, 255);
-            dgPaymentReceive.Location = new Point(14, 540);
+            dgPaymentReceive.Location = new Point(20, 900);
+            dgPaymentReceive.Margin = new Padding(4, 5, 4, 5);
             dgPaymentReceive.Name = "dgPaymentReceive";
             dgPaymentReceive.RowHeadersVisible = false;
-            dgPaymentReceive.Size = new Size(971, 105);
+            dgPaymentReceive.RowHeadersWidth = 62;
+            dgPaymentReceive.RowTemplate.Height = 25;
+            dgPaymentReceive.Size = new Size(1387, 175);
             dgPaymentReceive.TabIndex = 53;
             dgPaymentReceive.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgPaymentReceive.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -205,7 +208,8 @@
             materialLabel38.AutoSize = true;
             materialLabel38.Depth = 0;
             materialLabel38.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel38.Location = new Point(560, 518);
+            materialLabel38.Location = new Point(800, 863);
+            materialLabel38.Margin = new Padding(4, 0, 4, 0);
             materialLabel38.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel38.Name = "materialLabel38";
             materialLabel38.Size = new Size(70, 19);
@@ -218,7 +222,8 @@
             txtInvoiceDueDate.Depth = 0;
             txtInvoiceDueDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtInvoiceDueDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtInvoiceDueDate.Location = new Point(693, 520);
+            txtInvoiceDueDate.Location = new Point(990, 867);
+            txtInvoiceDueDate.Margin = new Padding(4, 0, 4, 0);
             txtInvoiceDueDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtInvoiceDueDate.Name = "txtInvoiceDueDate";
             txtInvoiceDueDate.Size = new Size(63, 17);
@@ -231,7 +236,8 @@
             txtInvoiceType.Depth = 0;
             txtInvoiceType.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtInvoiceType.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtInvoiceType.Location = new Point(133, 520);
+            txtInvoiceType.Location = new Point(190, 867);
+            txtInvoiceType.Margin = new Padding(4, 0, 4, 0);
             txtInvoiceType.MouseState = MaterialSkin.MouseState.HOVER;
             txtInvoiceType.Name = "txtInvoiceType";
             txtInvoiceType.Size = new Size(86, 17);
@@ -243,7 +249,8 @@
             materialLabel41.AutoSize = true;
             materialLabel41.Depth = 0;
             materialLabel41.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel41.Location = new Point(14, 518);
+            materialLabel41.Location = new Point(20, 863);
+            materialLabel41.Margin = new Padding(4, 0, 4, 0);
             materialLabel41.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel41.Name = "materialLabel41";
             materialLabel41.Size = new Size(94, 19);
@@ -255,7 +262,8 @@
             materialLabel42.AutoSize = true;
             materialLabel42.Depth = 0;
             materialLabel42.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel42.Location = new Point(560, 499);
+            materialLabel42.Location = new Point(800, 832);
+            materialLabel42.Margin = new Padding(4, 0, 4, 0);
             materialLabel42.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel42.Name = "materialLabel42";
             materialLabel42.Size = new Size(38, 19);
@@ -268,7 +276,8 @@
             txtInvoiceDate.Depth = 0;
             txtInvoiceDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtInvoiceDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtInvoiceDate.Location = new Point(693, 501);
+            txtInvoiceDate.Location = new Point(990, 835);
+            txtInvoiceDate.Margin = new Padding(4, 0, 4, 0);
             txtInvoiceDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtInvoiceDate.Name = "txtInvoiceDate";
             txtInvoiceDate.Size = new Size(35, 17);
@@ -281,7 +290,8 @@
             txtInvoiceName.Depth = 0;
             txtInvoiceName.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtInvoiceName.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtInvoiceName.Location = new Point(133, 501);
+            txtInvoiceName.Location = new Point(190, 835);
+            txtInvoiceName.Margin = new Padding(4, 0, 4, 0);
             txtInvoiceName.MouseState = MaterialSkin.MouseState.HOVER;
             txtInvoiceName.Name = "txtInvoiceName";
             txtInvoiceName.Size = new Size(76, 17);
@@ -293,7 +303,8 @@
             materialLabel45.AutoSize = true;
             materialLabel45.Depth = 0;
             materialLabel45.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel45.Location = new Point(14, 499);
+            materialLabel45.Location = new Point(20, 832);
+            materialLabel45.Margin = new Padding(4, 0, 4, 0);
             materialLabel45.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel45.Name = "materialLabel45";
             materialLabel45.Size = new Size(83, 19);
@@ -306,7 +317,8 @@
             materialLabel37.Depth = 0;
             materialLabel37.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel37.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel37.Location = new Point(14, 475);
+            materialLabel37.Location = new Point(20, 792);
+            materialLabel37.Margin = new Padding(4, 0, 4, 0);
             materialLabel37.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel37.Name = "materialLabel37";
             materialLabel37.Size = new Size(148, 24);
@@ -315,9 +327,10 @@
             // 
             // guna2Separator3
             // 
-            guna2Separator3.Location = new Point(14, 462);
+            guna2Separator3.Location = new Point(20, 770);
+            guna2Separator3.Margin = new Padding(4, 5, 4, 5);
             guna2Separator3.Name = "guna2Separator3";
-            guna2Separator3.Size = new Size(971, 10);
+            guna2Separator3.Size = new Size(1387, 17);
             guna2Separator3.TabIndex = 43;
             // 
             // materialLabel29
@@ -325,7 +338,8 @@
             materialLabel29.AutoSize = true;
             materialLabel29.Depth = 0;
             materialLabel29.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel29.Location = new Point(560, 440);
+            materialLabel29.Location = new Point(800, 733);
+            materialLabel29.Margin = new Padding(4, 0, 4, 0);
             materialLabel29.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel29.Name = "materialLabel29";
             materialLabel29.Size = new Size(84, 19);
@@ -338,7 +352,8 @@
             txtShipmentWarehouse.Depth = 0;
             txtShipmentWarehouse.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtShipmentWarehouse.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtShipmentWarehouse.Location = new Point(693, 442);
+            txtShipmentWarehouse.Location = new Point(990, 737);
+            txtShipmentWarehouse.Margin = new Padding(4, 0, 4, 0);
             txtShipmentWarehouse.MouseState = MaterialSkin.MouseState.HOVER;
             txtShipmentWarehouse.Name = "txtShipmentWarehouse";
             txtShipmentWarehouse.Size = new Size(77, 17);
@@ -351,7 +366,8 @@
             txtShipmentType.Depth = 0;
             txtShipmentType.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtShipmentType.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtShipmentType.Location = new Point(133, 442);
+            txtShipmentType.Location = new Point(190, 737);
+            txtShipmentType.Margin = new Padding(4, 0, 4, 0);
             txtShipmentType.MouseState = MaterialSkin.MouseState.HOVER;
             txtShipmentType.Name = "txtShipmentType";
             txtShipmentType.Size = new Size(101, 17);
@@ -363,7 +379,8 @@
             materialLabel32.AutoSize = true;
             materialLabel32.Depth = 0;
             materialLabel32.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel32.Location = new Point(14, 440);
+            materialLabel32.Location = new Point(20, 733);
+            materialLabel32.Margin = new Padding(4, 0, 4, 0);
             materialLabel32.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel32.Name = "materialLabel32";
             materialLabel32.Size = new Size(112, 19);
@@ -375,7 +392,8 @@
             materialLabel33.AutoSize = true;
             materialLabel33.Depth = 0;
             materialLabel33.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel33.Location = new Point(560, 421);
+            materialLabel33.Location = new Point(800, 702);
+            materialLabel33.Margin = new Padding(4, 0, 4, 0);
             materialLabel33.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel33.Name = "materialLabel33";
             materialLabel33.Size = new Size(38, 19);
@@ -388,7 +406,8 @@
             txtShipmentDate.Depth = 0;
             txtShipmentDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtShipmentDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtShipmentDate.Location = new Point(693, 423);
+            txtShipmentDate.Location = new Point(990, 705);
+            txtShipmentDate.Margin = new Padding(4, 0, 4, 0);
             txtShipmentDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtShipmentDate.Name = "txtShipmentDate";
             txtShipmentDate.Size = new Size(35, 17);
@@ -401,7 +420,8 @@
             txtShipmentNo.Depth = 0;
             txtShipmentNo.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtShipmentNo.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtShipmentNo.Location = new Point(133, 423);
+            txtShipmentNo.Location = new Point(190, 705);
+            txtShipmentNo.Margin = new Padding(4, 0, 4, 0);
             txtShipmentNo.MouseState = MaterialSkin.MouseState.HOVER;
             txtShipmentNo.Name = "txtShipmentNo";
             txtShipmentNo.Size = new Size(27, 17);
@@ -413,7 +433,8 @@
             materialLabel36.AutoSize = true;
             materialLabel36.Depth = 0;
             materialLabel36.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel36.Location = new Point(14, 421);
+            materialLabel36.Location = new Point(20, 702);
+            materialLabel36.Margin = new Padding(4, 0, 4, 0);
             materialLabel36.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel36.Name = "materialLabel36";
             materialLabel36.Size = new Size(29, 19);
@@ -425,7 +446,8 @@
             materialLabel27.AutoSize = true;
             materialLabel27.Depth = 0;
             materialLabel27.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel27.Location = new Point(560, 362);
+            materialLabel27.Location = new Point(800, 603);
+            materialLabel27.Margin = new Padding(4, 0, 4, 0);
             materialLabel27.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel27.Name = "materialLabel27";
             materialLabel27.Size = new Size(76, 19);
@@ -438,7 +460,8 @@
             txtSalesOrderTotalNET.Depth = 0;
             txtSalesOrderTotalNET.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderTotalNET.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderTotalNET.Location = new Point(693, 364);
+            txtSalesOrderTotalNET.Location = new Point(990, 607);
+            txtSalesOrderTotalNET.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderTotalNET.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderTotalNET.Name = "txtSalesOrderTotalNET";
             txtSalesOrderTotalNET.Size = new Size(69, 17);
@@ -450,7 +473,8 @@
             materialLabel19.AutoSize = true;
             materialLabel19.Depth = 0;
             materialLabel19.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel19.Location = new Point(560, 343);
+            materialLabel19.Location = new Point(800, 572);
+            materialLabel19.Margin = new Padding(4, 0, 4, 0);
             materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel19.Name = "materialLabel19";
             materialLabel19.Size = new Size(54, 19);
@@ -463,7 +487,8 @@
             txtSalesOrderFreight.Depth = 0;
             txtSalesOrderFreight.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderFreight.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderFreight.Location = new Point(693, 345);
+            txtSalesOrderFreight.Location = new Point(990, 575);
+            txtSalesOrderFreight.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderFreight.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderFreight.Name = "txtSalesOrderFreight";
             txtSalesOrderFreight.Size = new Size(51, 17);
@@ -475,7 +500,8 @@
             materialLabel21.AutoSize = true;
             materialLabel21.Depth = 0;
             materialLabel21.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel21.Location = new Point(560, 324);
+            materialLabel21.Location = new Point(800, 540);
+            materialLabel21.Margin = new Padding(4, 0, 4, 0);
             materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel21.Name = "materialLabel21";
             materialLabel21.Size = new Size(35, 19);
@@ -488,7 +514,8 @@
             txtSalesOrderVAT.Depth = 0;
             txtSalesOrderVAT.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderVAT.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderVAT.Location = new Point(693, 326);
+            txtSalesOrderVAT.Location = new Point(990, 543);
+            txtSalesOrderVAT.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderVAT.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderVAT.Name = "txtSalesOrderVAT";
             txtSalesOrderVAT.Size = new Size(32, 17);
@@ -500,7 +527,8 @@
             materialLabel23.AutoSize = true;
             materialLabel23.Depth = 0;
             materialLabel23.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel23.Location = new Point(560, 305);
+            materialLabel23.Location = new Point(800, 508);
+            materialLabel23.Margin = new Padding(4, 0, 4, 0);
             materialLabel23.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel23.Name = "materialLabel23";
             materialLabel23.Size = new Size(68, 19);
@@ -513,7 +541,8 @@
             txtSalesOrderDiscount.Depth = 0;
             txtSalesOrderDiscount.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderDiscount.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderDiscount.Location = new Point(693, 307);
+            txtSalesOrderDiscount.Location = new Point(990, 512);
+            txtSalesOrderDiscount.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderDiscount.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderDiscount.Name = "txtSalesOrderDiscount";
             txtSalesOrderDiscount.Size = new Size(61, 17);
@@ -525,7 +554,8 @@
             materialLabel25.AutoSize = true;
             materialLabel25.Depth = 0;
             materialLabel25.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel25.Location = new Point(560, 286);
+            materialLabel25.Location = new Point(800, 477);
+            materialLabel25.Margin = new Padding(4, 0, 4, 0);
             materialLabel25.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel25.Name = "materialLabel25";
             materialLabel25.Size = new Size(85, 19);
@@ -538,7 +568,8 @@
             txtSalesOrderTotalSales.Depth = 0;
             txtSalesOrderTotalSales.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderTotalSales.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderTotalSales.Location = new Point(693, 288);
+            txtSalesOrderTotalSales.Location = new Point(990, 480);
+            txtSalesOrderTotalSales.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderTotalSales.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderTotalSales.Name = "txtSalesOrderTotalSales";
             txtSalesOrderTotalSales.Size = new Size(77, 17);
@@ -551,7 +582,8 @@
             materialLabel18.Depth = 0;
             materialLabel18.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel18.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel18.Location = new Point(14, 397);
+            materialLabel18.Location = new Point(20, 662);
+            materialLabel18.Margin = new Padding(4, 0, 4, 0);
             materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel18.Name = "materialLabel18";
             materialLabel18.Size = new Size(153, 24);
@@ -560,9 +592,10 @@
             // 
             // guna2Separator2
             // 
-            guna2Separator2.Location = new Point(14, 384);
+            guna2Separator2.Location = new Point(20, 640);
+            guna2Separator2.Margin = new Padding(4, 5, 4, 5);
             guna2Separator2.Name = "guna2Separator2";
-            guna2Separator2.Size = new Size(971, 10);
+            guna2Separator2.Size = new Size(1387, 17);
             guna2Separator2.TabIndex = 23;
             // 
             // dgSalesOrderLines
@@ -588,10 +621,13 @@
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             dgSalesOrderLines.DefaultCellStyle = dataGridViewCellStyle6;
             dgSalesOrderLines.GridColor = Color.FromArgb(231, 229, 255);
-            dgSalesOrderLines.Location = new Point(14, 133);
+            dgSalesOrderLines.Location = new Point(20, 222);
+            dgSalesOrderLines.Margin = new Padding(4, 5, 4, 5);
             dgSalesOrderLines.Name = "dgSalesOrderLines";
             dgSalesOrderLines.RowHeadersVisible = false;
-            dgSalesOrderLines.Size = new Size(971, 150);
+            dgSalesOrderLines.RowHeadersWidth = 62;
+            dgSalesOrderLines.RowTemplate.Height = 25;
+            dgSalesOrderLines.Size = new Size(1387, 250);
             dgSalesOrderLines.TabIndex = 22;
             dgSalesOrderLines.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgSalesOrderLines.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -621,7 +657,8 @@
             materialLabel17.Depth = 0;
             materialLabel17.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel17.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel17.Location = new Point(14, 106);
+            materialLabel17.Location = new Point(20, 177);
+            materialLabel17.Margin = new Padding(4, 0, 4, 0);
             materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel17.Name = "materialLabel17";
             materialLabel17.Size = new Size(138, 24);
@@ -630,9 +667,10 @@
             // 
             // guna2Separator1
             // 
-            guna2Separator1.Location = new Point(14, 93);
+            guna2Separator1.Location = new Point(20, 155);
+            guna2Separator1.Margin = new Padding(4, 5, 4, 5);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(971, 10);
+            guna2Separator1.Size = new Size(1387, 17);
             guna2Separator1.TabIndex = 20;
             // 
             // materialLabel13
@@ -640,7 +678,8 @@
             materialLabel13.AutoSize = true;
             materialLabel13.Depth = 0;
             materialLabel13.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel13.Location = new Point(560, 71);
+            materialLabel13.Location = new Point(800, 118);
+            materialLabel13.Margin = new Padding(4, 0, 4, 0);
             materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel13.Name = "materialLabel13";
             materialLabel13.Size = new Size(73, 19);
@@ -653,7 +692,8 @@
             txtSalesOrderCustomer.Depth = 0;
             txtSalesOrderCustomer.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderCustomer.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderCustomer.Location = new Point(693, 73);
+            txtSalesOrderCustomer.Location = new Point(990, 122);
+            txtSalesOrderCustomer.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderCustomer.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderCustomer.Name = "txtSalesOrderCustomer";
             txtSalesOrderCustomer.Size = new Size(67, 17);
@@ -666,7 +706,8 @@
             txtSalesOrderDeliveryDate.Depth = 0;
             txtSalesOrderDeliveryDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderDeliveryDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderDeliveryDate.Location = new Point(133, 73);
+            txtSalesOrderDeliveryDate.Location = new Point(190, 122);
+            txtSalesOrderDeliveryDate.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderDeliveryDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderDeliveryDate.Name = "txtSalesOrderDeliveryDate";
             txtSalesOrderDeliveryDate.Size = new Size(90, 17);
@@ -678,7 +719,8 @@
             materialLabel10.AutoSize = true;
             materialLabel10.Depth = 0;
             materialLabel10.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel10.Location = new Point(14, 71);
+            materialLabel10.Location = new Point(20, 118);
+            materialLabel10.Margin = new Padding(4, 0, 4, 0);
             materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel10.Name = "materialLabel10";
             materialLabel10.Size = new Size(98, 19);
@@ -691,7 +733,8 @@
             txtSalesOrderDate.Depth = 0;
             txtSalesOrderDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderDate.Location = new Point(133, 54);
+            txtSalesOrderDate.Location = new Point(190, 90);
+            txtSalesOrderDate.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderDate.Name = "txtSalesOrderDate";
             txtSalesOrderDate.Size = new Size(74, 17);
@@ -703,7 +746,8 @@
             materialLabel12.AutoSize = true;
             materialLabel12.Depth = 0;
             materialLabel12.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel12.Location = new Point(14, 52);
+            materialLabel12.Location = new Point(20, 87);
+            materialLabel12.Margin = new Padding(4, 0, 4, 0);
             materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel12.Name = "materialLabel12";
             materialLabel12.Size = new Size(80, 19);
@@ -715,7 +759,8 @@
             materialLabel5.AutoSize = true;
             materialLabel5.Depth = 0;
             materialLabel5.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel5.Location = new Point(560, 33);
+            materialLabel5.Location = new Point(800, 55);
+            materialLabel5.Margin = new Padding(4, 0, 4, 0);
             materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel5.Name = "materialLabel5";
             materialLabel5.Size = new Size(67, 19);
@@ -728,7 +773,8 @@
             txtSalesOrderRemarks.Depth = 0;
             txtSalesOrderRemarks.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderRemarks.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderRemarks.Location = new Point(693, 35);
+            txtSalesOrderRemarks.Location = new Point(990, 58);
+            txtSalesOrderRemarks.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderRemarks.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderRemarks.Name = "txtSalesOrderRemarks";
             txtSalesOrderRemarks.Size = new Size(61, 17);
@@ -741,7 +787,8 @@
             txtSalesOrderType.Depth = 0;
             txtSalesOrderType.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderType.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderType.Location = new Point(133, 35);
+            txtSalesOrderType.Location = new Point(190, 58);
+            txtSalesOrderType.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderType.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderType.Name = "txtSalesOrderType";
             txtSalesOrderType.Size = new Size(75, 17);
@@ -753,7 +800,8 @@
             materialLabel8.AutoSize = true;
             materialLabel8.Depth = 0;
             materialLabel8.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel8.Location = new Point(14, 33);
+            materialLabel8.Location = new Point(20, 55);
+            materialLabel8.Margin = new Padding(4, 0, 4, 0);
             materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel8.Name = "materialLabel8";
             materialLabel8.Size = new Size(83, 19);
@@ -765,7 +813,8 @@
             materialLabel3.AutoSize = true;
             materialLabel3.Depth = 0;
             materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel3.Location = new Point(560, 14);
+            materialLabel3.Location = new Point(800, 23);
+            materialLabel3.Margin = new Padding(4, 0, 4, 0);
             materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel3.Name = "materialLabel3";
             materialLabel3.Size = new Size(55, 19);
@@ -778,7 +827,8 @@
             txtSalesOrderBranch.Depth = 0;
             txtSalesOrderBranch.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderBranch.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderBranch.Location = new Point(693, 16);
+            txtSalesOrderBranch.Location = new Point(990, 27);
+            txtSalesOrderBranch.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderBranch.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderBranch.Name = "txtSalesOrderBranch";
             txtSalesOrderBranch.Size = new Size(46, 17);
@@ -791,7 +841,8 @@
             txtSalesOrderName.Depth = 0;
             txtSalesOrderName.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSalesOrderName.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtSalesOrderName.Location = new Point(133, 16);
+            txtSalesOrderName.Location = new Point(190, 27);
+            txtSalesOrderName.Margin = new Padding(4, 0, 4, 0);
             txtSalesOrderName.MouseState = MaterialSkin.MouseState.HOVER;
             txtSalesOrderName.Name = "txtSalesOrderName";
             txtSalesOrderName.Size = new Size(27, 17);
@@ -803,7 +854,8 @@
             materialLabel1.AutoSize = true;
             materialLabel1.Depth = 0;
             materialLabel1.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel1.Location = new Point(14, 14);
+            materialLabel1.Location = new Point(20, 23);
+            materialLabel1.Margin = new Padding(4, 0, 4, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
             materialLabel1.Size = new Size(29, 19);
@@ -812,10 +864,11 @@
             // 
             // SalesOrderInformationView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 729);
+            ClientSize = new Size(1350, 729);
             Controls.Add(materialCard1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "SalesOrderInformationView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

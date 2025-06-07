@@ -25,6 +25,14 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.MultipleDeleteEvent -= MultipleDelete;
+            _view.PrintEvent -= Print;
+            _view.DetailsEvent -= Details;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
@@ -147,7 +155,8 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
         
         private void LoadAllEmployeeList(bool emptyValue = false)
         {
-            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll(includeProperties: "JobPosition,Department,Shift"));
+            EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(
+                _unitOfWork.Employee.Value.GetAll(includeProperties: "JobPosition,Department,Shift,Attendances.Project,Payrolls"));
 
             if (!emptyValue) EmployeeList = EmployeeList.Where(c => c.Name.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetEmployeeListBindingSource(EmployeeList.OrderBy(c => c.Name));

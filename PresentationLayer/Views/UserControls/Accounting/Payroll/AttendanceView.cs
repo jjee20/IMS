@@ -98,6 +98,11 @@ namespace PresentationLayer.Views.UserControls
             SearchEvent?.Invoke(this, EventArgs.Empty);
         }
 
+        private void AttendanceView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
         public event EventHandler AddEvent;
         public event EventHandler SearchEvent;
         public event CellClickEventHandler ShowAttendanceEvent;

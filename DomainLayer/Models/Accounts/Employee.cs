@@ -32,7 +32,11 @@ public class Employee
     public int ShiftId { get; set; } // Foreign Key
     public Shift Shift { get; set; } // Integration with Shift Management
     public bool isDeducted { get; set; } = true;
+    public bool isActive{ get; set; } = true;
+    public DateTime ContractStartDate { get; set; }
+    public DateTime ContractEndDate { get; set; }
 
+    public IEnumerable<Payroll> Payrolls { get; set; }
     public IEnumerable<Allowance> Allowances { get; set; }
     public IEnumerable<Bonus> Bonuses { get; set; }
     public IEnumerable<Benefit> Benefits { get; set; }

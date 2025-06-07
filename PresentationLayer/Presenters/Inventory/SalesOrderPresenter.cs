@@ -32,10 +32,20 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.MultipleDeleteEvent -= MultipleDelete;
+            _view.PrintEvent -= Print;
+            view.PaymentEvent -= Payment;
+            _view.InvoiceEvent -= Invoice;
+            _view.DetailsEvent -= Details;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
-            _view.PaymentEvent += Payment;
+            view.PaymentEvent += Payment;
             _view.InvoiceEvent += Invoice;
             _view.DetailsEvent += Details;
             _view.DeleteEvent += Delete;

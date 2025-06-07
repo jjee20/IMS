@@ -25,6 +25,7 @@ namespace PresentationLayer.Presenters.Account
             _passwordHasher = new PasswordHasher<ApplicationUser>();
 
             // Subscribe to the login event in the view
+            _view.LoginEvent -= Login;
             _view.LoginEvent += Login;
         }
 
