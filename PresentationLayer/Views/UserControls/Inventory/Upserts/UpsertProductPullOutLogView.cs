@@ -110,6 +110,27 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 return;
             }
 
+            int productId = (int)txtProduct.SelectedValue;
+
+            // Get total stock-in quantity
+            var productStockInQty = _unitOfWork.ProductStockInLogLines.Value
+                .GetAll(c => c.ProductId == productId)
+                .Sum(c => (int?)c.StockQuantity) ?? 0;
+
+            // Get total pull-out quantity
+            var productPullOutQty = _unitOfWork.ProductPullOutLogLines.Value
+                .GetAll(c => c.ProductId == productId)
+                .Sum(c => (int?)c.StockQuantity) ?? 0;
+
+            // Calculate current stock
+            int availableStock = productStockInQty - productPullOutQty;
+
+            if (availableStock <= 0)
+            {
+                MessageBox.Show("No stock available for the selected product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
 
             var productInLogLines = new ProductPullOutLogLineViewModel()

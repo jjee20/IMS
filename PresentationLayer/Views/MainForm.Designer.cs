@@ -37,8 +37,8 @@
             toolStripButton30 = new ToolStripButton();
             btnStockInLog = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             toolStripButton31 = new ToolStripButton();
-            btnProject = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
-            toolStripButton4 = new ToolStripButton();
+            btnPullOutLog = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            toolStripButton32 = new ToolStripButton();
             btnProduct = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             toolStripSplitButton1 = new ToolStripSplitButton();
             btnProductType = new ToolStripMenuItem();
@@ -53,6 +53,8 @@
             btnPurchaseType = new ToolStripMenuItem();
             btnInvoiceType = new ToolStripMenuItem();
             btnBillType = new ToolStripMenuItem();
+            btnProject = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            toolStripButton4 = new ToolStripButton();
             btnWarehouse = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             toolStripButton11 = new ToolStripButton();
             btnCustomer = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
@@ -124,18 +126,17 @@
             toolStripTabItem1 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             toolStripTabItem4 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             toolStripTabItem2 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
-            btnPullOutLog = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
-            toolStripButton32 = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)ribbonControlMain).BeginInit();
             ribbonControlMain.SuspendLayout();
             btnInventory.Panel.SuspendLayout();
             btnDashboard.SuspendLayout();
             btnStockMonitoring.SuspendLayout();
             btnStockInLog.SuspendLayout();
-            btnProject.SuspendLayout();
+            btnPullOutLog.SuspendLayout();
             btnProduct.SuspendLayout();
             btnSalesOrder.SuspendLayout();
             btnPurchaseOrder.SuspendLayout();
+            btnProject.SuspendLayout();
             btnWarehouse.SuspendLayout();
             btnCustomer.SuspendLayout();
             btnBranch.SuspendLayout();
@@ -167,7 +168,6 @@
             toolStripEx3.SuspendLayout();
             toolStripEx4.SuspendLayout();
             toolStripEx5.SuspendLayout();
-            btnPullOutLog.SuspendLayout();
             SuspendLayout();
             // 
             // ribbonControlMain
@@ -341,35 +341,32 @@
             toolStripButton31.Text = "Stock-In Log";
             toolStripButton31.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
-            // btnProject
+            // btnPullOutLog
             // 
-            btnProject.AllowMenuTextAlignment = true;
-            btnProject.Dock = DockStyle.None;
-            btnProject.Font = new Font("Segoe UI", 8.25F);
-            btnProject.ForeColor = Color.MidnightBlue;
-            btnProject.GripStyle = ToolStripGripStyle.Hidden;
-            btnProject.Image = null;
-            btnProject.ImageScalingSize = new Size(30, 30);
-            btnProject.Items.AddRange(new ToolStripItem[] { toolStripButton4 });
-            btnProject.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            btnProject.Location = new Point(956, 2);
-            btnProject.Margin = new Padding(2, 0, 2, 0);
-            btnProject.Name = "toolStripEx4";
-            btnProject.Office12Mode = false;
-            btnProject.Padding = new Padding(3, 0, 0, 0);
-            btnProject.RightToLeft = RightToLeft.No;
-            btnProject.Size = new Size(83, 98);
-            btnProject.TabIndex = 4;
-            btnProject.Click += btnProject_Click;
+            btnPullOutLog.Dock = DockStyle.None;
+            btnPullOutLog.Font = new Font("Segoe UI", 8.25F);
+            btnPullOutLog.ForeColor = Color.MidnightBlue;
+            btnPullOutLog.GripStyle = ToolStripGripStyle.Hidden;
+            btnPullOutLog.Image = null;
+            btnPullOutLog.ImageScalingSize = new Size(30, 30);
+            btnPullOutLog.Items.AddRange(new ToolStripItem[] { toolStripButton32 });
+            btnPullOutLog.Location = new Point(383, 2);
+            btnPullOutLog.Name = "btnPullOutLog";
+            btnPullOutLog.Office12Mode = false;
+            btnPullOutLog.Padding = new Padding(3, 0, 0, 0);
+            btnPullOutLog.RightToLeft = RightToLeft.No;
+            btnPullOutLog.Size = new Size(120, 98);
+            btnPullOutLog.TabIndex = 26;
+            btnPullOutLog.Click += btnPullOutLog_Click;
             // 
-            // toolStripButton4
+            // toolStripButton32
             // 
-            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(74, 93);
-            toolStripButton4.Text = "Projects";
-            toolStripButton4.TextImageRelation = TextImageRelation.ImageAboveText;
+            toolStripButton32.Image = (Image)resources.GetObject("toolStripButton32.Image");
+            toolStripButton32.ImageTransparentColor = Color.Magenta;
+            toolStripButton32.Name = "toolStripButton32";
+            toolStripButton32.Size = new Size(111, 93);
+            toolStripButton32.Text = "Pull-Out Log";
+            toolStripButton32.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
             // btnProduct
             // 
@@ -528,6 +525,36 @@
             btnBillType.TextAlign = ContentAlignment.MiddleLeft;
             btnBillType.Click += btnBillType_Click;
             // 
+            // btnProject
+            // 
+            btnProject.AllowMenuTextAlignment = true;
+            btnProject.Dock = DockStyle.None;
+            btnProject.Font = new Font("Segoe UI", 8.25F);
+            btnProject.ForeColor = Color.MidnightBlue;
+            btnProject.GripStyle = ToolStripGripStyle.Hidden;
+            btnProject.Image = null;
+            btnProject.ImageScalingSize = new Size(30, 30);
+            btnProject.Items.AddRange(new ToolStripItem[] { toolStripButton4 });
+            btnProject.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            btnProject.Location = new Point(956, 2);
+            btnProject.Margin = new Padding(2, 0, 2, 0);
+            btnProject.Name = "toolStripEx4";
+            btnProject.Office12Mode = false;
+            btnProject.Padding = new Padding(3, 0, 0, 0);
+            btnProject.RightToLeft = RightToLeft.No;
+            btnProject.Size = new Size(83, 98);
+            btnProject.TabIndex = 4;
+            btnProject.Click += btnProject_Click;
+            // 
+            // toolStripButton4
+            // 
+            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
+            toolStripButton4.ImageTransparentColor = Color.Magenta;
+            toolStripButton4.Name = "toolStripButton4";
+            toolStripButton4.Size = new Size(74, 93);
+            toolStripButton4.Text = "Projects";
+            toolStripButton4.TextImageRelation = TextImageRelation.ImageAboveText;
+            // 
             // btnWarehouse
             // 
             btnWarehouse.AllowMenuTextAlignment = true;
@@ -605,7 +632,7 @@
             btnBranch.Image = null;
             btnBranch.ImageScalingSize = new Size(30, 30);
             btnBranch.Items.AddRange(new ToolStripItem[] { toolStripButton1 });
-            btnBranch.Location = new Point(1267, 2);
+            btnBranch.Location = new Point(1347, 2);
             btnBranch.Margin = new Padding(2, 0, 2, 0);
             btnBranch.Name = "toolStripEx22";
             btnBranch.Office12Mode = false;
@@ -634,7 +661,7 @@
             btnVendor.Image = null;
             btnVendor.ImageScalingSize = new Size(30, 30);
             btnVendor.Items.AddRange(new ToolStripItem[] { toolStripSplitButton6 });
-            btnVendor.Location = new Point(1345, 2);
+            btnVendor.Location = new Point(1425, 2);
             btnVendor.Margin = new Padding(2, 0, 2, 0);
             btnVendor.Name = "toolStripEx23";
             btnVendor.Office12Mode = false;
@@ -672,7 +699,7 @@
             btnCashBank.Image = null;
             btnCashBank.ImageScalingSize = new Size(30, 30);
             btnCashBank.Items.AddRange(new ToolStripItem[] { toolStripButton19 });
-            btnCashBank.Location = new Point(1428, 2);
+            btnCashBank.Location = new Point(1508, 2);
             btnCashBank.Margin = new Padding(2, 0, 2, 0);
             btnCashBank.Name = "btnCashBank";
             btnCashBank.Office12Mode = false;
@@ -701,7 +728,7 @@
             btnSalesReport.Image = null;
             btnSalesReport.ImageScalingSize = new Size(30, 30);
             btnSalesReport.Items.AddRange(new ToolStripItem[] { toolStripButton5 });
-            btnSalesReport.Location = new Point(1511, 2);
+            btnSalesReport.Location = new Point(1591, 2);
             btnSalesReport.Margin = new Padding(2, 0, 2, 0);
             btnSalesReport.Name = "toolStripEx5";
             btnSalesReport.Office12Mode = false;
@@ -730,7 +757,7 @@
             btnPurchaseReport.Image = null;
             btnPurchaseReport.ImageScalingSize = new Size(30, 30);
             btnPurchaseReport.Items.AddRange(new ToolStripItem[] { toolStripButton3 });
-            btnPurchaseReport.Location = new Point(1594, 2);
+            btnPurchaseReport.Location = new Point(1674, 2);
             btnPurchaseReport.Margin = new Padding(2, 0, 2, 0);
             btnPurchaseReport.Name = "toolStripEx6";
             btnPurchaseReport.Office12Mode = false;
@@ -746,7 +773,7 @@
             toolStripButton3.ImageTransparentColor = Color.Magenta;
             toolStripButton3.Name = "toolStripButton3";
             toolStripButton3.Size = new Size(139, 57);
-            toolStripButton3.Text = "Purchase Report";
+            toolStripButton3.Text = "Expense Report";
             toolStripButton3.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
             // btnTargetGoals
@@ -759,7 +786,7 @@
             btnTargetGoals.Image = null;
             btnTargetGoals.ImageScalingSize = new Size(30, 30);
             btnTargetGoals.Items.AddRange(new ToolStripItem[] { toolStripButton2 });
-            btnTargetGoals.Location = new Point(1677, 2);
+            btnTargetGoals.Location = new Point(1757, 2);
             btnTargetGoals.Margin = new Padding(2, 0, 2, 0);
             btnTargetGoals.Name = "toolStripEx7";
             btnTargetGoals.Office12Mode = false;
@@ -967,7 +994,7 @@
             btnDeduction.Office12Mode = false;
             btnDeduction.Padding = new Padding(3, 0, 0, 0);
             btnDeduction.RightToLeft = RightToLeft.No;
-            btnDeduction.Size = new Size(102, 98);
+            btnDeduction.Size = new Size(81, 98);
             btnDeduction.TabIndex = 2;
             btnDeduction.Click += btnDeduction_Click;
             // 
@@ -989,13 +1016,13 @@
             btnLeave.Image = null;
             btnLeave.ImageScalingSize = new Size(30, 30);
             btnLeave.Items.AddRange(new ToolStripItem[] { toolStripButton14 });
-            btnLeave.Location = new Point(591, 2);
+            btnLeave.Location = new Point(570, 2);
             btnLeave.Margin = new Padding(2, 0, 2, 0);
             btnLeave.Name = "Leave";
             btnLeave.Office12Mode = false;
             btnLeave.Padding = new Padding(3, 0, 0, 0);
             btnLeave.RightToLeft = RightToLeft.No;
-            btnLeave.Size = new Size(66, 98);
+            btnLeave.Size = new Size(81, 98);
             btnLeave.TabIndex = 6;
             btnLeave.Click += btnLeave_Click;
             // 
@@ -1017,13 +1044,13 @@
             btnEmployee.Image = null;
             btnEmployee.ImageScalingSize = new Size(30, 30);
             btnEmployee.Items.AddRange(new ToolStripItem[] { toolStripButton13 });
-            btnEmployee.Location = new Point(659, 2);
+            btnEmployee.Location = new Point(653, 2);
             btnEmployee.Margin = new Padding(2, 0, 2, 0);
             btnEmployee.Name = "Employee";
             btnEmployee.Office12Mode = false;
             btnEmployee.Padding = new Padding(3, 0, 0, 0);
             btnEmployee.RightToLeft = RightToLeft.No;
-            btnEmployee.Size = new Size(97, 98);
+            btnEmployee.Size = new Size(81, 98);
             btnEmployee.TabIndex = 4;
             btnEmployee.Click += btnEmployee_Click;
             // 
@@ -1045,13 +1072,13 @@
             btnDepartment.Image = null;
             btnDepartment.ImageScalingSize = new Size(30, 30);
             btnDepartment.Items.AddRange(new ToolStripItem[] { toolStripButton6 });
-            btnDepartment.Location = new Point(758, 2);
+            btnDepartment.Location = new Point(736, 2);
             btnDepartment.Margin = new Padding(2, 0, 2, 0);
             btnDepartment.Name = "Department";
             btnDepartment.Office12Mode = false;
             btnDepartment.Padding = new Padding(3, 0, 0, 0);
             btnDepartment.RightToLeft = RightToLeft.No;
-            btnDepartment.Size = new Size(115, 98);
+            btnDepartment.Size = new Size(81, 98);
             btnDepartment.TabIndex = 3;
             btnDepartment.Click += btnDepartment_Click;
             // 
@@ -1073,7 +1100,7 @@
             btnJobPosition.Image = null;
             btnJobPosition.ImageScalingSize = new Size(30, 30);
             btnJobPosition.Items.AddRange(new ToolStripItem[] { toolStripButton7 });
-            btnJobPosition.Location = new Point(875, 2);
+            btnJobPosition.Location = new Point(819, 2);
             btnJobPosition.Margin = new Padding(2, 0, 2, 0);
             btnJobPosition.Name = "Job Position";
             btnJobPosition.Office12Mode = false;
@@ -1101,7 +1128,7 @@
             btnTax.Image = null;
             btnTax.ImageScalingSize = new Size(30, 30);
             btnTax.Items.AddRange(new ToolStripItem[] { toolStripButton9 });
-            btnTax.Location = new Point(958, 2);
+            btnTax.Location = new Point(902, 2);
             btnTax.Margin = new Padding(2, 0, 2, 0);
             btnTax.Name = "Tax";
             btnTax.Office12Mode = false;
@@ -1129,7 +1156,7 @@
             btnShift.Image = null;
             btnShift.ImageScalingSize = new Size(30, 30);
             btnShift.Items.AddRange(new ToolStripItem[] { toolStripButton8 });
-            btnShift.Location = new Point(1041, 2);
+            btnShift.Location = new Point(985, 2);
             btnShift.Margin = new Padding(2, 0, 2, 0);
             btnShift.Name = "Shift";
             btnShift.Office12Mode = false;
@@ -1157,7 +1184,7 @@
             btnHoliday.Image = null;
             btnHoliday.ImageScalingSize = new Size(30, 30);
             btnHoliday.Items.AddRange(new ToolStripItem[] { toolStripButton29 });
-            btnHoliday.Location = new Point(1124, 2);
+            btnHoliday.Location = new Point(1068, 2);
             btnHoliday.Margin = new Padding(2, 0, 2, 0);
             btnHoliday.Name = "btnHoliday";
             btnHoliday.Office12Mode = false;
@@ -1185,7 +1212,7 @@
             btnPayroll.Image = null;
             btnPayroll.ImageScalingSize = new Size(30, 30);
             btnPayroll.Items.AddRange(new ToolStripItem[] { toolStripButton10 });
-            btnPayroll.Location = new Point(1207, 2);
+            btnPayroll.Location = new Point(1151, 2);
             btnPayroll.Margin = new Padding(2, 0, 2, 0);
             btnPayroll.Name = "Payroll ";
             btnPayroll.Office12Mode = false;
@@ -1493,32 +1520,6 @@
             toolStripTabItem2.Tag = "2";
             toolStripTabItem2.Text = "Inventory";
             // 
-            // btnPullOutLog
-            // 
-            btnPullOutLog.Dock = DockStyle.None;
-            btnPullOutLog.Font = new Font("Segoe UI", 8.25F);
-            btnPullOutLog.ForeColor = Color.MidnightBlue;
-            btnPullOutLog.GripStyle = ToolStripGripStyle.Hidden;
-            btnPullOutLog.Image = null;
-            btnPullOutLog.ImageScalingSize = new Size(30, 30);
-            btnPullOutLog.Items.AddRange(new ToolStripItem[] { toolStripButton32 });
-            btnPullOutLog.Location = new Point(383, 2);
-            btnPullOutLog.Name = "btnPullOutLog";
-            btnPullOutLog.Office12Mode = false;
-            btnPullOutLog.Padding = new Padding(3, 0, 0, 0);
-            btnPullOutLog.Size = new Size(120, 98);
-            btnPullOutLog.TabIndex = 26;
-            btnPullOutLog.Click += btnPullOutLog_Click;
-            // 
-            // toolStripButton32
-            // 
-            toolStripButton32.Image = (Image)resources.GetObject("toolStripButton32.Image");
-            toolStripButton32.ImageTransparentColor = Color.Magenta;
-            toolStripButton32.Name = "toolStripButton32";
-            toolStripButton32.Size = new Size(111, 93);
-            toolStripButton32.Text = "Pull-Out Log";
-            toolStripButton32.TextImageRelation = TextImageRelation.ImageAboveText;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
@@ -1541,10 +1542,11 @@
             btnDashboard.ResumeLayout(false);
             btnStockMonitoring.ResumeLayout(false);
             btnStockInLog.ResumeLayout(false);
-            btnProject.ResumeLayout(false);
+            btnPullOutLog.ResumeLayout(false);
             btnProduct.ResumeLayout(false);
             btnSalesOrder.ResumeLayout(false);
             btnPurchaseOrder.ResumeLayout(false);
+            btnProject.ResumeLayout(false);
             btnWarehouse.ResumeLayout(false);
             btnCustomer.ResumeLayout(false);
             btnBranch.ResumeLayout(false);
@@ -1578,7 +1580,6 @@
             toolStripEx3.ResumeLayout(false);
             toolStripEx4.ResumeLayout(false);
             toolStripEx5.ResumeLayout(false);
-            btnPullOutLog.ResumeLayout(false);
             ResumeLayout(false);
         }
 

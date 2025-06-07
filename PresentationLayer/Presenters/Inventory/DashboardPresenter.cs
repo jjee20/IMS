@@ -8,6 +8,7 @@ using PresentationLayer.Views;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.IViews.Inventory;
 using PresentationLayer.Views.UserControls;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace PresentationLayer.Presenters
 {
@@ -23,6 +25,7 @@ namespace PresentationLayer.Presenters
     {
         private IDashboardView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private GunaHorizontalBarDataset TopSellingDataSet;
         private GunaBarDataset InventoryStatusDataSet;
         private GunaLineDataset DailySalesTrendDataSet;
@@ -35,10 +38,11 @@ namespace PresentationLayer.Presenters
         private IEnumerable<EnumItemViewModel> MonthList;
         private int ItemSold;
         private int Sales;
-        public DashboardPresenter(IDashboardView view, IUnitOfWork unitOfWork)
+        public DashboardPresenter(IDashboardView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
         {
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
             TopSellingDataSet = new GunaHorizontalBarDataset();
             DailySalesTrendDataSet = new GunaLineDataset();
             InventoryStatusDataSet = new GunaBarDataset();
@@ -51,7 +55,7 @@ namespace PresentationLayer.Presenters
             _view.UpdateDashboardEvent -= UpdateDashboard;
             _view.UpdateDashboardEvent += UpdateDashboard;
 
-            LoadAll();
+            RefreshEvent();
 
             _view.SetMonth(MonthBindingSource);
             _view.SetYear(YearBindingSource);
@@ -62,6 +66,8 @@ namespace PresentationLayer.Presenters
             _view.SetProjectExpenseDistribution(ProjectDataSet);
             _view.SetProgressBars(ItemSold, Sales);
 
+            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshEvent);
+
         }
 
         private void UpdateDashboard(object? sender, EventArgs e)
@@ -70,7 +76,7 @@ namespace PresentationLayer.Presenters
             LoadMonthlySalesTrend(_view.Year);
         }
 
-        private void LoadAll()
+        private void RefreshEvent()
         {
             var currentDate = DateTime.Now;
 

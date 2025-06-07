@@ -3,12 +3,14 @@ using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.InventoryViewModels;
 using Guna.Charts.WinForms;
 using RavenTech_ERP.Views.IViews.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Inventory
 {
@@ -16,6 +18,7 @@ namespace RavenTech_ERP.Presenters.Inventory
     {
         private IPurchasesReportView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private BindingSource MonthBindingSource;
         private BindingSource YearBindingSource;
         private BindingSource DailyPurchasesBindingSource;
@@ -25,10 +28,11 @@ namespace RavenTech_ERP.Presenters.Inventory
         private IEnumerable<EnumItemViewModel> MonthList;
         private GunaBarDataset DailyPurchasesTrendDataSet;
 
-        public PurchasesReportPresenter(IPurchasesReportView view, IUnitOfWork unitOfWork)
+        public PurchasesReportPresenter(IPurchasesReportView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
         {
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
             YearBindingSource = new BindingSource();
             MonthBindingSource = new BindingSource();
             DailyPurchasesBindingSource = new BindingSource();
@@ -38,9 +42,7 @@ namespace RavenTech_ERP.Presenters.Inventory
 
             _view.UpdatePurchasesReportEvent += UpdatePurchasesReport;
 
-            LoadAllYears();
-            LoadAllMonths();
-            LoadReport();
+            RefreshView();
 
             _view.SetYears(YearBindingSource);
             _view.SetMonths(MonthBindingSource);
@@ -48,6 +50,14 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.SetDailyPurchasesDataGrid(DailyPurchasesBindingSource);
             _view.SetMonthlyPurchasesDataGrid(MonthlyPurchasesBindingSource);
             _view.SetAnnuallyPurchasesDataGrid(AnnuallyPurchasesBindingSource);
+            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshView);
+        }
+
+        private void RefreshView()
+        {
+            LoadAllYears();
+            LoadAllMonths();
+            LoadReport();
         }
 
         private void LoadAllMonths()

@@ -11,6 +11,7 @@ using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
@@ -149,7 +150,7 @@ namespace PresentationLayer.Presenters
             CustomerList = Program.Mapper.Map<IEnumerable<CustomerViewModel>>(_unitOfWork.Customer.Value.GetAll());
 
             if (!emptyValue) CustomerList = CustomerList.Where(c => c.CustomerName.ToLower().Contains(_view.SearchValue.ToLower()));
-            _view.SetCustomerListBindingSource(CustomerList);
+            _view.SetCustomerListBindingSource(CustomerList); 
         }
     }
 }

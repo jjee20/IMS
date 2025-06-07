@@ -1,11 +1,13 @@
 ﻿using DomainLayer.Models.Inventory;
 using RavenTech_ERP.Views.IViews.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Inventory
 {
@@ -13,15 +15,18 @@ namespace RavenTech_ERP.Presenters.Inventory
     {
         private ITargetGoalsView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
 
-        public TargetGoalsPresenter(ITargetGoalsView view, IUnitOfWork unitOfWork)
+        public TargetGoalsPresenter(ITargetGoalsView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
         {
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
             _view.SaveClicked -= Save;
             _view.SaveClicked += Save;
 
             LoadAll();
+
         }
 
         private void LoadAll()
@@ -61,6 +66,8 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.SalesRemaining = sales - monthlySalesTarget;
             _view.ItemSoldRemaining = itemSold - monthlyItemSoldTarget;
             _view.YearRemaining = annualSales - annualSalesTarget;
+
+            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
 
         private void Save(object? sender, EventArgs e)
