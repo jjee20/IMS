@@ -888,14 +888,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "190a33ee-3945-411f-bc76-e84e521fe3c1",
+                            ConcurrencyStamp = "8211cb92-0b9a-4195-9d37-db25403a1afe",
                             Department = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPER@ADMIN.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGt/DTn7OsvwDfUULPkHVs0IhrftFxPpyHw4NVdgGXzjrWz4i00JFJPzUBJ8IRXzZw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPFdQU6wAdeTXofBPQHTDGr3oqCCiavoJNJVPSibQS/i8JERij71n0j3vwgKeW/g8A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -905,14 +905,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "FB38CC93-2B1E-4444-9A48-396E4C28E190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ecea06af-e595-4a36-8b9d-7bfb8532858b",
+                            ConcurrencyStamp = "3c728b0f-da4f-460f-9d1f-e9dc7146871d",
                             Department = 1,
                             Email = "inventory@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "INVENTORY@USER.COM",
                             NormalizedUserName = "inventory",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKtguSUxWPJsjnzUqLD+fC87ZpaY+aXLJFW7fbtrNoQNjWS9P4UhnT2a0/7vabM4ag==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENUX0vUWuhexh6mLaetGq06T3lmG5+Xr1ffnIUWSJQDflPf0ZJu2lrbS2HkrGarxvw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -922,14 +922,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "6628DE62-AF21-4389-B612-623A1A17637C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1177e770-4bce-4829-abe4-2b8af26d33d9",
+                            ConcurrencyStamp = "c2ebb269-72a1-49b5-8a49-88088336fb34",
                             Department = 2,
                             Email = "payroll@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PAYROLL@USER.COM",
                             NormalizedUserName = "payroll",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMYfpoiHBo586cjalRexR2cHqe5h3hpwkzXP2rS/6iMuiQG8SZPdeohBbQsG8X6otA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENNMAfsCEVRpLQdjyHC1NZ+NcAY+LJxZTcml2kNldn6hPgQrLJ1YfH2rh7BfRSLOSw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -1462,7 +1462,13 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("ReceivedBy")
@@ -1472,6 +1478,10 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("ProductPullOutLogId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("ProductPullOutLogs");
                 });
@@ -2576,6 +2586,21 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("ProductPullOutLogs");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Inventory.ProductPullOutLogs", b =>
+                {
+                    b.HasOne("DomainLayer.Models.Inventory.Product", null)
+                        .WithMany("ProductPullOutLogs")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("DomainLayer.Models.Accounting.Payroll.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductStockInLogLines", b =>
                 {
                     b.HasOne("DomainLayer.Models.Inventory.Product", "Product")
@@ -2837,6 +2862,8 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Product", b =>
                 {
+                    b.Navigation("ProductPullOutLogs");
+
                     b.Navigation("ProductStockInLogs");
                 });
 
