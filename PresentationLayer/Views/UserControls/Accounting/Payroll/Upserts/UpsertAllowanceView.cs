@@ -32,7 +32,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private void LoadEmployees()
         {
             var entity = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            txtEmployee.DataSource = entity.ToList();
+            txtEmployee.DataSource = entity.OrderBy(c => c.Name).ToList();
             txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
             txtEmployee.Text = "~Select Employee~";
@@ -55,8 +55,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 txtAllowanceType.Text = _entity.AllowanceType.ToString();
                 txtAmount.Text = _entity.Amount.ToString();
                 txtDescription.Text = _entity.Description;
-                txtDate.Value = _entity == null ? _entity.DateGranted : DateTime.Now;
-                txtIsRecurring.Checked = _entity.IsRecurring;
+                txtStartDate.Value = _entity == null ? _entity.StartDate : DateTime.Now;
+                txtEndDate.Value = _entity == null ? _entity.EndDate : DateTime.Now;
             }
         }
 
@@ -86,10 +86,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         {
             _entity.EmployeeId = (int)txtEmployee.SelectedValue;
             _entity.AllowanceType = (DomainLayer.Enums.AllowanceType)txtAllowanceType.SelectedValue;
-            _entity.DateGranted = txtDate.Value;
+            _entity.StartDate = txtStartDate.Value;
+            _entity.EndDate = txtEndDate.Value;
             _entity.Amount = !string.IsNullOrEmpty(txtAmount.Text) ? Convert.ToDouble(txtAmount.Text) : 0;
             _entity.Description = txtDescription.Text;
-            _entity.IsRecurring = txtIsRecurring.Checked;
         }
 
         private void ShowSuccess(string message) =>

@@ -33,95 +33,70 @@ namespace PresentationLayer.Views.UserControls
             components = new System.ComponentModel.Container();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductMonitoringView));
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             tableLayoutPanel3 = new TableLayoutPanel();
             guna2GradientPanel4 = new Guna2GradientPanel();
-            dgProjectFlow = new Guna2DataGridView();
-            guna2HtmlLabel8 = new Guna2HtmlLabel();
-            guna2GradientPanel3 = new Guna2GradientPanel();
-            dgOutOfStock = new Guna2DataGridView();
-            guna2HtmlLabel3 = new Guna2HtmlLabel();
-            guna2GradientPanel2 = new Guna2GradientPanel();
-            dgLowStock = new Guna2DataGridView();
-            guna2HtmlLabel5 = new Guna2HtmlLabel();
-            guna2GradientPanel1 = new Guna2GradientPanel();
-            dgInStock = new Guna2DataGridView();
-            guna2HtmlLabel1 = new Guna2HtmlLabel();
-            panel2 = new Panel();
-            tableLayoutPanel4 = new TableLayoutPanel();
-            txtTotalProjectFlowPanel = new Guna2GradientPanel();
-            guna2DataGridView2 = new Guna2DataGridView();
-            txtTotalProjectFlow = new Guna2HtmlLabel();
-            guna2HtmlLabel6 = new Guna2HtmlLabel();
-            guna2HtmlLabel4 = new Guna2HtmlLabel();
-            guna2HtmlLabel9 = new Guna2HtmlLabel();
-            txtInStock = new Guna2GradientPanel();
-            guna2HtmlLabel10 = new Guna2HtmlLabel();
-            txtLowStock = new Guna2GradientPanel();
-            guna2HtmlLabel7 = new Guna2HtmlLabel();
+            dgOutOfStock = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            guna2GradientPanel5 = new Guna2GradientPanel();
+            dgLowStock = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             guna2GradientPanel6 = new Guna2GradientPanel();
-            guna2DataGridView1 = new Guna2DataGridView();
-            txtOutOfStock = new Guna2HtmlLabel();
-            guna2HtmlLabel11 = new Guna2HtmlLabel();
-            btnPrint = new Button();
-            imageList1 = new ImageList(components);
+            dgPulledOut = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            guna2GradientPanel7 = new Guna2GradientPanel();
+            dgInStock = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            tableLayoutPanel7 = new TableLayoutPanel();
+            guna2GradientPanel3 = new Guna2GradientPanel();
+            txtOutOfStock = new Label();
+            label4 = new Label();
+            guna2GradientPanel2 = new Guna2GradientPanel();
+            txtLowStock = new Label();
+            label3 = new Label();
+            guna2GradientPanel1 = new Guna2GradientPanel();
+            txtPulledOut = new Label();
+            label2 = new Label();
+            materialCard5 = new Guna2GradientPanel();
+            txtInStock = new Label();
+            label9 = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             guna2Separator1 = new Guna2Separator();
             tableLayoutPanel2 = new TableLayoutPanel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            imageList1 = new ImageList(components);
             guna2HtmlToolTip2 = new Guna2HtmlToolTip();
             guna2HtmlLabel2 = new Guna2HtmlLabel();
+            guna2Elipse1 = new Guna2Elipse(components);
+            guna2Elipse2 = new Guna2Elipse(components);
+            guna2Elipse3 = new Guna2Elipse(components);
+            guna2Elipse4 = new Guna2Elipse(components);
             materialCard1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             guna2GradientPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgProjectFlow).BeginInit();
-            guna2GradientPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgOutOfStock).BeginInit();
-            guna2GradientPanel2.SuspendLayout();
+            guna2GradientPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgLowStock).BeginInit();
-            guna2GradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgInStock).BeginInit();
-            panel2.SuspendLayout();
-            tableLayoutPanel4.SuspendLayout();
-            txtTotalProjectFlowPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView2).BeginInit();
-            txtInStock.SuspendLayout();
-            txtLowStock.SuspendLayout();
             guna2GradientPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgPulledOut).BeginInit();
+            guna2GradientPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgInStock).BeginInit();
+            tableLayoutPanel7.SuspendLayout();
+            guna2GradientPanel3.SuspendLayout();
+            guna2GradientPanel2.SuspendLayout();
+            guna2GradientPanel1.SuspendLayout();
+            materialCard5.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -130,17 +105,17 @@ namespace PresentationLayer.Views.UserControls
             // 
             materialCard1.BackColor = Color.FromArgb(255, 255, 255);
             materialCard1.Controls.Add(tableLayoutPanel3);
-            materialCard1.Controls.Add(panel2);
+            materialCard1.Controls.Add(tableLayoutPanel7);
             materialCard1.Controls.Add(tableLayoutPanel1);
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(2, 2);
-            materialCard1.Margin = new Padding(14);
+            materialCard1.Location = new Point(3, 3);
+            materialCard1.Margin = new Padding(21, 21, 21, 21);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1346, 725);
+            materialCard1.Padding = new Padding(21, 21, 21, 21);
+            materialCard1.Size = new Size(1344, 723);
             materialCard1.TabIndex = 2;
             // 
             // tableLayoutPanel3
@@ -151,649 +126,377 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel3.Controls.Add(guna2GradientPanel4, 3, 0);
-            tableLayoutPanel3.Controls.Add(guna2GradientPanel3, 2, 0);
-            tableLayoutPanel3.Controls.Add(guna2GradientPanel2, 1, 0);
-            tableLayoutPanel3.Controls.Add(guna2GradientPanel1, 0, 0);
+            tableLayoutPanel3.Controls.Add(guna2GradientPanel5, 2, 0);
+            tableLayoutPanel3.Controls.Add(guna2GradientPanel6, 1, 0);
+            tableLayoutPanel3.Controls.Add(guna2GradientPanel7, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(14, 126);
+            tableLayoutPanel3.Location = new Point(21, 250);
+            tableLayoutPanel3.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel3.Size = new Size(1318, 585);
-            tableLayoutPanel3.TabIndex = 6;
+            tableLayoutPanel3.Size = new Size(1302, 452);
+            tableLayoutPanel3.TabIndex = 25;
             // 
             // guna2GradientPanel4
             // 
-            guna2GradientPanel4.Controls.Add(dgProjectFlow);
-            guna2GradientPanel4.Controls.Add(guna2HtmlLabel8);
+            guna2GradientPanel4.BackColor = Color.Transparent;
+            guna2GradientPanel4.BorderRadius = 15;
+            guna2GradientPanel4.Controls.Add(dgOutOfStock);
             guna2GradientPanel4.CustomizableEdges = customizableEdges1;
             guna2GradientPanel4.Dock = DockStyle.Fill;
-            guna2GradientPanel4.FillColor = Color.PowderBlue;
-            guna2GradientPanel4.FillColor2 = Color.White;
-            guna2GradientPanel4.Location = new Point(990, 3);
+            guna2GradientPanel4.FillColor = Color.IndianRed;
+            guna2GradientPanel4.FillColor2 = Color.Red;
+            guna2GradientPanel4.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            guna2GradientPanel4.Location = new Point(996, 21);
+            guna2GradientPanel4.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel4.Name = "guna2GradientPanel4";
+            guna2GradientPanel4.Padding = new Padding(21, 21, 21, 21);
             guna2GradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2GradientPanel4.Size = new Size(325, 559);
-            guna2GradientPanel4.TabIndex = 3;
-            // 
-            // dgProjectFlow
-            // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dgProjectFlow.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgProjectFlow.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgProjectFlow.ColumnHeadersHeight = 4;
-            dgProjectFlow.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgProjectFlow.DefaultCellStyle = dataGridViewCellStyle3;
-            dgProjectFlow.Dock = DockStyle.Fill;
-            dgProjectFlow.GridColor = Color.FromArgb(231, 229, 255);
-            dgProjectFlow.Location = new Point(0, 23);
-            dgProjectFlow.Name = "dgProjectFlow";
-            dgProjectFlow.RowHeadersVisible = false;
-            dgProjectFlow.Size = new Size(325, 536);
-            dgProjectFlow.TabIndex = 2;
-            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgProjectFlow.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgProjectFlow.ThemeStyle.BackColor = Color.White;
-            dgProjectFlow.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgProjectFlow.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgProjectFlow.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgProjectFlow.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgProjectFlow.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgProjectFlow.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgProjectFlow.ThemeStyle.HeaderStyle.Height = 4;
-            dgProjectFlow.ThemeStyle.ReadOnly = false;
-            dgProjectFlow.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgProjectFlow.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgProjectFlow.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgProjectFlow.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgProjectFlow.ThemeStyle.RowsStyle.Height = 25;
-            dgProjectFlow.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgProjectFlow.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // guna2HtmlLabel8
-            // 
-            guna2HtmlLabel8.BackColor = Color.Transparent;
-            guna2HtmlLabel8.Dock = DockStyle.Top;
-            guna2HtmlLabel8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel8.ForeColor = Color.Black;
-            guna2HtmlLabel8.Location = new Point(0, 0);
-            guna2HtmlLabel8.Name = "guna2HtmlLabel8";
-            guna2HtmlLabel8.Size = new Size(97, 23);
-            guna2HtmlLabel8.TabIndex = 1;
-            guna2HtmlLabel8.Text = "Project Flow";
-            guna2HtmlLabel8.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // guna2GradientPanel3
-            // 
-            guna2GradientPanel3.Controls.Add(dgOutOfStock);
-            guna2GradientPanel3.Controls.Add(guna2HtmlLabel3);
-            guna2GradientPanel3.CustomizableEdges = customizableEdges3;
-            guna2GradientPanel3.Dock = DockStyle.Fill;
-            guna2GradientPanel3.FillColor = Color.IndianRed;
-            guna2GradientPanel3.FillColor2 = Color.White;
-            guna2GradientPanel3.Location = new Point(661, 3);
-            guna2GradientPanel3.Name = "guna2GradientPanel3";
-            guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2GradientPanel3.Size = new Size(323, 559);
-            guna2GradientPanel3.TabIndex = 2;
+            guna2GradientPanel4.Size = new Size(285, 410);
+            guna2GradientPanel4.TabIndex = 19;
             // 
             // dgOutOfStock
             // 
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dgOutOfStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgOutOfStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            dgOutOfStock.ColumnHeadersHeight = 4;
-            dgOutOfStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgOutOfStock.DefaultCellStyle = dataGridViewCellStyle6;
+            dgOutOfStock.AccessibleName = "Table";
+            dgOutOfStock.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             dgOutOfStock.Dock = DockStyle.Fill;
-            dgOutOfStock.GridColor = Color.FromArgb(231, 229, 255);
-            dgOutOfStock.Location = new Point(0, 23);
+            dgOutOfStock.Location = new Point(21, 21);
+            dgOutOfStock.Margin = new Padding(4, 4, 4, 4);
             dgOutOfStock.Name = "dgOutOfStock";
-            dgOutOfStock.RowHeadersVisible = false;
-            dgOutOfStock.Size = new Size(323, 536);
-            dgOutOfStock.TabIndex = 2;
-            dgOutOfStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgOutOfStock.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgOutOfStock.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgOutOfStock.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgOutOfStock.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgOutOfStock.ThemeStyle.BackColor = Color.White;
-            dgOutOfStock.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgOutOfStock.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgOutOfStock.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgOutOfStock.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgOutOfStock.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgOutOfStock.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgOutOfStock.ThemeStyle.HeaderStyle.Height = 4;
-            dgOutOfStock.ThemeStyle.ReadOnly = false;
-            dgOutOfStock.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgOutOfStock.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgOutOfStock.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgOutOfStock.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgOutOfStock.ThemeStyle.RowsStyle.Height = 25;
-            dgOutOfStock.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgOutOfStock.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dgOutOfStock.PreviewRowHeight = 42;
+            dgOutOfStock.Size = new Size(243, 368);
+            dgOutOfStock.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            dgOutOfStock.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            dgOutOfStock.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            dgOutOfStock.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            dgOutOfStock.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            dgOutOfStock.TabIndex = 1;
+            dgOutOfStock.Text = "sfDataGrid1";
             // 
-            // guna2HtmlLabel3
+            // guna2GradientPanel5
             // 
-            guna2HtmlLabel3.BackColor = Color.Transparent;
-            guna2HtmlLabel3.Dock = DockStyle.Top;
-            guna2HtmlLabel3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel3.ForeColor = Color.MistyRose;
-            guna2HtmlLabel3.Location = new Point(0, 0);
-            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            guna2HtmlLabel3.Size = new Size(97, 23);
-            guna2HtmlLabel3.TabIndex = 1;
-            guna2HtmlLabel3.Text = "Out of Stock";
-            guna2HtmlLabel3.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // guna2GradientPanel2
-            // 
-            guna2GradientPanel2.Controls.Add(dgLowStock);
-            guna2GradientPanel2.Controls.Add(guna2HtmlLabel5);
-            guna2GradientPanel2.CustomizableEdges = customizableEdges5;
-            guna2GradientPanel2.Dock = DockStyle.Fill;
-            guna2GradientPanel2.FillColor = Color.LightGoldenrodYellow;
-            guna2GradientPanel2.FillColor2 = Color.White;
-            guna2GradientPanel2.Location = new Point(332, 3);
-            guna2GradientPanel2.Name = "guna2GradientPanel2";
-            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GradientPanel2.Size = new Size(323, 559);
-            guna2GradientPanel2.TabIndex = 1;
+            guna2GradientPanel5.BackColor = Color.Transparent;
+            guna2GradientPanel5.BorderRadius = 15;
+            guna2GradientPanel5.Controls.Add(dgLowStock);
+            guna2GradientPanel5.CustomizableEdges = customizableEdges3;
+            guna2GradientPanel5.Dock = DockStyle.Fill;
+            guna2GradientPanel5.FillColor = Color.FromArgb(255, 224, 192);
+            guna2GradientPanel5.FillColor2 = Color.FromArgb(255, 128, 0);
+            guna2GradientPanel5.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            guna2GradientPanel5.Location = new Point(671, 21);
+            guna2GradientPanel5.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel5.Name = "guna2GradientPanel5";
+            guna2GradientPanel5.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2GradientPanel5.Size = new Size(283, 410);
+            guna2GradientPanel5.TabIndex = 18;
             // 
             // dgLowStock
             // 
-            dataGridViewCellStyle7.BackColor = Color.White;
-            dgLowStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dgLowStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            dgLowStock.ColumnHeadersHeight = 4;
-            dgLowStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.White;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            dgLowStock.DefaultCellStyle = dataGridViewCellStyle9;
+            dgLowStock.AccessibleName = "Table";
+            dgLowStock.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             dgLowStock.Dock = DockStyle.Fill;
-            dgLowStock.GridColor = Color.FromArgb(231, 229, 255);
-            dgLowStock.Location = new Point(0, 23);
+            dgLowStock.Location = new Point(21, 21);
+            dgLowStock.Margin = new Padding(4, 4, 4, 4);
             dgLowStock.Name = "dgLowStock";
-            dgLowStock.RowHeadersVisible = false;
-            dgLowStock.Size = new Size(323, 536);
-            dgLowStock.TabIndex = 2;
-            dgLowStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgLowStock.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgLowStock.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgLowStock.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgLowStock.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgLowStock.ThemeStyle.BackColor = Color.White;
-            dgLowStock.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgLowStock.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgLowStock.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgLowStock.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgLowStock.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgLowStock.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgLowStock.ThemeStyle.HeaderStyle.Height = 4;
-            dgLowStock.ThemeStyle.ReadOnly = false;
-            dgLowStock.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgLowStock.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgLowStock.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgLowStock.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgLowStock.ThemeStyle.RowsStyle.Height = 25;
-            dgLowStock.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgLowStock.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // guna2HtmlLabel5
-            // 
-            guna2HtmlLabel5.BackColor = Color.Transparent;
-            guna2HtmlLabel5.Dock = DockStyle.Top;
-            guna2HtmlLabel5.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel5.Location = new Point(0, 0);
-            guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            guna2HtmlLabel5.Size = new Size(80, 23);
-            guna2HtmlLabel5.TabIndex = 3;
-            guna2HtmlLabel5.Text = "Low Stock";
-            guna2HtmlLabel5.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // guna2GradientPanel1
-            // 
-            guna2GradientPanel1.Controls.Add(dgInStock);
-            guna2GradientPanel1.Controls.Add(guna2HtmlLabel1);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges7;
-            guna2GradientPanel1.Dock = DockStyle.Fill;
-            guna2GradientPanel1.FillColor = Color.PaleGreen;
-            guna2GradientPanel1.FillColor2 = Color.White;
-            guna2GradientPanel1.Location = new Point(3, 3);
-            guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2GradientPanel1.Size = new Size(323, 559);
-            guna2GradientPanel1.TabIndex = 0;
-            // 
-            // dgInStock
-            // 
-            dataGridViewCellStyle10.BackColor = Color.White;
-            dgInStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dgInStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            dgInStock.ColumnHeadersHeight = 4;
-            dgInStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            dgInStock.DefaultCellStyle = dataGridViewCellStyle12;
-            dgInStock.Dock = DockStyle.Fill;
-            dgInStock.GridColor = Color.FromArgb(231, 229, 255);
-            dgInStock.Location = new Point(0, 23);
-            dgInStock.Name = "dgInStock";
-            dgInStock.RowHeadersVisible = false;
-            dgInStock.Size = new Size(323, 536);
-            dgInStock.TabIndex = 1;
-            dgInStock.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgInStock.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgInStock.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgInStock.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgInStock.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgInStock.ThemeStyle.BackColor = Color.White;
-            dgInStock.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgInStock.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgInStock.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgInStock.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgInStock.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgInStock.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgInStock.ThemeStyle.HeaderStyle.Height = 4;
-            dgInStock.ThemeStyle.ReadOnly = false;
-            dgInStock.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgInStock.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgInStock.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgInStock.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgInStock.ThemeStyle.RowsStyle.Height = 25;
-            dgInStock.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgInStock.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // guna2HtmlLabel1
-            // 
-            guna2HtmlLabel1.BackColor = Color.Transparent;
-            guna2HtmlLabel1.Dock = DockStyle.Top;
-            guna2HtmlLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel1.Location = new Point(0, 0);
-            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(64, 23);
-            guna2HtmlLabel1.TabIndex = 0;
-            guna2HtmlLabel1.Text = "In Stock";
-            guna2HtmlLabel1.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.White;
-            panel2.Controls.Add(tableLayoutPanel4);
-            panel2.Controls.Add(btnPrint);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(14, 64);
-            panel2.Margin = new Padding(3, 13, 3, 4);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1318, 62);
-            panel2.TabIndex = 5;
-            // 
-            // tableLayoutPanel4
-            // 
-            tableLayoutPanel4.ColumnCount = 10;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Controls.Add(txtTotalProjectFlowPanel, 8, 1);
-            tableLayoutPanel4.Controls.Add(guna2HtmlLabel6, 3, 1);
-            tableLayoutPanel4.Controls.Add(guna2HtmlLabel4, 1, 1);
-            tableLayoutPanel4.Controls.Add(guna2HtmlLabel9, 5, 1);
-            tableLayoutPanel4.Controls.Add(txtInStock, 2, 1);
-            tableLayoutPanel4.Controls.Add(txtLowStock, 4, 1);
-            tableLayoutPanel4.Controls.Add(guna2GradientPanel6, 6, 1);
-            tableLayoutPanel4.Controls.Add(guna2HtmlLabel11, 7, 1);
-            tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(0, 0);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 3;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Size = new Size(1243, 62);
-            tableLayoutPanel4.TabIndex = 12;
-            // 
-            // txtTotalProjectFlowPanel
-            // 
-            txtTotalProjectFlowPanel.Controls.Add(guna2DataGridView2);
-            txtTotalProjectFlowPanel.Controls.Add(txtTotalProjectFlow);
-            txtTotalProjectFlowPanel.CustomizableEdges = customizableEdges9;
-            txtTotalProjectFlowPanel.Dock = DockStyle.Fill;
-            txtTotalProjectFlowPanel.FillColor = Color.PowderBlue;
-            txtTotalProjectFlowPanel.FillColor2 = Color.White;
-            txtTotalProjectFlowPanel.ForeColor = Color.White;
-            txtTotalProjectFlowPanel.Location = new Point(1145, 19);
-            txtTotalProjectFlowPanel.Name = "txtTotalProjectFlowPanel";
-            txtTotalProjectFlowPanel.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            txtTotalProjectFlowPanel.Size = new Size(114, 24);
-            txtTotalProjectFlowPanel.TabIndex = 12;
-            // 
-            // guna2DataGridView2
-            // 
-            dataGridViewCellStyle13.BackColor = Color.White;
-            guna2DataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle14.ForeColor = Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
-            guna2DataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            guna2DataGridView2.ColumnHeadersHeight = 4;
-            guna2DataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = Color.White;
-            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle15.ForeColor = Color.White;
-            dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle15.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
-            guna2DataGridView2.DefaultCellStyle = dataGridViewCellStyle15;
-            guna2DataGridView2.Dock = DockStyle.Fill;
-            guna2DataGridView2.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView2.Location = new Point(0, 23);
-            guna2DataGridView2.Name = "guna2DataGridView2";
-            guna2DataGridView2.RowHeadersVisible = false;
-            guna2DataGridView2.Size = new Size(114, 1);
-            guna2DataGridView2.TabIndex = 2;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.Font = null;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            guna2DataGridView2.ThemeStyle.BackColor = Color.White;
-            guna2DataGridView2.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView2.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            guna2DataGridView2.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            guna2DataGridView2.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView2.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            guna2DataGridView2.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView2.ThemeStyle.HeaderStyle.Height = 4;
-            guna2DataGridView2.ThemeStyle.ReadOnly = false;
-            guna2DataGridView2.ThemeStyle.RowsStyle.BackColor = Color.White;
-            guna2DataGridView2.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            guna2DataGridView2.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView2.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2DataGridView2.ThemeStyle.RowsStyle.Height = 25;
-            guna2DataGridView2.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView2.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // txtTotalProjectFlow
-            // 
-            txtTotalProjectFlow.BackColor = Color.Transparent;
-            txtTotalProjectFlow.Dock = DockStyle.Top;
-            txtTotalProjectFlow.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            txtTotalProjectFlow.ForeColor = Color.Black;
-            txtTotalProjectFlow.Location = new Point(0, 0);
-            txtTotalProjectFlow.Name = "txtTotalProjectFlow";
-            txtTotalProjectFlow.Size = new Size(12, 23);
-            txtTotalProjectFlow.TabIndex = 1;
-            txtTotalProjectFlow.Text = "0";
-            txtTotalProjectFlow.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // guna2HtmlLabel6
-            // 
-            guna2HtmlLabel6.BackColor = Color.Transparent;
-            guna2HtmlLabel6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel6.Location = new Point(305, 19);
-            guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            guna2HtmlLabel6.Size = new Size(127, 23);
-            guna2HtmlLabel6.TabIndex = 3;
-            guna2HtmlLabel6.Text = "Total Low Stock:";
-            guna2HtmlLabel6.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // guna2HtmlLabel4
-            // 
-            guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel4.Location = new Point(-15, 19);
-            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(111, 23);
-            guna2HtmlLabel4.TabIndex = 1;
-            guna2HtmlLabel4.Text = "Total In Stock:";
-            guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // guna2HtmlLabel9
-            // 
-            guna2HtmlLabel9.BackColor = Color.Transparent;
-            guna2HtmlLabel9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel9.Location = new Point(625, 19);
-            guna2HtmlLabel9.Name = "guna2HtmlLabel9";
-            guna2HtmlLabel9.Size = new Size(144, 23);
-            guna2HtmlLabel9.TabIndex = 6;
-            guna2HtmlLabel9.Text = "Total Out of Stock:";
-            guna2HtmlLabel9.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // txtInStock
-            // 
-            txtInStock.Controls.Add(guna2HtmlLabel10);
-            txtInStock.CustomizableEdges = customizableEdges11;
-            txtInStock.Dock = DockStyle.Fill;
-            txtInStock.FillColor = Color.PaleGreen;
-            txtInStock.FillColor2 = Color.White;
-            txtInStock.Location = new Point(185, 19);
-            txtInStock.Name = "txtInStock";
-            txtInStock.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtInStock.Size = new Size(114, 24);
-            txtInStock.TabIndex = 8;
-            // 
-            // guna2HtmlLabel10
-            // 
-            guna2HtmlLabel10.BackColor = Color.Transparent;
-            guna2HtmlLabel10.Dock = DockStyle.Fill;
-            guna2HtmlLabel10.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel10.Location = new Point(0, 0);
-            guna2HtmlLabel10.Name = "guna2HtmlLabel10";
-            guna2HtmlLabel10.Size = new Size(12, 23);
-            guna2HtmlLabel10.TabIndex = 5;
-            guna2HtmlLabel10.Text = "0";
-            guna2HtmlLabel10.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
-            // txtLowStock
-            // 
-            txtLowStock.Controls.Add(guna2HtmlLabel7);
-            txtLowStock.CustomizableEdges = customizableEdges13;
-            txtLowStock.Dock = DockStyle.Fill;
-            txtLowStock.FillColor = Color.LightGoldenrodYellow;
-            txtLowStock.FillColor2 = Color.White;
-            txtLowStock.Location = new Point(505, 19);
-            txtLowStock.Name = "txtLowStock";
-            txtLowStock.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            txtLowStock.Size = new Size(114, 24);
-            txtLowStock.TabIndex = 10;
-            // 
-            // guna2HtmlLabel7
-            // 
-            guna2HtmlLabel7.BackColor = Color.Transparent;
-            guna2HtmlLabel7.Dock = DockStyle.Fill;
-            guna2HtmlLabel7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel7.Location = new Point(0, 0);
-            guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            guna2HtmlLabel7.Size = new Size(12, 23);
-            guna2HtmlLabel7.TabIndex = 10;
-            guna2HtmlLabel7.Text = "0";
-            guna2HtmlLabel7.TextAlignment = ContentAlignment.MiddleCenter;
+            dgLowStock.PreviewRowHeight = 42;
+            dgLowStock.Size = new Size(241, 368);
+            dgLowStock.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            dgLowStock.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            dgLowStock.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            dgLowStock.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            dgLowStock.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            dgLowStock.TabIndex = 1;
+            dgLowStock.Text = "sfDataGrid1";
             // 
             // guna2GradientPanel6
             // 
-            guna2GradientPanel6.Controls.Add(guna2DataGridView1);
-            guna2GradientPanel6.Controls.Add(txtOutOfStock);
-            guna2GradientPanel6.CustomizableEdges = customizableEdges15;
+            guna2GradientPanel6.BackColor = Color.Transparent;
+            guna2GradientPanel6.BorderRadius = 15;
+            guna2GradientPanel6.Controls.Add(dgPulledOut);
+            guna2GradientPanel6.CustomizableEdges = customizableEdges5;
             guna2GradientPanel6.Dock = DockStyle.Fill;
-            guna2GradientPanel6.FillColor = Color.IndianRed;
-            guna2GradientPanel6.FillColor2 = Color.White;
-            guna2GradientPanel6.Location = new Point(825, 19);
+            guna2GradientPanel6.FillColor = Color.DeepSkyBlue;
+            guna2GradientPanel6.FillColor2 = Color.Blue;
+            guna2GradientPanel6.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            guna2GradientPanel6.Location = new Point(346, 21);
+            guna2GradientPanel6.Margin = new Padding(21, 21, 21, 21);
             guna2GradientPanel6.Name = "guna2GradientPanel6";
-            guna2GradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2GradientPanel6.Size = new Size(114, 24);
-            guna2GradientPanel6.TabIndex = 11;
+            guna2GradientPanel6.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2GradientPanel6.Size = new Size(283, 410);
+            guna2GradientPanel6.TabIndex = 17;
             // 
-            // guna2DataGridView1
+            // dgPulledOut
             // 
-            dataGridViewCellStyle16.BackColor = Color.White;
-            guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle17.ForeColor = Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            guna2DataGridView1.ColumnHeadersHeight = 4;
-            guna2DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = Color.White;
-            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle18.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle18.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle18.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
-            guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle18;
-            guna2DataGridView1.Dock = DockStyle.Fill;
-            guna2DataGridView1.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.Location = new Point(0, 23);
-            guna2DataGridView1.Name = "guna2DataGridView1";
-            guna2DataGridView1.RowHeadersVisible = false;
-            guna2DataGridView1.Size = new Size(114, 1);
-            guna2DataGridView1.TabIndex = 2;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.Height = 4;
-            guna2DataGridView1.ThemeStyle.ReadOnly = false;
-            guna2DataGridView1.ThemeStyle.RowsStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            guna2DataGridView1.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView1.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2DataGridView1.ThemeStyle.RowsStyle.Height = 25;
-            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dgPulledOut.AccessibleName = "Table";
+            dgPulledOut.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            dgPulledOut.Dock = DockStyle.Fill;
+            dgPulledOut.Location = new Point(21, 21);
+            dgPulledOut.Margin = new Padding(4, 4, 4, 4);
+            dgPulledOut.Name = "dgPulledOut";
+            dgPulledOut.PreviewRowHeight = 42;
+            dgPulledOut.Size = new Size(241, 368);
+            dgPulledOut.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            dgPulledOut.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            dgPulledOut.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            dgPulledOut.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            dgPulledOut.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            dgPulledOut.TabIndex = 1;
+            dgPulledOut.Text = "sfDataGrid1";
+            // 
+            // guna2GradientPanel7
+            // 
+            guna2GradientPanel7.BackColor = Color.Transparent;
+            guna2GradientPanel7.BorderRadius = 15;
+            guna2GradientPanel7.Controls.Add(dgInStock);
+            guna2GradientPanel7.CustomizableEdges = customizableEdges7;
+            guna2GradientPanel7.Dock = DockStyle.Fill;
+            guna2GradientPanel7.FillColor = Color.MediumAquamarine;
+            guna2GradientPanel7.FillColor2 = Color.Green;
+            guna2GradientPanel7.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            guna2GradientPanel7.Location = new Point(21, 21);
+            guna2GradientPanel7.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel7.Name = "guna2GradientPanel7";
+            guna2GradientPanel7.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel7.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2GradientPanel7.Size = new Size(283, 410);
+            guna2GradientPanel7.TabIndex = 13;
+            // 
+            // dgInStock
+            // 
+            dgInStock.AccessibleName = "Table";
+            dgInStock.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            dgInStock.Dock = DockStyle.Fill;
+            dgInStock.Location = new Point(21, 21);
+            dgInStock.Margin = new Padding(4, 4, 4, 4);
+            dgInStock.Name = "dgInStock";
+            dgInStock.PreviewRowHeight = 42;
+            dgInStock.Size = new Size(241, 368);
+            dgInStock.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            dgInStock.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            dgInStock.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            dgInStock.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            dgInStock.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            dgInStock.TabIndex = 0;
+            dgInStock.Text = "sfDataGrid1";
+            // 
+            // tableLayoutPanel7
+            // 
+            tableLayoutPanel7.ColumnCount = 4;
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel7.Controls.Add(guna2GradientPanel3, 3, 0);
+            tableLayoutPanel7.Controls.Add(guna2GradientPanel2, 2, 0);
+            tableLayoutPanel7.Controls.Add(guna2GradientPanel1, 1, 0);
+            tableLayoutPanel7.Controls.Add(materialCard5, 0, 0);
+            tableLayoutPanel7.Dock = DockStyle.Top;
+            tableLayoutPanel7.Location = new Point(21, 96);
+            tableLayoutPanel7.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 1;
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel7.Size = new Size(1302, 154);
+            tableLayoutPanel7.TabIndex = 24;
+            // 
+            // guna2GradientPanel3
+            // 
+            guna2GradientPanel3.BackColor = Color.Transparent;
+            guna2GradientPanel3.BorderRadius = 15;
+            guna2GradientPanel3.Controls.Add(txtOutOfStock);
+            guna2GradientPanel3.Controls.Add(label4);
+            guna2GradientPanel3.CustomizableEdges = customizableEdges9;
+            guna2GradientPanel3.Dock = DockStyle.Fill;
+            guna2GradientPanel3.FillColor = Color.IndianRed;
+            guna2GradientPanel3.FillColor2 = Color.Red;
+            guna2GradientPanel3.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            guna2GradientPanel3.Location = new Point(996, 21);
+            guna2GradientPanel3.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel3.Name = "guna2GradientPanel3";
+            guna2GradientPanel3.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2GradientPanel3.Size = new Size(285, 112);
+            guna2GradientPanel3.TabIndex = 19;
             // 
             // txtOutOfStock
             // 
+            txtOutOfStock.AutoSize = true;
             txtOutOfStock.BackColor = Color.Transparent;
-            txtOutOfStock.Dock = DockStyle.Top;
-            txtOutOfStock.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            txtOutOfStock.ForeColor = Color.MistyRose;
-            txtOutOfStock.Location = new Point(0, 0);
+            txtOutOfStock.Dock = DockStyle.Right;
+            txtOutOfStock.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            txtOutOfStock.ForeColor = Color.White;
+            txtOutOfStock.Location = new Point(115, 53);
+            txtOutOfStock.Margin = new Padding(4, 0, 4, 0);
             txtOutOfStock.Name = "txtOutOfStock";
-            txtOutOfStock.Size = new Size(12, 23);
-            txtOutOfStock.TabIndex = 1;
-            txtOutOfStock.Text = "0";
-            txtOutOfStock.TextAlignment = ContentAlignment.MiddleCenter;
+            txtOutOfStock.Size = new Size(149, 54);
+            txtOutOfStock.TabIndex = 3;
+            txtOutOfStock.Text = "99,999";
+            txtOutOfStock.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // guna2HtmlLabel11
+            // label4
             // 
-            guna2HtmlLabel11.BackColor = Color.Transparent;
-            guna2HtmlLabel11.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2HtmlLabel11.Location = new Point(945, 19);
-            guna2HtmlLabel11.Name = "guna2HtmlLabel11";
-            guna2HtmlLabel11.Size = new Size(144, 23);
-            guna2HtmlLabel11.TabIndex = 12;
-            guna2HtmlLabel11.Text = "Total Project Flow:";
-            guna2HtmlLabel11.TextAlignment = ContentAlignment.MiddleCenter;
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Dock = DockStyle.Top;
+            label4.Font = new Font("Segoe UI", 12F);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(21, 21);
+            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(147, 32);
+            label4.TabIndex = 2;
+            label4.Text = "Out of Stock";
+            label4.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // btnPrint
+            // guna2GradientPanel2
             // 
-            btnPrint.Dock = DockStyle.Right;
-            btnPrint.FlatAppearance.BorderSize = 0;
-            btnPrint.FlatStyle = FlatStyle.Flat;
-            btnPrint.ImageKey = "printing.png";
-            btnPrint.ImageList = imageList1;
-            btnPrint.Location = new Point(1243, 0);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(75, 62);
-            btnPrint.TabIndex = 25;
-            btnPrint.Text = "Print";
-            btnPrint.TextImageRelation = TextImageRelation.ImageAboveText;
-            btnPrint.UseVisualStyleBackColor = true;
-            btnPrint.Visible = false;
+            guna2GradientPanel2.BackColor = Color.Transparent;
+            guna2GradientPanel2.BorderRadius = 15;
+            guna2GradientPanel2.Controls.Add(txtLowStock);
+            guna2GradientPanel2.Controls.Add(label3);
+            guna2GradientPanel2.CustomizableEdges = customizableEdges11;
+            guna2GradientPanel2.Dock = DockStyle.Fill;
+            guna2GradientPanel2.FillColor = Color.FromArgb(255, 224, 192);
+            guna2GradientPanel2.FillColor2 = Color.FromArgb(255, 128, 0);
+            guna2GradientPanel2.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            guna2GradientPanel2.Location = new Point(671, 21);
+            guna2GradientPanel2.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel2.Name = "guna2GradientPanel2";
+            guna2GradientPanel2.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            guna2GradientPanel2.Size = new Size(283, 112);
+            guna2GradientPanel2.TabIndex = 18;
             // 
-            // imageList1
+            // txtLowStock
             // 
-            imageList1.ColorDepth = ColorDepth.Depth32Bit;
-            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
-            imageList1.TransparentColor = Color.Transparent;
-            imageList1.Images.SetKeyName(0, "add.png");
-            imageList1.Images.SetKeyName(1, "delete.png");
-            imageList1.Images.SetKeyName(2, "diskette.png");
-            imageList1.Images.SetKeyName(3, "edit-text.png");
-            imageList1.Images.SetKeyName(4, "printing.png");
-            imageList1.Images.SetKeyName(5, "return.png");
+            txtLowStock.AutoSize = true;
+            txtLowStock.BackColor = Color.Transparent;
+            txtLowStock.Dock = DockStyle.Right;
+            txtLowStock.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            txtLowStock.ForeColor = Color.White;
+            txtLowStock.Location = new Point(113, 53);
+            txtLowStock.Margin = new Padding(4, 0, 4, 0);
+            txtLowStock.Name = "txtLowStock";
+            txtLowStock.Size = new Size(149, 54);
+            txtLowStock.TabIndex = 3;
+            txtLowStock.Text = "99,999";
+            txtLowStock.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Dock = DockStyle.Top;
+            label3.Font = new Font("Segoe UI", 12F);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(21, 21);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(120, 32);
+            label3.TabIndex = 2;
+            label3.Text = "Low Stock";
+            label3.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // guna2GradientPanel1
+            // 
+            guna2GradientPanel1.BackColor = Color.Transparent;
+            guna2GradientPanel1.BorderRadius = 15;
+            guna2GradientPanel1.Controls.Add(txtPulledOut);
+            guna2GradientPanel1.Controls.Add(label2);
+            guna2GradientPanel1.CustomizableEdges = customizableEdges13;
+            guna2GradientPanel1.Dock = DockStyle.Fill;
+            guna2GradientPanel1.FillColor = Color.DeepSkyBlue;
+            guna2GradientPanel1.FillColor2 = Color.Blue;
+            guna2GradientPanel1.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            guna2GradientPanel1.Location = new Point(346, 21);
+            guna2GradientPanel1.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel1.Name = "guna2GradientPanel1";
+            guna2GradientPanel1.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            guna2GradientPanel1.Size = new Size(283, 112);
+            guna2GradientPanel1.TabIndex = 17;
+            // 
+            // txtPulledOut
+            // 
+            txtPulledOut.AutoSize = true;
+            txtPulledOut.BackColor = Color.Transparent;
+            txtPulledOut.Dock = DockStyle.Right;
+            txtPulledOut.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            txtPulledOut.ForeColor = Color.White;
+            txtPulledOut.Location = new Point(113, 53);
+            txtPulledOut.Margin = new Padding(4, 0, 4, 0);
+            txtPulledOut.Name = "txtPulledOut";
+            txtPulledOut.Size = new Size(149, 54);
+            txtPulledOut.TabIndex = 3;
+            txtPulledOut.Text = "99,999";
+            txtPulledOut.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Dock = DockStyle.Top;
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(21, 21);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(194, 32);
+            label2.TabIndex = 2;
+            label2.Text = "Pulled-Out Stock";
+            label2.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // materialCard5
+            // 
+            materialCard5.BackColor = Color.Transparent;
+            materialCard5.BorderRadius = 15;
+            materialCard5.Controls.Add(txtInStock);
+            materialCard5.Controls.Add(label9);
+            materialCard5.CustomizableEdges = customizableEdges15;
+            materialCard5.Dock = DockStyle.Fill;
+            materialCard5.FillColor = Color.MediumAquamarine;
+            materialCard5.FillColor2 = Color.Green;
+            materialCard5.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard5.Location = new Point(21, 21);
+            materialCard5.Margin = new Padding(21, 21, 21, 21);
+            materialCard5.Name = "materialCard5";
+            materialCard5.Padding = new Padding(21, 21, 21, 21);
+            materialCard5.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            materialCard5.Size = new Size(283, 112);
+            materialCard5.TabIndex = 13;
+            // 
+            // txtInStock
+            // 
+            txtInStock.AutoSize = true;
+            txtInStock.BackColor = Color.Transparent;
+            txtInStock.Dock = DockStyle.Right;
+            txtInStock.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            txtInStock.ForeColor = Color.White;
+            txtInStock.Location = new Point(113, 53);
+            txtInStock.Margin = new Padding(4, 0, 4, 0);
+            txtInStock.Name = "txtInStock";
+            txtInStock.Size = new Size(149, 54);
+            txtInStock.TabIndex = 3;
+            txtInStock.Text = "99,999";
+            txtInStock.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.BackColor = Color.Transparent;
+            label9.Dock = DockStyle.Top;
+            label9.Font = new Font("Segoe UI", 12F);
+            label9.ForeColor = Color.White;
+            label9.Location = new Point(21, 21);
+            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(98, 32);
+            label9.TabIndex = 2;
+            label9.Text = "In Stock";
+            label9.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel1
             // 
@@ -803,21 +506,22 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.Controls.Add(guna2Separator1, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(14, 14);
+            tableLayoutPanel1.Location = new Point(21, 21);
+            tableLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1318, 50);
+            tableLayoutPanel1.Size = new Size(1302, 75);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // guna2Separator1
             // 
             guna2Separator1.Dock = DockStyle.Fill;
-            guna2Separator1.Location = new Point(3, 40);
-            guna2Separator1.Margin = new Padding(3, 2, 3, 2);
+            guna2Separator1.Location = new Point(4, 60);
+            guna2Separator1.Margin = new Padding(4, 3, 4, 3);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1312, 8);
+            guna2Separator1.Size = new Size(1294, 12);
             guna2Separator1.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -832,7 +536,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1318, 38);
+            tableLayoutPanel2.Size = new Size(1302, 57);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -844,13 +548,26 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
             materialLabel1.ForeColor = Color.FromArgb(255, 246, 233);
             materialLabel1.ImageAlign = ContentAlignment.MiddleLeft;
-            materialLabel1.Location = new Point(3, 0);
+            materialLabel1.Location = new Point(4, 0);
+            materialLabel1.Margin = new Padding(4, 0, 4, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(292, 38);
+            materialLabel1.Size = new Size(385, 57);
             materialLabel1.TabIndex = 3;
-            materialLabel1.Text = "Product Monitoring";
+            materialLabel1.Text = "Product Stock Monitoring";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "add.png");
+            imageList1.Images.SetKeyName(1, "delete.png");
+            imageList1.Images.SetKeyName(2, "diskette.png");
+            imageList1.Images.SetKeyName(3, "edit-text.png");
+            imageList1.Images.SetKeyName(4, "printing.png");
+            imageList1.Images.SetKeyName(5, "return.png");
             // 
             // guna2HtmlToolTip2
             // 
@@ -868,48 +585,61 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel2.Location = new Point(0, 0);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(80, 23);
+            guna2HtmlLabel2.Size = new Size(118, 34);
             guna2HtmlLabel2.TabIndex = 1;
             guna2HtmlLabel2.Text = "Low Stock";
             guna2HtmlLabel2.TextAlignment = ContentAlignment.MiddleCenter;
             // 
+            // guna2Elipse1
+            // 
+            guna2Elipse1.BorderRadius = 20;
+            guna2Elipse1.TargetControl = dgInStock;
+            // 
+            // guna2Elipse2
+            // 
+            guna2Elipse2.BorderRadius = 20;
+            guna2Elipse2.TargetControl = dgPulledOut;
+            // 
+            // guna2Elipse3
+            // 
+            guna2Elipse3.BorderRadius = 20;
+            guna2Elipse3.TargetControl = dgLowStock;
+            // 
+            // guna2Elipse4
+            // 
+            guna2Elipse4.BorderRadius = 20;
+            guna2Elipse4.TargetControl = dgOutOfStock;
+            // 
             // ProductMonitoringView
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1350, 729);
             Controls.Add(materialCard1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "ProductMonitoringView";
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             materialCard1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             guna2GradientPanel4.ResumeLayout(false);
-            guna2GradientPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgProjectFlow).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgOutOfStock).EndInit();
+            guna2GradientPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgLowStock).EndInit();
+            guna2GradientPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgPulledOut).EndInit();
+            guna2GradientPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgInStock).EndInit();
+            tableLayoutPanel7.ResumeLayout(false);
             guna2GradientPanel3.ResumeLayout(false);
             guna2GradientPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgOutOfStock).EndInit();
             guna2GradientPanel2.ResumeLayout(false);
             guna2GradientPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgLowStock).EndInit();
             guna2GradientPanel1.ResumeLayout(false);
             guna2GradientPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgInStock).EndInit();
-            panel2.ResumeLayout(false);
-            tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanel4.PerformLayout();
-            txtTotalProjectFlowPanel.ResumeLayout(false);
-            txtTotalProjectFlowPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView2).EndInit();
-            txtInStock.ResumeLayout(false);
-            txtInStock.PerformLayout();
-            txtLowStock.ResumeLayout(false);
-            txtLowStock.PerformLayout();
-            guna2GradientPanel6.ResumeLayout(false);
-            guna2GradientPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).EndInit();
+            materialCard5.ResumeLayout(false);
+            materialCard5.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
@@ -924,38 +654,34 @@ namespace PresentationLayer.Views.UserControls
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Guna2Separator guna2Separator1;
         private Guna2HtmlToolTip guna2HtmlToolTip2;
-        private Panel panel2;
         private ImageList imageList1;
-        private TableLayoutPanel tableLayoutPanel3;
-        private Guna2GradientPanel guna2GradientPanel3;
-        private Guna2GradientPanel guna2GradientPanel1;
-        private Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna2HtmlLabel guna2HtmlLabel3;
-        private Guna2DataGridView dgOutOfStock;
-        private Guna2DataGridView dgInStock;
-        private TableLayoutPanel tableLayoutPanel4;
-        private Guna2HtmlLabel guna2HtmlLabel6;
-        private Guna2HtmlLabel guna2HtmlLabel4;
-        private Guna2HtmlLabel guna2HtmlLabel9;
-        private Button btnPrint;
-        private Guna2GradientPanel guna2GradientPanel2;
-        private Guna2DataGridView dgLowStock;
-        private Guna2HtmlLabel guna2HtmlLabel5;
-        private Guna2GradientPanel txtInStock;
-        private Guna2HtmlLabel guna2HtmlLabel10;
-        private Guna2GradientPanel txtLowStock;
-        private Guna2HtmlLabel guna2HtmlLabel7;
-        private Guna2GradientPanel guna2GradientPanel6;
-        private Guna2DataGridView guna2DataGridView1;
-        private Guna2HtmlLabel txtOutOfStock;
         private Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna2GradientPanel guna2GradientPanel4;
-        private Guna2DataGridView dgProjectFlow;
-        private Guna2HtmlLabel guna2HtmlLabel8;
-        private Guna2DataGridView guna2DataGridView2;
         private Guna2HtmlLabel guna2HtmlLabel12;
-        private Guna2HtmlLabel guna2HtmlLabel11;
-        private Guna2GradientPanel txtTotalProjectFlowPanel;
-        private Guna2HtmlLabel txtTotalProjectFlow;
+        private TableLayoutPanel tableLayoutPanel7;
+        private Guna2GradientPanel guna2GradientPanel2;
+        private Label txtLowStock;
+        private Label label3;
+        private Guna2GradientPanel guna2GradientPanel1;
+        private Label txtPulledOut;
+        private Label label2;
+        private Guna2GradientPanel materialCard5;
+        private Label txtInStock;
+        private Label label9;
+        private Guna2GradientPanel guna2GradientPanel3;
+        private Label txtOutOfStock;
+        private Label label4;
+        private TableLayoutPanel tableLayoutPanel3;
+        private Guna2GradientPanel guna2GradientPanel4;
+        private Guna2GradientPanel guna2GradientPanel5;
+        private Guna2GradientPanel guna2GradientPanel6;
+        private Guna2GradientPanel guna2GradientPanel7;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid dgInStock;
+        private Guna2Elipse guna2Elipse1;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid dgOutOfStock;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid dgLowStock;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid dgPulledOut;
+        private Guna2Elipse guna2Elipse2;
+        private Guna2Elipse guna2Elipse3;
+        private Guna2Elipse guna2Elipse4;
     }
 }

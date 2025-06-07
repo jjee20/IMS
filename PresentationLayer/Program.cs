@@ -32,7 +32,8 @@ namespace PresentationLayer
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+
 
             // Resolve InventoryView and Presenter
             var unitOfWork = UnityC.Resolve<IUnitOfWork>();

@@ -30,10 +30,10 @@ namespace PresentationLayer.Views.UserControls
         private void AssociateAndRaiseViewEvents()
         {
             //Print
-            btnPrint.Click += delegate
-            {
-                PrintEvent?.Invoke(this, EventArgs.Empty);
-            };
+            //btnPrint.Click += delegate
+            //{
+            //    PrintEvent?.Invoke(this, EventArgs.Empty);
+            //};
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double InStock
@@ -53,28 +53,24 @@ namespace PresentationLayer.Views.UserControls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProjectFlow
         {
-            set { txtTotalProjectFlow.Text = value.ToString(); }
+            set { txtPulledOut.Text = value.ToString(); }
         }
 
         public void SetInStockListBindingSource(BindingSource source)
         {
             dgInStock.DataSource = source;
-            DataGridHelper.ApplyDisplayNames<StockViewModel>(source, dgInStock);
         }
         public void SetLowStockListBindingSource(BindingSource source)
         {
             dgLowStock.DataSource = source;
-            DataGridHelper.ApplyDisplayNames<StockViewModel>(source, dgLowStock);
         }
         public void SetOutOfStockListBindingSource(BindingSource source)
         {
             dgOutOfStock.DataSource = source;
-            DataGridHelper.ApplyDisplayNames<StockViewModel>(source, dgOutOfStock);
         }
         public void SetProjectFlowListBindingSource(BindingSource source)
         {
-            dgProjectFlow.DataSource = source;
-            DataGridHelper.ApplyDisplayNames<ProjectFlowViewModel>(source, dgProjectFlow);
+            dgPulledOut.DataSource = source;
         }
 
         public event EventHandler PrintEvent;

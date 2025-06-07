@@ -1,5 +1,7 @@
 ﻿using DomainLayer.Models;
 using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.PayrollViewModels;
 using InfastructureLayer.DataAccess.Data;
 using InfastructureLayer.Repositories;
 using InfastructureLayer.Repositories.Accounting.Payroll;
@@ -71,8 +73,12 @@ namespace InfastructureLayer.DataAccess.Repositories
             Allowance = new Lazy<IAllowanceRepository>(() => new AllowanceRepository(_db));
             Bonus = new Lazy<IBonusRepository>(() => new BonusRepository(_db));
             ProjectLine = new Lazy<IProjectLineRepository>(() => new ProjectLineRepository(_db));
-            StockInLogs = new Lazy<IProductStockInLogRepository>(() => new ProductStockInLogRepository(_db));
+            ProductStockInLogs = new Lazy<IProductStockInLogRepository>(() => new ProductStockInLogRepository(_db));
+            ProductPullOutLogs = new Lazy<IProductPullOutLogRepository>(() => new ProductPullOutLogRepository(_db));
+            ProductStockInLogLines = new Lazy<IProductStockInLogLinesRepository>(() => new ProductStockInLogLinesRepository(_db));
+            ProductPullOutLogLines = new Lazy<IProductPullOutLogLinesRepository>(() => new ProductPullOutLogLinesRepository(_db));
             EmployeeContribution = new Lazy<IEmployeeContributionRepository>(() => new EmployeeContributionRepository(_db));
+            Payroll = new Lazy<IPayrollRepository>(() => new PayrollRepository(_db));
         }
 
         // Lazy Repository Properties
@@ -124,8 +130,12 @@ namespace InfastructureLayer.DataAccess.Repositories
         public Lazy<IAllowanceRepository> Allowance { get; }
         public Lazy<IBonusRepository> Bonus { get; }
         public Lazy<IProjectLineRepository> ProjectLine { get; }
-        public Lazy<IProductStockInLogRepository> StockInLogs { get; }
+        public Lazy<IProductStockInLogRepository> ProductStockInLogs { get; }
+        public Lazy<IProductStockInLogLinesRepository> ProductStockInLogLines { get; }
+        public Lazy<IProductPullOutLogRepository> ProductPullOutLogs { get; }
+        public Lazy<IProductPullOutLogLinesRepository> ProductPullOutLogLines { get; }
         public Lazy<IEmployeeContributionRepository> EmployeeContribution { get; }
+        public Lazy<IPayrollRepository> Payroll { get; }
 
         public IRepository<T> GetRepository<T>() where T : class
         {

@@ -5,6 +5,5 @@ namespace ServiceLayer.Services.IRepositories.IAccounts
 {
     public interface IProjectRepository : IRepository<Project>
     {
-        void Update(Project obj);
     }
 }

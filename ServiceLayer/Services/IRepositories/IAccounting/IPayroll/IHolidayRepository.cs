@@ -5,6 +5,5 @@ namespace ServiceLayer.Services.IRepositories.IAccounting.IPayroll
 {
     public interface IHolidayRepository : IRepository<Holiday>
     {
-        void Update(Holiday obj);
     }
 }

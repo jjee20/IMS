@@ -51,6 +51,7 @@ namespace DomainLayer.Models.Inventory
         public virtual Branch Branch { get; set; }
         public virtual ProductType ProductType { get; set; }
 
-        public IEnumerable<ProductStockInLog> ProductStockInLogs { get; set; }
+        public IEnumerable<ProductStockInLogs> ProductStockInLogs { get; set; }
+        public IEnumerable<ProductPullOutLogs> ProductPullOutLogs { get; set; }
     }
 }

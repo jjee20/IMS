@@ -32,6 +32,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             OutOfStockBindingSource = new BindingSource();
             ProjectFlowBindingSource = new BindingSource();
 
+            _view.PrintEvent -= Print;
             _view.PrintEvent += Print;
 
             LoadInStock();
@@ -47,64 +48,77 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void LoadProjectFlow()
         {
-            ProjectFlowList = _unitOfWork.ProjectLine.Value.GetAll(includeProperties: "Project")
+            var pullOuts = _unitOfWork.ProductPullOutLogs.Value.GetAll(includeProperties: "ProductPullOutLogLines.Product,Project");
+            ProjectFlowList = pullOuts
+                .SelectMany(p => p.ProductPullOutLogLines)
+                .Where(p => p.Product != null && p.ProductPullOutLogs != null && p.ProductPullOutLogs.Project != null)
                 .GroupBy(p => new
                 {
-                    p.ProjectId,
-                    ProductName = p.Product?.ProductName ?? p.ProductName // Fallback if navigation is null
+                    ProjectId = p.ProductPullOutLogs.Project.ProjectId,
+                    ProductName = p.Product.ProductName,
+                    ProjectName = p.ProductPullOutLogs.Project.ProjectName
                 })
-               .Select(g => new ProjectFlowViewModel
-               {
-                   Product = g.Key.ProductName,
-                   Qty = g.Sum(c => c.Quantity),
-                   Project = g.FirstOrDefault()?.Project?.ProjectName ?? "Unknown"
-               })
-               .ToList();
+                .Select(g => new ProjectFlowViewModel
+                {
+                    Product = g.Key.ProductName,
+                    Project = g.Key.ProjectName,
+                    Qty = g.Sum(x => x.StockQuantity)
+                })
+                .ToList();
+
             ProjectFlowBindingSource.DataSource = ProjectFlowList;
             _view.ProjectFlow = ProjectFlowList.Sum(c => c.Qty);
         }
 
         private void LoadOutOfStock()
         {
-            OutOfStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
-               .Where(p => p.ProductStockInLogs.Sum(c => c.StockQuantity) == 0) // Ensure total stock is 0
-               .GroupBy(p => p.ProductName)
-               .Select(g => new StockViewModel
-               {
-                   Product = g.Key,
-                   Qty = g.Sum(p => p.ProductStockInLogs.Sum(c => c.StockQuantity))
-               })
-               .ToList();
-            OutOfStockBindingSource.DataSource = OutOfStockList;
-            _view.OutOfStock = OutOfStockList.Sum(c => c.Qty);
-        }
+            var currentStocks = GetProductCurrentStocks();
 
+            OutOfStockList = currentStocks
+                .Where(x => x.stockQty <= 0)
+                .GroupBy(x => x.product.ProductName)
+                .Select(g => new StockViewModel
+                {
+                    Product = g.Key,
+                    Qty = 0
+                })
+                .ToList();
+
+            OutOfStockBindingSource.DataSource = OutOfStockList;
+            _view.OutOfStock = OutOfStockList.Count();
+        }
         private void LoadLowStock()
         {
-            LowStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
-               .Where(p => p.ProductStockInLogs.Sum(c => c.StockQuantity) <= p.ReorderLevel && p.ProductStockInLogs.Sum(c => c.StockQuantity) != 0) // Ensure total stock is 0
-               .GroupBy(p => p.ProductName)
-               .Select(g => new StockViewModel
-               {
-                   Product = g.Key,
-                   Qty = g.Sum(p => p.ProductStockInLogs.Sum(c => c.StockQuantity)) // Fix the Sum logic
-               })
-               .ToList();
-            LowStockBindingSource.DataSource = LowStockList;
+            var currentStocks = GetProductCurrentStocks();
 
+            LowStockList = currentStocks
+                .Where(x => x.stockQty > 0 && x.stockQty <= x.product.ReorderLevel)
+                .GroupBy(x => x.product.ProductName)
+                .Select(g => new StockViewModel
+                {
+                    Product = g.Key,
+                    Qty = g.Sum(x => x.stockQty)
+                })
+                .ToList();
+
+            LowStockBindingSource.DataSource = LowStockList;
             _view.LowStock = LowStockList.Sum(c => c.Qty);
         }
 
         private void LoadInStock()
         {
-            InStockList = _unitOfWork.Product.Value.GetAll(includeProperties: "ProductStockInLogs")
-               .GroupBy(p => p.ProductName)
-               .Select(g => new StockViewModel
-               {
-                   Product = g.Key,
-                   Qty = g.Sum(p => p.ProductStockInLogs.Sum(c => c.StockQuantity)) // Fix the Sum logic
-               })
-               .ToList();
+            var currentStocks = GetProductCurrentStocks();
+
+            InStockList = currentStocks
+                .Where(x => x.stockQty > 0)
+                .GroupBy(x => x.product.ProductName)
+                .Select(g => new StockViewModel
+                {
+                    Product = g.Key,
+                    Qty = g.Sum(x => x.stockQty)
+                })
+                .ToList();
+
             InStockBindingSource.DataSource = InStockList;
             _view.InStock = InStockList.Sum(c => c.Qty);
         }
@@ -117,6 +131,40 @@ namespace RavenTech_ERP.Presenters.Inventory
         private void Search(object? sender, EventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private List<(Product product, double stockQty)> GetProductCurrentStocks()
+        {
+            var stockInLogs = _unitOfWork.ProductStockInLogs.Value.GetAll(includeProperties: "ProductStockInLogLines.Product");
+            var pullOutLogs = _unitOfWork.ProductPullOutLogs.Value.GetAll(includeProperties: "ProductPullOutLogLines.Product");
+
+            var stockIn = stockInLogs
+                .SelectMany(log => log.ProductStockInLogLines)
+                .Where(l => l.Product != null)
+                .GroupBy(l => l.Product.ProductId)
+                .ToDictionary(g => g.Key, g => g.Sum(l => l.StockQuantity));
+
+            var pullOut = pullOutLogs
+                .SelectMany(log => log.ProductPullOutLogLines)
+                .Where(l => l.Product != null)
+                .GroupBy(l => l.Product.ProductId)
+                .ToDictionary(g => g.Key, g => g.Sum(l => l.StockQuantity));
+
+            var allProducts = stockIn.Keys.Union(pullOut.Keys);
+
+            var currentStocks = allProducts
+                .Select(id =>
+                {
+                    var product = stockInLogs.SelectMany(l => l.ProductStockInLogLines)
+                                             .FirstOrDefault(p => p.Product.ProductId == id)?.Product;
+                    stockIn.TryGetValue(id, out double stockQtyIn);
+                    pullOut.TryGetValue(id, out double stockQtyOut);
+                    return (product, stockQtyIn - stockQtyOut);
+                })
+                .Where(x => x.product != null)
+                .ToList();
+
+            return currentStocks;
         }
     }
 }

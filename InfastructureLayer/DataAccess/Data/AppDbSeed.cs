@@ -10,14 +10,14 @@ namespace InfastructureLayer.DataAccess.Data
     public class AppDbSeed
     {
         //Role Ids
-        private static string SuperAdminRoleId = Guid.NewGuid().ToString();
-        private static string InventoryRoleId = Guid.NewGuid().ToString();
-        private static string PayrollRoleId = Guid.NewGuid().ToString();
+        private static string SuperAdminRoleId = "EAA7F29D - DF72 - 44EB - 84B2 - 7ACCE813336A";
+        private static string InventoryRoleId = "C2C4EE84-DA3F-46ED-B55C-EDFE9D4C227E";
+        private static string PayrollRoleId = "A55B2EC0-5D09-4509-9844-8F474BB85C5D";
 
 		//User Ids
-		private static string SuperAdminId = Guid.NewGuid().ToString();
-        private static string InventoryId = Guid.NewGuid().ToString();
-        private static string PayrollId = Guid.NewGuid().ToString();
+		private static string SuperAdminId = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD";
+        private static string InventoryId = "FB38CC93-2B1E-4444-9A48-396E4C28E190";
+        private static string PayrollId = "6628DE62-AF21-4389-B612-623A1A17637C";
 
         public static void SeedRole(ModelBuilder modelBuilder)
         {

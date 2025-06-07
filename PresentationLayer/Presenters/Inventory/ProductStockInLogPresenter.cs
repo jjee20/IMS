@@ -8,6 +8,7 @@ using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using RavenTech_ERP.Views.UserControls.Inventory.Upserts;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
@@ -29,6 +30,13 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.MultipleDeleteEvent -= MultipleDelete;
+            _view.PrintEvent -= Print;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
@@ -64,7 +72,7 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductStockInLogViewModel row)
             {
-                var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId);
+                var entity = _unitOfWork.ProductStockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId, includeProperties: "ProductStockInLogLines.Product");
                 using (var form = new UpsertProductStockInLogView(_unitOfWork,entity))
                 {
                     form.Text = "Edit Product Stock-In Log";
@@ -79,10 +87,11 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductStockInLogViewModel row)
             {
-                var entity = _unitOfWork.StockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId);
+                var entity = _unitOfWork.ProductStockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId, includeProperties: "ProductStockInLogLines");
                 if (entity != null)
                 {
-                    _unitOfWork.StockInLogs.Value.Remove(entity);
+                    _unitOfWork.ProductStockInLogLines.Value.RemoveRange(entity.ProductStockInLogLines);
+                    _unitOfWork.ProductStockInLogs.Value.Remove(entity);
                     _unitOfWork.Save();
 
                     _view.ShowMessage("ProductStockInLog deleted successfully.");
@@ -104,8 +113,8 @@ namespace PresentationLayer.Presenters
                 var selected = _view.DataGrid.SelectedItems.Cast<ProductStockInLogViewModel>().ToList(); // If you're using view models
                 var ids = selected.Select(b => b.ProductStockInLogId).ToList();
 
-                var entities = _unitOfWork.StockInLogs.Value
-                    .GetAll()
+                var entities = _unitOfWork.ProductStockInLogs.Value
+                    .GetAll(includeProperties: "ProductStockInLogLines")
                     .Where(b => ids.Contains(b.ProductStockInLogId))
                     .ToList();
 
@@ -114,8 +123,11 @@ namespace PresentationLayer.Presenters
                     _view.ShowMessage("Selected records could not be found.");
                     return;
                 }
-
-                _unitOfWork.StockInLogs.Value.RemoveRange(entities);
+                foreach (var item in entities)
+                {
+                    _unitOfWork.ProductStockInLogLines.Value.RemoveRange(item.ProductStockInLogLines);
+                }
+                _unitOfWork.ProductStockInLogs.Value.RemoveRange(entities);
                 _unitOfWork.Save();
 
                 _view.ShowMessage($"{entities.Count} entries deleted successfully.");
@@ -140,9 +152,9 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllProductStockInLogList(bool emptyValue = false)
         {
-            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.StockInLogs.Value.GetAll());
+            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.ProductStockInLogs.Value.GetAll(includeProperties: "ProductStockInLogLines.Product.UnitOfMeasure"));
 
-            if (!emptyValue) ProductStockInLogList = ProductStockInLogList.Where(c => c.Product.ToLower().Contains(_view.SearchValue.ToLower()));
+            if (!emptyValue) ProductStockInLogList = ProductStockInLogList.Where(c => c.ProductStockInLogLines.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductInStockLogListBindingSource(ProductStockInLogList);
         }
     }

@@ -24,6 +24,13 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.MultipleDeleteEvent -= MultipleDelete;
+            _view.PrintEvent -= Print;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
@@ -135,7 +142,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
         
         private void LoadAllBenefitList(bool emptyValue = false)
         {
-            BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll());
+            BenefitList = Program.Mapper.Map<IEnumerable<BenefitViewModel>>(_unitOfWork.Benefit.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) BenefitList = BenefitList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetBenefitListBindingSource(BenefitList.OrderBy(c => c.Employee));

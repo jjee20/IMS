@@ -2,6 +2,7 @@
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
+using PresentationLayer;
 using PresentationLayer.Reports;
 using RavenTech_ERP.Helpers;
 using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
@@ -16,7 +17,8 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         public IPayrollView _view;
         private IUnitOfWork _unitOfWork;
         private BindingSource ProjectBindingSource;
-        private List<PayrollViewModel> PayrollList;
+        private List<PayrollViewModel> PayrollVMList;
+        private List<DomainLayer.Models.Accounting.Payroll.Payroll> PayrollList;
         private IEnumerable<Project> ProjectList;
         private string ProjectName;
         public PayrollPresenter(IPayrollView view, IUnitOfWork unitOfWork)
@@ -27,7 +29,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view = view;
             _unitOfWork = unitOfWork;
             ProjectBindingSource = new BindingSource();
-            PayrollList = new List<PayrollViewModel>();
+            PayrollVMList = new List<PayrollViewModel>();
+            PayrollList = new List<DomainLayer.Models.Accounting.Payroll.Payroll>();
+            _view.PrintPayrollEvent -= PrintPayroll;
+            _view.SearchEvent -= Search;
+            _view.TMonthEvent -= TMonthPayCalculation;
+            _view.PrintPaySlipEvent -= PrintPayslip;
+            
             _view.PrintPayrollEvent += PrintPayroll;
             _view.SearchEvent += Search;
             _view.TMonthEvent += TMonthPayCalculation;
@@ -113,9 +121,13 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
         private void LoadAllPayrollList(DateTime startDate, DateTime endDate, int? projectId = 0)
         {
             PayrollList.Clear();
+            PayrollVMList.Clear();
 
-            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");
-            var contributions = _unitOfWork.Contribution.Value.GetAll();
+            var employees = _unitOfWork.Employee.Value.GetAll(
+                     c => c.isActive != false && (c.ContractStartDate.Date <= startDate.Date && c.ContractEndDate.Date >= endDate.Date),
+                     includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution"
+                 );
+
             var holidays = _unitOfWork.Holiday.Value.GetAll(h => h.EffectiveDate.Date >= startDate && h.EffectiveDate.Date <= endDate).ToList();
 
             if (!_view.All && projectId.HasValue)
@@ -129,7 +141,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 ProjectName = "Project: All";
             }
 
-            var payrollEntries = employees.OrderBy(e => e.LastName).Select(employee =>
+            PayrollList = employees.OrderBy(e => e.LastName).Select(employee =>
             {
                 var attendances = employee.Attendances?.Where(a => a.Date.Date >= startDate && a.Date.Date <= endDate) ?? Enumerable.Empty<Attendance>();
                 var approvedLeaves = employee.Leaves.Where(l => l.LeaveType != LeaveType.UnpaidLeave && l.Status == Status.Approved);
@@ -145,7 +157,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 double presentDays = fullDays + halfDays;
 
                 double overtimeHours = attendances.Sum(a => Math.Max(0, a.HoursWorked - shiftHours));
-                double overtimePay = overtimeHours * (shiftHours > 0 ? (employee.BasicSalary / shiftHours) : 0);
+                double overtimePay = overtimeHours * hourlyRate;
 
                 double allowancePay = PayrollHelper.CalculateAllowances(employee, startDate, endDate);
                 double bonusPay = PayrollHelper.CalculateBonuses(employee, startDate, endDate);
@@ -163,9 +175,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 double pagibig = (_view.IncludeContribution && employee.isDeducted) ? contributionsData?.PagIbig ?? 0 : 0;
                 double philHealth = (_view.IncludeContribution && employee.isDeducted) ? contributionsData?.PhilHealth ?? 0 : 0;
 
-                return new PayrollViewModel
+                return new DomainLayer.Models.Accounting.Payroll.Payroll
                 {
-                    Employee = $"{employee.LastName}, {employee.FirstName}",
+                    EmployeeId = employee.EmployeeId,
+                    EmployeeName = $"{employee.LastName}, {employee.FirstName}",
+                    StartDate = startDate,
+                    EndDate = endDate,
                     DailyRate = employee.BasicSalary,
                     DaysWorked = presentDays,
                     BasicSalary = Math.Round(regularPay, 0),
@@ -182,8 +197,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 };
             }).ToList();
 
-            PayrollList.AddRange(payrollEntries);
-            _view.SetPayrollListBindingSource(PayrollList.OrderBy(e => e.Employee).ToList());
+            PayrollVMList = Program.Mapper.Map<List<PayrollViewModel>>(PayrollList);
+
+            _view.SetPayrollListBindingSource(PayrollVMList.OrderBy(e => e.Employee).ToList());
         }
 
         private void Search(object? sender, EventArgs e)
@@ -207,8 +223,40 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             }
         }
 
-        private void PrintPayroll(object? sender, EventArgs e)
+        private async void PrintPayroll(object? sender, EventArgs e)
         {
+            foreach (var payroll in PayrollList)
+            {
+                var existingPayroll = await _unitOfWork.Payroll.Value
+                    .GetAsync(p => p.EmployeeId == payroll.EmployeeId && p.StartDate.Date == _view.StartDate.Date && p.EndDate.Date == _view.EndDate.Date);
+
+                if (existingPayroll != null)
+                {
+                    // Update fields
+                    existingPayroll.DailyRate = payroll.DailyRate;
+                    existingPayroll.DaysWorked = payroll.DaysWorked;
+                    existingPayroll.BasicSalary = payroll.BasicSalary;
+                    existingPayroll.OvertimePay = payroll.OvertimePay;
+                    existingPayroll.Allowances = payroll.Allowances;
+                    existingPayroll.Benefits = payroll.Benefits;
+                    existingPayroll.Bonuses = payroll.Bonuses;
+                    existingPayroll.LateAndEarly = payroll.LateAndEarly;
+                    existingPayroll.Absent = payroll.Absent;
+                    existingPayroll.SSSContribution = payroll.SSSContribution;
+                    existingPayroll.PagibigContribution = payroll.PagibigContribution;
+                    existingPayroll.PhilHealthContribution = payroll.PhilHealthContribution;
+                    existingPayroll.Deductions = payroll.Deductions;
+
+                    _unitOfWork.Payroll.Value.Update(existingPayroll); // Use Update
+                }
+                else
+                {
+                    await _unitOfWork.Payroll.Value.AddAsync(payroll); // Use Add for new records
+                }
+            }
+
+            await _unitOfWork.SaveAsync();
+
 
             try
             {
@@ -223,11 +271,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
 
                 var localReport = new LocalReport();
-                var reportDataSource = new ReportDataSource("Payroll", PayrollList);
+                var reportDataSource = new ReportDataSource("Payroll", PayrollVMList);
                 var parameters = new List<ReportParameter>
                 {
                     new ReportParameter("PayrollPeriod", $"Payroll Period: {_view.StartDate.ToShortDateString()} to {_view.EndDate.ToShortDateString()}"),
-                    new ReportParameter("Total", PayrollList.Sum(c => c.NetPay).ToString()),
+                    new ReportParameter("Total", PayrollVMList.Sum(c => c.NetPay).ToString()),
                     new ReportParameter("Project", ProjectName),
                 };
                 //localReport.SetParameters(parameters);

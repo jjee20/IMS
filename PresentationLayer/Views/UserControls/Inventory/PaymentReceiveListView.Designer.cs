@@ -52,12 +52,12 @@
             materialCard4.Depth = 0;
             materialCard4.Dock = DockStyle.Fill;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard4.Location = new Point(2, 2);
-            materialCard4.Margin = new Padding(14);
+            materialCard4.Location = new Point(3, 3);
+            materialCard4.Margin = new Padding(20, 23, 20, 23);
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
-            materialCard4.Padding = new Padding(14);
-            materialCard4.Size = new Size(796, 446);
+            materialCard4.Padding = new Padding(20, 23, 20, 23);
+            materialCard4.Size = new Size(1078, 555);
             materialCard4.TabIndex = 2;
             // 
             // panel1
@@ -65,9 +65,10 @@
             panel1.Controls.Add(dgList);
             panel1.Controls.Add(dgPager);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(14, 14);
+            panel1.Location = new Point(20, 23);
+            panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(768, 418);
+            panel1.Size = new Size(1038, 509);
             panel1.TabIndex = 1;
             // 
             // dgList
@@ -129,10 +130,12 @@
             dgList.FrozenColumnCount = 2;
             dgList.FrozenRowCount = 1;
             dgList.Location = new Point(0, 0);
+            dgList.Margin = new Padding(4, 5, 4, 5);
             dgList.Name = "dgList";
+            dgList.PreviewRowHeight = 42;
             dgList.ShowGroupDropArea = true;
             dgList.ShowToolTip = true;
-            dgList.Size = new Size(768, 382);
+            dgList.Size = new Size(1038, 449);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -147,19 +150,21 @@
             dgPager.CanOverrideStyle = true;
             dgPager.Dock = DockStyle.Bottom;
             dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 382);
+            dgPager.Location = new Point(0, 449);
+            dgPager.Margin = new Padding(4, 5, 4, 5);
             dgPager.Name = "dgPager";
             dgPager.PageSize = 15;
-            dgPager.Size = new Size(768, 36);
+            dgPager.Size = new Size(1038, 60);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
             // PaymentReceiveListView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1084, 561);
             Controls.Add(materialCard4);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "PaymentReceiveListView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

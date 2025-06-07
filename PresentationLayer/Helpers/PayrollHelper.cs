@@ -33,7 +33,7 @@ namespace RavenTech_ERP.Helpers
         {
             return employee.Allowances?
                 .Where(a => a.EmployeeId == employee.EmployeeId &&
-                            (a.IsRecurring || a.DateGranted.Date >= startDate.Date && a.DateGranted.Date <= endDate.Date))
+                            (a.StartDate.Date == startDate.Date && a.EndDate.Date == endDate.Date))
                 .Sum(a => a.Amount) ?? 0;
         }
         public static double CalculateBonuses(Employee employee, DateTime startDate, DateTime endDate)

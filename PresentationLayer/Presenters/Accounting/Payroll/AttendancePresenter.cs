@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.ViewModels.PayrollViewModels;
+using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer;
 using PresentationLayer.Reports;
@@ -28,6 +29,11 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.ShowAttendanceEvent -= ShowAttendance;
+            _view.PrintEvent -= Print;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.ShowAttendanceEvent += ShowAttendance;
@@ -38,6 +44,11 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             LoadAllAttendanceList();
 
             //Source Binding
+        }
+
+        private void FormClosing(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void ShowAttendance(object sender, CellClickEventArgs e)

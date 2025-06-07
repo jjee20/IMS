@@ -7,8 +7,6 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Images\icon\RavenTech.ico</ApplicationIcon>
-	  <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
-	  <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
 	  <PlatformTarget>x64</PlatformTarget>
 	  <Platforms>AnyCPU;x64</Platforms>
 	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -39,8 +37,10 @@
     <PackageReference Include="Guna.Charts.WinForms" Version="1.1.0" />
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.7" />
     <PackageReference Include="MaterialSkin.2" Version="2.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.13.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.13.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="4.13.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
     <PackageReference Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" />
@@ -50,6 +50,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.26" />
     <PackageReference Include="Syncfusion.DataGridExport.WinForms" Version="29.1.35" />
     <PackageReference Include="Syncfusion.Licensing" Version="29.1.35" />
@@ -174,6 +178,9 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\HolidayView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductPullOutLogView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\ProductStockInLogView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,7 +193,7 @@
     <Compile Update="Views\UserControls\Inventory\Searches\SearchEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertProductStockInLogView.cs">
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertProductPullOutLogView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\Upserts\UpsertPurchaseOrderView.cs">

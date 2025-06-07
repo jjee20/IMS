@@ -47,7 +47,10 @@ namespace ServiceLayer.Services.IRepositories
         Lazy<IShiftRepository> Shift { get; }
         Lazy<IShipmentRepository> Shipment { get; }
         Lazy<IShipmentTypeRepository> ShipmentType { get; }
-        Lazy<IProductStockInLogRepository> StockInLogs { get; }
+        Lazy<IProductStockInLogRepository> ProductStockInLogs { get; }
+        Lazy<IProductStockInLogLinesRepository> ProductStockInLogLines { get; }
+        Lazy<IProductPullOutLogRepository> ProductPullOutLogs { get; }
+        Lazy<IProductPullOutLogLinesRepository> ProductPullOutLogLines { get; }
         Lazy<ITargetGoalsRepository> TargetGoals { get; }
         Lazy<ITaxRepository> Tax { get; }
         Lazy<IUnitOfMeasureRepository> UnitOfMeasure { get; }
@@ -56,6 +59,7 @@ namespace ServiceLayer.Services.IRepositories
         Lazy<IVendorTypeRepository> VendorType { get; }
         Lazy<IWarehouseRepository> Warehouse { get; }
         Lazy<IThirteenthMonthRepository> ThirteenthMonth { get; }
+        Lazy<IPayrollRepository> Payroll { get; }
 
         IRepository<T> GetRepository<T>() where T : class;
         void Save();

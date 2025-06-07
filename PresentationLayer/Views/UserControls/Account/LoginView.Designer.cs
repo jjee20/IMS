@@ -155,7 +155,7 @@
             txtPassword.Anchor = AnchorStyles.None;
             txtPassword.BorderRadius = 5;
             txtPassword.CustomizableEdges = customizableEdges6;
-            txtPassword.DefaultText = "";
+            txtPassword.DefaultText = "pass@123";
             txtPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             txtPassword.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
@@ -181,7 +181,7 @@
             txtUsername.Anchor = AnchorStyles.None;
             txtUsername.BorderRadius = 5;
             txtUsername.CustomizableEdges = customizableEdges8;
-            txtUsername.DefaultText = "";
+            txtUsername.DefaultText = "superadmin";
             txtUsername.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtUsername.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             txtUsername.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);

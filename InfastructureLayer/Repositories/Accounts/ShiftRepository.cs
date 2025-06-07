@@ -14,10 +14,5 @@ namespace InfastructureLayer.Repositories.Accounts
         {
             _db = db;
         }
-
-        public void Update(Shift obj)
-        {
-            _db.Shifts.Update(obj);
-        }
     }
 }

@@ -29,6 +29,14 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.ProjectEvent -= Project;
+            _view.MultipleDeleteEvent -= MultipleDelete;
+            _view.PrintEvent -= Print;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
@@ -96,6 +104,10 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProjectViewModel row)
             {
+                var lineEntity = _unitOfWork.ProjectLine.Value.GetAll().Where(c => c.ProjectId == row.ProjectId).ToList();
+
+                _unitOfWork.ProjectLine.Value.RemoveRange(lineEntity);
+
                 var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId);
                 if (entity != null)
                 {

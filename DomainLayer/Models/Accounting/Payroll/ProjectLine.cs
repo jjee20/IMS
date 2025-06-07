@@ -27,5 +27,10 @@ namespace DomainLayer.Models.Accounting.Payroll
         public double DiscountPercentage { get; set; }
         public double DiscountAmount { get; set; }
         public double SubTotal { get; set; }
+
+        public string? DeliveredBy { get; set; }
+        public DateTime? DeliveredDate { get; set; }
+        public string? ReceivedBy { get; set; }
+        public DateTime? ReceivedDate { get; set; }
     }
 }

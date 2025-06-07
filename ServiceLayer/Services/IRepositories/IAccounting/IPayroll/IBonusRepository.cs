@@ -6,6 +6,5 @@ namespace ServiceLayer.Services.IRepositories.IAccounting.IPayroll
 {
     public interface IBonusRepository : IRepository<Bonus>
     {
-        void Update(Bonus obj);
     }
 }

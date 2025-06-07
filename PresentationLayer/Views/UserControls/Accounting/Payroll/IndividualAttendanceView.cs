@@ -3,6 +3,7 @@ using DomainLayer.ViewModels.PayrollViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer;
 using PresentationLayer.Reports;
+using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts;
 using ServiceLayer.Services.IRepositories;
@@ -31,14 +32,17 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
         private DateTime _endndDate;
         private IEnumerable<IndividualAttendanceViewModel> _attendanceList;
 
-        public IndividualAttendanceView(IUnitOfWork unitOfWork, Employee employee, DateTime startDate, DateTime endndDate)
+        public IndividualAttendanceView(IUnitOfWork unitOfWork, Employee employee, DateTime startDate, DateTime endDate)
         {
             InitializeComponent();
             _unitOfWork = unitOfWork;
             _employee = employee;
             _startDate = startDate;
-            _endndDate = endndDate;
-            LoadAllAttendance(employee.EmployeeId, startDate.Date, endndDate.Date);
+            _endndDate = endDate;
+
+            txtStartDate.Value = startDate;
+            txtEndDate.Value = endDate;
+            LoadAllAttendance(employee.EmployeeId, startDate.Date, endDate.Date);
         }
         public SfDataGrid DataGrid => dgList;
 
@@ -50,6 +54,13 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
                 c.Date.Date >= startDate.Date && c.Date.Date <= endDate.Date, includeProperties: "Employee,Project"));
 
             dgPager.DataSource = _attendanceList.ToList();
+
+            foreach (var item in _attendanceList)
+            {
+                item.Edit = Resources.edit;
+                item.Delete = Resources.delete;
+            }
+
             dgList.DataSource = dgPager.PagedSource;
         }
 

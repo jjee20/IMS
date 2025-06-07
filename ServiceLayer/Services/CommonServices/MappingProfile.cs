@@ -37,9 +37,31 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
             CreateMap<JobPosition, JobPositionViewModel>()
                 .ReverseMap();
-            CreateMap<ProductStockInLog, ProductStockInLogViewModel>()
-                .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product.ProductName))
-                .ForMember(dest => dest.DateAdded, opt => opt.MapFrom(src => src.DateAdded.ToLongDateString()))
+            CreateMap<ProductStockInLogs, ProductStockInLogViewModel>()
+                .ForMember(dest => dest.DeliveredDate, opt => opt.MapFrom(src => src.DeliveredDate.Value.ToLongDateString()))
+                .ForMember(dest => dest.ReceivedDate, opt => opt.MapFrom(src => src.ReceivedDate.Value.ToLongDateString()))
+                .ForMember(dest => dest.ProductStockInLogLines, opt => opt.MapFrom(src =>
+                string.Join(",\n", src.ProductStockInLogLines.Select(c =>
+                    $"{c.DateAdded:yyyy-MM-dd} - {c.Product.ProductName} - ({c.StockQuantity} {c.Product.UnitOfMeasure.UnitOfMeasureName} | " +
+                    $"Size: {c.Product.Size}, Color: {c.Product.Color} | " +
+                    $"UnitCost: {c.Product.DefaultBuyingPrice:C} | Total: {(c.StockQuantity * c.Product.DefaultBuyingPrice):C})"
+                ))
+            ))
+            .ForMember(dest => dest.ProductStatus, opt => opt.MapFrom(src => src.ProductStatus.ToString()))
+                .ReverseMap();
+
+            CreateMap<ProductPullOutLogs, ProductPullOutLogViewModel>()
+                .ForMember(dest => dest.DeliveredDate, opt => opt.MapFrom(src => src.DeliveredDate.Value.ToLongDateString()))
+                .ForMember(dest => dest.ReceivedDate, opt => opt.MapFrom(src => src.ReceivedDate.Value.ToLongDateString()))
+                .ForMember(dest => dest.ProductPullOutLogLines, opt => opt.MapFrom(src =>
+                string.Join(",\n", src.ProductPullOutLogLines.Select(c =>
+                    $"{c.DateAdded:yyyy-MM-dd} - {c.Product.ProductName} - ({c.StockQuantity} {c.Product.UnitOfMeasure.UnitOfMeasureName} | " +
+                    $"Size: {c.Product.Size}, Color: {c.Product.Color} | " +
+                    $"UnitCost: {c.Product.DefaultBuyingPrice:C} | Total: {(c.StockQuantity * c.Product.DefaultBuyingPrice):C})"
+                ))
+            ))
+            .ForMember(dest => dest.Project, opt => opt.MapFrom(src => src.Project.ProjectName.ToString()))
+            .ForMember(dest => dest.ProductStatus, opt => opt.MapFrom(src => src.ProductStatus.ToString()))
                 .ReverseMap();
             CreateMap<Customer, CustomerViewModel>()
                 .ForMember(dest => dest.CustomerType, opt => opt.MapFrom(src => src.CustomerType.CustomerTypeName))
@@ -151,12 +173,13 @@ namespace ServiceLayer.Services.CommonServices
 
             CreateMap<Allowance, AllowanceViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
-                 .ForMember(dest => dest.IsRecurring, opt => opt.MapFrom(src => src.IsRecurring.ToString()))
-                 .ForMember(dest => dest.DateGranted, opt => opt.MapFrom(src => src.DateGranted.ToLongDateString()))
+                 .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.ToLongDateString()))
                  .ForMember(dest => dest.AllowanceType, opt => opt.MapFrom(src => src.AllowanceType == AllowanceType.Other ? src.Description : src.AllowanceType.ToString()))
                 .ReverseMap();
             CreateMap<Holiday, HolidayViewModel>()
                 .ForMember(dest => dest.EffectiveDate, opt => opt.MapFrom(src => src.EffectiveDate.ToLongDateString()))
+                .ReverseMap();
+            CreateMap<ProjectLine, ProjectLineViewModel>()
                 .ReverseMap();
             CreateMap<Deduction, DeductionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
@@ -165,7 +188,7 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
             CreateMap<Benefit, BenefitViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
-                 .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => src.BenefitType == BenefitType.Other ? src.Other : src.BenefitType.ToString()))
+                 .ForMember(dest => dest.BenefitType, opt => opt.MapFrom(src => src.BenefitType == BenefitType.Other ? src.Other : src.BenefitType.ToString()))
                 .ReverseMap();
             CreateMap<Bonus, BonusViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
@@ -175,6 +198,9 @@ namespace ServiceLayer.Services.CommonServices
             CreateMap<EmployeeContribution, EmployeeContributionViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))
                 .ReverseMap();
+            CreateMap<Payroll, PayrollViewModel>()
+                 .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => src.EmployeeName))
+                .ReverseMap();
             CreateMap<Employee, EmployeeViewModel>()
                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.LastName}, {src.FirstName}"))
                  .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department.Name))
@@ -182,6 +208,15 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.JobPosition, opt => opt.MapFrom(src => src.JobPosition.Title))
                  .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.ToLongDateString()))
                  .ForMember(dest => dest.isDeducted, opt => opt.MapFrom(src => src.isDeducted ? "Yes" : "No"))
+                 .ForMember(dest => dest.isActive, opt => opt.MapFrom(src => src.isActive ? "Yes" : "No"))
+                 .ForMember(dest => dest.ContractStartDate, opt => opt.MapFrom(src => src.ContractStartDate == null ? DateTime.Now : src.ContractStartDate))
+                 .ForMember(dest => dest.ContractEndDate, opt => opt.MapFrom(src => src.ContractEndDate == null ? DateTime.Now : src.ContractEndDate))
+                 .ForMember(dest => dest.TotalSalaryClaimed, opt => opt.MapFrom(src => src.Payrolls.Sum(c => c.NetPay)))
+       
+                 .ForMember(dest => dest.Projects, opt => opt.MapFrom(src => string.Join(",", src.Attendances
+                       .Where(a => a.Project != null && !string.IsNullOrEmpty(a.Project.ProjectName))
+                       .Select(a => a.Project.ProjectName)
+                       .Distinct())))
                 .ReverseMap();
             CreateMap<Employee, UserInformationViewModel>()
                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.LastName}, {src.FirstName}"))
@@ -203,6 +238,7 @@ namespace ServiceLayer.Services.CommonServices
                  .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.ToLongDateString()))
                  .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.ToLongDateString()))
                  .ForMember(dest => dest.LeaveType, opt => opt.MapFrom(src => src.LeaveType == LeaveType.Other ? src.Other : src.LeaveType.ToString()))
+                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
                 .ReverseMap();
             CreateMap<Benefit, BenefitViewModel>()
                  .ForMember(dest => dest.Employee, opt => opt.MapFrom(src => $"{src.Employee.LastName}, {src.Employee.FirstName}"))

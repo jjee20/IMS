@@ -13,10 +13,5 @@ namespace InfastructureLayer.Repositories.Inventory
         {
             _db = db;
         }
-
-        public void Update(GoodsReceivedNote obj)
-        {
-            _db.GoodsReceivedNote.Update(obj);
-        }
     }
 }

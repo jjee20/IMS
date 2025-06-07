@@ -24,6 +24,13 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.MultipleDeleteEvent -= MultipleDelete;
+            _view.PrintEvent -= Print;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
@@ -135,7 +142,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
         
         private void LoadAllEmployeeContributionList(bool emptyValue = false)
         {
-            EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(_unitOfWork.EmployeeContribution.Value.GetAll());
+            EmployeeContributionList = Program.Mapper.Map<IEnumerable<EmployeeContributionViewModel>>(_unitOfWork.EmployeeContribution.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) EmployeeContributionList = EmployeeContributionList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetEmployeeContributionListBindingSource(EmployeeContributionList);

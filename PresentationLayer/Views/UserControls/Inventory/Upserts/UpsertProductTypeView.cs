@@ -43,9 +43,9 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 await _unitOfWork.ProductType.Value.AddAsync(_entity);
                 message = "Product Type added successfully.";
             }
+            await _unitOfWork.SaveAsync();
 
             ShowSuccess(message);
-            await _unitOfWork.SaveAsync();
             DialogResult = DialogResult.OK;
             Close();
         }

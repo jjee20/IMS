@@ -27,6 +27,7 @@ namespace PresentationLayer.Presenters.Account
             _unitOfWork = unitOfWork;
             _passwordHasher = new PasswordHasher<ApplicationUser>();
 
+            _view.SaveEvent -= Save;
             _view.SaveEvent += Save;
 
         }

@@ -28,6 +28,13 @@ namespace PresentationLayer.Presenters
             _unitOfWork = unitOfWork;
 
             //Events
+            _view.SearchEvent -= Search;
+            _view.AddEvent -= AddNew;
+            _view.EditEvent -= Edit;
+            _view.DeleteEvent -= Delete;
+            _view.MultipleDeleteEvent -= MultipleDelete;
+            _view.PrintEvent -= Print;
+
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
             _view.EditEvent += Edit;
@@ -139,7 +146,7 @@ namespace PresentationLayer.Presenters
         
         private void LoadAllVendorList(bool emptyValue = false)
         {
-            VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll());
+            VendorList = Program.Mapper.Map<IEnumerable<VendorViewModel>>(_unitOfWork.Vendor.Value.GetAll(includeProperties:"VendorType"));
 
             if (!emptyValue) VendorList = VendorList.Where(c => c.VendorName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetVendorListBindingSource(VendorList);

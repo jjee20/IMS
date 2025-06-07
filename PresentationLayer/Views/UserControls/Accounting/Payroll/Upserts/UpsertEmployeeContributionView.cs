@@ -31,7 +31,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private void LoadEmployees()
         {
             var entity = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(_unitOfWork.Employee.Value.GetAll());
-            txtEmployee.DataSource = entity.ToList();
+            txtEmployee.DataSource = entity.OrderBy(c => c.Name).ToList();
             txtEmployee.DisplayMember = "Name";
             txtEmployee.ValueMember = "EmployeeId";
             txtEmployee.Text = "~Select Employee~";

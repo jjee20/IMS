@@ -14,10 +14,5 @@ namespace InfastructureLayer.Repositories.Accounts
         {
             _db = db;
         }
-
-        public void Update(Customer obj)
-        {
-            _db.Customer.Update(obj);
-        }
     }
 }
