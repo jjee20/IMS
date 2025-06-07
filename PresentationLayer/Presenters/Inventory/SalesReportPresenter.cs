@@ -3,12 +3,14 @@ using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.InventoryViewModels;
 using Guna.Charts.WinForms;
 using RavenTech_ERP.Views.IViews.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Inventory
 {
@@ -16,6 +18,7 @@ namespace RavenTech_ERP.Presenters.Inventory
     {
         private ISalesReportView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private BindingSource MonthBindingSource;
         private BindingSource YearBindingSource;
         private BindingSource DailySalesBindingSource;
@@ -27,10 +30,11 @@ namespace RavenTech_ERP.Presenters.Inventory
         private GunaBarDataset MonthlySalesTrendDataset;
         private GunaBarDataset MonthlyPurchasesTrendDataset;
 
-        public SalesReportPresenter(ISalesReportView view, IUnitOfWork unitOfWork)
+        public SalesReportPresenter(ISalesReportView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
         {
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
             YearBindingSource = new BindingSource();
             MonthBindingSource = new BindingSource();
             DailySalesBindingSource = new BindingSource();
@@ -42,9 +46,7 @@ namespace RavenTech_ERP.Presenters.Inventory
 
             _view.UpdateSalesReportEvent += UpdateSalesReport;
 
-            LoadAllYears();
-            LoadAllMonths();
-            LoadReport();
+            RefreshView();
 
             _view.SetYears(YearBindingSource);
             _view.SetMonths(MonthBindingSource);
@@ -52,6 +54,16 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.SetMonthlySalesChart(MonthlySalesTrendDataset, MonthlyPurchasesTrendDataset);
             _view.SetDailySalesDataGrid(DailySalesBindingSource);
             _view.SetMonthlySalesDataGrid(MonthlySalesBindingSource);
+
+
+            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshView);
+        }
+
+        private void RefreshView()
+        {
+            LoadAllYears();
+            LoadAllMonths();
+            LoadReport();
         }
 
         private void LoadAllMonths()

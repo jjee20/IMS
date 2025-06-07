@@ -2,12 +2,14 @@
 using DomainLayer.ViewModels.Inventory;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Inventory
 {
@@ -15,6 +17,7 @@ namespace RavenTech_ERP.Presenters.Inventory
     {
         public IProductMonitoringView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<StockViewModel> InStockList;
         private IEnumerable<StockViewModel> LowStockList;
         private IEnumerable<StockViewModel> OutOfStockList;
@@ -23,10 +26,11 @@ namespace RavenTech_ERP.Presenters.Inventory
         private BindingSource LowStockBindingSource;
         private BindingSource OutOfStockBindingSource;
         private BindingSource ProjectFlowBindingSource;
-        public ProductMonitoringPresenter(IProductMonitoringView view, IUnitOfWork unitOfWork)
+        public ProductMonitoringPresenter(IProductMonitoringView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
         {
             _view = view;
             _unitOfWork = unitOfWork;
+            _eventAggregator = eventAggregator;
             InStockBindingSource = new BindingSource();
             LowStockBindingSource = new BindingSource();
             OutOfStockBindingSource = new BindingSource();
@@ -35,15 +39,21 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.PrintEvent -= Print;
             _view.PrintEvent += Print;
 
-            LoadInStock();
-            LoadLowStock();
-            LoadOutOfStock();
-            LoadProjectFlow();
 
             _view.SetInStockListBindingSource(InStockBindingSource);
             _view.SetLowStockListBindingSource(LowStockBindingSource);
             _view.SetOutOfStockListBindingSource(OutOfStockBindingSource);
             _view.SetProjectFlowListBindingSource(ProjectFlowBindingSource);
+            RefreshView();
+            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshView);
+        }
+
+        private void RefreshView()
+        {
+            LoadInStock();
+            LoadLowStock();
+            LoadOutOfStock();
+            LoadProjectFlow();
         }
 
         private void LoadProjectFlow()

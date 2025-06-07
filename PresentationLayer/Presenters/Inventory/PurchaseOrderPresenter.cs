@@ -11,10 +11,12 @@ using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
@@ -23,13 +25,15 @@ namespace PresentationLayer.Presenters
     {
         public IPurchaseOrderView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<PurchaseOrderViewModel> PurchaseOrderList;
-        public PurchaseOrderPresenter(IPurchaseOrderView view, IUnitOfWork unitOfWork) {
+        public PurchaseOrderPresenter(IPurchaseOrderView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -207,6 +211,7 @@ namespace PresentationLayer.Presenters
 
 
             _view.SetPurchaseOrderListBindingSource(PurchaseOrderList.OrderByDescending(c => c.OrderDate));
+            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
     }
 }

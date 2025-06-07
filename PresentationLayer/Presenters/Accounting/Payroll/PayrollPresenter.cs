@@ -7,8 +7,10 @@ using PresentationLayer.Reports;
 using RavenTech_ERP.Helpers;
 using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Events;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RevenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -16,18 +18,20 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     {
         public IPayrollView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private BindingSource ProjectBindingSource;
         private List<PayrollViewModel> PayrollVMList;
         private List<DomainLayer.Models.Accounting.Payroll.Payroll> PayrollList;
         private IEnumerable<Project> ProjectList;
         private string ProjectName;
-        public PayrollPresenter(IPayrollView view, IUnitOfWork unitOfWork)
+        public PayrollPresenter(IPayrollView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
         {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
             ProjectBindingSource = new BindingSource();
             PayrollVMList = new List<PayrollViewModel>();
             PayrollList = new List<DomainLayer.Models.Accounting.Payroll.Payroll>();
@@ -42,7 +46,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.PrintPaySlipEvent += PrintPayslip;
 
             //Load
+            RefreshView();
+            _eventAggregator.Subscribe<PayrollUpdateEvent>(RefreshView);
+        }
 
+        private void RefreshView()
+        {
             LoadAllProjectList();
             _view.SetProjectListBindingSource(ProjectBindingSource);
             LoadAllPayrollList(_view.StartDate.Date, _view.EndDate.Date);

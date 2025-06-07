@@ -7,10 +7,12 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters

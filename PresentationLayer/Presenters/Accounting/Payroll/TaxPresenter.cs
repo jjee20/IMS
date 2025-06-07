@@ -5,9 +5,11 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -15,13 +17,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     {
         public ITaxView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<TaxViewModel> TaxList;
-        public TaxPresenter(ITaxView view, IUnitOfWork unitOfWork) {
+        public TaxPresenter(ITaxView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -146,6 +150,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             if (!emptyValue) TaxList = TaxList.Where(c => c.MinimumSalary.ToString().Contains(_view.SearchValue) || c.MaximumSalary.ToString().Contains(_view.SearchValue) || c.TaxRate.ToString().Contains(_view.SearchValue));
             _view.SetTaxListBindingSource(TaxList);
+            _eventAggregator.Publish<PayrollUpdateEvent>();
         }
     }
 }

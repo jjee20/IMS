@@ -4,10 +4,12 @@ using PresentationLayer;
 using PresentationLayer.Reports;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Runtime.Intrinsics.Arm;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -15,13 +17,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     {
         public IAllowanceView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<AllowanceViewModel> AllowanceList;
-        public AllowancePresenter(IAllowanceView view, IUnitOfWork unitOfWork) {
+        public AllowancePresenter(IAllowanceView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -146,6 +150,8 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             if (!emptyValue) AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
             _view.SetAllowanceListBindingSource(AllowanceList.OrderByDescending(c => c.StartDate));
+
+            _eventAggregator.Publish<PayrollUpdateEvent>();
         }
     }
 }

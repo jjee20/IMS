@@ -9,10 +9,12 @@ using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory.Upserts;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
@@ -21,13 +23,15 @@ namespace PresentationLayer.Presenters
     {
         public IProductPullOutLogView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<ProductPullOutLogViewModel> ProductPullOutLogList;
-        public ProductPullOutLogPresenter(IProductPullOutLogView view, IUnitOfWork unitOfWork) {
+        public ProductPullOutLogPresenter(IProductPullOutLogView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -156,6 +160,7 @@ namespace PresentationLayer.Presenters
 
             if (!emptyValue) ProductPullOutLogList = ProductPullOutLogList.Where(c => c.ProductPullOutLogLines.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductInStockLogListBindingSource(ProductPullOutLogList);
+            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
     }
 }
