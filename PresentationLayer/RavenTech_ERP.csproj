@@ -398,7 +398,13 @@
     <None Update="Reports\Accounting\Payroll\PayrollReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Reports\Inventory\ProductPullOutLogsReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Reports\Inventory\PurchaseReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\ProductStockInLogsReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Inventory\SalesReport.rdlc">

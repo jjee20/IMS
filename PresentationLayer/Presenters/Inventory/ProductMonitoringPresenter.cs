@@ -66,7 +66,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
-            ProjectFlowBindingSource.DataSource = ProjectFlowList;
+            ProjectFlowBindingSource.DataSource = ProjectFlowList.ToList();
             _view.ProjectFlow = ProjectFlowList.Sum(c => c.Qty);
         }
 
@@ -84,7 +84,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
-            OutOfStockBindingSource.DataSource = OutOfStockList;
+            OutOfStockBindingSource.DataSource = OutOfStockList.ToList();
             _view.OutOfStock = OutOfStockList.Count();
         }
         private void LoadLowStock()
@@ -101,7 +101,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
-            LowStockBindingSource.DataSource = LowStockList;
+            LowStockBindingSource.DataSource = LowStockList.ToList();
             _view.LowStock = LowStockList.Sum(c => c.Qty);
         }
 
@@ -119,7 +119,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
-            InStockBindingSource.DataSource = InStockList;
+            InStockBindingSource.DataSource = InStockList.ToList();
             _view.InStock = InStockList.Sum(c => c.Qty);
         }
 

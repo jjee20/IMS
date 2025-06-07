@@ -106,14 +106,13 @@
             materialCard1.Controls.Add(txtProjectName);
             materialCard1.Controls.Add(materialLabel1);
             materialCard1.Depth = 0;
-            materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 3);
+            materialCard1.Location = new Point(3, 25);
             materialCard1.Margin = new Padding(20, 23, 20, 23);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(20, 23, 20, 23);
-            materialCard1.Size = new Size(1344, 723);
+            materialCard1.Size = new Size(1344, 701);
             materialCard1.TabIndex = 0;
             // 
             // materialLabel9
@@ -121,7 +120,7 @@
             materialLabel9.AutoSize = true;
             materialLabel9.Depth = 0;
             materialLabel9.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel9.Location = new Point(800, 982);
+            materialLabel9.Location = new Point(792, 631);
             materialLabel9.Margin = new Padding(4, 0, 4, 0);
             materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel9.Name = "materialLabel9";
@@ -135,7 +134,7 @@
             txtVariance.Depth = 0;
             txtVariance.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtVariance.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtVariance.Location = new Point(1006, 985);
+            txtVariance.Location = new Point(998, 634);
             txtVariance.Margin = new Padding(4, 0, 4, 0);
             txtVariance.MouseState = MaterialSkin.MouseState.HOVER;
             txtVariance.Name = "txtVariance";
@@ -148,7 +147,7 @@
             materialLabel7.AutoSize = true;
             materialLabel7.Depth = 0;
             materialLabel7.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel7.Location = new Point(800, 1013);
+            materialLabel7.Location = new Point(792, 662);
             materialLabel7.Margin = new Padding(4, 0, 4, 0);
             materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel7.Name = "materialLabel7";
@@ -162,7 +161,7 @@
             txtTotalRevenue.Depth = 0;
             txtTotalRevenue.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtTotalRevenue.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtTotalRevenue.Location = new Point(1006, 1017);
+            txtTotalRevenue.Location = new Point(998, 666);
             txtTotalRevenue.Margin = new Padding(4, 0, 4, 0);
             txtTotalRevenue.MouseState = MaterialSkin.MouseState.HOVER;
             txtTotalRevenue.Name = "txtTotalRevenue";
@@ -172,10 +171,10 @@
             // 
             // guna2Separator3
             // 
-            guna2Separator3.Location = new Point(24, 872);
+            guna2Separator3.Location = new Point(16, 536);
             guna2Separator3.Margin = new Padding(4, 5, 4, 5);
             guna2Separator3.Name = "guna2Separator3";
-            guna2Separator3.Size = new Size(1387, 17);
+            guna2Separator3.Size = new Size(1304, 17);
             guna2Separator3.TabIndex = 33;
             // 
             // materialLabel6
@@ -183,7 +182,7 @@
             materialLabel6.AutoSize = true;
             materialLabel6.Depth = 0;
             materialLabel6.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel6.Location = new Point(800, 893);
+            materialLabel6.Location = new Point(792, 557);
             materialLabel6.Margin = new Padding(4, 0, 4, 0);
             materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel6.Name = "materialLabel6";
@@ -197,7 +196,7 @@
             txtDeduction.Depth = 0;
             txtDeduction.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtDeduction.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtDeduction.Location = new Point(1006, 897);
+            txtDeduction.Location = new Point(998, 561);
             txtDeduction.Margin = new Padding(4, 0, 4, 0);
             txtDeduction.MouseState = MaterialSkin.MouseState.HOVER;
             txtDeduction.Name = "txtDeduction";
@@ -210,7 +209,7 @@
             materialLabel4.AutoSize = true;
             materialLabel4.Depth = 0;
             materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel4.Location = new Point(800, 835);
+            materialLabel4.Location = new Point(787, 511);
             materialLabel4.Margin = new Padding(4, 0, 4, 0);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
@@ -224,7 +223,7 @@
             txtPayroll.Depth = 0;
             txtPayroll.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPayroll.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPayroll.Location = new Point(1006, 838);
+            txtPayroll.Location = new Point(993, 514);
             txtPayroll.Margin = new Padding(4, 0, 4, 0);
             txtPayroll.MouseState = MaterialSkin.MouseState.HOVER;
             txtPayroll.Name = "txtPayroll";
@@ -255,13 +254,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgPayroll.DefaultCellStyle = dataGridViewCellStyle3;
             dgPayroll.GridColor = Color.FromArgb(231, 229, 255);
-            dgPayroll.Location = new Point(20, 580);
+            dgPayroll.Location = new Point(16, 411);
             dgPayroll.Margin = new Padding(4, 5, 4, 5);
             dgPayroll.Name = "dgPayroll";
             dgPayroll.RowHeadersVisible = false;
             dgPayroll.RowHeadersWidth = 62;
             dgPayroll.RowTemplate.Height = 25;
-            dgPayroll.Size = new Size(1387, 250);
+            dgPayroll.Size = new Size(1304, 95);
             dgPayroll.TabIndex = 28;
             dgPayroll.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgPayroll.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -291,7 +290,7 @@
             materialLabel2.Depth = 0;
             materialLabel2.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel2.Location = new Point(20, 535);
+            materialLabel2.Location = new Point(16, 382);
             materialLabel2.Margin = new Padding(4, 0, 4, 0);
             materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel2.Name = "materialLabel2";
@@ -304,7 +303,7 @@
             materialLabel25.AutoSize = true;
             materialLabel25.Depth = 0;
             materialLabel25.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel25.Location = new Point(800, 477);
+            materialLabel25.Location = new Point(787, 335);
             materialLabel25.Margin = new Padding(4, 0, 4, 0);
             materialLabel25.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel25.Name = "materialLabel25";
@@ -318,7 +317,7 @@
             txtProjectTotalPurchase.Depth = 0;
             txtProjectTotalPurchase.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtProjectTotalPurchase.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtProjectTotalPurchase.Location = new Point(1006, 480);
+            txtProjectTotalPurchase.Location = new Point(993, 338);
             txtProjectTotalPurchase.Margin = new Padding(4, 0, 4, 0);
             txtProjectTotalPurchase.MouseState = MaterialSkin.MouseState.HOVER;
             txtProjectTotalPurchase.Name = "txtProjectTotalPurchase";
@@ -328,10 +327,10 @@
             // 
             // guna2Separator2
             // 
-            guna2Separator2.Location = new Point(24, 513);
+            guna2Separator2.Location = new Point(20, 360);
             guna2Separator2.Margin = new Padding(4, 5, 4, 5);
             guna2Separator2.Name = "guna2Separator2";
-            guna2Separator2.Size = new Size(1387, 17);
+            guna2Separator2.Size = new Size(1300, 17);
             guna2Separator2.TabIndex = 23;
             // 
             // dgProjectLines
@@ -363,7 +362,7 @@
             dgProjectLines.RowHeadersVisible = false;
             dgProjectLines.RowHeadersWidth = 62;
             dgProjectLines.RowTemplate.Height = 25;
-            dgProjectLines.Size = new Size(1387, 250);
+            dgProjectLines.Size = new Size(1300, 108);
             dgProjectLines.TabIndex = 22;
             dgProjectLines.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgProjectLines.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -406,7 +405,7 @@
             guna2Separator1.Location = new Point(20, 155);
             guna2Separator1.Margin = new Padding(4, 5, 4, 5);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1387, 17);
+            guna2Separator1.Size = new Size(1300, 17);
             guna2Separator1.TabIndex = 20;
             // 
             // materialLabel15
