@@ -47,7 +47,6 @@
             txtBillVendorInvoiceNo = new MaterialSkin.Controls.MaterialLabel();
             txtBillVendorDONo = new MaterialSkin.Controls.MaterialLabel();
             materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
-            guna2Separator3 = new Guna.UI2.WinForms.Guna2Separator();
             materialLabel29 = new MaterialSkin.Controls.MaterialLabel();
             txtBillDueDate = new MaterialSkin.Controls.MaterialLabel();
             txtBillType = new MaterialSkin.Controls.MaterialLabel();
@@ -102,7 +101,6 @@
             materialCard1.Controls.Add(txtBillVendorInvoiceNo);
             materialCard1.Controls.Add(txtBillVendorDONo);
             materialCard1.Controls.Add(materialLabel7);
-            materialCard1.Controls.Add(guna2Separator3);
             materialCard1.Controls.Add(materialLabel29);
             materialCard1.Controls.Add(txtBillDueDate);
             materialCard1.Controls.Add(txtBillType);
@@ -141,26 +139,26 @@
             materialCard1.Controls.Add(txtPurchaseOrderName);
             materialCard1.Controls.Add(materialLabel1);
             materialCard1.Depth = 0;
-            materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 3);
+            materialCard1.Location = new Point(3, 25);
             materialCard1.Margin = new Padding(20, 23, 20, 23);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(20, 23, 20, 23);
-            materialCard1.Size = new Size(1344, 723);
+            materialCard1.Size = new Size(1344, 693);
             materialCard1.TabIndex = 0;
             // 
             // guna2TabControl1
             // 
             guna2TabControl1.Controls.Add(tabPage1);
             guna2TabControl1.Controls.Add(tabPage2);
-            guna2TabControl1.ItemSize = new Size(180, 40);
-            guna2TabControl1.Location = new Point(20, 828);
+            guna2TabControl1.Font = new Font("Segoe UI", 8F);
+            guna2TabControl1.ItemSize = new Size(250, 40);
+            guna2TabControl1.Location = new Point(632, 182);
             guna2TabControl1.Margin = new Padding(4, 5, 4, 5);
             guna2TabControl1.Name = "guna2TabControl1";
             guna2TabControl1.SelectedIndex = 0;
-            guna2TabControl1.Size = new Size(1387, 247);
+            guna2TabControl1.Size = new Size(688, 312);
             guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -176,7 +174,7 @@
             guna2TabControl1.TabButtonSelectedState.Font = new Font("Segoe UI Semibold", 10F);
             guna2TabControl1.TabButtonSelectedState.ForeColor = Color.White;
             guna2TabControl1.TabButtonSelectedState.InnerColor = Color.FromArgb(76, 132, 255);
-            guna2TabControl1.TabButtonSize = new Size(180, 40);
+            guna2TabControl1.TabButtonSize = new Size(250, 40);
             guna2TabControl1.TabIndex = 58;
             guna2TabControl1.TabMenuBackColor = Color.White;
             guna2TabControl1.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
@@ -184,11 +182,12 @@
             // tabPage1
             // 
             tabPage1.Controls.Add(dgGoodsReceivedNote);
+            tabPage1.Font = new Font("Segoe UI", 7F);
             tabPage1.Location = new Point(4, 44);
             tabPage1.Margin = new Padding(4, 5, 4, 5);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(4, 5, 4, 5);
-            tabPage1.Size = new Size(1379, 199);
+            tabPage1.Size = new Size(680, 264);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Goods Received Note";
             tabPage1.UseVisualStyleBackColor = true;
@@ -199,7 +198,7 @@
             dgGoodsReceivedNote.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 7F);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -209,7 +208,7 @@
             dgGoodsReceivedNote.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 7F);
             dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
@@ -223,7 +222,7 @@
             dgGoodsReceivedNote.RowHeadersVisible = false;
             dgGoodsReceivedNote.RowHeadersWidth = 62;
             dgGoodsReceivedNote.RowTemplate.Height = 25;
-            dgGoodsReceivedNote.Size = new Size(1371, 189);
+            dgGoodsReceivedNote.Size = new Size(672, 254);
             dgGoodsReceivedNote.TabIndex = 23;
             dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgGoodsReceivedNote.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -250,11 +249,12 @@
             // tabPage2
             // 
             tabPage2.Controls.Add(dgPaymentVoucher);
+            tabPage2.Font = new Font("Segoe UI", 7F);
             tabPage2.Location = new Point(4, 44);
             tabPage2.Margin = new Padding(4, 5, 4, 5);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(4, 5, 4, 5);
-            tabPage2.Size = new Size(1379, 199);
+            tabPage2.Size = new Size(680, 264);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Payment Voucher";
             tabPage2.UseVisualStyleBackColor = true;
@@ -265,7 +265,7 @@
             dgPaymentVoucher.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 7F);
             dataGridViewCellStyle5.ForeColor = Color.White;
             dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
@@ -275,7 +275,7 @@
             dgPaymentVoucher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 7F);
             dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
             dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
@@ -289,7 +289,7 @@
             dgPaymentVoucher.RowHeadersVisible = false;
             dgPaymentVoucher.RowHeadersWidth = 62;
             dgPaymentVoucher.RowTemplate.Height = 25;
-            dgPaymentVoucher.Size = new Size(1371, 189);
+            dgPaymentVoucher.Size = new Size(672, 254);
             dgPaymentVoucher.TabIndex = 24;
             dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgPaymentVoucher.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -318,7 +318,7 @@
             materialLabel2.AutoSize = true;
             materialLabel2.Depth = 0;
             materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel2.Location = new Point(800, 765);
+            materialLabel2.Location = new Point(800, 622);
             materialLabel2.Margin = new Padding(4, 0, 4, 0);
             materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel2.Name = "materialLabel2";
@@ -332,7 +332,7 @@
             txtBillVendorInvoiceNo.Depth = 0;
             txtBillVendorInvoiceNo.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtBillVendorInvoiceNo.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtBillVendorInvoiceNo.Location = new Point(1006, 768);
+            txtBillVendorInvoiceNo.Location = new Point(1006, 625);
             txtBillVendorInvoiceNo.Margin = new Padding(4, 0, 4, 0);
             txtBillVendorInvoiceNo.MouseState = MaterialSkin.MouseState.HOVER;
             txtBillVendorInvoiceNo.Name = "txtBillVendorInvoiceNo";
@@ -346,7 +346,7 @@
             txtBillVendorDONo.Depth = 0;
             txtBillVendorDONo.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtBillVendorDONo.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtBillVendorDONo.Location = new Point(190, 768);
+            txtBillVendorDONo.Location = new Point(190, 625);
             txtBillVendorDONo.Margin = new Padding(4, 0, 4, 0);
             txtBillVendorDONo.MouseState = MaterialSkin.MouseState.HOVER;
             txtBillVendorDONo.Name = "txtBillVendorDONo";
@@ -359,7 +359,7 @@
             materialLabel7.AutoSize = true;
             materialLabel7.Depth = 0;
             materialLabel7.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel7.Location = new Point(20, 765);
+            materialLabel7.Location = new Point(20, 622);
             materialLabel7.Margin = new Padding(4, 0, 4, 0);
             materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel7.Name = "materialLabel7";
@@ -367,20 +367,12 @@
             materialLabel7.TabIndex = 54;
             materialLabel7.Text = "Vendor DO No.:";
             // 
-            // guna2Separator3
-            // 
-            guna2Separator3.Location = new Point(20, 802);
-            guna2Separator3.Margin = new Padding(4, 5, 4, 5);
-            guna2Separator3.Name = "guna2Separator3";
-            guna2Separator3.Size = new Size(1387, 17);
-            guna2Separator3.TabIndex = 43;
-            // 
             // materialLabel29
             // 
             materialLabel29.AutoSize = true;
             materialLabel29.Depth = 0;
             materialLabel29.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel29.Location = new Point(800, 733);
+            materialLabel29.Location = new Point(800, 590);
             materialLabel29.Margin = new Padding(4, 0, 4, 0);
             materialLabel29.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel29.Name = "materialLabel29";
@@ -394,7 +386,7 @@
             txtBillDueDate.Depth = 0;
             txtBillDueDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtBillDueDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtBillDueDate.Location = new Point(1006, 737);
+            txtBillDueDate.Location = new Point(1006, 594);
             txtBillDueDate.Margin = new Padding(4, 0, 4, 0);
             txtBillDueDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtBillDueDate.Name = "txtBillDueDate";
@@ -408,7 +400,7 @@
             txtBillType.Depth = 0;
             txtBillType.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtBillType.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtBillType.Location = new Point(190, 733);
+            txtBillType.Location = new Point(190, 590);
             txtBillType.Margin = new Padding(4, 0, 4, 0);
             txtBillType.MouseState = MaterialSkin.MouseState.HOVER;
             txtBillType.Name = "txtBillType";
@@ -421,7 +413,7 @@
             materialLabel32.AutoSize = true;
             materialLabel32.Depth = 0;
             materialLabel32.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel32.Location = new Point(20, 733);
+            materialLabel32.Location = new Point(20, 590);
             materialLabel32.Margin = new Padding(4, 0, 4, 0);
             materialLabel32.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel32.Name = "materialLabel32";
@@ -434,7 +426,7 @@
             materialLabel33.AutoSize = true;
             materialLabel33.Depth = 0;
             materialLabel33.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel33.Location = new Point(800, 702);
+            materialLabel33.Location = new Point(800, 559);
             materialLabel33.Margin = new Padding(4, 0, 4, 0);
             materialLabel33.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel33.Name = "materialLabel33";
@@ -448,7 +440,7 @@
             txtBillDate.Depth = 0;
             txtBillDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtBillDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtBillDate.Location = new Point(1006, 705);
+            txtBillDate.Location = new Point(1006, 562);
             txtBillDate.Margin = new Padding(4, 0, 4, 0);
             txtBillDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtBillDate.Name = "txtBillDate";
@@ -462,7 +454,7 @@
             txtBillNo.Depth = 0;
             txtBillNo.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtBillNo.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtBillNo.Location = new Point(190, 705);
+            txtBillNo.Location = new Point(190, 562);
             txtBillNo.Margin = new Padding(4, 0, 4, 0);
             txtBillNo.MouseState = MaterialSkin.MouseState.HOVER;
             txtBillNo.Name = "txtBillNo";
@@ -475,7 +467,7 @@
             materialLabel36.AutoSize = true;
             materialLabel36.Depth = 0;
             materialLabel36.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel36.Location = new Point(20, 702);
+            materialLabel36.Location = new Point(20, 559);
             materialLabel36.Margin = new Padding(4, 0, 4, 0);
             materialLabel36.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel36.Name = "materialLabel36";
@@ -488,7 +480,7 @@
             materialLabel27.AutoSize = true;
             materialLabel27.Depth = 0;
             materialLabel27.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel27.Location = new Point(800, 603);
+            materialLabel27.Location = new Point(20, 456);
             materialLabel27.Margin = new Padding(4, 0, 4, 0);
             materialLabel27.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel27.Name = "materialLabel27";
@@ -502,7 +494,7 @@
             txtPurchaseOrderTotalNET.Depth = 0;
             txtPurchaseOrderTotalNET.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPurchaseOrderTotalNET.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPurchaseOrderTotalNET.Location = new Point(1006, 607);
+            txtPurchaseOrderTotalNET.Location = new Point(226, 460);
             txtPurchaseOrderTotalNET.Margin = new Padding(4, 0, 4, 0);
             txtPurchaseOrderTotalNET.MouseState = MaterialSkin.MouseState.HOVER;
             txtPurchaseOrderTotalNET.Name = "txtPurchaseOrderTotalNET";
@@ -515,7 +507,7 @@
             materialLabel19.AutoSize = true;
             materialLabel19.Depth = 0;
             materialLabel19.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel19.Location = new Point(800, 572);
+            materialLabel19.Location = new Point(20, 425);
             materialLabel19.Margin = new Padding(4, 0, 4, 0);
             materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel19.Name = "materialLabel19";
@@ -529,7 +521,7 @@
             txtPurchaseOrderFreight.Depth = 0;
             txtPurchaseOrderFreight.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPurchaseOrderFreight.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPurchaseOrderFreight.Location = new Point(1006, 575);
+            txtPurchaseOrderFreight.Location = new Point(226, 428);
             txtPurchaseOrderFreight.Margin = new Padding(4, 0, 4, 0);
             txtPurchaseOrderFreight.MouseState = MaterialSkin.MouseState.HOVER;
             txtPurchaseOrderFreight.Name = "txtPurchaseOrderFreight";
@@ -542,7 +534,7 @@
             materialLabel21.AutoSize = true;
             materialLabel21.Depth = 0;
             materialLabel21.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel21.Location = new Point(800, 540);
+            materialLabel21.Location = new Point(20, 393);
             materialLabel21.Margin = new Padding(4, 0, 4, 0);
             materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel21.Name = "materialLabel21";
@@ -556,7 +548,7 @@
             txtPurchaseOrderVAT.Depth = 0;
             txtPurchaseOrderVAT.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPurchaseOrderVAT.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPurchaseOrderVAT.Location = new Point(1006, 543);
+            txtPurchaseOrderVAT.Location = new Point(226, 396);
             txtPurchaseOrderVAT.Margin = new Padding(4, 0, 4, 0);
             txtPurchaseOrderVAT.MouseState = MaterialSkin.MouseState.HOVER;
             txtPurchaseOrderVAT.Name = "txtPurchaseOrderVAT";
@@ -569,7 +561,7 @@
             materialLabel23.AutoSize = true;
             materialLabel23.Depth = 0;
             materialLabel23.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel23.Location = new Point(800, 508);
+            materialLabel23.Location = new Point(20, 361);
             materialLabel23.Margin = new Padding(4, 0, 4, 0);
             materialLabel23.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel23.Name = "materialLabel23";
@@ -583,7 +575,7 @@
             txtPurchaseOrderDiscount.Depth = 0;
             txtPurchaseOrderDiscount.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPurchaseOrderDiscount.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPurchaseOrderDiscount.Location = new Point(1006, 512);
+            txtPurchaseOrderDiscount.Location = new Point(226, 365);
             txtPurchaseOrderDiscount.Margin = new Padding(4, 0, 4, 0);
             txtPurchaseOrderDiscount.MouseState = MaterialSkin.MouseState.HOVER;
             txtPurchaseOrderDiscount.Name = "txtPurchaseOrderDiscount";
@@ -596,7 +588,7 @@
             materialLabel25.AutoSize = true;
             materialLabel25.Depth = 0;
             materialLabel25.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel25.Location = new Point(800, 477);
+            materialLabel25.Location = new Point(20, 330);
             materialLabel25.Margin = new Padding(4, 0, 4, 0);
             materialLabel25.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel25.Name = "materialLabel25";
@@ -610,7 +602,7 @@
             txtPurchaseOrderTotalPurchase.Depth = 0;
             txtPurchaseOrderTotalPurchase.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPurchaseOrderTotalPurchase.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPurchaseOrderTotalPurchase.Location = new Point(1006, 480);
+            txtPurchaseOrderTotalPurchase.Location = new Point(226, 333);
             txtPurchaseOrderTotalPurchase.Margin = new Padding(4, 0, 4, 0);
             txtPurchaseOrderTotalPurchase.MouseState = MaterialSkin.MouseState.HOVER;
             txtPurchaseOrderTotalPurchase.Name = "txtPurchaseOrderTotalPurchase";
@@ -624,7 +616,7 @@
             materialLabel18.Depth = 0;
             materialLabel18.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel18.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel18.Location = new Point(20, 662);
+            materialLabel18.Location = new Point(20, 519);
             materialLabel18.Margin = new Padding(4, 0, 4, 0);
             materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel18.Name = "materialLabel18";
@@ -634,7 +626,7 @@
             // 
             // guna2Separator2
             // 
-            guna2Separator2.Location = new Point(20, 640);
+            guna2Separator2.Location = new Point(20, 497);
             guna2Separator2.Margin = new Padding(4, 5, 4, 5);
             guna2Separator2.Name = "guna2Separator2";
             guna2Separator2.Size = new Size(1387, 17);
@@ -669,7 +661,7 @@
             dgPurchaseOrderLines.RowHeadersVisible = false;
             dgPurchaseOrderLines.RowHeadersWidth = 62;
             dgPurchaseOrderLines.RowTemplate.Height = 25;
-            dgPurchaseOrderLines.Size = new Size(1387, 250);
+            dgPurchaseOrderLines.Size = new Size(604, 103);
             dgPurchaseOrderLines.TabIndex = 22;
             dgPurchaseOrderLines.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgPurchaseOrderLines.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -712,7 +704,7 @@
             guna2Separator1.Location = new Point(20, 155);
             guna2Separator1.Margin = new Padding(4, 5, 4, 5);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1387, 17);
+            guna2Separator1.Size = new Size(1300, 17);
             guna2Separator1.TabIndex = 20;
             // 
             // materialLabel15
@@ -958,7 +950,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel17;
         private MaterialSkin.Controls.MaterialLabel materialLabel27;
         private MaterialSkin.Controls.MaterialLabel txtPurchaseOrderTotalNET;
-        private Guna.UI2.WinForms.Guna2Separator guna2Separator3;
         private MaterialSkin.Controls.MaterialLabel materialLabel29;
         private MaterialSkin.Controls.MaterialLabel txtBillDueDate;
         private MaterialSkin.Controls.MaterialLabel txtBillType;

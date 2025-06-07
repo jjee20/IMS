@@ -126,6 +126,10 @@ namespace RavenTech_ERP.Reports {
         
         private EmployeeContributionDataTable tableEmployeeContribution;
         
+        private ProductStockInLogsDataTable tableProductStockInLogs;
+        
+        private ProductPullOutLogsDataTable tableProductPullOutLogs;
+        
         private global::System.Data.DataRelation relationFK_AspNetRoleClaims_AspNetRoles_RoleId;
         
         private global::System.Data.DataRelation relationFK_AspNetUserClaims_AspNetUsers_UserId;
@@ -324,6 +328,12 @@ namespace RavenTech_ERP.Reports {
                 }
                 if ((ds.Tables["EmployeeContribution"] != null)) {
                     base.Tables.Add(new EmployeeContributionDataTable(ds.Tables["EmployeeContribution"]));
+                }
+                if ((ds.Tables["ProductStockInLogs"] != null)) {
+                    base.Tables.Add(new ProductStockInLogsDataTable(ds.Tables["ProductStockInLogs"]));
+                }
+                if ((ds.Tables["ProductPullOutLogs"] != null)) {
+                    base.Tables.Add(new ProductPullOutLogsDataTable(ds.Tables["ProductPullOutLogs"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -855,6 +865,26 @@ namespace RavenTech_ERP.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ProductStockInLogsDataTable ProductStockInLogs {
+            get {
+                return this.tableProductStockInLogs;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ProductPullOutLogsDataTable ProductPullOutLogs {
+            get {
+                return this.tableProductPullOutLogs;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -1072,6 +1102,12 @@ namespace RavenTech_ERP.Reports {
                 }
                 if ((ds.Tables["EmployeeContribution"] != null)) {
                     base.Tables.Add(new EmployeeContributionDataTable(ds.Tables["EmployeeContribution"]));
+                }
+                if ((ds.Tables["ProductStockInLogs"] != null)) {
+                    base.Tables.Add(new ProductStockInLogsDataTable(ds.Tables["ProductStockInLogs"]));
+                }
+                if ((ds.Tables["ProductPullOutLogs"] != null)) {
+                    base.Tables.Add(new ProductPullOutLogsDataTable(ds.Tables["ProductPullOutLogs"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1412,6 +1448,18 @@ namespace RavenTech_ERP.Reports {
                     this.tableEmployeeContribution.InitVars();
                 }
             }
+            this.tableProductStockInLogs = ((ProductStockInLogsDataTable)(base.Tables["ProductStockInLogs"]));
+            if ((initTable == true)) {
+                if ((this.tableProductStockInLogs != null)) {
+                    this.tableProductStockInLogs.InitVars();
+                }
+            }
+            this.tableProductPullOutLogs = ((ProductPullOutLogsDataTable)(base.Tables["ProductPullOutLogs"]));
+            if ((initTable == true)) {
+                if ((this.tableProductPullOutLogs != null)) {
+                    this.tableProductPullOutLogs.InitVars();
+                }
+            }
             this.relationFK_AspNetRoleClaims_AspNetRoles_RoleId = this.Relations["FK_AspNetRoleClaims_AspNetRoles_RoleId"];
             this.relationFK_AspNetUserClaims_AspNetUsers_UserId = this.Relations["FK_AspNetUserClaims_AspNetUsers_UserId"];
             this.relationFK_AspNetUserLogins_AspNetUsers_UserId = this.Relations["FK_AspNetUserLogins_AspNetUsers_UserId"];
@@ -1532,6 +1580,10 @@ namespace RavenTech_ERP.Reports {
             base.Tables.Add(this.tableStockInLogs);
             this.tableEmployeeContribution = new EmployeeContributionDataTable();
             base.Tables.Add(this.tableEmployeeContribution);
+            this.tableProductStockInLogs = new ProductStockInLogsDataTable();
+            base.Tables.Add(this.tableProductStockInLogs);
+            this.tableProductPullOutLogs = new ProductPullOutLogsDataTable();
+            base.Tables.Add(this.tableProductPullOutLogs);
             this.relationFK_AspNetRoleClaims_AspNetRoles_RoleId = new global::System.Data.DataRelation("FK_AspNetRoleClaims_AspNetRoles_RoleId", new global::System.Data.DataColumn[] {
                         this.tableAspNetRoles.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableAspNetRoleClaims.RoleIdColumn}, false);
@@ -1874,6 +1926,18 @@ namespace RavenTech_ERP.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeProductStockInLogs() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeProductPullOutLogs() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -2079,6 +2143,12 @@ namespace RavenTech_ERP.Reports {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void EmployeeContributionRowChangeEventHandler(object sender, EmployeeContributionRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void ProductStockInLogsRowChangeEventHandler(object sender, ProductStockInLogsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void ProductPullOutLogsRowChangeEventHandler(object sender, ProductPullOutLogsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -19239,6 +19309,686 @@ namespace RavenTech_ERP.Reports {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ProductStockInLogsDataTable : global::System.Data.TypedTableBase<ProductStockInLogsRow> {
+            
+            private global::System.Data.DataColumn columnProductStockInLogLines;
+            
+            private global::System.Data.DataColumn columnNotes;
+            
+            private global::System.Data.DataColumn columnProductStatus;
+            
+            private global::System.Data.DataColumn columnDeliveredBy;
+            
+            private global::System.Data.DataColumn columnDeliveredDate;
+            
+            private global::System.Data.DataColumn columnReceivedBy;
+            
+            private global::System.Data.DataColumn columnReceivedDate;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductStockInLogsDataTable() {
+                this.TableName = "ProductStockInLogs";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal ProductStockInLogsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called" +
+                " or extended by application code.", DiagnosticId="SYSLIB0051")]
+            protected ProductStockInLogsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ProductStockInLogLinesColumn {
+                get {
+                    return this.columnProductStockInLogLines;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NotesColumn {
+                get {
+                    return this.columnNotes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ProductStatusColumn {
+                get {
+                    return this.columnProductStatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DeliveredByColumn {
+                get {
+                    return this.columnDeliveredBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DeliveredDateColumn {
+                get {
+                    return this.columnDeliveredDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ReceivedByColumn {
+                get {
+                    return this.columnReceivedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ReceivedDateColumn {
+                get {
+                    return this.columnReceivedDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductStockInLogsRow this[int index] {
+                get {
+                    return ((ProductStockInLogsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ProductStockInLogsRowChangeEventHandler ProductStockInLogsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ProductStockInLogsRowChangeEventHandler ProductStockInLogsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ProductStockInLogsRowChangeEventHandler ProductStockInLogsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ProductStockInLogsRowChangeEventHandler ProductStockInLogsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddProductStockInLogsRow(ProductStockInLogsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductStockInLogsRow AddProductStockInLogsRow(string ProductStockInLogLines, string Notes, string ProductStatus, string DeliveredBy, string DeliveredDate, string ReceivedBy, string ReceivedDate) {
+                ProductStockInLogsRow rowProductStockInLogsRow = ((ProductStockInLogsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ProductStockInLogLines,
+                        Notes,
+                        ProductStatus,
+                        DeliveredBy,
+                        DeliveredDate,
+                        ReceivedBy,
+                        ReceivedDate};
+                rowProductStockInLogsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowProductStockInLogsRow);
+                return rowProductStockInLogsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ProductStockInLogsDataTable cln = ((ProductStockInLogsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ProductStockInLogsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnProductStockInLogLines = base.Columns["ProductStockInLogLines"];
+                this.columnNotes = base.Columns["Notes"];
+                this.columnProductStatus = base.Columns["ProductStatus"];
+                this.columnDeliveredBy = base.Columns["DeliveredBy"];
+                this.columnDeliveredDate = base.Columns["DeliveredDate"];
+                this.columnReceivedBy = base.Columns["ReceivedBy"];
+                this.columnReceivedDate = base.Columns["ReceivedDate"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnProductStockInLogLines = new global::System.Data.DataColumn("ProductStockInLogLines", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProductStockInLogLines);
+                this.columnNotes = new global::System.Data.DataColumn("Notes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNotes);
+                this.columnProductStatus = new global::System.Data.DataColumn("ProductStatus", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProductStatus);
+                this.columnDeliveredBy = new global::System.Data.DataColumn("DeliveredBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeliveredBy);
+                this.columnDeliveredDate = new global::System.Data.DataColumn("DeliveredDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeliveredDate);
+                this.columnReceivedBy = new global::System.Data.DataColumn("ReceivedBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReceivedBy);
+                this.columnReceivedDate = new global::System.Data.DataColumn("ReceivedDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReceivedDate);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductStockInLogsRow NewProductStockInLogsRow() {
+                return ((ProductStockInLogsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ProductStockInLogsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ProductStockInLogsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ProductStockInLogsRowChanged != null)) {
+                    this.ProductStockInLogsRowChanged(this, new ProductStockInLogsRowChangeEvent(((ProductStockInLogsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ProductStockInLogsRowChanging != null)) {
+                    this.ProductStockInLogsRowChanging(this, new ProductStockInLogsRowChangeEvent(((ProductStockInLogsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ProductStockInLogsRowDeleted != null)) {
+                    this.ProductStockInLogsRowDeleted(this, new ProductStockInLogsRowChangeEvent(((ProductStockInLogsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ProductStockInLogsRowDeleting != null)) {
+                    this.ProductStockInLogsRowDeleting(this, new ProductStockInLogsRowChangeEvent(((ProductStockInLogsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveProductStockInLogsRow(ProductStockInLogsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SERCS ds = new SERCS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ProductStockInLogsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ProductPullOutLogsDataTable : global::System.Data.TypedTableBase<ProductPullOutLogsRow> {
+            
+            private global::System.Data.DataColumn columnProductPullOutLogLines;
+            
+            private global::System.Data.DataColumn columnProject;
+            
+            private global::System.Data.DataColumn columnNotes;
+            
+            private global::System.Data.DataColumn columnProductStatus;
+            
+            private global::System.Data.DataColumn columnDeliveredBy;
+            
+            private global::System.Data.DataColumn columnDeliveredDate;
+            
+            private global::System.Data.DataColumn columnReceivedBy;
+            
+            private global::System.Data.DataColumn columnReceivedDate;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductPullOutLogsDataTable() {
+                this.TableName = "ProductPullOutLogs";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal ProductPullOutLogsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called" +
+                " or extended by application code.", DiagnosticId="SYSLIB0051")]
+            protected ProductPullOutLogsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ProductPullOutLogLinesColumn {
+                get {
+                    return this.columnProductPullOutLogLines;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ProjectColumn {
+                get {
+                    return this.columnProject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NotesColumn {
+                get {
+                    return this.columnNotes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ProductStatusColumn {
+                get {
+                    return this.columnProductStatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DeliveredByColumn {
+                get {
+                    return this.columnDeliveredBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DeliveredDateColumn {
+                get {
+                    return this.columnDeliveredDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ReceivedByColumn {
+                get {
+                    return this.columnReceivedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ReceivedDateColumn {
+                get {
+                    return this.columnReceivedDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductPullOutLogsRow this[int index] {
+                get {
+                    return ((ProductPullOutLogsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ProductPullOutLogsRowChangeEventHandler ProductPullOutLogsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ProductPullOutLogsRowChangeEventHandler ProductPullOutLogsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ProductPullOutLogsRowChangeEventHandler ProductPullOutLogsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event ProductPullOutLogsRowChangeEventHandler ProductPullOutLogsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddProductPullOutLogsRow(ProductPullOutLogsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductPullOutLogsRow AddProductPullOutLogsRow(string ProductPullOutLogLines, string Project, string Notes, string ProductStatus, string DeliveredBy, string DeliveredDate, string ReceivedBy, string ReceivedDate) {
+                ProductPullOutLogsRow rowProductPullOutLogsRow = ((ProductPullOutLogsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ProductPullOutLogLines,
+                        Project,
+                        Notes,
+                        ProductStatus,
+                        DeliveredBy,
+                        DeliveredDate,
+                        ReceivedBy,
+                        ReceivedDate};
+                rowProductPullOutLogsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowProductPullOutLogsRow);
+                return rowProductPullOutLogsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ProductPullOutLogsDataTable cln = ((ProductPullOutLogsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ProductPullOutLogsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnProductPullOutLogLines = base.Columns["ProductPullOutLogLines"];
+                this.columnProject = base.Columns["Project"];
+                this.columnNotes = base.Columns["Notes"];
+                this.columnProductStatus = base.Columns["ProductStatus"];
+                this.columnDeliveredBy = base.Columns["DeliveredBy"];
+                this.columnDeliveredDate = base.Columns["DeliveredDate"];
+                this.columnReceivedBy = base.Columns["ReceivedBy"];
+                this.columnReceivedDate = base.Columns["ReceivedDate"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnProductPullOutLogLines = new global::System.Data.DataColumn("ProductPullOutLogLines", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProductPullOutLogLines);
+                this.columnProject = new global::System.Data.DataColumn("Project", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProject);
+                this.columnNotes = new global::System.Data.DataColumn("Notes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNotes);
+                this.columnProductStatus = new global::System.Data.DataColumn("ProductStatus", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProductStatus);
+                this.columnDeliveredBy = new global::System.Data.DataColumn("DeliveredBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeliveredBy);
+                this.columnDeliveredDate = new global::System.Data.DataColumn("DeliveredDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeliveredDate);
+                this.columnReceivedBy = new global::System.Data.DataColumn("ReceivedBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReceivedBy);
+                this.columnReceivedDate = new global::System.Data.DataColumn("ReceivedDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReceivedDate);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductPullOutLogsRow NewProductPullOutLogsRow() {
+                return ((ProductPullOutLogsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ProductPullOutLogsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ProductPullOutLogsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ProductPullOutLogsRowChanged != null)) {
+                    this.ProductPullOutLogsRowChanged(this, new ProductPullOutLogsRowChangeEvent(((ProductPullOutLogsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ProductPullOutLogsRowChanging != null)) {
+                    this.ProductPullOutLogsRowChanging(this, new ProductPullOutLogsRowChangeEvent(((ProductPullOutLogsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ProductPullOutLogsRowDeleted != null)) {
+                    this.ProductPullOutLogsRowDeleted(this, new ProductPullOutLogsRowChangeEvent(((ProductPullOutLogsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ProductPullOutLogsRowDeleting != null)) {
+                    this.ProductPullOutLogsRowDeleting(this, new ProductPullOutLogsRowChangeEvent(((ProductPullOutLogsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveProductPullOutLogsRow(ProductPullOutLogsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SERCS ds = new SERCS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ProductPullOutLogsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class AspNetRoleClaimsRow : global::System.Data.DataRow {
@@ -25694,6 +26444,458 @@ namespace RavenTech_ERP.Reports {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ProductStockInLogsRow : global::System.Data.DataRow {
+            
+            private ProductStockInLogsDataTable tableProductStockInLogs;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal ProductStockInLogsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableProductStockInLogs = ((ProductStockInLogsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ProductStockInLogLines {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductStockInLogs.ProductStockInLogLinesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProductStockInLogLines\' in table \'ProductStockInLogs\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductStockInLogs.ProductStockInLogLinesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Notes {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductStockInLogs.NotesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Notes\' in table \'ProductStockInLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductStockInLogs.NotesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ProductStatus {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductStockInLogs.ProductStatusColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProductStatus\' in table \'ProductStockInLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductStockInLogs.ProductStatusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DeliveredBy {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductStockInLogs.DeliveredByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeliveredBy\' in table \'ProductStockInLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductStockInLogs.DeliveredByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DeliveredDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductStockInLogs.DeliveredDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeliveredDate\' in table \'ProductStockInLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductStockInLogs.DeliveredDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ReceivedBy {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductStockInLogs.ReceivedByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceivedBy\' in table \'ProductStockInLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductStockInLogs.ReceivedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ReceivedDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductStockInLogs.ReceivedDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceivedDate\' in table \'ProductStockInLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductStockInLogs.ReceivedDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsProductStockInLogLinesNull() {
+                return this.IsNull(this.tableProductStockInLogs.ProductStockInLogLinesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetProductStockInLogLinesNull() {
+                this[this.tableProductStockInLogs.ProductStockInLogLinesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNotesNull() {
+                return this.IsNull(this.tableProductStockInLogs.NotesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNotesNull() {
+                this[this.tableProductStockInLogs.NotesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsProductStatusNull() {
+                return this.IsNull(this.tableProductStockInLogs.ProductStatusColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetProductStatusNull() {
+                this[this.tableProductStockInLogs.ProductStatusColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDeliveredByNull() {
+                return this.IsNull(this.tableProductStockInLogs.DeliveredByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDeliveredByNull() {
+                this[this.tableProductStockInLogs.DeliveredByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDeliveredDateNull() {
+                return this.IsNull(this.tableProductStockInLogs.DeliveredDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDeliveredDateNull() {
+                this[this.tableProductStockInLogs.DeliveredDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsReceivedByNull() {
+                return this.IsNull(this.tableProductStockInLogs.ReceivedByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetReceivedByNull() {
+                this[this.tableProductStockInLogs.ReceivedByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsReceivedDateNull() {
+                return this.IsNull(this.tableProductStockInLogs.ReceivedDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetReceivedDateNull() {
+                this[this.tableProductStockInLogs.ReceivedDateColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ProductPullOutLogsRow : global::System.Data.DataRow {
+            
+            private ProductPullOutLogsDataTable tableProductPullOutLogs;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal ProductPullOutLogsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableProductPullOutLogs = ((ProductPullOutLogsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ProductPullOutLogLines {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductPullOutLogs.ProductPullOutLogLinesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProductPullOutLogLines\' in table \'ProductPullOutLogs\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductPullOutLogs.ProductPullOutLogLinesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Project {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductPullOutLogs.ProjectColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Project\' in table \'ProductPullOutLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductPullOutLogs.ProjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Notes {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductPullOutLogs.NotesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Notes\' in table \'ProductPullOutLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductPullOutLogs.NotesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ProductStatus {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductPullOutLogs.ProductStatusColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProductStatus\' in table \'ProductPullOutLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductPullOutLogs.ProductStatusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DeliveredBy {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductPullOutLogs.DeliveredByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeliveredBy\' in table \'ProductPullOutLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductPullOutLogs.DeliveredByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DeliveredDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductPullOutLogs.DeliveredDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeliveredDate\' in table \'ProductPullOutLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductPullOutLogs.DeliveredDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ReceivedBy {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductPullOutLogs.ReceivedByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceivedBy\' in table \'ProductPullOutLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductPullOutLogs.ReceivedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ReceivedDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableProductPullOutLogs.ReceivedDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReceivedDate\' in table \'ProductPullOutLogs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProductPullOutLogs.ReceivedDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsProductPullOutLogLinesNull() {
+                return this.IsNull(this.tableProductPullOutLogs.ProductPullOutLogLinesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetProductPullOutLogLinesNull() {
+                this[this.tableProductPullOutLogs.ProductPullOutLogLinesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsProjectNull() {
+                return this.IsNull(this.tableProductPullOutLogs.ProjectColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetProjectNull() {
+                this[this.tableProductPullOutLogs.ProjectColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNotesNull() {
+                return this.IsNull(this.tableProductPullOutLogs.NotesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNotesNull() {
+                this[this.tableProductPullOutLogs.NotesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsProductStatusNull() {
+                return this.IsNull(this.tableProductPullOutLogs.ProductStatusColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetProductStatusNull() {
+                this[this.tableProductPullOutLogs.ProductStatusColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDeliveredByNull() {
+                return this.IsNull(this.tableProductPullOutLogs.DeliveredByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDeliveredByNull() {
+                this[this.tableProductPullOutLogs.DeliveredByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDeliveredDateNull() {
+                return this.IsNull(this.tableProductPullOutLogs.DeliveredDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDeliveredDateNull() {
+                this[this.tableProductPullOutLogs.DeliveredDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsReceivedByNull() {
+                return this.IsNull(this.tableProductPullOutLogs.ReceivedByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetReceivedByNull() {
+                this[this.tableProductPullOutLogs.ReceivedByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsReceivedDateNull() {
+                return this.IsNull(this.tableProductPullOutLogs.ReceivedDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetReceivedDateNull() {
+                this[this.tableProductPullOutLogs.ReceivedDateColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -27413,6 +28615,74 @@ namespace RavenTech_ERP.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public EmployeeContributionRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class ProductStockInLogsRowChangeEvent : global::System.EventArgs {
+            
+            private ProductStockInLogsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductStockInLogsRowChangeEvent(ProductStockInLogsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductStockInLogsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class ProductPullOutLogsRowChangeEvent : global::System.EventArgs {
+            
+            private ProductPullOutLogsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductPullOutLogsRowChangeEvent(ProductPullOutLogsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ProductPullOutLogsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -38056,15 +39326,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._purchaseTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._purchaseTypeTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._aspNetUserClaimsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.AspNetUserClaims.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -38173,6 +39434,15 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._purchaseTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._purchaseTypeTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -38244,14 +39514,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._salesTypeTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._purchaseTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._purchaseTypeTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -38351,6 +39613,14 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._purchaseTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._purchaseTypeTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -38361,6 +39631,14 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(SERCS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._purchaseTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._purchaseTypeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._productTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.ProductType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -38454,14 +39732,6 @@ SELECT UserProfileId, FirstName, LastName, ProfilePicture, ApplicationUserId FRO
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._aspNetUserClaimsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._purchaseTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PurchaseType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._purchaseTypeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

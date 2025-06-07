@@ -110,12 +110,12 @@ namespace PresentationLayer.Views.UserControls
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 3);
-            materialCard1.Margin = new Padding(21, 21, 21, 21);
+            materialCard1.Location = new Point(2, 2);
+            materialCard1.Margin = new Padding(21);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(21, 21, 21, 21);
-            materialCard1.Size = new Size(1344, 723);
+            materialCard1.Padding = new Padding(21);
+            materialCard1.Size = new Size(1346, 725);
             materialCard1.TabIndex = 2;
             // 
             // tableLayoutPanel3
@@ -131,11 +131,11 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel3.Controls.Add(guna2GradientPanel7, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(21, 250);
-            tableLayoutPanel3.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel3.Margin = new Padding(4);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(1302, 452);
+            tableLayoutPanel3.Size = new Size(1304, 454);
             tableLayoutPanel3.TabIndex = 25;
             // 
             // guna2GradientPanel4
@@ -148,12 +148,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel4.FillColor = Color.IndianRed;
             guna2GradientPanel4.FillColor2 = Color.Red;
             guna2GradientPanel4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel4.Location = new Point(996, 21);
-            guna2GradientPanel4.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel4.Location = new Point(999, 21);
+            guna2GradientPanel4.Margin = new Padding(21);
             guna2GradientPanel4.Name = "guna2GradientPanel4";
-            guna2GradientPanel4.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel4.Padding = new Padding(21);
             guna2GradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2GradientPanel4.Size = new Size(285, 410);
+            guna2GradientPanel4.Size = new Size(284, 412);
             guna2GradientPanel4.TabIndex = 19;
             // 
             // dgOutOfStock
@@ -162,10 +162,10 @@ namespace PresentationLayer.Views.UserControls
             dgOutOfStock.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             dgOutOfStock.Dock = DockStyle.Fill;
             dgOutOfStock.Location = new Point(21, 21);
-            dgOutOfStock.Margin = new Padding(4, 4, 4, 4);
+            dgOutOfStock.Margin = new Padding(4);
             dgOutOfStock.Name = "dgOutOfStock";
             dgOutOfStock.PreviewRowHeight = 42;
-            dgOutOfStock.Size = new Size(243, 368);
+            dgOutOfStock.Size = new Size(242, 370);
             dgOutOfStock.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgOutOfStock.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgOutOfStock.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -184,12 +184,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel5.FillColor = Color.FromArgb(255, 224, 192);
             guna2GradientPanel5.FillColor2 = Color.FromArgb(255, 128, 0);
             guna2GradientPanel5.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel5.Location = new Point(671, 21);
-            guna2GradientPanel5.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel5.Location = new Point(673, 21);
+            guna2GradientPanel5.Margin = new Padding(21);
             guna2GradientPanel5.Name = "guna2GradientPanel5";
-            guna2GradientPanel5.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel5.Padding = new Padding(21);
             guna2GradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2GradientPanel5.Size = new Size(283, 410);
+            guna2GradientPanel5.Size = new Size(284, 412);
             guna2GradientPanel5.TabIndex = 18;
             // 
             // dgLowStock
@@ -198,10 +198,10 @@ namespace PresentationLayer.Views.UserControls
             dgLowStock.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             dgLowStock.Dock = DockStyle.Fill;
             dgLowStock.Location = new Point(21, 21);
-            dgLowStock.Margin = new Padding(4, 4, 4, 4);
+            dgLowStock.Margin = new Padding(4);
             dgLowStock.Name = "dgLowStock";
             dgLowStock.PreviewRowHeight = 42;
-            dgLowStock.Size = new Size(241, 368);
+            dgLowStock.Size = new Size(242, 370);
             dgLowStock.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgLowStock.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgLowStock.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -220,12 +220,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel6.FillColor = Color.DeepSkyBlue;
             guna2GradientPanel6.FillColor2 = Color.Blue;
             guna2GradientPanel6.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel6.Location = new Point(346, 21);
-            guna2GradientPanel6.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel6.Location = new Point(347, 21);
+            guna2GradientPanel6.Margin = new Padding(21);
             guna2GradientPanel6.Name = "guna2GradientPanel6";
-            guna2GradientPanel6.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel6.Padding = new Padding(21);
             guna2GradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GradientPanel6.Size = new Size(283, 410);
+            guna2GradientPanel6.Size = new Size(284, 412);
             guna2GradientPanel6.TabIndex = 17;
             // 
             // dgPulledOut
@@ -234,10 +234,10 @@ namespace PresentationLayer.Views.UserControls
             dgPulledOut.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             dgPulledOut.Dock = DockStyle.Fill;
             dgPulledOut.Location = new Point(21, 21);
-            dgPulledOut.Margin = new Padding(4, 4, 4, 4);
+            dgPulledOut.Margin = new Padding(4);
             dgPulledOut.Name = "dgPulledOut";
             dgPulledOut.PreviewRowHeight = 42;
-            dgPulledOut.Size = new Size(241, 368);
+            dgPulledOut.Size = new Size(242, 370);
             dgPulledOut.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgPulledOut.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgPulledOut.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -257,11 +257,11 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel7.FillColor2 = Color.Green;
             guna2GradientPanel7.ForeColor = Color.FromArgb(222, 0, 0, 0);
             guna2GradientPanel7.Location = new Point(21, 21);
-            guna2GradientPanel7.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel7.Margin = new Padding(21);
             guna2GradientPanel7.Name = "guna2GradientPanel7";
-            guna2GradientPanel7.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel7.Padding = new Padding(21);
             guna2GradientPanel7.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2GradientPanel7.Size = new Size(283, 410);
+            guna2GradientPanel7.Size = new Size(284, 412);
             guna2GradientPanel7.TabIndex = 13;
             // 
             // dgInStock
@@ -270,10 +270,10 @@ namespace PresentationLayer.Views.UserControls
             dgInStock.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             dgInStock.Dock = DockStyle.Fill;
             dgInStock.Location = new Point(21, 21);
-            dgInStock.Margin = new Padding(4, 4, 4, 4);
+            dgInStock.Margin = new Padding(4);
             dgInStock.Name = "dgInStock";
             dgInStock.PreviewRowHeight = 42;
-            dgInStock.Size = new Size(241, 368);
+            dgInStock.Size = new Size(242, 370);
             dgInStock.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgInStock.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgInStock.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -295,11 +295,11 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel7.Controls.Add(materialCard5, 0, 0);
             tableLayoutPanel7.Dock = DockStyle.Top;
             tableLayoutPanel7.Location = new Point(21, 96);
-            tableLayoutPanel7.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel7.Margin = new Padding(4);
             tableLayoutPanel7.Name = "tableLayoutPanel7";
             tableLayoutPanel7.RowCount = 1;
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel7.Size = new Size(1302, 154);
+            tableLayoutPanel7.Size = new Size(1304, 154);
             tableLayoutPanel7.TabIndex = 24;
             // 
             // guna2GradientPanel3
@@ -313,12 +313,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel3.FillColor = Color.IndianRed;
             guna2GradientPanel3.FillColor2 = Color.Red;
             guna2GradientPanel3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel3.Location = new Point(996, 21);
-            guna2GradientPanel3.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel3.Location = new Point(999, 21);
+            guna2GradientPanel3.Margin = new Padding(21);
             guna2GradientPanel3.Name = "guna2GradientPanel3";
-            guna2GradientPanel3.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel3.Padding = new Padding(21);
             guna2GradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2GradientPanel3.Size = new Size(285, 112);
+            guna2GradientPanel3.Size = new Size(284, 112);
             guna2GradientPanel3.TabIndex = 19;
             // 
             // txtOutOfStock
@@ -328,7 +328,7 @@ namespace PresentationLayer.Views.UserControls
             txtOutOfStock.Dock = DockStyle.Right;
             txtOutOfStock.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtOutOfStock.ForeColor = Color.White;
-            txtOutOfStock.Location = new Point(115, 53);
+            txtOutOfStock.Location = new Point(114, 53);
             txtOutOfStock.Margin = new Padding(4, 0, 4, 0);
             txtOutOfStock.Name = "txtOutOfStock";
             txtOutOfStock.Size = new Size(149, 54);
@@ -362,12 +362,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel2.FillColor = Color.FromArgb(255, 224, 192);
             guna2GradientPanel2.FillColor2 = Color.FromArgb(255, 128, 0);
             guna2GradientPanel2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel2.Location = new Point(671, 21);
-            guna2GradientPanel2.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel2.Location = new Point(673, 21);
+            guna2GradientPanel2.Margin = new Padding(21);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
-            guna2GradientPanel2.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel2.Padding = new Padding(21);
             guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2GradientPanel2.Size = new Size(283, 112);
+            guna2GradientPanel2.Size = new Size(284, 112);
             guna2GradientPanel2.TabIndex = 18;
             // 
             // txtLowStock
@@ -377,7 +377,7 @@ namespace PresentationLayer.Views.UserControls
             txtLowStock.Dock = DockStyle.Right;
             txtLowStock.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtLowStock.ForeColor = Color.White;
-            txtLowStock.Location = new Point(113, 53);
+            txtLowStock.Location = new Point(114, 53);
             txtLowStock.Margin = new Padding(4, 0, 4, 0);
             txtLowStock.Name = "txtLowStock";
             txtLowStock.Size = new Size(149, 54);
@@ -411,12 +411,12 @@ namespace PresentationLayer.Views.UserControls
             guna2GradientPanel1.FillColor = Color.DeepSkyBlue;
             guna2GradientPanel1.FillColor2 = Color.Blue;
             guna2GradientPanel1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            guna2GradientPanel1.Location = new Point(346, 21);
-            guna2GradientPanel1.Margin = new Padding(21, 21, 21, 21);
+            guna2GradientPanel1.Location = new Point(347, 21);
+            guna2GradientPanel1.Margin = new Padding(21);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.Padding = new Padding(21, 21, 21, 21);
+            guna2GradientPanel1.Padding = new Padding(21);
             guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2GradientPanel1.Size = new Size(283, 112);
+            guna2GradientPanel1.Size = new Size(284, 112);
             guna2GradientPanel1.TabIndex = 17;
             // 
             // txtPulledOut
@@ -426,7 +426,7 @@ namespace PresentationLayer.Views.UserControls
             txtPulledOut.Dock = DockStyle.Right;
             txtPulledOut.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtPulledOut.ForeColor = Color.White;
-            txtPulledOut.Location = new Point(113, 53);
+            txtPulledOut.Location = new Point(114, 53);
             txtPulledOut.Margin = new Padding(4, 0, 4, 0);
             txtPulledOut.Name = "txtPulledOut";
             txtPulledOut.Size = new Size(149, 54);
@@ -461,11 +461,11 @@ namespace PresentationLayer.Views.UserControls
             materialCard5.FillColor2 = Color.Green;
             materialCard5.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard5.Location = new Point(21, 21);
-            materialCard5.Margin = new Padding(21, 21, 21, 21);
+            materialCard5.Margin = new Padding(21);
             materialCard5.Name = "materialCard5";
-            materialCard5.Padding = new Padding(21, 21, 21, 21);
+            materialCard5.Padding = new Padding(21);
             materialCard5.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            materialCard5.Size = new Size(283, 112);
+            materialCard5.Size = new Size(284, 112);
             materialCard5.TabIndex = 13;
             // 
             // txtInStock
@@ -475,7 +475,7 @@ namespace PresentationLayer.Views.UserControls
             txtInStock.Dock = DockStyle.Right;
             txtInStock.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             txtInStock.ForeColor = Color.White;
-            txtInStock.Location = new Point(113, 53);
+            txtInStock.Location = new Point(114, 53);
             txtInStock.Margin = new Padding(4, 0, 4, 0);
             txtInStock.Name = "txtInStock";
             txtInStock.Size = new Size(149, 54);
@@ -507,12 +507,12 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Top;
             tableLayoutPanel1.Location = new Point(21, 21);
-            tableLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel1.Margin = new Padding(4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1302, 75);
+            tableLayoutPanel1.Size = new Size(1304, 75);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // guna2Separator1
@@ -521,7 +521,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Location = new Point(4, 60);
             guna2Separator1.Margin = new Padding(4, 3, 4, 3);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1294, 12);
+            guna2Separator1.Size = new Size(1296, 12);
             guna2Separator1.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -536,7 +536,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1302, 57);
+            tableLayoutPanel2.Size = new Size(1304, 57);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -617,7 +617,7 @@ namespace PresentationLayer.Views.UserControls
             ClientSize = new Size(1350, 729);
             Controls.Add(materialCard1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "ProductMonitoringView";
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
