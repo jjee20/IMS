@@ -164,10 +164,10 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllEmployeeList(bool emptyValue = false)
+        private async void LoadAllEmployeeList(bool emptyValue = false)
         {
             EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(
-                _unitOfWork.Employee.Value.GetAll(includeProperties: "JobPosition,Department,Shift,Attendances.Project,Payrolls"));
+                await _unitOfWork.Employee.Value.GetAllAsync(includeProperties: "JobPosition,Department,Shift,Attendances.Project,Payrolls"));
 
             if (!emptyValue) EmployeeList = EmployeeList.Where(c => c.Name.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetEmployeeListBindingSource(EmployeeList.OrderBy(c => c.Name));

@@ -143,9 +143,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllBranchList(bool emptyValue = false)
+        private async void LoadAllBranchList(bool emptyValue = false)
         {
-            BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(_unitOfWork.Branch.Value.GetAll());
+            BranchList = Program.Mapper.Map<IEnumerable<BranchViewModel>>(await _unitOfWork.Branch.Value.GetAllAsync());
 
             if (!emptyValue) BranchList = BranchList.Where(c => c.BranchName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetBranchListBindingSource(BranchList);

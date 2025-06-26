@@ -144,9 +144,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllDeductionList(bool emptyValue = false)
+        private async void LoadAllDeductionList(bool emptyValue = false)
         {
-            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.Value.GetAll(includeProperties: "Employee"));
+            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(await _unitOfWork.Deduction.Value.GetAllAsync(includeProperties: "Employee"));
 
             if (!emptyValue) DeductionList = DeductionList.Where(c => c.Employee.Contains(_view.SearchValue));
             _view.SetDeductionListBindingSource(DeductionList.OrderByDescending(c => c.DateDeducted));

@@ -36,6 +36,12 @@ namespace PresentationLayer.Views.UserControls
             //};
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string SearchValue
+        {
+            get { return txtSearch.Text; }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double InStock
         {
             set { txtInStock.Text = value.ToString(); }
@@ -86,5 +92,15 @@ namespace PresentationLayer.Views.UserControls
             }
             return instance;
         }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+                SearchEvent?.Invoke(this, EventArgs.Empty);
+            txtSearch.Focus();
+        }
+
+        public event EventHandler SearchEvent;
     }
 }

@@ -14,6 +14,7 @@ using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using System.Threading.Tasks;
 using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
@@ -62,7 +63,7 @@ namespace PresentationLayer.Presenters
                 form.Text = "Add Product Stock-In Log";
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    LoadAllProductStockInLogList();
+                   LoadAllProductStockInLogList();
                 }
             }
         }
@@ -154,9 +155,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllProductStockInLogList(bool emptyValue = false)
+        private async void LoadAllProductStockInLogList(bool emptyValue = false)
         {
-            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.ProductStockInLogs.Value.GetAll(includeProperties: "ProductStockInLogLines.Product.UnitOfMeasure"));
+            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(await _unitOfWork.ProductStockInLogs.Value.GetAllAsync(includeProperties: "ProductStockInLogLines.Product.UnitOfMeasure"));
 
             if (!emptyValue) ProductStockInLogList = ProductStockInLogList.Where(c => c.ProductStockInLogLines.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductInStockLogListBindingSource(ProductStockInLogList);

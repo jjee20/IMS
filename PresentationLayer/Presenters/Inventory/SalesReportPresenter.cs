@@ -93,7 +93,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             YearBindingSource.DataSource = YearList.OrderByDescending(c => c.Name);
         }
 
-        private void LoadReport(int? year = 0, int? month = 0)
+        private async void LoadReport(int? year = 0, int? month = 0)
         {
             if(year == 0 || month == 0)
             {
@@ -101,8 +101,8 @@ namespace RavenTech_ERP.Presenters.Inventory
                 month = DateTime.Now.Month;
             }
 
-            var sales = _unitOfWork.SalesOrder.Value.GetAll(includeProperties: "SalesOrderLines");
-            var purchases = _unitOfWork.PurchaseOrder.Value.GetAll(includeProperties: "PurchaseOrderLines");
+            var sales = await _unitOfWork.SalesOrder.Value.GetAllAsync(includeProperties: "SalesOrderLines");
+            var purchases = await _unitOfWork.PurchaseOrder.Value.GetAllAsync(includeProperties: "PurchaseOrderLines");
 
             _view.ItemSold = sales.Where(c => c.OrderDate.Year == year.Value).SelectMany(c => c.SalesOrderLines).Sum(c => c.Quantity).ToString();
             _view.Sales = sales.Where(c => c.OrderDate.Year == year.Value).Sum(c => c.Total);

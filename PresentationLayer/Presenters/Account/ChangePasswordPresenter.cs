@@ -35,7 +35,7 @@ namespace PresentationLayer.Presenters.Account
         private async void Save(object? sender, EventArgs e)
         {
             string userId = Settings.Default.User_Id;
-            var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId);
+            var user = await _unitOfWork.ApplicationUser.Value.GetAsync(c => c.Id == userId);
 
             try
             {
@@ -48,7 +48,7 @@ namespace PresentationLayer.Presenters.Account
                     user.PasswordHash = _view.NewPassword;
                     _unitOfWork.ApplicationUser.Value.Update(user);
                     _view.Message = "Password updated successfully";
-                    _unitOfWork.Save();
+                    await _unitOfWork.SaveAsync();
                     _view.IsSuccessful = true;
                 }
                 else

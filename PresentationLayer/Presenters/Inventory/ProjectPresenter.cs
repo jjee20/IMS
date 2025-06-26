@@ -171,9 +171,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllProjectList(bool emptyValue = false)
+        private async void LoadAllProjectList(bool emptyValue = false)
         {
-            var projects = _unitOfWork.Project.Value.GetAll();
+            var projects = await _unitOfWork.Project.Value.GetAllAsync();
 
             ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(projects);
 

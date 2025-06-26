@@ -198,9 +198,9 @@ namespace PresentationLayer.Presenters.Account
             _view.ConfirmPassword = "";
         }
 
-        private void LoadAllRegisterList()
+        private async void LoadAllRegisterList()
         {
-            var user = _unitOfWork.ApplicationUser.Value.GetAll(includeProperties: "Profile");
+            var user = await _unitOfWork.ApplicationUser.Value.GetAllAsync(includeProperties: "Profile");
             RegisterList = Program.Mapper.Map<IEnumerable<AccountViewModel>>(user);
             _view.SetRegisterListBindingSource(RegisterList);
         }

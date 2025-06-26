@@ -37,7 +37,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             ProjectFlowBindingSource = new BindingSource();
 
             _view.PrintEvent -= Print;
-            _view.PrintEvent += Print;
+            _view.SearchEvent += Search;
 
 
             _view.SetInStockListBindingSource(InStockBindingSource);
@@ -56,9 +56,10 @@ namespace RavenTech_ERP.Presenters.Inventory
             LoadProjectFlow();
         }
 
-        private void LoadProjectFlow()
+        private async void LoadProjectFlow()
         {
-            var pullOuts = _unitOfWork.ProductPullOutLogs.Value.GetAll(includeProperties: "ProductPullOutLogLines.Product,Project");
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            var pullOuts = await _unitOfWork.ProductPullOutLogs.Value.GetAllAsync(includeProperties: "ProductPullOutLogLines.Product,Project");
             ProjectFlowList = pullOuts
                 .SelectMany(p => p.ProductPullOutLogLines)
                 .Where(p => p.Product != null && p.ProductPullOutLogs != null && p.ProductPullOutLogs.Project != null)
@@ -76,13 +77,20 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
+            if(!emptyValue)
+            {
+                ProjectFlowList = ProjectFlowList
+                    .Where(c => c.Product.ToLower().Contains(_view.SearchValue.ToLower()) || c.Project.ToLower().Contains(_view.SearchValue.ToLower()));
+            }
+
             ProjectFlowBindingSource.DataSource = ProjectFlowList.ToList();
             _view.ProjectFlow = ProjectFlowList.Sum(c => c.Qty);
         }
 
-        private void LoadOutOfStock()
+        private async void LoadOutOfStock()
         {
-            var currentStocks = GetProductCurrentStocks();
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            var currentStocks = await GetProductCurrentStocks(emptyValue);
 
             OutOfStockList = currentStocks
                 .Where(x => x.stockQty <= 0)
@@ -97,9 +105,10 @@ namespace RavenTech_ERP.Presenters.Inventory
             OutOfStockBindingSource.DataSource = OutOfStockList.ToList();
             _view.OutOfStock = OutOfStockList.Count();
         }
-        private void LoadLowStock()
+        private async void LoadLowStock()
         {
-            var currentStocks = GetProductCurrentStocks();
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            var currentStocks = await GetProductCurrentStocks(emptyValue);
 
             LowStockList = currentStocks
                 .Where(x => x.stockQty > 0 && x.stockQty <= x.product.ReorderLevel)
@@ -115,9 +124,10 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.LowStock = LowStockList.Sum(c => c.Qty);
         }
 
-        private void LoadInStock()
+        private async void LoadInStock()
         {
-            var currentStocks = GetProductCurrentStocks();
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            var currentStocks = await GetProductCurrentStocks(emptyValue);
 
             InStockList = currentStocks
                 .Where(x => x.stockQty > 0)
@@ -140,13 +150,13 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void Search(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            RefreshView();
         }
 
-        private List<(Product product, double stockQty)> GetProductCurrentStocks()
+        private async Task<List<(Product product, double stockQty)>> GetProductCurrentStocks(bool emptyValue)
         {
-            var stockInLogs = _unitOfWork.ProductStockInLogs.Value.GetAll(includeProperties: "ProductStockInLogLines.Product");
-            var pullOutLogs = _unitOfWork.ProductPullOutLogs.Value.GetAll(includeProperties: "ProductPullOutLogLines.Product");
+            var stockInLogs = await _unitOfWork.ProductStockInLogs.Value.GetAllAsync(includeProperties: "ProductStockInLogLines.Product");
+            var pullOutLogs = await _unitOfWork.ProductPullOutLogs.Value.GetAllAsync(includeProperties: "ProductPullOutLogLines.Product");
 
             var stockIn = stockInLogs
                 .SelectMany(log => log.ProductStockInLogLines)

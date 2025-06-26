@@ -127,22 +127,23 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             }
         }
 
-        private void LoadAllPayrollList(DateTime startDate, DateTime endDate, int? projectId = 0)
+        private async void LoadAllPayrollList(DateTime startDate, DateTime endDate, int? projectId = 0)
         {
             PayrollList.Clear();
             PayrollVMList.Clear();
 
-            var employees = _unitOfWork.Employee.Value.GetAll(
+            var employees = await _unitOfWork.Employee.Value.GetAllAsync(
                      c => c.isActive != false && (c.ContractStartDate.Date <= startDate.Date && c.ContractEndDate.Date >= endDate.Date),
                      includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution"
                  );
 
-            var holidays = _unitOfWork.Holiday.Value.GetAll(h => h.EffectiveDate.Date >= startDate && h.EffectiveDate.Date <= endDate).ToList();
+            var holidayList = await _unitOfWork.Holiday.Value.GetAllAsync(h => h.EffectiveDate.Date >= startDate && h.EffectiveDate.Date <= endDate);
+            var holidays = holidayList.ToList();
 
             if (!_view.All && projectId.HasValue)
             {
                 employees = employees.Where(e => e.Attendances.Any(a => a.ProjectId == projectId));
-                var project = _unitOfWork.Project.Value.Get(p => p.ProjectId == projectId);
+                var project = await _unitOfWork.Project.Value.GetAsync(p => p.ProjectId == projectId);
                 ProjectName = $"Project: {project?.ProjectName ?? ""}";
             }
             else
@@ -158,7 +159,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
 
                 int totalDays = PayrollHelper.TotalDays(employee.Attendances, startDate, endDate);
                 double shiftHours = employee.Shift?.RegularHours ?? 8;
-                double hourlyRate = totalDays > 0 ? employee.BasicSalary / (totalDays * shiftHours) : 0;
+                double hourlyRate = employee.BasicSalary /  shiftHours;
                 double regularPay = employee.BasicSalary * totalDays;
 
                 double fullDays = attendances.Count(a => a.IsPresent && !a.IsHalfDay && !PayrollHelper.IsCoveredByLeave(a.Date, approvedLeaves));
@@ -298,9 +299,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 _view.Message = $"An error occurred while generating the report: {ex.Message}";
             }
         }
-        private void LoadAllProjectList()
+        private async void LoadAllProjectList()
         {
-            ProjectList = _unitOfWork.Project.Value.GetAll();
+            ProjectList = await _unitOfWork.Project.Value.GetAllAsync();
             ProjectBindingSource.DataSource = ProjectList;
         }
     }

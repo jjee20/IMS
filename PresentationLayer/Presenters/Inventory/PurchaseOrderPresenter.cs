@@ -202,10 +202,10 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllPurchaseOrderList(bool emptyValue = false)
+        private async void LoadAllPurchaseOrderList(bool emptyValue = false)
         {
 
-            PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(_unitOfWork.PurchaseOrder.Value.GetAll());
+            PurchaseOrderList = Program.Mapper.Map<IEnumerable<PurchaseOrderViewModel>>(await _unitOfWork.PurchaseOrder.Value.GetAllAsync());
 
             if (!emptyValue) PurchaseOrderList = PurchaseOrderList.Where(c => c.PurchaseOrderName.ToLower().Contains(_view.SearchValue.ToLower()));
 

@@ -143,10 +143,10 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        
-        private void LoadAllCashBankList(bool emptyValue = false)
+
+        private async void LoadAllCashBankList(bool emptyValue = false)
         {
-            CashBankList = Program.Mapper.Map<IEnumerable<CashBankViewModel>>(_unitOfWork.CashBank.Value.GetAll());
+            CashBankList = Program.Mapper.Map<IEnumerable<CashBankViewModel>>(await _unitOfWork.CashBank.Value.GetAllAsync());
 
             if (!emptyValue) CashBankList = CashBankList.Where(c => c.CashBankName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetCashBankListBindingSource(CashBankList);

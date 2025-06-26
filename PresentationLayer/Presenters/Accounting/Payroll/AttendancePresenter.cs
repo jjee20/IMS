@@ -97,18 +97,20 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllAttendanceList(bool emptyValue = false)
+        private async void LoadAllAttendanceList(bool emptyValue = false)
         {
-            AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
+            AttendanceList = await GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
 
             if (!emptyValue) AttendanceList = AttendanceList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetAttendanceListBindingSource(AttendanceList);
             _eventAggregator.Publish<PayrollUpdateEvent>();
         }
-        public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
+        public async Task<List<AttendanceViewModel>> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
-            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project").OrderBy(c => c.LastName);
-            var holidays = _unitOfWork.Holiday.Value.GetAll().Where(h => h.EffectiveDate >= startDate && h.EffectiveDate <= endDate).ToList();
+            var employeeList = await _unitOfWork.Employee.Value.GetAllAsync(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
+            var employees = employeeList.OrderBy(c => c.LastName);
+            var holidayList = await _unitOfWork.Holiday.Value.GetAllAsync(h => h.EffectiveDate >= startDate && h.EffectiveDate <= endDate);
+            var holidays = holidayList.ToList();
             var summaryList = new List<AttendanceViewModel>();
 
             int totalDays = 0;

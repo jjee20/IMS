@@ -144,9 +144,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllAllowanceList(bool emptyValue = false)
+        private async void LoadAllAllowanceList(bool emptyValue = false)
         {
-            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(includeProperties: "Employee"));
+            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(await _unitOfWork.Allowance.Value.GetAllAsync(includeProperties: "Employee"));
 
             if (!emptyValue) AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
             _view.SetAllowanceListBindingSource(AllowanceList.OrderByDescending(c => c.StartDate));

@@ -47,7 +47,9 @@ namespace PresentationLayer.Views.UserControls
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductMonitoringView));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             tableLayoutPanel3 = new TableLayoutPanel();
             guna2GradientPanel4 = new Guna2GradientPanel();
@@ -74,6 +76,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1 = new TableLayoutPanel();
             guna2Separator1 = new Guna2Separator();
             tableLayoutPanel2 = new TableLayoutPanel();
+            txtSearch = new Guna2TextBox();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             imageList1 = new ImageList(components);
             guna2HtmlToolTip2 = new Guna2HtmlToolTip();
@@ -527,8 +530,10 @@ namespace PresentationLayer.Views.UserControls
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.BackColor = Color.White;
-            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 651F));
+            tableLayoutPanel2.Controls.Add(txtSearch, 1, 0);
             tableLayoutPanel2.Controls.Add(materialLabel1, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(0, 0);
@@ -536,8 +541,33 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel2.Size = new Size(1304, 57);
             tableLayoutPanel2.TabIndex = 0;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            txtSearch.CharacterCasing = CharacterCasing.Upper;
+            txtSearch.CustomizableEdges = customizableEdges17;
+            txtSearch.DefaultText = "";
+            txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtSearch.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtSearch.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtSearch.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSearch.Font = new Font("Segoe UI", 9F);
+            txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
+            txtSearch.Location = new Point(870, 6);
+            txtSearch.Margin = new Padding(4, 6, 4, 6);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = "Search here";
+            txtSearch.SelectedText = "";
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            txtSearch.Size = new Size(430, 45);
+            txtSearch.TabIndex = 12;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // materialLabel1
             // 
@@ -683,5 +713,6 @@ namespace PresentationLayer.Views.UserControls
         private Guna2Elipse guna2Elipse2;
         private Guna2Elipse guna2Elipse3;
         private Guna2Elipse guna2Elipse4;
+        private Guna2TextBox txtSearch;
     }
 }

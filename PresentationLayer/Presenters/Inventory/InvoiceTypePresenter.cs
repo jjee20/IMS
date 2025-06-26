@@ -142,9 +142,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllInvoiceTypeList(bool emptyValue = false)
+        private async void LoadAllInvoiceTypeList(bool emptyValue = false)
         {
-            InvoiceTypeList = Program.Mapper.Map<IEnumerable<InvoiceTypeViewModel>>(_unitOfWork.InvoiceType.Value.GetAll());
+            InvoiceTypeList = Program.Mapper.Map<IEnumerable<InvoiceTypeViewModel>>(await _unitOfWork.InvoiceType.Value.GetAllAsync());
 
             if (!emptyValue) InvoiceTypeList = InvoiceTypeList.Where(c => c.InvoiceTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetInvoiceTypeListBindingSource(InvoiceTypeList);

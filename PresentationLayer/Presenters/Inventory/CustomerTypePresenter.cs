@@ -145,10 +145,10 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        
-        private void LoadAllCustomerTypeList(bool emptyValue = false)
+
+        private async void LoadAllCustomerTypeList(bool emptyValue = false)
         {
-            CustomerTypeList = Program.Mapper.Map<IEnumerable<CustomerTypeViewModel>>(_unitOfWork.CustomerType.Value.GetAll());
+            CustomerTypeList = Program.Mapper.Map<IEnumerable<CustomerTypeViewModel>>(await _unitOfWork.CustomerType.Value.GetAllAsync());
 
             if (!emptyValue) CustomerTypeList = CustomerTypeList.Where(c => c.CustomerTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetCustomerTypeListBindingSource(CustomerTypeList);

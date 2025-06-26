@@ -148,9 +148,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllProductList(bool emptyValue = false)
+        private async void LoadAllProductList(bool emptyValue = false)
         {
-            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll());
+            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(await _unitOfWork.Product.Value.GetAllAsync());
 
             if (!emptyValue) ProductList = ProductList.Where(c => c.ProductName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductListBindingSource(ProductList);

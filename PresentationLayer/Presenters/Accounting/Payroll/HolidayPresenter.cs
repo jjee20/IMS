@@ -144,9 +144,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
 
-        private void LoadAllHolidayList(bool emptyValue = false)
+        private async void LoadAllHolidayList(bool emptyValue = false)
         {
-            HolidayList = Program.Mapper.Map<IEnumerable<HolidayViewModel>>(_unitOfWork.Holiday.Value.GetAll());
+            HolidayList = Program.Mapper.Map<IEnumerable<HolidayViewModel>>(await _unitOfWork.Holiday.Value.GetAllAsync());
 
             if (!emptyValue) HolidayList = HolidayList.Where(c => c.HolidayName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetHolidayListBindingSource(HolidayList.OrderBy(c => c.EffectiveDate));

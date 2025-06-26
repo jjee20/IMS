@@ -31,10 +31,16 @@ namespace PresentationLayer.Presenters.Account
             LoadDetails();
         }
 
-        private void LoadDetails()
+        private async void LoadDetails()
         {
             var userId = Settings.Default.User_Id;
-            var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId, includeProperties: "Profile");
+            var user = await _unitOfWork.ApplicationUser.Value.GetAsync(c => c.Id == userId, includeProperties: "Profile");
+
+            if(user == null)
+            {
+                MessageBox.Show("User not found. Please log in again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             _view.AppUserName = user.Profile != null ? $"{user.Profile.FirstName} {user.Profile.LastName}" ?? "{Needs Updating}" : "{Needs Updating}";
             _view.Email = user.Email ?? "{Needs Updating}";
