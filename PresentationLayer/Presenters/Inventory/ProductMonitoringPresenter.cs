@@ -2,12 +2,14 @@
 using DomainLayer.ViewModels.Inventory;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Inventory
 {
@@ -15,6 +17,7 @@ namespace RavenTech_ERP.Presenters.Inventory
     {
         public IProductMonitoringView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<StockViewModel> InStockList;
         private IEnumerable<StockViewModel> LowStockList;
         private IEnumerable<StockViewModel> OutOfStockList;
@@ -23,32 +26,40 @@ namespace RavenTech_ERP.Presenters.Inventory
         private BindingSource LowStockBindingSource;
         private BindingSource OutOfStockBindingSource;
         private BindingSource ProjectFlowBindingSource;
-        public ProductMonitoringPresenter(IProductMonitoringView view, IUnitOfWork unitOfWork)
+        public ProductMonitoringPresenter(IProductMonitoringView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
         {
             _view = view;
             _unitOfWork = unitOfWork;
+            _eventAggregator = eventAggregator;
             InStockBindingSource = new BindingSource();
             LowStockBindingSource = new BindingSource();
             OutOfStockBindingSource = new BindingSource();
             ProjectFlowBindingSource = new BindingSource();
 
             _view.PrintEvent -= Print;
-            _view.PrintEvent += Print;
+            _view.SearchEvent += Search;
 
-            LoadInStock();
-            LoadLowStock();
-            LoadOutOfStock();
-            LoadProjectFlow();
 
             _view.SetInStockListBindingSource(InStockBindingSource);
             _view.SetLowStockListBindingSource(LowStockBindingSource);
             _view.SetOutOfStockListBindingSource(OutOfStockBindingSource);
             _view.SetProjectFlowListBindingSource(ProjectFlowBindingSource);
+            RefreshView();
+            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshView);
         }
 
-        private void LoadProjectFlow()
+        private void RefreshView()
         {
-            var pullOuts = _unitOfWork.ProductPullOutLogs.Value.GetAll(includeProperties: "ProductPullOutLogLines.Product,Project");
+            LoadInStock();
+            LoadLowStock();
+            LoadOutOfStock();
+            LoadProjectFlow();
+        }
+
+        private async void LoadProjectFlow()
+        {
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            var pullOuts = await _unitOfWork.ProductPullOutLogs.Value.GetAllAsync(includeProperties: "ProductPullOutLogLines.Product,Project");
             ProjectFlowList = pullOuts
                 .SelectMany(p => p.ProductPullOutLogLines)
                 .Where(p => p.Product != null && p.ProductPullOutLogs != null && p.ProductPullOutLogs.Project != null)
@@ -66,13 +77,20 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
-            ProjectFlowBindingSource.DataSource = ProjectFlowList;
+            if(!emptyValue)
+            {
+                ProjectFlowList = ProjectFlowList
+                    .Where(c => c.Product.ToLower().Contains(_view.SearchValue.ToLower()) || c.Project.ToLower().Contains(_view.SearchValue.ToLower()));
+            }
+
+            ProjectFlowBindingSource.DataSource = ProjectFlowList.ToList();
             _view.ProjectFlow = ProjectFlowList.Sum(c => c.Qty);
         }
 
-        private void LoadOutOfStock()
+        private async void LoadOutOfStock()
         {
-            var currentStocks = GetProductCurrentStocks();
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            var currentStocks = await GetProductCurrentStocks(emptyValue);
 
             OutOfStockList = currentStocks
                 .Where(x => x.stockQty <= 0)
@@ -84,12 +102,13 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
-            OutOfStockBindingSource.DataSource = OutOfStockList;
+            OutOfStockBindingSource.DataSource = OutOfStockList.ToList();
             _view.OutOfStock = OutOfStockList.Count();
         }
-        private void LoadLowStock()
+        private async void LoadLowStock()
         {
-            var currentStocks = GetProductCurrentStocks();
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            var currentStocks = await GetProductCurrentStocks(emptyValue);
 
             LowStockList = currentStocks
                 .Where(x => x.stockQty > 0 && x.stockQty <= x.product.ReorderLevel)
@@ -101,13 +120,14 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
-            LowStockBindingSource.DataSource = LowStockList;
+            LowStockBindingSource.DataSource = LowStockList.ToList();
             _view.LowStock = LowStockList.Sum(c => c.Qty);
         }
 
-        private void LoadInStock()
+        private async void LoadInStock()
         {
-            var currentStocks = GetProductCurrentStocks();
+            bool emptyValue = string.IsNullOrWhiteSpace(_view.SearchValue);
+            var currentStocks = await GetProductCurrentStocks(emptyValue);
 
             InStockList = currentStocks
                 .Where(x => x.stockQty > 0)
@@ -119,7 +139,7 @@ namespace RavenTech_ERP.Presenters.Inventory
                 })
                 .ToList();
 
-            InStockBindingSource.DataSource = InStockList;
+            InStockBindingSource.DataSource = InStockList.ToList();
             _view.InStock = InStockList.Sum(c => c.Qty);
         }
 
@@ -130,13 +150,13 @@ namespace RavenTech_ERP.Presenters.Inventory
 
         private void Search(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            RefreshView();
         }
 
-        private List<(Product product, double stockQty)> GetProductCurrentStocks()
+        private async Task<List<(Product product, double stockQty)>> GetProductCurrentStocks(bool emptyValue)
         {
-            var stockInLogs = _unitOfWork.ProductStockInLogs.Value.GetAll(includeProperties: "ProductStockInLogLines.Product");
-            var pullOutLogs = _unitOfWork.ProductPullOutLogs.Value.GetAll(includeProperties: "ProductPullOutLogLines.Product");
+            var stockInLogs = await _unitOfWork.ProductStockInLogs.Value.GetAllAsync(includeProperties: "ProductStockInLogLines.Product");
+            var pullOutLogs = await _unitOfWork.ProductPullOutLogs.Value.GetAllAsync(includeProperties: "ProductPullOutLogLines.Product");
 
             var stockIn = stockInLogs
                 .SelectMany(log => log.ProductStockInLogLines)

@@ -2,12 +2,14 @@
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
+using DomainLayer.Models.ThinkEE;
 using DomainLayer.ViewModels.Inventory;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
+using RavenTech_ThinkEE;
 using System.Configuration;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -43,6 +45,16 @@ namespace InfastructureLayer.DataAccess.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+        #region ThinkEE
+        //public DbSet<ReviewTopic> ReviewTopics { get; set; }
+        //public DbSet<Exam> Exams { get; set; }
+        //public DbSet<Question> Questions { get; set; }
+        //public DbSet<Choice> Choices { get; set; }
+        //public DbSet<ExamResult> ExamResults { get; set; }
+        //public DbSet<ExamFormat> ExamFormats { get; set; }
+        //public DbSet<PerformanceReport> PerformanceReports { get; set; }
+        #endregion
+
         #region Accounts
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<UserProfile> UserProfile { get; set; }

@@ -143,9 +143,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllPurchaseTypeList(bool emptyValue = false)
+        private async void LoadAllPurchaseTypeList(bool emptyValue = false)
         {
-            PurchaseTypeList = Program.Mapper.Map<IEnumerable<PurchaseTypeViewModel>>(_unitOfWork.PurchaseType.Value.GetAll());
+            PurchaseTypeList = Program.Mapper.Map<IEnumerable<PurchaseTypeViewModel>>(await _unitOfWork.PurchaseType.Value.GetAllAsync());
 
             if (!emptyValue) PurchaseTypeList = PurchaseTypeList.Where(c => c.PurchaseTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetPurchaseTypeListBindingSource(PurchaseTypeList);

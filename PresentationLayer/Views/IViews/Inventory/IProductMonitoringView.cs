@@ -6,8 +6,10 @@
         double LowStock { set; }
         double OutOfStock { set; }
         double ProjectFlow { set; }
+        string SearchValue { get; }
 
-        event EventHandler PrintEvent;
+        event EventHandler PrintEvent; 
+        event EventHandler SearchEvent;
 
         void SetInStockListBindingSource(BindingSource source);
         void SetLowStockListBindingSource(BindingSource source);

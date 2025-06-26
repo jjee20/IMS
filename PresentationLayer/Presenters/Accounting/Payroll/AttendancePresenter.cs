@@ -10,9 +10,11 @@ using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -20,13 +22,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     {
         public IAttendanceView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<AttendanceViewModel> AttendanceList;
-        public AttendancePresenter(IAttendanceView view, IUnitOfWork unitOfWork) {
+        public AttendancePresenter(IAttendanceView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -44,11 +48,6 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             LoadAllAttendanceList();
 
             //Source Binding
-        }
-
-        private void FormClosing(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void ShowAttendance(object sender, CellClickEventArgs e)
@@ -98,17 +97,20 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllAttendanceList(bool emptyValue = false)
+        private async void LoadAllAttendanceList(bool emptyValue = false)
         {
-            AttendanceList = GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
+            AttendanceList = await GetAttendanceSummary(_view.StartDate.Date, _view.EndDate.Date);
 
             if (!emptyValue) AttendanceList = AttendanceList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetAttendanceListBindingSource(AttendanceList);
+            _eventAggregator.Publish<PayrollUpdateEvent>();
         }
-        public List<AttendanceViewModel> GetAttendanceSummary(DateTime startDate, DateTime endDate)
+        public async Task<List<AttendanceViewModel>> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {
-            var employees = _unitOfWork.Employee.Value.GetAll(includeProperties: "Attendances,Leaves,Shift,Attendances.Project").OrderBy(c => c.LastName);
-            var holidays = _unitOfWork.Holiday.Value.GetAll().Where(h => h.EffectiveDate >= startDate && h.EffectiveDate <= endDate).ToList();
+            var employeeList = await _unitOfWork.Employee.Value.GetAllAsync(includeProperties: "Attendances,Leaves,Shift,Attendances.Project");
+            var employees = employeeList.OrderBy(c => c.LastName);
+            var holidayList = await _unitOfWork.Holiday.Value.GetAllAsync(h => h.EffectiveDate >= startDate && h.EffectiveDate <= endDate);
+            var holidays = holidayList.ToList();
             var summaryList = new List<AttendanceViewModel>();
 
             int totalDays = 0;

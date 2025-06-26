@@ -11,10 +11,12 @@ using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
@@ -23,13 +25,15 @@ namespace PresentationLayer.Presenters
     {
         public ISalesOrderView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<SalesOrderViewModel> SalesOrderList;
-        public SalesOrderPresenter(ISalesOrderView view, IUnitOfWork unitOfWork) {
+        public SalesOrderPresenter(ISalesOrderView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -197,15 +201,17 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllSalesOrderList(bool emptyValue = false)
+        private async void LoadAllSalesOrderList(bool emptyValue = false)
         {
 
-            SalesOrderList = Program.Mapper.Map<IEnumerable<SalesOrderViewModel>>(_unitOfWork.SalesOrder.Value.GetAll());
+            SalesOrderList = Program.Mapper.Map<IEnumerable<SalesOrderViewModel>>(await _unitOfWork.SalesOrder.Value.GetAllAsync());
 
             if (!emptyValue) SalesOrderList = SalesOrderList.Where(c => c.SalesOrderName.ToLower().Contains(_view.SearchValue.ToLower()));
 
 
             _view.SetSalesOrderListBindingSource(SalesOrderList.OrderByDescending(c => c.OrderDate));
+
+            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
     }
 }

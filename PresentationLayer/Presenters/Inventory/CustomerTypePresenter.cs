@@ -7,10 +7,12 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
@@ -143,10 +145,10 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        
-        private void LoadAllCustomerTypeList(bool emptyValue = false)
+
+        private async void LoadAllCustomerTypeList(bool emptyValue = false)
         {
-            CustomerTypeList = Program.Mapper.Map<IEnumerable<CustomerTypeViewModel>>(_unitOfWork.CustomerType.Value.GetAll());
+            CustomerTypeList = Program.Mapper.Map<IEnumerable<CustomerTypeViewModel>>(await _unitOfWork.CustomerType.Value.GetAllAsync());
 
             if (!emptyValue) CustomerTypeList = CustomerTypeList.Where(c => c.CustomerTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetCustomerTypeListBindingSource(CustomerTypeList);

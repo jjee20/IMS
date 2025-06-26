@@ -143,9 +143,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllSalesTypeList(bool emptyValue = false)
+        private async void LoadAllSalesTypeList(bool emptyValue = false)
         {
-            SalesTypeList = Program.Mapper.Map<IEnumerable<SalesTypeViewModel>>(_unitOfWork.SalesType.Value.GetAll());
+            SalesTypeList = Program.Mapper.Map<IEnumerable<SalesTypeViewModel>>(await _unitOfWork.SalesType.Value.GetAllAsync());
 
             if (!emptyValue) SalesTypeList = SalesTypeList.Where(c => c.SalesTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetSalesTypeListBindingSource(SalesTypeList);

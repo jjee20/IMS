@@ -144,9 +144,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllWarehouseList(bool emptyValue = false)
+        private async void LoadAllWarehouseList(bool emptyValue = false)
         {
-            WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(_unitOfWork.Warehouse.Value.GetAll());
+            WarehouseList = Program.Mapper.Map<IEnumerable<WarehouseViewModel>>(await _unitOfWork.Warehouse.Value.GetAllAsync());
 
             if (!emptyValue) WarehouseList = WarehouseList.Where(c => c.WarehouseName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetWarehouseListBindingSource(WarehouseList);

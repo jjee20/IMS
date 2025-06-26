@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\ThinkEE\" />
     <Folder Include="ViewModels\POSViewModels\" />
   </ItemGroup>
 

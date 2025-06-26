@@ -135,7 +135,7 @@
             guna2Separator1.Location = new Point(4, 99);
             guna2Separator1.Margin = new Padding(4, 3, 4, 3);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1336, 16);
+            guna2Separator1.Size = new Size(1338, 16);
             guna2Separator1.TabIndex = 2;
             // 
             // materialCard1
@@ -147,12 +147,12 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 121);
+            materialCard1.Location = new Point(2, 120);
             materialCard1.Margin = new Padding(20, 23, 20, 23);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(20, 23, 20, 23);
-            materialCard1.Size = new Size(1344, 605);
+            materialCard1.Size = new Size(1346, 607);
             materialCard1.TabIndex = 10;
             // 
             // tableLayoutPanel5
@@ -177,7 +177,7 @@
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 33F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 33F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 33F));
-            tableLayoutPanel5.Size = new Size(1304, 358);
+            tableLayoutPanel5.Size = new Size(1306, 360);
             tableLayoutPanel5.TabIndex = 2;
             // 
             // materialCard2
@@ -188,12 +188,12 @@
             materialCard2.Depth = 0;
             materialCard2.Dock = DockStyle.Fill;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(20, 23);
-            materialCard2.Margin = new Padding(20, 23, 20, 23);
+            materialCard2.Location = new Point(5, 5);
+            materialCard2.Margin = new Padding(5);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
-            materialCard2.Padding = new Padding(20, 23, 20, 23);
-            materialCard2.Size = new Size(612, 133);
+            materialCard2.Padding = new Padding(5);
+            materialCard2.Size = new Size(643, 170);
             materialCard2.TabIndex = 0;
             // 
             // chartDailySales
@@ -201,10 +201,10 @@
             chartDailySales.Dock = DockStyle.Fill;
             chartFont1.FontName = "Arial";
             chartDailySales.Legend.LabelFont = chartFont1;
-            chartDailySales.Location = new Point(20, 42);
+            chartDailySales.Location = new Point(5, 24);
             chartDailySales.Margin = new Padding(4, 5, 4, 5);
             chartDailySales.Name = "chartDailySales";
-            chartDailySales.Size = new Size(572, 68);
+            chartDailySales.Size = new Size(633, 141);
             chartDailySales.TabIndex = 2;
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
@@ -238,7 +238,7 @@
             materialLabel3.Depth = 0;
             materialLabel3.Dock = DockStyle.Top;
             materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel3.Location = new Point(20, 23);
+            materialLabel3.Location = new Point(5, 5);
             materialLabel3.Margin = new Padding(4, 0, 4, 0);
             materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel3.Name = "materialLabel3";
@@ -255,12 +255,12 @@
             materialCard3.Depth = 0;
             materialCard3.Dock = DockStyle.Fill;
             materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard3.Location = new Point(672, 23);
-            materialCard3.Margin = new Padding(20, 23, 20, 23);
+            materialCard3.Location = new Point(658, 5);
+            materialCard3.Margin = new Padding(5);
             materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard3.Name = "materialCard3";
-            materialCard3.Padding = new Padding(20, 23, 20, 23);
-            materialCard3.Size = new Size(612, 133);
+            materialCard3.Padding = new Padding(5);
+            materialCard3.Size = new Size(643, 170);
             materialCard3.TabIndex = 1;
             // 
             // chartMonthlySales
@@ -268,10 +268,10 @@
             chartMonthlySales.Dock = DockStyle.Fill;
             chartFont9.FontName = "Arial";
             chartMonthlySales.Legend.LabelFont = chartFont9;
-            chartMonthlySales.Location = new Point(20, 42);
+            chartMonthlySales.Location = new Point(5, 24);
             chartMonthlySales.Margin = new Padding(4, 5, 4, 5);
             chartMonthlySales.Name = "chartMonthlySales";
-            chartMonthlySales.Size = new Size(572, 68);
+            chartMonthlySales.Size = new Size(633, 141);
             chartMonthlySales.TabIndex = 3;
             chartFont10.FontName = "Arial";
             chartFont10.Size = 12;
@@ -305,7 +305,7 @@
             materialLabel4.Depth = 0;
             materialLabel4.Dock = DockStyle.Top;
             materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel4.Location = new Point(20, 23);
+            materialLabel4.Location = new Point(5, 5);
             materialLabel4.Margin = new Padding(4, 0, 4, 0);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
@@ -322,12 +322,12 @@
             materialCard4.Depth = 0;
             materialCard4.Dock = DockStyle.Fill;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard4.Location = new Point(20, 202);
-            materialCard4.Margin = new Padding(20, 23, 20, 23);
+            materialCard4.Location = new Point(5, 185);
+            materialCard4.Margin = new Padding(5);
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
-            materialCard4.Padding = new Padding(20, 23, 20, 23);
-            materialCard4.Size = new Size(612, 133);
+            materialCard4.Padding = new Padding(5);
+            materialCard4.Size = new Size(643, 170);
             materialCard4.TabIndex = 2;
             // 
             // dgDailySales
@@ -354,13 +354,13 @@
             dgDailySales.DefaultCellStyle = dataGridViewCellStyle3;
             dgDailySales.Dock = DockStyle.Fill;
             dgDailySales.GridColor = Color.FromArgb(231, 229, 255);
-            dgDailySales.Location = new Point(20, 42);
+            dgDailySales.Location = new Point(5, 24);
             dgDailySales.Margin = new Padding(4, 5, 4, 5);
             dgDailySales.Name = "dgDailySales";
             dgDailySales.RowHeadersVisible = false;
             dgDailySales.RowHeadersWidth = 62;
             dgDailySales.RowTemplate.Height = 25;
-            dgDailySales.Size = new Size(572, 68);
+            dgDailySales.Size = new Size(633, 141);
             dgDailySales.TabIndex = 3;
             dgDailySales.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgDailySales.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -390,7 +390,7 @@
             materialLabel5.Depth = 0;
             materialLabel5.Dock = DockStyle.Top;
             materialLabel5.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel5.Location = new Point(20, 23);
+            materialLabel5.Location = new Point(5, 5);
             materialLabel5.Margin = new Padding(4, 0, 4, 0);
             materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel5.Name = "materialLabel5";
@@ -407,12 +407,12 @@
             materialCard5.Depth = 0;
             materialCard5.Dock = DockStyle.Fill;
             materialCard5.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard5.Location = new Point(672, 202);
-            materialCard5.Margin = new Padding(20, 23, 20, 23);
+            materialCard5.Location = new Point(658, 185);
+            materialCard5.Margin = new Padding(5);
             materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard5.Name = "materialCard5";
-            materialCard5.Padding = new Padding(20, 23, 20, 23);
-            materialCard5.Size = new Size(612, 133);
+            materialCard5.Padding = new Padding(5);
+            materialCard5.Size = new Size(643, 170);
             materialCard5.TabIndex = 3;
             // 
             // dgMonthlySales
@@ -439,13 +439,13 @@
             dgMonthlySales.DefaultCellStyle = dataGridViewCellStyle6;
             dgMonthlySales.Dock = DockStyle.Fill;
             dgMonthlySales.GridColor = Color.FromArgb(231, 229, 255);
-            dgMonthlySales.Location = new Point(20, 42);
+            dgMonthlySales.Location = new Point(5, 24);
             dgMonthlySales.Margin = new Padding(4, 5, 4, 5);
             dgMonthlySales.Name = "dgMonthlySales";
             dgMonthlySales.RowHeadersVisible = false;
             dgMonthlySales.RowHeadersWidth = 62;
             dgMonthlySales.RowTemplate.Height = 25;
-            dgMonthlySales.Size = new Size(572, 68);
+            dgMonthlySales.Size = new Size(633, 141);
             dgMonthlySales.TabIndex = 4;
             dgMonthlySales.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgMonthlySales.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -475,7 +475,7 @@
             materialLabel6.Depth = 0;
             materialLabel6.Dock = DockStyle.Top;
             materialLabel6.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel6.Location = new Point(20, 23);
+            materialLabel6.Location = new Point(5, 5);
             materialLabel6.Margin = new Padding(4, 0, 4, 0);
             materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel6.Name = "materialLabel6";
@@ -503,7 +503,7 @@
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 123F));
-            tableLayoutPanel4.Size = new Size(1304, 123);
+            tableLayoutPanel4.Size = new Size(1306, 123);
             tableLayoutPanel4.TabIndex = 1;
             // 
             // guna2GradientPanel1
@@ -697,7 +697,7 @@
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(1304, 78);
+            tableLayoutPanel3.Size = new Size(1306, 78);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // materialLabel2
@@ -711,7 +711,7 @@
             materialLabel2.Margin = new Padding(4, 0, 4, 0);
             materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel2.Name = "materialLabel2";
-            materialLabel2.Size = new Size(1296, 78);
+            materialLabel2.Size = new Size(1298, 78);
             materialLabel2.TabIndex = 0;
             materialLabel2.Text = "ALL-TIME RECORD";
             materialLabel2.TextAlign = ContentAlignment.MiddleCenter;
@@ -724,13 +724,13 @@
             tableLayoutPanel1.Controls.Add(guna2Separator1, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(3, 3);
+            tableLayoutPanel1.Location = new Point(2, 2);
             tableLayoutPanel1.Margin = new Padding(4, 5, 4, 5);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 81.8181839F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 18.181818F));
-            tableLayoutPanel1.Size = new Size(1344, 118);
+            tableLayoutPanel1.Size = new Size(1346, 118);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // tableLayoutPanel2
@@ -745,7 +745,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1344, 96);
+            tableLayoutPanel2.Size = new Size(1346, 96);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // guna2Panel1
@@ -759,7 +759,7 @@
             guna2Panel1.Margin = new Padding(4, 5, 4, 5);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Panel1.Size = new Size(1336, 86);
+            guna2Panel1.Size = new Size(1338, 86);
             guna2Panel1.TabIndex = 0;
             // 
             // txtMonth
@@ -778,7 +778,7 @@
             txtMonth.Hint = "Month";
             txtMonth.IntegralHeight = false;
             txtMonth.ItemHeight = 43;
-            txtMonth.Location = new Point(895, 0);
+            txtMonth.Location = new Point(897, 0);
             txtMonth.Margin = new Padding(4, 5, 4, 5);
             txtMonth.MaxDropDownItems = 4;
             txtMonth.MouseState = MaterialSkin.MouseState.OUT;
@@ -803,7 +803,7 @@
             txtYear.Hint = "Year";
             txtYear.IntegralHeight = false;
             txtYear.ItemHeight = 43;
-            txtYear.Location = new Point(1162, 0);
+            txtYear.Location = new Point(1164, 0);
             txtYear.Margin = new Padding(4, 5, 4, 5);
             txtYear.MaxDropDownItems = 4;
             txtYear.MouseState = MaterialSkin.MouseState.OUT;

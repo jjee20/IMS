@@ -140,9 +140,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllShiftList(bool emptyValue = false)
+        private async void LoadAllShiftList(bool emptyValue = false)
         {
-            ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(_unitOfWork.Shift.Value.GetAll());
+            ShiftList = Program.Mapper.Map<IEnumerable<ShiftViewModel>>(await _unitOfWork.Shift.Value.GetAllAsync());
 
             if (!emptyValue) ShiftList = ShiftList.Where(c => c.ShiftName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetShiftListBindingSource(ShiftList);

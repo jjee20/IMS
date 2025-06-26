@@ -5,9 +5,11 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -15,13 +17,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     {
         public IDeductionView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<DeductionViewModel> DeductionList;
-        public DeductionPresenter(IDeductionView view, IUnitOfWork unitOfWork) {
+        public DeductionPresenter(IDeductionView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -140,12 +144,13 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllDeductionList(bool emptyValue = false)
+        private async void LoadAllDeductionList(bool emptyValue = false)
         {
-            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.Value.GetAll(includeProperties: "Employee"));
+            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(await _unitOfWork.Deduction.Value.GetAllAsync(includeProperties: "Employee"));
 
             if (!emptyValue) DeductionList = DeductionList.Where(c => c.Employee.Contains(_view.SearchValue));
             _view.SetDeductionListBindingSource(DeductionList.OrderByDescending(c => c.DateDeducted));
+            _eventAggregator.Publish<PayrollUpdateEvent>();
         }
     }
 }

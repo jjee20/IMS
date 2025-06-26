@@ -38,8 +38,17 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             _entityViewModel = new List<ProductPullOutLogLineViewModel>();
             LoadAllProductList();
             LoadAllStatus();
+            LoadAllProjects();
 
             LoadEntityToForm();
+        }
+
+        private void LoadAllProjects()
+        {
+            txtProject.DataSource = _unitOfWork.Project.Value.GetAll();
+            txtProject.DisplayMember = "ProjectName";
+            txtProject.ValueMember = "ProjectId";
+            txtProject.Text = "~Select Project~";
         }
 
         private void LoadEntityToForm()
@@ -52,6 +61,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 txtReceivedDate.Value = _entity.ReceivedDate;
                 txtStatus.SelectedItem = _entity.ProductStatus;
                 txtNotes.Text = _entity.Notes;
+                txtProject.SelectedValue = _entity.ProjectId;
 
                 if (_entity.ProductPullOutLogLines == null) _entity.ProductPullOutLogLines = new List<ProductPullOutLogLines>();
 
@@ -97,6 +107,27 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             if(txtProduct.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select a product to add.","Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            int productId = (int)txtProduct.SelectedValue;
+
+            // Get total stock-in quantity
+            var productStockInQty = _unitOfWork.ProductStockInLogLines.Value
+                .GetAll(c => c.ProductId == productId)
+                .Sum(c => (int?)c.StockQuantity) ?? 0;
+
+            // Get total pull-out quantity
+            var productPullOutQty = _unitOfWork.ProductPullOutLogLines.Value
+                .GetAll(c => c.ProductId == productId)
+                .Sum(c => (int?)c.StockQuantity) ?? 0;
+
+            // Calculate current stock
+            int availableStock = productStockInQty - productPullOutQty;
+
+            if (availableStock <= 0)
+            {
+                MessageBox.Show("No stock available for the selected product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -195,6 +226,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             _entity.DeliveredBy = txtDeliveredBy.Text;
             _entity.ReceivedDate = txtReceivedDate.Value;
             _entity.ReceivedBy = txtReceivedBy.Text;
+            _entity.ProjectId = (int)txtProject.SelectedValue;
             _entity.ProductPullOutLogLines = _entityViewModel.Select(c => new ProductPullOutLogLines
             {
                 DateAdded = c.DateAdded,

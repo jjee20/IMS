@@ -143,9 +143,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllBillTypeList(bool emptyValue = false)
+        private async void LoadAllBillTypeList(bool emptyValue = false)
         {
-            BillTypeList = Program.Mapper.Map<IEnumerable<BillTypeViewModel>>(_unitOfWork.BillType.Value.GetAll());
+            BillTypeList = Program.Mapper.Map<IEnumerable<BillTypeViewModel>>(await _unitOfWork.BillType.Value.GetAllAsync());
 
             if (!emptyValue) BillTypeList = BillTypeList.Where(c => c.BillTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetBillTypeListBindingSource(BillTypeList);

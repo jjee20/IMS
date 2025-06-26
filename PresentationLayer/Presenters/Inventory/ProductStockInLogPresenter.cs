@@ -9,10 +9,13 @@ using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory.Upserts;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using System.Threading.Tasks;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
@@ -22,12 +25,14 @@ namespace PresentationLayer.Presenters
         public IProductStockInLogView _view;
         private IUnitOfWork _unitOfWork;
         private IEnumerable<ProductStockInLogViewModel> ProductStockInLogList;
-        public ProductStockInLogPresenter(IProductStockInLogView view, IUnitOfWork unitOfWork) {
+        private IEventAggregator _eventAggregator;
+        public ProductStockInLogPresenter(IProductStockInLogView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            _eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -58,7 +63,7 @@ namespace PresentationLayer.Presenters
                 form.Text = "Add Product Stock-In Log";
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    LoadAllProductStockInLogList();
+                   LoadAllProductStockInLogList();
                 }
             }
         }
@@ -141,7 +146,7 @@ namespace PresentationLayer.Presenters
 
         private void Print(object? sender, EventArgs e)
         {
-            string reportFileName = "ProductStockInLogReport.rdlc";
+            string reportFileName = "ProductStockInLogsReport.rdlc";
             string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
             string reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
@@ -150,12 +155,14 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllProductStockInLogList(bool emptyValue = false)
+        private async void LoadAllProductStockInLogList(bool emptyValue = false)
         {
-            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(_unitOfWork.ProductStockInLogs.Value.GetAll(includeProperties: "ProductStockInLogLines.Product.UnitOfMeasure"));
+            ProductStockInLogList = Program.Mapper.Map<IEnumerable<ProductStockInLogViewModel>>(await _unitOfWork.ProductStockInLogs.Value.GetAllAsync(includeProperties: "ProductStockInLogLines.Product.UnitOfMeasure"));
 
             if (!emptyValue) ProductStockInLogList = ProductStockInLogList.Where(c => c.ProductStockInLogLines.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductInStockLogListBindingSource(ProductStockInLogList);
+
+            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
     }
 }

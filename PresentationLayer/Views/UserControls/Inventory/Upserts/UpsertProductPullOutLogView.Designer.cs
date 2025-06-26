@@ -82,6 +82,8 @@
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             autoLabel9 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            txtProject = new Syncfusion.WinForms.ListView.SfComboBox();
+            autoLabel6 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             ((System.ComponentModel.ISupportInitialize)txtStatus).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtNotes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtDeliveredBy).BeginInit();
@@ -93,6 +95,7 @@
             guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtProduct).BeginInit();
             guna2Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtProject).BeginInit();
             SuspendLayout();
             // 
             // lbStatus
@@ -107,7 +110,7 @@
             // txtStatus
             // 
             txtStatus.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            txtStatus.Location = new Point(119, 32);
+            txtStatus.Location = new Point(120, 31);
             txtStatus.Margin = new Padding(4, 5, 4, 5);
             txtStatus.Name = "txtStatus";
             txtStatus.Padding = new Padding(10, 0, 0, 0);
@@ -118,7 +121,7 @@
             // 
             // autoLabel2
             // 
-            autoLabel2.Location = new Point(469, 50);
+            autoLabel2.Location = new Point(470, 50);
             autoLabel2.Margin = new Padding(4, 0, 4, 0);
             autoLabel2.Name = "autoLabel2";
             autoLabel2.Size = new Size(59, 25);
@@ -132,7 +135,7 @@
             txtNotes.Margin = new Padding(4, 5, 4, 5);
             txtNotes.Multiline = true;
             txtNotes.Name = "txtNotes";
-            txtNotes.Size = new Size(340, 43);
+            txtNotes.Size = new Size(340, 95);
             txtNotes.TabIndex = 3;
             // 
             // btnSave
@@ -151,7 +154,7 @@
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(6, 91);
+            autoLabel1.Location = new Point(7, 144);
             autoLabel1.Margin = new Padding(4, 0, 4, 0);
             autoLabel1.Name = "autoLabel1";
             autoLabel1.Size = new Size(110, 25);
@@ -161,7 +164,7 @@
             // txtDeliveredBy
             // 
             txtDeliveredBy.BeforeTouchSize = new Size(340, 31);
-            txtDeliveredBy.Location = new Point(119, 85);
+            txtDeliveredBy.Location = new Point(120, 138);
             txtDeliveredBy.Margin = new Padding(4, 5, 4, 5);
             txtDeliveredBy.Name = "txtDeliveredBy";
             txtDeliveredBy.Size = new Size(340, 31);
@@ -170,7 +173,7 @@
             // txtReceivedBy
             // 
             txtReceivedBy.BeforeTouchSize = new Size(340, 31);
-            txtReceivedBy.Location = new Point(119, 133);
+            txtReceivedBy.Location = new Point(120, 180);
             txtReceivedBy.Margin = new Padding(4, 5, 4, 5);
             txtReceivedBy.Name = "txtReceivedBy";
             txtReceivedBy.Size = new Size(340, 31);
@@ -178,7 +181,7 @@
             // 
             // autoLabel3
             // 
-            autoLabel3.Location = new Point(7, 139);
+            autoLabel3.Location = new Point(8, 186);
             autoLabel3.Margin = new Padding(4, 0, 4, 0);
             autoLabel3.Name = "autoLabel3";
             autoLabel3.Size = new Size(105, 25);
@@ -187,7 +190,7 @@
             // 
             // autoLabel4
             // 
-            autoLabel4.Location = new Point(469, 139);
+            autoLabel4.Location = new Point(470, 186);
             autoLabel4.Margin = new Padding(4, 0, 4, 0);
             autoLabel4.Name = "autoLabel4";
             autoLabel4.Size = new Size(123, 25);
@@ -196,7 +199,7 @@
             // 
             // autoLabel5
             // 
-            autoLabel5.Location = new Point(469, 91);
+            autoLabel5.Location = new Point(470, 144);
             autoLabel5.Margin = new Padding(4, 0, 4, 0);
             autoLabel5.Name = "autoLabel5";
             autoLabel5.Size = new Size(128, 25);
@@ -206,7 +209,7 @@
             // txtDeliveredDate
             // 
             txtDeliveredDate.DateTimeIcon = null;
-            txtDeliveredDate.Location = new Point(603, 85);
+            txtDeliveredDate.Location = new Point(604, 138);
             txtDeliveredDate.Margin = new Padding(4, 5, 4, 5);
             txtDeliveredDate.Name = "txtDeliveredDate";
             txtDeliveredDate.Size = new Size(341, 31);
@@ -216,7 +219,7 @@
             // txtReceivedDate
             // 
             txtReceivedDate.DateTimeIcon = null;
-            txtReceivedDate.Location = new Point(603, 133);
+            txtReceivedDate.Location = new Point(604, 180);
             txtReceivedDate.Margin = new Padding(4, 5, 4, 5);
             txtReceivedDate.Name = "txtReceivedDate";
             txtReceivedDate.Size = new Size(343, 31);
@@ -231,10 +234,10 @@
             panelProducts.Controls.Add(tableLayoutPanel7);
             panelProducts.Controls.Add(guna2Separator2);
             panelProducts.Controls.Add(autoLabel9);
-            panelProducts.Location = new Point(9, 182);
+            panelProducts.Location = new Point(9, 225);
             panelProducts.Margin = new Padding(4, 5, 4, 5);
             panelProducts.Name = "panelProducts";
-            panelProducts.Size = new Size(1127, 540);
+            panelProducts.Size = new Size(1127, 497);
             panelProducts.TabIndex = 13;
             // 
             // dgList
@@ -550,11 +553,34 @@
             autoLabel9.TabIndex = 4;
             autoLabel9.Text = "Product Details";
             // 
+            // txtProject
+            // 
+            txtProject.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
+            txtProject.Location = new Point(120, 84);
+            txtProject.Margin = new Padding(4, 5, 4, 5);
+            txtProject.Name = "txtProject";
+            txtProject.Padding = new Padding(10, 0, 0, 0);
+            txtProject.Size = new Size(341, 43);
+            txtProject.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
+            txtProject.TabIndex = 15;
+            txtProject.TabStop = false;
+            // 
+            // autoLabel6
+            // 
+            autoLabel6.Location = new Point(6, 102);
+            autoLabel6.Margin = new Padding(4, 0, 4, 0);
+            autoLabel6.Name = "autoLabel6";
+            autoLabel6.Size = new Size(66, 25);
+            autoLabel6.TabIndex = 14;
+            autoLabel6.Text = "Project";
+            // 
             // UpsertProductPullOutLogView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1140, 729);
+            Controls.Add(txtProject);
+            Controls.Add(autoLabel6);
             Controls.Add(panelProducts);
             Controls.Add(txtReceivedDate);
             Controls.Add(txtDeliveredDate);
@@ -591,6 +617,7 @@
             ((System.ComponentModel.ISupportInitialize)txtProduct).EndInit();
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtProject).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -629,5 +656,7 @@
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel9;
         private Syncfusion.WinForms.Input.SfDateTimeEdit txtDateAdded;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Syncfusion.WinForms.ListView.SfComboBox txtProject;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel6;
     }
 }

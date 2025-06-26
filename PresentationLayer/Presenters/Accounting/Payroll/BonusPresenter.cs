@@ -5,9 +5,11 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -15,13 +17,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     {
         public IBonusView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<BonusViewModel> BonusList;
-        public BonusPresenter(IBonusView view, IUnitOfWork unitOfWork) {
+        public BonusPresenter(IBonusView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -140,12 +144,13 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllBonusList(bool emptyValue = false)
+        private async void LoadAllBonusList(bool emptyValue = false)
         {
-            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(_unitOfWork.Bonus.Value.GetAll(includeProperties: "Employee"));
+            BonusList = Program.Mapper.Map<IEnumerable<BonusViewModel>>(await _unitOfWork.Bonus.Value.GetAllAsync(includeProperties: "Employee"));
 
             if (!emptyValue) BonusList = BonusList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetBonusListBindingSource(BonusList.OrderByDescending(c => c.DateGranted));
+            _eventAggregator.Publish<PayrollUpdateEvent>();
         }
     }
 }

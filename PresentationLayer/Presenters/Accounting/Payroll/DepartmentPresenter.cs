@@ -5,9 +5,11 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -16,12 +18,13 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
         public IDepartmentView _view;
         private IUnitOfWork _unitOfWork;
         private IEnumerable<DepartmentViewModel> DepartmentList;
+
         public DepartmentPresenter(IDepartmentView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork; 
 
             //Events
             _view.SearchEvent -= Search;
@@ -140,9 +143,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllDepartmentList(bool emptyValue = false)
+        private async void LoadAllDepartmentList(bool emptyValue = false)
         {
-            DepartmentList = Program.Mapper.Map<IEnumerable<DepartmentViewModel>>(_unitOfWork.Department.Value.GetAll());
+            DepartmentList = Program.Mapper.Map<IEnumerable<DepartmentViewModel>>(await _unitOfWork.Department.Value.GetAllAsync());
 
             if (!emptyValue) DepartmentList = DepartmentList.Where(c => c.Name.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetDepartmentListBindingSource(DepartmentList);

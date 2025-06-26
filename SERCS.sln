@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLaye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenTech_ERP", "PresentationLayer\RavenTech_ERP.csproj", "{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenTech_ThinkEE", "RavenTech_ThinkEE\RavenTech_ThinkEE.csproj", "{0D8992AE-46A9-4385-B912-5CCC763E575A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}.Release|Any CPU.Build.0 = Release|Any CPU
 		{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}.Release|x64.ActiveCfg = Release|x64
 		{67DC8496-4E81-4DB5-8A40-BA52AD5E0E78}.Release|x64.Build.0 = Release|x64
+		{0D8992AE-46A9-4385-B912-5CCC763E575A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D8992AE-46A9-4385-B912-5CCC763E575A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D8992AE-46A9-4385-B912-5CCC763E575A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0D8992AE-46A9-4385-B912-5CCC763E575A}.Debug|x64.Build.0 = Debug|Any CPU
+		{0D8992AE-46A9-4385-B912-5CCC763E575A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D8992AE-46A9-4385-B912-5CCC763E575A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D8992AE-46A9-4385-B912-5CCC763E575A}.Release|x64.ActiveCfg = Release|Any CPU
+		{0D8992AE-46A9-4385-B912-5CCC763E575A}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

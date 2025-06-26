@@ -6,9 +6,11 @@ using RavenTech_ERP.Views.IViews.Accounting;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Account;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -16,13 +18,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     {
         public IEmployeeView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<EmployeeViewModel> EmployeeList;
-        public EmployeePresenter(IEmployeeView view, IUnitOfWork unitOfWork) {
+        public EmployeePresenter(IEmployeeView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -43,9 +47,16 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             //Load
 
+
+
             LoadAllEmployeeList();
 
+            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshView);
             //Source Binding
+        }
+        private void RefreshView()
+        {
+            LoadAllEmployeeList();
         }
 
         private void Details(object sender, CellClickEventArgs e)
@@ -153,13 +164,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllEmployeeList(bool emptyValue = false)
+        private async void LoadAllEmployeeList(bool emptyValue = false)
         {
             EmployeeList = Program.Mapper.Map<IEnumerable<EmployeeViewModel>>(
-                _unitOfWork.Employee.Value.GetAll(includeProperties: "JobPosition,Department,Shift,Attendances.Project,Payrolls"));
+                await _unitOfWork.Employee.Value.GetAllAsync(includeProperties: "JobPosition,Department,Shift,Attendances.Project,Payrolls"));
 
             if (!emptyValue) EmployeeList = EmployeeList.Where(c => c.Name.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetEmployeeListBindingSource(EmployeeList.OrderBy(c => c.Name));
+
+            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
     }
 }

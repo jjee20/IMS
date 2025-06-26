@@ -143,9 +143,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllPaymentTypeList(bool emptyValue = false)
+        private async void LoadAllPaymentTypeList(bool emptyValue = false)
         {
-            PaymentTypeList = Program.Mapper.Map<IEnumerable<PaymentTypeViewModel>>(_unitOfWork.PaymentType.Value.GetAll());
+            PaymentTypeList = Program.Mapper.Map<IEnumerable<PaymentTypeViewModel>>(await _unitOfWork.PaymentType.Value.GetAllAsync());
 
             if (!emptyValue) PaymentTypeList = PaymentTypeList.Where(c => c.PaymentTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetPaymentTypeListBindingSource(PaymentTypeList);

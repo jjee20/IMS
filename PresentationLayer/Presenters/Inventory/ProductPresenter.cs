@@ -7,10 +7,12 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
@@ -19,13 +21,15 @@ namespace PresentationLayer.Presenters
     {
         public IProductView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<ProductViewModel> ProductList;
-        public ProductPresenter(IProductView view, IUnitOfWork unitOfWork) {
+        public ProductPresenter(IProductView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -144,12 +148,13 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllProductList(bool emptyValue = false)
+        private async void LoadAllProductList(bool emptyValue = false)
         {
-            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(_unitOfWork.Product.Value.GetAll());
+            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(await _unitOfWork.Product.Value.GetAllAsync());
 
             if (!emptyValue) ProductList = ProductList.Where(c => c.ProductName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductListBindingSource(ProductList);
+            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
     }
 }

@@ -46,35 +46,39 @@
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(50, 59);
+            autoLabel1.Location = new Point(71, 98);
+            autoLabel1.Margin = new Padding(4, 0, 4, 0);
             autoLabel1.Name = "autoLabel1";
-            autoLabel1.Size = new Size(50, 15);
+            autoLabel1.Size = new Size(76, 25);
             autoLabel1.TabIndex = 70;
             autoLabel1.Text = "Bill Date";
             // 
             // txtDate
             // 
             txtDate.DateTimeIcon = null;
-            txtDate.Location = new Point(166, 54);
+            txtDate.Location = new Point(237, 86);
+            txtDate.Margin = new Padding(4, 5, 4, 5);
             txtDate.Name = "txtDate";
-            txtDate.Size = new Size(258, 23);
+            txtDate.Size = new Size(369, 42);
             txtDate.TabIndex = 71;
             txtDate.ToolTipText = "";
             // 
             // txtDueDate
             // 
             txtDueDate.DateTimeIcon = null;
-            txtDueDate.Location = new Point(166, 94);
+            txtDueDate.Location = new Point(237, 157);
+            txtDueDate.Margin = new Padding(4, 5, 4, 5);
             txtDueDate.Name = "txtDueDate";
-            txtDueDate.Size = new Size(258, 23);
+            txtDueDate.Size = new Size(369, 38);
             txtDueDate.TabIndex = 73;
             txtDueDate.ToolTipText = "";
             // 
             // autoLabel2
             // 
-            autoLabel2.Location = new Point(50, 99);
+            autoLabel2.Location = new Point(71, 165);
+            autoLabel2.Margin = new Padding(4, 0, 4, 0);
             autoLabel2.Name = "autoLabel2";
-            autoLabel2.Size = new Size(74, 15);
+            autoLabel2.Size = new Size(113, 25);
             autoLabel2.TabIndex = 72;
             autoLabel2.Text = "Bill Due Date";
             // 
@@ -83,68 +87,76 @@
             txtBillType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtBillType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtBillType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            txtBillType.Location = new Point(166, 135);
+            txtBillType.Location = new Point(237, 225);
+            txtBillType.Margin = new Padding(4, 5, 4, 5);
             txtBillType.Name = "txtBillType";
-            txtBillType.Size = new Size(258, 26);
+            txtBillType.Padding = new Padding(10, 0, 0, 0);
+            txtBillType.Size = new Size(369, 43);
             txtBillType.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
             txtBillType.TabIndex = 74;
             txtBillType.TabStop = false;
             // 
             // autoLabel3
             // 
-            autoLabel3.Location = new Point(50, 140);
+            autoLabel3.Location = new Point(71, 233);
+            autoLabel3.Margin = new Padding(4, 0, 4, 0);
             autoLabel3.Name = "autoLabel3";
-            autoLabel3.Size = new Size(50, 15);
+            autoLabel3.Size = new Size(76, 25);
             autoLabel3.TabIndex = 75;
             autoLabel3.Text = "Bill Type";
             // 
             // autoLabel4
             // 
-            autoLabel4.Location = new Point(50, 184);
+            autoLabel4.Location = new Point(71, 307);
+            autoLabel4.Margin = new Padding(4, 0, 4, 0);
             autoLabel4.Name = "autoLabel4";
-            autoLabel4.Size = new Size(80, 15);
+            autoLabel4.Size = new Size(125, 25);
             autoLabel4.TabIndex = 76;
             autoLabel4.Text = "Vendor D.O. #";
             // 
             // txtVendorDONumber
             // 
-            txtVendorDONumber.BeforeTouchSize = new Size(258, 23);
-            txtVendorDONumber.Location = new Point(166, 181);
+            txtVendorDONumber.BeforeTouchSize = new Size(367, 31);
+            txtVendorDONumber.Location = new Point(237, 302);
+            txtVendorDONumber.Margin = new Padding(4, 5, 4, 5);
             txtVendorDONumber.Name = "txtVendorDONumber";
-            txtVendorDONumber.Size = new Size(258, 23);
+            txtVendorDONumber.Size = new Size(367, 31);
             txtVendorDONumber.TabIndex = 77;
             // 
             // txtVendorInvoiceNumber
             // 
-            txtVendorInvoiceNumber.BeforeTouchSize = new Size(258, 23);
-            txtVendorInvoiceNumber.Location = new Point(166, 222);
+            txtVendorInvoiceNumber.BeforeTouchSize = new Size(367, 31);
+            txtVendorInvoiceNumber.Location = new Point(237, 370);
+            txtVendorInvoiceNumber.Margin = new Padding(4, 5, 4, 5);
             txtVendorInvoiceNumber.Name = "txtVendorInvoiceNumber";
-            txtVendorInvoiceNumber.Size = new Size(258, 23);
+            txtVendorInvoiceNumber.Size = new Size(367, 31);
             txtVendorInvoiceNumber.TabIndex = 79;
             // 
             // autoLabel5
             // 
-            autoLabel5.Location = new Point(50, 225);
+            autoLabel5.Location = new Point(71, 375);
+            autoLabel5.Margin = new Padding(4, 0, 4, 0);
             autoLabel5.Name = "autoLabel5";
-            autoLabel5.Size = new Size(95, 15);
+            autoLabel5.Size = new Size(146, 25);
             autoLabel5.TabIndex = 78;
             autoLabel5.Text = "Vendor Invoice #";
             // 
             // btnSave
             // 
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
-            btnSave.Location = new Point(189, 281);
+            btnSave.Location = new Point(270, 468);
+            btnSave.Margin = new Padding(4, 5, 4, 5);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(96, 28);
+            btnSave.Size = new Size(137, 47);
             btnSave.TabIndex = 80;
             btnSave.Text = "Save";
             btnSave.Click += btnConfirm_Click;
             // 
             // UpsertBillView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(474, 353);
+            ClientSize = new Size(675, 577);
             Controls.Add(btnSave);
             Controls.Add(txtVendorInvoiceNumber);
             Controls.Add(autoLabel5);
@@ -156,6 +168,7 @@
             Controls.Add(autoLabel2);
             Controls.Add(txtDate);
             Controls.Add(autoLabel1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "UpsertBillView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

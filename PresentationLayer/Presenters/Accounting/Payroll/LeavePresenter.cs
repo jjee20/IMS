@@ -5,9 +5,11 @@ using PresentationLayer.Reports;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 
 namespace RavenTech_ERP.Presenters.Accounting.Payroll
 {
@@ -15,13 +17,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     {
         public ILeaveView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<LeaveViewModel> LeaveList;
-        public LeavePresenter(ILeaveView view, IUnitOfWork unitOfWork) {
+        public LeavePresenter(ILeaveView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -140,12 +144,13 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllLeaveList(bool emptyValue = false)
+        private async void LoadAllLeaveList(bool emptyValue = false)
         {
-            LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(_unitOfWork.Leave.Value.GetAll(includeProperties: "Employee"));
+            LeaveList = Program.Mapper.Map<IEnumerable<LeaveViewModel>>(await _unitOfWork.Leave.Value.GetAllAsync(includeProperties: "Employee"));
 
             if (!emptyValue) LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue));
             _view.SetLeaveListBindingSource(LeaveList.OrderByDescending(c => c.StartDate));
+            _eventAggregator.Publish<PayrollUpdateEvent>();
         }
     }
 }

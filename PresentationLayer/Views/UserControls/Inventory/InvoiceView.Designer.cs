@@ -47,11 +47,12 @@
             txtInvoiceType.Hint = "Select Invoice Type";
             txtInvoiceType.IntegralHeight = false;
             txtInvoiceType.ItemHeight = 43;
-            txtInvoiceType.Location = new Point(88, 74);
+            txtInvoiceType.Location = new Point(132, 81);
+            txtInvoiceType.Margin = new Padding(4, 5, 4, 5);
             txtInvoiceType.MaxDropDownItems = 4;
             txtInvoiceType.MouseState = MaterialSkin.MouseState.OUT;
             txtInvoiceType.Name = "txtInvoiceType";
-            txtInvoiceType.Size = new Size(296, 49);
+            txtInvoiceType.Size = new Size(421, 49);
             txtInvoiceType.StartIndex = 0;
             txtInvoiceType.TabIndex = 0;
             // 
@@ -62,8 +63,8 @@
             btnPrint.Depth = 0;
             btnPrint.HighEmphasis = true;
             btnPrint.Icon = null;
-            btnPrint.Location = new Point(204, 169);
-            btnPrint.Margin = new Padding(4, 6, 4, 6);
+            btnPrint.Location = new Point(306, 158);
+            btnPrint.Margin = new Padding(6, 10, 6, 10);
             btnPrint.MouseState = MaterialSkin.MouseState.HOVER;
             btnPrint.Name = "btnPrint";
             btnPrint.NoAccentTextColor = Color.Empty;
@@ -77,11 +78,12 @@
             // 
             // InvoiceView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(473, 278);
+            ClientSize = new Size(673, 271);
             Controls.Add(btnPrint);
             Controls.Add(txtInvoiceType);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "InvoiceView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

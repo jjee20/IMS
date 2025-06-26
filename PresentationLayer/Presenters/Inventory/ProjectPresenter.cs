@@ -8,10 +8,12 @@ using PresentationLayer.Views.IViews;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using System.Linq;
+using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
 namespace PresentationLayer.Presenters
@@ -20,13 +22,15 @@ namespace PresentationLayer.Presenters
     {
         public IProjectView _view;
         private IUnitOfWork _unitOfWork;
+        private readonly IEventAggregator _eventAggregator;
         private IEnumerable<ProjectViewModel> ProjectList;
-        public ProjectPresenter(IProjectView view, IUnitOfWork unitOfWork) {
+        public ProjectPresenter(IProjectView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
+            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -167,9 +171,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllProjectList(bool emptyValue = false)
+        private async void LoadAllProjectList(bool emptyValue = false)
         {
-            var projects = _unitOfWork.Project.Value.GetAll();
+            var projects = await _unitOfWork.Project.Value.GetAllAsync();
 
             ProjectList = Program.Mapper.Map<IEnumerable<ProjectViewModel>>(projects);
 
@@ -177,6 +181,7 @@ namespace PresentationLayer.Presenters
 
 
             _view.SetProjectListBindingSource(ProjectList.OrderByDescending(c => c.StartDate));
+            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
     }
 }

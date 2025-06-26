@@ -142,10 +142,10 @@ namespace PresentationLayer.Presenters
             var reportView = new ReportView(reportPath, reportDataSource, localReport);
             reportView.ShowDialog();
         }
-        
-        private void LoadAllProductTypeList(bool emptyValue = false)
+
+        private async void LoadAllProductTypeList(bool emptyValue = false)
         {
-            ProductTypeList = Program.Mapper.Map<IEnumerable<ProductTypeViewModel>>(_unitOfWork.ProductType.Value.GetAll());
+            ProductTypeList = Program.Mapper.Map<IEnumerable<ProductTypeViewModel>>(await _unitOfWork.ProductType.Value.GetAllAsync());
 
             if (!emptyValue) ProductTypeList = ProductTypeList.Where(c => c.ProductTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductTypeListBindingSource(ProductTypeList);

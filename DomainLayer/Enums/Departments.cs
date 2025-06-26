@@ -10,6 +10,7 @@ namespace DomainLayer.Enums
     {
         Admin,
         Inventory,
-        Payroll
+        Payroll,
+        ThinkEE,
     }
 }
