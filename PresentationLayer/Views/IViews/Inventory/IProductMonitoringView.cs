@@ -9,6 +9,7 @@
         string SearchValue { get; }
 
         event EventHandler PrintEvent; 
+        event EventHandler RefreshEvent; 
         event EventHandler SearchEvent;
 
         void SetInStockListBindingSource(BindingSource source);

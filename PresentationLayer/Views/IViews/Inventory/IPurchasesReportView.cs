@@ -10,6 +10,7 @@ namespace RavenTech_ERP.Views.IViews.Inventory
         int Month { get; }
 
         event EventHandler UpdatePurchasesReportEvent;
+        event EventHandler RefreshEvent;
 
         static abstract PurchasesReportView GetInstance(TabPage parentContainer);
         void SetDailyPurchasesChart(GunaBarDataset purchasesbarDataset);

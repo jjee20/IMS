@@ -16,7 +16,7 @@ namespace PresentationLayer.Presenters
     public class InvoiceTypePresenter
     {
         public IInvoiceTypeView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<InvoiceTypeViewModel> InvoiceTypeList;
         public InvoiceTypePresenter(IInvoiceTypeView view, IUnitOfWork unitOfWork) {
 

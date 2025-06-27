@@ -12,7 +12,7 @@ namespace RavenTech_ERP
 {
     public partial class MainForm : SfForm, IMainForm
     {
-        public MainForm(IUnitOfWork unitOfWork)
+        public MainForm()
         {
             InitializeComponent();
             //btnAllowance.Click += delegate { AllowanceEvent?.Invoke(this, EventArgs.Empty); };

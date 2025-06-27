@@ -16,7 +16,7 @@ namespace PresentationLayer.Presenters.Account
     public class ChangePasswordPresenter
     {
         public IChangePasswordView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly PasswordHasher<ApplicationUser> _passwordHasher;
         public ChangePasswordPresenter(IChangePasswordView view, IUnitOfWork unitOfWork)
         {

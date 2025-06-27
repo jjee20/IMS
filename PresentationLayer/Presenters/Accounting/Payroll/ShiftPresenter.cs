@@ -14,7 +14,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class ShiftPresenter
     {
         public IShiftView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<ShiftViewModel> ShiftList;
         public ShiftPresenter(IShiftView view, IUnitOfWork unitOfWork) {
 

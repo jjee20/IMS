@@ -16,16 +16,16 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class LeavePresenter
     {
         public ILeaveView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<LeaveViewModel> LeaveList;
-        public LeavePresenter(ILeaveView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public LeavePresenter(ILeaveView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -150,7 +150,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             if (!emptyValue) LeaveList = LeaveList.Where(c => c.Employee.Contains(_view.SearchValue));
             _view.SetLeaveListBindingSource(LeaveList.OrderByDescending(c => c.StartDate));
-            _eventAggregator.Publish<PayrollUpdateEvent>();
+            
         }
     }
 }

@@ -16,16 +16,16 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class EmployeeContributionPresenter
     {
         public IEmployeeContributionView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<EmployeeContributionViewModel> EmployeeContributionList;
-        public EmployeeContributionPresenter(IEmployeeContributionView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public EmployeeContributionPresenter(IEmployeeContributionView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -150,7 +150,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             if (!emptyValue) EmployeeContributionList = EmployeeContributionList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetEmployeeContributionListBindingSource(EmployeeContributionList);
-            _eventAggregator.Publish<PayrollUpdateEvent>();
+            
         }
     }
 }

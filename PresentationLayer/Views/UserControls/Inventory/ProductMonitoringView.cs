@@ -38,28 +38,43 @@ namespace PresentationLayer.Views.UserControls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
-            get { return txtSearch.Text; }
+            get
+            {
+                return txtSearch.Text;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double InStock
         {
-            set { txtInStock.Text = value.ToString(); }
+            set
+            {
+                txtInStock.Text = value.ToString();
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double LowStock
         {
-            set { txtLowStock.Text = value.ToString(); }
+            set
+            {
+                txtLowStock.Text = value.ToString();
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double OutOfStock
         {
-            set { txtOutOfStock.Text = value.ToString(); }
+            set
+            {
+                txtOutOfStock.Text = value.ToString();
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProjectFlow
         {
-            set { txtPulledOut.Text = value.ToString(); }
+            set
+            {
+                txtPulledOut.Text = value.ToString();
+            }
         }
 
         public void SetInStockListBindingSource(BindingSource source)
@@ -100,6 +115,12 @@ namespace PresentationLayer.Views.UserControls
                 SearchEvent?.Invoke(this, EventArgs.Empty);
             txtSearch.Focus();
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshEvent?.Invoke(this, EventArgs.Empty);
+        }
+        public event EventHandler RefreshEvent;
 
         public event EventHandler SearchEvent;
     }

@@ -21,16 +21,16 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class AttendancePresenter
     {
         public IAttendanceView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<AttendanceViewModel> AttendanceList;
-        public AttendancePresenter(IAttendanceView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public AttendancePresenter(IAttendanceView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -103,7 +103,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             if (!emptyValue) AttendanceList = AttendanceList.Where(c => c.Employee.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetAttendanceListBindingSource(AttendanceList);
-            _eventAggregator.Publish<PayrollUpdateEvent>();
+            
         }
         public async Task<List<AttendanceViewModel>> GetAttendanceSummary(DateTime startDate, DateTime endDate)
         {

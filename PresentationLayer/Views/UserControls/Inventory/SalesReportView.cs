@@ -42,16 +42,31 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Month
         {
-            get { return (int)txtMonth.SelectedValue; }
+            get
+            {
+                return (int)txtMonth.SelectedValue;
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ItemSold { set => txtItemSold.Text = value; }
+        public string ItemSold
+        {
+            set => txtItemSold.Text = value;
+        }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public double Sales { get => double.Parse(txtSales.Text); set => txtSales.Text = value.ToString("N2"); }
+        public double Sales
+        {
+            get => double.Parse(txtSales.Text); set => txtSales.Text = value.ToString("N2");
+        }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public double Purchases { get => double.Parse(txtPurchases.Text); set => txtPurchases.Text = value.ToString("N2"); }
+        public double Purchases
+        {
+            get => double.Parse(txtPurchases.Text); set => txtPurchases.Text = value.ToString("N2");
+        }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string Net { set => txtNet.Text = value; }
+        public string Net
+        {
+            set => txtNet.Text = value;
+        }
 
         public void SetDailySalesChart(GunaBarDataset salesbarDataset, GunaBarDataset purchasesbarDataset)
         {
@@ -102,5 +117,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             return instance;
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshEvent?.Invoke(sender, e);
+        }
+        public event EventHandler RefreshEvent;
     }
 }

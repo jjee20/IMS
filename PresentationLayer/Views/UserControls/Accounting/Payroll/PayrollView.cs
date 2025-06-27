@@ -58,9 +58,15 @@ namespace PresentationLayer.Views.UserControls
         private static PayrollView? instance;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DateTime StartDate { get => txtStartDate.Value.Date; set => txtStartDate.Value = value; }
+        public DateTime StartDate
+        {
+            get => txtStartDate.Value.Date; set => txtStartDate.Value = value;
+        }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DateTime EndDate { get => txtEndDate.Value.Date; set => txtEndDate.Value = value; }
+        public DateTime EndDate
+        {
+            get => txtEndDate.Value.Date; set => txtEndDate.Value = value;
+        }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int ProjectId
         {
@@ -72,26 +78,45 @@ namespace PresentationLayer.Views.UserControls
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool IncludeContribution { get => btnContribution.Checked; }
+        public bool IncludeContribution
+        {
+            get => btnContribution.Checked;
+        }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool IncludeBenefits { get => btnBenifits.Checked; }
+        public bool IncludeBenefits
+        {
+            get => btnBenifits.Checked;
+        }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool All { get => btnAll.Checked; }
+        public bool All
+        {
+            get => btnAll.Checked;
+        }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
-            get { return message; }
-            set { message = value; }
+            get
+            {
+                return message;
+            }
+            set
+            {
+                message = value;
+            }
         }
 
 
         public SfDataGrid DataGrid => dgList;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool IsSuccessful { get => success; set => success = value; }
+        public bool IsSuccessful
+        {
+            get => success; set => success = value;
+        }
 
         public event EventHandler PrintPayrollEvent;
         public event EventHandler SearchEvent;
+        public event EventHandler RefreshEvent;
         public event CellClickEventHandler TMonthEvent;
         public event CellClickEventHandler PrintPaySlipEvent;
 
@@ -185,6 +210,11 @@ namespace PresentationLayer.Views.UserControls
             {
                 TMonthEvent?.Invoke(sender, e);
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshEvent?.Invoke(sender, e);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace PresentationLayer.Views.IViews.Inventory
         double TotalExpense { set; }
         double TotalProfit { set; }
         event EventHandler UpdateDashboardEvent;
+        event EventHandler RefreshEvent;
         void SetYear(BindingSource dataSource);
         void SetMonth(BindingSource dataSource);
         void SetTopSelling(GunaHorizontalBarDataset topSellingItemsBindingSource);

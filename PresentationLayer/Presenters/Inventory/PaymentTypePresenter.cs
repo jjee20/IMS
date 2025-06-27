@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenters
     public class PaymentTypePresenter
     {
         public IPaymentTypeView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<PaymentTypeViewModel> PaymentTypeList;
         public PaymentTypePresenter(IPaymentTypeView view, IUnitOfWork unitOfWork) {
 

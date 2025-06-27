@@ -20,16 +20,16 @@ namespace PresentationLayer.Presenters
     public class ProductPresenter
     {
         public IProductView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<ProductViewModel> ProductList;
-        public ProductPresenter(IProductView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public ProductPresenter(IProductView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -154,7 +154,7 @@ namespace PresentationLayer.Presenters
 
             if (!emptyValue) ProductList = ProductList.Where(c => c.ProductName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductListBindingSource(ProductList);
-            _eventAggregator.Publish<InventoryCompletedEvent>();
+            
         }
     }
 }

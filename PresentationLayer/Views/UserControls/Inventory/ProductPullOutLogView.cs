@@ -81,8 +81,14 @@ namespace PresentationLayer.Views.UserControls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
-            get { return txtSearch.Text; }
-            set { txtSearch.Text = value; }
+            get
+            {
+                return txtSearch.Text;
+            }
+            set
+            {
+                txtSearch.Text = value;
+            }
         }
 
         public void SetProductInStockLogListBindingSource(IEnumerable<ProductPullOutLogViewModel> ProductInStockLogList)
@@ -98,7 +104,13 @@ namespace PresentationLayer.Views.UserControls
             dgList.DataSource = dgPager.PagedSource;
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshEvent?.Invoke(sender, e);
+        }
+
         public event EventHandler AddEvent;
+        public event EventHandler RefreshEvent;
         public event EventHandler SearchEvent;
         public event CellClickEventHandler EditEvent;
         public event CellClickEventHandler DeleteEvent;

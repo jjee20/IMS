@@ -14,7 +14,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class JobPositionPresenter
     {
         public IJobPositionView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<JobPositionViewModel> JobPositionList;
         public JobPositionPresenter(IJobPositionView view, IUnitOfWork unitOfWork) {
 

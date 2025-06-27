@@ -21,7 +21,7 @@ namespace PresentationLayer.Presenters.Account
     public class RegisterPresenter
     {
         public IRegisterView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private BindingSource DepartmentBindingSource;
         private IEnumerable<AccountViewModel> RegisterList;
         private IEnumerable<EnumItemViewModel> DepartmentList;
