@@ -16,7 +16,7 @@ namespace PresentationLayer.Presenters
     public class BillTypePresenter
     {
         public IBillTypeView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<BillTypeViewModel> BillTypeList;
         public BillTypePresenter(IBillTypeView view, IUnitOfWork unitOfWork) {
 

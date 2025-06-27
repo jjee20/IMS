@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenters
     public class ShipmentTypePresenter
     {
         public IShipmentTypeView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<ShipmentTypeViewModel> ShipmentTypeList;
         public ShipmentTypePresenter(IShipmentTypeView view, IUnitOfWork unitOfWork) {
 

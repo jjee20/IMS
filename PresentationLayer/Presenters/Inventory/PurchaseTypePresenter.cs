@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenters
     public class PurchaseTypePresenter
     {
         public IPurchaseTypeView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<PurchaseTypeViewModel> PurchaseTypeList;
         public PurchaseTypePresenter(IPurchaseTypeView view, IUnitOfWork unitOfWork) {
 

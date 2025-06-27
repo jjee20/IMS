@@ -24,16 +24,16 @@ namespace PresentationLayer.Presenters
     public class SalesOrderPresenter
     {
         public ISalesOrderView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<SalesOrderViewModel> SalesOrderList;
-        public SalesOrderPresenter(ISalesOrderView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public SalesOrderPresenter(ISalesOrderView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -211,7 +211,7 @@ namespace PresentationLayer.Presenters
 
             _view.SetSalesOrderListBindingSource(SalesOrderList.OrderByDescending(c => c.OrderDate));
 
-            _eventAggregator.Publish<InventoryCompletedEvent>();
+            
         }
     }
 }

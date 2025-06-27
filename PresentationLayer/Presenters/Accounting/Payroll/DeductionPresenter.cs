@@ -16,16 +16,16 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class DeductionPresenter
     {
         public IDeductionView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<DeductionViewModel> DeductionList;
-        public DeductionPresenter(IDeductionView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public DeductionPresenter(IDeductionView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -144,13 +144,13 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private async void LoadAllDeductionList(bool emptyValue = false)
+        private void LoadAllDeductionList(bool emptyValue = false)
         {
-            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(await _unitOfWork.Deduction.Value.GetAllAsync(includeProperties: "Employee"));
+            DeductionList = Program.Mapper.Map<IEnumerable<DeductionViewModel>>(_unitOfWork.Deduction.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) DeductionList = DeductionList.Where(c => c.Employee.Contains(_view.SearchValue));
             _view.SetDeductionListBindingSource(DeductionList.OrderByDescending(c => c.DateDeducted));
-            _eventAggregator.Publish<PayrollUpdateEvent>();
+            
         }
     }
 }

@@ -16,7 +16,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class DepartmentPresenter
     {
         public IDepartmentView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<DepartmentViewModel> DepartmentList;
 
         public DepartmentPresenter(IDepartmentView view, IUnitOfWork unitOfWork) {

@@ -26,7 +26,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
     public partial class UpsertProductStockInLogView : SfForm
     {
         string message = "";
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private ProductStockInLogs _entity;
         private List<ProductStockInLogLineViewModel> _entityViewModel;
 

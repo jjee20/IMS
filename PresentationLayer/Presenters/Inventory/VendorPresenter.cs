@@ -18,7 +18,7 @@ namespace PresentationLayer.Presenters
     public class VendorPresenter
     {
         public IVendorView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<VendorViewModel> VendorList;
         public VendorPresenter(IVendorView view, IUnitOfWork unitOfWork) {
 

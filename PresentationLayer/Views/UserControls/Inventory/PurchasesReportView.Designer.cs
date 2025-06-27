@@ -28,32 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            Guna.Charts.WinForms.ChartFont chartFont1 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont2 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont3 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont4 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid1 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.Tick tick1 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont5 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid2 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.Tick tick2 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont6 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid3 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.PointLabel pointLabel1 = new Guna.Charts.WinForms.PointLabel();
-            Guna.Charts.WinForms.ChartFont chartFont7 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Tick tick3 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont8 = new Guna.Charts.WinForms.ChartFont();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            var chartFont1 = new Guna.Charts.WinForms.ChartFont();
+            var chartFont2 = new Guna.Charts.WinForms.ChartFont();
+            var chartFont3 = new Guna.Charts.WinForms.ChartFont();
+            var chartFont4 = new Guna.Charts.WinForms.ChartFont();
+            var grid1 = new Guna.Charts.WinForms.Grid();
+            var tick1 = new Guna.Charts.WinForms.Tick();
+            var chartFont5 = new Guna.Charts.WinForms.ChartFont();
+            var grid2 = new Guna.Charts.WinForms.Grid();
+            var tick2 = new Guna.Charts.WinForms.Tick();
+            var chartFont6 = new Guna.Charts.WinForms.ChartFont();
+            var grid3 = new Guna.Charts.WinForms.Grid();
+            var pointLabel1 = new Guna.Charts.WinForms.PointLabel();
+            var chartFont7 = new Guna.Charts.WinForms.ChartFont();
+            var tick3 = new Guna.Charts.WinForms.Tick();
+            var chartFont8 = new Guna.Charts.WinForms.ChartFont();
+            var customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasesReportView));
+            var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             tableLayoutPanel5 = new TableLayoutPanel();
@@ -80,6 +83,7 @@
             txtMonth = new MaterialSkin.Controls.MaterialComboBox();
             txtYear = new MaterialSkin.Controls.MaterialComboBox();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            btnRefresh = new Guna.UI2.WinForms.Guna2Button();
             materialCard1.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -99,10 +103,10 @@
             // guna2Separator1
             // 
             guna2Separator1.Dock = DockStyle.Fill;
-            guna2Separator1.Location = new Point(4, 89);
+            guna2Separator1.Location = new Point(4, 57);
             guna2Separator1.Margin = new Padding(4, 3, 4, 3);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1338, 14);
+            guna2Separator1.Size = new Size(1338, 7);
             guna2Separator1.TabIndex = 2;
             // 
             // materialCard1
@@ -113,12 +117,12 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(2, 108);
+            materialCard1.Location = new Point(2, 69);
             materialCard1.Margin = new Padding(21);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(21);
-            materialCard1.Size = new Size(1346, 619);
+            materialCard1.Size = new Size(1346, 658);
             materialCard1.TabIndex = 10;
             // 
             // tableLayoutPanel5
@@ -134,7 +138,7 @@
             tableLayoutPanel5.RowCount = 2;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.Size = new Size(1304, 455);
+            tableLayoutPanel5.Size = new Size(1304, 494);
             tableLayoutPanel5.TabIndex = 2;
             // 
             // tableLayoutPanel3
@@ -150,12 +154,12 @@
             tableLayoutPanel3.Controls.Add(materialCard5, 2, 0);
             tableLayoutPanel3.Controls.Add(materialCard4, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(0, 227);
+            tableLayoutPanel3.Location = new Point(0, 247);
             tableLayoutPanel3.Margin = new Padding(0);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(1304, 228);
+            tableLayoutPanel3.Size = new Size(1304, 247);
             tableLayoutPanel3.TabIndex = 5;
             // 
             // materialCard7
@@ -171,7 +175,7 @@
             materialCard7.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard7.Name = "materialCard7";
             materialCard7.Padding = new Padding(21);
-            materialCard7.Size = new Size(374, 186);
+            materialCard7.Size = new Size(374, 205);
             materialCard7.TabIndex = 7;
             // 
             // dgAnnualPurchases
@@ -204,7 +208,7 @@
             dgAnnualPurchases.RowHeadersVisible = false;
             dgAnnualPurchases.RowHeadersWidth = 62;
             dgAnnualPurchases.RowTemplate.Height = 25;
-            dgAnnualPurchases.Size = new Size(332, 125);
+            dgAnnualPurchases.Size = new Size(332, 144);
             dgAnnualPurchases.TabIndex = 3;
             dgAnnualPurchases.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgAnnualPurchases.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -256,7 +260,7 @@
             materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard5.Name = "materialCard5";
             materialCard5.Padding = new Padding(21);
-            materialCard5.Size = new Size(372, 186);
+            materialCard5.Size = new Size(372, 205);
             materialCard5.TabIndex = 5;
             // 
             // dgMonthlyPurchases
@@ -289,7 +293,7 @@
             dgMonthlyPurchases.RowHeadersVisible = false;
             dgMonthlyPurchases.RowHeadersWidth = 62;
             dgMonthlyPurchases.RowTemplate.Height = 25;
-            dgMonthlyPurchases.Size = new Size(330, 125);
+            dgMonthlyPurchases.Size = new Size(330, 144);
             dgMonthlyPurchases.TabIndex = 3;
             dgMonthlyPurchases.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgMonthlyPurchases.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -341,7 +345,7 @@
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(21);
-            materialCard4.Size = new Size(372, 186);
+            materialCard4.Size = new Size(372, 205);
             materialCard4.TabIndex = 3;
             // 
             // dgDailyPurchases
@@ -374,7 +378,7 @@
             dgDailyPurchases.RowHeadersVisible = false;
             dgDailyPurchases.RowHeadersWidth = 62;
             dgDailyPurchases.RowTemplate.Height = 25;
-            dgDailyPurchases.Size = new Size(330, 125);
+            dgDailyPurchases.Size = new Size(330, 144);
             dgDailyPurchases.TabIndex = 3;
             dgDailyPurchases.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgDailyPurchases.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -426,7 +430,7 @@
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(21);
-            materialCard2.Size = new Size(1262, 185);
+            materialCard2.Size = new Size(1262, 205);
             materialCard2.TabIndex = 3;
             // 
             // chartDailyPurchases
@@ -437,7 +441,7 @@
             chartDailyPurchases.Location = new Point(21, 40);
             chartDailyPurchases.Margin = new Padding(4);
             chartDailyPurchases.Name = "chartDailyPurchases";
-            chartDailyPurchases.Size = new Size(1220, 124);
+            chartDailyPurchases.Size = new Size(1220, 144);
             chartDailyPurchases.TabIndex = 2;
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
@@ -556,7 +560,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 81.8181839F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 18.181818F));
-            tableLayoutPanel1.Size = new Size(1346, 106);
+            tableLayoutPanel1.Size = new Size(1346, 67);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // tableLayoutPanel2
@@ -571,21 +575,22 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1346, 86);
+            tableLayoutPanel2.Size = new Size(1346, 54);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // guna2Panel1
             // 
             guna2Panel1.Controls.Add(txtMonth);
             guna2Panel1.Controls.Add(txtYear);
+            guna2Panel1.Controls.Add(btnRefresh);
             guna2Panel1.Controls.Add(materialLabel1);
-            guna2Panel1.CustomizableEdges = customizableEdges1;
+            guna2Panel1.CustomizableEdges = customizableEdges3;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(4, 4);
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel1.Size = new Size(1338, 78);
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2Panel1.Size = new Size(1338, 46);
             guna2Panel1.TabIndex = 0;
             // 
             // txtMonth
@@ -604,7 +609,7 @@
             txtMonth.Hint = "Month";
             txtMonth.IntegralHeight = false;
             txtMonth.ItemHeight = 43;
-            txtMonth.Location = new Point(876, 0);
+            txtMonth.Location = new Point(801, 0);
             txtMonth.Margin = new Padding(4);
             txtMonth.MaxDropDownItems = 4;
             txtMonth.MouseState = MaterialSkin.MouseState.OUT;
@@ -629,7 +634,7 @@
             txtYear.Hint = "Year";
             txtYear.IntegralHeight = false;
             txtYear.ItemHeight = 43;
-            txtYear.Location = new Point(1156, 0);
+            txtYear.Location = new Point(1081, 0);
             txtYear.Margin = new Padding(4);
             txtYear.MaxDropDownItems = 4;
             txtYear.MouseState = MaterialSkin.MouseState.OUT;
@@ -650,10 +655,31 @@
             materialLabel1.Margin = new Padding(4, 0, 4, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(854, 78);
+            materialLabel1.Size = new Size(595, 46);
             materialLabel1.TabIndex = 4;
             materialLabel1.Text = "Expense Report";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.CustomizableEdges = customizableEdges1;
+            btnRefresh.DisabledState.BorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnRefresh.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnRefresh.Dock = DockStyle.Right;
+            btnRefresh.FillColor = Color.Transparent;
+            btnRefresh.Font = new Font("Segoe UI", 9F);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
+            btnRefresh.ImageSize = new Size(30, 30);
+            btnRefresh.Location = new Point(1263, 0);
+            btnRefresh.Margin = new Padding(4);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnRefresh.Size = new Size(75, 46);
+            btnRefresh.TabIndex = 12;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // PurchasesReportView
             // 
@@ -716,5 +742,6 @@
         private MaterialSkin.Controls.MaterialCard materialCard4;
         private Guna.UI2.WinForms.Guna2DataGridView dgDailyPurchases;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private Guna.UI2.WinForms.Guna2Button btnRefresh;
     }
 }

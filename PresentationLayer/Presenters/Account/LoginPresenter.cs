@@ -1,27 +1,28 @@
-﻿using DomainLayer.Models.Accounts;
+﻿using DomainLayer.Enums;
+using DomainLayer.Models.Accounts;
 using Microsoft.AspNetCore.Identity;
 using PresentationLayer.Views.IViews.Inventory;
-using RevenTech_ERP.Presenters.Accounting.Payroll;
-using RavenTech_ERP.Properties;
-using RevenTech_ERP.Views.IViews.Accounting.Payroll;
-using ServiceLayer.Services.IRepositories;
-using RavenTech_ERP.Views.IViews;
 using RavenTech_ERP;
 using RavenTech_ERP.Presenters;
-using DomainLayer.Enums;
+using RavenTech_ERP.Properties;
+using RavenTech_ERP.Views.IViews;
+using RevenTech_ERP.Presenters.Accounting.Payroll;
+using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using ServiceLayer.Services.IRepositories;
+using Unity;
 
 namespace PresentationLayer.Presenters.Account
 {
     public class LoginPresenter
     {
         private ILoginView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnityContainer _container;
         private readonly PasswordHasher<ApplicationUser> _passwordHasher;
 
-        public LoginPresenter(ILoginView view, IUnitOfWork unitOfWork)
+        public LoginPresenter(ILoginView view, IUnityContainer container)
         {
             _view = view;
-            _unitOfWork = unitOfWork;
+            _container = container;
             _passwordHasher = new PasswordHasher<ApplicationUser>();
 
             // Subscribe to the login event in the view
@@ -44,8 +45,8 @@ namespace PresentationLayer.Presenters.Account
                 }
 
                 // Retrieve the user from the database based on the username
-                var user = await _unitOfWork.ApplicationUser.Value.GetAsync(c => c.UserName == username);
-
+                var user = await _container.Resolve<IUnitOfWork>().ApplicationUser.Value.GetAsync(c => c.UserName == username);
+                
                 if (user == null)
                 {
                     MessageBox.Show("Invalid username or password.");
@@ -62,8 +63,8 @@ namespace PresentationLayer.Presenters.Account
                     if(user.TaskRoles != null) Settings.Default.Roles = string.Join(",",user.TaskRoles);
                     Settings.Default.Department = department.ToString();
 
-                    IMainForm mainForm = new MainForm(_unitOfWork);
-                    new MainPresenter(mainForm, _unitOfWork);
+                    IMainForm mainForm = new MainForm();
+                    new MainPresenter(mainForm, _container);
                     if(department == Departments.Inventory)
                     {
                         mainForm.InventoryTab.Visible = true;

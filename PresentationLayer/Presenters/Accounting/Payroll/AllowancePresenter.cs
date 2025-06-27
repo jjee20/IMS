@@ -16,16 +16,16 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class AllowancePresenter
     {
         public IAllowanceView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<AllowanceViewModel> AllowanceList;
-        public AllowancePresenter(IAllowanceView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public AllowancePresenter(IAllowanceView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -144,14 +144,14 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private async void LoadAllAllowanceList(bool emptyValue = false)
+        private void LoadAllAllowanceList(bool emptyValue = false)
         {
-            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(await _unitOfWork.Allowance.Value.GetAllAsync(includeProperties: "Employee"));
+            AllowanceList = Program.Mapper.Map<IEnumerable<AllowanceViewModel>>(_unitOfWork.Allowance.Value.GetAll(includeProperties: "Employee"));
 
             if (!emptyValue) AllowanceList = AllowanceList.Where(c => c.Employee.Contains(_view.SearchValue));
             _view.SetAllowanceListBindingSource(AllowanceList.OrderByDescending(c => c.StartDate));
 
-            _eventAggregator.Publish<PayrollUpdateEvent>();
+            
         }
     }
 }

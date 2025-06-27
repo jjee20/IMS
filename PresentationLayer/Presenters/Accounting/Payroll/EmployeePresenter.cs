@@ -17,16 +17,14 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class EmployeePresenter
     {
         public IEmployeeView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<EmployeeViewModel> EmployeeList;
-        public EmployeePresenter(IEmployeeView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public EmployeePresenter(IEmployeeView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -50,13 +48,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
 
             LoadAllEmployeeList();
-
-            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshView);
             //Source Binding
-        }
-        private void RefreshView()
-        {
-            LoadAllEmployeeList();
         }
 
         private void Details(object sender, CellClickEventArgs e)
@@ -171,8 +163,6 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             if (!emptyValue) EmployeeList = EmployeeList.Where(c => c.Name.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetEmployeeListBindingSource(EmployeeList.OrderBy(c => c.Name));
-
-            _eventAggregator.Publish<InventoryCompletedEvent>();
         }
     }
 }

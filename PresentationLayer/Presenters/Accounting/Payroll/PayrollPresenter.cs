@@ -17,21 +17,21 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     public class PayrollPresenter
     {
         public IPayrollView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private BindingSource ProjectBindingSource;
         private List<PayrollViewModel> PayrollVMList;
         private List<DomainLayer.Models.Accounting.Payroll.Payroll> PayrollList;
         private IEnumerable<Project> ProjectList;
         private string ProjectName;
-        public PayrollPresenter(IPayrollView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
+        public PayrollPresenter(IPayrollView view, IUnitOfWork unitOfWork)
         {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
             ProjectBindingSource = new BindingSource();
             PayrollVMList = new List<PayrollViewModel>();
             PayrollList = new List<DomainLayer.Models.Accounting.Payroll.Payroll>();
@@ -39,22 +39,26 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.SearchEvent -= Search;
             _view.TMonthEvent -= TMonthPayCalculation;
             _view.PrintPaySlipEvent -= PrintPayslip;
+            _view.RefreshEvent -= Refresh;
             
             _view.PrintPayrollEvent += PrintPayroll;
             _view.SearchEvent += Search;
             _view.TMonthEvent += TMonthPayCalculation;
             _view.PrintPaySlipEvent += PrintPayslip;
+            _view.RefreshEvent += Refresh;
 
             //Load
+            
             RefreshView();
-            _eventAggregator.Subscribe<PayrollUpdateEvent>(RefreshView);
         }
 
-        private void RefreshView()
+        private void Refresh(object? sender, EventArgs e) => RefreshView();
+
+        private  void RefreshView()
         {
-            LoadAllProjectList();
+             LoadAllProjectList();
             _view.SetProjectListBindingSource(ProjectBindingSource);
-            LoadAllPayrollList(_view.StartDate.Date, _view.EndDate.Date);
+             LoadAllPayrollList(_view.StartDate.Date, _view.EndDate.Date);
         }
 
         private void PrintPayslip(object sender, CellClickEventArgs e)
@@ -120,30 +124,28 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             var employee = _unitOfWork.Employee.Value.Get(c => c.LastName == employeeName[0].Trim() && c.FirstName == employeeName[1].Trim(), includeProperties: "Department,JobPosition,Leaves,Attendances,");
             if (rowData != null)
             {
-                using (var tmonth = new _Upsert13thMonthView(rowData, _unitOfWork, employee))
-                {
-                    tmonth.ShowDialog();
-                }
+                using var tmonth = new _Upsert13thMonthView(rowData, _unitOfWork, employee);
+                tmonth.ShowDialog();
             }
         }
 
-        private async void LoadAllPayrollList(DateTime startDate, DateTime endDate, int? projectId = 0)
+        private void LoadAllPayrollList(DateTime startDate, DateTime endDate, int? projectId = 0)
         {
             PayrollList.Clear();
             PayrollVMList.Clear();
 
-            var employees = await _unitOfWork.Employee.Value.GetAllAsync(
+            var employees =  _unitOfWork.Employee.Value.GetAll(
                      c => c.isActive != false && (c.ContractStartDate.Date <= startDate.Date && c.ContractEndDate.Date >= endDate.Date),
                      includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution"
                  );
 
-            var holidayList = await _unitOfWork.Holiday.Value.GetAllAsync(h => h.EffectiveDate.Date >= startDate && h.EffectiveDate.Date <= endDate);
+            var holidayList =  _unitOfWork.Holiday.Value.GetAll(h => h.EffectiveDate.Date >= startDate && h.EffectiveDate.Date <= endDate);
             var holidays = holidayList.ToList();
 
             if (!_view.All && projectId.HasValue)
             {
                 employees = employees.Where(e => e.Attendances.Any(a => a.ProjectId == projectId));
-                var project = await _unitOfWork.Project.Value.GetAsync(p => p.ProjectId == projectId);
+                var project =  _unitOfWork.Project.Value.Get(p => p.ProjectId == projectId);
                 ProjectName = $"Project: {project?.ProjectName ?? ""}";
             }
             else
@@ -212,7 +214,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             _view.SetPayrollListBindingSource(PayrollVMList.OrderBy(e => e.Employee).ToList());
         }
 
-        private void Search(object? sender, EventArgs e)
+        private  void Search(object? sender, EventArgs e)
         {
             try
             {
@@ -224,7 +226,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                     return;
                 }
 
-                LoadAllPayrollList(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
+                 LoadAllPayrollList(_view.StartDate.Date, _view.EndDate.Date, _view.ProjectId);
 
             }
             catch (Exception ex)
@@ -233,12 +235,12 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
             }
         }
 
-        private async void PrintPayroll(object? sender, EventArgs e)
+        private  void PrintPayroll(object? sender, EventArgs e)
         {
             foreach (var payroll in PayrollList)
             {
-                var existingPayroll = await _unitOfWork.Payroll.Value
-                    .GetAsync(p => p.EmployeeId == payroll.EmployeeId && p.StartDate.Date == _view.StartDate.Date && p.EndDate.Date == _view.EndDate.Date);
+                var existingPayroll =  _unitOfWork.Payroll.Value
+                    .Get(p => p.EmployeeId == payroll.EmployeeId && p.StartDate.Date == _view.StartDate.Date && p.EndDate.Date == _view.EndDate.Date);
 
                 if (existingPayroll != null)
                 {
@@ -261,11 +263,11 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 }
                 else
                 {
-                    await _unitOfWork.Payroll.Value.AddAsync(payroll); // Use Add for new records
+                     _unitOfWork.Payroll.Value.Add(payroll); // Use Add for new records
                 }
             }
 
-            await _unitOfWork.SaveAsync();
+             _unitOfWork.Save();
 
 
             try
@@ -299,9 +301,9 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
                 _view.Message = $"An error occurred while generating the report: {ex.Message}";
             }
         }
-        private async void LoadAllProjectList()
+        private void LoadAllProjectList()
         {
-            ProjectList = await _unitOfWork.Project.Value.GetAllAsync();
+            ProjectList = _unitOfWork.Project.Value.GetAll();
             ProjectBindingSource.DataSource = ProjectList;
         }
     }

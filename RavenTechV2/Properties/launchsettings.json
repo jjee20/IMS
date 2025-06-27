@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "RavenTechV2 (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "RavenTechV2 (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}

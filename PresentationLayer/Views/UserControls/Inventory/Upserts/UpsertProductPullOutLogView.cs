@@ -26,7 +26,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
     public partial class UpsertProductPullOutLogView : SfForm
     {
         string message = "";
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private ProductPullOutLogs _entity;
         private List<ProductPullOutLogLineViewModel> _entityViewModel;
 

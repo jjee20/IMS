@@ -17,8 +17,8 @@ namespace RavenTech_ERP.Presenters.Inventory
     public class SalesReportPresenter
     {
         private ISalesReportView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private BindingSource MonthBindingSource;
         private BindingSource YearBindingSource;
         private BindingSource DailySalesBindingSource;
@@ -30,11 +30,11 @@ namespace RavenTech_ERP.Presenters.Inventory
         private GunaBarDataset MonthlySalesTrendDataset;
         private GunaBarDataset MonthlyPurchasesTrendDataset;
 
-        public SalesReportPresenter(ISalesReportView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
+        public SalesReportPresenter(ISalesReportView view, IUnitOfWork unitOfWork)
         {
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
             YearBindingSource = new BindingSource();
             MonthBindingSource = new BindingSource();
             DailySalesBindingSource = new BindingSource();
@@ -45,6 +45,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             MonthlyPurchasesTrendDataset = new GunaBarDataset();
 
             _view.UpdateSalesReportEvent += UpdateSalesReport;
+            _view.RefreshEvent += Refresh;
 
             RefreshView();
 
@@ -54,10 +55,9 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.SetMonthlySalesChart(MonthlySalesTrendDataset, MonthlyPurchasesTrendDataset);
             _view.SetDailySalesDataGrid(DailySalesBindingSource);
             _view.SetMonthlySalesDataGrid(MonthlySalesBindingSource);
-
-
-            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshView);
         }
+
+        private void Refresh(object? sender, EventArgs e) => RefreshView();
 
         private void RefreshView()
         {

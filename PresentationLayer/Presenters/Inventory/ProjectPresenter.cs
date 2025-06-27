@@ -21,16 +21,16 @@ namespace PresentationLayer.Presenters
     public class ProjectPresenter
     {
         public IProjectView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<ProjectViewModel> ProjectList;
-        public ProjectPresenter(IProjectView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public ProjectPresenter(IProjectView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -181,7 +181,7 @@ namespace PresentationLayer.Presenters
 
 
             _view.SetProjectListBindingSource(ProjectList.OrderByDescending(c => c.StartDate));
-            _eventAggregator.Publish<InventoryCompletedEvent>();
+            
         }
     }
 }

@@ -30,32 +30,34 @@ namespace PresentationLayer.Views.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn7 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn9 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn10 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn11 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn12 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn13 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn14 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn15 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn16 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn17 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
-            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PayrollView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn7 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn9 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn10 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn11 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn12 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn13 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn14 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn15 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn16 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn17 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            var gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(PayrollView));
+            var customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             materialCard4 = new MaterialSkin.Controls.MaterialCard();
             panel1 = new Panel();
@@ -76,6 +78,7 @@ namespace PresentationLayer.Views.UserControls
             btnPrint = new Guna2Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
+            btnRefresh = new Guna2Button();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
             materialCard1.SuspendLayout();
@@ -505,8 +508,10 @@ namespace PresentationLayer.Views.UserControls
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.BackColor = Color.White;
-            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 97F));
+            tableLayoutPanel2.Controls.Add(btnRefresh, 1, 0);
             tableLayoutPanel2.Controls.Add(materialLabel1, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(0, 0);
@@ -516,6 +521,27 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Size = new Size(1298, 79);
             tableLayoutPanel2.TabIndex = 0;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.CustomizableEdges = customizableEdges7;
+            btnRefresh.DisabledState.BorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnRefresh.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnRefresh.Dock = DockStyle.Right;
+            btnRefresh.FillColor = Color.Transparent;
+            btnRefresh.Font = new Font("Segoe UI", 9F);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
+            btnRefresh.ImageSize = new Size(30, 30);
+            btnRefresh.Location = new Point(1219, 4);
+            btnRefresh.Margin = new Padding(4);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnRefresh.Size = new Size(75, 71);
+            btnRefresh.TabIndex = 11;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // materialLabel1
             // 
@@ -529,7 +555,7 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.Margin = new Padding(4, 0, 4, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(1288, 79);
+            materialLabel1.Size = new Size(1193, 79);
             materialLabel1.TabIndex = 3;
             materialLabel1.Text = "Payroll Management";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
@@ -598,5 +624,6 @@ namespace PresentationLayer.Views.UserControls
         private MaterialSkin.Controls.MaterialComboBox txtProject;
         private Panel panel3;
         private Panel panel4;
+        private Guna2Button btnRefresh;
     }
 }

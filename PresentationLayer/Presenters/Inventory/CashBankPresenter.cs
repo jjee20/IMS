@@ -18,7 +18,7 @@ namespace PresentationLayer.Presenters
     public class CashBankPresenter
     {
         public ICashBankView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<CashBankViewModel> CashBankList;
         public CashBankPresenter(ICashBankView view, IUnitOfWork unitOfWork) {
 

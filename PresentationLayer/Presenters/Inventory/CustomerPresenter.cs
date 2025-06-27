@@ -19,7 +19,7 @@ namespace PresentationLayer.Presenters
     public class CustomerPresenter
     {
         public ICustomerView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<CustomerViewModel> CustomerList;
         public CustomerPresenter(ICustomerView view, IUnitOfWork unitOfWork) {
 
