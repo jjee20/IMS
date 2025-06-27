@@ -143,9 +143,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllDepartmentList(bool emptyValue = false)
+        private async void LoadAllDepartmentList(bool emptyValue = false)
         {
-            DepartmentList = Program.Mapper.Map<IEnumerable<DepartmentViewModel>>(_unitOfWork.Department.Value.GetAll());
+            DepartmentList = Program.Mapper.Map<IEnumerable<DepartmentViewModel>>(await _unitOfWork.Department.Value.GetAllAsync());
 
             if (!emptyValue) DepartmentList = DepartmentList.Where(c => c.Name.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetDepartmentListBindingSource(DepartmentList);

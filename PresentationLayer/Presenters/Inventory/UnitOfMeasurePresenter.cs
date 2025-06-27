@@ -143,9 +143,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllUnitOfMeasureList(bool emptyValue = false)
+        private async void LoadAllUnitOfMeasureList(bool emptyValue = false)
         {
-            UnitOfMeasureList = Program.Mapper.Map<IEnumerable<UnitOfMeasureViewModel>>(_unitOfWork.UnitOfMeasure.Value.GetAll());
+            UnitOfMeasureList = Program.Mapper.Map<IEnumerable<UnitOfMeasureViewModel>>(await _unitOfWork.UnitOfMeasure.Value.GetAllAsync());
 
             if (!emptyValue) UnitOfMeasureList = UnitOfMeasureList.Where(c => c.UnitOfMeasureName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetUnitOfMeasureListBindingSource(UnitOfMeasureList);

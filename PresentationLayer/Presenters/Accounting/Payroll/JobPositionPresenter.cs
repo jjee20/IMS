@@ -140,9 +140,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllJobPositionList(bool emptyValue = false)
+        private async void LoadAllJobPositionList(bool emptyValue = false)
         {
-            JobPositionList = Program.Mapper.Map<IEnumerable<JobPositionViewModel>>(_unitOfWork.JobPosition.Value.GetAll());
+            JobPositionList = Program.Mapper.Map<IEnumerable<JobPositionViewModel>>(await _unitOfWork.JobPosition.Value.GetAllAsync());
 
             if (!emptyValue) JobPositionList = JobPositionList.Where(c => c.Title.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetJobPositionListBindingSource(JobPositionList);

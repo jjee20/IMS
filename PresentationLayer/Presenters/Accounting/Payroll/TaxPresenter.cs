@@ -144,9 +144,9 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
             reportView.ShowDialog();
         }
         
-        private void LoadAllTaxList(bool emptyValue = false)
+        private async void LoadAllTaxList(bool emptyValue = false)
         {
-            TaxList = Program.Mapper.Map<IEnumerable<TaxViewModel>>(_unitOfWork.Tax.Value.GetAll());
+            TaxList = Program.Mapper.Map<IEnumerable<TaxViewModel>>(await _unitOfWork.Tax.Value.GetAllAsync());
 
             if (!emptyValue) TaxList = TaxList.Where(c => c.MinimumSalary.ToString().Contains(_view.SearchValue) || c.MaximumSalary.ToString().Contains(_view.SearchValue) || c.TaxRate.ToString().Contains(_view.SearchValue));
             _view.SetTaxListBindingSource(TaxList);

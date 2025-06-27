@@ -29,7 +29,7 @@ namespace PresentationLayer.Presenters.Account
             _view.LoginEvent += Login;
         }
 
-        private void Login(object? sender, EventArgs e)
+        private async void Login(object? sender, EventArgs e)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace PresentationLayer.Presenters.Account
                 }
 
                 // Retrieve the user from the database based on the username
-                var user = _unitOfWork.ApplicationUser.Value.Get(c => c.UserName == username);
+                var user = await _unitOfWork.ApplicationUser.Value.GetAsync(c => c.UserName == username);
 
                 if (user == null)
                 {

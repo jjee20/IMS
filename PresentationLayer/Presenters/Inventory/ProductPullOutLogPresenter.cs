@@ -154,9 +154,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllProductPullOutLogList(bool emptyValue = false)
+        private async void LoadAllProductPullOutLogList(bool emptyValue = false)
         {
-            ProductPullOutLogList = Program.Mapper.Map<IEnumerable<ProductPullOutLogViewModel>>(_unitOfWork.ProductPullOutLogs.Value.GetAll(includeProperties: "Project,ProductPullOutLogLines.Product.UnitOfMeasure"));
+            ProductPullOutLogList = Program.Mapper.Map<IEnumerable<ProductPullOutLogViewModel>>(await _unitOfWork.ProductPullOutLogs.Value.GetAllAsync(includeProperties: "Project,ProductPullOutLogLines.Product.UnitOfMeasure"));
 
             if (!emptyValue) ProductPullOutLogList = ProductPullOutLogList.Where(c => c.ProductPullOutLogLines.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductInStockLogListBindingSource(ProductPullOutLogList);

@@ -143,9 +143,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllVendorTypeList(bool emptyValue = false)
+        private async void LoadAllVendorTypeList(bool emptyValue = false)
         {
-            VendorTypeList = Program.Mapper.Map<IEnumerable<VendorTypeViewModel>>(_unitOfWork.VendorType.Value.GetAll());
+            VendorTypeList = Program.Mapper.Map<IEnumerable<VendorTypeViewModel>>(await _unitOfWork.VendorType.Value.GetAllAsync());
 
             if (!emptyValue) VendorTypeList = VendorTypeList.Where(c => c.VendorTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetVendorTypeListBindingSource(VendorTypeList);

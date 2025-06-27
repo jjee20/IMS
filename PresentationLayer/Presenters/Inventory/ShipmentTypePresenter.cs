@@ -143,9 +143,9 @@ namespace PresentationLayer.Presenters
             reportView.ShowDialog();
         }
         
-        private void LoadAllShipmentTypeList(bool emptyValue = false)
+        private async void LoadAllShipmentTypeList(bool emptyValue = false)
         {
-            ShipmentTypeList = Program.Mapper.Map<IEnumerable<ShipmentTypeViewModel>>(_unitOfWork.ShipmentType.Value.GetAll());
+            ShipmentTypeList = Program.Mapper.Map<IEnumerable<ShipmentTypeViewModel>>(await _unitOfWork.ShipmentType.Value.GetAllAsync());
 
             if (!emptyValue) ShipmentTypeList = ShipmentTypeList.Where(c => c.ShipmentTypeName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetShipmentTypeListBindingSource(ShipmentTypeList);
