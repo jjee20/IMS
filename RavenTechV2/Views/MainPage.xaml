@@ -86,17 +86,21 @@
 
                     <!-- Replace with your real chart controls below -->
                     <Border Grid.Row="0" Grid.Column="0" Background="White" CornerRadius="8" Padding="8">
-                        <TextBlock Text="Top Selling Item/Service" FontWeight="Bold" Margin="0,0,0,8"/>
-                        <chart:SfCartesianChart  ItemsSource="{x:Bind ViewModel.TopSellingItems}">
-                            <!-- Configure axes and series -->
-                        </chart:SfCartesianChart>
+                        <StackPanel>
+                            <TextBlock Text="Top Selling Item/Service" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <chart:ColumnSeries ItemsSource="{Binding ViewModel.TopSellingItems}">
+                                <!-- Configure axes and series -->
+                            </chart:ColumnSeries>
+                        </StackPanel>
                     </Border>
 
                     <Border Grid.Row="0" Grid.Column="1" Background="White" CornerRadius="8" Padding="8">
-                        <TextBlock Text="Daily Sales Trend" FontWeight="Bold" Margin="0,0,0,8"/>
-                        <syncfusion:SfLineChart ItemsSource="{x:Bind ViewModel.DailySales}">
-                            <!-- Configure axes and series -->
-                        </syncfusion:SfLineChart>
+                        <StackPanel>
+                            <TextBlock Text="Daily Sales Trend" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <chart:LineSeries ItemsSource="{Binding ViewModel.DailySales}">
+                                <!-- Configure axes and series -->
+                            </chart:LineSeries>
+                        </StackPanel>
                     </Border>
 
                     <Border Grid.Row="0" Grid.Column="2" Background="White" CornerRadius="8" Padding="8">
@@ -106,17 +110,20 @@
 
                     <!-- More charts (pie, bar, etc.) in Row=1 -->
                     <Border Grid.Row="1" Grid.Column="0" Background="White" CornerRadius="8" Padding="8">
-                        <TextBlock Text="Project Expense Distribution" FontWeight="Bold" Margin="0,0,0,8"/>
-                        <syncfusion:SfPieChart ItemsSource="{x:Bind ViewModel.ProjectExpenses}">
-                            <!-- Configure series -->
-                        </syncfusion:SfPieChart>
+                        <StackPanel>
+                            <TextBlock Text="Project Expense Distribution" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <chart:PieSeries ItemsSource="{x:Bind ViewModel.ProjectExpenses}">
+                                <!-- Configure series -->
+                            </chart:PieSeries>
+                        </StackPanel>
                     </Border>
                     <Border Grid.Row="1" Grid.Column="1" Background="White" CornerRadius="8" Padding="8">
-                        <TextBlock Text="Monthly Sales Trend" FontWeight="Bold" Margin="0,0,0,8"/>
-                        <syncfusion:SfLineChart ItemsSource="{x:Bind ViewModel.MonthlySales}">
-                            <!-- Configure axes and series -->
-                        </syncfusion:SfLineChart>
-                    </Border>
+                        <StackPanel><TextBlock Text="Monthly Sales Trend" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <chart:LineSeries ItemsSource="{x:Bind ViewModel.MonthlySales}">
+                                <!-- Configure axes and series -->
+                            </chart:LineSeries>
+                        </StackPanel>
+            </Border>
                     <Border Grid.Row="1" Grid.Column="2" Background="White" CornerRadius="8" Padding="8">
                         <TextBlock Text="Inventory Status" FontWeight="Bold" Margin="0,0,0,8"/>
                         <!-- Add chart or summary here -->

@@ -173,14 +173,14 @@ namespace PresentationLayer.Presenters
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
             var projectList = await _unitOfWork.Project.Value.GetAllAsync(
-                c => c.StartDate.HasValue && c.StartDate.Value.Year == year, includeProperties: "ProjectLines");
+                c => c.StartDate.HasValue && c.StartDate.Value.Year == year, includeProperties: "ProductPullOutLogs.ProductPullOutLogLines.Product");
 
             var projectExpenses = projectList
                 .GroupBy(c => c.ProjectName)
                 .Select(g => new ProjectExpenseDistributionViewModel
                 {
                     Project = g.Key,
-                    Amount = g.Sum(p => p.ProjectLines.Sum(pl => pl.SubTotal))
+                    Amount = g.Sum(p => p.ProductPullOutLogs.SelectMany(c => c.ProductPullOutLogLines).Sum(pl => pl.StockQuantity * pl.Product.DefaultBuyingPrice))
                 })
                 .ToList();
 
@@ -216,12 +216,14 @@ namespace PresentationLayer.Presenters
             }).ToList();
 
             var totalQty = productStocks.Sum(p => p.Quantity);
+            var totalPullOutQty = allPullOut.Sum(p => p.StockQuantity);
             var lowStockQty = productStocks.Count(p => p.Product.ReorderLevel > 0 && p.Quantity <= p.Product.ReorderLevel && p.Quantity > 0);
-            var outOfStockQty = productStocks.Count(p => p.Quantity <= 0);
+            var outOfStockQty = productStocks.Count(p => p.Quantity <= 0); 
 
             InventoryStatusDataSet.Label = "Qty";
             InventoryStatusDataSet.DataPoints.Clear();
             InventoryStatusDataSet.DataPoints.Add("Total Stock", totalQty);
+            InventoryStatusDataSet.DataPoints.Add("Pulled Out", totalPullOutQty);
             InventoryStatusDataSet.DataPoints.Add("Low Stock (< ReorderLevel)", lowStockQty);
             InventoryStatusDataSet.DataPoints.Add("Out of Stock", outOfStockQty);
         }

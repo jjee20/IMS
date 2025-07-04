@@ -1,4 +1,6 @@
-﻿namespace RavenTech_ERP.Views.IViews.Inventory
+﻿using Guna.Charts.WinForms;
+
+namespace RavenTech_ERP.Views.IViews.Inventory
 {
     public interface IProductMonitoringView
     {
@@ -16,5 +18,6 @@
         void SetLowStockListBindingSource(BindingSource source);
         void SetOutOfStockListBindingSource(BindingSource source);
         void SetProjectFlowListBindingSource(BindingSource source);
+        void SetTrendsBindingSource(GunaBarDataset inStockTrendDataset, GunaBarDataset pullOutStockTrendDataset, GunaBarDataset lowStockTrendDataset, GunaBarDataset outOfStockTrendDataset);
     }
 }

@@ -1,12 +1,4 @@
-﻿using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels.Inventory;
-using MaterialSkin;
-using PresentationLayer.Presenters;
-using PresentationLayer.Views.IViews;
-using RavenTech_ERP.Views.IViews.Inventory;
-using ServiceLayer.Services.Helpers;
-using Syncfusion.WinForms.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.Inventory;
+using Guna.Charts.WinForms;
+using MaterialSkin;
+using PresentationLayer.Presenters;
+using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
+using ServiceLayer.Services.Helpers;
+using Syncfusion.WinForms.Controls;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -93,6 +94,14 @@ namespace PresentationLayer.Views.UserControls
         {
             dgPulledOut.DataSource = source;
         }
+        public void SetTrendsBindingSource(GunaBarDataset inStockTrendDataset, GunaBarDataset pullOutStockTrendDataset, GunaBarDataset lowStockTrendDataset, GunaBarDataset outOfStockTrendDataset)
+        {
+            chartTrends.Datasets.Clear();
+            chartTrends.Datasets.Add(inStockTrendDataset);
+            chartTrends.Datasets.Add(pullOutStockTrendDataset);
+            chartTrends.Datasets.Add(lowStockTrendDataset);
+            chartTrends.Datasets.Add(outOfStockTrendDataset);
+        }
 
         public event EventHandler PrintEvent;
 
@@ -120,6 +129,7 @@ namespace PresentationLayer.Views.UserControls
         {
             RefreshEvent?.Invoke(this, EventArgs.Empty);
         }
+
         public event EventHandler RefreshEvent;
 
         public event EventHandler SearchEvent;

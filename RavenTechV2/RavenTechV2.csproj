@@ -16,6 +16,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\LoginPage.xaml" />
+    <None Remove="Views\ProductFormDialogPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,7 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
     <PackageReference Include="Syncfusion.Chart.WinUI" Version="30.1.37" />
     <PackageReference Include="Syncfusion.Core.WinUI" Version="30.1.37" />
+    <PackageReference Include="Syncfusion.Grid.WinUI" Version="30.1.37" />
     <PackageReference Include="WinUIEx" Version="2.3.2" />
   </ItemGroup>
 
@@ -44,6 +46,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\ProductFormDialogPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -51,6 +56,11 @@
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Accounting\Payroll\" />
+    <Folder Include="Views\Inventory\Dialog\" />
   </ItemGroup>
   
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

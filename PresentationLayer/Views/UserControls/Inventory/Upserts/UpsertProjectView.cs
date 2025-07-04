@@ -238,7 +238,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                 productId = product.ProductId;
                 productName = product.ProductName;
-                price = product.DefaultSellingPrice;
+                price = product.DefaultBuyingPrice;
 
                 if (_projectsLines.Any(c => c.ProductId == productId))
                 {
