@@ -32,6 +32,9 @@ namespace PresentationLayer.Views.UserControls
         {
             var customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardView));
+            var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -139,14 +142,13 @@ namespace PresentationLayer.Views.UserControls
             var customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardView));
-            var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Separator2 = new Guna2Separator();
             guna2CustomGradientPanel2 = new Guna2CustomGradientPanel();
             txtYear = new MaterialSkin.Controls.MaterialComboBox();
             guna2vSeparator6 = new Guna2VSeparator();
             txtMonth = new MaterialSkin.Controls.MaterialComboBox();
+            guna2vSeparator1 = new Guna2VSeparator();
+            btnRefresh = new Guna2Button();
             tableLayoutPanel7 = new TableLayoutPanel();
             guna2GradientPanel2 = new Guna2GradientPanel();
             txtExpense = new Label();
@@ -211,8 +213,6 @@ namespace PresentationLayer.Views.UserControls
             txtSalesToday = new Label();
             label8 = new Label();
             guna2HtmlLabel1 = new Guna2HtmlLabel();
-            btnRefresh = new Guna2Button();
-            guna2vSeparator1 = new Guna2VSeparator();
             guna2CustomGradientPanel2.SuspendLayout();
             tableLayoutPanel7.SuspendLayout();
             guna2GradientPanel2.SuspendLayout();
@@ -335,6 +335,38 @@ namespace PresentationLayer.Views.UserControls
             txtMonth.Size = new Size(356, 49);
             txtMonth.StartIndex = 0;
             txtMonth.TabIndex = 0;
+            // 
+            // guna2vSeparator1
+            // 
+            guna2vSeparator1.BackColor = SystemColors.Control;
+            guna2vSeparator1.Dock = DockStyle.Right;
+            guna2vSeparator1.FillColor = Color.Transparent;
+            guna2vSeparator1.Location = new Point(1256, 0);
+            guna2vSeparator1.Margin = new Padding(4);
+            guna2vSeparator1.Name = "guna2vSeparator1";
+            guna2vSeparator1.Size = new Size(15, 52);
+            guna2vSeparator1.TabIndex = 19;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.CustomizableEdges = customizableEdges1;
+            btnRefresh.DisabledState.BorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnRefresh.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnRefresh.Dock = DockStyle.Right;
+            btnRefresh.FillColor = Color.Transparent;
+            btnRefresh.Font = new Font("Segoe UI", 9F);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
+            btnRefresh.ImageSize = new Size(30, 30);
+            btnRefresh.Location = new Point(1271, 0);
+            btnRefresh.Margin = new Padding(4);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnRefresh.Size = new Size(75, 52);
+            btnRefresh.TabIndex = 18;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // tableLayoutPanel7
             // 
@@ -1508,38 +1540,6 @@ namespace PresentationLayer.Views.UserControls
             guna2HtmlLabel1.Size = new Size(1346, 56);
             guna2HtmlLabel1.TabIndex = 0;
             guna2HtmlLabel1.Text = "Dashboard";
-            // 
-            // btnRefresh
-            // 
-            btnRefresh.CustomizableEdges = customizableEdges1;
-            btnRefresh.DisabledState.BorderColor = Color.DarkGray;
-            btnRefresh.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnRefresh.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnRefresh.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnRefresh.Dock = DockStyle.Right;
-            btnRefresh.FillColor = Color.Transparent;
-            btnRefresh.Font = new Font("Segoe UI", 9F);
-            btnRefresh.ForeColor = Color.White;
-            btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
-            btnRefresh.ImageSize = new Size(30, 30);
-            btnRefresh.Location = new Point(1271, 0);
-            btnRefresh.Margin = new Padding(4);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnRefresh.Size = new Size(75, 52);
-            btnRefresh.TabIndex = 18;
-            btnRefresh.Click += btnRefresh_Click;
-            // 
-            // guna2vSeparator1
-            // 
-            guna2vSeparator1.BackColor = SystemColors.Control;
-            guna2vSeparator1.Dock = DockStyle.Right;
-            guna2vSeparator1.FillColor = Color.Transparent;
-            guna2vSeparator1.Location = new Point(1256, 0);
-            guna2vSeparator1.Margin = new Padding(4);
-            guna2vSeparator1.Name = "guna2vSeparator1";
-            guna2vSeparator1.Size = new Size(15, 52);
-            guna2vSeparator1.TabIndex = 19;
             // 
             // DashboardView
             // 

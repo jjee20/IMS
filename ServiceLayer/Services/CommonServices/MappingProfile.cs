@@ -113,7 +113,7 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
             CreateMap<Product, ProductViewModel>()
                 .ForMember(dest => dest.UnitOfMeasure, opt => opt.MapFrom(src => src.UnitOfMeasure.UnitOfMeasureName))
-                .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName))
+                .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName ?? "{Needs Update}"))
                 .ReverseMap();
             CreateMap<Warehouse, WarehouseViewModel>()
                 .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName))

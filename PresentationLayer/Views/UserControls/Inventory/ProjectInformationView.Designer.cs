@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle3 = new DataGridViewCellStyle();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            txtActualAmount = new MaterialSkin.Controls.MaterialLabel();
             materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
             txtVariance = new MaterialSkin.Controls.MaterialLabel();
             materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
@@ -44,11 +43,6 @@
             txtDeduction = new MaterialSkin.Controls.MaterialLabel();
             materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             txtPayroll = new MaterialSkin.Controls.MaterialLabel();
-            dgPayroll = new Guna.UI2.WinForms.Guna2DataGridView();
-            materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            materialLabel25 = new MaterialSkin.Controls.MaterialLabel();
-            txtProjectTotalPurchase = new MaterialSkin.Controls.MaterialLabel();
-            guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             dgProjectLines = new Guna.UI2.WinForms.Guna2DataGridView();
             materialLabel17 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
@@ -67,13 +61,14 @@
             txtProjectName = new MaterialSkin.Controls.MaterialLabel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             materialCard1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgPayroll).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgProjectLines).BeginInit();
             SuspendLayout();
             // 
             // materialCard1
             // 
             materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(materialLabel2);
+            materialCard1.Controls.Add(txtActualAmount);
             materialCard1.Controls.Add(materialLabel9);
             materialCard1.Controls.Add(txtVariance);
             materialCard1.Controls.Add(materialLabel7);
@@ -83,11 +78,6 @@
             materialCard1.Controls.Add(txtDeduction);
             materialCard1.Controls.Add(materialLabel4);
             materialCard1.Controls.Add(txtPayroll);
-            materialCard1.Controls.Add(dgPayroll);
-            materialCard1.Controls.Add(materialLabel2);
-            materialCard1.Controls.Add(materialLabel25);
-            materialCard1.Controls.Add(txtProjectTotalPurchase);
-            materialCard1.Controls.Add(guna2Separator2);
             materialCard1.Controls.Add(dgProjectLines);
             materialCard1.Controls.Add(materialLabel17);
             materialCard1.Controls.Add(guna2Separator1);
@@ -115,12 +105,39 @@
             materialCard1.Size = new Size(1344, 701);
             materialCard1.TabIndex = 0;
             // 
+            // materialLabel2
+            // 
+            materialLabel2.AutoSize = true;
+            materialLabel2.Depth = 0;
+            materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel2.Location = new Point(792, 554);
+            materialLabel2.Margin = new Padding(4, 0, 4, 0);
+            materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel2.Name = "materialLabel2";
+            materialLabel2.Size = new Size(151, 19);
+            materialLabel2.TabIndex = 39;
+            materialLabel2.Text = "Total Actual Amount:";
+            // 
+            // txtActualAmount
+            // 
+            txtActualAmount.AutoSize = true;
+            txtActualAmount.Depth = 0;
+            txtActualAmount.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            txtActualAmount.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            txtActualAmount.Location = new Point(998, 558);
+            txtActualAmount.Margin = new Padding(4, 0, 4, 0);
+            txtActualAmount.MouseState = MaterialSkin.MouseState.HOVER;
+            txtActualAmount.Name = "txtActualAmount";
+            txtActualAmount.Size = new Size(136, 17);
+            txtActualAmount.TabIndex = 38;
+            txtActualAmount.Text = "Total Actual Amount:";
+            // 
             // materialLabel9
             // 
             materialLabel9.AutoSize = true;
             materialLabel9.Depth = 0;
             materialLabel9.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel9.Location = new Point(792, 631);
+            materialLabel9.Location = new Point(792, 643);
             materialLabel9.Margin = new Padding(4, 0, 4, 0);
             materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel9.Name = "materialLabel9";
@@ -134,7 +151,7 @@
             txtVariance.Depth = 0;
             txtVariance.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtVariance.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtVariance.Location = new Point(998, 634);
+            txtVariance.Location = new Point(998, 646);
             txtVariance.Margin = new Padding(4, 0, 4, 0);
             txtVariance.MouseState = MaterialSkin.MouseState.HOVER;
             txtVariance.Name = "txtVariance";
@@ -171,7 +188,7 @@
             // 
             // guna2Separator3
             // 
-            guna2Separator3.Location = new Point(16, 536);
+            guna2Separator3.Location = new Point(16, 512);
             guna2Separator3.Margin = new Padding(4, 5, 4, 5);
             guna2Separator3.Name = "guna2Separator3";
             guna2Separator3.Size = new Size(1304, 17);
@@ -182,7 +199,7 @@
             materialLabel6.AutoSize = true;
             materialLabel6.Depth = 0;
             materialLabel6.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel6.Location = new Point(792, 557);
+            materialLabel6.Location = new Point(792, 624);
             materialLabel6.Margin = new Padding(4, 0, 4, 0);
             materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel6.Name = "materialLabel6";
@@ -196,7 +213,7 @@
             txtDeduction.Depth = 0;
             txtDeduction.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtDeduction.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtDeduction.Location = new Point(998, 561);
+            txtDeduction.Location = new Point(998, 628);
             txtDeduction.Margin = new Padding(4, 0, 4, 0);
             txtDeduction.MouseState = MaterialSkin.MouseState.HOVER;
             txtDeduction.Name = "txtDeduction";
@@ -209,7 +226,7 @@
             materialLabel4.AutoSize = true;
             materialLabel4.Depth = 0;
             materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel4.Location = new Point(787, 511);
+            materialLabel4.Location = new Point(792, 534);
             materialLabel4.Margin = new Padding(4, 0, 4, 0);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
@@ -223,7 +240,7 @@
             txtPayroll.Depth = 0;
             txtPayroll.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPayroll.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPayroll.Location = new Point(993, 514);
+            txtPayroll.Location = new Point(998, 537);
             txtPayroll.Margin = new Padding(4, 0, 4, 0);
             txtPayroll.MouseState = MaterialSkin.MouseState.HOVER;
             txtPayroll.Name = "txtPayroll";
@@ -231,10 +248,10 @@
             txtPayroll.TabIndex = 29;
             txtPayroll.Text = "Total Payroll:";
             // 
-            // dgPayroll
+            // dgProjectLines
             // 
             dataGridViewCellStyle1.BackColor = Color.White;
-            dgPayroll.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgProjectLines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -242,9 +259,9 @@
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgPayroll.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgPayroll.ColumnHeadersHeight = 25;
-            dgPayroll.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgProjectLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgProjectLines.ColumnHeadersHeight = 25;
+            dgProjectLines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -252,117 +269,15 @@
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgPayroll.DefaultCellStyle = dataGridViewCellStyle3;
-            dgPayroll.GridColor = Color.FromArgb(231, 229, 255);
-            dgPayroll.Location = new Point(16, 411);
-            dgPayroll.Margin = new Padding(4, 5, 4, 5);
-            dgPayroll.Name = "dgPayroll";
-            dgPayroll.RowHeadersVisible = false;
-            dgPayroll.RowHeadersWidth = 62;
-            dgPayroll.RowTemplate.Height = 25;
-            dgPayroll.Size = new Size(1304, 95);
-            dgPayroll.TabIndex = 28;
-            dgPayroll.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgPayroll.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgPayroll.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgPayroll.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgPayroll.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgPayroll.ThemeStyle.BackColor = Color.White;
-            dgPayroll.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgPayroll.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgPayroll.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgPayroll.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgPayroll.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgPayroll.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgPayroll.ThemeStyle.HeaderStyle.Height = 25;
-            dgPayroll.ThemeStyle.ReadOnly = false;
-            dgPayroll.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgPayroll.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgPayroll.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgPayroll.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgPayroll.ThemeStyle.RowsStyle.Height = 25;
-            dgPayroll.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgPayroll.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // materialLabel2
-            // 
-            materialLabel2.AutoSize = true;
-            materialLabel2.Depth = 0;
-            materialLabel2.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
-            materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel2.Location = new Point(16, 382);
-            materialLabel2.Margin = new Padding(4, 0, 4, 0);
-            materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel2.Name = "materialLabel2";
-            materialLabel2.Size = new Size(130, 24);
-            materialLabel2.TabIndex = 27;
-            materialLabel2.Text = "Payroll Details";
-            // 
-            // materialLabel25
-            // 
-            materialLabel25.AutoSize = true;
-            materialLabel25.Depth = 0;
-            materialLabel25.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel25.Location = new Point(787, 335);
-            materialLabel25.Margin = new Padding(4, 0, 4, 0);
-            materialLabel25.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel25.Name = "materialLabel25";
-            materialLabel25.Size = new Size(112, 19);
-            materialLabel25.TabIndex = 26;
-            materialLabel25.Text = "Total Purchase:";
-            // 
-            // txtProjectTotalPurchase
-            // 
-            txtProjectTotalPurchase.AutoSize = true;
-            txtProjectTotalPurchase.Depth = 0;
-            txtProjectTotalPurchase.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            txtProjectTotalPurchase.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtProjectTotalPurchase.Location = new Point(993, 338);
-            txtProjectTotalPurchase.Margin = new Padding(4, 0, 4, 0);
-            txtProjectTotalPurchase.MouseState = MaterialSkin.MouseState.HOVER;
-            txtProjectTotalPurchase.Name = "txtProjectTotalPurchase";
-            txtProjectTotalPurchase.Size = new Size(102, 17);
-            txtProjectTotalPurchase.TabIndex = 25;
-            txtProjectTotalPurchase.Text = "Total Purchase:";
-            // 
-            // guna2Separator2
-            // 
-            guna2Separator2.Location = new Point(20, 360);
-            guna2Separator2.Margin = new Padding(4, 5, 4, 5);
-            guna2Separator2.Name = "guna2Separator2";
-            guna2Separator2.Size = new Size(1300, 17);
-            guna2Separator2.TabIndex = 23;
-            // 
-            // dgProjectLines
-            // 
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dgProjectLines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgProjectLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            dgProjectLines.ColumnHeadersHeight = 25;
-            dgProjectLines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgProjectLines.DefaultCellStyle = dataGridViewCellStyle6;
+            dgProjectLines.DefaultCellStyle = dataGridViewCellStyle3;
             dgProjectLines.GridColor = Color.FromArgb(231, 229, 255);
-            dgProjectLines.Location = new Point(20, 222);
+            dgProjectLines.Location = new Point(24, 182);
             dgProjectLines.Margin = new Padding(4, 5, 4, 5);
             dgProjectLines.Name = "dgProjectLines";
             dgProjectLines.RowHeadersVisible = false;
             dgProjectLines.RowHeadersWidth = 62;
             dgProjectLines.RowTemplate.Height = 25;
-            dgProjectLines.Size = new Size(1300, 108);
+            dgProjectLines.Size = new Size(1300, 320);
             dgProjectLines.TabIndex = 22;
             dgProjectLines.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgProjectLines.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -417,9 +332,9 @@
             materialLabel15.Margin = new Padding(4, 0, 4, 0);
             materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel15.Name = "materialLabel15";
-            materialLabel15.Size = new Size(55, 19);
+            materialLabel15.Size = new Size(103, 19);
             materialLabel15.TabIndex = 17;
-            materialLabel15.Text = "Budget:";
+            materialLabel15.Text = "Bidding Value:";
             // 
             // txtBudget
             // 
@@ -431,9 +346,9 @@
             txtBudget.Margin = new Padding(4, 0, 4, 0);
             txtBudget.MouseState = MaterialSkin.MouseState.HOVER;
             txtBudget.Name = "txtBudget";
-            txtBudget.Size = new Size(51, 17);
+            txtBudget.Size = new Size(94, 17);
             txtBudget.TabIndex = 16;
-            txtBudget.Text = "Budget:";
+            txtBudget.Text = "Bidding Value:";
             // 
             // txtEndDate
             // 
@@ -612,7 +527,6 @@
             Text = "Project Information (#: )";
             materialCard1.ResumeLayout(false);
             materialCard1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgPayroll).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgProjectLines).EndInit();
             ResumeLayout(false);
         }
@@ -633,17 +547,12 @@
         private MaterialSkin.Controls.MaterialLabel txtProjectName;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel25;
-        private MaterialSkin.Controls.MaterialLabel txtProjectTotalPurchase;
-        private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
         private Guna.UI2.WinForms.Guna2DataGridView dgProjectLines;
         private MaterialSkin.Controls.MaterialLabel materialLabel17;
         private MaterialSkin.Controls.MaterialLabel materialLabel15;
         private MaterialSkin.Controls.MaterialLabel txtBudget;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel txtPayroll;
-        private Guna.UI2.WinForms.Guna2DataGridView dgPayroll;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
         private MaterialSkin.Controls.MaterialLabel txtTotalRevenue;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator3;
@@ -651,5 +560,7 @@
         private MaterialSkin.Controls.MaterialLabel txtDeduction;
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
         private MaterialSkin.Controls.MaterialLabel txtVariance;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel txtActualAmount;
     }
 }

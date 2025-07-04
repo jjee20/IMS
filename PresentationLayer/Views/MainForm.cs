@@ -142,6 +142,11 @@ namespace RavenTech_ERP
             ProjectEvent?.Invoke(this, EventArgs.Empty);
         }
 
+        private void btnMaterialsAllocatedvsActual_Click(object sender, EventArgs e)
+        {
+            ProjectEvent?.Invoke(this, EventArgs.Empty);
+        }
+
         private void btnWarehouse_Click(object sender, EventArgs e)
         {
             WarehouseEvent?.Invoke(this, EventArgs.Empty);

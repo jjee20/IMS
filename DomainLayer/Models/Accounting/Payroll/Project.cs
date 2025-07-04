@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Models.Accounts;
+using DomainLayer.Models.Inventory;
 
 namespace DomainLayer.Models.Accounting.Payroll
 {
@@ -25,5 +26,6 @@ namespace DomainLayer.Models.Accounting.Payroll
 
         public double? Revenue { get; set; }
         public IEnumerable<ProjectLine> ProjectLines { get; set; }
+        public IEnumerable<ProductPullOutLogs> ProductPullOutLogs { get; set; }
     }
 }

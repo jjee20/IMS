@@ -171,4 +171,10 @@
   <data name="Shell_Payroll.Content" xml:space="preserve">
     <value>Payroll</value>
   </data>
+  <data name="Shell_ProductFormDialog.Content" xml:space="preserve">
+    <value>ProductFormDialog</value>
+  </data>
+  <data name="Shell_ProductList.Content" xml:space="preserve">
+    <value>ProductList</value>
+  </data>
 </root>

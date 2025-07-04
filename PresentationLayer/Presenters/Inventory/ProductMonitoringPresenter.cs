@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
+using Guna.Charts.WinForms;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Views.IViews.Inventory;
 using ServiceLayer.Services.CommonServices;
@@ -27,6 +28,10 @@ namespace RavenTech_ERP.Presenters.Inventory
         private BindingSource LowStockBindingSource;
         private BindingSource OutOfStockBindingSource;
         private BindingSource ProjectFlowBindingSource;
+        private readonly GunaBarDataset InStockTrendDataSet = new();
+        private readonly GunaBarDataset PullOutStockTrendDataSet = new();
+        private readonly GunaBarDataset LowStockTrendDataSet = new();
+        private readonly GunaBarDataset OutOfStockTrendDataSet = new();
         public ProductMonitoringPresenter(IProductMonitoringView view, IUnitOfWork unitOfWork)
         {
             _view = view;
@@ -45,6 +50,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.SetLowStockListBindingSource(LowStockBindingSource);
             _view.SetOutOfStockListBindingSource(OutOfStockBindingSource);
             _view.SetProjectFlowListBindingSource(ProjectFlowBindingSource);
+            _view.SetTrendsBindingSource(InStockTrendDataSet, PullOutStockTrendDataSet, LowStockTrendDataSet, OutOfStockTrendDataSet);  
             RefreshView();
         }
 
@@ -56,7 +62,50 @@ namespace RavenTech_ERP.Presenters.Inventory
             await LoadLowStock();
             await LoadOutOfStock();
             await LoadProjectFlow();
+            await LoadTrends();
         }
+
+        private async Task LoadTrends()
+        {
+            var currentStocks = await GetProductCurrentStocks(true); // true = no search filter
+
+            // Clear old data
+            InStockTrendDataSet.DataPoints.Clear();
+            PullOutStockTrendDataSet.DataPoints.Clear();
+            LowStockTrendDataSet.DataPoints.Clear();
+            OutOfStockTrendDataSet.DataPoints.Clear();
+
+            // Combine all unique product names
+            var allProductNames = currentStocks
+                .Select(cs => cs.product.ProductName)
+                .Union(LowStockList.Select(p => p.Product))
+                .Union(OutOfStockList.Select(p => p.Product))
+                .Distinct()
+                .ToList();
+
+            foreach (var productName in allProductNames)
+            {
+                double inStockQty = InStockList.FirstOrDefault(p => p.Product == productName)?.Qty ?? 0;
+                double pullOutQty = ProjectFlowList.FirstOrDefault(p => p.Product == productName)?.Qty ?? 0;
+                double lowStockQty = LowStockList.FirstOrDefault(p => p.Product == productName)?.Qty ?? 0;
+                double outOfStockQty = OutOfStockList.FirstOrDefault(p => p.Product == productName)?.Qty ?? 0;
+
+                InStockTrendDataSet.Label = "In Stock";
+                InStockTrendDataSet.FillColors.Add(Color.Green);
+                InStockTrendDataSet.DataPoints.Add(productName, Math.Round(inStockQty, 2));
+                PullOutStockTrendDataSet.Label = "Pulled Out";
+                PullOutStockTrendDataSet.FillColors.Add(Color.Blue);
+                PullOutStockTrendDataSet.DataPoints.Add(productName, Math.Round(pullOutQty, 2));
+                LowStockTrendDataSet.Label = "Low Stock";
+                LowStockTrendDataSet.FillColors.Add(Color.Orange);
+                LowStockTrendDataSet.DataPoints.Add(productName, Math.Round(lowStockQty, 2));
+                OutOfStockTrendDataSet.Label = "Out of Stock";
+                OutOfStockTrendDataSet.FillColors.Add(Color.Crimson);
+                OutOfStockTrendDataSet.DataPoints.Add(productName, Math.Round(outOfStockQty, 2));
+            }
+
+        }
+
 
         private async Task LoadProjectFlow()
         {

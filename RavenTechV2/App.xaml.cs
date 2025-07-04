@@ -1,6 +1,10 @@
 ﻿using System;
+
+using AutoMapper;
+
 using InfastructureLayer.DataAccess.Data;
 using InfastructureLayer.DataAccess.Repositories;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -14,6 +18,8 @@ using RavenTechV2.Models;
 using RavenTechV2.Services;
 using RavenTechV2.ViewModels;
 using RavenTechV2.Views;
+
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 
 namespace RavenTechV2;
@@ -58,10 +64,11 @@ public partial class App : Application
             // Default Activation Handler
             services.AddDbContext<ApplicationDataContext>();
             services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
+            services.AddAutoMapper(typeof(MappingProfile));
 
             // Other Activation Handlers
 
-            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@33302e302e303b33303bo5tfYXUT3HyPFQfOrSd9R2DFSPIIsg63ehiunIlJ0YQ=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@33302e302e303b33303bo5tfYXUT3HyPFQfOrSd9R2DFSPIIsg63ehiunIlJ0YQ=");
 
             // Services
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
@@ -79,6 +86,8 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
+            services.AddTransient<ProductListViewModel>();
+            services.AddTransient<ProductListPage>();
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
             services.AddTransient<ContentGridDetailViewModel>();
