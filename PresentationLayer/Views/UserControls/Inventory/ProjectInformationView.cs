@@ -17,6 +17,8 @@ using PresentationLayer;
 using RavenTech_ERP.Helpers;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.Controls;
+using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Renderers;
 using static Unity.Storage.RegistrationSet;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
@@ -79,7 +81,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
              })
              .ToList();
 
-
             dgProjectLines.DataSource = projectLines;
 
             var holidays = _unitOfWork.Holiday.Value.GetAll(c => c.EffectiveDate.Date >= DateTime.Parse(startDate).Date && c.EffectiveDate.Date <= DateTime.Parse(endDate).Date);
@@ -101,7 +102,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             txtTotalRevenue.Text = totalRevenue.ToString("N2");
             // Compute Variance (Total Revenue - Actual Revenue)
             double variance = (double)(totalRevenue - revenue);
-            double variancePercent = (variance / revenue) * 100;
+            double variancePercent = (totalRevenue / revenue) * 100;
             txtVariance.Text = $"{variance.ToString("N2")} ({variancePercent}%)";
         }
     }

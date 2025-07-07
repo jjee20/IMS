@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            var dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            var dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            var dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle3 = new DataGridViewCellStyle();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             txtActualAmount = new MaterialSkin.Controls.MaterialLabel();
@@ -124,7 +124,7 @@
             txtActualAmount.Depth = 0;
             txtActualAmount.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtActualAmount.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtActualAmount.Location = new Point(998, 568);
+            txtActualAmount.Location = new Point(1044, 567);
             txtActualAmount.Margin = new Padding(4, 0, 4, 0);
             txtActualAmount.MouseState = MaterialSkin.MouseState.HOVER;
             txtActualAmount.Name = "txtActualAmount";
@@ -151,7 +151,7 @@
             txtVariance.Depth = 0;
             txtVariance.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtVariance.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtVariance.Location = new Point(998, 630);
+            txtVariance.Location = new Point(1044, 629);
             txtVariance.Margin = new Padding(4, 0, 4, 0);
             txtVariance.MouseState = MaterialSkin.MouseState.HOVER;
             txtVariance.Name = "txtVariance";
@@ -178,7 +178,7 @@
             txtTotalRevenue.Depth = 0;
             txtTotalRevenue.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtTotalRevenue.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtTotalRevenue.Location = new Point(998, 661);
+            txtTotalRevenue.Location = new Point(1044, 660);
             txtTotalRevenue.Margin = new Padding(4, 0, 4, 0);
             txtTotalRevenue.MouseState = MaterialSkin.MouseState.HOVER;
             txtTotalRevenue.Name = "txtTotalRevenue";
@@ -213,7 +213,7 @@
             txtDeduction.Depth = 0;
             txtDeduction.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtDeduction.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtDeduction.Location = new Point(998, 599);
+            txtDeduction.Location = new Point(1044, 598);
             txtDeduction.Margin = new Padding(4, 0, 4, 0);
             txtDeduction.MouseState = MaterialSkin.MouseState.HOVER;
             txtDeduction.Name = "txtDeduction";
@@ -240,7 +240,7 @@
             txtPayroll.Depth = 0;
             txtPayroll.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPayroll.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPayroll.Location = new Point(998, 537);
+            txtPayroll.Location = new Point(1044, 536);
             txtPayroll.Margin = new Padding(4, 0, 4, 0);
             txtPayroll.MouseState = MaterialSkin.MouseState.HOVER;
             txtPayroll.Name = "txtPayroll";
@@ -250,26 +250,26 @@
             // 
             // dgProjectLines
             // 
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dgProjectLines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgProjectLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dgProjectLines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgProjectLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgProjectLines.ColumnHeadersHeight = 25;
             dgProjectLines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgProjectLines.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgProjectLines.DefaultCellStyle = dataGridViewCellStyle3;
             dgProjectLines.GridColor = Color.FromArgb(231, 229, 255);
             dgProjectLines.Location = new Point(24, 182);
             dgProjectLines.Margin = new Padding(4, 5, 4, 5);
@@ -342,7 +342,7 @@
             txtBudget.Depth = 0;
             txtBudget.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtBudget.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtBudget.Location = new Point(1006, 58);
+            txtBudget.Location = new Point(1044, 58);
             txtBudget.Margin = new Padding(4, 0, 4, 0);
             txtBudget.MouseState = MaterialSkin.MouseState.HOVER;
             txtBudget.Name = "txtBudget";
@@ -356,7 +356,7 @@
             txtEndDate.Depth = 0;
             txtEndDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtEndDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtEndDate.Location = new Point(190, 120);
+            txtEndDate.Location = new Point(234, 120);
             txtEndDate.Margin = new Padding(4, 0, 4, 0);
             txtEndDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtEndDate.Name = "txtEndDate";
@@ -383,7 +383,7 @@
             txtStartDate.Depth = 0;
             txtStartDate.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtStartDate.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtStartDate.Location = new Point(190, 89);
+            txtStartDate.Location = new Point(234, 89);
             txtStartDate.Margin = new Padding(4, 0, 4, 0);
             txtStartDate.MouseState = MaterialSkin.MouseState.HOVER;
             txtStartDate.Name = "txtStartDate";
@@ -423,7 +423,7 @@
             txtRevenue.Depth = 0;
             txtRevenue.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtRevenue.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtRevenue.Location = new Point(1006, 89);
+            txtRevenue.Location = new Point(1044, 89);
             txtRevenue.Margin = new Padding(4, 0, 4, 0);
             txtRevenue.MouseState = MaterialSkin.MouseState.HOVER;
             txtRevenue.Name = "txtRevenue";
@@ -437,7 +437,7 @@
             txtDescription.Depth = 0;
             txtDescription.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtDescription.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtDescription.Location = new Point(190, 58);
+            txtDescription.Location = new Point(234, 58);
             txtDescription.Margin = new Padding(4, 0, 4, 0);
             txtDescription.MouseState = MaterialSkin.MouseState.HOVER;
             txtDescription.Name = "txtDescription";
@@ -477,7 +477,7 @@
             txtClient.Depth = 0;
             txtClient.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtClient.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtClient.Location = new Point(1006, 27);
+            txtClient.Location = new Point(1044, 27);
             txtClient.Margin = new Padding(4, 0, 4, 0);
             txtClient.MouseState = MaterialSkin.MouseState.HOVER;
             txtClient.Name = "txtClient";
@@ -491,7 +491,7 @@
             txtProjectName.Depth = 0;
             txtProjectName.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtProjectName.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtProjectName.Location = new Point(190, 27);
+            txtProjectName.Location = new Point(234, 27);
             txtProjectName.Margin = new Padding(4, 0, 4, 0);
             txtProjectName.MouseState = MaterialSkin.MouseState.HOVER;
             txtProjectName.Name = "txtProjectName";
