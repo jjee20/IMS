@@ -22,16 +22,16 @@ namespace PresentationLayer.Presenters
     public class ProductPullOutLogPresenter
     {
         public IProductPullOutLogView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<ProductPullOutLogViewModel> ProductPullOutLogList;
-        public ProductPullOutLogPresenter(IProductPullOutLogView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public ProductPullOutLogPresenter(IProductPullOutLogView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -40,6 +40,7 @@ namespace PresentationLayer.Presenters
             _view.DeleteEvent -= Delete;
             _view.MultipleDeleteEvent -= MultipleDelete;
             _view.PrintEvent -= Print;
+            _view.RefreshEvent -= Refresh;
 
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
@@ -47,6 +48,7 @@ namespace PresentationLayer.Presenters
             _view.DeleteEvent += Delete;
             _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
+            _view.RefreshEvent += Refresh;
 
             //Load
 
@@ -54,6 +56,8 @@ namespace PresentationLayer.Presenters
 
             //Source Binding
         }
+
+        private void Refresh(object? sender, EventArgs e) => LoadAllProductPullOutLogList();
 
         private void AddNew(object? sender, EventArgs e)
         {
@@ -160,7 +164,7 @@ namespace PresentationLayer.Presenters
 
             if (!emptyValue) ProductPullOutLogList = ProductPullOutLogList.Where(c => c.ProductPullOutLogLines.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductInStockLogListBindingSource(ProductPullOutLogList);
-            _eventAggregator.Publish<InventoryCompletedEvent>();
+            
         }
     }
 }

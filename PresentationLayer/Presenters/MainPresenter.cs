@@ -1,4 +1,9 @@
-﻿using DomainLayer.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DomainLayer.Enums;
 using PresentationLayer.Presenters;
 using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views.IViews;
@@ -20,18 +25,14 @@ using RevenTech_ERP.Presenters.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Unity;
 
 namespace RavenTech_ERP.Presenters
 {
     public class MainPresenter
     {
-        private readonly IMainForm _mainForm;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMainForm _mainForm; 
+        private readonly IUnityContainer _container;
         private DepartmentPresenter? _departmentPresenter;
         private EmployeePresenter? _employeePresenter;
         private HolidayPresenter? _holidayPresenter;
@@ -74,12 +75,11 @@ namespace RavenTech_ERP.Presenters
         private BenefitPresenter? _benefitPresenter;
         private AttendancePresenter? _attendancePresenter;
         private AllowancePresenter? _allowancePresenter;
-        private readonly IEventAggregator _eventAggregator;
-        public MainPresenter(IMainForm mainForm, IUnitOfWork unitOfWork)
+        
+        public MainPresenter(IMainForm mainForm, IUnityContainer container)
         {
             _mainForm = mainForm;
-            _unitOfWork = unitOfWork;
-            _eventAggregator = new EventAggregator();
+            _container = container;
             //_mainForm.AllowanceEvent -= AllowanceEvent;
             //_mainForm.AttendanceEvent -= AttendanceEvent;
             //_mainForm.BenefitEvent -= BenefitEvent;
@@ -182,7 +182,7 @@ namespace RavenTech_ERP.Presenters
         {
             IDepartmentView view = ChildManager<DepartmentView>.GetChildInstance((MainForm)_mainForm);
             if (_departmentPresenter == null || ((Form)view).IsDisposed)
-                _departmentPresenter = new DepartmentPresenter(view, _unitOfWork);
+                _departmentPresenter = new DepartmentPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -190,7 +190,7 @@ namespace RavenTech_ERP.Presenters
         {
             IEmployeeView view = ChildManager<EmployeeView>.GetChildInstance((MainForm)_mainForm);
             if (_employeePresenter == null || ((Form)view).IsDisposed)
-                _employeePresenter = new EmployeePresenter(view, _unitOfWork, _eventAggregator);
+                _employeePresenter = new EmployeePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -198,7 +198,7 @@ namespace RavenTech_ERP.Presenters
         {
             IHolidayView view = (IHolidayView)ChildManager<HolidayView>.GetChildInstance((MainForm)_mainForm);
             if (_holidayPresenter == null || ((Form)view).IsDisposed)
-                _holidayPresenter = new HolidayPresenter(view, _unitOfWork, _eventAggregator);
+                _holidayPresenter = new HolidayPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -206,7 +206,7 @@ namespace RavenTech_ERP.Presenters
         {
             ICustomerTypeView view = (ICustomerTypeView)ChildManager<CustomerTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_customerTypePresenter == null || ((Form)view).IsDisposed)
-                _customerTypePresenter = new CustomerTypePresenter(view, _unitOfWork);
+                _customerTypePresenter = new CustomerTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -214,7 +214,7 @@ namespace RavenTech_ERP.Presenters
         {
             ICustomerView view = (ICustomerView)ChildManager<CustomerView>.GetChildInstance((MainForm)_mainForm);
             if (_customerPresenter == null || ((Form)view).IsDisposed)
-                _customerPresenter = new CustomerPresenter(view, _unitOfWork);
+                _customerPresenter = new CustomerPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -222,7 +222,7 @@ namespace RavenTech_ERP.Presenters
         {
             IPayrollView view = (IPayrollView)ChildManager<PayrollView>.GetChildInstance((MainForm)_mainForm);
             if (_payrollPresenter == null || ((Form)view).IsDisposed)
-                _payrollPresenter = new PayrollPresenter(view, _unitOfWork, _eventAggregator);
+                _payrollPresenter = new PayrollPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -230,7 +230,7 @@ namespace RavenTech_ERP.Presenters
         {
             IRegisterView view = (IRegisterView)ChildManager<RegisterView>.GetChildInstance((MainForm)_mainForm);
             if (_registerPresenter == null || ((Form)view).IsDisposed)
-                _registerPresenter = new RegisterPresenter(view, _unitOfWork);
+                _registerPresenter = new RegisterPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -238,7 +238,7 @@ namespace RavenTech_ERP.Presenters
         {
             IProfileView view = (IProfileView)ChildManager<ProfileView>.GetChildInstance((MainForm)_mainForm);
             if (_profilePresenter == null || ((Form)view).IsDisposed)
-                _profilePresenter = new ProfilePresenter(view, _unitOfWork);
+                _profilePresenter = new ProfilePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -246,7 +246,7 @@ namespace RavenTech_ERP.Presenters
         {
             IProductMonitoringView view = ChildManager<ProductMonitoringView>.GetChildInstance((MainForm)_mainForm);
             if (_productMonitoringPresenter == null || ((Form)view).IsDisposed)
-                _productMonitoringPresenter = new ProductMonitoringPresenter(view, _unitOfWork, _eventAggregator);
+                _productMonitoringPresenter = new ProductMonitoringPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -254,7 +254,7 @@ namespace RavenTech_ERP.Presenters
         {
             IDashboardView view = (IDashboardView)ChildManager<DashboardView>.GetChildInstance((MainForm)_mainForm);
             if (_dashboardPresenter == null || ((Form)view).IsDisposed)
-                _dashboardPresenter = new DashboardPresenter(view, _unitOfWork, _eventAggregator);
+                _dashboardPresenter = new DashboardPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -262,7 +262,7 @@ namespace RavenTech_ERP.Presenters
         {
             IWarehouseView view = (IWarehouseView)ChildManager<WarehouseView>.GetChildInstance((MainForm)_mainForm);
             if (_warehousePresenter == null || ((Form)view).IsDisposed)
-                _warehousePresenter = new WarehousePresenter(view, _unitOfWork);
+                _warehousePresenter = new WarehousePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -270,7 +270,7 @@ namespace RavenTech_ERP.Presenters
         {
             IVendorTypeView view = (IVendorTypeView)ChildManager<VendorTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_vendorTypePresenter == null || ((Form)view).IsDisposed)
-                _vendorTypePresenter = new VendorTypePresenter(view, _unitOfWork);
+                _vendorTypePresenter = new VendorTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -278,7 +278,7 @@ namespace RavenTech_ERP.Presenters
         {
             IVendorView view = (IVendorView)ChildManager<VendorView>.GetChildInstance((MainForm)_mainForm);
             if (_vendorPresenter == null || ((Form)view).IsDisposed)
-                _vendorPresenter = new VendorPresenter(view, _unitOfWork);
+                _vendorPresenter = new VendorPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -286,7 +286,7 @@ namespace RavenTech_ERP.Presenters
         {
             IUnitOfMeasureView view = (IUnitOfMeasureView)ChildManager<UnitOfMeasureView>.GetChildInstance((MainForm)_mainForm);
             if (_unitOfMeasurePresenter == null || ((Form)view).IsDisposed)
-                _unitOfMeasurePresenter = new UnitOfMeasurePresenter(view, _unitOfWork);
+                _unitOfMeasurePresenter = new UnitOfMeasurePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -294,7 +294,7 @@ namespace RavenTech_ERP.Presenters
         {
             ITargetGoalsView view = (ITargetGoalsView)ChildManager<TargetGoalsView>.GetChildInstance((MainForm)_mainForm);
             if (_targetGoalsPresenter == null || ((Form)view).IsDisposed)
-                _targetGoalsPresenter = new TargetGoalsPresenter(view, _unitOfWork, _eventAggregator);
+                _targetGoalsPresenter = new TargetGoalsPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -302,7 +302,7 @@ namespace RavenTech_ERP.Presenters
         {
             IShipmentTypeView view = (IShipmentTypeView)ChildManager<ShipmentTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_shipmentTypePresenter == null || ((Form)view).IsDisposed)
-                _shipmentTypePresenter = new ShipmentTypePresenter(view, _unitOfWork);
+                _shipmentTypePresenter = new ShipmentTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -310,7 +310,7 @@ namespace RavenTech_ERP.Presenters
         {
             ISalesTypeView view = (ISalesTypeView)ChildManager<SalesTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_salesTypePresenter == null || ((Form)view).IsDisposed)
-                _salesTypePresenter = new SalesTypePresenter(view, _unitOfWork);
+                _salesTypePresenter = new SalesTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -318,7 +318,7 @@ namespace RavenTech_ERP.Presenters
         {
             ISalesReportView view = (ISalesReportView)ChildManager<SalesReportView>.GetChildInstance((MainForm)_mainForm);
             if (_salesReportPresenter == null || ((Form)view).IsDisposed)
-                _salesReportPresenter = new SalesReportPresenter(view, _unitOfWork, _eventAggregator);
+                _salesReportPresenter = new SalesReportPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -326,7 +326,7 @@ namespace RavenTech_ERP.Presenters
         {
             ISalesOrderView view = (ISalesOrderView)ChildManager<SalesOrderView>.GetChildInstance((MainForm)_mainForm);
             if (_salesOrderPresenter == null || ((Form)view).IsDisposed)
-                _salesOrderPresenter = new SalesOrderPresenter(view, _unitOfWork, _eventAggregator);
+                _salesOrderPresenter = new SalesOrderPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -334,7 +334,7 @@ namespace RavenTech_ERP.Presenters
         {
             IPurchaseTypeView view = (IPurchaseTypeView)ChildManager<PurchaseTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_purchaseTypePresenter == null || ((Form)view).IsDisposed)
-                _purchaseTypePresenter = new PurchaseTypePresenter(view, _unitOfWork);
+                _purchaseTypePresenter = new PurchaseTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -342,7 +342,7 @@ namespace RavenTech_ERP.Presenters
         {
             IPurchasesReportView view = (IPurchasesReportView)ChildManager<PurchasesReportView>.GetChildInstance((MainForm)_mainForm);
             if (_purchasesReportPresenter == null || ((Form)view).IsDisposed)
-                _purchasesReportPresenter = new PurchasesReportPresenter(view, _unitOfWork, _eventAggregator);
+                _purchasesReportPresenter = new PurchasesReportPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -350,7 +350,7 @@ namespace RavenTech_ERP.Presenters
         {
             IPurchaseOrderView view = (IPurchaseOrderView)ChildManager<PurchaseOrderView>.GetChildInstance((MainForm)_mainForm);
             if (_purchaseOrderPresenter == null || ((Form)view).IsDisposed)
-                _purchaseOrderPresenter = new PurchaseOrderPresenter(view, _unitOfWork, _eventAggregator);
+                _purchaseOrderPresenter = new PurchaseOrderPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -358,7 +358,7 @@ namespace RavenTech_ERP.Presenters
         {
             IProductTypeView view = (IProductTypeView)ChildManager<ProductTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_productTypePresenter == null || ((Form)view).IsDisposed)
-                _productTypePresenter = new ProductTypePresenter(view, _unitOfWork);
+                _productTypePresenter = new ProductTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -366,7 +366,7 @@ namespace RavenTech_ERP.Presenters
         {
             IProductStockInLogView view = (IProductStockInLogView)ChildManager<ProductStockInLogView>.GetChildInstance((MainForm)_mainForm);
             if (_productStockInLogPresenter == null || ((Form)view).IsDisposed)
-                _productStockInLogPresenter = new ProductStockInLogPresenter(view, _unitOfWork, _eventAggregator);
+                _productStockInLogPresenter = new ProductStockInLogPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -374,7 +374,7 @@ namespace RavenTech_ERP.Presenters
         {
             IProductPullOutLogView view = (IProductPullOutLogView)ChildManager<ProductPullOutLogView>.GetChildInstance((MainForm)_mainForm);
             if (_productPullOutLogPresenter == null || ((Form)view).IsDisposed)
-                _productPullOutLogPresenter = new ProductPullOutLogPresenter(view, _unitOfWork, _eventAggregator);
+                _productPullOutLogPresenter = new ProductPullOutLogPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -382,7 +382,7 @@ namespace RavenTech_ERP.Presenters
         {
             IProductView view = (IProductView)ChildManager<ProductView>.GetChildInstance((MainForm)_mainForm);
             if (_productPresenter == null || ((Form)view).IsDisposed)
-                _productPresenter = new ProductPresenter(view, _unitOfWork, _eventAggregator);
+                _productPresenter = new ProductPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -390,7 +390,7 @@ namespace RavenTech_ERP.Presenters
         {
             IPaymentTypeView view = (IPaymentTypeView)ChildManager<PaymentTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_paymentTypePresenter == null || ((Form)view).IsDisposed)
-                _paymentTypePresenter = new PaymentTypePresenter(view, _unitOfWork);
+                _paymentTypePresenter = new PaymentTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -398,7 +398,7 @@ namespace RavenTech_ERP.Presenters
         {
             IInvoiceTypeView view = (IInvoiceTypeView)ChildManager<InvoiceTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_invoiceTypePresenter == null || ((Form)view).IsDisposed)
-                _invoiceTypePresenter = new InvoiceTypePresenter(view, _unitOfWork);
+                _invoiceTypePresenter = new InvoiceTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -406,7 +406,7 @@ namespace RavenTech_ERP.Presenters
         {
             ICashBankView view = (ICashBankView)ChildManager<CashBankView>.GetChildInstance((MainForm)_mainForm);
             if (_cashBankPresenter == null || ((Form)view).IsDisposed)
-                _cashBankPresenter = new CashBankPresenter(view, _unitOfWork);
+                _cashBankPresenter = new CashBankPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -414,7 +414,7 @@ namespace RavenTech_ERP.Presenters
         {
             IBranchView view = (IBranchView)ChildManager<BranchView>.GetChildInstance((MainForm)_mainForm);
             if (_branchPresenter == null || ((Form)view).IsDisposed)
-                _branchPresenter = new BranchPresenter(view, _unitOfWork);
+                _branchPresenter = new BranchPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -422,7 +422,7 @@ namespace RavenTech_ERP.Presenters
         {
             IBillTypeView view = (IBillTypeView)ChildManager<BillTypeView>.GetChildInstance((MainForm)_mainForm);
             if (_billTypePresenter == null || ((Form)view).IsDisposed)
-                _billTypePresenter = new BillTypePresenter(view, _unitOfWork);
+                _billTypePresenter = new BillTypePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -430,7 +430,7 @@ namespace RavenTech_ERP.Presenters
         {
             ITaxView view = (ITaxView)ChildManager<TaxView>.GetChildInstance((MainForm)_mainForm);
             if (_taxPresenter == null || ((Form)view).IsDisposed)
-                _taxPresenter = new TaxPresenter(view, _unitOfWork, _eventAggregator);
+                _taxPresenter = new TaxPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -438,7 +438,7 @@ namespace RavenTech_ERP.Presenters
         {
             IShiftView view = (IShiftView)ChildManager<ShiftView>.GetChildInstance((MainForm)_mainForm);
             if (_shiftPresenter == null || ((Form)view).IsDisposed)
-                _shiftPresenter = new ShiftPresenter(view, _unitOfWork);
+                _shiftPresenter = new ShiftPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -446,7 +446,7 @@ namespace RavenTech_ERP.Presenters
         {
             IProjectView view = (IProjectView)ChildManager<ProjectView>.GetChildInstance((MainForm)_mainForm);
             if (_projectPresenter == null || ((Form)view).IsDisposed)
-                _projectPresenter = new ProjectPresenter(view, _unitOfWork, _eventAggregator);
+                _projectPresenter = new ProjectPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -454,7 +454,7 @@ namespace RavenTech_ERP.Presenters
         {
             ILeaveView view = (ILeaveView)ChildManager<LeaveView>.GetChildInstance((MainForm)_mainForm);
             if (_leavePresenter == null || ((Form)view).IsDisposed)
-                _leavePresenter = new LeavePresenter(view, _unitOfWork, _eventAggregator);
+                _leavePresenter = new LeavePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -462,7 +462,7 @@ namespace RavenTech_ERP.Presenters
         {
             IJobPositionView view = (IJobPositionView)ChildManager<JobPositionView>.GetChildInstance((MainForm)_mainForm);
             if (_jobPositionPresenter == null || ((Form)view).IsDisposed)
-                _jobPositionPresenter = new JobPositionPresenter(view, _unitOfWork);
+                _jobPositionPresenter = new JobPositionPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -470,7 +470,7 @@ namespace RavenTech_ERP.Presenters
         {
             IDeductionView view = (IDeductionView)ChildManager<DeductionView>.GetChildInstance((MainForm)_mainForm);
             if (_deductionPresenter == null || ((Form)view).IsDisposed)
-                _deductionPresenter = new DeductionPresenter(view, _unitOfWork, _eventAggregator);
+                _deductionPresenter = new DeductionPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -478,7 +478,7 @@ namespace RavenTech_ERP.Presenters
         {
             IEmployeeContributionView view = (IEmployeeContributionView)ChildManager<EmployeeContributionView>.GetChildInstance((MainForm)_mainForm);
             if (_employeeContributionPresenter == null || ((Form)view).IsDisposed)
-                _employeeContributionPresenter = new EmployeeContributionPresenter(view, _unitOfWork, _eventAggregator);
+                _employeeContributionPresenter = new EmployeeContributionPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -486,7 +486,7 @@ namespace RavenTech_ERP.Presenters
         {
             IBonusView view = (IBonusView)ChildManager<BonusView>.GetChildInstance((MainForm)_mainForm);
             if (_bonusPresenter == null || ((Form)view).IsDisposed)
-                _bonusPresenter = new BonusPresenter(view, _unitOfWork, _eventAggregator);
+                _bonusPresenter = new BonusPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -494,7 +494,7 @@ namespace RavenTech_ERP.Presenters
         {
             IBenefitView view = (IBenefitView)ChildManager<BenefitView>.GetChildInstance((MainForm)_mainForm);
             if (_benefitPresenter == null || ((Form)view).IsDisposed)
-                _benefitPresenter = new BenefitPresenter(view, _unitOfWork, _eventAggregator);
+                _benefitPresenter = new BenefitPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -502,7 +502,7 @@ namespace RavenTech_ERP.Presenters
         {
             IAttendanceView view = (IAttendanceView)ChildManager<AttendanceView>.GetChildInstance((MainForm)_mainForm);
             if (_attendancePresenter == null || ((Form)view).IsDisposed)
-                _attendancePresenter = new AttendancePresenter(view, _unitOfWork, _eventAggregator);
+                _attendancePresenter = new AttendancePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -510,7 +510,7 @@ namespace RavenTech_ERP.Presenters
         {
             IAllowanceView view = (IAllowanceView)ChildManager<AllowanceView>.GetChildInstance((MainForm)_mainForm);
             if (_allowancePresenter == null || ((Form)view).IsDisposed)
-                _allowancePresenter = new AllowancePresenter(view, _unitOfWork, _eventAggregator);
+                _allowancePresenter = new AllowancePresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
     }

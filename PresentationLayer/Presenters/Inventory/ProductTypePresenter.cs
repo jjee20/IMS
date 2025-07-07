@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenters
     public class ProductTypePresenter
     {
         public IProductTypeView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<ProductTypeViewModel> ProductTypeList;
         public ProductTypePresenter(IProductTypeView view, IUnitOfWork unitOfWork) {
 

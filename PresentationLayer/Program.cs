@@ -19,8 +19,8 @@ namespace PresentationLayer
         {
             IUnityContainer UnityC = new UnityContainer();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NNaF5cXmBCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWXxdcHZUR2BZUkVyWEVWYUA=");
-
-            UnityC.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
+            
+            UnityC.RegisterType<IUnitOfWork, UnitOfWork>(new TransientLifetimeManager());
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
@@ -34,13 +34,9 @@ namespace PresentationLayer
             Application.SetCompatibleTextRenderingDefault(false);
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
 
-
-            // Resolve InventoryView and Presenter
-            var unitOfWork = UnityC.Resolve<IUnitOfWork>();
-
             //Pass dependencies to the presenter
             ILoginView mainView = new LoginView();
-            var presenter = new LoginPresenter(mainView, unitOfWork);
+            var presenter = new LoginPresenter(mainView, UnityC);
 
             Application.Run((Form)mainView);
             //Application.Run(new UpsertProjectView());

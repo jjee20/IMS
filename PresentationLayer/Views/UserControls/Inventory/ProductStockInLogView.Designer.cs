@@ -30,20 +30,22 @@ namespace PresentationLayer.Views.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductStockInLogView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn2 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
-            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductStockInLogView));
+            var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            var gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridDateTimeColumn2 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            var gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            var gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            var customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel2 = new Panel();
             btnPrint = new Guna2ImageButton();
             btnAdd = new Syncfusion.WinForms.Controls.SfButton();
@@ -58,6 +60,7 @@ namespace PresentationLayer.Views.UserControls
             panel1 = new Panel();
             dgList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             dgPager = new Syncfusion.WinForms.DataPager.SfDataPager();
+            btnRefresh = new Guna2Button();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -174,15 +177,17 @@ namespace PresentationLayer.Views.UserControls
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.BackColor = Color.White;
-            tableLayoutPanel2.ColumnCount = 1;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel2.Controls.Add(btnRefresh, 1, 0);
             tableLayoutPanel2.Controls.Add(materialLabel1, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(0, 0);
             tableLayoutPanel2.Margin = new Padding(0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new Size(1346, 60);
             tableLayoutPanel2.TabIndex = 0;
             // 
@@ -198,7 +203,7 @@ namespace PresentationLayer.Views.UserControls
             materialLabel1.Margin = new Padding(4, 0, 4, 0);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(1336, 60);
+            materialLabel1.Size = new Size(1288, 60);
             materialLabel1.TabIndex = 3;
             materialLabel1.Text = "Product Stock-In Log Management";
             materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
@@ -363,6 +368,27 @@ namespace PresentationLayer.Views.UserControls
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
+            // btnRefresh
+            // 
+            btnRefresh.CustomizableEdges = customizableEdges4;
+            btnRefresh.DisabledState.BorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnRefresh.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnRefresh.Dock = DockStyle.Right;
+            btnRefresh.FillColor = Color.Transparent;
+            btnRefresh.Font = new Font("Segoe UI", 9F);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
+            btnRefresh.ImageSize = new Size(30, 30);
+            btnRefresh.Location = new Point(1300, 4);
+            btnRefresh.Margin = new Padding(4);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            btnRefresh.Size = new Size(42, 52);
+            btnRefresh.TabIndex = 12;
+            btnRefresh.Click += btnRefresh_Click;
+            // 
             // ProductStockInLogView
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
@@ -402,5 +428,6 @@ namespace PresentationLayer.Views.UserControls
         private Syncfusion.Windows.Forms.Tools.toolstripitem toolstripitemExcel;
         private Syncfusion.Windows.Forms.Tools.toolstripitem toolstripitemPDF;
         private Guna2ImageButton btnPrint;
+        private Guna2Button btnRefresh;
     }
 }

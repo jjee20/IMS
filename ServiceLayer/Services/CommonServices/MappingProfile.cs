@@ -3,11 +3,13 @@ using DomainLayer.Enums;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
+using DomainLayer.Models.ThinkEE;
 using DomainLayer.ViewModels;
 using DomainLayer.ViewModels.AccountViewModels;
 using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.InventoryViewModels;
 using DomainLayer.ViewModels.PayrollViewModels;
+using DomainLayer.ViewModels.ThinkEE;
 
 namespace ServiceLayer.Services.CommonServices
 {
@@ -113,7 +115,7 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
             CreateMap<Product, ProductViewModel>()
                 .ForMember(dest => dest.UnitOfMeasure, opt => opt.MapFrom(src => src.UnitOfMeasure.UnitOfMeasureName))
-                .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName))
+                .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName ?? "{Needs Update}"))
                 .ReverseMap();
             CreateMap<Warehouse, WarehouseViewModel>()
                 .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName))
@@ -147,7 +149,10 @@ namespace ServiceLayer.Services.CommonServices
                 .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName))
                 .ReverseMap();
             #endregion
-
+            #region ThinkEE
+            CreateMap<ReviewTopic, ReviewTopicViewModel>()
+                .ReverseMap();
+            #endregion
             #region Payroll
             CreateMap<Attendance, IndividualAttendanceViewModel>()
                  .ForMember(dest => dest.Project,

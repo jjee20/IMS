@@ -15,17 +15,15 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class HolidayPresenter
     {
         public IHolidayView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<HolidayViewModel> HolidayList;
-        public HolidayPresenter(IHolidayView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
+        public HolidayPresenter(IHolidayView view, IUnitOfWork unitOfWork)
         {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -150,8 +148,6 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             if (!emptyValue) HolidayList = HolidayList.Where(c => c.HolidayName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetHolidayListBindingSource(HolidayList.OrderBy(c => c.EffectiveDate));
-
-            _eventAggregator.Publish<PayrollUpdateEvent>();
         }
     }
 }

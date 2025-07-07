@@ -12,7 +12,7 @@ namespace RavenTech_ERP
 {
     public partial class MainForm : SfForm, IMainForm
     {
-        public MainForm(IUnitOfWork unitOfWork)
+        public MainForm()
         {
             InitializeComponent();
             //btnAllowance.Click += delegate { AllowanceEvent?.Invoke(this, EventArgs.Empty); };
@@ -138,6 +138,11 @@ namespace RavenTech_ERP
         }
 
         private void btnProject_Click(object sender, EventArgs e)
+        {
+            ProjectEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnMaterialsAllocatedvsActual_Click(object sender, EventArgs e)
         {
             ProjectEvent?.Invoke(this, EventArgs.Empty);
         }

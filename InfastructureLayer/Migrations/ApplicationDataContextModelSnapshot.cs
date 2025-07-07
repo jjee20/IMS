@@ -888,14 +888,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8211cb92-0b9a-4195-9d37-db25403a1afe",
+                            ConcurrencyStamp = "6a828565-e3bf-4968-9589-d17d77725d54",
                             Department = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPER@ADMIN.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPFdQU6wAdeTXofBPQHTDGr3oqCCiavoJNJVPSibQS/i8JERij71n0j3vwgKeW/g8A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ9SUK2UBa8RGz5+7kBVln2LwU4uiXZmXIxr+/z7tmr3EX+z79tB4f7M0Ke63EZQmw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -905,14 +905,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "FB38CC93-2B1E-4444-9A48-396E4C28E190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3c728b0f-da4f-460f-9d1f-e9dc7146871d",
+                            ConcurrencyStamp = "4ec6c01a-91c0-4250-ac26-c48a662bd451",
                             Department = 1,
                             Email = "inventory@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "INVENTORY@USER.COM",
                             NormalizedUserName = "inventory",
-                            PasswordHash = "AQAAAAIAAYagAAAAENUX0vUWuhexh6mLaetGq06T3lmG5+Xr1ffnIUWSJQDflPf0ZJu2lrbS2HkrGarxvw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHG3OGG/+oUf8+a2Xhck+0GVfhLVIpjiQfxJVRwcsuwGUXlmEjlZJv8uTxnlg1a1aw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -922,14 +922,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "6628DE62-AF21-4389-B612-623A1A17637C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c2ebb269-72a1-49b5-8a49-88088336fb34",
+                            ConcurrencyStamp = "773ddb02-3ea7-406a-b6ce-42f296cb1d41",
                             Department = 2,
                             Email = "payroll@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PAYROLL@USER.COM",
                             NormalizedUserName = "payroll",
-                            PasswordHash = "AQAAAAIAAYagAAAAENNMAfsCEVRpLQdjyHC1NZ+NcAY+LJxZTcml2kNldn6hPgQrLJ1YfH2rh7BfRSLOSw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECWxr5DXl7/3G7uJQUU1B6gv6inQx2qSBvY0DnETpHowY/nFmCecOTkc03P2orn1pA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -2049,6 +2049,200 @@ namespace InfastructureLayer.Migrations
                     b.ToTable("Warehouse");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.Choice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Choices");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamFormat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DefaultDurationMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExamFormats");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExamineeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPoints")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("ExamineeId");
+
+                    b.ToTable("ExamResults");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamTopic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReviewTopicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReviewTopicId");
+
+                    b.ToTable("ExamTopics");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.PerformanceReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExamineeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StrongAreas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalItems")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WeakAreas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("ExamineeId");
+
+                    b.ToTable("PerformanceReports");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExamTopicId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("ExamTopicId");
+
+                    b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ReviewTopic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReviewTopics");
+                });
+
             modelBuilder.Entity("Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
@@ -2289,6 +2483,40 @@ namespace InfastructureLayer.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("RavenTech_ThinkEE.Exam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExamFormatId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReviewTopicId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamFormatId");
+
+                    b.HasIndex("ReviewTopicId");
+
+                    b.ToTable("Exams");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Allowance", b =>
@@ -2593,7 +2821,7 @@ namespace InfastructureLayer.Migrations
                         .HasForeignKey("ProductId");
 
                     b.HasOne("DomainLayer.Models.Accounting.Payroll.Project", "Project")
-                        .WithMany()
+                        .WithMany("ProductPullOutLogs")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2771,6 +2999,85 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("Branch");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.Choice", b =>
+                {
+                    b.HasOne("DomainLayer.Models.ThinkEE.Question", "Question")
+                        .WithMany("Choices")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamResult", b =>
+                {
+                    b.HasOne("RavenTech_ThinkEE.Exam", "Exam")
+                        .WithMany("Results")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "Examinee")
+                        .WithMany()
+                        .HasForeignKey("ExamineeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Examinee");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamTopic", b =>
+                {
+                    b.HasOne("DomainLayer.Models.ThinkEE.ReviewTopic", "ReviewTopic")
+                        .WithMany("ExamTopics")
+                        .HasForeignKey("ReviewTopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReviewTopic");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.PerformanceReport", b =>
+                {
+                    b.HasOne("RavenTech_ThinkEE.Exam", "Exam")
+                        .WithMany()
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "Examinee")
+                        .WithMany()
+                        .HasForeignKey("ExamineeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Examinee");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.Question", b =>
+                {
+                    b.HasOne("RavenTech_ThinkEE.Exam", "Exam")
+                        .WithMany("Questions")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Models.ThinkEE.ExamTopic", "ExamTopic")
+                        .WithMany("Questions")
+                        .HasForeignKey("ExamTopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("ExamTopic");
+                });
+
             modelBuilder.Entity("Employee", b =>
                 {
                     b.HasOne("Department", "Department")
@@ -2849,8 +3156,25 @@ namespace InfastructureLayer.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RavenTech_ThinkEE.Exam", b =>
+                {
+                    b.HasOne("DomainLayer.Models.ThinkEE.ExamFormat", "ExamFormat")
+                        .WithMany("Exams")
+                        .HasForeignKey("ExamFormatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Models.ThinkEE.ReviewTopic", null)
+                        .WithMany("Exams")
+                        .HasForeignKey("ReviewTopicId");
+
+                    b.Navigation("ExamFormat");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Project", b =>
                 {
+                    b.Navigation("ProductPullOutLogs");
+
                     b.Navigation("ProjectLines");
                 });
 
@@ -2902,6 +3226,28 @@ namespace InfastructureLayer.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamFormat", b =>
+                {
+                    b.Navigation("Exams");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamTopic", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.Question", b =>
+                {
+                    b.Navigation("Choices");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.ThinkEE.ReviewTopic", b =>
+                {
+                    b.Navigation("ExamTopics");
+
+                    b.Navigation("Exams");
+                });
+
             modelBuilder.Entity("Employee", b =>
                 {
                     b.Navigation("Allowances");
@@ -2920,6 +3266,13 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("Leaves");
 
                     b.Navigation("Payrolls");
+                });
+
+            modelBuilder.Entity("RavenTech_ThinkEE.Exam", b =>
+                {
+                    b.Navigation("Questions");
+
+                    b.Navigation("Results");
                 });
 #pragma warning restore 612, 618
         }

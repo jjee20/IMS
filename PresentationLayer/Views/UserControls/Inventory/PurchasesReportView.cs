@@ -42,10 +42,16 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Month
         {
-            get { return (int)txtMonth.SelectedValue; }
+            get
+            {
+                return (int)txtMonth.SelectedValue;
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public double Purchases { set => txtPurchases.Text = value.ToString("N2"); }
+        public double Purchases
+        {
+            set => txtPurchases.Text = value.ToString("N2");
+        }
 
         public void SetDailyPurchasesChart(GunaBarDataset purchasesbarDataset)
         {
@@ -93,5 +99,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             return instance;
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshEvent?.Invoke(sender, e);
+        }
+        public event EventHandler RefreshEvent;
     }
 }

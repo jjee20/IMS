@@ -23,16 +23,14 @@ namespace PresentationLayer.Presenters
     public class ProductStockInLogPresenter
     {
         public IProductStockInLogView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<ProductStockInLogViewModel> ProductStockInLogList;
-        private IEventAggregator _eventAggregator;
-        public ProductStockInLogPresenter(IProductStockInLogView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public ProductStockInLogPresenter(IProductStockInLogView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            _eventAggregator = eventAggregator;
 
             //Events
             _view.SearchEvent -= Search;
@@ -41,6 +39,7 @@ namespace PresentationLayer.Presenters
             _view.DeleteEvent -= Delete;
             _view.MultipleDeleteEvent -= MultipleDelete;
             _view.PrintEvent -= Print;
+            _view.RefreshEvent -= Refresh;
 
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
@@ -48,6 +47,7 @@ namespace PresentationLayer.Presenters
             _view.DeleteEvent += Delete;
             _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
+            _view.RefreshEvent += Refresh;
 
             //Load
 
@@ -55,6 +55,8 @@ namespace PresentationLayer.Presenters
 
             //Source Binding
         }
+
+        private void Refresh(object? sender, EventArgs e) => LoadAllProductStockInLogList();
 
         private void AddNew(object? sender, EventArgs e)
         {
@@ -162,7 +164,7 @@ namespace PresentationLayer.Presenters
             if (!emptyValue) ProductStockInLogList = ProductStockInLogList.Where(c => c.ProductStockInLogLines.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductInStockLogListBindingSource(ProductStockInLogList);
 
-            _eventAggregator.Publish<InventoryCompletedEvent>();
+            
         }
     }
 }

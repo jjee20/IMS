@@ -18,7 +18,7 @@ namespace PresentationLayer.Presenters
     public class WarehousePresenter
     {
         public IWarehouseView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<WarehouseViewModel> WarehouseList;
         public WarehousePresenter(IWarehouseView view, IUnitOfWork unitOfWork) {
 

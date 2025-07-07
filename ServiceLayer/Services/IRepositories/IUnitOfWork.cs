@@ -1,6 +1,7 @@
 ﻿using ServiceLayer.Services.IRepositories.IAccounting.IPayroll;
 using ServiceLayer.Services.IRepositories.IAccounts;
 using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories.IThinkEE;
 
 namespace ServiceLayer.Services.IRepositories
 {
@@ -60,6 +61,7 @@ namespace ServiceLayer.Services.IRepositories
         Lazy<IWarehouseRepository> Warehouse { get; }
         Lazy<IThirteenthMonthRepository> ThirteenthMonth { get; }
         Lazy<IPayrollRepository> Payroll { get; }
+        Lazy<IReviewTopicRepository> ReviewTopic { get; }
 
         IRepository<T> GetRepository<T>() where T : class;
         void Save();

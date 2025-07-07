@@ -38,6 +38,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public event EventHandler UpdateDashboardEvent;
+        public event EventHandler RefreshEvent;
 
         private static DashboardView? instance;
         public static DashboardView GetInstance(TabPage parentContainer)
@@ -64,79 +65,119 @@ namespace PresentationLayer.Views.UserControls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Gross
         {
-            set { txtGross.Text = value; }
+            set
+            {
+                txtGross.Text = value;
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Sales
         {
-            set { txtSales.Text = value; }
+            set
+            {
+                txtSales.Text = value;
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Expense
         {
-            set { txtExpense.Text = value; }
+            set
+            {
+                txtExpense.Text = value;
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SalesToday
         {
-            set { txtSalesToday.Text = value; }
+            set
+            {
+                txtSalesToday.Text = value;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ItemSoldToday
         {
-            set { txtItemSoldToday.Text = value; }
+            set
+            {
+                txtItemSoldToday.Text = value;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ExpenseToday
         {
-            set { txtExpenseToday.Text = value; }
+            set
+            {
+                txtExpenseToday.Text = value;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Year
         {
-            get {
-                    if (txtYear.DataSource != null)
-                        return (int)txtYear.SelectedValue;
-                    else return 0;
+            get
+            {
+                if (txtYear.DataSource != null)
+                    return (int)txtYear.SelectedValue;
+                else return 0;
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Month
         {
-            get { return (int)txtMonth.SelectedValue; }
+            get
+            {
+                return (int)txtMonth.SelectedValue;
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ExpenseTodayItemsSold
         {
-            set { txtExpenseItemsSold.Text = value.ToString("N2"); }
+            set
+            {
+                txtExpenseItemsSold.Text = value.ToString("N2");
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ExpenseTodayItemsSoldTarget
         {
-            set { txtExpenseItemsSoldTarget.Text = value.ToString("N2"); }
+            set
+            {
+                txtExpenseItemsSoldTarget.Text = value.ToString("N2");
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ExpenseTodaySales
         {
-            set { txtExpenseSales.Text = value.ToString("N2"); }
+            set
+            {
+                txtExpenseSales.Text = value.ToString("N2");
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ExpenseTodaySalesTarget
         {
-            set { txtExpenseSalesTarget.Text = value.ToString("N2"); }
+            set
+            {
+                txtExpenseSalesTarget.Text = value.ToString("N2");
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double TotalExpense
         {
-            set { txtTotalExpenses.Text = value.ToString("N2"); }
+            set
+            {
+                txtTotalExpenses.Text = value.ToString("N2");
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double TotalProfit
         {
-            set { txtTotalProfit.Text = value.ToString("N2"); }
+            set
+            {
+                txtTotalProfit.Text = value.ToString("N2");
+            }
         }
 
         public void SetYear(BindingSource dataSource)
@@ -187,6 +228,11 @@ namespace PresentationLayer.Views.UserControls
         {
             progressBarItemSold.Value = itemSold;
             progressBarSales.Value = sales;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshEvent?.Invoke(sender, e);
         }
     }
 }

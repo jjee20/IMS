@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenters
     public class SalesTypePresenter
     {
         public ISalesTypeView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<SalesTypeViewModel> SalesTypeList;
         public SalesTypePresenter(ISalesTypeView view, IUnitOfWork unitOfWork) {
 

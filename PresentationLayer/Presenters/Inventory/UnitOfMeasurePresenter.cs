@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenters
     public class UnitOfMeasurePresenter
     {
         public IUnitOfMeasureView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<UnitOfMeasureViewModel> UnitOfMeasureList;
         public UnitOfMeasurePresenter(IUnitOfMeasureView view, IUnitOfWork unitOfWork) {
 

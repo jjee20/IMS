@@ -25,7 +25,7 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
 {
     public partial class IndividualAttendanceView : SfForm
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private Employee _employee;
         private Attendance _entity;
         private DateTime _startDate;

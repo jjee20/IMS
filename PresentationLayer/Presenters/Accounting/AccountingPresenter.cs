@@ -9,7 +9,7 @@ namespace PresentationLayer.Presenters.Accounting
     public class AccountingPresenter
     {
         private IAccountingView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         public AccountingPresenter(IAccountingView view, IUnitOfWork unitOfWork)
         {
             _view = view;

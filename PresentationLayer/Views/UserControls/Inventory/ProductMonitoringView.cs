@@ -1,12 +1,4 @@
-﻿using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels.Inventory;
-using MaterialSkin;
-using PresentationLayer.Presenters;
-using PresentationLayer.Views.IViews;
-using RavenTech_ERP.Views.IViews.Inventory;
-using ServiceLayer.Services.Helpers;
-using Syncfusion.WinForms.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels.Inventory;
+using Guna.Charts.WinForms;
+using MaterialSkin;
+using PresentationLayer.Presenters;
+using PresentationLayer.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
+using ServiceLayer.Services.Helpers;
+using Syncfusion.WinForms.Controls;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -38,28 +39,43 @@ namespace PresentationLayer.Views.UserControls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SearchValue
         {
-            get { return txtSearch.Text; }
+            get
+            {
+                return txtSearch.Text;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double InStock
         {
-            set { txtInStock.Text = value.ToString(); }
+            set
+            {
+                txtInStock.Text = value.ToString();
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double LowStock
         {
-            set { txtLowStock.Text = value.ToString(); }
+            set
+            {
+                txtLowStock.Text = value.ToString();
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double OutOfStock
         {
-            set { txtOutOfStock.Text = value.ToString(); }
+            set
+            {
+                txtOutOfStock.Text = value.ToString();
+            }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double ProjectFlow
         {
-            set { txtPulledOut.Text = value.ToString(); }
+            set
+            {
+                txtPulledOut.Text = value.ToString();
+            }
         }
 
         public void SetInStockListBindingSource(BindingSource source)
@@ -77,6 +93,14 @@ namespace PresentationLayer.Views.UserControls
         public void SetProjectFlowListBindingSource(BindingSource source)
         {
             dgPulledOut.DataSource = source;
+        }
+        public void SetTrendsBindingSource(GunaBarDataset inStockTrendDataset, GunaBarDataset pullOutStockTrendDataset, GunaBarDataset lowStockTrendDataset, GunaBarDataset outOfStockTrendDataset)
+        {
+            chartTrends.Datasets.Clear();
+            chartTrends.Datasets.Add(inStockTrendDataset);
+            chartTrends.Datasets.Add(pullOutStockTrendDataset);
+            chartTrends.Datasets.Add(lowStockTrendDataset);
+            chartTrends.Datasets.Add(outOfStockTrendDataset);
         }
 
         public event EventHandler PrintEvent;
@@ -100,6 +124,13 @@ namespace PresentationLayer.Views.UserControls
                 SearchEvent?.Invoke(this, EventArgs.Empty);
             txtSearch.Focus();
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler RefreshEvent;
 
         public event EventHandler SearchEvent;
     }

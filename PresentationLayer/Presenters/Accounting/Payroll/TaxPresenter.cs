@@ -16,16 +16,16 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
     public class TaxPresenter
     {
         public ITaxView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<TaxViewModel> TaxList;
-        public TaxPresenter(ITaxView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public TaxPresenter(ITaxView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -150,7 +150,7 @@ namespace RavenTech_ERP.Presenters.Accounting.Payroll
 
             if (!emptyValue) TaxList = TaxList.Where(c => c.MinimumSalary.ToString().Contains(_view.SearchValue) || c.MaximumSalary.ToString().Contains(_view.SearchValue) || c.TaxRate.ToString().Contains(_view.SearchValue));
             _view.SetTaxListBindingSource(TaxList);
-            _eventAggregator.Publish<PayrollUpdateEvent>();
+            
         }
     }
 }

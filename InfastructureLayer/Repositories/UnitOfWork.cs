@@ -7,10 +7,12 @@ using InfastructureLayer.Repositories;
 using InfastructureLayer.Repositories.Accounting.Payroll;
 using InfastructureLayer.Repositories.Accounts;
 using InfastructureLayer.Repositories.Inventory;
+using InfastructureLayer.Repositories.ThinkEE;
 using ServiceLayer.Services.IRepositories;
 using ServiceLayer.Services.IRepositories.IAccounting.IPayroll;
 using ServiceLayer.Services.IRepositories.IAccounts;
 using ServiceLayer.Services.IRepositories.IInventory;
+using ServiceLayer.Services.IRepositories.IThinkEE;
 using System;
 
 namespace InfastructureLayer.DataAccess.Repositories
@@ -79,6 +81,7 @@ namespace InfastructureLayer.DataAccess.Repositories
             ProductPullOutLogLines = new Lazy<IProductPullOutLogLinesRepository>(() => new ProductPullOutLogLinesRepository(_db));
             EmployeeContribution = new Lazy<IEmployeeContributionRepository>(() => new EmployeeContributionRepository(_db));
             Payroll = new Lazy<IPayrollRepository>(() => new PayrollRepository(_db));
+            ReviewTopic = new Lazy<IReviewTopicRepository>(() => new ReviewTopicRepository(_db));
         }
 
         // Lazy Repository Properties
@@ -136,6 +139,7 @@ namespace InfastructureLayer.DataAccess.Repositories
         public Lazy<IProductPullOutLogLinesRepository> ProductPullOutLogLines { get; }
         public Lazy<IEmployeeContributionRepository> EmployeeContribution { get; }
         public Lazy<IPayrollRepository> Payroll { get; }
+        public Lazy<IReviewTopicRepository> ReviewTopic { get; }
 
         public IRepository<T> GetRepository<T>() where T : class
         {

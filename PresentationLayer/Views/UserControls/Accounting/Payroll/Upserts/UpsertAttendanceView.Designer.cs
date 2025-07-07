@@ -30,7 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             autoLabel1 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            txtHoursWorked = new Syncfusion.Windows.Forms.Tools.IntegerTextBox();
             txtEmployee = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             txtDate = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
             txtTimein = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
@@ -44,7 +43,7 @@
             autoLabel5 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             autoLabel6 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             btnSave = new Syncfusion.WinForms.Controls.SfButton();
-            ((System.ComponentModel.ISupportInitialize)txtHoursWorked).BeginInit();
+            txtHoursWorked = new Syncfusion.Windows.Forms.Tools.DoubleTextBox();
             ((System.ComponentModel.ISupportInitialize)txtEmployee).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtDate).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtDate.Calendar).BeginInit();
@@ -55,33 +54,25 @@
             ((System.ComponentModel.ISupportInitialize)txtIsPresent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtIsHalfDay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtProject).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtHoursWorked).BeginInit();
             SuspendLayout();
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(122, 62);
+            autoLabel1.Location = new Point(174, 103);
+            autoLabel1.Margin = new Padding(4, 0, 4, 0);
             autoLabel1.Name = "autoLabel1";
-            autoLabel1.Size = new Size(59, 15);
+            autoLabel1.Size = new Size(90, 25);
             autoLabel1.TabIndex = 0;
             autoLabel1.Text = "Employee";
             // 
-            // txtHoursWorked
-            // 
-            txtHoursWorked.AccessibilityEnabled = true;
-            txtHoursWorked.BeforeTouchSize = new Size(100, 23);
-            txtHoursWorked.IntegerValue = 8L;
-            txtHoursWorked.Location = new Point(213, 237);
-            txtHoursWorked.Name = "txtHoursWorked";
-            txtHoursWorked.Size = new Size(232, 23);
-            txtHoursWorked.TabIndex = 1;
-            txtHoursWorked.Text = "8";
-            // 
             // txtEmployee
             // 
-            txtEmployee.Height = 23;
-            txtEmployee.Location = new Point(213, 58);
+            txtEmployee.Height = 33;
+            txtEmployee.Location = new Point(304, 97);
+            txtEmployee.Margin = new Padding(4, 5, 4, 5);
             txtEmployee.Name = "txtEmployee";
-            txtEmployee.Size = new Size(232, 23);
+            txtEmployee.Size = new Size(330, 33);
             txtEmployee.TabIndex = 2;
             txtEmployee.Text = "~Select~";
             txtEmployee.TextBoxHeight = 23;
@@ -93,7 +84,7 @@
             // 
             // 
             txtDate.Calendar.AllowMultipleSelection = false;
-            txtDate.Calendar.BottomHeight = 25;
+            txtDate.Calendar.BottomHeight = 35;
             txtDate.Calendar.DayNamesFont = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtDate.Calendar.DaysFont = new Font("Segoe UI", 9F);
             txtDate.Calendar.Dock = DockStyle.Fill;
@@ -122,11 +113,12 @@
             txtDate.CalendarSize = new Size(189, 176);
             txtDate.DropDownImage = null;
             txtDate.Font = new Font("Segoe UI", 9F);
-            txtDate.Location = new Point(213, 105);
+            txtDate.Location = new Point(304, 175);
+            txtDate.Margin = new Padding(4, 5, 4, 5);
             txtDate.MetroColor = Color.FromArgb(22, 165, 220);
             txtDate.MinValue = new DateTime(0L);
             txtDate.Name = "txtDate";
-            txtDate.Size = new Size(232, 20);
+            txtDate.Size = new Size(330, 31);
             txtDate.TabIndex = 3;
             txtDate.Value = new DateTime(2025, 4, 11, 11, 46, 39, 652);
             // 
@@ -137,7 +129,7 @@
             // 
             // 
             txtTimein.Calendar.AllowMultipleSelection = false;
-            txtTimein.Calendar.BottomHeight = 25;
+            txtTimein.Calendar.BottomHeight = 35;
             txtTimein.Calendar.DayNamesFont = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtTimein.Calendar.DaysFont = new Font("Segoe UI", 9F);
             txtTimein.Calendar.Dock = DockStyle.Fill;
@@ -168,11 +160,12 @@
             txtTimein.DropDownImage = null;
             txtTimein.Font = new Font("Segoe UI", 9F);
             txtTimein.Format = DateTimePickerFormat.Custom;
-            txtTimein.Location = new Point(213, 149);
+            txtTimein.Location = new Point(304, 248);
+            txtTimein.Margin = new Padding(4, 5, 4, 5);
             txtTimein.MetroColor = Color.FromArgb(22, 165, 220);
             txtTimein.MinValue = new DateTime(0L);
             txtTimein.Name = "txtTimein";
-            txtTimein.Size = new Size(232, 20);
+            txtTimein.Size = new Size(330, 31);
             txtTimein.TabIndex = 4;
             txtTimein.Value = new DateTime(2025, 4, 11, 8, 0, 0, 0);
             // 
@@ -183,7 +176,7 @@
             // 
             // 
             txtTimeout.Calendar.AllowMultipleSelection = false;
-            txtTimeout.Calendar.BottomHeight = 25;
+            txtTimeout.Calendar.BottomHeight = 35;
             txtTimeout.Calendar.DayNamesFont = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtTimeout.Calendar.DaysFont = new Font("Segoe UI", 9F);
             txtTimeout.Calendar.Dock = DockStyle.Fill;
@@ -214,97 +207,123 @@
             txtTimeout.DropDownImage = null;
             txtTimeout.Font = new Font("Segoe UI", 9F);
             txtTimeout.Format = DateTimePickerFormat.Custom;
-            txtTimeout.Location = new Point(213, 193);
+            txtTimeout.Location = new Point(304, 322);
+            txtTimeout.Margin = new Padding(4, 5, 4, 5);
             txtTimeout.MetroColor = Color.FromArgb(22, 165, 220);
             txtTimeout.MinValue = new DateTime(0L);
             txtTimeout.Name = "txtTimeout";
-            txtTimeout.Size = new Size(232, 20);
+            txtTimeout.Size = new Size(330, 31);
             txtTimeout.TabIndex = 5;
             txtTimeout.Value = new DateTime(2025, 4, 11, 17, 0, 0, 0);
             // 
             // txtIsPresent
             // 
             txtIsPresent.AccessibilityEnabled = true;
-            txtIsPresent.Location = new Point(213, 321);
+            txtIsPresent.BeforeTouchSize = new Size(214, 35);
+            txtIsPresent.ImageCheckBoxSize = new Size(19, 19);
+            txtIsPresent.Location = new Point(304, 535);
+            txtIsPresent.Margin = new Padding(4, 5, 4, 5);
             txtIsPresent.Name = "txtIsPresent";
-            txtIsPresent.Size = new Size(150, 21);
+            txtIsPresent.Size = new Size(214, 35);
             txtIsPresent.TabIndex = 6;
             txtIsPresent.Text = "Is Present?";
             // 
             // txtIsHalfDay
             // 
             txtIsHalfDay.AccessibilityEnabled = true;
-            txtIsHalfDay.Location = new Point(295, 321);
+            txtIsHalfDay.BeforeTouchSize = new Size(214, 35);
+            txtIsHalfDay.ImageCheckBoxSize = new Size(19, 19);
+            txtIsHalfDay.Location = new Point(421, 535);
+            txtIsHalfDay.Margin = new Padding(4, 5, 4, 5);
             txtIsHalfDay.Name = "txtIsHalfDay";
-            txtIsHalfDay.Size = new Size(150, 21);
+            txtIsHalfDay.Size = new Size(214, 35);
             txtIsHalfDay.TabIndex = 7;
             txtIsHalfDay.Text = "Is Halfday?";
             // 
             // txtProject
             // 
-            txtProject.Height = 23;
-            txtProject.Location = new Point(213, 284);
+            txtProject.Height = 33;
+            txtProject.Location = new Point(304, 473);
+            txtProject.Margin = new Padding(4, 5, 4, 5);
             txtProject.Name = "txtProject";
-            txtProject.Size = new Size(232, 23);
+            txtProject.Size = new Size(330, 33);
             txtProject.TabIndex = 8;
             txtProject.Text = "~Select~";
             txtProject.TextBoxHeight = 23;
             // 
             // autoLabel2
             // 
-            autoLabel2.Location = new Point(122, 107);
+            autoLabel2.Location = new Point(174, 178);
+            autoLabel2.Margin = new Padding(4, 0, 4, 0);
             autoLabel2.Name = "autoLabel2";
-            autoLabel2.Size = new Size(31, 15);
+            autoLabel2.Size = new Size(49, 25);
             autoLabel2.TabIndex = 9;
             autoLabel2.Text = "Date";
             // 
             // autoLabel3
             // 
-            autoLabel3.Location = new Point(122, 152);
+            autoLabel3.Location = new Point(174, 253);
+            autoLabel3.Margin = new Padding(4, 0, 4, 0);
             autoLabel3.Name = "autoLabel3";
-            autoLabel3.Size = new Size(43, 15);
+            autoLabel3.Size = new Size(64, 25);
             autoLabel3.TabIndex = 10;
             autoLabel3.Text = "Timein";
             // 
             // autoLabel4
             // 
-            autoLabel4.Location = new Point(122, 197);
+            autoLabel4.Location = new Point(174, 328);
+            autoLabel4.Margin = new Padding(4, 0, 4, 0);
             autoLabel4.Name = "autoLabel4";
-            autoLabel4.Size = new Size(51, 15);
+            autoLabel4.Size = new Size(77, 25);
             autoLabel4.TabIndex = 11;
             autoLabel4.Text = "Timeout";
             // 
             // autoLabel5
             // 
-            autoLabel5.Location = new Point(122, 242);
+            autoLabel5.Location = new Point(174, 403);
+            autoLabel5.Margin = new Padding(4, 0, 4, 0);
             autoLabel5.Name = "autoLabel5";
-            autoLabel5.Size = new Size(83, 15);
+            autoLabel5.Size = new Size(127, 25);
             autoLabel5.TabIndex = 12;
             autoLabel5.Text = "Hours Worked";
             // 
             // autoLabel6
             // 
-            autoLabel6.Location = new Point(122, 287);
+            autoLabel6.Location = new Point(174, 478);
+            autoLabel6.Margin = new Padding(4, 0, 4, 0);
             autoLabel6.Name = "autoLabel6";
-            autoLabel6.Size = new Size(44, 15);
+            autoLabel6.Size = new Size(66, 25);
             autoLabel6.TabIndex = 13;
             autoLabel6.Text = "Project";
             // 
             // btnSave
             // 
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
-            btnSave.Location = new Point(235, 364);
+            btnSave.Location = new Point(336, 607);
+            btnSave.Margin = new Padding(4, 5, 4, 5);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(96, 28);
+            btnSave.Size = new Size(137, 47);
             btnSave.TabIndex = 14;
             btnSave.Text = "Save";
             btnSave.Click += btnSave_Click;
             // 
+            // txtHoursWorked
+            // 
+            txtHoursWorked.AccessibilityEnabled = true;
+            txtHoursWorked.BeforeTouchSize = new Size(330, 31);
+            txtHoursWorked.DoubleValue = 8D;
+            txtHoursWorked.Location = new Point(304, 403);
+            txtHoursWorked.Name = "txtHoursWorked";
+            txtHoursWorked.Size = new Size(330, 31);
+            txtHoursWorked.TabIndex = 15;
+            txtHoursWorked.Text = "8.00";
+            // 
             // UpsertAttendanceView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(567, 450);
+            ClientSize = new Size(807, 739);
+            Controls.Add(txtHoursWorked);
             Controls.Add(btnSave);
             Controls.Add(autoLabel6);
             Controls.Add(autoLabel5);
@@ -318,8 +337,8 @@
             Controls.Add(txtTimein);
             Controls.Add(txtDate);
             Controls.Add(txtEmployee);
-            Controls.Add(txtHoursWorked);
             Controls.Add(autoLabel1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "UpsertAttendanceView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -327,7 +346,6 @@
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Add Attendance";
             Load += UpsertAttendanceView_Load;
-            ((System.ComponentModel.ISupportInitialize)txtHoursWorked).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtEmployee).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtDate.Calendar).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtDate).EndInit();
@@ -338,6 +356,7 @@
             ((System.ComponentModel.ISupportInitialize)txtIsPresent).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtIsHalfDay).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtProject).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtHoursWorked).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -345,7 +364,6 @@
         #endregion
 
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel1;
-        private Syncfusion.Windows.Forms.Tools.IntegerTextBox txtHoursWorked;
         private Syncfusion.Windows.Forms.Tools.ComboBoxAdv txtEmployee;
         private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv txtDate;
         private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv txtTimein;
@@ -359,5 +377,6 @@
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel5;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel6;
         private Syncfusion.WinForms.Controls.SfButton btnSave;
+        private Syncfusion.Windows.Forms.Tools.DoubleTextBox txtHoursWorked;
     }
 }

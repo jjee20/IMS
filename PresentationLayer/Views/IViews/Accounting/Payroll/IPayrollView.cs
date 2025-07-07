@@ -19,6 +19,7 @@ namespace RevenTech_ERP.Views.IViews.Accounting.Payroll
         string Message { get; set; }
         event EventHandler PrintPayrollEvent;
         event EventHandler SearchEvent;
+        event EventHandler RefreshEvent;
         event CellClickEventHandler TMonthEvent;
         event CellClickEventHandler PrintPaySlipEvent;
         void SetPayrollListBindingSource(IEnumerable<PayrollViewModel> PayrollList);

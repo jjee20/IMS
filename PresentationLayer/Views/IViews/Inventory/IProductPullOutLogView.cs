@@ -16,6 +16,7 @@ namespace RavenTech_ERP.Views.IViews.Inventory
         event KeyEventHandler MultipleDeleteEvent;
         event EventHandler PrintEvent;
         event EventHandler SearchEvent;
+        event EventHandler RefreshEvent;
 
         void SetProductInStockLogListBindingSource(IEnumerable<ProductPullOutLogViewModel> ProductInStockLogList);
     }

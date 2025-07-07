@@ -16,7 +16,7 @@ namespace RevenTech_ERP.Presenters.Accounting.Payroll
     public class ContributionPresenter
     {
         public IContributionView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private BindingSource ContributionTypeBindingSource;
         private IEnumerable<Contribution> ContributionList;
         private IEnumerable<EnumItemViewModel> ContributionTypeList;

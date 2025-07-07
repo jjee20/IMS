@@ -13,6 +13,7 @@ namespace RavenTech_ERP.Views.IViews.Inventory
         int Month { get; }
 
         event EventHandler UpdateSalesReportEvent;
+        event EventHandler RefreshEvent;
 
         static abstract SalesReportView GetInstance(TabPage parentContainer);
         void SetDailySalesChart(GunaBarDataset salesbarDataset, GunaBarDataset purchasesbarDataset);

@@ -21,7 +21,7 @@ namespace PresentationLayer.Presenters
     {
         private readonly IDashboardView _view;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        
 
         // Chart datasets and binding sources
         private readonly GunaHorizontalBarDataset TopSellingDataSet = new();
@@ -36,16 +36,16 @@ namespace PresentationLayer.Presenters
         private int ItemSold, Sales;
         private IEnumerable<EnumItemViewModel> YearList, MonthList;
 
-        public DashboardPresenter(IDashboardView view, IUnitOfWork unitOfWork, IEventAggregator eventAggregator)
+        public DashboardPresenter(IDashboardView view, IUnitOfWork unitOfWork)
         {
             _view = view;
             _unitOfWork = unitOfWork;
-            _eventAggregator = eventAggregator;
 
             // Event subscriptions
             _view.UpdateDashboardEvent -= UpdateDashboard;
+            _view.RefreshEvent -= Refresh;
             _view.UpdateDashboardEvent += UpdateDashboard;
-            _eventAggregator.Subscribe<InventoryCompletedEvent>(RefreshEvent);
+            _view.RefreshEvent += Refresh;
 
             // Initial loads and UI bindings
             RefreshEvent();
@@ -59,22 +59,24 @@ namespace PresentationLayer.Presenters
             _view.SetProgressBars(ItemSold, Sales);
         }
 
-        private void UpdateDashboard(object? sender, EventArgs e)
+        private void Refresh(object? sender, EventArgs e) => RefreshEvent();
+
+        private async void UpdateDashboard(object? sender, EventArgs e)
         {
-            LoadDailySalesTrend(_view.Year, _view.Month);
-            LoadMonthlySalesTrend(_view.Year);
+            await LoadDailySalesTrend(_view.Year, _view.Month);
+            await LoadMonthlySalesTrend(_view.Year);
         }
 
-        private void RefreshEvent()
+        private async void RefreshEvent()
         {
             LoadYears();
             LoadMonths();
-            LoadPanelHeader(_view.Year);
-            LoadTopSellingItems(_view.Year);
-            LoadProjectExpenseDistribution(_view.Year);
-            LoadDailySalesTrend();
-            LoadMonthlySalesTrend();
-            LoadInventoryStatus();
+            await LoadPanelHeader(_view.Year);
+            await LoadTopSellingItems(_view.Year);
+            await LoadProjectExpenseDistribution(_view.Year);
+            await LoadDailySalesTrend();
+            await LoadMonthlySalesTrend();
+            await LoadInventoryStatus();
         }
 
         private void LoadMonths()
@@ -95,7 +97,7 @@ namespace PresentationLayer.Presenters
             YearBindingSource.DataSource = YearList;
         }
 
-        private async void LoadPanelHeader(int? year = 0)
+        private async Task LoadPanelHeader(int? year = 0)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
             var today = DateTime.Now;
@@ -148,7 +150,7 @@ namespace PresentationLayer.Presenters
             ItemSold = expenseTarget.MonthlyItemSold > 0 ? (int)(itemsSoldToday / expenseTarget.MonthlyItemSold * 100) : 0;
         }
 
-        private async void LoadTopSellingItems(int year)
+        private async Task LoadTopSellingItems(int year)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
             var salesLines = await _unitOfWork.SalesOrderLine.Value.GetAllAsync(
@@ -167,18 +169,18 @@ namespace PresentationLayer.Presenters
                 TopSellingDataSet.DataPoints.Add(item.ProductName, item.Quantity);
         }
 
-        private async void LoadProjectExpenseDistribution(int year)
+        private async Task LoadProjectExpenseDistribution(int year)
         {
             year = year == 0 ? DateTime.Now.Year : _view.Year;
             var projectList = await _unitOfWork.Project.Value.GetAllAsync(
-                c => c.StartDate.HasValue && c.StartDate.Value.Year == year, includeProperties: "ProjectLines");
+                c => c.StartDate.HasValue && c.StartDate.Value.Year == year, includeProperties: "ProductPullOutLogs.ProductPullOutLogLines.Product");
 
             var projectExpenses = projectList
                 .GroupBy(c => c.ProjectName)
                 .Select(g => new ProjectExpenseDistributionViewModel
                 {
                     Project = g.Key,
-                    Amount = g.Sum(p => p.ProjectLines.Sum(pl => pl.SubTotal))
+                    Amount = g.Sum(p => p.ProductPullOutLogs.SelectMany(c => c.ProductPullOutLogLines).Sum(pl => pl.StockQuantity * pl.Product.DefaultBuyingPrice))
                 })
                 .ToList();
 
@@ -188,7 +190,7 @@ namespace PresentationLayer.Presenters
                 ProjectDataSet.DataPoints.Add(item.Project, item.Amount);
         }
 
-        private async void LoadInventoryStatus()
+        private async Task LoadInventoryStatus()
         {
             var productsStockIn = await _unitOfWork.ProductStockInLogs.Value
                 .GetAllAsync(includeProperties: "ProductStockInLogLines.Product");
@@ -214,17 +216,19 @@ namespace PresentationLayer.Presenters
             }).ToList();
 
             var totalQty = productStocks.Sum(p => p.Quantity);
+            var totalPullOutQty = allPullOut.Sum(p => p.StockQuantity);
             var lowStockQty = productStocks.Count(p => p.Product.ReorderLevel > 0 && p.Quantity <= p.Product.ReorderLevel && p.Quantity > 0);
-            var outOfStockQty = productStocks.Count(p => p.Quantity <= 0);
+            var outOfStockQty = productStocks.Count(p => p.Quantity <= 0); 
 
             InventoryStatusDataSet.Label = "Qty";
             InventoryStatusDataSet.DataPoints.Clear();
             InventoryStatusDataSet.DataPoints.Add("Total Stock", totalQty);
+            InventoryStatusDataSet.DataPoints.Add("Pulled Out", totalPullOutQty);
             InventoryStatusDataSet.DataPoints.Add("Low Stock (< ReorderLevel)", lowStockQty);
             InventoryStatusDataSet.DataPoints.Add("Out of Stock", outOfStockQty);
         }
 
-        private async void LoadDailySalesTrend(int? year = 0, int? month = 0)
+        private async Task LoadDailySalesTrend(int? year = 0, int? month = 0)
         {
             var today = (year == 0 && month == 0) ? DateTime.Now : new DateTime(year.Value, month.Value, 1);
             int days = DateTime.DaysInMonth(today.Year, today.Month);
@@ -240,7 +244,7 @@ namespace PresentationLayer.Presenters
             }
         }
 
-        private async void LoadMonthlySalesTrend(int? year = 0)
+        private async Task LoadMonthlySalesTrend(int? year = 0)
         {
             var date = year == 0 ? DateTime.Now : new DateTime(year.Value, 1, 1);
             var months = Enumerable.Range(1, 12).Select(i => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)).ToList();

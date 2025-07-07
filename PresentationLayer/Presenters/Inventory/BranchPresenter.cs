@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenters
     public class BranchPresenter
     {
         public IBranchView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<BranchViewModel> BranchList;
         public BranchPresenter(IBranchView view, IUnitOfWork unitOfWork) {
 

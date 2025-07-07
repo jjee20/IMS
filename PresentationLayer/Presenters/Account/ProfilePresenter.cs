@@ -18,7 +18,7 @@ namespace PresentationLayer.Presenters.Account
     public class ProfilePresenter
     {
         private IProfileView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         public ProfilePresenter(IProfileView view, IUnitOfWork unitOfWork)
         {
             _view = view;

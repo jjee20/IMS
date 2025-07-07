@@ -21,16 +21,16 @@ namespace PresentationLayer.Presenters
     public class ProjectPresenter
     {
         public IProjectView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
         private IEnumerable<ProjectViewModel> ProjectList;
-        public ProjectPresenter(IProjectView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator) {
+        public ProjectPresenter(IProjectView view, IUnitOfWork unitOfWork) {
 
             //Initialize
 
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
 
             //Events
             _view.SearchEvent -= Search;
@@ -60,10 +60,9 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProjectViewModel row)
             {
-                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId, includeProperties: "ProjectLines");
+                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId, includeProperties: "ProjectLines.Product,ProjectLines.Product.UnitOfMeasure,ProjectLines.Product.ProductType,ProductPullOutLogs,ProductPullOutLogs.ProductPullOutLogLines");
                 using (var form = new ProjectInformationView(row, _unitOfWork, entity))
                 {
-                    form.Text = "Edit Project";
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         LoadAllProjectList();
@@ -94,13 +93,11 @@ namespace PresentationLayer.Presenters
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProjectViewModel row)
             {
                 var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId, includeProperties: "ProjectLines");
-                using (var form = new UpsertProjectView(_unitOfWork, entity))
+                using var form = new UpsertProjectView(_unitOfWork, entity);
+                form.Text = "Edit Project";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    form.Text = "Edit Project";
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
-                        LoadAllProjectList();
-                    }
+                    LoadAllProjectList();
                 }
             }
         }
@@ -181,7 +178,7 @@ namespace PresentationLayer.Presenters
 
 
             _view.SetProjectListBindingSource(ProjectList.OrderByDescending(c => c.StartDate));
-            _eventAggregator.Publish<InventoryCompletedEvent>();
+            
         }
     }
 }

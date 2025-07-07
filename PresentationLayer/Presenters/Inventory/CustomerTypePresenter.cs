@@ -20,7 +20,7 @@ namespace PresentationLayer.Presenters
     public class CustomerTypePresenter
     {
         public ICustomerTypeView _view;
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private IEnumerable<CustomerTypeViewModel> CustomerTypeList;
         public CustomerTypePresenter(ICustomerTypeView view, IUnitOfWork unitOfWork) {
 

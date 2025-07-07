@@ -14,14 +14,14 @@ namespace RavenTech_ERP.Presenters.Inventory
     public class TargetGoalsPresenter
     {
         private ITargetGoalsView _view;
-        private IUnitOfWork _unitOfWork;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IUnitOfWork _unitOfWork;
+        
 
-        public TargetGoalsPresenter(ITargetGoalsView view, IUnitOfWork unitOfWork, ServiceLayer.Services.CommonServices.IEventAggregator eventAggregator)
+        public TargetGoalsPresenter(ITargetGoalsView view, IUnitOfWork unitOfWork)
         {
             _view = view;
             _unitOfWork = unitOfWork;
-            this._eventAggregator = eventAggregator;
+            
             _view.SaveClicked -= Save;
             _view.SaveClicked += Save;
 
@@ -68,7 +68,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.ItemSoldRemaining = itemSold - monthlyItemSoldTarget;
             _view.YearRemaining = annualSales - annualSalesTarget;
 
-            _eventAggregator.Publish<InventoryCompletedEvent>();
+            
         }
 
         private async void Save(object? sender, EventArgs e)

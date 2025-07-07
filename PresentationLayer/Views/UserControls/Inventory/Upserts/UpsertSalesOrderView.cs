@@ -202,6 +202,17 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 if (result == DialogResult.Yes)
                 {
                     _unitOfWork.SalesOrder.Value.Update(_entity);
+
+                    var oldLines = await _unitOfWork.SalesOrderLine.Value.GetAllAsync(c => c.SalesOrderId == _entity.SalesOrderId);
+                    _unitOfWork.SalesOrderLine.Value.RemoveRange(oldLines);
+
+                    // 3. Set correct ProjectId for each new line, then add all
+                    foreach (var line in _entity.SalesOrderLines)
+                    {
+                        line.SalesOrderLineId = _entity.SalesOrderId;
+                    }
+                    _unitOfWork.SalesOrderLine.Value.AddRange(_entity.SalesOrderLines);
+
                     message = "SalesOrder updated successfully.";
                 }
             }

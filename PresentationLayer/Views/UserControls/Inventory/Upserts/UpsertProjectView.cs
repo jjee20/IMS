@@ -98,10 +98,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 DiscountPercentage = c.DiscountPercentage,
                 SubTotal = c.SubTotal
             }).ToList();
-
-            var total = _projectsLines.Sum(c => c.SubTotal);
-            var budgets = double.TryParse(txtBudget.Text, out var budgetValue) ? budgetValue : 0.0;
-            _entity.Revenue = budgets - total;
         }
 
         private void ShowSuccess(string message) =>
@@ -146,6 +142,15 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 if (result == DialogResult.Yes)
                 {
                     _unitOfWork.Project.Value.Update(_entity);
+                    var oldProjectLines = await _unitOfWork.ProjectLine.Value.GetAllAsync(c => c.ProjectId == _entity.ProjectId);
+                    _unitOfWork.ProjectLine.Value.RemoveRange(oldProjectLines);
+
+                    // 3. Set correct ProjectId for each new line, then add all
+                    foreach (var line in _entity.ProjectLines)
+                    {
+                        line.ProjectId = _entity.ProjectId;
+                    }
+                    _unitOfWork.ProjectLine.Value.AddRange(_entity.ProjectLines);
                     message = "Project updated successfully.";
                 }
             }
@@ -238,7 +243,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                 productId = product.ProductId;
                 productName = product.ProductName;
-                price = product.DefaultSellingPrice;
+                price = product.DefaultBuyingPrice;
 
                 if (_projectsLines.Any(c => c.ProductId == productId))
                 {
