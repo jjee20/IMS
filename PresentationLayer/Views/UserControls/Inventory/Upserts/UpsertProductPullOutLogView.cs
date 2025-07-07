@@ -113,7 +113,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             int productId = (int)txtProduct.SelectedValue;
 
             // Get total stock-in quantity
-            var productStockInQty = _unitOfWork.ProductStockInLogLines.Value
+            var productStockInQty = _unitOfWork.ProductPullOutLogLines.Value
                 .GetAll(c => c.ProductId == productId)
                 .Sum(c => (int?)c.StockQuantity) ?? 0;
 
@@ -199,6 +199,17 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 if (result == DialogResult.Yes)
                 {
                     _unitOfWork.ProductPullOutLogs.Value.Update(_entity);
+
+                    var oldLines = await _unitOfWork.ProductPullOutLogLines.Value.GetAllAsync(c => c.ProductPullOutId == _entity.ProductPullOutLogId);
+                    _unitOfWork.ProductPullOutLogLines.Value.RemoveRange(oldLines);
+
+                    // 3. Set correct ProjectId for each new line, then add all
+                    foreach (var line in _entity.ProductPullOutLogLines)
+                    {
+                        line.ProductPullOutId = _entity.ProductPullOutLogId;
+                    }
+                    _unitOfWork.ProductPullOutLogLines.Value.AddRange(_entity.ProductPullOutLogLines);
+
                     message = "Product stock-in updated successfully.";
                 }
             }

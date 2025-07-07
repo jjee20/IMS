@@ -25,7 +25,7 @@ namespace DomainLayer.Models.Accounting.Payroll
         public double? Budget { get; set; }
 
         public double? Revenue { get; set; }
-        public IEnumerable<ProjectLine> ProjectLines { get; set; }
-        public IEnumerable<ProductPullOutLogs> ProductPullOutLogs { get; set; }
+        public virtual ICollection<ProjectLine> ProjectLines { get; set; } = new List<ProjectLine>();
+        public virtual ICollection<ProductPullOutLogs> ProductPullOutLogs { get; set; } = new List<ProductPullOutLogs>();
     }
 }

@@ -14,5 +14,14 @@ namespace InfastructureLayer.Repositories.Accounts
         {
             _db = db;
         }
+        public void UpdateProjectWithLines(Project entity)
+        {
+            // Assume ProjectLineId is the PK of ProjectLine.
+            UpdateWithChildren<Project, ProjectLine>(
+                entity,
+                p => p.ProjectLines,
+                pl => pl.ProjectLineId // <-- Make sure this is the correct PK for ProjectLine
+            );
+        }
     }
 }

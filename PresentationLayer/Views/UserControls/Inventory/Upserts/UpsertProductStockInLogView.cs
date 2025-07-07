@@ -168,6 +168,17 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 if (result == DialogResult.Yes)
                 {
                     _unitOfWork.ProductStockInLogs.Value.Update(_entity);
+
+                    var oldLines = await _unitOfWork.ProductStockInLogLines.Value.GetAllAsync(c => c.ProductStockInLogId == _entity.ProductStockInLogId);
+                    _unitOfWork.ProductStockInLogLines.Value.RemoveRange(oldLines);
+
+                    // 3. Set correct ProjectId for each new line, then add all
+                    foreach (var line in _entity.ProductStockInLogLines)
+                    {
+                        line.ProductStockInLogId = _entity.ProductStockInLogId;
+                    }
+                    _unitOfWork.ProductStockInLogLines.Value.AddRange(_entity.ProductStockInLogLines);
+
                     message = "Product stock-in updated successfully.";
                 }
             }

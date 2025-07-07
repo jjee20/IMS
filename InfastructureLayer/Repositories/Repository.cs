@@ -196,6 +196,60 @@ namespace InfastructureLayer.Repositories
             _db.Entry(entity).State = EntityState.Modified;
         }
 
+        public void UpdateWithChildren<TParent, TChild>(
+    TParent entity,
+    Expression<Func<TParent, IEnumerable<TChild>>> childrenSelector,
+    Func<TChild, object> keySelector
+)
+    where TParent : class
+    where TChild : class
+        {
+            // Find primary key for parent
+            var keyName = _db.Model.FindEntityType(typeof(TParent))
+                .FindPrimaryKey().Properties.Select(x => x.Name).Single();
+
+            var keyValue = _db.Entry(entity).Property(keyName).CurrentValue;
+
+            // Load existing entity with children tracked
+            var dbSet = _db.Set<TParent>();
+            var parentInDb = dbSet
+                .Include(childrenSelector)
+                .FirstOrDefault(e => EF.Property<object>(e, keyName).Equals(keyValue));
+
+            if (parentInDb == null)
+                throw new InvalidOperationException("Entity not found");
+
+            // Update scalar (simple) properties
+            _db.Entry(parentInDb).CurrentValues.SetValues(entity);
+
+            // Get children collections
+            var existingChildren = childrenSelector.Compile().Invoke(parentInDb).ToList();
+            var newChildren = childrenSelector.Compile().Invoke(entity).ToList();
+
+            // 1. Remove deleted children
+            foreach (var existingChild in existingChildren)
+            {
+                if (!newChildren.Any(c => keySelector(c).Equals(keySelector(existingChild))))
+                    _db.Remove(existingChild);
+            }
+
+            // 2. Add or update children
+            foreach (var child in newChildren)
+            {
+                var existingChild = existingChildren.FirstOrDefault(c => keySelector(c).Equals(keySelector(child)));
+                if (existingChild != null)
+                {
+                    _db.Entry(existingChild).CurrentValues.SetValues(child); // Update
+                }
+                else
+                {
+                    // Attach new child to parent
+                    existingChildren.Add(child);
+                }
+            }
+
+        }
+
         public void UpdateRange(IEnumerable<T> entities)
         {
             foreach (var entity in entities)

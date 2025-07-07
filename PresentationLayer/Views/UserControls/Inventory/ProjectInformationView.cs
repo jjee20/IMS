@@ -45,8 +45,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             var endDate = !string.IsNullOrEmpty(_projectVM.EndDate) ? _projectVM.EndDate : DateTime.Now.Date.ToLongDateString();
             txtProjectName.Text = _project.ProjectName ?? "{Needs Updating}";
             txtClient.Text = _projectVM.Client ?? "{Needs Updating}";
-            txtRevenue.Text = budget.ToString() ?? "{Needs Updating}";
-            txtBudget.Text = revenue.ToString() ?? "{Needs Updating}";
+            txtRevenue.Text = revenue.ToString() ?? "{Needs Updating}";
+            txtBudget.Text = budget.ToString() ?? "{Needs Updating}";
             txtStartDate.Text = startDate; 
             txtEndDate.Text = endDate;
             txtDescription.Text = _projectVM.Description ?? "{Needs Updating}";
@@ -57,7 +57,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                  var first = group.First(); // Representative line for shared product data
 
                  var totalQty = group.Sum(pl => pl.Quantity);
-                 var totalAmount = group.Sum(pl => pl.Amount);
+                 var totalAmount = group.Sum(pl => pl.SubTotal);
                  var price = first.Price;
 
                  var actualQty = _project.ProductPullOutLogs
@@ -101,7 +101,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             txtTotalRevenue.Text = totalRevenue.ToString("N2");
             // Compute Variance (Total Revenue - Actual Revenue)
             double variance = (double)(totalRevenue - revenue);
-            txtVariance.Text = variance.ToString("N2");
+            double variancePercent = (variance / revenue) * 100;
+            txtVariance.Text = $"{variance.ToString("N2")} ({variancePercent}%)";
         }
     }
 }

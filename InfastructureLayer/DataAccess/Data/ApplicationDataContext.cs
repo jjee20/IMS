@@ -46,13 +46,14 @@ namespace InfastructureLayer.DataAccess.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
         #region ThinkEE
-        //public DbSet<ReviewTopic> ReviewTopics { get; set; }
-        //public DbSet<Exam> Exams { get; set; }
-        //public DbSet<Question> Questions { get; set; }
-        //public DbSet<Choice> Choices { get; set; }
-        //public DbSet<ExamResult> ExamResults { get; set; }
-        //public DbSet<ExamFormat> ExamFormats { get; set; }
-        //public DbSet<PerformanceReport> PerformanceReports { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Choice> Choices { get; set; }
+        public DbSet<ExamFormat> ExamFormats { get; set; }
+        public DbSet<ExamTopic> ExamTopics { get; set; }
+        public DbSet<ExamResult> ExamResults { get; set; }
+        public DbSet<PerformanceReport> PerformanceReports { get; set; }
+        public DbSet<ReviewTopic> ReviewTopics { get; set; }
         #endregion
 
         #region Accounts
