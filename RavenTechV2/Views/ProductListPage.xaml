@@ -38,26 +38,26 @@
                               GridLinesVisibility="None"
                               HeaderLinesVisibility="Both"
                               ShowGroupDropArea="True">
-				<syncfusion:SfDataGrid.Columns>
-					<!-- TODO: Replace column definitions to match real data. Consider adding Header values to Resources.resw. -->
-					<syncfusion:GridTextColumn  MappingName="ProductId" HeaderText="ID" />
-					<syncfusion:GridTextColumn  MappingName="ProductName" HeaderText="Name" TextWrapping="Wrap"/>
-					<syncfusion:GridTextColumn  MappingName="ProductCode" HeaderText="Code" />
-					<syncfusion:GridTextColumn  MappingName="Barcode" HeaderText="Barcode" />
-					<syncfusion:GridTextColumn  MappingName="Description" HeaderText="Description" TextWrapping="Wrap"/>
-					<syncfusion:GridTextColumn  MappingName="Brand" HeaderText="Brand" />
-					<syncfusion:GridTextColumn  MappingName="Color" HeaderText="Color" />
-					<syncfusion:GridTextColumn  MappingName="Size" HeaderText="Size" />
-					<syncfusion:GridTextColumn  MappingName="UnitOfMeasure" HeaderText="UOM" />
-					<syncfusion:GridTextColumn  MappingName="DefaultBuyingPrice" HeaderText="Buying Price" />
-					<syncfusion:GridTextColumn  MappingName="DefaultSellingPrice" HeaderText="Selling Price" />
-					<syncfusion:GridTextColumn  MappingName="Branch" HeaderText="Branch" />
-					<syncfusion:GridTemplateColumn HeaderText="Actions">
-						<syncfusion:GridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<StackPanel Orientation="Horizontal" Spacing="4">
-									<!-- Edit Button (Blue) -->
-									<Button
+                <syncfusion:SfDataGrid.Columns>
+                    <!-- TODO: Replace column definitions to match real data. Consider adding Header values to Resources.resw. -->
+                    <syncfusion:GridTextColumn  MappingName="ProductId" HeaderText="ID" />
+                    <syncfusion:GridTextColumn  MappingName="ProductName" HeaderText="Name" TextWrapping="Wrap"/>
+                    <syncfusion:GridTextColumn  MappingName="ProductCode" HeaderText="Code" />
+                    <syncfusion:GridTextColumn  MappingName="Barcode" HeaderText="Barcode" />
+                    <syncfusion:GridTextColumn  MappingName="Description" HeaderText="Description" TextWrapping="Wrap"/>
+                    <syncfusion:GridTextColumn  MappingName="Brand" HeaderText="Brand" />
+                    <syncfusion:GridTextColumn  MappingName="Color" HeaderText="Color" />
+                    <syncfusion:GridTextColumn  MappingName="Size" HeaderText="Size" />
+                    <syncfusion:GridTextColumn  MappingName="UnitOfMeasure" HeaderText="UOM" />
+                    <syncfusion:GridTextColumn  MappingName="DefaultBuyingPrice" HeaderText="Buying Price" />
+                    <syncfusion:GridTextColumn  MappingName="DefaultSellingPrice" HeaderText="Selling Price" />
+                    <syncfusion:GridTextColumn  MappingName="Branch" HeaderText="Branch" />
+                    <syncfusion:GridTemplateColumn HeaderText="Actions">
+                        <syncfusion:GridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                    <!-- Edit Button (Blue) -->
+                                    <Button
                             Content="Edit"
                             Click="EditButton_Click"
                             Tag="{Binding}"
@@ -66,8 +66,8 @@
                             BorderBrush="DodgerBlue"
                             BorderThickness="1"
                             MinWidth="48"/>
-									<!-- Delete Button (Red) -->
-									<Button
+                                    <!-- Delete Button (Red) -->
+                                    <Button
                     Content="Delete"
                     Click="DeleteButton_Click"
                     Tag="{Binding}"
@@ -75,22 +75,12 @@
                     BorderBrush="Crimson"
                     BorderThickness="1"
                     MinWidth="56"/>
-								</StackPanel>
-							</DataTemplate>
-						</syncfusion:GridTemplateColumn.CellTemplate>
-					</syncfusion:GridTemplateColumn>
-				</syncfusion:SfDataGrid.Columns>
-				<syncfusion:SfDataGrid.TableSummaryRows>
-					<syncfusion:GridTableSummaryRow Title="Total Product : {TotalProduct}" ShowSummaryInRow="True">
-						<syncfusion:GridTableSummaryRow.SummaryColumns>
-							<syncfusion:GridSummaryColumn Name="TotalProduct"
-														 Format="{Count}"
-														 MappingName="ProductId"
-														 SummaryType="DoubleAggregate" />
-					</syncfusion:GridTableSummaryRow.SummaryColumns>
-				</syncfusion:GridTableSummaryRow>
-				</syncfusion:SfDataGrid.TableSummaryRows>
-			</syncfusion:SfDataGrid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </syncfusion:GridTemplateColumn.CellTemplate>
+                    </syncfusion:GridTemplateColumn>
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
 		</StackPanel>
 	</Grid>
 </Page>

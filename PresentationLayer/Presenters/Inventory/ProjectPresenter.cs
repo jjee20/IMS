@@ -93,13 +93,11 @@ namespace PresentationLayer.Presenters
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProjectViewModel row)
             {
                 var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId, includeProperties: "ProjectLines");
-                using (var form = new UpsertProjectView(_unitOfWork, entity))
+                using var form = new UpsertProjectView(_unitOfWork, entity);
+                form.Text = "Edit Project";
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    form.Text = "Edit Project";
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
-                        LoadAllProjectList();
-                    }
+                    LoadAllProjectList();
                 }
             }
         }
