@@ -4,6 +4,10 @@ namespace RavenTech_ERP.Views.IViews
 {
     public interface IMainForm
     {
+        event EventHandler ExamEvent;
+        event EventHandler ExamFormatEvent;
+        event EventHandler ExamTopicEvent;
+        event EventHandler ReviewTopicEvent;
         event EventHandler AllowanceEvent;
         event EventHandler AttendanceEvent;
         event EventHandler BenefitEvent;

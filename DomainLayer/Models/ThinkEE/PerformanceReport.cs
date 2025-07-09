@@ -13,7 +13,7 @@ namespace DomainLayer.Models.ThinkEE
     public class PerformanceReport
     {
         [Key]
-        public int Id { get; set; }
+        public int PerformanceReportId { get; set; }
 
         [ForeignKey("Examinee")]
         public string ExamineeId { get; set; }

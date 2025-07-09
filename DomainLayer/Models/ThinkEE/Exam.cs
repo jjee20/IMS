@@ -10,13 +10,13 @@ namespace RavenTech_ThinkEE
     public class Exam
     {
         [Key]
-        public int Id { get; set; }
+        public int ExamId { get; set; }
 
         [Required]
         public string Title { get; set; }
 
         [Required]
-        public string Type { get; set; }  // e.g., Mock, Quiz, Final
+        public string Type { get; set; } = "";
 
         public DateTime Date { get; set; }
         [ForeignKey("ExamFormat")]

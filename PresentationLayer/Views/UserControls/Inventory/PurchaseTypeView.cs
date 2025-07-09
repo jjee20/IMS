@@ -46,7 +46,9 @@ namespace PresentationLayer.Views.UserControls
 
         private void dgList_CellClick(object sender, CellClickEventArgs e)
         {
-            if (e.DataColumn.GridColumn.MappingName == "Edit")
+            if (e.DataRow?.RowType == RowType.DefaultRow)
+            {
+                if (e.DataColumn.GridColumn.MappingName == "Edit")
             {
                 EditEvent?.Invoke(sender, e);
             }
@@ -59,6 +61,7 @@ namespace PresentationLayer.Views.UserControls
                 {
                     DeleteEvent?.Invoke(sender, e);
                 }
+            }
             }
         }
         private void Me_KeyDown(object sender, KeyEventArgs e)

@@ -66,7 +66,7 @@ public partial class ReviewTopicViewModel : ObservableRecipient, INavigationAwar
     public async void Edit(DomainLayer.ViewModels.ThinkEE.ReviewTopicViewModel vm)
     {
         if (vm == null) return;
-        var entity = await _unitOfWork.ReviewTopic.Value.GetAsync(x => x.Id == vm.Id);
+        var entity = await _unitOfWork.ReviewTopic.Value.GetAsync(x => x.ReviewTopicId == vm.ReviewTopicId);
         var dialog = new ReviewTopicDialogPage(entity, "Edit Review Topic") { XamlRoot = DialogXamlRoot }; 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
@@ -94,7 +94,7 @@ public partial class ReviewTopicViewModel : ObservableRecipient, INavigationAwar
 
         if (result == ContentDialogResult.Primary)
         {
-            var selectedEntity = await _unitOfWork.ReviewTopic.Value.GetAsync(e => e.Id == vm.Id);
+            var selectedEntity = await _unitOfWork.ReviewTopic.Value.GetAsync(e => e.ReviewTopicId == vm.ReviewTopicId);
 
             _unitOfWork.ReviewTopic.Value.Remove(selectedEntity);
             await _unitOfWork.SaveAsync();

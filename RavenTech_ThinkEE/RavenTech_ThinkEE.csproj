@@ -37,20 +37,6 @@
     <ProjectReference Include="..\InfastructureLayer\InfastructureLayer.csproj" />
     <ProjectReference Include="..\RavenTech_ThinkEE.Core\RavenTech_ThinkEE.Core.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Reports\Report.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Update="Reports\ReportView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Reports\SERCS.Designer.cs">
-      <DependentUpon>SERCS.xsd</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -186,10 +172,6 @@
     </None>
     <None Update="Reports\Inventory\WarehouseReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Reports\SERCS.xsd">
-      <LastGenOutput>SERCS.Designer.cs</LastGenOutput>
-      <Generator>MSDataSetGenerator</Generator>
     </None>
     <Page Update="Views\ReviewTopicDialogPage.xaml">
       <Generator>MSBuild:Compile</Generator>

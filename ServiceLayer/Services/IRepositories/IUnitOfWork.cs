@@ -7,6 +7,11 @@ namespace ServiceLayer.Services.IRepositories
 {
     public interface IUnitOfWork
     {
+        Lazy<IChoiceRepository> Choice { get; }
+        Lazy<IQuestionRepository> Question { get; }
+        Lazy<IExamRepository> Exam { get; }
+        Lazy<IExamFormatRepository> ExamFormat { get; }
+        Lazy<IExamTopicRepository> ExamTopic { get; }
         Lazy<IHolidayRepository> Holiday { get; }
         Lazy<IAllowanceRepository> Allowance { get; }
         Lazy<IApplicationUserRepository> ApplicationUser { get; }
