@@ -35,6 +35,7 @@ namespace RavenTech_ERP.Presenters
     {
         private readonly IMainForm _mainForm; 
         private readonly IUnityContainer _container;
+        private ProjectDashboardPresenter? _projectDashboardPresenter;
         private ExamPresenter? _examPresenter;
         private ExamFormatPresenter? _examFormatPresenter;
         private ExamTopicPresenter? _examTopicPresenter;
@@ -129,6 +130,7 @@ namespace RavenTech_ERP.Presenters
             //_mainForm.DepartmentEvent -= DepartmentEvent;
             //_mainForm.ProductPulloutLogEvent -= ProductPulloutLogEvent;
 
+            _mainForm.ProjectDashboardEvent += ProjectDashboardEvent;
             _mainForm.ExamEvent += ExamEvent;
             _mainForm.ExamFormatEvent += ExamFormatEvent;
             _mainForm.ExamTopicEvent += ExamTopicEvent;
@@ -186,6 +188,14 @@ namespace RavenTech_ERP.Presenters
                 _mainForm.ribbonControl.SelectedTab = _mainForm.PayrollTab;
                 AttendanceEvent(this, EventArgs.Empty);
             }
+        }
+
+        private void ProjectDashboardEvent(object? sender, EventArgs e)
+        {
+            IProjectDashboardView view = ChildManager<ProjectDashboardView>.GetChildInstance((MainForm)_mainForm);
+            if (_projectDashboardPresenter == null || ((Form)view).IsDisposed)
+                _projectDashboardPresenter = new ProjectDashboardPresenter(view, _container.Resolve<IUnitOfWork>());
+            ((Form)view).BringToFront();
         }
 
         private void ExamEvent(object? sender, EventArgs e)
