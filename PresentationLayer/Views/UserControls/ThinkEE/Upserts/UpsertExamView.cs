@@ -34,7 +34,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private async void LoadExamTopicsToCOmbobox()
         {
             var examTopics = await _unitOfWork.ExamTopic.Value.GetAllAsync();
-            var comboCol = dgList.Columns["ExamTopic"] as GridComboBoxColumn;
+            var comboCol = dgList.Columns["ExamTopicId"] as GridComboBoxColumn;
             if (comboCol != null)
             {
                 comboCol.DataSource = examTopics;

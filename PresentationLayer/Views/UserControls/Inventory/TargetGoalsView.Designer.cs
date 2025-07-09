@@ -258,7 +258,7 @@
             txtYearCurrent.AutoSize = true;
             txtYearCurrent.Depth = 0;
             txtYearCurrent.Dock = DockStyle.Fill;
-            txtYearCurrent.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Pixel);
+            txtYearCurrent.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtYearCurrent.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             txtYearCurrent.Location = new Point(370, 78);
             txtYearCurrent.Margin = new Padding(4, 0, 4, 0);
@@ -512,7 +512,7 @@
             txtItemSold.AutoSize = true;
             txtItemSold.Depth = 0;
             txtItemSold.Dock = DockStyle.Fill;
-            txtItemSold.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Pixel);
+            txtItemSold.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtItemSold.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             txtItemSold.Location = new Point(370, 62);
             txtItemSold.Margin = new Padding(4, 0, 4, 0);
@@ -528,7 +528,7 @@
             txtSales.AutoSize = true;
             txtSales.Depth = 0;
             txtSales.Dock = DockStyle.Fill;
-            txtSales.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Pixel);
+            txtSales.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSales.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             txtSales.Location = new Point(370, 93);
             txtSales.Margin = new Padding(4, 0, 4, 0);

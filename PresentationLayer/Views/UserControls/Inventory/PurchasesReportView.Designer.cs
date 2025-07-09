@@ -82,8 +82,8 @@
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             txtMonth = new MaterialSkin.Controls.MaterialComboBox();
             txtYear = new MaterialSkin.Controls.MaterialComboBox();
-            materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             btnRefresh = new Guna.UI2.WinForms.Guna2Button();
+            materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             materialCard1.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -643,23 +643,6 @@
             txtYear.StartIndex = 0;
             txtYear.TabIndex = 5;
             // 
-            // materialLabel1
-            // 
-            materialLabel1.Depth = 0;
-            materialLabel1.Dock = DockStyle.Left;
-            materialLabel1.Font = new Font("Roboto", 34F, FontStyle.Bold, GraphicsUnit.Pixel);
-            materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
-            materialLabel1.ForeColor = Color.FromArgb(255, 246, 233);
-            materialLabel1.ImageAlign = ContentAlignment.MiddleLeft;
-            materialLabel1.Location = new Point(0, 0);
-            materialLabel1.Margin = new Padding(4, 0, 4, 0);
-            materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(595, 46);
-            materialLabel1.TabIndex = 4;
-            materialLabel1.Text = "Expense Report";
-            materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
-            // 
             // btnRefresh
             // 
             btnRefresh.CustomizableEdges = customizableEdges1;
@@ -680,6 +663,23 @@
             btnRefresh.Size = new Size(75, 46);
             btnRefresh.TabIndex = 12;
             btnRefresh.Click += btnRefresh_Click;
+            // 
+            // materialLabel1
+            // 
+            materialLabel1.Depth = 0;
+            materialLabel1.Dock = DockStyle.Left;
+            materialLabel1.Font = new Font("Roboto", 34F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
+            materialLabel1.ForeColor = Color.FromArgb(255, 246, 233);
+            materialLabel1.ImageAlign = ContentAlignment.MiddleLeft;
+            materialLabel1.Location = new Point(0, 0);
+            materialLabel1.Margin = new Padding(4, 0, 4, 0);
+            materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel1.Name = "materialLabel1";
+            materialLabel1.Size = new Size(595, 46);
+            materialLabel1.TabIndex = 4;
+            materialLabel1.Text = "Expense Report";
+            materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // PurchasesReportView
             // 

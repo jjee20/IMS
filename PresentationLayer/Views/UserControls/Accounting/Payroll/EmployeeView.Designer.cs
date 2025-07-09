@@ -289,6 +289,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn6.MappingName = "Email";
             gridTextColumn6.ShowToolTip = true;
             gridTextColumn7.AllowFiltering = true;
+            gridTextColumn7.Format = "C2";
             gridTextColumn7.HeaderText = "Basic Salary";
             gridTextColumn7.MappingName = "BasicSalary";
             gridTextColumn7.ShowToolTip = true;
@@ -337,6 +338,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn15.MappingName = "Projects";
             gridTextColumn15.ShowToolTip = true;
             gridTextColumn16.AllowFiltering = true;
+            gridTextColumn16.Format = "C2";
             gridTextColumn16.HeaderText = "Total Salary Claimed";
             gridTextColumn16.MappingName = "TotalSalaryClaimed";
             gridTextColumn16.ShowToolTip = true;

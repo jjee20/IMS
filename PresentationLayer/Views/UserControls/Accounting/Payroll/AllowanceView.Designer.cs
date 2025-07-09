@@ -277,6 +277,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn3.ShowToolTip = true;
             gridTextColumn4.AllowFiltering = true;
             gridTextColumn4.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
+            gridTextColumn4.Format = "C2";
             gridTextColumn4.HeaderText = "Amount";
             gridTextColumn4.MappingName = "Amount";
             gridTextColumn4.ShowToolTip = true;

@@ -842,7 +842,7 @@ namespace PresentationLayer.Views.UserControls
             chartFont34.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
             chartTopUsed.Title.Font = chartFont34;
             chartTopUsed.Title.ForeColor = Color.Black;
-            chartTopUsed.Title.Text = "Top Used Material/Product per Project";
+            chartTopUsed.Title.Text = "Top Used Material/Product";
             chartFont35.FontName = "Arial";
             chartTopUsed.Tooltips.BodyFont = chartFont35;
             chartFont36.FontName = "Arial";

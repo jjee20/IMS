@@ -136,7 +136,7 @@ namespace PresentationLayer.Views.UserControls
         {
             set
             {
-                txtExpenseItemsSold.Text = value.ToString("N2");
+                txtExpenseItemsSold.Text = value.ToString("C2");
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -144,7 +144,7 @@ namespace PresentationLayer.Views.UserControls
         {
             set
             {
-                txtExpenseItemsSoldTarget.Text = value.ToString("N2");
+                txtExpenseItemsSoldTarget.Text = value.ToString("C2");
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -152,7 +152,7 @@ namespace PresentationLayer.Views.UserControls
         {
             set
             {
-                txtExpenseSales.Text = value.ToString("N2");
+                txtExpenseSales.Text = value.ToString("C2");
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -160,7 +160,7 @@ namespace PresentationLayer.Views.UserControls
         {
             set
             {
-                txtExpenseSalesTarget.Text = value.ToString("N2");
+                txtExpenseSalesTarget.Text = value.ToString("C2");
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -168,7 +168,7 @@ namespace PresentationLayer.Views.UserControls
         {
             set
             {
-                txtTotalExpenses.Text = value.ToString("N2");
+                txtTotalExpenses.Text = value.ToString("C2");
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -176,7 +176,7 @@ namespace PresentationLayer.Views.UserControls
         {
             set
             {
-                txtTotalProfit.Text = value.ToString("N2");
+                txtTotalProfit.Text = value.ToString("C2");
             }
         }
 

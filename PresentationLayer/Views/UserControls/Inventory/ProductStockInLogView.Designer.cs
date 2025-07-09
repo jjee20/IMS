@@ -301,6 +301,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn5.ShowToolTip = true;
             gridDateTimeColumn1.AllowFiltering = true;
             gridDateTimeColumn1.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridDateTimeColumn1.Format = "MMMM dd,yyyy";
             gridDateTimeColumn1.HeaderText = "Delivered Date";
             gridDateTimeColumn1.MappingName = "DeliveredDate";
             gridDateTimeColumn1.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
@@ -312,6 +313,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn6.ShowToolTip = true;
             gridDateTimeColumn2.AllowFiltering = true;
             gridDateTimeColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridDateTimeColumn2.Format = "MMMM dd,yyyy";
             gridDateTimeColumn2.HeaderText = "Received Date";
             gridDateTimeColumn2.MappingName = "ReceivedDate";
             gridDateTimeColumn2.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
