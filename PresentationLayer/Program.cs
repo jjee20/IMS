@@ -1,13 +1,14 @@
-using Unity;
-using Unity.Lifetime;
-using InfastructureLayer.DataAccess.Repositories;
-using ServiceLayer.Services.CommonServices;
+using System.Globalization;
 using AutoMapper;
+using InfastructureLayer.DataAccess.Repositories;
 using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views.IViews.Inventory;
-using ServiceLayer.Services.IRepositories;
 using RavenTech_ERP.Views.UserControls.Account;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using ServiceLayer.Services.CommonServices;
+using ServiceLayer.Services.IRepositories;
+using Unity;
+using Unity.Lifetime;
 
 namespace PresentationLayer
 {
@@ -19,7 +20,9 @@ namespace PresentationLayer
         {
             IUnityContainer UnityC = new UnityContainer();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NNaF5cXmBCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWXxdcHZUR2BZUkVyWEVWYUA=");
-            
+            CultureInfo phCulture = new CultureInfo("en-PH");
+            Thread.CurrentThread.CurrentCulture = phCulture;
+            Thread.CurrentThread.CurrentUICulture = phCulture;
             UnityC.RegisterType<IUnitOfWork, UnitOfWork>(new TransientLifetimeManager());
 
             var mapperConfig = new MapperConfiguration(cfg =>
