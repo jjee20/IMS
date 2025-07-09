@@ -113,7 +113,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             int productId = (int)txtProduct.SelectedValue;
 
             // Get total stock-in quantity
-            var productStockInQty = _unitOfWork.ProductPullOutLogLines.Value
+            var productStockInQty = _unitOfWork.ProductStockInLogLines.Value
                 .GetAll(c => c.ProductId == productId)
                 .Sum(c => (int?)c.StockQuantity) ?? 0;
 
