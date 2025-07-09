@@ -2,6 +2,7 @@
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Accounts;
 using DomainLayer.Models.ThinkEE;
+using DomainLayer.ViewModels.ThinkEE;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RavenTech_ThinkEE;
@@ -116,87 +117,87 @@ namespace InfastructureLayer.DataAccess.Data
         public static void SeedExamFormat(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReviewTopic>().HasData(
-                new ReviewTopic { Id = 1, Code = "REE", Name = "Registered Electrical Engineer" },
-                new ReviewTopic { Id = 2, Code = "RME", Name = "Registered Master Electrician" }
+                new ReviewTopic { ReviewTopicId = 1, Code = "REE", Name = "Registered Electrical Engineer" },
+                new ReviewTopic { ReviewTopicId = 2, Code = "RME", Name = "Registered Master Electrician" }
             );
             modelBuilder.Entity<ExamTopic>().HasData(
                 //REE
-                new ExamTopic { Id = 1, Name = "Algebra", Category = "Mathematics" },
-                new ExamTopic { Id = 2, Name = "Trigonometry", Category = "Mathematics" },
-                new ExamTopic { Id = 3, Name = "Differential and Integral Calculus", Category = "Mathematics" },
-                new ExamTopic { Id = 4, Name = "Complex Numbers", Category = "Mathematics" },
-                new ExamTopic { Id = 5, Name = "Probability and Statistics", Category = "Mathematics" },
-                new ExamTopic { Id = 6, Name = "Differential Equations", Category = "Mathematics" },
-                new ExamTopic { Id = 7, Name = "Laplace Transform and Fourier Series", Category = "Mathematics" },
-                new ExamTopic { Id = 8, Name = "Matrix Algebra", Category = "Mathematics" },
-                new ExamTopic { Id = 9, Name = "Numerical Methods", Category = "Mathematics" },
+                new ExamTopic { ExamTopicId = 1, Name = "Algebra", Category = "Mathematics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 2, Name = "Trigonometry", Category = "Mathematics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 3, Name = "Differential and Integral Calculus", Category = "Mathematics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 4, Name = "Complex Numbers", Category = "Mathematics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 5, Name = "Probability and Statistics", Category = "Mathematics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 6, Name = "Differential Equations", Category = "Mathematics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 7, Name = "Laplace Transform and Fourier Series", Category = "Mathematics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 8, Name = "Matrix Algebra", Category = "Mathematics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 9, Name = "Numerical Methods", Category = "Mathematics", ReviewTopicId = 1 },
 
-                new ExamTopic { Id = 10, Name = "Engineering Mechanics", Category = "Engineering Sciences" },
-                new ExamTopic { Id = 11, Name = "Strength of Materials", Category = "Engineering Sciences" },
-                new ExamTopic { Id = 12, Name = "Thermodynamics", Category = "Engineering Sciences" },
-                new ExamTopic { Id = 13, Name = "Fluid Mechanics", Category = "Engineering Sciences" },
-                new ExamTopic { Id = 14, Name = "Chemistry and Physics", Category = "Engineering Sciences" },
-                new ExamTopic { Id = 15, Name = "Computer Fundamentals and Programming", Category = "Engineering Sciences" },
+                new ExamTopic { ExamTopicId = 10, Name = "Engineering Mechanics", Category = "Engineering Sciences", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 11, Name = "Strength of Materials", Category = "Engineering Sciences", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 12, Name = "Thermodynamics", Category = "Engineering Sciences", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 13, Name = "FluExamTopicId Mechanics", Category = "Engineering Sciences", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 14, Name = "Chemistry and Physics", Category = "Engineering Sciences", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 15, Name = "Computer Fundamentals and Programming", Category = "Engineering Sciences", ReviewTopicId = 1 },
 
-                new ExamTopic { Id = 16, Name = "DC and AC Circuits", Category = "Electrical Circuits and Devices" },
-                new ExamTopic { Id = 17, Name = "Network Theorems", Category = "Electrical Circuits and Devices" },
-                new ExamTopic { Id = 18, Name = "Resonance", Category = "Electrical Circuits and Devices" },
-                new ExamTopic { Id = 19, Name = "Transformers", Category = "Electrical Circuits and Devices" },
-                new ExamTopic { Id = 20, Name = "Motors and Generators", Category = "Electrical Circuits and Devices" },
+                new ExamTopic { ExamTopicId = 16, Name = "DC and AC Circuits", Category = "Electrical Circuits and Devices", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 17, Name = "Network Theorems", Category = "Electrical Circuits and Devices", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 18, Name = "Resonance", Category = "Electrical Circuits and Devices", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 19, Name = "Transformers", Category = "Electrical Circuits and Devices", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 20, Name = "Motors and Generators", Category = "Electrical Circuits and Devices", ReviewTopicId = 1 },
 
-                new ExamTopic { Id = 21, Name = "Semiconductor Devices", Category = "Electronics" },
-                new ExamTopic { Id = 22, Name = "Amplifiers", Category = "Electronics" },
-                new ExamTopic { Id = 23, Name = "Oscillators", Category = "Electronics" },
-                new ExamTopic { Id = 24, Name = "Operational Amplifiers", Category = "Electronics" },
-                new ExamTopic { Id = 25, Name = "Digital Electronics", Category = "Electronics" },
-                new ExamTopic { Id = 26, Name = "Communication Basics", Category = "Electronics" },
+                new ExamTopic { ExamTopicId = 21, Name = "Semiconductor Devices", Category = "Electronics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 22, Name = "Amplifiers", Category = "Electronics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 23, Name = "Oscillators", Category = "Electronics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 24, Name = "Operational Amplifiers", Category = "Electronics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 25, Name = "Digital Electronics", Category = "Electronics", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 26, Name = "Communication Basics", Category = "Electronics", ReviewTopicId = 1 },
 
-                new ExamTopic { Id = 27, Name = "Power Generation", Category = "Power Systems" },
-                new ExamTopic { Id = 28, Name = "Power Transmission and Distribution", Category = "Power Systems" },
-                new ExamTopic { Id = 29, Name = "Load Flow and Short Circuit Analysis", Category = "Power Systems" },
-                new ExamTopic { Id = 30, Name = "Protective Relays and Circuit Breakers", Category = "Power Systems" },
-                new ExamTopic { Id = 31, Name = "Substation Design", Category = "Power Systems" },
+                new ExamTopic { ExamTopicId = 27, Name = "Power Generation", Category = "Power Systems", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 28, Name = "Power Transmission and Distribution", Category = "Power Systems", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 29, Name = "Load Flow and Short Circuit Analysis", Category = "Power Systems", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 30, Name = "Protective Relays and Circuit Breakers", Category = "Power Systems", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 31, Name = "Substation Design", Category = "Power Systems", ReviewTopicId = 1 },
 
-                new ExamTopic { Id = 32, Name = "Synchronous Machines", Category = "Electrical Machines" },
-                new ExamTopic { Id = 33, Name = "Induction Motors", Category = "Electrical Machines" },
-                new ExamTopic { Id = 34, Name = "Transformers", Category = "Electrical Machines" },
-                new ExamTopic { Id = 35, Name = "DC Machines", Category = "Electrical Machines" },
-                new ExamTopic { Id = 36, Name = "Motor Control and Starting", Category = "Electrical Machines" },
+                new ExamTopic { ExamTopicId = 32, Name = "Synchronous Machines", Category = "Electrical Machines", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 33, Name = "Induction Motors", Category = "Electrical Machines", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 34, Name = "Transformers", Category = "Electrical Machines", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 35, Name = "DC Machines", Category = "Electrical Machines", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 36, Name = "Motor Control and Starting", Category = "Electrical Machines", ReviewTopicId = 1 },
 
-                new ExamTopic { Id = 37, Name = "Feedback and Control Theory", Category = "Control Systems" },
-                new ExamTopic { Id = 38, Name = "Block Diagrams", Category = "Control Systems" },
-                new ExamTopic { Id = 39, Name = "Stability Analysis", Category = "Control Systems" },
-                new ExamTopic { Id = 40, Name = "Bode Plots and Root Locus", Category = "Control Systems" },
+                new ExamTopic { ExamTopicId = 37, Name = "Feedback and Control Theory", Category = "Control Systems", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 38, Name = "Block Diagrams", Category = "Control Systems", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 39, Name = "Stability Analysis", Category = "Control Systems", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 40, Name = "Bode Plots and Root Locus", Category = "Control Systems", ReviewTopicId = 1 },
 
-                new ExamTopic { Id = 41, Name = "Electrical Measuring Instruments", Category = "Instrumentation and Measurement" },
-                new ExamTopic { Id = 42, Name = "Transducers", Category = "Instrumentation and Measurement" },
-                new ExamTopic { Id = 43, Name = "Calibration", Category = "Instrumentation and Measurement" },
-                new ExamTopic { Id = 44, Name = "Instrument Errors", Category = "Instrumentation and Measurement" },
+                new ExamTopic { ExamTopicId = 41, Name = "Electrical Measuring Instruments", Category = "Instrumentation and Measurement", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 42, Name = "Transducers", Category = "Instrumentation and Measurement", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 43, Name = "Calibration", Category = "Instrumentation and Measurement", ReviewTopicId = 1 },
+                new ExamTopic { ExamTopicId = 44, Name = "Instrument Errors", Category = "Instrumentation and Measurement", ReviewTopicId = 1 },
 
                 //RME
-                new ExamTopic { Id = 45, Name = "Ohm's Law and Power Law", Category = "Basic Electrical Engineering" },
-                new ExamTopic { Id = 46, Name = "Wiring Design and Estimating", Category = "Electrical Design" },
-                new ExamTopic { Id = 47, Name = "Philippine Electrical Code", Category = "Regulations" },
-                new ExamTopic { Id = 48, Name = "Electrical Wiring Installation", Category = "Practical Applications" },
-                new ExamTopic { Id = 49, Name = "Tools and Electrical Materials", Category = "Materials and Tools" },
-                new ExamTopic { Id = 50, Name = "Safety Practices", Category = "Safety" },
-                new ExamTopic { Id = 51, Name = "Electrical Test Equipment", Category = "Testing and Measurement" }
+                new ExamTopic { ExamTopicId = 45, Name = "Ohm's Law and Power Law", Category = "Basic Electrical Engineering", ReviewTopicId = 2 },
+                new ExamTopic { ExamTopicId = 46, Name = "Wiring Design and Estimating", Category = "Electrical Design", ReviewTopicId = 2 },
+                new ExamTopic { ExamTopicId = 47, Name = "Philippine Electrical Code", Category = "Regulations", ReviewTopicId = 2 },
+                new ExamTopic { ExamTopicId = 48, Name = "Electrical Wiring Installation", Category = "Practical Applications", ReviewTopicId = 2 },
+                new ExamTopic { ExamTopicId = 49, Name = "Tools and Electrical Materials", Category = "Materials and Tools", ReviewTopicId = 2 },
+                new ExamTopic { ExamTopicId = 50, Name = "Safety Practices", Category = "Safety", ReviewTopicId = 2 },
+                new ExamTopic { ExamTopicId = 51, Name = "Electrical Test Equipment", Category = "Testing and Measurement", ReviewTopicId = 2 }
             );
 
 
 
             modelBuilder.Entity<ExamFormat>().HasData(
-                new ExamFormat { Id = 1, Name = "Mock Board", Description = "Simulate full exam with time limit", DefaultDurationMinutes = 240 },
-                new ExamFormat { Id = 2, Name = "Diagnostic Test", Description = "Identify strengths and weaknesses", DefaultDurationMinutes = 120 },
-                new ExamFormat { Id = 3, Name = "Drill/Quiz", Description = "Short topic-based drills or quizzes", DefaultDurationMinutes = 60 },
-                new ExamFormat { Id = 4, Name = "Weekly Time-Bound", Description = "Weekly time-constrained exams", DefaultDurationMinutes = 90 }
+                new ExamFormat { ExamFormatId = 1, Name = "Mock Board", Description = "Simulate full exam with time limit", DefaultDurationMinutes = 240 },
+                new ExamFormat { ExamFormatId = 2, Name = "Diagnostic Test", Description = "ExamFormatIdentify strengths and weaknesses", DefaultDurationMinutes = 120 },
+                new ExamFormat { ExamFormatId = 3, Name = "Drill/Quiz", Description = "Short topic-based drills or quizzes", DefaultDurationMinutes = 60 },
+                new ExamFormat { ExamFormatId = 4, Name = "Weekly Time-Bound", Description = "Weekly time-constrained exams", DefaultDurationMinutes = 90 }
             );
 
             // Exam
             modelBuilder.Entity<Exam>().HasData(
                 new Exam
                 {
-                    Id = 1,
+                    ExamId = 1,
                     Title = "Electrical Circuits Mock Exam",
                     Type = "Mock Board",
                     Date = new DateTime(2025, 6, 1),
@@ -206,21 +207,21 @@ namespace InfastructureLayer.DataAccess.Data
 
             // Questions
             modelBuilder.Entity<Question>().HasData(
-                new Question { Id = 1, Text = "What is the unit of resistance?", Points = 1 },
-                new Question { Id = 2, Text = "What law states that V = IR?", Points = 1 }
+                new Question { QuestionId = 1, Text = "What is the unit of resistance?", Points = 1, ExamId = 1, ExamTopicId = 16 },
+                new Question { QuestionId = 2, Text = "What law states that V = IR?", Points = 1, ExamId = 1, ExamTopicId = 16 }
             );
 
             // Choices
             modelBuilder.Entity<Choice>().HasData(
-                new Choice { Id = 1, Text = "Ohm", IsCorrect = true, QuestionId = 1 },
-                new Choice { Id = 2, Text = "Volt", IsCorrect = false, QuestionId = 1 },
-                new Choice { Id = 3, Text = "Watt", IsCorrect = false, QuestionId = 1 },
-                new Choice { Id = 4, Text = "Ampere", IsCorrect = false, QuestionId = 1 },
+                new Choice { ChoiceId = 1, Text = "Ohm", IsCorrect = true, QuestionId = 1 },
+                new Choice { ChoiceId = 2, Text = "Volt", IsCorrect = false, QuestionId = 1 },
+                new Choice { ChoiceId = 3, Text = "Watt", IsCorrect = false, QuestionId = 1 },
+                new Choice { ChoiceId = 4, Text = "Ampere", IsCorrect = false, QuestionId = 1 },
 
-                new Choice { Id = 5, Text = "Ohm's Law", IsCorrect = true, QuestionId = 2 },
-                new Choice { Id = 6, Text = "Kirchhoff's Law", IsCorrect = false, QuestionId = 2 },
-                new Choice { Id = 7, Text = "Faraday's Law", IsCorrect = false, QuestionId = 2 },
-                new Choice { Id = 8, Text = "Coulomb's Law", IsCorrect = false, QuestionId = 2 }
+                new Choice { ChoiceId = 5, Text = "Ohm's Law", IsCorrect = true, QuestionId = 2 },
+                new Choice { ChoiceId = 6, Text = "Kirchhoff's Law", IsCorrect = false, QuestionId = 2 },
+                new Choice { ChoiceId = 7, Text = "Faraday's Law", IsCorrect = false, QuestionId = 2 },
+                new Choice { ChoiceId = 8, Text = "Coulomb's Law", IsCorrect = false, QuestionId = 2 }
             );
         }
     }

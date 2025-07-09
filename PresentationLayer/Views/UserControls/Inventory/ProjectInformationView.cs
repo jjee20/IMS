@@ -81,7 +81,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
              })
              .ToList();
 
-            dgProjectLines.DataSource = projectLines;
+            dgPager.DataSource = projectLines;
+            dgProjectLines.DataSource = dgPager.PagedSource;
 
             var holidays = _unitOfWork.Holiday.Value.GetAll(c => c.EffectiveDate.Date >= DateTime.Parse(startDate).Date && c.EffectiveDate.Date <= DateTime.Parse(endDate).Date);
             var employees = _unitOfWork.Employee.Value.GetAll(c => c.Attendances.Any(c => c.ProjectId == _project.ProjectId) , includeProperties: "Attendances,Shift,Deductions,Benefits,Allowances,Bonuses,Leaves,Contribution");

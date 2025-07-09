@@ -34,6 +34,8 @@ namespace PresentationLayer.Views.UserControls
             var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
             var gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
             var gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
@@ -44,8 +46,6 @@ namespace PresentationLayer.Views.UserControls
             var gridDateTimeColumn2 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             var gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
             var gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
-            var customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            var customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel2 = new Panel();
             btnPrint = new Guna2ImageButton();
             btnAdd = new Syncfusion.WinForms.Controls.SfButton();
@@ -54,13 +54,13 @@ namespace PresentationLayer.Views.UserControls
             toolstripitemPDF = new Syncfusion.Windows.Forms.Tools.toolstripitem();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
+            btnRefresh = new Guna2Button();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
             materialCard4 = new MaterialSkin.Controls.MaterialCard();
             panel1 = new Panel();
             dgList = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             dgPager = new Syncfusion.WinForms.DataPager.SfDataPager();
-            btnRefresh = new Guna2Button();
             panel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -191,6 +191,27 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Size = new Size(1346, 60);
             tableLayoutPanel2.TabIndex = 0;
             // 
+            // btnRefresh
+            // 
+            btnRefresh.CustomizableEdges = customizableEdges4;
+            btnRefresh.DisabledState.BorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnRefresh.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnRefresh.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnRefresh.Dock = DockStyle.Right;
+            btnRefresh.FillColor = Color.Transparent;
+            btnRefresh.Font = new Font("Segoe UI", 9F);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
+            btnRefresh.ImageSize = new Size(30, 30);
+            btnRefresh.Location = new Point(1300, 4);
+            btnRefresh.Margin = new Padding(4);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            btnRefresh.Size = new Size(42, 52);
+            btnRefresh.TabIndex = 12;
+            btnRefresh.Click += btnRefresh_Click;
+            // 
             // materialLabel1
             // 
             materialLabel1.Depth = 0;
@@ -258,6 +279,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn1.Visible = false;
             gridTextColumn1.Width = 100D;
             gridTextColumn2.AllowFiltering = true;
+            gridTextColumn2.AllowTextWrapping = true;
             gridTextColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn2.HeaderText = "Product Information";
             gridTextColumn2.MappingName = "ProductStockInLogLines";
@@ -338,7 +360,6 @@ namespace PresentationLayer.Views.UserControls
             dgList.Margin = new Padding(4);
             dgList.Name = "dgList";
             dgList.PreviewRowHeight = 42;
-            dgList.RowHeight = 140;
             dgList.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
             dgList.ShowGroupDropArea = true;
             dgList.ShowToolTip = true;
@@ -367,27 +388,6 @@ namespace PresentationLayer.Views.UserControls
             dgPager.Size = new Size(1304, 54);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
-            // 
-            // btnRefresh
-            // 
-            btnRefresh.CustomizableEdges = customizableEdges4;
-            btnRefresh.DisabledState.BorderColor = Color.DarkGray;
-            btnRefresh.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnRefresh.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnRefresh.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnRefresh.Dock = DockStyle.Right;
-            btnRefresh.FillColor = Color.Transparent;
-            btnRefresh.Font = new Font("Segoe UI", 9F);
-            btnRefresh.ForeColor = Color.White;
-            btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
-            btnRefresh.ImageSize = new Size(30, 30);
-            btnRefresh.Location = new Point(1300, 4);
-            btnRefresh.Margin = new Padding(4);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            btnRefresh.Size = new Size(42, 52);
-            btnRefresh.TabIndex = 12;
-            btnRefresh.Click += btnRefresh_Click;
             // 
             // ProductStockInLogView
             // 

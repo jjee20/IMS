@@ -12,7 +12,7 @@ namespace DomainLayer.Models.ThinkEE
     public class ExamTopic
     {
         [Key]
-        public int Id { get; set; }
+        public int ExamTopicId { get; set; }
 
         [Required]
         public string Name { get; set; }

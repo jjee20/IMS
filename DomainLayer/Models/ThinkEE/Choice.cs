@@ -8,7 +8,7 @@ namespace DomainLayer.Models.ThinkEE
     public class Choice
     {
         [Key]
-        public int Id { get; set; }
+        public int ChoiceId { get; set; }
 
         [Required]
         public string Text { get; set; }

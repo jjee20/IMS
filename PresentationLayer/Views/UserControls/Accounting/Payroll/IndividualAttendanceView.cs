@@ -66,7 +66,9 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
 
         private void dgList_CellClick(object sender, CellClickEventArgs e)
         {
-            if (e.DataColumn.GridColumn.MappingName == "Edit")
+            if (e.DataRow?.RowType == RowType.DefaultRow)
+            {
+                if (e.DataColumn.GridColumn.MappingName == "Edit")
             {
                 if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is IndividualAttendanceViewModel row)
                 {
@@ -81,6 +83,7 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
                             LoadAllAttendance(_employee.EmployeeId, _startDate.Date, _endndDate.Date);
                         }
                     }
+                }
                 }
             }
             else if (e.DataColumn.GridColumn.MappingName == "Delete")

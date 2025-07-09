@@ -11,7 +11,7 @@ namespace DomainLayer.Models.ThinkEE
     public class ExamFormat
     {
         [Key]
-        public int Id { get; set; }
+        public int ExamFormatId { get; set; }
 
         [Required]
         public string Name { get; set; } // e.g., Mock Board, Diagnostic, Drill, Weekly Quiz

@@ -13,11 +13,13 @@ using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Helpers;
 using RavenTech_ERP.Presenters.Accounting.Payroll;
 using RavenTech_ERP.Presenters.Inventory;
+using RavenTech_ERP.Presenters.ThinkEE;
 using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
 using RavenTech_ERP.Views.IViews.Accounting;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.IViews.Inventory;
+using RavenTech_ERP.Views.IViews.ThinkEE;
 using RavenTech_ERP.Views.UserControls.Account;
 using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
@@ -33,6 +35,10 @@ namespace RavenTech_ERP.Presenters
     {
         private readonly IMainForm _mainForm; 
         private readonly IUnityContainer _container;
+        private ExamPresenter? _examPresenter;
+        private ExamFormatPresenter? _examFormatPresenter;
+        private ExamTopicPresenter? _examTopicPresenter;
+        private ReviewTopicPresenter? _reviewTopicPresenter;
         private DepartmentPresenter? _departmentPresenter;
         private EmployeePresenter? _employeePresenter;
         private HolidayPresenter? _holidayPresenter;
@@ -123,6 +129,10 @@ namespace RavenTech_ERP.Presenters
             //_mainForm.DepartmentEvent -= DepartmentEvent;
             //_mainForm.ProductPulloutLogEvent -= ProductPulloutLogEvent;
 
+            _mainForm.ExamEvent += ExamEvent;
+            _mainForm.ExamFormatEvent += ExamFormatEvent;
+            _mainForm.ExamTopicEvent += ExamTopicEvent;
+            _mainForm.ReviewTopicEvent += ReviewTopicEvent;
             _mainForm.AllowanceEvent += AllowanceEvent;
             _mainForm.AttendanceEvent += AttendanceEvent;
             _mainForm.BenefitEvent += BenefitEvent;
@@ -176,6 +186,38 @@ namespace RavenTech_ERP.Presenters
                 _mainForm.ribbonControl.SelectedTab = _mainForm.PayrollTab;
                 AttendanceEvent(this, EventArgs.Empty);
             }
+        }
+
+        private void ExamEvent(object? sender, EventArgs e)
+        {
+            IExamView view = ChildManager<ExamView>.GetChildInstance((MainForm)_mainForm);
+            if (_examPresenter == null || ((Form)view).IsDisposed)
+                _examPresenter = new ExamPresenter(view, _container.Resolve<IUnitOfWork>());
+            ((Form)view).BringToFront();
+        }
+
+        private void ExamFormatEvent(object? sender, EventArgs e)
+        {
+            IExamFormatView view = ChildManager<ExamFormatView>.GetChildInstance((MainForm)_mainForm);
+            if (_examFormatPresenter == null || ((Form)view).IsDisposed)
+                _examFormatPresenter = new ExamFormatPresenter(view, _container.Resolve<IUnitOfWork>());
+            ((Form)view).BringToFront();
+        }
+
+        private void ExamTopicEvent(object? sender, EventArgs e)
+        {
+            IExamTopicView view = ChildManager<ExamTopicView>.GetChildInstance((MainForm)_mainForm);
+            if (_examTopicPresenter == null || ((Form)view).IsDisposed)
+                _examTopicPresenter = new ExamTopicPresenter(view, _container.Resolve<IUnitOfWork>());
+            ((Form)view).BringToFront();
+        }
+
+        private void ReviewTopicEvent(object? sender, EventArgs e)
+        {
+            IReviewTopicView view = ChildManager<ReviewTopicView>.GetChildInstance((MainForm)_mainForm);
+            if (_reviewTopicPresenter == null || ((Form)view).IsDisposed)
+                _reviewTopicPresenter = new ReviewTopicPresenter(view, _container.Resolve<IUnitOfWork>());
+            ((Form)view).BringToFront();
         }
 
         private void DepartmentEvent(object? sender, EventArgs e)

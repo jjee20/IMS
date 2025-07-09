@@ -144,6 +144,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.AllowTriStateSorting = true;
             dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn1.AllowFiltering = true;
+            gridTextColumn1.AllowTextWrapping = true;
             gridTextColumn1.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn1.HeaderText = "Employee";
             gridTextColumn1.MappingName = "Employee";
@@ -184,6 +185,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn10.HeaderText = "Late/Early";
             gridTextColumn10.MappingName = "LateAndEarly";
             gridTextColumn11.AllowFiltering = true;
+            gridTextColumn11.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
             gridTextColumn11.HeaderText = "Absent";
             gridTextColumn11.MappingName = "Absent";
             gridTextColumn12.AllowFiltering = true;

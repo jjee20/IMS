@@ -47,18 +47,21 @@ namespace PresentationLayer.Views.UserControls
 
         private void dgList_CellClick(object sender, CellClickEventArgs e)
         {
-            if (e.DataColumn.GridColumn.MappingName == "Edit")
+            if (e.DataRow?.RowType == RowType.DefaultRow)
             {
-                EditEvent?.Invoke(sender, e);
-            }
-            else if (e.DataColumn.GridColumn.MappingName == "Delete")
-            {
-                var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                if (e.DataColumn.GridColumn.MappingName == "Edit")
                 {
-                    DeleteEvent?.Invoke(sender, e);
+                    EditEvent?.Invoke(sender, e);
+                }
+                else if (e.DataColumn.GridColumn.MappingName == "Delete")
+                {
+                    var result = MessageBox.Show("Are you sure you want to delete the selected item?", "Warning",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        DeleteEvent?.Invoke(sender, e);
+                    }
                 }
             }
         }

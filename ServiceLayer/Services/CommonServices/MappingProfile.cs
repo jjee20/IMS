@@ -10,6 +10,7 @@ using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.InventoryViewModels;
 using DomainLayer.ViewModels.PayrollViewModels;
 using DomainLayer.ViewModels.ThinkEE;
+using RavenTech_ThinkEE;
 
 namespace ServiceLayer.Services.CommonServices
 {
@@ -150,6 +151,16 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
             #endregion
             #region ThinkEE
+            CreateMap<Exam, ExamViewModel>()
+                 .ForMember(dest => dest.ExamFormat,
+                     opt => opt.MapFrom(src => src.ExamFormat.Name.ToString()))
+                .ReverseMap();
+            CreateMap<ExamFormat, ExamFormatViewModel>()
+                .ReverseMap();
+            CreateMap<ExamTopic, ExamTopicViewModel>()
+                 .ForMember(dest => dest.ReviewTopic,
+                     opt => opt.MapFrom(src => src.ReviewTopic.Name.ToString()))
+                .ReverseMap();
             CreateMap<ReviewTopic, ReviewTopicViewModel>()
                 .ReverseMap();
             #endregion

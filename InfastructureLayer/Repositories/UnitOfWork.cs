@@ -27,6 +27,11 @@ namespace InfastructureLayer.DataAccess.Repositories
             _db = db;
 
             // Lazy Initialization
+            Choice = new Lazy<IChoiceRepository>(() => new ChoiceRepository(_db));
+            Question = new Lazy<IQuestionRepository>(() => new QuestionRepository(_db));
+            Exam = new Lazy<IExamRepository>(() => new ExamRepository(_db));
+            ExamFormat = new Lazy<IExamFormatRepository>(() => new ExamFormatRepository(_db));
+            ExamTopic = new Lazy<IExamTopicRepository>(() => new ExamTopicRepository(_db));
             ApplicationUser = new Lazy<IApplicationUserRepository>(() => new ApplicationUserRepository(_db));
             ThirteenthMonth = new Lazy<IThirteenthMonthRepository>(() => new ThirteenthMonthRepository(_db));
             Holiday = new Lazy<IHolidayRepository>(() => new HolidayRepository(_db));
@@ -85,6 +90,11 @@ namespace InfastructureLayer.DataAccess.Repositories
         }
 
         // Lazy Repository Properties
+        public Lazy<IChoiceRepository> Choice { get; }
+        public Lazy<IQuestionRepository> Question { get; }
+        public Lazy<IExamRepository> Exam { get; }
+        public Lazy<IExamFormatRepository> ExamFormat { get; }
+        public Lazy<IExamTopicRepository> ExamTopic { get; }
         public Lazy<IThirteenthMonthRepository> ThirteenthMonth { get; }
         public Lazy<IApplicationUserRepository> ApplicationUser { get; }
         public Lazy<IHolidayRepository> Holiday { get; }
@@ -154,7 +164,7 @@ namespace InfastructureLayer.DataAccess.Repositories
             return (IRepository<T>)_repositories[type];
         }
 
-        public async void Save() => _db.SaveChanges();
+        public void Save() => _db.SaveChanges();
         public Task SaveAsync() => _db.SaveChangesAsync();
     }
 }

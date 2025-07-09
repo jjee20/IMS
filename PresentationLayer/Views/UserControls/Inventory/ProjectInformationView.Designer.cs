@@ -28,10 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            var dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            var dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            var dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            var gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridNumericColumn1 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var gridNumericColumn2 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var gridNumericColumn3 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var gridNumericColumn4 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var gridNumericColumn5 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var gridNumericColumn6 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var gridNumericColumn7 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var gridNumericColumn8 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var gridNumericColumn9 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
+            var stackedHeaderRow1 = new Syncfusion.WinForms.DataGrid.StackedHeaderRow();
+            var stackedColumn1 = new Syncfusion.WinForms.DataGrid.StackedColumn();
+            var stackedColumn2 = new Syncfusion.WinForms.DataGrid.StackedColumn();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            panel1 = new Panel();
+            dgProjectLines = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            dgPager = new Syncfusion.WinForms.DataPager.SfDataPager();
             materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             txtActualAmount = new MaterialSkin.Controls.MaterialLabel();
             materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
@@ -43,8 +58,6 @@
             txtDeduction = new MaterialSkin.Controls.MaterialLabel();
             materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             txtPayroll = new MaterialSkin.Controls.MaterialLabel();
-            dgProjectLines = new Guna.UI2.WinForms.Guna2DataGridView();
-            materialLabel17 = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             materialLabel15 = new MaterialSkin.Controls.MaterialLabel();
             txtBudget = new MaterialSkin.Controls.MaterialLabel();
@@ -61,12 +74,14 @@
             txtProjectName = new MaterialSkin.Controls.MaterialLabel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             materialCard1.SuspendLayout();
+            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgProjectLines).BeginInit();
             SuspendLayout();
             // 
             // materialCard1
             // 
             materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(panel1);
             materialCard1.Controls.Add(materialLabel2);
             materialCard1.Controls.Add(txtActualAmount);
             materialCard1.Controls.Add(materialLabel9);
@@ -78,8 +93,6 @@
             materialCard1.Controls.Add(txtDeduction);
             materialCard1.Controls.Add(materialLabel4);
             materialCard1.Controls.Add(txtPayroll);
-            materialCard1.Controls.Add(dgProjectLines);
-            materialCard1.Controls.Add(materialLabel17);
             materialCard1.Controls.Add(guna2Separator1);
             materialCard1.Controls.Add(materialLabel15);
             materialCard1.Controls.Add(txtBudget);
@@ -96,21 +109,149 @@
             materialCard1.Controls.Add(txtProjectName);
             materialCard1.Controls.Add(materialLabel1);
             materialCard1.Depth = 0;
+            materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 25);
+            materialCard1.Location = new Point(2, 2);
             materialCard1.Margin = new Padding(20, 23, 20, 23);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(20, 23, 20, 23);
-            materialCard1.Size = new Size(1344, 701);
+            materialCard1.Size = new Size(1346, 725);
             materialCard1.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(dgProjectLines);
+            panel1.Controls.Add(dgPager);
+            panel1.Location = new Point(21, 168);
+            panel1.Margin = new Padding(4);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1304, 335);
+            panel1.TabIndex = 40;
+            // 
+            // dgProjectLines
+            // 
+            dgProjectLines.AccessibleName = "Table";
+            dgProjectLines.AllowFiltering = true;
+            dgProjectLines.AllowTriStateSorting = true;
+            dgProjectLines.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            gridTextColumn1.AllowFiltering = true;
+            gridTextColumn1.AllowTextWrapping = true;
+            gridTextColumn1.HeaderText = "Name";
+            gridTextColumn1.MappingName = "Name";
+            gridTextColumn1.ShowToolTip = true;
+            gridTextColumn2.AllowFiltering = true;
+            gridTextColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn2.HeaderText = "UOM";
+            gridTextColumn2.MappingName = "UOM";
+            gridTextColumn2.ShowToolTip = true;
+            gridTextColumn3.AllowFiltering = true;
+            gridTextColumn3.AllowTextWrapping = true;
+            gridTextColumn3.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridTextColumn3.HeaderText = "Category";
+            gridTextColumn3.MappingName = "Category";
+            gridTextColumn3.ShowToolTip = true;
+            gridNumericColumn1.AllowFiltering = true;
+            gridNumericColumn1.AllowTextWrapping = true;
+            gridNumericColumn1.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn1.HeaderText = "Cost";
+            gridNumericColumn1.MappingName = "Cost";
+            gridNumericColumn1.ShowToolTip = true;
+            gridNumericColumn2.AllowFiltering = true;
+            gridNumericColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn2.HeaderText = "Qty";
+            gridNumericColumn2.MappingName = "Qty";
+            gridNumericColumn2.ShowToolTip = true;
+            gridNumericColumn3.AllowFiltering = true;
+            gridNumericColumn3.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn3.HeaderText = "Actual";
+            gridNumericColumn3.MappingName = "ActualQty";
+            gridNumericColumn3.ShowToolTip = true;
+            gridNumericColumn4.AllowFiltering = true;
+            gridNumericColumn4.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn4.HeaderText = "Remaining";
+            gridNumericColumn4.MappingName = "RemainingQty";
+            gridNumericColumn4.ShowToolTip = true;
+            gridNumericColumn5.AllowFiltering = true;
+            gridNumericColumn5.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn5.HeaderText = "%";
+            gridNumericColumn5.MappingName = "PercentageQty";
+            gridNumericColumn5.ShowToolTip = true;
+            gridNumericColumn6.AllowFiltering = true;
+            gridNumericColumn6.HeaderText = "Amount";
+            gridNumericColumn6.MappingName = "Amount";
+            gridNumericColumn6.ShowToolTip = true;
+            gridNumericColumn7.AllowFiltering = true;
+            gridNumericColumn7.HeaderText = "Actual";
+            gridNumericColumn7.MappingName = "ActualAmount";
+            gridNumericColumn7.ShowToolTip = true;
+            gridNumericColumn8.AllowFiltering = true;
+            gridNumericColumn8.HeaderText = "Remaining";
+            gridNumericColumn8.MappingName = "RemainingAmount";
+            gridNumericColumn8.ShowToolTip = true;
+            gridNumericColumn9.AllowFiltering = true;
+            gridNumericColumn9.HeaderText = "%";
+            gridNumericColumn9.MappingName = "PercentageAmount";
+            gridNumericColumn9.ShowToolTip = true;
+            dgProjectLines.Columns.Add(gridTextColumn1);
+            dgProjectLines.Columns.Add(gridTextColumn2);
+            dgProjectLines.Columns.Add(gridTextColumn3);
+            dgProjectLines.Columns.Add(gridNumericColumn1);
+            dgProjectLines.Columns.Add(gridNumericColumn2);
+            dgProjectLines.Columns.Add(gridNumericColumn3);
+            dgProjectLines.Columns.Add(gridNumericColumn4);
+            dgProjectLines.Columns.Add(gridNumericColumn5);
+            dgProjectLines.Columns.Add(gridNumericColumn6);
+            dgProjectLines.Columns.Add(gridNumericColumn7);
+            dgProjectLines.Columns.Add(gridNumericColumn8);
+            dgProjectLines.Columns.Add(gridNumericColumn9);
+            dgProjectLines.Dock = DockStyle.Fill;
+            dgProjectLines.FrozenColumnCount = 2;
+            dgProjectLines.FrozenRowCount = 1;
+            dgProjectLines.Location = new Point(0, 0);
+            dgProjectLines.Margin = new Padding(4);
+            dgProjectLines.Name = "dgProjectLines";
+            dgProjectLines.PreviewRowHeight = 42;
+            dgProjectLines.RowHeight = 140;
+            dgProjectLines.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
+            dgProjectLines.ShowToolTip = true;
+            dgProjectLines.Size = new Size(1304, 281);
+            stackedHeaderRow1.Name = "StackedHeaderRow1";
+            stackedColumn1.ChildColumns = "Qty,ActualQty,RemainingQty,PercentageQty";
+            stackedColumn1.HeaderText = "Quantity Details";
+            stackedColumn2.ChildColumns = "Amount,ActualAmount,RemainingAmount,PercentageAmount";
+            stackedColumn2.HeaderText = "Amount Details";
+            stackedHeaderRow1.StackedColumns.Add(stackedColumn1);
+            stackedHeaderRow1.StackedColumns.Add(stackedColumn2);
+            dgProjectLines.StackedHeaderRows.Add(stackedHeaderRow1);
+            dgProjectLines.Style.BorderColor = Color.FromArgb(100, 100, 100);
+            dgProjectLines.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+            dgProjectLines.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+            dgProjectLines.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+            dgProjectLines.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+            dgProjectLines.TabIndex = 7;
+            dgProjectLines.Text = "sfDataGrid1";
+            // 
+            // dgPager
+            // 
+            dgPager.AccessibleName = "DataPager";
+            dgPager.CanOverrideStyle = true;
+            dgPager.Dock = DockStyle.Bottom;
+            dgPager.HorizontalAlignment = HorizontalAlignment.Center;
+            dgPager.Location = new Point(0, 281);
+            dgPager.Margin = new Padding(4);
+            dgPager.Name = "dgPager";
+            dgPager.PageSize = 15;
+            dgPager.Size = new Size(1304, 54);
+            dgPager.TabIndex = 8;
+            dgPager.Text = "sfDataPager1";
             // 
             // materialLabel2
             // 
             materialLabel2.AutoSize = true;
             materialLabel2.Depth = 0;
             materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel2.Location = new Point(792, 563);
+            materialLabel2.Location = new Point(791, 582);
             materialLabel2.Margin = new Padding(4, 0, 4, 0);
             materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel2.Name = "materialLabel2";
@@ -124,7 +265,7 @@
             txtActualAmount.Depth = 0;
             txtActualAmount.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtActualAmount.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtActualAmount.Location = new Point(1044, 567);
+            txtActualAmount.Location = new Point(1043, 586);
             txtActualAmount.Margin = new Padding(4, 0, 4, 0);
             txtActualAmount.MouseState = MaterialSkin.MouseState.HOVER;
             txtActualAmount.Name = "txtActualAmount";
@@ -137,7 +278,7 @@
             materialLabel9.AutoSize = true;
             materialLabel9.Depth = 0;
             materialLabel9.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel9.Location = new Point(792, 629);
+            materialLabel9.Location = new Point(791, 648);
             materialLabel9.Margin = new Padding(4, 0, 4, 0);
             materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel9.Name = "materialLabel9";
@@ -151,7 +292,7 @@
             txtVariance.Depth = 0;
             txtVariance.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtVariance.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtVariance.Location = new Point(1044, 629);
+            txtVariance.Location = new Point(1043, 648);
             txtVariance.Margin = new Padding(4, 0, 4, 0);
             txtVariance.MouseState = MaterialSkin.MouseState.HOVER;
             txtVariance.Name = "txtVariance";
@@ -164,7 +305,7 @@
             materialLabel7.AutoSize = true;
             materialLabel7.Depth = 0;
             materialLabel7.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel7.Location = new Point(792, 662);
+            materialLabel7.Location = new Point(791, 681);
             materialLabel7.Margin = new Padding(4, 0, 4, 0);
             materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel7.Name = "materialLabel7";
@@ -178,7 +319,7 @@
             txtTotalRevenue.Depth = 0;
             txtTotalRevenue.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtTotalRevenue.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtTotalRevenue.Location = new Point(1044, 660);
+            txtTotalRevenue.Location = new Point(1043, 679);
             txtTotalRevenue.Margin = new Padding(4, 0, 4, 0);
             txtTotalRevenue.MouseState = MaterialSkin.MouseState.HOVER;
             txtTotalRevenue.Name = "txtTotalRevenue";
@@ -199,7 +340,7 @@
             materialLabel6.AutoSize = true;
             materialLabel6.Depth = 0;
             materialLabel6.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel6.Location = new Point(792, 596);
+            materialLabel6.Location = new Point(791, 615);
             materialLabel6.Margin = new Padding(4, 0, 4, 0);
             materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel6.Name = "materialLabel6";
@@ -213,7 +354,7 @@
             txtDeduction.Depth = 0;
             txtDeduction.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtDeduction.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtDeduction.Location = new Point(1044, 598);
+            txtDeduction.Location = new Point(1043, 617);
             txtDeduction.Margin = new Padding(4, 0, 4, 0);
             txtDeduction.MouseState = MaterialSkin.MouseState.HOVER;
             txtDeduction.Name = "txtDeduction";
@@ -226,7 +367,7 @@
             materialLabel4.AutoSize = true;
             materialLabel4.Depth = 0;
             materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel4.Location = new Point(792, 534);
+            materialLabel4.Location = new Point(791, 553);
             materialLabel4.Margin = new Padding(4, 0, 4, 0);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
@@ -240,7 +381,7 @@
             txtPayroll.Depth = 0;
             txtPayroll.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPayroll.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            txtPayroll.Location = new Point(1044, 536);
+            txtPayroll.Location = new Point(1043, 555);
             txtPayroll.Margin = new Padding(4, 0, 4, 0);
             txtPayroll.MouseState = MaterialSkin.MouseState.HOVER;
             txtPayroll.Name = "txtPayroll";
@@ -248,76 +389,9 @@
             txtPayroll.TabIndex = 29;
             txtPayroll.Text = "Total Payroll:";
             // 
-            // dgProjectLines
-            // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dgProjectLines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgProjectLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgProjectLines.ColumnHeadersHeight = 25;
-            dgProjectLines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgProjectLines.DefaultCellStyle = dataGridViewCellStyle3;
-            dgProjectLines.GridColor = Color.FromArgb(231, 229, 255);
-            dgProjectLines.Location = new Point(24, 182);
-            dgProjectLines.Margin = new Padding(4, 5, 4, 5);
-            dgProjectLines.Name = "dgProjectLines";
-            dgProjectLines.RowHeadersVisible = false;
-            dgProjectLines.RowHeadersWidth = 62;
-            dgProjectLines.RowTemplate.Height = 25;
-            dgProjectLines.Size = new Size(1300, 320);
-            dgProjectLines.TabIndex = 22;
-            dgProjectLines.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgProjectLines.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgProjectLines.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgProjectLines.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgProjectLines.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgProjectLines.ThemeStyle.BackColor = Color.White;
-            dgProjectLines.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgProjectLines.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgProjectLines.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgProjectLines.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            dgProjectLines.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgProjectLines.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgProjectLines.ThemeStyle.HeaderStyle.Height = 25;
-            dgProjectLines.ThemeStyle.ReadOnly = false;
-            dgProjectLines.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgProjectLines.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgProjectLines.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            dgProjectLines.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            dgProjectLines.ThemeStyle.RowsStyle.Height = 25;
-            dgProjectLines.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgProjectLines.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // materialLabel17
-            // 
-            materialLabel17.AutoSize = true;
-            materialLabel17.Depth = 0;
-            materialLabel17.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
-            materialLabel17.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel17.Location = new Point(20, 177);
-            materialLabel17.Margin = new Padding(4, 0, 4, 0);
-            materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel17.Name = "materialLabel17";
-            materialLabel17.Size = new Size(138, 24);
-            materialLabel17.TabIndex = 21;
-            materialLabel17.Text = "Product Details";
-            // 
             // guna2Separator1
             // 
-            guna2Separator1.Location = new Point(20, 155);
+            guna2Separator1.Location = new Point(24, 142);
             guna2Separator1.Margin = new Padding(4, 5, 4, 5);
             guna2Separator1.Name = "guna2Separator1";
             guna2Separator1.Size = new Size(1300, 17);
@@ -527,6 +601,7 @@
             Text = "Project Information (#: )";
             materialCard1.ResumeLayout(false);
             materialCard1.PerformLayout();
+            panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgProjectLines).EndInit();
             ResumeLayout(false);
         }
@@ -547,8 +622,6 @@
         private MaterialSkin.Controls.MaterialLabel txtProjectName;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
-        private Guna.UI2.WinForms.Guna2DataGridView dgProjectLines;
-        private MaterialSkin.Controls.MaterialLabel materialLabel17;
         private MaterialSkin.Controls.MaterialLabel materialLabel15;
         private MaterialSkin.Controls.MaterialLabel txtBudget;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
@@ -562,5 +635,8 @@
         private MaterialSkin.Controls.MaterialLabel txtVariance;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel txtActualAmount;
+        private Panel panel1;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid dgProjectLines;
+        private Syncfusion.WinForms.DataPager.SfDataPager dgPager;
     }
 }

@@ -10,7 +10,7 @@ namespace DomainLayer.Models.ThinkEE
     public class ExamResult
     {
         [Key]
-        public int Id { get; set; }
+        public int ExamResultId { get; set; }
 
         [ForeignKey("Examinee")]
         public string ExamineeId { get; set; }

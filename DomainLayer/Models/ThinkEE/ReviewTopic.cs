@@ -11,7 +11,7 @@ namespace DomainLayer.Models.ThinkEE
     public class ReviewTopic
     {
         [Key]
-        public int Id { get; set; }
+        public int ReviewTopicId { get; set; }
 
         [Required]
         public string Code { get; set; } // "REE" or "RME"

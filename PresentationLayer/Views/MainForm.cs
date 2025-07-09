@@ -15,47 +15,6 @@ namespace RavenTech_ERP
         public MainForm()
         {
             InitializeComponent();
-            //btnAllowance.Click += delegate { AllowanceEvent?.Invoke(this, EventArgs.Empty); };
-            //btnAttendance.Click += delegate { AttendanceEvent?.Invoke(this, EventArgs.Empty); };
-            //btnBenefit.Click += delegate { BenefitEvent?.Invoke(this, EventArgs.Empty); };
-            //btnBonus.Click += delegate { BonusEvent?.Invoke(this, EventArgs.Empty); };
-            //btnContribution.Click += delegate { ContributionEvent?.Invoke(this, EventArgs.Empty); };
-            //btnDeduction.Click += delegate { DeductionEvent?.Invoke(this, EventArgs.Empty); };
-            //btnDepartment.Click += delegate { DepartmentEvent?.Invoke(this, EventArgs.Empty); };
-            //btnEmployee.Click += delegate { EmployeeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnJobPosition.Click += delegate { JobPositionEvent?.Invoke(this, EventArgs.Empty); };
-            //btnLeave.Click += delegate { LeaveEvent?.Invoke(this, EventArgs.Empty); };
-            //btnPayroll.Click += delegate { PayrollEvent?.Invoke(this, EventArgs.Empty); };
-            //btnProject.Click += delegate { ProjectEvent?.Invoke(this, EventArgs.Empty); };
-            //btnShift.Click += delegate { ShiftEvent?.Invoke(this, EventArgs.Empty); };
-            //btnTax.Click += delegate { TaxEvent?.Invoke(this, EventArgs.Empty); };
-            //btnBillType.Click += delegate { BillTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnBranch.Click += delegate { BranchEvent?.Invoke(this, EventArgs.Empty); };
-            //btnCashBank.Click += delegate { CashBankEvent?.Invoke(this, EventArgs.Empty); };
-            //btnCustomerType.Click += delegate { CustomerTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnCustomer.Click += delegate { CustomerEvent?.Invoke(this, EventArgs.Empty); };
-            //btnInvoiceType.Click += delegate { InvoiceTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnPaymentType.Click += delegate { PaymentTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnStockInLog.Click += delegate { StockInLogEvent?.Invoke(this, EventArgs.Empty); };
-            //btnProductType.Click += delegate { ProductTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnProduct.Click += delegate { ProductEvent?.Invoke(this, EventArgs.Empty); };
-            //btnPurchaseOrder.Click += delegate { PurchaseOrderEvent?.Invoke(this, EventArgs.Empty); };
-            //btnPurchaseType.Click += delegate { PurchaseTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnSalesOrder.Click += delegate { SalesOrderEvent?.Invoke(this, EventArgs.Empty); };
-            //btnSalesType.Click += delegate { SalesTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnShipmentType.Click += delegate { ShipmentTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnTargetGoals.Click += delegate { TargetGoalsEvent?.Invoke(this, EventArgs.Empty); };
-            //btnUOM.Click += delegate { UnitOfMeasureEvent?.Invoke(this, EventArgs.Empty); };
-            //btnVendorType.Click += delegate { VendorTypeEvent?.Invoke(this, EventArgs.Empty); };
-            //btnVendor.Click += delegate { VendorEvent?.Invoke(this, EventArgs.Empty); };
-            //btnWarehouse.Click += delegate { WarehouseEvent?.Invoke(this, EventArgs.Empty); };
-            //btnPurchaseReport.Click += delegate { PurchaseReportEvent?.Invoke(this, EventArgs.Empty); };
-            //btnSalesReport.Click += delegate { SalesReportEvent?.Invoke(this, EventArgs.Empty); };
-            //btnProfile.Click += delegate { ProfileEvent?.Invoke(this, EventArgs.Empty); };
-            //btnRegisterAccount.Click += delegate { RegisterAccountEvent?.Invoke(this, EventArgs.Empty); };
-            //btnDashboard.Click += delegate { DashboardEvent?.Invoke(this, EventArgs.Empty); };
-            //btnHoliday.Click += delegate { HolidayEvent?.Invoke(this, EventArgs.Empty); };
-            //btnStockMonitoring.Click += delegate { ProductMonitoringEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -67,6 +26,9 @@ namespace RavenTech_ERP
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ToolStripEx RegisterButton { get => btnRegisterAccount; set => btnRegisterAccount = value; }
 
+        public event EventHandler ExamEvent;
+        public event EventHandler ExamFormatEvent;
+        public event EventHandler ExamTopicEvent;
         public event EventHandler ProfileEvent;
         public event EventHandler EditProfileEvent;
         public event EventHandler ChangePasswordEvent;
@@ -111,10 +73,31 @@ namespace RavenTech_ERP
         public event EventHandler WarehouseEvent;
         public event EventHandler HolidayEvent;
         public event EventHandler ProductPulloutLogEvent;
+        public event EventHandler ReviewTopicEvent;
 
         public void ShowForm()
         {
             Show();
+        }
+
+        private void btnExam_Click(object sender, EventArgs e)
+        {
+            ExamEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnExamFormat_Click(object sender, EventArgs e)
+        {
+            ExamFormatEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnExamTopic_Click(object sender, EventArgs e)
+        {
+            ExamTopicEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnReviewTopic_Click(object sender, EventArgs e)
+        {
+            ReviewTopicEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)

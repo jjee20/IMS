@@ -46,7 +46,9 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         }
         private void dg_CellClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
         {
-            if (e.DataColumn.GridColumn.MappingName == "Delete")
+            if (e.DataRow?.RowType == RowType.DefaultRow)
+            {
+                if (e.DataColumn.GridColumn.MappingName == "Delete")
             {
                 if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is PaymentReceiveViewModel row)
                 {
@@ -69,6 +71,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                         dgList.DataSource = _paymentReceive;
                     }
                 }
+            }
             }
         }
     }
