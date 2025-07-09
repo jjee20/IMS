@@ -40,15 +40,15 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadProjectInformation()
         {
-            double budget = _projectVM.Budget;
-            double revenue = _projectVM.Revenue;
+            double totalBudget = _projectVM.Budget;
+            double targetRevenue = _projectVM.Revenue;
 
-            var startDate = !string.IsNullOrEmpty(_projectVM.StartDate) ? _projectVM.StartDate : DateTime.Now.Date.ToLongDateString();
-            var endDate = !string.IsNullOrEmpty(_projectVM.EndDate) ? _projectVM.EndDate : DateTime.Now.Date.ToLongDateString();
+            var startDate = !string.IsNullOrEmpty(_projectVM.StartDate) ? _projectVM.StartDate : "{Needs Updating}";
+            var endDate = !string.IsNullOrEmpty(_projectVM.EndDate) ? _projectVM.EndDate : "{Needs Updating}";
             txtProjectName.Text = _project.ProjectName ?? "{Needs Updating}";
             txtClient.Text = _projectVM.Client ?? "{Needs Updating}";
-            txtRevenue.Text = revenue.ToString() ?? "{Needs Updating}";
-            txtBudget.Text = budget.ToString() ?? "{Needs Updating}";
+            txtRevenue.Text = targetRevenue.ToString("C2") ?? "{Needs Updating}";
+            txtBudget.Text = totalBudget.ToString("C2") ?? "{Needs Updating}";
             txtStartDate.Text = startDate; 
             txtEndDate.Text = endDate;
             txtDescription.Text = _projectVM.Description ?? "{Needs Updating}";
@@ -59,7 +59,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                  var first = group.First(); // Representative line for shared product data
 
                  var totalQty = group.Sum(pl => pl.Quantity);
-                 var totalAmount = group.Sum(pl => pl.SubTotal);
+                 var totalAmount = group.Sum(pl => pl.Price * pl.Quantity);
                  var price = first.Price;
 
                  var actualQty = _project.ProductPullOutLogs
@@ -90,21 +90,25 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             var payroll = PayrollHelper.CalculatePayroll(employees, contributions, _project, DateTime.Parse(startDate), DateTime.Parse(endDate), holidays.ToList());
 
             // Calculate payroll totals
-            double totalPurchase = projectLines.Sum(p => p.ActualAmount);
-            txtActualAmount.Text = totalPurchase.ToString("N2");
-            double totalPayroll = payroll.Sum(p => p.NetPay);
-            txtPayroll.Text = totalPayroll.ToString("N2");
+            var totalPurchase = projectLines.Sum(p => p.ActualAmount);
+            txtActualAmount.Text = $"₱{totalPurchase:N2}";
+
+            var totalPayroll = payroll.Sum(p => p.NetPay);
+            txtPayroll.Text = totalPayroll.ToString("C2");
 
             // Compute deductions (Total Purchase + Payroll)
-            double totalDeductions = totalPurchase + totalPayroll;
-            txtDeduction.Text = totalDeductions.ToString("N2");
+            var totalDeductions = totalPurchase + totalPayroll;
+            txtDeduction.Text = totalDeductions.ToString("C2");
+
             // Compute Total Revenue (Budget - Deductions)
-            double totalRevenue = (double)(budget - totalDeductions);
-            txtTotalRevenue.Text = totalRevenue.ToString("N2");
-            // Compute Variance (Total Revenue - Actual Revenue)
-            double variance = (double)(totalRevenue - revenue);
-            double variancePercent = (totalRevenue / revenue) * 100;
-            txtVariance.Text = $"{variance.ToString("N2")} ({variancePercent}%)";
+            var totalRevenue = (double)(totalBudget - totalDeductions);
+            txtTotalRevenue.Text = totalRevenue.ToString("C2");
+
+            // Compute Variance (Actual Revenue - Target Revenue)
+            var variance = totalRevenue - targetRevenue;
+            var variancePercent = (targetRevenue == 0) ? 0 : (variance / targetRevenue) * 100;
+            txtVariance.Text = $"{variance:C2} ({variancePercent:N2}%)";
+
         }
     }
 }

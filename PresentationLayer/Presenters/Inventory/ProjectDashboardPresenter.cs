@@ -118,9 +118,9 @@ namespace PresentationLayer.Presenters
             var totalExpense = pullouts.SelectMany(o => o.ProductPullOutLogLines).Sum(line => line.StockQuantity * line.Product.DefaultBuyingPrice);
             var totalProfit = totalRevenue - totalExpense;
             // Update View
-            _view.TotalRevenue = totalRevenue?.ToString("N2");
-            _view.TotalProfit = totalProfit?.ToString("N2");
-            _view.TotalExpense = totalExpense.ToString("N2");   
+            _view.TotalRevenue = totalRevenue?.ToString("C2");
+            _view.TotalProfit = totalProfit?.ToString("C2");
+            _view.TotalExpense = totalExpense.ToString("C2");   
         }
 
         private async Task LoadTopUsedItems(int year)
@@ -150,7 +150,7 @@ namespace PresentationLayer.Presenters
 
             var topProjects = projects
                 .Select(g => new { g.ProjectName, Revenue = g.Budget })
-                .OrderBy(c => c.Revenue)
+                .OrderByDescending(c => c.Revenue)
                 .Take(5)
                 .ToList();
 

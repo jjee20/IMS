@@ -50,7 +50,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Purchases
         {
-            set => txtPurchases.Text = value.ToString("N2");
+            set => txtPurchases.Text = value.ToString("C2");
         }
 
         public void SetDailyPurchasesChart(GunaBarDataset purchasesbarDataset)

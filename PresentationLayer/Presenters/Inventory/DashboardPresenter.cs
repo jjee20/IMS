@@ -133,11 +133,11 @@ namespace PresentationLayer.Presenters
                 .Sum(line => line.SubTotal);
 
             // Update View
-            _view.Sales = sales.ToString("N2");
-            _view.Gross = gross.ToString("N2");
-            _view.Expense = expense.ToString("N2");
-            _view.SalesToday = salesToday.ToString("N2");
-            _view.ExpenseToday = expenseToday.ToString("N2");
+            _view.Sales = sales.ToString("C2");
+            _view.Gross = gross.ToString("C2");
+            _view.Expense = expense.ToString("C2");
+            _view.SalesToday = salesToday.ToString("C2");
+            _view.ExpenseToday = expenseToday.ToString("C2");
             _view.TotalProfit = salesToday - expenseToday;
             _view.ItemSoldToday = itemsSoldToday.ToString("N0");
             _view.ExpenseTodaySales = salesToday;

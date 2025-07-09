@@ -133,10 +133,12 @@
             dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn1.HeaderText = "Question";
             gridTextColumn1.MappingName = "Question";
+            gridComboBoxColumn1.DisplayMember = "Name";
             gridComboBoxColumn1.HeaderText = "Topic";
             gridComboBoxColumn1.MappingName = "ExamTopicId";
             gridComboBoxColumn1.MaximumWidth = 200D;
             gridComboBoxColumn1.MinimumWidth = 200D;
+            gridComboBoxColumn1.ValueMember = "ExamTopicId";
             gridTextColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
             gridTextColumn2.HeaderText = "#1";
             gridTextColumn2.MappingName = "Choice1";
