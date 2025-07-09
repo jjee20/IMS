@@ -178,6 +178,9 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\HolidayView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProjectDashboardView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\ThinkEE\ExamView.cs">
       <SubType>Form</SubType>
     </Compile>

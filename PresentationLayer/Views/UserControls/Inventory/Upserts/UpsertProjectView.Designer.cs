@@ -758,7 +758,6 @@
             autoLabel8.Size = new Size(131, 25);
             autoLabel8.TabIndex = 17;
             autoLabel8.Text = "Target Revenue";
-            autoLabel8.Visible = false;
             // 
             // txtRevenue
             // 
@@ -771,7 +770,6 @@
             txtRevenue.Size = new Size(228, 31);
             txtRevenue.TabIndex = 18;
             txtRevenue.Text = "1.00";
-            txtRevenue.Visible = false;
             // 
             // panelDetails
             // 

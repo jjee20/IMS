@@ -26,6 +26,7 @@ namespace RavenTech_ERP
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ToolStripEx RegisterButton { get => btnRegisterAccount; set => btnRegisterAccount = value; }
 
+        public event EventHandler ProjectDashboardEvent;
         public event EventHandler ExamEvent;
         public event EventHandler ExamFormatEvent;
         public event EventHandler ExamTopicEvent;
@@ -78,6 +79,11 @@ namespace RavenTech_ERP
         public void ShowForm()
         {
             Show();
+        }
+
+        private void btnProjectDashboard_Click(object sender, EventArgs e)
+        {
+            ProjectDashboardEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnExam_Click(object sender, EventArgs e)
