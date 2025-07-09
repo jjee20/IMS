@@ -10,9 +10,13 @@ namespace DomainLayer.ViewModels.ThinkEE
 {
     public class ReviewTopicViewModel
     {
-        public int Id { get; set; }
+        public int ReviewTopicId { get; set; }
         public string Code { get; set; } 
         public string Name { get; set; }
+        [Display(Name = "")]
+        public byte[] Edit { get; set; }
+        [Display(Name = "")]
+        public byte[] Delete { get; set; }
     }
 
 }

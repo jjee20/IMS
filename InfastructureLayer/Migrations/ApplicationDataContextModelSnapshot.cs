@@ -888,14 +888,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6a828565-e3bf-4968-9589-d17d77725d54",
+                            ConcurrencyStamp = "5124e9e6-dca1-4fa9-a7b8-7f33b9030c24",
                             Department = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPER@ADMIN.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ9SUK2UBa8RGz5+7kBVln2LwU4uiXZmXIxr+/z7tmr3EX+z79tB4f7M0Ke63EZQmw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENfP67ADtO1AjWeSecictY24LqJxwLji7fBTScLQWG5ZeOiwo3EEZR+YvhaFXVUDqw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -905,14 +905,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "FB38CC93-2B1E-4444-9A48-396E4C28E190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ec6c01a-91c0-4250-ac26-c48a662bd451",
+                            ConcurrencyStamp = "226e4e59-9770-48c5-8215-e17f3ba8fa8b",
                             Department = 1,
                             Email = "inventory@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "INVENTORY@USER.COM",
                             NormalizedUserName = "inventory",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHG3OGG/+oUf8+a2Xhck+0GVfhLVIpjiQfxJVRwcsuwGUXlmEjlZJv8uTxnlg1a1aw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELBa2jcatbdrJKUokNsV25rpmj4HlqH5xtuAiDpYKskQSlJ0BQRI/mhCOYhF/Fj64Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -922,14 +922,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "6628DE62-AF21-4389-B612-623A1A17637C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "773ddb02-3ea7-406a-b6ce-42f296cb1d41",
+                            ConcurrencyStamp = "9d55731c-4a27-4379-9f94-3a58ccc2ee0d",
                             Department = 2,
                             Email = "payroll@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PAYROLL@USER.COM",
                             NormalizedUserName = "payroll",
-                            PasswordHash = "AQAAAAIAAYagAAAAECWxr5DXl7/3G7uJQUU1B6gv6inQx2qSBvY0DnETpHowY/nFmCecOTkc03P2orn1pA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEECBXFWZZePksJmpe5tD+kTeEjRfnk2rdXywYU4GDlyCQ7eM9ua0l1qG+BgmLciGaA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -2051,11 +2051,11 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.Choice", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ChoiceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChoiceId"));
 
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
@@ -2067,20 +2067,78 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ChoiceId");
 
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Choices");
+
+                    b.HasData(
+                        new
+                        {
+                            ChoiceId = 1,
+                            IsCorrect = true,
+                            QuestionId = 1,
+                            Text = "Ohm"
+                        },
+                        new
+                        {
+                            ChoiceId = 2,
+                            IsCorrect = false,
+                            QuestionId = 1,
+                            Text = "Volt"
+                        },
+                        new
+                        {
+                            ChoiceId = 3,
+                            IsCorrect = false,
+                            QuestionId = 1,
+                            Text = "Watt"
+                        },
+                        new
+                        {
+                            ChoiceId = 4,
+                            IsCorrect = false,
+                            QuestionId = 1,
+                            Text = "Ampere"
+                        },
+                        new
+                        {
+                            ChoiceId = 5,
+                            IsCorrect = true,
+                            QuestionId = 2,
+                            Text = "Ohm's Law"
+                        },
+                        new
+                        {
+                            ChoiceId = 6,
+                            IsCorrect = false,
+                            QuestionId = 2,
+                            Text = "Kirchhoff's Law"
+                        },
+                        new
+                        {
+                            ChoiceId = 7,
+                            IsCorrect = false,
+                            QuestionId = 2,
+                            Text = "Faraday's Law"
+                        },
+                        new
+                        {
+                            ChoiceId = 8,
+                            IsCorrect = false,
+                            QuestionId = 2,
+                            Text = "Coulomb's Law"
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamFormat", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ExamFormatId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamFormatId"));
 
                     b.Property<int>("DefaultDurationMinutes")
                         .HasColumnType("int");
@@ -2093,18 +2151,48 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ExamFormatId");
 
                     b.ToTable("ExamFormats");
+
+                    b.HasData(
+                        new
+                        {
+                            ExamFormatId = 1,
+                            DefaultDurationMinutes = 240,
+                            Description = "Simulate full exam with time limit",
+                            Name = "Mock Board"
+                        },
+                        new
+                        {
+                            ExamFormatId = 2,
+                            DefaultDurationMinutes = 120,
+                            Description = "ExamFormatIdentify strengths and weaknesses",
+                            Name = "Diagnostic Test"
+                        },
+                        new
+                        {
+                            ExamFormatId = 3,
+                            DefaultDurationMinutes = 60,
+                            Description = "Short topic-based drills or quizzes",
+                            Name = "Drill/Quiz"
+                        },
+                        new
+                        {
+                            ExamFormatId = 4,
+                            DefaultDurationMinutes = 90,
+                            Description = "Weekly time-constrained exams",
+                            Name = "Weekly Time-Bound"
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamResult", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ExamResultId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamResultId"));
 
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
@@ -2119,7 +2207,7 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("TotalPoints")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ExamResultId");
 
                     b.HasIndex("ExamId");
 
@@ -2130,11 +2218,11 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamTopic", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ExamTopicId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamTopicId"));
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -2147,20 +2235,379 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("ReviewTopicId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ExamTopicId");
 
                     b.HasIndex("ReviewTopicId");
 
                     b.ToTable("ExamTopics");
+
+                    b.HasData(
+                        new
+                        {
+                            ExamTopicId = 1,
+                            Category = "Mathematics",
+                            Name = "Algebra",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 2,
+                            Category = "Mathematics",
+                            Name = "Trigonometry",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 3,
+                            Category = "Mathematics",
+                            Name = "Differential and Integral Calculus",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 4,
+                            Category = "Mathematics",
+                            Name = "Complex Numbers",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 5,
+                            Category = "Mathematics",
+                            Name = "Probability and Statistics",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 6,
+                            Category = "Mathematics",
+                            Name = "Differential Equations",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 7,
+                            Category = "Mathematics",
+                            Name = "Laplace Transform and Fourier Series",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 8,
+                            Category = "Mathematics",
+                            Name = "Matrix Algebra",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 9,
+                            Category = "Mathematics",
+                            Name = "Numerical Methods",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 10,
+                            Category = "Engineering Sciences",
+                            Name = "Engineering Mechanics",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 11,
+                            Category = "Engineering Sciences",
+                            Name = "Strength of Materials",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 12,
+                            Category = "Engineering Sciences",
+                            Name = "Thermodynamics",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 13,
+                            Category = "Engineering Sciences",
+                            Name = "FluExamTopicId Mechanics",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 14,
+                            Category = "Engineering Sciences",
+                            Name = "Chemistry and Physics",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 15,
+                            Category = "Engineering Sciences",
+                            Name = "Computer Fundamentals and Programming",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 16,
+                            Category = "Electrical Circuits and Devices",
+                            Name = "DC and AC Circuits",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 17,
+                            Category = "Electrical Circuits and Devices",
+                            Name = "Network Theorems",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 18,
+                            Category = "Electrical Circuits and Devices",
+                            Name = "Resonance",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 19,
+                            Category = "Electrical Circuits and Devices",
+                            Name = "Transformers",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 20,
+                            Category = "Electrical Circuits and Devices",
+                            Name = "Motors and Generators",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 21,
+                            Category = "Electronics",
+                            Name = "Semiconductor Devices",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 22,
+                            Category = "Electronics",
+                            Name = "Amplifiers",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 23,
+                            Category = "Electronics",
+                            Name = "Oscillators",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 24,
+                            Category = "Electronics",
+                            Name = "Operational Amplifiers",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 25,
+                            Category = "Electronics",
+                            Name = "Digital Electronics",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 26,
+                            Category = "Electronics",
+                            Name = "Communication Basics",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 27,
+                            Category = "Power Systems",
+                            Name = "Power Generation",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 28,
+                            Category = "Power Systems",
+                            Name = "Power Transmission and Distribution",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 29,
+                            Category = "Power Systems",
+                            Name = "Load Flow and Short Circuit Analysis",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 30,
+                            Category = "Power Systems",
+                            Name = "Protective Relays and Circuit Breakers",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 31,
+                            Category = "Power Systems",
+                            Name = "Substation Design",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 32,
+                            Category = "Electrical Machines",
+                            Name = "Synchronous Machines",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 33,
+                            Category = "Electrical Machines",
+                            Name = "Induction Motors",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 34,
+                            Category = "Electrical Machines",
+                            Name = "Transformers",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 35,
+                            Category = "Electrical Machines",
+                            Name = "DC Machines",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 36,
+                            Category = "Electrical Machines",
+                            Name = "Motor Control and Starting",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 37,
+                            Category = "Control Systems",
+                            Name = "Feedback and Control Theory",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 38,
+                            Category = "Control Systems",
+                            Name = "Block Diagrams",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 39,
+                            Category = "Control Systems",
+                            Name = "Stability Analysis",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 40,
+                            Category = "Control Systems",
+                            Name = "Bode Plots and Root Locus",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 41,
+                            Category = "Instrumentation and Measurement",
+                            Name = "Electrical Measuring Instruments",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 42,
+                            Category = "Instrumentation and Measurement",
+                            Name = "Transducers",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 43,
+                            Category = "Instrumentation and Measurement",
+                            Name = "Calibration",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 44,
+                            Category = "Instrumentation and Measurement",
+                            Name = "Instrument Errors",
+                            ReviewTopicId = 1
+                        },
+                        new
+                        {
+                            ExamTopicId = 45,
+                            Category = "Basic Electrical Engineering",
+                            Name = "Ohm's Law and Power Law",
+                            ReviewTopicId = 2
+                        },
+                        new
+                        {
+                            ExamTopicId = 46,
+                            Category = "Electrical Design",
+                            Name = "Wiring Design and Estimating",
+                            ReviewTopicId = 2
+                        },
+                        new
+                        {
+                            ExamTopicId = 47,
+                            Category = "Regulations",
+                            Name = "Philippine Electrical Code",
+                            ReviewTopicId = 2
+                        },
+                        new
+                        {
+                            ExamTopicId = 48,
+                            Category = "Practical Applications",
+                            Name = "Electrical Wiring Installation",
+                            ReviewTopicId = 2
+                        },
+                        new
+                        {
+                            ExamTopicId = 49,
+                            Category = "Materials and Tools",
+                            Name = "Tools and Electrical Materials",
+                            ReviewTopicId = 2
+                        },
+                        new
+                        {
+                            ExamTopicId = 50,
+                            Category = "Safety",
+                            Name = "Safety Practices",
+                            ReviewTopicId = 2
+                        },
+                        new
+                        {
+                            ExamTopicId = 51,
+                            Category = "Testing and Measurement",
+                            Name = "Electrical Test Equipment",
+                            ReviewTopicId = 2
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.PerformanceReport", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PerformanceReportId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PerformanceReportId"));
 
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
@@ -2183,7 +2630,7 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PerformanceReportId");
 
                     b.HasIndex("ExamId");
 
@@ -2194,11 +2641,11 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.Question", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("QuestionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"));
 
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
@@ -2213,22 +2660,40 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("QuestionId");
 
                     b.HasIndex("ExamId");
 
                     b.HasIndex("ExamTopicId");
 
                     b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            QuestionId = 1,
+                            ExamId = 1,
+                            ExamTopicId = 16,
+                            Points = 1,
+                            Text = "What is the unit of resistance?"
+                        },
+                        new
+                        {
+                            QuestionId = 2,
+                            ExamId = 1,
+                            ExamTopicId = 16,
+                            Points = 1,
+                            Text = "What law states that V = IR?"
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.ReviewTopic", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ReviewTopicId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewTopicId"));
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -2238,9 +2703,23 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ReviewTopicId");
 
                     b.ToTable("ReviewTopics");
+
+                    b.HasData(
+                        new
+                        {
+                            ReviewTopicId = 1,
+                            Code = "REE",
+                            Name = "Registered Electrical Engineer"
+                        },
+                        new
+                        {
+                            ReviewTopicId = 2,
+                            Code = "RME",
+                            Name = "Registered Master Electrician"
+                        });
                 });
 
             modelBuilder.Entity("Employee", b =>
@@ -2487,11 +2966,11 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("RavenTech_ThinkEE.Exam", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ExamId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamId"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -2510,13 +2989,23 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ExamId");
 
                     b.HasIndex("ExamFormatId");
 
                     b.HasIndex("ReviewTopicId");
 
                     b.ToTable("Exams");
+
+                    b.HasData(
+                        new
+                        {
+                            ExamId = 1,
+                            Date = new DateTime(2025, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamFormatId = 1,
+                            Title = "Electrical Circuits Mock Exam",
+                            Type = "Mock Board"
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Allowance", b =>

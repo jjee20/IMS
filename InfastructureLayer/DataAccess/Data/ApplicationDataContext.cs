@@ -4,6 +4,7 @@ using DomainLayer.Models.Accounts;
 using DomainLayer.Models.Inventory;
 using DomainLayer.Models.ThinkEE;
 using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.ThinkEE;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,8 @@ namespace InfastructureLayer.DataAccess.Data
             string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
 
             var connection = new SqlConnection(connectionString);
-            optionsBuilder.UseSqlServer(connection);
-            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer(connection);
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
             optionsBuilder.ConfigureWarnings(w =>
             w.Ignore(RelationalEventId.PendingModelChangesWarning));
         }
@@ -41,6 +42,7 @@ namespace InfastructureLayer.DataAccess.Data
             AppDbSeed.SeedUserRoles(builder);
             AppDbSeed.SeedUsers(builder);
             AppDbSeed.SeedHolidays(builder);
+            AppDbSeed.SeedExamFormat(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);

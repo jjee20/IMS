@@ -178,6 +178,30 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\HolidayView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\ThinkEE\ExamView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ThinkEE\ExamTopicView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ThinkEE\ExamFormatView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ThinkEE\Upserts\UpsertExamView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ThinkEE\Upserts\UpsertExamTopicView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ThinkEE\Upserts\UpsertExamFormatView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ThinkEE\Upserts\UpsertReviewTopicView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\ThinkEE\ReviewTopicView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\ProductPullOutLogView.cs">
       <SubType>Form</SubType>
     </Compile>

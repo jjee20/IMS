@@ -48,26 +48,29 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void dgList_CellClick(object sender, CellClickEventArgs e)
         {
-            if (e.DataColumn.GridColumn.MappingName == "Delete")
+            if (e.DataRow?.RowType == RowType.DefaultRow)
             {
-                if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is GoodsReceiveNoteViewModel row)
+                if (e.DataColumn.GridColumn.MappingName == "Delete")
                 {
-                    var entity = _unitOfWork.GoodsReceivedNote.Value.Get(c => c.GoodsReceivedNoteId == row.GoodsReceivedNoteId, tracked: true);
-
-                    var result = MessageBox.Show("Are you sure you want to delete the selected GRN?", "Warning",
-                               MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
+                    if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is GoodsReceiveNoteViewModel row)
                     {
-                        _unitOfWork.GoodsReceivedNote.Value.Remove(entity);
-                        _unitOfWork.Save();
+                        var entity = _unitOfWork.GoodsReceivedNote.Value.Get(c => c.GoodsReceivedNoteId == row.GoodsReceivedNoteId, tracked: true);
 
-                        MessageBox.Show("GRN deleted successfully", "Delete GRN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var result = MessageBox.Show("Are you sure you want to delete the selected GRN?", "Warning",
+                                   MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                        _goodsReceiveNotes.ToList().Remove(row);
+                        if (result == DialogResult.Yes)
+                        {
+                            _unitOfWork.GoodsReceivedNote.Value.Remove(entity);
+                            _unitOfWork.Save();
 
-                        dgList.DataSource = null;
-                        dgList.DataSource = _goodsReceiveNotes;
+                            MessageBox.Show("GRN deleted successfully", "Delete GRN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            _goodsReceiveNotes.ToList().Remove(row);
+
+                            dgList.DataSource = null;
+                            dgList.DataSource = _goodsReceiveNotes;
+                        }
                     }
                 }
             }
