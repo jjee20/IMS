@@ -8,8 +8,10 @@ using DomainLayer.ViewModels.ThinkEE;
 using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
 using RavenTech_ThinkEE;
+using ServiceLayer.Services.Helpers;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.Controls;
+using Syncfusion.WinForms.DataGrid;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
@@ -24,8 +26,21 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             InitializeComponent();
             _unitOfWork = unitOfWork;
             _entity = entity ?? new Exam();
-            LoadEntityToForm();
             LoadExamFormat();
+            LoadExamTopicsToCOmbobox();
+            LoadEntityToForm();
+        }
+
+        private async void LoadExamTopicsToCOmbobox()
+        {
+            var examTopics = await _unitOfWork.ExamTopic.Value.GetAllAsync();
+            var comboCol = dgList.Columns["ExamTopic"] as GridComboBoxColumn;
+            if (comboCol != null)
+            {
+                comboCol.DataSource = examTopics;
+                comboCol.DisplayMember = "Name";
+                comboCol.ValueMember = "ExamTopicId";
+            }
         }
 
         private void LoadExamFormat()
@@ -50,7 +65,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                     Answer = q.Choices.FirstOrDefault(c => c.IsCorrect)?.Text,
                     Delete = Resources.delete
                 }).ToList())
-                : new BindingList<ExamQuestionsViewModel>(); 
+                : new BindingList<ExamQuestionsViewModel>();
             dgList.DataSource = questions;
             txtTitle.Text = _entity.Title;
             txtDate.Value = _entity.Date;
@@ -61,11 +76,13 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         {
             UpdateEntityFromForm();
 
+            _unitOfWork.Exam.Value.Update(_entity);
 
             var questionsVM = dgList.DataSource as BindingList<ExamQuestionsViewModel>;
             var questionList = questionsVM.Select(q => new Question
             {
-                QuestionId = _entity.ExamId,
+                ExamId = _entity.ExamId,
+                ExamTopicId = q.ExamTopicId,
                 Text = q.Question,
                 Choices = new List<Choice>
                     {
@@ -86,7 +103,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                 await _unitOfWork.Question.Value.AddRangeAsync(questionList);
 
-                _unitOfWork.Exam.Value.Update(_entity);
                 message = "Exam Format updated successfully.";
             }
             else
@@ -115,6 +131,18 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private void UpsertExamView_Load(object sender, EventArgs e)
         {
             txtDate.Value = DateTime.Now;
+        }
+
+        private void dgList_QueryImageCellStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryImageCellStyleEventArgs e)
+        {
+            if (e.Column.MappingName == "Delete")
+            {
+                e.Image = DataGridHelper.ByteArrayToImage(Resources.delete);
+            }
+        }
+
+        private void dgList_QueryCellStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryCellStyleEventArgs e)
+        {
         }
     }
 }

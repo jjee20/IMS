@@ -29,8 +29,8 @@ namespace InfastructureLayer.DataAccess.Data
             string connectionString = ConfigurationManager.ConnectionStrings[environment]?.ConnectionString;
 
             var connection = new SqlConnection(connectionString);
-            //optionsBuilder.UseSqlServer(connection);
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(connection);
+            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
             optionsBuilder.ConfigureWarnings(w =>
             w.Ignore(RelationalEventId.PendingModelChangesWarning));
         }

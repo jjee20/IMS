@@ -71,7 +71,7 @@ namespace RavenTech_ERP.Presenters.ThinkEE
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ExamViewModel row)
             {
-                var entity = _unitOfWork.Exam.Value.Get(c => c.ExamId == row.ExamId);
+                var entity = _unitOfWork.Exam.Value.Get(c => c.ExamId == row.ExamId, includeProperties: "ExamFormat,Questions.Choices");
                 using (var form = new UpsertExamView(_unitOfWork,entity))
                 {
                     form.Text = "Edit Exam";
