@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileView));
+            var customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
             btnChangePassword = new Guna.UI2.WinForms.Guna2Button();
             btnEditProfile = new Guna.UI2.WinForms.Guna2Button();
@@ -46,7 +46,7 @@
             materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
-            listTask = new MaterialSkin.Controls.MaterialListView();
+            listTask = new ListBox();
             txtDepartment = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             txtPhone = new MaterialSkin.Controls.MaterialLabel();
@@ -70,12 +70,12 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 3);
-            materialCard1.Margin = new Padding(21, 21, 21, 21);
+            materialCard1.Location = new Point(2, 2);
+            materialCard1.Margin = new Padding(21);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(21, 21, 21, 21);
-            materialCard1.Size = new Size(1344, 723);
+            materialCard1.Padding = new Padding(21);
+            materialCard1.Size = new Size(1346, 725);
             materialCard1.TabIndex = 0;
             // 
             // btnChangePassword
@@ -88,8 +88,8 @@
             btnChangePassword.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnChangePassword.Font = new Font("Segoe UI", 9F);
             btnChangePassword.ForeColor = Color.White;
-            btnChangePassword.Location = new Point(-29, 607);
-            btnChangePassword.Margin = new Padding(4, 4, 4, 4);
+            btnChangePassword.Location = new Point(77, 534);
+            btnChangePassword.Margin = new Padding(4);
             btnChangePassword.Name = "btnChangePassword";
             btnChangePassword.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnChangePassword.Size = new Size(300, 68);
@@ -106,8 +106,8 @@
             btnEditProfile.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnEditProfile.Font = new Font("Segoe UI", 9F);
             btnEditProfile.ForeColor = Color.White;
-            btnEditProfile.Location = new Point(-29, 535);
-            btnEditProfile.Margin = new Padding(4, 4, 4, 4);
+            btnEditProfile.Location = new Point(77, 462);
+            btnEditProfile.Margin = new Padding(4);
             btnEditProfile.Name = "btnEditProfile";
             btnEditProfile.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnEditProfile.Size = new Size(300, 68);
@@ -132,12 +132,12 @@
             materialCard2.Controls.Add(txtName);
             materialCard2.Depth = 0;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(456, 45);
-            materialCard2.Margin = new Padding(21, 21, 21, 21);
+            materialCard2.Location = new Point(457, 46);
+            materialCard2.Margin = new Padding(21);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
-            materialCard2.Padding = new Padding(21, 21, 21, 21);
-            materialCard2.Size = new Size(996, 632);
+            materialCard2.Padding = new Padding(21);
+            materialCard2.Size = new Size(868, 632);
             materialCard2.TabIndex = 9;
             // 
             // materialLabel6
@@ -214,32 +214,21 @@
             guna2GroupBox1.Font = new Font("Segoe UI", 9F);
             guna2GroupBox1.ForeColor = Color.FromArgb(125, 137, 149);
             guna2GroupBox1.Location = new Point(26, 286);
-            guna2GroupBox1.Margin = new Padding(4, 4, 4, 4);
+            guna2GroupBox1.Margin = new Padding(4);
             guna2GroupBox1.Name = "guna2GroupBox1";
             guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GroupBox1.Size = new Size(1136, 327);
+            guna2GroupBox1.Size = new Size(817, 327);
             guna2GroupBox1.TabIndex = 6;
             guna2GroupBox1.Text = "Task";
             // 
             // listTask
             // 
-            listTask.AutoSizeTable = false;
-            listTask.BackColor = Color.FromArgb(255, 255, 255);
             listTask.BorderStyle = BorderStyle.None;
-            listTask.Depth = 0;
-            listTask.Dock = DockStyle.Fill;
-            listTask.FullRowSelect = true;
-            listTask.Location = new Point(0, 40);
-            listTask.Margin = new Padding(4, 4, 4, 4);
-            listTask.MinimumSize = new Size(300, 150);
-            listTask.MouseLocation = new Point(-1, -1);
-            listTask.MouseState = MaterialSkin.MouseState.OUT;
+            listTask.FormattingEnabled = true;
+            listTask.Location = new Point(45, 40);
             listTask.Name = "listTask";
-            listTask.OwnerDraw = true;
-            listTask.Size = new Size(1136, 287);
+            listTask.Size = new Size(772, 275);
             listTask.TabIndex = 0;
-            listTask.UseCompatibleStateImageBehavior = false;
-            listTask.View = View.Details;
             // 
             // txtDepartment
             // 
@@ -257,7 +246,7 @@
             // guna2Separator1
             // 
             guna2Separator1.Location = new Point(26, 212);
-            guna2Separator1.Margin = new Padding(4, 4, 4, 4);
+            guna2Separator1.Margin = new Padding(4);
             guna2Separator1.Name = "guna2Separator1";
             guna2Separator1.Size = new Size(1136, 15);
             guna2Separator1.TabIndex = 2;
@@ -319,13 +308,13 @@
             guna2CirclePictureBox1.Anchor = AnchorStyles.None;
             guna2CirclePictureBox1.Image = (Image)resources.GetObject("guna2CirclePictureBox1.Image");
             guna2CirclePictureBox1.ImageRotate = 0F;
-            guna2CirclePictureBox1.Location = new Point(-108, 45);
-            guna2CirclePictureBox1.Margin = new Padding(4, 4, 4, 4);
+            guna2CirclePictureBox1.Location = new Point(52, 131);
+            guna2CirclePictureBox1.Margin = new Padding(4);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            guna2CirclePictureBox1.Padding = new Padding(8, 8, 8, 8);
+            guna2CirclePictureBox1.Padding = new Padding(8);
             guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges7;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CirclePictureBox1.Size = new Size(459, 428);
+            guna2CirclePictureBox1.Size = new Size(355, 302);
             guna2CirclePictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             guna2CirclePictureBox1.TabIndex = 8;
             guna2CirclePictureBox1.TabStop = false;
@@ -359,7 +348,6 @@
         private Guna.UI2.WinForms.Guna2Button btnEditProfile;
         private MaterialSkin.Controls.MaterialCard materialCard2;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
-        private MaterialSkin.Controls.MaterialListView listTask;
         private MaterialSkin.Controls.MaterialLabel txtDepartment;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private MaterialSkin.Controls.MaterialLabel txtPhone;
@@ -372,5 +360,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private ListBox listTask;
     }
 }

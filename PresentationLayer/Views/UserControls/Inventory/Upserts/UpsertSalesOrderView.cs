@@ -1,4 +1,8 @@
-﻿using DomainLayer.Models.Accounting.Payroll;
+﻿using System;
+using System.ServiceModel.Channels;
+using System.Windows.Forms;
+using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.PayrollViewModels;
@@ -6,14 +10,12 @@ using PresentationLayer;
 using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
 using RavenTech_ERP.Views.UserControls.Inventory.Searches;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using Syncfusion.WinForms.DataGrid.Interactivity;
-using System;
-using System.ServiceModel.Channels;
-using System.Windows.Forms;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
@@ -288,6 +290,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 return;
             }
 
+            // For non-stock items
             if (btnNonStock.Checked)
             {
                 productId = 0;
@@ -296,7 +299,69 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             }
             else
             {
-                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
+                productId = (int)txtProduct.SelectedValue;
+
+                // Get total stock-in quantity
+                var productStockInQty = _unitOfWork.ProductStockInLogLines.Value
+                    .GetAll(c => c.ProductId == productId)
+                    .Sum(c => (int?)c.StockQuantity) ?? 0;
+
+                // Get total pull-out quantity
+                var productPullOutQty = _unitOfWork.ProductPullOutLogLines.Value
+                    .GetAll(c => c.ProductId == productId)
+                    .Sum(c => (int?)c.StockQuantity) ?? 0;
+
+                // Get total sales-order quantity
+                var productSalesOrderQty = _unitOfWork.SalesOrderLine.Value
+                    .GetAll(c => c.ProductId == productId)
+                    .Sum(c => (int?)c.Quantity) ?? 0;
+
+                // Calculate current stock
+                var availableStock = productStockInQty - productPullOutQty - productSalesOrderQty;
+                var currentQty = int.TryParse(txtProductQty.Text, out var qty) ? qty : 0;
+
+                var userDepartment = Settings.Default.Department;
+                var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+
+                var isAdmin = userDepartment == Departments.Admin.ToString();
+                var canOverride = appUserRoles != null && appUserRoles.Contains(TaskRoles.Override);
+
+                var allowOverride = false;
+
+                // Centralized override logic
+                if (currentQty > availableStock || availableStock <= 0)
+                {
+                    if (isAdmin && canOverride)
+                    {
+                        var result = MessageBox.Show(
+                                "Insufficient stock for the selected product. Do you want to override?",
+                                "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            allowOverride = true;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Insufficient stock for the selected product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                // Only proceed if there is enough stock, or override is allowed
+                if (currentQty > availableStock && !allowOverride)
+                {
+                    // This is a secondary check for when override is declined
+                    MessageBox.Show("Insufficient stock for the selected product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == productId);
                 if (product == null)
                 {
                     MessageBox.Show("Selected product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -314,7 +379,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 }
             }
 
-            double quantity = double.TryParse(txtProductQty.Text, out var qty) ? qty : 0.0;
+            double quantity = double.TryParse(txtProductQty.Text, out var qty2) ? qty2 : 0.0;
             double discountPercent = double.TryParse(txtProductDiscount.Text, out var disc) ? disc / 100 : 0.0;
             double subTotal = (price * quantity) - (price * discountPercent);
 
@@ -333,6 +398,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
             ComputeTotal();
         }
+
 
         private void ComputeTotal()
         {

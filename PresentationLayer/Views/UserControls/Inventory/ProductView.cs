@@ -1,21 +1,23 @@
-﻿using DomainLayer.ViewModels.InventoryViewModels;
+﻿using System.ComponentModel;
+using DomainLayer.Enums;
+using DomainLayer.ViewModels;
+using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
 using RavenTech_ERP.Views.UserControls;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
-using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using Syncfusion.WinForms.DataGridConverter;
 using Syncfusion.WinForms.DataGridConverter.Events;
-using System.ComponentModel;
-using DomainLayer.ViewModels;
-using DomainLayer.ViewModels.Inventory;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -24,6 +26,7 @@ namespace PresentationLayer.Views.UserControls
         public ProductView()
         {
             InitializeComponent();
+            SetPermissions();
         }
 
 
@@ -68,6 +71,13 @@ namespace PresentationLayer.Views.UserControls
         {
             if (e.KeyCode == Keys.Delete)
             {
+                var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+                if (appUserRoles != null && appUserRoles.Contains(TaskRoles.View))
+                {
+                    MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 var result = MessageBox.Show("Are you sure you want to delete the selected items?", "Warning",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
@@ -98,6 +108,14 @@ namespace PresentationLayer.Views.UserControls
             }
 
             dgList.DataSource = dgPager.PagedSource;
+        }
+
+        public void SetPermissions()
+        {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            btnAdd.Enabled = appUserRoles.Contains(TaskRoles.Add);
+            dgList.Columns["Edit"].Visible = appUserRoles.Contains(TaskRoles.Edit);
+            dgList.Columns["Delete"].Visible = appUserRoles.Contains(TaskRoles.Delete);
         }
 
         public event EventHandler AddEvent;

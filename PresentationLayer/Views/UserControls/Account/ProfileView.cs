@@ -16,7 +16,7 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class ProfileView : SfForm, IProfileView
     {
-        private List<TaskRoles> items;
+        private readonly List<TaskRoles> items;
         public ProfileView()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace PresentationLayer.Views.UserControls
         public void GetTaskRoles(List<TaskRoles> taskRoles)
         {
             listTask.Items.Clear();
-            foreach (TaskRoles item in taskRoles)
+            foreach (var item in taskRoles)
             {
                 listTask.Items.Add(item.ToString());
             }

@@ -18,6 +18,9 @@ namespace ServiceLayer.Services.CommonServices
                 .ToList();
             return retrievedRoles;
         }
+
+
+
         public static bool AllowedToAdd(List<TaskRoles> roles)
         {
             return roles.Contains(DomainLayer.Enums.TaskRoles.Add) ? true : false;
@@ -33,6 +36,10 @@ namespace ServiceLayer.Services.CommonServices
         public static bool AllowedToView(List<TaskRoles> roles)
         {
             return roles.Contains(DomainLayer.Enums.TaskRoles.View) ? true : false;
+        }
+        public static bool AllowedToOverride(List<TaskRoles> roles)
+        {
+            return roles.Contains(DomainLayer.Enums.TaskRoles.Override) ? true : false;
         }
     }
 }

@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Enums
+namespace DomainLayer.Enums;
+
+public enum Departments
 {
-    public enum Departments
-    {
-        Admin,
-        Inventory,
-        Payroll,
-        ThinkEE,
-    }
+    Admin,
+    Inventory,
+    Payroll,
+    Guest
 }
