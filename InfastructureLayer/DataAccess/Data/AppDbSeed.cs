@@ -21,6 +21,7 @@ namespace InfastructureLayer.DataAccess.Data
 		private static string SuperAdminId = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD";
         private static string InventoryId = "FB38CC93-2B1E-4444-9A48-396E4C28E190";
         private static string PayrollId = "6628DE62-AF21-4389-B612-623A1A17637C";
+        private static string GuestId = "2878BA2F-5B81-4BD3-A830-6733C6536AAF";
 
         public static void SeedRole(ModelBuilder modelBuilder)
         {
@@ -53,6 +54,14 @@ namespace InfastructureLayer.DataAccess.Data
                 NormalizedEmail = "SUPER@ADMIN.COM",
                 EmailConfirmed = true,
                 SecurityStamp = string.Empty,
+                TaskRoles =
+                [
+                    TaskRoles.Add,
+                    TaskRoles.Edit,
+                    TaskRoles.Delete,
+                    TaskRoles.View,
+                    TaskRoles.Override
+                ]
             };
             superadmin.PasswordHash = hasher.HashPassword(superadmin, "pass@123");
             modelBuilder.Entity<ApplicationUser>().HasData(superadmin);
@@ -68,6 +77,13 @@ namespace InfastructureLayer.DataAccess.Data
                 NormalizedEmail = "INVENTORY@USER.COM",
                 EmailConfirmed = true,
                 SecurityStamp = string.Empty,
+                TaskRoles =
+                [
+                    TaskRoles.Add,
+                    TaskRoles.Edit,
+                    TaskRoles.Delete,
+                    TaskRoles.View
+                ]
             };
             inventory.PasswordHash = hasher.HashPassword(inventory, "pass@123");
             modelBuilder.Entity<ApplicationUser>().HasData(inventory);
@@ -83,9 +99,34 @@ namespace InfastructureLayer.DataAccess.Data
                 NormalizedEmail = "PAYROLL@USER.COM",
                 EmailConfirmed = true,
                 SecurityStamp = string.Empty,
+                TaskRoles =
+                [
+                    TaskRoles.Add,
+                    TaskRoles.Edit,
+                    TaskRoles.Delete,
+                    TaskRoles.View
+                ]
             };
             payroll.PasswordHash = hasher.HashPassword(payroll, "pass@123");
             modelBuilder.Entity<ApplicationUser>().HasData(payroll);
+
+            var guest = new ApplicationUser
+            {
+                Id = GuestId,
+                UserName = "guest",
+                NormalizedUserName = "GUEST",
+                Department = Departments.Payroll,
+                Email = "guest@user.com",
+                NormalizedEmail = "GUEST@USER.COM",
+                EmailConfirmed = true,
+                SecurityStamp = string.Empty,
+                TaskRoles =
+                [
+                    TaskRoles.View
+                ]
+            };
+            guest.PasswordHash = hasher.HashPassword(guest, "guest@123");
+            modelBuilder.Entity<ApplicationUser>().HasData(guest);
         }
 
         public static void SeedHolidays(ModelBuilder modelBuilder)

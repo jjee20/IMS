@@ -60,7 +60,7 @@ namespace PresentationLayer.Presenters.Account
                 {
                     var department = user.Department;
                     Settings.Default.User_Id = user.Id;
-                    if(user.TaskRoles != null) Settings.Default.Roles = string.Join(",",user.TaskRoles);
+                    Settings.Default.Roles = user.TaskRoles != null ? string.Join(",",user.TaskRoles) : "";
                     Settings.Default.Department = department.ToString();
 
                     IMainForm mainForm = new MainForm();
@@ -70,12 +70,18 @@ namespace PresentationLayer.Presenters.Account
                         mainForm.InventoryTab.Visible = true;
                         mainForm.PayrollTab.Visible = false;
                         mainForm.RegisterButton.Visible = true;
+                        mainForm.ThinkEETab.Visible = false;
+                        if (user.TaskRoles != null && user.TaskRoles.Contains(TaskRoles.View))
+                        {
+                            mainForm.RegisterButton.Visible = false;
+                        }
                     } 
-                    if(department == Departments.Payroll)
+                    else if(department == Departments.Payroll)
                     {
                         mainForm.PayrollTab.Visible = true;
                         mainForm.InventoryTab.Visible = false;
                         mainForm.RegisterButton.Visible = true;
+                        mainForm.ThinkEETab.Visible = false;
                     }
                     mainForm.ShowForm();
                     _view.Hide();

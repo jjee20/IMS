@@ -1,5 +1,6 @@
 ﻿using InfastructureLayer.DataAccess.Data;
 using InfastructureLayer.DataAccess.Repositories;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -13,6 +14,7 @@ using RavenTech_ThinkEE.Models;
 using RavenTech_ThinkEE.Services;
 using RavenTech_ThinkEE.ViewModels;
 using RavenTech_ThinkEE.Views;
+
 using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 
@@ -74,9 +76,14 @@ public partial class App : Application
             services.AddSingleton<INavigationService, NavigationService>();
 
             // Core Services
+            services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
+            services.AddTransient<ExamDetailViewModel>();
+            services.AddTransient<ExamDetailPage>();
+            services.AddTransient<ExamViewModel>();
+            services.AddTransient<ExamPage>();
             services.AddTransient<ReviewTopicViewModel>();
             services.AddTransient<ReviewTopicPage>();
             services.AddTransient<SettingsViewModel>();

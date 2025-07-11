@@ -104,13 +104,18 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
         private void btnProductAdd_Click(object sender, EventArgs e)
         {
-            if(txtProduct.SelectedIndex == -1)
+            if (txtProduct.SelectedIndex == -1)
             {
-                MessageBox.Show("Please select a product to add.","Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please select a product to add.", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (txtProject.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a project.", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            int productId = (int)txtProduct.SelectedValue;
+            var productId = (int)txtProduct.SelectedValue;
 
             // Get total stock-in quantity
             var productStockInQty = _unitOfWork.ProductStockInLogLines.Value
@@ -122,12 +127,52 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 .GetAll(c => c.ProductId == productId)
                 .Sum(c => (int?)c.StockQuantity) ?? 0;
 
-            // Calculate current stock
-            int availableStock = productStockInQty - productPullOutQty;
+            // Get total sales-order quantity
+            var productSalesOrderQty = _unitOfWork.SalesOrderLine.Value
+                .GetAll(c => c.ProductId == productId)
+                .Sum(c => (int?)c.Quantity) ?? 0;
 
-            if (availableStock <= 0)
+            // Calculate current stock
+            var availableStock = productStockInQty - productPullOutQty - productSalesOrderQty;
+            var currentQty = int.TryParse(txtQuantity.Text, out var qty) ? qty : 0;
+
+            var userDepartment = Settings.Default.Department;
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+
+            var isAdmin = userDepartment == Departments.Admin.ToString();
+            var canOverride = appUserRoles != null && appUserRoles.Contains(TaskRoles.Override);
+
+            var allowOverride = false;
+
+            // Centralized override logic
+            if (currentQty > availableStock)
             {
-                MessageBox.Show("No stock available for the selected product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (isAdmin && canOverride)
+                {
+                    var result = MessageBox.Show(
+                        "Insufficient stock for the selected product. Do you want to override?",
+                        "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        allowOverride = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Insufficient stock for the selected product.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            // If no override, also block zero or negative stock
+            if (availableStock <= 0 && !allowOverride)
+            {
+                MessageBox.Show("No stock available for the selected product.", "Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -153,6 +198,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             dgList.DataSource = _entityViewModel;
             ComputeTotal();
         }
+
         private void dgList_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
         {
             dgList.Refresh();

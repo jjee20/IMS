@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RavenTech_ERP.Views.IViews.Inventory;
+using DomainLayer.Enums;
 using PresentationLayer.Views.UserControls;
+using RavenTech_ERP.Properties;
+using RavenTech_ERP.Views.IViews.Inventory;
+using ServiceLayer.Services.CommonServices;
 using Syncfusion.WinForms.Controls;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
@@ -19,12 +22,18 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         public TargetGoalsView()
         {
             InitializeComponent();
+            SetPermissions();
 
             btnSave.Click += delegate 
             { 
                 SaveClicked?.Invoke(this, EventArgs.Empty);
                 MessageBox.Show(_message);
             };
+        }
+        public void SetPermissions()
+        {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles); 
+            btnSave.Enabled = appUserRoles.Contains(TaskRoles.Add) || appUserRoles.Contains(TaskRoles.Edit);
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
