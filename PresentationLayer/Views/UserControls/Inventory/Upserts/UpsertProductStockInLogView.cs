@@ -100,6 +100,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 return;
             }
 
+
             var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
 
             var productInLogLines = new ProductStockInLogLineViewModel()

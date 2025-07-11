@@ -1,23 +1,25 @@
-﻿using DomainLayer.ViewModels.InventoryViewModels;
+﻿using System.ComponentModel;
+using DomainLayer.Enums;
+using DomainLayer.ViewModels;
+using DomainLayer.ViewModels.Inventory;
+using DomainLayer.ViewModels.InventoryViewModels;
+using DomainLayer.ViewModels.PayrollViewModels;
 using PresentationLayer.Views.IViews;
 using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
+using RavenTech_ERP.Views.IViews.Inventory;
 using RavenTech_ERP.Views.UserControls;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.Helpers;
 using Syncfusion.Data.Extensions;
-using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 using Syncfusion.WinForms.Controls;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using Syncfusion.WinForms.DataGridConverter;
 using Syncfusion.WinForms.DataGridConverter.Events;
-using System.ComponentModel;
-using DomainLayer.ViewModels;
-using DomainLayer.ViewModels.PayrollViewModels;
-using RavenTech_ERP.Views.IViews.Inventory;
-using DomainLayer.ViewModels.Inventory;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -26,6 +28,14 @@ namespace PresentationLayer.Views.UserControls
         public PurchaseOrderView()
         {
             InitializeComponent();
+            SetPermissions();
+        }
+        public void SetPermissions()
+        {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            btnAdd.Enabled = appUserRoles.Contains(TaskRoles.Add);
+            dgList.Columns["Edit"].Visible = appUserRoles.Contains(TaskRoles.Edit);
+            dgList.Columns["Delete"].Visible = appUserRoles.Contains(TaskRoles.Delete);
         }
 
 

@@ -35,6 +35,7 @@ namespace RavenTech_ERP.Presenters
     {
         private readonly IMainForm _mainForm; 
         private readonly IUnityContainer _container;
+        private ProjectDashboardPresenter? _projectDashboardPresenter;
         private ExamPresenter? _examPresenter;
         private ExamFormatPresenter? _examFormatPresenter;
         private ExamTopicPresenter? _examTopicPresenter;
@@ -86,49 +87,8 @@ namespace RavenTech_ERP.Presenters
         {
             _mainForm = mainForm;
             _container = container;
-            //_mainForm.AllowanceEvent -= AllowanceEvent;
-            //_mainForm.AttendanceEvent -= AttendanceEvent;
-            //_mainForm.BenefitEvent -= BenefitEvent;
-            //_mainForm.BonusEvent -= BonusEvent;
-            //_mainForm.ContributionEvent -= ContributionEvent;
-            //_mainForm.CustomerEvent -= CustomerEvent;
-            //_mainForm.CustomerTypeEvent -= CustomerTypeEvent;
-            //_mainForm.DeductionEvent -= DeductionEvent;
-            //_mainForm.JobPositionEvent -= JobPositionEvent;
-            //_mainForm.LeaveEvent -= LeaveEvent;
-            //_mainForm.ProjectEvent -= ProjectEvent;
-            //_mainForm.ShiftEvent -= ShiftEvent;
-            //_mainForm.TaxEvent -= TaxEvent;
-            //_mainForm.BillTypeEvent -= BillTypeEvent;
-            //_mainForm.BranchEvent -= BranchEvent;
-            //_mainForm.CashBankEvent -= CashBankEvent;
-            //_mainForm.InvoiceTypeEvent -= InvoiceTypeEvent;
-            //_mainForm.PaymentTypeEvent -= PaymentTypeEvent;
-            //_mainForm.ProductEvent -= ProductEvent;
-            //_mainForm.StockInLogEvent -= StockInLogEvent;
-            //_mainForm.ProductTypeEvent -= ProductTypeEvent;
-            //_mainForm.PurchaseOrderEvent -= PurchaseOrderEvent;
-            //_mainForm.PurchaseReportEvent -= PurchaseReportEvent;
-            //_mainForm.PurchaseTypeEvent -= PurchaseTypeEvent;
-            //_mainForm.SalesOrderEvent -= SalesOrderEvent;
-            //_mainForm.SalesReportEvent -= SalesReportEvent;
-            //_mainForm.SalesTypeEvent -= SalesTypeEvent;
-            //_mainForm.ShipmentTypeEvent -= ShipmentTypeEvent;
-            //_mainForm.TargetGoalsEvent -= TargetGoalsEvent;
-            //_mainForm.UnitOfMeasureEvent -= UnitOfMeasureEvent;
-            //_mainForm.VendorEvent -= VendorEvent;
-            //_mainForm.VendorTypeEvent -= VendorTypeEvent;
-            //_mainForm.WarehouseEvent -= WarehouseEvent;
-            //_mainForm.DashboardEvent -= DashboardEvent;
-            //_mainForm.ProductMonitoringEvent -= ProductMonitoringEvent;
-            //_mainForm.ProfileEvent -= ProfileEvent;
-            //_mainForm.RegisterAccountEvent -= RegisterAccountEvent;
-            //_mainForm.PayrollEvent -= PayrollEvent;
-            //_mainForm.HolidayEvent -= HolidayEvent;
-            //_mainForm.EmployeeEvent -= EmployeeEvent;
-            //_mainForm.DepartmentEvent -= DepartmentEvent;
-            //_mainForm.ProductPulloutLogEvent -= ProductPulloutLogEvent;
 
+            _mainForm.ProjectDashboardEvent += ProjectDashboardEvent;
             _mainForm.ExamEvent += ExamEvent;
             _mainForm.ExamFormatEvent += ExamFormatEvent;
             _mainForm.ExamTopicEvent += ExamTopicEvent;
@@ -186,6 +146,14 @@ namespace RavenTech_ERP.Presenters
                 _mainForm.ribbonControl.SelectedTab = _mainForm.PayrollTab;
                 AttendanceEvent(this, EventArgs.Empty);
             }
+        }
+
+        private void ProjectDashboardEvent(object? sender, EventArgs e)
+        {
+            IProjectDashboardView view = ChildManager<ProjectDashboardView>.GetChildInstance((MainForm)_mainForm);
+            if (_projectDashboardPresenter == null || ((Form)view).IsDisposed)
+                _projectDashboardPresenter = new ProjectDashboardPresenter(view, _container.Resolve<IUnitOfWork>());
+            ((Form)view).BringToFront();
         }
 
         private void ExamEvent(object? sender, EventArgs e)

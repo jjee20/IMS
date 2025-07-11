@@ -107,7 +107,7 @@ namespace RavenTech_ERP.Presenters.Inventory
             _view.ItemSold = sales.Where(c => c.OrderDate.Year == year.Value).SelectMany(c => c.SalesOrderLines).Sum(c => c.Quantity).ToString();
             _view.Sales = sales.Where(c => c.OrderDate.Year == year.Value).Sum(c => c.Total);
             _view.Purchases = purchases.Where(c => c.OrderDate.Year == year.Value).Sum(c => c.Total);
-            _view.Net = (_view.Sales - _view.Purchases).ToString("N2");
+            _view.Net = (_view.Sales - _view.Purchases).ToString("C2");
 
             var daysInMonth = DateTime.DaysInMonth(year.Value, month.Value);
             var daysRange = Enumerable.Range(1, daysInMonth);

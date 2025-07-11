@@ -1,15 +1,4 @@
-﻿using DomainLayer.Models.Inventory;
-using DomainLayer.ViewModels;
-using DomainLayer.ViewModels.Inventory;
-using MaterialSkin.Controls;
-using RavenTech_ERP.Properties;
-using ServiceLayer.Services.Helpers;
-using ServiceLayer.Services.IRepositories;
-using Syncfusion.Data.Extensions;
-using Syncfusion.WinForms.Controls;
-using Syncfusion.WinForms.DataGrid.Enums;
-using Syncfusion.WinForms.DataGrid.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DomainLayer.Enums;
+using DomainLayer.Models.Inventory;
+using DomainLayer.ViewModels;
+using DomainLayer.ViewModels.Inventory;
+using MaterialSkin.Controls;
+using RavenTech_ERP.Properties;
+using ServiceLayer.Services.CommonServices;
+using ServiceLayer.Services.Helpers;
+using ServiceLayer.Services.IRepositories;
+using Syncfusion.Data.Extensions;
+using Syncfusion.WinForms.Controls;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
 namespace RavenTech_ERP.Views.UserControls.Inventory
 {
@@ -32,6 +34,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
             LoadAllGoodsReceivedNoteList();
             _unitOfWork = unitOfWork;
+            SetPermissions();
+        }
+        public void SetPermissions()
+        {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            dgList.Columns["Delete"].Visible = appUserRoles.Contains(TaskRoles.Delete);
         }
 
         private void LoadAllGoodsReceivedNoteList()

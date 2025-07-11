@@ -17,6 +17,8 @@ public class PageService : IPageService
         Configure<MainViewModel, MainPage>();
         Configure<SettingsViewModel, SettingsPage>();
         Configure<ReviewTopicViewModel, ReviewTopicPage>();
+        Configure<ExamViewModel, ExamPage>();
+        Configure<ExamDetailViewModel, ExamDetailPage>();
     }
 
     public Type GetPageType(string key)

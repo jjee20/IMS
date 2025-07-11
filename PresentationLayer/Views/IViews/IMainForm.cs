@@ -2,8 +2,9 @@
 
 namespace RavenTech_ERP.Views.IViews
 {
-    public interface IMainForm
+    public interface IMainForm : IMessageBase
     {
+        event EventHandler ProjectDashboardEvent;
         event EventHandler ExamEvent;
         event EventHandler ExamFormatEvent;
         event EventHandler ExamTopicEvent;
@@ -56,6 +57,7 @@ namespace RavenTech_ERP.Views.IViews
         RibbonControlAdv ribbonControl { get; }
         ToolStripTabItem InventoryTab { get; set; }
         ToolStripTabItem PayrollTab { get; set; }
+        ToolStripTabItem ThinkEETab { get; set; }
         ToolStripEx RegisterButton { get; set; }
         void ShowForm();
     }

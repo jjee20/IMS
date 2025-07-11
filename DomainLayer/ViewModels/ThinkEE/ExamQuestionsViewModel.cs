@@ -10,6 +10,7 @@ namespace DomainLayer.ViewModels.ThinkEE
     public class ExamQuestionsViewModel
     {
         public string Question { get; set; }
+        public int ExamTopicId { get; set; }
         public string Choice1 { get; set; }
         public string Choice2 { get; set; }
         public string Choice3 { get; set; }

@@ -1,19 +1,27 @@
+using System.ComponentModel;
+using DomainLayer.Enums;
 using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Helpers;
+using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
 using RevenTech_ERP.Presenters.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
+using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.Controls;
-using System.ComponentModel;
 
 namespace RavenTech_ERP
 {
     public partial class MainForm : SfForm, IMainForm
     {
+
+        private List<TaskRoles> appUserRoles = new();
+        private Departments department;
         public MainForm()
         {
+            appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            department = (Departments)Enum.Parse(typeof(Departments), Settings.Default.Department);
             InitializeComponent();
         }
 
@@ -25,7 +33,10 @@ namespace RavenTech_ERP
         public ToolStripTabItem PayrollTab { get => btnPayrollMain; set => btnPayrollMain = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ToolStripEx RegisterButton { get => btnRegisterAccount; set => btnRegisterAccount = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public ToolStripTabItem ThinkEETab { get => btnThinkEE; set => btnThinkEE = value; }
 
+        public event EventHandler ProjectDashboardEvent;
         public event EventHandler ExamEvent;
         public event EventHandler ExamFormatEvent;
         public event EventHandler ExamTopicEvent;
@@ -80,6 +91,17 @@ namespace RavenTech_ERP
             Show();
         }
 
+        private void btnProjectDashboard_Click(object sender, EventArgs e)
+        {
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ProjectDashboardEvent?.Invoke(this, EventArgs.Empty);
+        }
+
         private void btnExam_Click(object sender, EventArgs e)
         {
             ExamEvent?.Invoke(this, EventArgs.Empty);
@@ -102,6 +124,12 @@ namespace RavenTech_ERP
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             DashboardEvent?.Invoke(this, EventArgs.Empty);
         }
 
@@ -112,11 +140,23 @@ namespace RavenTech_ERP
 
         private void btnSalesOrder_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             SalesOrderEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnPurchaseOrder_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             PurchaseOrderEvent?.Invoke(this, EventArgs.Empty);
         }
 
@@ -124,49 +164,91 @@ namespace RavenTech_ERP
         {
             ProjectEvent?.Invoke(this, EventArgs.Empty);
         }
-
-        private void btnMaterialsAllocatedvsActual_Click(object sender, EventArgs e)
-        {
-            ProjectEvent?.Invoke(this, EventArgs.Empty);
-        }
-
         private void btnWarehouse_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             WarehouseEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             CustomerEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnBranch_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             BranchEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnVendor_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             VendorEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnCashBank_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             CashBankEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnSalesReport_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             SalesReportEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnPurchaseReport_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             PurchaseReportEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnTargetGoals_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             TargetGoalsEvent?.Invoke(this, EventArgs.Empty);
         }
 
@@ -251,54 +333,132 @@ namespace RavenTech_ERP
         }
         private void btnStockMonitoring_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             ProductMonitoringEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnStockInLog_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             StockInLogEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnProductType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             ProductTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnUOM_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             UnitOfMeasureEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnSalesType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             SalesTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnShipmentType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             ShipmentTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnPaymentType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             PaymentTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnPurchaseType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             PurchaseTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnInvoiceType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             InvoiceTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnBillType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             BillTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnCustomerType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             CustomerTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnVendorType_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             VendorTypeEvent?.Invoke(this, EventArgs.Empty);
         }
         private void btnPullOutLog_Click(object sender, EventArgs e)
         {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                MessageBox.Show("You are not authorized to execute this operation. Please contact your administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             ProductPulloutLogEvent?.Invoke(this, EventArgs.Empty);
         }
     }

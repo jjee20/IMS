@@ -47,7 +47,7 @@ namespace ServiceLayer.Services.CommonServices
                 string.Join(",\n", src.ProductStockInLogLines.Select(c =>
                     $"{c.DateAdded:yyyy-MM-dd} - {c.Product.ProductName} - ({c.StockQuantity} {c.Product.UnitOfMeasure.UnitOfMeasureName} | " +
                     $"Size: {c.Product.Size}, Color: {c.Product.Color} | " +
-                    $"UnitCost: {c.Product.DefaultBuyingPrice:C} | Total: {(c.StockQuantity * c.Product.DefaultBuyingPrice):C})"
+                    $"Unit Cost: {c.Product.DefaultBuyingPrice:C} | Total: {(c.StockQuantity * c.Product.DefaultBuyingPrice):C})"
                 ))
             ))
             .ForMember(dest => dest.ProductStatus, opt => opt.MapFrom(src => src.ProductStatus.ToString()))
@@ -265,8 +265,8 @@ namespace ServiceLayer.Services.CommonServices
                 .ReverseMap();
 
             CreateMap<Project, ProjectViewModel>()
-                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.HasValue ? src.StartDate.Value.ToString("yyyy-MM-dd") : null))
-                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.HasValue ? src.EndDate.Value.ToString("yyyy-MM-dd") : null))
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.HasValue ? src.StartDate.Value.ToString("MMMM dd,yyyy") : null))
+                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.HasValue ? src.EndDate.Value.ToString("MMMM dd,yyyy") : null))
                 .ReverseMap();
 
             #endregion

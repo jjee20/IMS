@@ -121,6 +121,7 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.Controls.Add(dgProjectLines);
             panel1.Controls.Add(dgPager);
             panel1.Location = new Point(21, 168);
@@ -134,6 +135,7 @@
             dgProjectLines.AccessibleName = "Table";
             dgProjectLines.AllowFiltering = true;
             dgProjectLines.AllowTriStateSorting = true;
+            dgProjectLines.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgProjectLines.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn1.AllowFiltering = true;
             gridTextColumn1.AllowTextWrapping = true;
@@ -154,42 +156,52 @@
             gridNumericColumn1.AllowFiltering = true;
             gridNumericColumn1.AllowTextWrapping = true;
             gridNumericColumn1.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn1.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Currency;
             gridNumericColumn1.HeaderText = "Cost";
             gridNumericColumn1.MappingName = "Cost";
             gridNumericColumn1.ShowToolTip = true;
             gridNumericColumn2.AllowFiltering = true;
             gridNumericColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn2.Format = "N2";
             gridNumericColumn2.HeaderText = "Qty";
             gridNumericColumn2.MappingName = "Qty";
             gridNumericColumn2.ShowToolTip = true;
             gridNumericColumn3.AllowFiltering = true;
             gridNumericColumn3.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn3.Format = "N2";
             gridNumericColumn3.HeaderText = "Actual";
             gridNumericColumn3.MappingName = "ActualQty";
             gridNumericColumn3.ShowToolTip = true;
             gridNumericColumn4.AllowFiltering = true;
             gridNumericColumn4.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn4.Format = "N2";
             gridNumericColumn4.HeaderText = "Remaining";
             gridNumericColumn4.MappingName = "RemainingQty";
             gridNumericColumn4.ShowToolTip = true;
             gridNumericColumn5.AllowFiltering = true;
             gridNumericColumn5.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
+            gridNumericColumn5.Format = "N2";
+            gridNumericColumn5.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Percent;
             gridNumericColumn5.HeaderText = "%";
             gridNumericColumn5.MappingName = "PercentageQty";
             gridNumericColumn5.ShowToolTip = true;
             gridNumericColumn6.AllowFiltering = true;
+            gridNumericColumn6.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Currency;
             gridNumericColumn6.HeaderText = "Amount";
             gridNumericColumn6.MappingName = "Amount";
             gridNumericColumn6.ShowToolTip = true;
             gridNumericColumn7.AllowFiltering = true;
+            gridNumericColumn7.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Currency;
             gridNumericColumn7.HeaderText = "Actual";
             gridNumericColumn7.MappingName = "ActualAmount";
             gridNumericColumn7.ShowToolTip = true;
             gridNumericColumn8.AllowFiltering = true;
+            gridNumericColumn8.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Currency;
             gridNumericColumn8.HeaderText = "Remaining";
             gridNumericColumn8.MappingName = "RemainingAmount";
             gridNumericColumn8.ShowToolTip = true;
             gridNumericColumn9.AllowFiltering = true;
+            gridNumericColumn9.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Percent;
             gridNumericColumn9.HeaderText = "%";
             gridNumericColumn9.MappingName = "PercentageAmount";
             gridNumericColumn9.ShowToolTip = true;
@@ -205,14 +217,11 @@
             dgProjectLines.Columns.Add(gridNumericColumn7);
             dgProjectLines.Columns.Add(gridNumericColumn8);
             dgProjectLines.Columns.Add(gridNumericColumn9);
-            dgProjectLines.Dock = DockStyle.Fill;
-            dgProjectLines.FrozenColumnCount = 2;
-            dgProjectLines.FrozenRowCount = 1;
+            dgProjectLines.FrozenColumnCount = 1;
             dgProjectLines.Location = new Point(0, 0);
             dgProjectLines.Margin = new Padding(4);
             dgProjectLines.Name = "dgProjectLines";
             dgProjectLines.PreviewRowHeight = 42;
-            dgProjectLines.RowHeight = 140;
             dgProjectLines.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
             dgProjectLines.ShowToolTip = true;
             dgProjectLines.Size = new Size(1304, 281);
@@ -248,6 +257,7 @@
             // 
             // materialLabel2
             // 
+            materialLabel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             materialLabel2.AutoSize = true;
             materialLabel2.Depth = 0;
             materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -261,6 +271,7 @@
             // 
             // txtActualAmount
             // 
+            txtActualAmount.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             txtActualAmount.AutoSize = true;
             txtActualAmount.Depth = 0;
             txtActualAmount.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -275,6 +286,7 @@
             // 
             // materialLabel9
             // 
+            materialLabel9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             materialLabel9.AutoSize = true;
             materialLabel9.Depth = 0;
             materialLabel9.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -288,6 +300,7 @@
             // 
             // txtVariance
             // 
+            txtVariance.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             txtVariance.AutoSize = true;
             txtVariance.Depth = 0;
             txtVariance.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -302,6 +315,7 @@
             // 
             // materialLabel7
             // 
+            materialLabel7.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             materialLabel7.AutoSize = true;
             materialLabel7.Depth = 0;
             materialLabel7.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -315,6 +329,7 @@
             // 
             // txtTotalRevenue
             // 
+            txtTotalRevenue.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             txtTotalRevenue.AutoSize = true;
             txtTotalRevenue.Depth = 0;
             txtTotalRevenue.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -329,6 +344,7 @@
             // 
             // guna2Separator3
             // 
+            guna2Separator3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             guna2Separator3.Location = new Point(16, 512);
             guna2Separator3.Margin = new Padding(4, 5, 4, 5);
             guna2Separator3.Name = "guna2Separator3";
@@ -337,6 +353,7 @@
             // 
             // materialLabel6
             // 
+            materialLabel6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             materialLabel6.AutoSize = true;
             materialLabel6.Depth = 0;
             materialLabel6.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -350,6 +367,7 @@
             // 
             // txtDeduction
             // 
+            txtDeduction.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             txtDeduction.AutoSize = true;
             txtDeduction.Depth = 0;
             txtDeduction.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -364,6 +382,7 @@
             // 
             // materialLabel4
             // 
+            materialLabel4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             materialLabel4.AutoSize = true;
             materialLabel4.Depth = 0;
             materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -377,6 +396,7 @@
             // 
             // txtPayroll
             // 
+            txtPayroll.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             txtPayroll.AutoSize = true;
             txtPayroll.Depth = 0;
             txtPayroll.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -391,6 +411,7 @@
             // 
             // guna2Separator1
             // 
+            guna2Separator1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             guna2Separator1.Location = new Point(24, 142);
             guna2Separator1.Margin = new Padding(4, 5, 4, 5);
             guna2Separator1.Name = "guna2Separator1";
@@ -399,6 +420,7 @@
             // 
             // materialLabel15
             // 
+            materialLabel15.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             materialLabel15.AutoSize = true;
             materialLabel15.Depth = 0;
             materialLabel15.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -412,6 +434,7 @@
             // 
             // txtBudget
             // 
+            txtBudget.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtBudget.AutoSize = true;
             txtBudget.Depth = 0;
             txtBudget.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -480,6 +503,7 @@
             // 
             // materialLabel5
             // 
+            materialLabel5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             materialLabel5.AutoSize = true;
             materialLabel5.Depth = 0;
             materialLabel5.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -493,6 +517,7 @@
             // 
             // txtRevenue
             // 
+            txtRevenue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtRevenue.AutoSize = true;
             txtRevenue.Depth = 0;
             txtRevenue.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -534,6 +559,7 @@
             // 
             // materialLabel3
             // 
+            materialLabel3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             materialLabel3.AutoSize = true;
             materialLabel3.Depth = 0;
             materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -547,6 +573,7 @@
             // 
             // txtClient
             // 
+            txtClient.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtClient.AutoSize = true;
             txtClient.Depth = 0;
             txtClient.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);

@@ -145,7 +145,7 @@
     <value>About this application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>TODO: Replace with your app description.</value>
+    <value>Review Center Mock Exam</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
     <value>Privacy Statement</value>
@@ -155,5 +155,8 @@
   </data>
   <data name="Shell_ReviewTopic.Content" xml:space="preserve">
     <value>Review Topic</value>
+  </data>
+  <data name="Shell_Exam.Content" xml:space="preserve">
+    <value>Available Exam</value>
   </data>
 </root>

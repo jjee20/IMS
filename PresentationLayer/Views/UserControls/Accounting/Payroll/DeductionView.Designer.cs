@@ -30,17 +30,17 @@ namespace PresentationLayer.Views.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeductionView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridDateTimeColumn gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridTextColumn gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
-            Syncfusion.WinForms.DataGrid.GridImageColumn gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(DeductionView));
+            var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
+            var gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            var gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
             panel2 = new Panel();
             btnPrint = new Guna2ImageButton();
             btnAdd = new Syncfusion.WinForms.Controls.SfButton();
@@ -70,10 +70,10 @@ namespace PresentationLayer.Views.UserControls
             panel2.Controls.Add(btnAdd);
             panel2.Controls.Add(txtSearch);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(3, 83);
+            panel2.Location = new Point(2, 82);
             panel2.Margin = new Padding(4, 20, 4, 6);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1344, 93);
+            panel2.Size = new Size(1346, 93);
             panel2.TabIndex = 9;
             // 
             // btnPrint
@@ -85,8 +85,8 @@ namespace PresentationLayer.Views.UserControls
             btnPrint.ImageOffset = new Point(0, 0);
             btnPrint.ImageRotate = 0F;
             btnPrint.ImageSize = new Size(30, 30);
-            btnPrint.Location = new Point(1263, 15);
-            btnPrint.Margin = new Padding(4, 4, 4, 4);
+            btnPrint.Location = new Point(1265, 15);
+            btnPrint.Margin = new Padding(4);
             btnPrint.Name = "btnPrint";
             btnPrint.PressedState.ImageSize = new Size(64, 64);
             btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges1;
@@ -101,7 +101,7 @@ namespace PresentationLayer.Views.UserControls
             btnAdd.ForeColor = Color.Black;
             btnAdd.ImageMargin = new Padding(5, 3, 3, 3);
             btnAdd.Location = new Point(22, 15);
-            btnAdd.Margin = new Padding(4, 4, 4, 4);
+            btnAdd.Margin = new Padding(4);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(142, 58);
             btnAdd.Style.BackColor = Color.AliceBlue;
@@ -127,7 +127,7 @@ namespace PresentationLayer.Views.UserControls
             txtSearch.Font = new Font("Segoe UI", 9F);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
-            txtSearch.Location = new Point(823, 15);
+            txtSearch.Location = new Point(825, 15);
             txtSearch.Margin = new Padding(4, 6, 4, 6);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search here";
@@ -159,13 +159,13 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Controls.Add(guna2Separator1, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(3, 3);
-            tableLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel1.Location = new Point(2, 2);
+            tableLayoutPanel1.Margin = new Padding(4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 76F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 24F));
-            tableLayoutPanel1.Size = new Size(1344, 80);
+            tableLayoutPanel1.Size = new Size(1346, 80);
             tableLayoutPanel1.TabIndex = 8;
             // 
             // tableLayoutPanel2
@@ -180,7 +180,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1344, 60);
+            tableLayoutPanel2.Size = new Size(1346, 60);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -206,7 +206,7 @@ namespace PresentationLayer.Views.UserControls
             guna2Separator1.Location = new Point(4, 63);
             guna2Separator1.Margin = new Padding(4, 3, 4, 3);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1336, 14);
+            guna2Separator1.Size = new Size(1338, 14);
             guna2Separator1.TabIndex = 1;
             // 
             // materialCard4
@@ -216,12 +216,12 @@ namespace PresentationLayer.Views.UserControls
             materialCard4.Depth = 0;
             materialCard4.Dock = DockStyle.Fill;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard4.Location = new Point(3, 176);
-            materialCard4.Margin = new Padding(21, 21, 21, 21);
+            materialCard4.Location = new Point(2, 175);
+            materialCard4.Margin = new Padding(21);
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
-            materialCard4.Padding = new Padding(21, 21, 21, 21);
-            materialCard4.Size = new Size(1344, 550);
+            materialCard4.Padding = new Padding(21);
+            materialCard4.Size = new Size(1346, 552);
             materialCard4.TabIndex = 10;
             // 
             // panel1
@@ -230,9 +230,9 @@ namespace PresentationLayer.Views.UserControls
             panel1.Controls.Add(dgPager);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(21, 21);
-            panel1.Margin = new Padding(4, 4, 4, 4);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1302, 508);
+            panel1.Size = new Size(1304, 510);
             panel1.TabIndex = 1;
             // 
             // dgList
@@ -268,6 +268,7 @@ namespace PresentationLayer.Views.UserControls
             gridTextColumn3.ShowToolTip = true;
             gridTextColumn4.AllowFiltering = true;
             gridTextColumn4.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            gridTextColumn4.Format = "C2";
             gridTextColumn4.HeaderText = "Amount";
             gridTextColumn4.MappingName = "Amount";
             gridTextColumn4.ShowToolTip = true;
@@ -309,13 +310,13 @@ namespace PresentationLayer.Views.UserControls
             dgList.FrozenColumnCount = 2;
             dgList.FrozenRowCount = 1;
             dgList.Location = new Point(0, 0);
-            dgList.Margin = new Padding(4, 4, 4, 4);
+            dgList.Margin = new Padding(4);
             dgList.Name = "dgList";
             dgList.PreviewRowHeight = 42;
             dgList.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
             dgList.ShowGroupDropArea = true;
             dgList.ShowToolTip = true;
-            dgList.Size = new Size(1302, 454);
+            dgList.Size = new Size(1304, 456);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
             dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -331,11 +332,11 @@ namespace PresentationLayer.Views.UserControls
             dgPager.CanOverrideStyle = true;
             dgPager.Dock = DockStyle.Bottom;
             dgPager.HorizontalAlignment = HorizontalAlignment.Center;
-            dgPager.Location = new Point(0, 454);
-            dgPager.Margin = new Padding(4, 4, 4, 4);
+            dgPager.Location = new Point(0, 456);
+            dgPager.Margin = new Padding(4);
             dgPager.Name = "dgPager";
             dgPager.PageSize = 15;
-            dgPager.Size = new Size(1302, 54);
+            dgPager.Size = new Size(1304, 54);
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
@@ -349,7 +350,7 @@ namespace PresentationLayer.Views.UserControls
             Controls.Add(panel2);
             Controls.Add(tableLayoutPanel1);
             KeyPreview = true;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "DeductionView";
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;

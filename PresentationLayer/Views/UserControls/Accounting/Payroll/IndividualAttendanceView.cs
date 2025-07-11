@@ -1,17 +1,4 @@
-﻿using DomainLayer.Models.Accounting.Payroll;
-using DomainLayer.ViewModels.PayrollViewModels;
-using Microsoft.Reporting.WinForms;
-using PresentationLayer;
-using PresentationLayer.Reports;
-using RavenTech_ERP.Properties;
-using RavenTech_ERP.Views.IViews.Accounting.Payroll;
-using RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts;
-using ServiceLayer.Services.IRepositories;
-using Syncfusion.WinForms.Controls;
-using Syncfusion.WinForms.DataGrid;
-using Syncfusion.WinForms.DataGrid.Enums;
-using Syncfusion.WinForms.DataGrid.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DomainLayer.Enums;
+using DomainLayer.Models.Accounting.Payroll;
+using DomainLayer.ViewModels.PayrollViewModels;
+using Microsoft.Reporting.WinForms;
+using PresentationLayer;
+using PresentationLayer.Reports;
+using RavenTech_ERP.Properties;
+using RavenTech_ERP.Views.IViews.Accounting.Payroll;
+using RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts;
+using ServiceLayer.Services.CommonServices;
+using ServiceLayer.Services.IRepositories;
+using Syncfusion.WinForms.Controls;
+using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 
 namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
 {
@@ -43,6 +45,14 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll
             txtStartDate.Value = startDate;
             txtEndDate.Value = endDate;
             LoadAllAttendance(employee.EmployeeId, startDate.Date, endDate.Date);
+            SetPermissions();
+        }
+        public void SetPermissions()
+        {
+            var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
+            btnAdd.Enabled = appUserRoles.Contains(TaskRoles.Add);
+            dgList.Columns["Edit"].Visible = appUserRoles.Contains(TaskRoles.Edit);
+            dgList.Columns["Delete"].Visible = appUserRoles.Contains(TaskRoles.Delete);
         }
         public SfDataGrid DataGrid => dgList;
 
