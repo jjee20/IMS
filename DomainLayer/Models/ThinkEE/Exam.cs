@@ -15,20 +15,24 @@ namespace RavenTech_ThinkEE
         [Required]
         public string Title { get; set; }
 
-        [Required]
-        public string Type { get; set; } = "";
-
         public DateTime Date { get; set; }
         [ForeignKey("ExamFormat")]
         public int ExamFormatId { get; set; }
 
         public ExamFormat ExamFormat { get; set; }
 
+        [NotMapped]
+        public string DisplayDate => Date.ToString("MMMM d, yyyy");
+        [ForeignKey("ExamResult")]
+        public int? ExamResultId{ get; set; }
 
+        public ExamResult? ExamResult { get; set; } 
+        [ForeignKey("ReviewTopic")]
+        public int? ReviewTopicId{ get; set; }
+
+        public ReviewTopic? ReviewTopic { get; set; } 
         // Navigation
         public ICollection<Question> Questions { get; set; } = new List<Question>();
-
-        public ICollection<ExamResult> Results { get; set; } = new List<ExamResult>();
     }
 
 }

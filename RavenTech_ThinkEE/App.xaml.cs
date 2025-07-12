@@ -69,7 +69,7 @@ public partial class App : Application
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
@@ -80,6 +80,10 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
+            services.AddTransient<ContentGridDetailViewModel>();
+            services.AddTransient<ContentGridDetailPage>();
+            services.AddTransient<ContentGridViewModel>();
+            services.AddTransient<ContentGridPage>();
             services.AddTransient<ExamDetailViewModel>();
             services.AddTransient<ExamDetailPage>();
             services.AddTransient<ExamViewModel>();

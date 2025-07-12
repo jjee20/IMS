@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.WinUI.UI.Animations;
-
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
@@ -19,12 +19,12 @@ public sealed partial class ExamDetailPage : Page
     {
         ViewModel = App.GetService<ExamDetailViewModel>();
         InitializeComponent();
+        DataContext = ViewModel;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
-        this.RegisterElementForConnectedAnimation("animationKeyContentGrid", itemHero);
     }
 
     protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -34,10 +34,18 @@ public sealed partial class ExamDetailPage : Page
         {
             var navigationService = App.GetService<INavigationService>();
 
-            if (ViewModel.Item != null)
+            if (ViewModel.Exam != null)
             {
-                navigationService.SetListDataItemForNextConnectedAnimation(ViewModel.Item);
+                navigationService.SetListDataItemForNextConnectedAnimation(ViewModel.Exam);
             }
         }
+    }
+    private void Previous_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.PreviousQuestion();
+    }
+    private void Next_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.NextQuestion();
     }
 }

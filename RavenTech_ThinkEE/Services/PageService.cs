@@ -19,6 +19,8 @@ public class PageService : IPageService
         Configure<ReviewTopicViewModel, ReviewTopicPage>();
         Configure<ExamViewModel, ExamPage>();
         Configure<ExamDetailViewModel, ExamDetailPage>();
+        Configure<ContentGridViewModel, ContentGridPage>();
+        Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
     }
 
     public Type GetPageType(string key)

@@ -888,14 +888,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "025c81bc-0ec9-46e7-963f-485356f19d2a",
+                            ConcurrencyStamp = "6980e11e-f7dc-430b-9c76-d879eace7d0a",
                             Department = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPER@ADMIN.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOAJ0NO3dzVM5kPZ8Pd2ZGbcxqLxiZDqBjP5t4SDbyPXdD6Zu1KZgGtJZ9YAuXLaLA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB+zN/rTmlc6SslhaW6WfKAjrWUTCWxzakZDlfpV74EOU4TrGOL7jT6ssU1cnkDzmw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3,4]",
@@ -906,14 +906,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "FB38CC93-2B1E-4444-9A48-396E4C28E190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c5b1deb7-c62a-4b92-8523-ddbc3fc89e72",
+                            ConcurrencyStamp = "2c8e048b-9b5c-4533-a295-8a621527dbe0",
                             Department = 1,
                             Email = "inventory@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "INVENTORY@USER.COM",
                             NormalizedUserName = "inventory",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFre/zIhRJiaejz5Ns/1X5SvTdZcvda8ZFKX3Q1/HvyaTARiac1MBTZLyfmc9XaF3Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHP6cc/zTEEYLcw5DxqDoEn9kGe/Wf7VlpUOmyEMWqLX2ZwvwZ9mGmWmRV45BfVjsA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -924,14 +924,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "6628DE62-AF21-4389-B612-623A1A17637C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc61454d-79ef-4b9f-b630-760025ec6cd1",
+                            ConcurrencyStamp = "6fcf43bd-2b57-48aa-a026-df0a36556284",
                             Department = 2,
                             Email = "payroll@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PAYROLL@USER.COM",
                             NormalizedUserName = "payroll",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG6wb7538hgWjBq1OinKG17xnVpysLii54tfIfayu3UzFhczCR8zHvJ4f2QQM5wdMQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHUPnsV8zXozkz5Rx6lGYAtXKrLgvfMA1mUW4+abE37kpLECGwdidPQxly2ChfxW/g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -942,14 +942,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "2878BA2F-5B81-4BD3-A830-6733C6536AAF",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1b3fabd6-4666-4222-a624-0f108af88fe5",
+                            ConcurrencyStamp = "70dcaec4-45d7-412b-9638-89d476adf393",
                             Department = 2,
                             Email = "guest@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@USER.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHiUzBAOrIzw97ue3ZQOAhr4i7hl0W1m41/5gS+YwDYu0euzLI8QztWvlqyHTIrvHQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDCILT9M8++tAl3GC6HIxKSIjolSANv+zXWyU4pCWD5f9KXlQ4NXb3h/zH33ncEbIQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[3]",
@@ -2215,7 +2215,7 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamResultId"));
 
-                    b.Property<int>("ExamId")
+                    b.Property<int>("ExamStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("ExamineeId")
@@ -2229,8 +2229,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ExamResultId");
-
-                    b.HasIndex("ExamId");
 
                     b.HasIndex("ExamineeId");
 
@@ -2999,6 +2997,9 @@ namespace InfastructureLayer.Migrations
                     b.Property<int>("ExamFormatId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ExamResultId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ReviewTopicId")
                         .HasColumnType("int");
 
@@ -3006,13 +3007,11 @@ namespace InfastructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ExamId");
 
                     b.HasIndex("ExamFormatId");
+
+                    b.HasIndex("ExamResultId");
 
                     b.HasIndex("ReviewTopicId");
 
@@ -3024,8 +3023,8 @@ namespace InfastructureLayer.Migrations
                             ExamId = 1,
                             Date = new DateTime(2025, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExamFormatId = 1,
-                            Title = "Electrical Circuits Mock Exam",
-                            Type = "Mock Board"
+                            ReviewTopicId = 1,
+                            Title = "Electrical Circuits Mock Exam"
                         });
                 });
 
@@ -3522,19 +3521,11 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamResult", b =>
                 {
-                    b.HasOne("RavenTech_ThinkEE.Exam", "Exam")
-                        .WithMany("Results")
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DomainLayer.Models.Accounts.ApplicationUser", "Examinee")
                         .WithMany()
                         .HasForeignKey("ExamineeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Exam");
 
                     b.Navigation("Examinee");
                 });
@@ -3674,11 +3665,19 @@ namespace InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Models.ThinkEE.ReviewTopic", null)
+                    b.HasOne("DomainLayer.Models.ThinkEE.ExamResult", "ExamResult")
+                        .WithMany()
+                        .HasForeignKey("ExamResultId");
+
+                    b.HasOne("DomainLayer.Models.ThinkEE.ReviewTopic", "ReviewTopic")
                         .WithMany("Exams")
                         .HasForeignKey("ReviewTopicId");
 
                     b.Navigation("ExamFormat");
+
+                    b.Navigation("ExamResult");
+
+                    b.Navigation("ReviewTopic");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Project", b =>
@@ -3781,8 +3780,6 @@ namespace InfastructureLayer.Migrations
             modelBuilder.Entity("RavenTech_ThinkEE.Exam", b =>
                 {
                     b.Navigation("Questions");
-
-                    b.Navigation("Results");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,6 +23,54 @@ namespace RavenTech_ERP
             appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
             department = (Departments)Enum.Parse(typeof(Departments), Settings.Default.Department);
             InitializeComponent();
+
+            SetPermissions();
+        }
+
+        private void SetPermissions()
+        {
+            if (appUserRoles != null && (department == Departments.Inventory || department == Departments.Guest) && appUserRoles.Contains(TaskRoles.View))
+            {
+                btnRegisterAccount.Visible = false;
+                btnAllowance.Visible = false;
+                btnAttendance.Visible = false;
+                btnBenefit.Visible = false;
+                btnBonus.Visible = false;
+                btnContribution.Visible = false;
+                btnDeduction.Visible = false;
+                btnDepartment.Visible = false;
+                btnEmployee.Visible = false;
+                btnJobPosition.Visible = false;
+                btnLeave.Visible = false;
+                btnPayroll.Visible = false;
+                btnShift.Visible = false;
+                btnTax.Visible = false;
+                btnBillType.Visible = false;
+                btnBranch.Visible = false;
+                btnCashBank.Visible = false;
+                btnCustomerType.Visible = false;
+                btnCustomer.Visible = false;
+                btnDashboard.Visible = false;
+                btnInvoiceType.Visible = false;
+                btnPaymentType.Visible = false;
+                btnStockMonitoring.Visible = false;
+                btnProductType.Visible = false;
+                btnPurchaseOrder.Visible = false;
+                btnPurchaseType.Visible = false;
+                btnPurchaseReport.Visible = false;
+                btnSalesOrder.Visible = false;
+                btnSalesReport.Visible = false;
+                btnSalesType.Visible = false;
+                btnShipmentType.Visible = false;
+                btnTargetGoals.Visible = false;
+                btnUOM.Visible = false;
+                btnVendorType.Visible = false;
+                btnVendor.Visible = false;
+                btnWarehouse.Visible = false;
+                btnHoliday.Visible = false;
+                btnPullOutLog.Visible = false;
+                btnStockInLog.Visible = false;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

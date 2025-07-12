@@ -1,8 +1,9 @@
 ﻿
-using DomainLayer.Models.Accounts;
-using RavenTech_ThinkEE;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DomainLayer.Enums;
+using DomainLayer.Models.Accounts;
+using RavenTech_ThinkEE;
 
 namespace DomainLayer.Models.ThinkEE
 {
@@ -17,14 +18,13 @@ namespace DomainLayer.Models.ThinkEE
 
         public ApplicationUser Examinee { get; set; }
 
-        [ForeignKey("Exam")]
-        public int ExamId { get; set; }
-
-        public Exam Exam { get; set; }
-
         public int Score { get; set; }
 
         public int TotalPoints { get; set; }
+        public ExamStatus ExamStatus { get; set; }
+        [NotMapped]
+        public string ExamStatusString => ExamStatus.ToString() ?? DomainLayer.Enums.ExamStatus.NotTaken.ToString();
+
     }
 
 }
