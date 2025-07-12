@@ -159,4 +159,7 @@
   <data name="Shell_Exam.Content" xml:space="preserve">
     <value>Available Exam</value>
   </data>
+  <data name="Shell_ContentGrid.Content" xml:space="preserve">
+    <value>ContentGrid</value>
+  </data>
 </root>

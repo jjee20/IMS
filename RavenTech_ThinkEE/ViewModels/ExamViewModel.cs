@@ -30,7 +30,7 @@ public partial class ExamViewModel : ObservableRecipient, INavigationAware
         Source.Clear();
 
         // TODO: Replace with real data.
-        var data = await _unitOfWork.Exam.Value.GetAllAsync(includeProperties: "ExamFormat");
+        var data = await _unitOfWork.Exam.Value.GetAllAsync(includeProperties: "ExamFormat,ExamResult,Questions.Choices");
         foreach (var item in data)
         {
             Source.Add(item);
