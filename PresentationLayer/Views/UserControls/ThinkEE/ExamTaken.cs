@@ -100,12 +100,12 @@ public partial class ExamTaken : SfForm
         _questions = _exam.Questions.ToList();
         var examResult = _exam.ExamResults.FirstOrDefault(x => x.ExamineeId == Settings.Default.User_Id);
         // LOAD SAVED USER CHOICES
-        if (examResult.SelectedChoices != null)
+        if (examResult != null && examResult.SelectedChoices.Any())
         {
             _selectedChoices.Clear();
             foreach (var resultChoice in examResult.SelectedChoices)
             {
-                int qIndex = _questions.FindIndex(q => q.QuestionId == resultChoice.QuestionId);
+                var qIndex = _questions.FindIndex(q => q.QuestionId == resultChoice.QuestionId);
                 if (qIndex >= 0)
                 {
                     var choice = _questions[qIndex].Choices.FirstOrDefault(c => c.ChoiceId == resultChoice.ChoiceId);
@@ -121,6 +121,7 @@ public partial class ExamTaken : SfForm
         }
         else
         {
+
             _currentQuestionIndex = 0;
         }
 
@@ -140,20 +141,6 @@ public partial class ExamTaken : SfForm
             });
             return;
         }
-
-        if (_questions == null || !_questions.Any())
-        {
-            panelQuestions.Controls.Add(new Label
-            {
-                Text = "No questions available for this exam.",
-                AutoSize = true,
-                ForeColor = Color.Red,
-                Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleCenter
-            });
-            return;
-        }
-
         LoadQuestionControl();
         UpdateProgress();
     }
@@ -329,9 +316,8 @@ public partial class ExamTaken : SfForm
                 return;
             }
 
-            // (Optional) Save partial progress here if needed
-        }
             SaveExamProgress();
+        }
     }
 
     private async void SaveExamProgress(int correctCount = 0)
@@ -339,20 +325,22 @@ public partial class ExamTaken : SfForm
         var examResult = _exam.ExamResults
             .FirstOrDefault(x => x.ExamineeId == Settings.Default.User_Id);
 
-        if (examResult == null)
-            return;
 
-        examResult.ExamStatus = correctCount == 0 ? DomainLayer.Enums.ExamStatus.Ongoing : DomainLayer.Enums.ExamStatus.Taken;
+        var oldChoices = await _unitOfWork.ExamResultChoice.Value
+           .GetAllAsync(c => c.ExamResultId == examResult.ExamResultId, tracked: true);
+        _unitOfWork.ExamResultChoice.Value.RemoveRange(oldChoices);
+        await _unitOfWork.SaveAsync();
+
+        if (examResult.SelectedChoices == null)
+            examResult.SelectedChoices = new List<ExamResultChoice>();
+        else
+            examResult.SelectedChoices.Clear();
+
+        examResult.ExamStatus = !_examTaken ? DomainLayer.Enums.ExamStatus.Ongoing : DomainLayer.Enums.ExamStatus.Taken;
         examResult.TotalPoints = _questions.Count;
         examResult.Score = correctCount;
         examResult.ExamDuration = _remainingTime; 
         examResult.ExamStartTime = _examStartTime;
-
-        var choices = await _unitOfWork.ExamResultChoice.Value.GetAllAsync(c => c.ExamResultId == examResult.ExamResultId, tracked: true);
-
-
-        _unitOfWork.ExamResultChoice.Value.RemoveRange(choices);
-        await _unitOfWork.SaveAsync();
 
         foreach (var kvp in _selectedChoices)
         {
@@ -364,8 +352,12 @@ public partial class ExamTaken : SfForm
             });
         }
 
-        // Save changes to the database (async if needed)
-        _unitOfWork.ExamResult.Value.UpdateWithChildren(examResult, c => c.SelectedChoices, c => c.Id);
+        _unitOfWork.ExamResult.Value.UpdateWithChildren(
+            examResult,
+            c => c.SelectedChoices,
+            c => c.Id
+            );
+
         await _unitOfWork.SaveAsync(); 
     }
 

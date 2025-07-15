@@ -154,7 +154,7 @@ partial class ExamTaken
         // 
         tableLayoutPanel3.ColumnCount = 3;
         tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 600F));
+        tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 500F));
         tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         tableLayoutPanel3.Controls.Add(panel3, 1, 0);
         tableLayoutPanel3.Dock = DockStyle.Fill;
@@ -173,10 +173,10 @@ partial class ExamTaken
         panel3.Controls.Add(btnNext);
         panel3.Controls.Add(btnPrevious);
         panel3.Dock = DockStyle.Fill;
-        panel3.Location = new Point(320, 0);
+        panel3.Location = new Point(370, 0);
         panel3.Margin = new Padding(0);
         panel3.Name = "panel3";
-        panel3.Size = new Size(600, 36);
+        panel3.Size = new Size(500, 36);
         panel3.TabIndex = 12;
         // 
         // txtQuestionNo
@@ -186,7 +186,7 @@ partial class ExamTaken
         txtQuestionNo.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
         txtQuestionNo.Location = new Point(196, 0);
         txtQuestionNo.Name = "txtQuestionNo";
-        txtQuestionNo.Size = new Size(208, 36);
+        txtQuestionNo.Size = new Size(108, 36);
         txtQuestionNo.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
         txtQuestionNo.TabIndex = 5;
         txtQuestionNo.TabStop = false;
@@ -196,7 +196,7 @@ partial class ExamTaken
         // 
         btnForward.Dock = DockStyle.Right;
         btnForward.Font = new Font("Segoe UI Semibold", 9F);
-        btnForward.Location = new Point(404, 0);
+        btnForward.Location = new Point(304, 0);
         btnForward.Name = "btnForward";
         btnForward.Size = new Size(52, 36);
         btnForward.Style.Image = (Image)resources.GetObject("resource.Image");
@@ -220,7 +220,7 @@ partial class ExamTaken
         btnNext.Dock = DockStyle.Right;
         btnNext.Font = new Font("Segoe UI Semibold", 9F);
         btnNext.ForeColor = Color.Black;
-        btnNext.Location = new Point(456, 0);
+        btnNext.Location = new Point(356, 0);
         btnNext.Name = "btnNext";
         btnNext.Size = new Size(144, 36);
         btnNext.Style.BackColor = Color.DodgerBlue;
