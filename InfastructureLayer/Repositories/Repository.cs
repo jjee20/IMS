@@ -258,7 +258,11 @@ namespace InfastructureLayer.Repositories
             {
                 var key = keySelector(child);
                 var existing = dbChildren.FirstOrDefault(c => keySelector(c).Equals(key));
-                if (existing == null)
+
+                var idProperty = child.GetType().GetProperty("Id");
+                int idValue = idProperty != null ? (int)idProperty.GetValue(child) : 0;
+
+                if (existing == null || idValue == 0)
                     _db.Entry(child).State = EntityState.Added;
                 else
                     _db.Entry(child).State = EntityState.Modified;
