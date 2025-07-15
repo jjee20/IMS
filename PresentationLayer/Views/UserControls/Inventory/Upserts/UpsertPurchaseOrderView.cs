@@ -130,6 +130,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
             _entity.PurchaseOrderLines = _projectsLines.Select(c => new PurchaseOrderLine
             {
+                PurchaseOrderId = _entity.PurchaseOrderId,
                 ProductId = c.ProductId,
                 ProductName = c.ProductName,
                 Price = c.Price,
@@ -146,7 +147,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private async void buttonConfirm_Click_1(object sender, EventArgs e)
         {
-            UpdateEntityFromForm();
             if (string.IsNullOrWhiteSpace(txtPurchaseOrderName.Text))
             {
                 MessageBox.Show("Please enter a project name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -168,18 +168,13 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 var result = MessageBox.Show("Are you sure you want to update the project?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    _unitOfWork.PurchaseOrder.Value.Update(_entity);
 
-                    var oldLines = await _unitOfWork.PurchaseOrderLine.Value.GetAllAsync(c => c.PurchaseOrderId == _entity.PurchaseOrderId);
+                    var oldLines = await _unitOfWork.PurchaseOrderLine.Value.GetAllAsync(c => c.PurchaseOrderId == _entity.PurchaseOrderId, tracked: true);
                     _unitOfWork.PurchaseOrderLine.Value.RemoveRange(oldLines);
+                    await _unitOfWork.SaveAsync();
 
-                    // 3. Set correct ProjectId for each new line, then add all
-                    foreach (var line in _entity.PurchaseOrderLines)
-                    {
-                        line.PurchaseOrderLineId = _entity.PurchaseOrderId;
-                    }
-                    _unitOfWork.PurchaseOrderLine.Value.AddRange(_entity.PurchaseOrderLines);
-
+                    UpdateEntityFromForm();
+                    _unitOfWork.PurchaseOrder.Value.Update(_entity);
                     message = "PurchaseOrder updated successfully.";
                 }
             }

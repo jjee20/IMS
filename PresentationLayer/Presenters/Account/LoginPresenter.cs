@@ -83,6 +83,14 @@ namespace PresentationLayer.Presenters.Account
                         mainForm.RegisterButton.Visible = true;
                         mainForm.ThinkEETab.Visible = false;
                     }
+                    
+                    else if(department == Departments.Payroll)
+                    {
+                        mainForm.PayrollTab.Visible = false;
+                        mainForm.InventoryTab.Visible = false;
+                        mainForm.RegisterButton.Visible = false;
+                        mainForm.ThinkEETab.Visible = true;
+                    }
                     mainForm.ShowForm();
                     _view.Hide();
                 }

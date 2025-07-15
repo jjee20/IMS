@@ -73,6 +73,54 @@ namespace RavenTech_ERP
                 btnProjectDashboard.Visible = false;
                 btnProject.Visible = false;
             }
+            else if (appUserRoles != null && appUserRoles.Contains(TaskRoles.Taker))
+            {
+                btnRegisterAccount.Visible = false;
+                btnAllowance.Visible = false;
+                btnAttendance.Visible = false;
+                btnBenefit.Visible = false;
+                btnBonus.Visible = false;
+                btnContribution.Visible = false;
+                btnDeduction.Visible = false;
+                btnDepartment.Visible = false;
+                btnEmployee.Visible = false;
+                btnJobPosition.Visible = false;
+                btnLeave.Visible = false;
+                btnPayroll.Visible = false;
+                btnShift.Visible = false;
+                btnTax.Visible = false;
+                btnBillType.Visible = false;
+                btnBranch.Visible = false;
+                btnCashBank.Visible = false;
+                btnCustomerType.Visible = false;
+                btnCustomer.Visible = false;
+                btnDashboard.Visible = false;
+                btnInvoiceType.Visible = false;
+                btnPaymentType.Visible = false;
+                btnStockMonitoring.Visible = false;
+                btnProductType.Visible = false;
+                btnPurchaseOrder.Visible = false;
+                btnPurchaseType.Visible = false;
+                btnPurchaseReport.Visible = false;
+                btnSalesOrder.Visible = false;
+                btnSalesReport.Visible = false;
+                btnSalesType.Visible = false;
+                btnShipmentType.Visible = false;
+                btnTargetGoals.Visible = false;
+                btnUOM.Visible = false;
+                btnVendorType.Visible = false;
+                btnVendor.Visible = false;
+                btnWarehouse.Visible = false;
+                btnHoliday.Visible = false;
+                btnPullOutLog.Visible = false;
+                btnStockInLog.Visible = false;
+                btnProjectDashboard.Visible = false;
+                btnProject.Visible = false;
+                btnExam.Visible = false;
+                btnExamFormat.Visible = false;
+                btnExamTopic.Visible = false;
+                btnReviewTopic.Visible = false;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -86,6 +134,7 @@ namespace RavenTech_ERP
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ToolStripTabItem ThinkEETab { get => btnThinkEE; set => btnThinkEE = value; }
 
+        public event EventHandler AvailableExamEvent;
         public event EventHandler ProjectDashboardEvent;
         public event EventHandler ExamEvent;
         public event EventHandler ExamFormatEvent;
@@ -150,6 +199,11 @@ namespace RavenTech_ERP
             }
 
             ProjectDashboardEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnAvailableExam_Click(object sender, EventArgs e)
+        {
+            AvailableExamEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnExam_Click(object sender, EventArgs e)

@@ -56,6 +56,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<ExamResult> ExamResults { get; set; }
         public DbSet<PerformanceReport> PerformanceReports { get; set; }
         public DbSet<ReviewTopic> ReviewTopics { get; set; }
+        public DbSet<ExamResultChoice> ExamResultChoices { get; set; }
         #endregion
 
         #region Accounts

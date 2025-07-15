@@ -91,6 +91,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
             _entity.ProjectLines = _projectsLines.Select(c => new ProjectLine
             {
+                ProjectId = _entity.ProjectId,
                 ProductId = c.ProductId,
                 ProductName = c.ProductName,
                 Price = c.Price,
@@ -119,7 +120,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private async void buttonConfirm_Click(object sender, EventArgs e)
         {
-            UpdateEntityFromForm();
             if (string.IsNullOrWhiteSpace(txtProjectName.Text))
             {
                 MessageBox.Show("Please enter a project name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -141,16 +141,14 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 var result = MessageBox.Show("Are you sure you want to update the project?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    _unitOfWork.Project.Value.Update(_entity);
-                    var oldProjectLines = await _unitOfWork.ProjectLine.Value.GetAllAsync(c => c.ProjectId == _entity.ProjectId);
+                   var oldProjectLines = await _unitOfWork.ProjectLine.Value.GetAllAsync(c => c.ProjectId == _entity.ProjectId, tracked: true);
                     _unitOfWork.ProjectLine.Value.RemoveRange(oldProjectLines);
+                    await _unitOfWork.SaveAsync();
 
-                    // 3. Set correct ProjectId for each new line, then add all
-                    foreach (var line in _entity.ProjectLines)
-                    {
-                        line.ProjectId = _entity.ProjectId;
-                    }
-                    _unitOfWork.ProjectLine.Value.AddRange(_entity.ProjectLines);
+                    _entity.ProjectLines.Clear();
+
+                    UpdateEntityFromForm();
+                    _unitOfWork.Project.Value.UpdateWithChildren(_entity, p => p.ProjectLines, pl => pl.ProjectLineId);
                     message = "Project updated successfully.";
                 }
             }

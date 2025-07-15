@@ -95,14 +95,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
             if (_entity.ExamId > 0)
             {
-                foreach (var question in _entity.Questions)
-                {
-                    _unitOfWork.Question.Value.Remove(question);
-                    _unitOfWork.Choice.Value.RemoveRange(question.Choices);
-                }
-
-                await _unitOfWork.Question.Value.AddRangeAsync(questionList);
-
+                var oldQuestions = await _unitOfWork.Question.Value.GetAllAsync(q => q.ExamId == _entity.ExamId, includeProperties: "Choices");
+                _unitOfWork.Question.Value.RemoveRange(oldQuestions);
                 message = "Exam Format updated successfully.";
             }
             else
@@ -123,6 +117,20 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.Title = txtTitle.Text;
             _entity.Date = txtDate.Value ?? DateTime.Now; // Ensure a fallback value if txtDate.Value is null
             _entity.ExamFormat = txtExamFormat.SelectedValue as ExamFormat; // Use 'as' to safely cast and handle null
+            var questionList = dgList.DataSource as BindingList<ExamQuestionsViewModel>;
+            _entity.Questions = questionList.Select(c => new Question
+            {
+                Text = c.Question,
+                Choices = new List<Choice>
+                {
+                    new Choice { Text = c.Choice1, IsCorrect = c.Answer == c.Choice1 },
+                    new Choice { Text = c.Choice2, IsCorrect = c.Answer == c.Choice2 },
+                    new Choice { Text = c.Choice3, IsCorrect = c.Answer == c.Choice3 },
+                    new Choice { Text = c.Choice4, IsCorrect = c.Answer == c.Choice4 }
+                },
+                ExamTopicId = c.ExamTopicId,
+                ExamId = _entity.ExamId,
+            }).ToList();
         }
 
         private void ShowSuccess(string message) =>

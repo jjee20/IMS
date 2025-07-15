@@ -237,25 +237,19 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            UpdateEntityFromForm();
 
             if (_entity.ProductPullOutLogId > 0)
             {
                 var result = MessageBox.Show("Are you sure you want to update the stock in logs?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    _unitOfWork.ProductPullOutLogs.Value.Update(_entity);
 
-                    var oldLines = await _unitOfWork.ProductPullOutLogLines.Value.GetAllAsync(c => c.ProductPullOutId == _entity.ProductPullOutLogId);
+                    var oldLines = await _unitOfWork.ProductPullOutLogLines.Value.GetAllAsync(c => c.ProductPullOutId == _entity.ProductPullOutLogId, tracked: true);
                     _unitOfWork.ProductPullOutLogLines.Value.RemoveRange(oldLines);
+                    await _unitOfWork.SaveAsync();
 
-                    // 3. Set correct ProjectId for each new line, then add all
-                    foreach (var line in _entity.ProductPullOutLogLines)
-                    {
-                        line.ProductPullOutId = _entity.ProductPullOutLogId;
-                    }
-                    _unitOfWork.ProductPullOutLogLines.Value.AddRange(_entity.ProductPullOutLogLines);
-
+                    UpdateEntityFromForm();
+                    _unitOfWork.ProductPullOutLogs.Value.Update(_entity);
                     message = "Product stock-in updated successfully.";
                 }
             }
@@ -284,8 +278,15 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             _entity.ReceivedDate = txtReceivedDate.Value;
             _entity.ReceivedBy = txtReceivedBy.Text;
             _entity.ProjectId = (int)txtProject.SelectedValue;
+
+            if(_entity.ProductPullOutLogLines == null)
+            {
+                _entity.ProductPullOutLogLines = new List<ProductPullOutLogLines>();
+            }
+
             _entity.ProductPullOutLogLines = _entityViewModel.Select(c => new ProductPullOutLogLines
             {
+                ProductPullOutId = _entity.ProductPullOutLogId,
                 DateAdded = c.DateAdded,
                 ProductId = c.ProductId,
                 StockQuantity = c.Quantity,
