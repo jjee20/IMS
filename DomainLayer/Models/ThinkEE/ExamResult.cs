@@ -13,6 +13,11 @@ namespace DomainLayer.Models.ThinkEE
         [Key]
         public int ExamResultId { get; set; }
 
+        [ForeignKey("Exam")]
+        public int ExamId { get; set; }
+
+        public Exam Exam { get; set; }
+
         [ForeignKey("Examinee")]
         public string ExamineeId { get; set; }
 
@@ -22,6 +27,9 @@ namespace DomainLayer.Models.ThinkEE
 
         public int TotalPoints { get; set; }
         public ExamStatus ExamStatus { get; set; }
+        public DateTime ExamStartTime { get; set; }
+        public TimeSpan ExamDuration { get; set; }
+        public ICollection<ExamResultChoice> SelectedChoices { get; set; } = new List<ExamResultChoice>();
         [NotMapped]
         public string ExamStatusString => ExamStatus.ToString() ?? DomainLayer.Enums.ExamStatus.NotTaken.ToString();
 

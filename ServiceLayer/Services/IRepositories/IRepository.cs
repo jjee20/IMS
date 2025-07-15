@@ -18,6 +18,9 @@ namespace ServiceLayer.Services.IRepositories
         Task<T> GetAsync(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false);
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool tracked = false);
         void Update(T entity);
+
+        void UpdateWithChild(T entity);
+
         void UpdateWithChildren<TParent, TChild>(
          TParent parent,
          Expression<Func<TParent, IEnumerable<TChild>>> childrenSelector,

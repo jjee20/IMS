@@ -1,4 +1,5 @@
-﻿using ServiceLayer.Services.IRepositories.IAccounting.IPayroll;
+﻿using DomainLayer.Models.ThinkEE;
+using ServiceLayer.Services.IRepositories.IAccounting.IPayroll;
 using ServiceLayer.Services.IRepositories.IAccounts;
 using ServiceLayer.Services.IRepositories.IInventory;
 using ServiceLayer.Services.IRepositories.IThinkEE;
@@ -7,6 +8,8 @@ namespace ServiceLayer.Services.IRepositories
 {
     public interface IUnitOfWork
     {
+        Lazy<IExamResultChoiceRepository> ExamResultChoice { get; }
+        Lazy<IExamResultRepository> ExamResult { get; }
         Lazy<IChoiceRepository> Choice { get; }
         Lazy<IQuestionRepository> Question { get; }
         Lazy<IExamRepository> Exam { get; }

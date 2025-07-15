@@ -161,25 +161,19 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            UpdateEntityFromForm();
 
             if (_entity.ProductStockInLogId > 0)
             {
                 var result = MessageBox.Show("Are you sure you want to update the stock in logs?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    _unitOfWork.ProductStockInLogs.Value.Update(_entity);
 
-                    var oldLines = await _unitOfWork.ProductStockInLogLines.Value.GetAllAsync(c => c.ProductStockInLogId == _entity.ProductStockInLogId);
+                    var oldLines = await _unitOfWork.ProductStockInLogLines.Value.GetAllAsync(c => c.ProductStockInLogId == _entity.ProductStockInLogId, tracked: true);
                     _unitOfWork.ProductStockInLogLines.Value.RemoveRange(oldLines);
-
-                    // 3. Set correct ProjectId for each new line, then add all
-                    foreach (var line in _entity.ProductStockInLogLines)
-                    {
-                        line.ProductStockInLogId = _entity.ProductStockInLogId;
-                    }
-                    _unitOfWork.ProductStockInLogLines.Value.AddRange(_entity.ProductStockInLogLines);
-
+                    await _unitOfWork.SaveAsync();
+                    
+                    UpdateEntityFromForm();
+                    _unitOfWork.ProductStockInLogs.Value.Update(_entity);
                     message = "Product stock-in updated successfully.";
                 }
             }
@@ -207,8 +201,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             _entity.DeliveredBy = txtDeliveredBy.Text;
             _entity.ReceivedDate = txtReceivedDate.Value;
             _entity.ReceivedBy = txtReceivedBy.Text;
+
             _entity.ProductStockInLogLines = _entityViewModel.Select(c => new ProductStockInLogLines
             {
+                ProductStockInLogId = _entity.ProductStockInLogId,
                 DateAdded = c.DateAdded,
                 ProductId = c.ProductId,
                 StockQuantity = c.Quantity,

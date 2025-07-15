@@ -1,6 +1,8 @@
-﻿using DomainLayer.Models;
+﻿using System;
+using DomainLayer.Models;
 using DomainLayer.Models.Accounting.Payroll;
 using DomainLayer.Models.Inventory;
+using DomainLayer.Models.ThinkEE;
 using DomainLayer.ViewModels.PayrollViewModels;
 using InfastructureLayer.DataAccess.Data;
 using InfastructureLayer.Repositories;
@@ -13,7 +15,6 @@ using ServiceLayer.Services.IRepositories.IAccounting.IPayroll;
 using ServiceLayer.Services.IRepositories.IAccounts;
 using ServiceLayer.Services.IRepositories.IInventory;
 using ServiceLayer.Services.IRepositories.IThinkEE;
-using System;
 
 namespace InfastructureLayer.DataAccess.Repositories
 {
@@ -27,6 +28,8 @@ namespace InfastructureLayer.DataAccess.Repositories
             _db = db;
 
             // Lazy Initialization
+            ExamResultChoice = new Lazy<IExamResultChoiceRepository>(() => new ExamResultChoiceRepository(_db));
+            ExamResult = new Lazy<IExamResultRepository>(() => new ExamResultRepository(_db));
             Choice = new Lazy<IChoiceRepository>(() => new ChoiceRepository(_db));
             Question = new Lazy<IQuestionRepository>(() => new QuestionRepository(_db));
             Exam = new Lazy<IExamRepository>(() => new ExamRepository(_db));
@@ -90,6 +93,8 @@ namespace InfastructureLayer.DataAccess.Repositories
         }
 
         // Lazy Repository Properties
+        public Lazy<IExamResultChoiceRepository> ExamResultChoice { get; }
+        public Lazy<IExamResultRepository> ExamResult { get; }
         public Lazy<IChoiceRepository> Choice { get; }
         public Lazy<IQuestionRepository> Question { get; }
         public Lazy<IExamRepository> Exam { get; }

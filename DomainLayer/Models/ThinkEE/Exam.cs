@@ -23,16 +23,13 @@ namespace RavenTech_ThinkEE
 
         [NotMapped]
         public string DisplayDate => Date.ToString("MMMM d, yyyy");
-        [ForeignKey("ExamResult")]
-        public int? ExamResultId{ get; set; }
-
-        public ExamResult? ExamResult { get; set; } 
         [ForeignKey("ReviewTopic")]
         public int? ReviewTopicId{ get; set; }
 
         public ReviewTopic? ReviewTopic { get; set; } 
         // Navigation
         public ICollection<Question> Questions { get; set; } = new List<Question>();
+        public ICollection<ExamResult> ExamResults { get; set; } = new List<ExamResult>();
     }
 
 }
