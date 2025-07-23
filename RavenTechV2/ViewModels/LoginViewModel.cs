@@ -5,10 +5,10 @@ using DomainLayer.Models.Accounts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using RavenTechV2.Contracts.Services;
+using RavenTechV2.Core.Models.UserManagement;
+using RavenTechV2.Core.Services;
 using RavenTechV2.Services;
 using RavenTechV2.Views;
-using ServiceLayer.Services.IRepositories;
 
 namespace RavenTechV2.ViewModels;
 
@@ -32,15 +32,17 @@ public partial class LoginViewModel : ObservableRecipient
     }
 
     private UIElement? _shell = null;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly PasswordHasher<ApplicationUser> _passwordHasher = new(); 
+    private readonly IUnitOfService _unitOfService;
+    private readonly PasswordHasher<User> _passwordHasher = new(); 
     private readonly NotificationService _notificationService;
+    private readonly IUserSessionService _userSessionService;
 
-    public LoginViewModel(IUnitOfWork unitOfWork, NotificationService notificationService)
+    public LoginViewModel(NotificationService notificationService, IUserSessionService userSessionService)
     {
         LoginCommand = new AsyncRelayCommand(OnLogin);
-        _unitOfWork = unitOfWork;
+        _unitOfService = App.GetService<IUnitOfService>();
         _notificationService = notificationService;
+        _userSessionService = userSessionService;
     }
 
     private async Task OnLogin()
@@ -60,7 +62,7 @@ public partial class LoginViewModel : ObservableRecipient
                 return;
             }
 
-            var user = await _unitOfWork.ApplicationUser.Value.GetAsync(c => c.UserName == Username || c.Email == Username);
+            var user = await _unitOfService.User.Value.GetAsync(c => c.UserName == Username || c.Email == Username, includeProperties: "UserRoles");
 
             if (user == null)
             {
@@ -74,6 +76,15 @@ public partial class LoginViewModel : ObservableRecipient
 
             if (passwordVerificationResult == PasswordVerificationResult.Success)
             {
+                List<string> roles;
+
+                if (user.UserRoles != null && user.UserRoles.Any())
+                    roles = user.UserRoles.Select(ur => ur.Name).ToList();
+                else
+                    roles = new List<string> { "N/A" };
+
+                
+                _userSessionService.SetUser(user, roles);
                 _notificationService.Show($"Login Successful, welcome {user.UserName}!", NotificationType.Success);
                 _shell = App.GetService<ShellPage>();
                 App.MainWindow.Content = _shell ?? new Frame();

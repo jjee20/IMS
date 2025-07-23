@@ -1,9 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
 using RavenTechV2.Contracts.Services;
+using RavenTechV2.Models;
 using RavenTechV2.Services;
 using RavenTechV2.Views;
 using Windows.System;
@@ -33,13 +35,16 @@ public partial class ShellViewModel : ObservableRecipient
     }
 
     private readonly NotificationService _notificationService = App.GetService<NotificationService>();
-
-    public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService)
+    public ObservableCollection<NavMenuItem> MenuItems { get; } = new();
+    private readonly IUserSessionService _userSession;
+    public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService, IUserSessionService userSession)
     {
         NavigationService = navigationService;
         NavigationService.Navigated += OnNavigated;
         NavigationViewService = navigationViewService;
         LogoutCommand = new RelayCommand(Logout);
+        _userSession = userSession;
+
     }
     private void Logout()
     {

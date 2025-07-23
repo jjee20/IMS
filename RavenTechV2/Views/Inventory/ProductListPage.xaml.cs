@@ -3,7 +3,7 @@ using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels.Inventory;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
+using RavenTechV2.Core.Services;
 using RavenTechV2.ViewModels;
 using ServiceLayer.Services.IRepositories;
 
@@ -15,11 +15,11 @@ public sealed partial class ProductListPage : Page
     {
         get;
     }
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IUnitOfService _unitOfService;
     private readonly IMapper _mapper;
     public ProductListPage()
     {
-        _unitOfWork = App.GetService<IUnitOfWork>();
+        _unitOfService = App.GetService<IUnitOfService>();
         _mapper = App.GetService<IMapper>();
         ViewModel = App.GetService<ProductListViewModel>();
         InitializeComponent();
@@ -28,30 +28,30 @@ public sealed partial class ProductListPage : Page
 
     private async void AddButton_Click(object sender, RoutedEventArgs e)
     {
-        var newProduct = new Product();
-        var dialog = new ProductFormDialogPage(newProduct, "Add Product") { XamlRoot = this.XamlRoot };
-        var result = await dialog.ShowAsync();
-        if (result == ContentDialogResult.Primary)
-        {
-            _unitOfWork.Product.Value.Add(newProduct);
-            await _unitOfWork.SaveAsync();
-            await ViewModel.ReloadAsync();
-        }
+        //var newProduct = new Product();
+        //var dialog = new ProductFormDialogPage(newProduct, "Add Product") { XamlRoot = this.XamlRoot };
+        //var result = await dialog.ShowAsync();
+        //if (result == ContentDialogResult.Primary)
+        //{
+        //    await _unitOfService.Product.Value.AddAsync(newProduct);
+        //    await _unitOfService.SaveChangesAsync();
+        //    await ViewModel.ReloadAsync();
+        //}
     }
 
     private async void EditButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn && btn.Tag is ProductViewModel productVM)
         {
-            var product = await _unitOfWork.Product.Value.GetAsync(c => c.ProductId == productVM.ProductId);
-            var dialog = new ProductFormDialogPage(product, "Edit Product") { XamlRoot = this.XamlRoot };
-            var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                _unitOfWork.Product.Value.Update(product);
-                await _unitOfWork.SaveAsync();
-                await ViewModel.ReloadAsync();
-            }
+            //var product = await _unitOfService.Product.Value.GetAsync(c => c.ProductId == productVM.ProductId);
+            //var dialog = new ProductFormDialogPage(product, "Edit Product") { XamlRoot = this.XamlRoot };
+            //var result = await dialog.ShowAsync();
+            //if (result == ContentDialogResult.Primary)
+            //{
+            //    _unitOfService.Product.Value.Update(product);
+            //    await _unitOfService.SaveChangesAsync();
+            //    await ViewModel.ReloadAsync();
+            //}
         }
     }
 
@@ -70,9 +70,9 @@ public sealed partial class ProductListPage : Page
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                var product = await _unitOfWork.Product.Value.GetAsync(c => c.ProductId == productVM.ProductId);
-                _unitOfWork.Product.Value.Remove(product);
-                await _unitOfWork.SaveAsync();
+                var product = await _unitOfService.Product.Value.GetAsync(c => c.ProductId == productVM.ProductId);
+                _unitOfService.Product.Value.Remove(product);
+                await _unitOfService.SaveChangesAsync();
                 await ViewModel.ReloadAsync();
             }
         }

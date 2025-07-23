@@ -139,9 +139,9 @@ namespace PresentationLayer.Presenters
 
         private void Print(object? sender, EventArgs e)
         {
-            string reportFileName = "ProductReport.rdlc";
-            string reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
-            string reportPath = Path.Combine(reportDirectory, reportFileName);
+            var reportFileName = "ProductReport.rdlc";
+            var reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
+            var reportPath = Path.Combine(reportDirectory, reportFileName);
             var localReport = new LocalReport();
             var reportDataSource = new ReportDataSource("Product", ProductList);
             var reportView = new ReportView(reportPath, reportDataSource, localReport);

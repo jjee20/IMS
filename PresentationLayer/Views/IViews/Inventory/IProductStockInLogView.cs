@@ -13,6 +13,7 @@ namespace RavenTech_ERP.Views.IViews.Inventory
         event EventHandler AddEvent;
         event CellClickEventHandler DeleteEvent;
         event CellClickEventHandler EditEvent;
+        event CellClickEventHandler IndividualPrintEvent;
         event KeyEventHandler MultipleDeleteEvent;
         event EventHandler PrintEvent;
         event EventHandler SearchEvent;

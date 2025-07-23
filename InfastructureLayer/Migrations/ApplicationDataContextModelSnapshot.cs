@@ -888,14 +888,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "27cff5e2-8cf8-4b1c-ab6a-a9664d43dd51",
+                            ConcurrencyStamp = "c47f77ac-c4f6-4d18-a0f0-00914e993bfc",
                             Department = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPER@ADMIN.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK326FkVgM5OY+wbjPQYDawXv/z8EG7GFNDL7oIc0tSTXdHf7T8gJM9GOwSoyKl0Qg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBRVfvsL8xP5erHsC/tPIsqF+N8PYXlQ5n82YBS19CCY4ZS4ljFQTo4qB631J+atLw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3,4]",
@@ -906,14 +906,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "FB38CC93-2B1E-4444-9A48-396E4C28E190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9e2f8f0f-4b09-443c-8222-a3c571c6f655",
+                            ConcurrencyStamp = "1238b037-31e2-4f0a-8de1-e49fdccd44b5",
                             Department = 1,
                             Email = "inventory@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "INVENTORY@USER.COM",
                             NormalizedUserName = "inventory",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPBYuOZnd5/TtYrmXpXwpX9Dd6O8xKslIdTtYXxSOjNv2/gQvWDmS1JGrsBG9f0Niw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAfjxgmX8VwR8ThjaqqoxjVyPALCwACPSVe2cAQnEEz2UUREfMrZShQsmmNaUtqXvw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -924,14 +924,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "6628DE62-AF21-4389-B612-623A1A17637C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de7755d5-6318-4250-9d64-e2924cb72325",
+                            ConcurrencyStamp = "24a418d5-d4fc-40a9-9ad3-980e91f2da5b",
                             Department = 2,
                             Email = "payroll@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PAYROLL@USER.COM",
                             NormalizedUserName = "payroll",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDsUfDml08wMtC7y+1GZta3nhf4L3VIjYvsh6s/l+nNAYh61EfpmDE2CS+Ktj7sMvg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN2fo4QaTcD7pZ5fH8mODdAfDOFDFHiuWuqkB+xD/qgsFlKG5ZH7HM/QsxOE322T9Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -942,14 +942,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "2878BA2F-5B81-4BD3-A830-6733C6536AAF",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be6b0696-9582-46f4-adfd-d9f99041f1bd",
+                            ConcurrencyStamp = "4ba1b0f2-1ba5-44e8-a321-ce538e8acc3c",
                             Department = 2,
                             Email = "guest@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@USER.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKpwz8TGB3UsbRxoMKW7E58taXbrQ7aLZa7n42R2dIU9AtGH7cEcwXl7YwTMpuBFZQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGoqXxOONtdWWu79cXMwdblV1R4uHBx+ZG86y7FMzHo72IWEIYoN8voq2NHMmpzh6g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[3]",
@@ -2673,6 +2673,9 @@ namespace InfastructureLayer.Migrations
                     b.Property<string>("ExamineeId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ReportDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
