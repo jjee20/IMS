@@ -325,11 +325,14 @@ public partial class ExamTaken : SfForm
         var examResult = _exam.ExamResults
             .FirstOrDefault(x => x.ExamineeId == Settings.Default.User_Id);
 
-
         var oldChoices = await _unitOfWork.ExamResultChoice.Value
-           .GetAllAsync(c => c.ExamResultId == examResult.ExamResultId, tracked: true);
+           .GetAllAsync(c => c.ExamResultId == examResult.ExamResultId, includeProperties: "ExamResult", tracked: true);
+
+        if (oldChoices.Any())
+        {
         _unitOfWork.ExamResultChoice.Value.RemoveRange(oldChoices);
         await _unitOfWork.SaveAsync();
+        }
 
         if (examResult.SelectedChoices == null)
             examResult.SelectedChoices = new List<ExamResultChoice>();
