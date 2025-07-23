@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<configSections>
+  <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+   <section name="RavenTech_ERP.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+  </sectionGroup>
+ </configSections>
+ <appSettings>
+		<!-- Define the active environment (Development, Staging, Production) -->
+		<add key="Environment" value="Staging" />
+	</appSettings>
+	<connectionStrings>
+  <add name="Development" connectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"
+   providerName="System.Data.SqlClient" />
+  <add name="Staging" connectionString="Server=192.168.2.100,1433;Database=db_sercs;User Id=scs_admin;Password=pass@123;TrustServerCertificate=True;"
+   providerName="System.Data.SqlClient" />
+  <add name="Production" connectionString="Server=192.168.2.100,1433;Database=db_scs;User Id=scs_admin;Password=pass@123;TrustServerCertificate=True;"
+   providerName="System.Data.SqlClient" />
+  <add name="RavenTech_ERP.Properties.Settings.SqlConnection" connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=inventorymanagementsystem;Integrated Security=True;TrustServerCertificate=True;" />
+ </connectionStrings>
+ <userSettings>
+  <RavenTech_ERP.Properties.Settings>
+   <setting name="User_Id" serializeAs="String">
+    <value />
+   </setting>
+   <setting name="Roles" serializeAs="String">
+    <value />
+   </setting>
+   <setting name="Department" serializeAs="String">
+    <value />
+   </setting>
+   <setting name="ExamStartTime" serializeAs="String">
+    <value />
+   </setting>
+   <setting name="ExamDuration" serializeAs="String">
+    <value>00:00:00</value>
+   </setting>
+  </RavenTech_ERP.Properties.Settings>
+ </userSettings>
+</configuration>
