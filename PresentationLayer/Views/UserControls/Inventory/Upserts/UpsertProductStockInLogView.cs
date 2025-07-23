@@ -161,7 +161,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-
+            UpdateEntityFromForm();
             if (_entity.ProductStockInLogId > 0)
             {
                 var result = MessageBox.Show("Are you sure you want to update the stock in logs?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -172,7 +172,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                     _unitOfWork.ProductStockInLogLines.Value.RemoveRange(oldLines);
                     await _unitOfWork.SaveAsync();
                     
-                    UpdateEntityFromForm();
                     _unitOfWork.ProductStockInLogs.Value.Update(_entity);
                     message = "Product stock-in updated successfully.";
                 }
@@ -195,6 +194,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
         private void UpdateEntityFromForm()
         {
+            _entity = new ProductStockInLogs();
             _entity.Notes = txtNotes.Text;
             _entity.ProductStatus = (ProductStatus)txtStatus.SelectedValue;
             _entity.DeliveredDate = txtDeliveredDate.Value;
