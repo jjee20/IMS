@@ -182,6 +182,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private async void buttonConfirm_Click_1(object sender, EventArgs e)
         {
+                    UpdateEntityFromForm();
             if (string.IsNullOrWhiteSpace(txtSalesOrderName.Text))
             {
                 MessageBox.Show("Please enter a project name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -208,7 +209,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                     _unitOfWork.SalesOrderLine.Value.RemoveRange(oldLines);
                     await _unitOfWork.SaveAsync();
 
-                    UpdateEntityFromForm();
                     _unitOfWork.SalesOrder.Value.Update(_entity);
 
                     message = "SalesOrder updated successfully.";
