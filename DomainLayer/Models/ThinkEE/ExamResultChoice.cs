@@ -15,14 +15,14 @@ public class ExamResultChoice
 
     [ForeignKey("ExamResult")]
     public int ExamResultId { get; set; }
-    public ExamResult ExamResult { get; set; }
+    public virtual ExamResult ExamResult { get; set; }
 
     [ForeignKey("Question")]
     public int QuestionId { get; set; }
-    public Question Question { get; set; }
+    public  virtual Question Question { get; set; }
 
 
     [ForeignKey("Choice")]
     public int ChoiceId { get; set; }
-    public Choice Choice { get; set; }
+    public virtual Choice Choice { get; set; }
 }

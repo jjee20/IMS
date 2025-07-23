@@ -93,6 +93,7 @@ partial class QuestionsControl
         // btnChoice1
         // 
         btnChoice1.AccessibilityEnabled = true;
+        btnChoice1.BackColor = Color.AliceBlue;
         btnChoice1.BeforeTouchSize = new Size(694, 34);
         btnChoice1.Dock = DockStyle.Fill;
         btnChoice1.ImageCheckBoxSize = new Size(19, 19);
@@ -106,6 +107,7 @@ partial class QuestionsControl
         // btnChoice2
         // 
         btnChoice2.AccessibilityEnabled = true;
+        btnChoice2.BackColor = Color.AliceBlue;
         btnChoice2.BeforeTouchSize = new Size(694, 34);
         btnChoice2.Dock = DockStyle.Fill;
         btnChoice2.ImageCheckBoxSize = new Size(19, 19);
@@ -119,6 +121,7 @@ partial class QuestionsControl
         // btnChoice3
         // 
         btnChoice3.AccessibilityEnabled = true;
+        btnChoice3.BackColor = Color.AliceBlue;
         btnChoice3.BeforeTouchSize = new Size(694, 34);
         btnChoice3.Dock = DockStyle.Fill;
         btnChoice3.ImageCheckBoxSize = new Size(19, 19);
@@ -132,6 +135,7 @@ partial class QuestionsControl
         // btnChoice4
         // 
         btnChoice4.AccessibilityEnabled = true;
+        btnChoice4.BackColor = Color.AliceBlue;
         btnChoice4.BeforeTouchSize = new Size(694, 34);
         btnChoice4.Dock = DockStyle.Fill;
         btnChoice4.ImageCheckBoxSize = new Size(19, 19);

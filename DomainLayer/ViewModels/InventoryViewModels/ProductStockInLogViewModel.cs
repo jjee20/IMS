@@ -21,5 +21,6 @@ namespace DomainLayer.Models.Inventory
         public DateTime? ReceivedDate { get; set; }
         public byte[] Edit { get; set; }
         public byte[] Delete { get; set; }
+        public byte[] Print { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels;
+using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
@@ -41,6 +42,7 @@ namespace PresentationLayer.Presenters
             _view.MultipleDeleteEvent -= MultipleDelete;
             _view.PrintEvent -= Print;
             _view.RefreshEvent -= Refresh;
+            _view.IndividualPrintEvent -= IndividualPrint;
 
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
@@ -49,6 +51,7 @@ namespace PresentationLayer.Presenters
             _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
             _view.RefreshEvent += Refresh;
+            _view.IndividualPrintEvent += IndividualPrint;
 
             //Load
 
@@ -56,7 +59,44 @@ namespace PresentationLayer.Presenters
 
             //Source Binding
         }
+        private void IndividualPrint(object? sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductPullOutLogViewModel row)
+            {
+                var entity = _unitOfWork.ProductPullOutLogs.Value.Get(c => c.ProductPullOutLogId == row.ProductPullOutLogId, includeProperties: "ProductPullOutLogLines.Product.UnitOfMeasure,Project");
 
+                var lines = entity.ProductPullOutLogLines.Select(pl => new ProductPullOutLogLinesViewModel
+                {
+                    DateAdded = pl.DateAdded.ToShortDateString(),
+                    Product = pl.Product.ProductName,
+                    Quantity = pl.StockQuantity,
+                    Unit = pl.Product.UnitOfMeasure.UnitOfMeasureName,
+                    Size = pl.Product.Size,
+                    Color = pl.Product.Color,
+                    UnitCost = pl.Product.DefaultBuyingPrice,
+                }).ToList();
+
+                if (entity != null)
+                {
+                    var reportFileName = "ProductPullOutLogIndividualReport.rdlc";
+                    var reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
+                    var reportPath = Path.Combine(reportDirectory, reportFileName);
+                    var localReport = new LocalReport();
+                    var reportParameters = new List<ReportParameter>
+                    {
+                        new("Project", entity.Project?.ProjectName ?? "N/A"),
+                        new("DeliveredBy", entity.DeliveredBy ?? "N/A"),
+                        new("DeliveredDate", entity.DeliveredDate?.ToShortDateString() ?? "N/A"),
+                        new("ReceivedBy", entity.ReceivedBy ?? "N/A"),
+                        new("ReceivedDate", entity.ReceivedDate?.ToShortDateString() ?? "N/A")
+                    };
+
+                    var reportDataSource = new ReportDataSource("ProductPullOutLogLines", lines);
+                    var reportView = new ReportView(reportPath, reportDataSource, localReport, reportParameters);
+                    reportView.ShowDialog();
+                }
+            }
+        }
         private void Refresh(object? sender, EventArgs e) => LoadAllProductPullOutLogList();
 
         private void AddNew(object? sender, EventArgs e)

@@ -31,6 +31,6 @@ public class AvailableExamPresenter
 
     private IEnumerable<Exam> GetAvailableExams()
     {
-        return _unitOfWork.Exam.Value.GetAll(includeProperties: "ExamFormat,Questions.Choices,ExamResults.Examinee,ExamResults.SelectedChoices.Choice,ExamResults.SelectedChoices.Question,ReviewTopic");
+        return _unitOfWork.Exam.Value.GetAll(includeProperties: "ExamFormat,Questions.Choices,Questions.ExamTopic,ExamResults.Examinee,ExamResults.SelectedChoices.Choice,ExamResults.SelectedChoices.Question.ExamTopic,ReviewTopic");
     }
 }

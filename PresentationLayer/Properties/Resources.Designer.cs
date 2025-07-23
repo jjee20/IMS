@@ -183,6 +183,16 @@ namespace RavenTech_ERP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] printer {
+            get {
+                object obj = ResourceManager.GetObject("printer", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] thirteen {
             get {
                 object obj = ResourceManager.GetObject("thirteen", resourceCulture);

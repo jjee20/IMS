@@ -134,6 +134,7 @@ namespace RavenTech_ERP
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ToolStripTabItem ThinkEETab { get => btnThinkEE; set => btnThinkEE = value; }
 
+        public event EventHandler ThinkEEDashboardEvent;
         public event EventHandler AvailableExamEvent;
         public event EventHandler ProjectDashboardEvent;
         public event EventHandler ExamEvent;
@@ -199,6 +200,11 @@ namespace RavenTech_ERP
             }
 
             ProjectDashboardEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnThinkEEDashboard_Click(object sender, EventArgs e)
+        {
+            ThinkEEDashboardEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnAvailableExam_Click(object sender, EventArgs e)

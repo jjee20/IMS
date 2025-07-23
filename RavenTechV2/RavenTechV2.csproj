@@ -59,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Accounting\Payroll\" />
+    <Folder Include="Views\Accounting\" />
     <Folder Include="Views\Inventory\Dialog\" />
   </ItemGroup>
   

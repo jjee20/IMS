@@ -32,7 +32,7 @@
             Message=""
             Margin="20"
             HorizontalAlignment="Center"
-            Width="400"/>   
+            Width="400"/>
         </Grid>
         <NavigationView
             x:Name="NavigationViewControl"
@@ -46,240 +46,609 @@
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Uid="Shell_Main" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.MainViewModel">
+                <NavigationViewItem Content="Dashboard" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.DashboardViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF246;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <TextBlock Text="Inventory" Margin="16,10,0,4"
-                   FontWeight="SemiBold"
-                   FontSize="16"
-                   IsHitTestVisible="False"
-                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                   />
-                <NavigationViewItem Content="Product/Service">
+                <NavigationViewItem Content="Sales">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA55;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE719;"/>
                     </NavigationViewItem.Icon>
                     <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Content="List" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.ProductListViewModel">
+                        <NavigationViewItem Content="Orders">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA55;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7BF;"/>
                             </NavigationViewItem.Icon>
+
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Sales Order">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="Standard">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="Quote">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="Return">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Orders">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Approve/Cancel">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Import Orders">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Monitoring">
+                        <NavigationViewItem Content="Invoices">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC77;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
                             </NavigationViewItem.Icon>
+
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Invoice">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Invoices">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Print">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Email">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Export">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Manage Invoice Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Invoice Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Invoice Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Stock-in Logs">
-                            <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB0F;"/>
-                            </NavigationViewItem.Icon>
-                        </NavigationViewItem>
-                        <NavigationViewItem Content="Pull-out Logs">
-                            <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB11;"/>
-                            </NavigationViewItem.Icon>
-                        </NavigationViewItem>
-                        <NavigationViewItem Content="Product Type">
+                        <NavigationViewItem Content="Shipments/Delivery">
                             <NavigationViewItem.Icon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
                             </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Shipment">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Shipments">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Print Delivery Receipt">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Unit Of Measure (UOM)">
+                        <NavigationViewItem Content="Customers">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xECC6;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
                             </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Customer">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Customers">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Manage Customer Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Customer Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Customer Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Payments">
+                            <NavigationViewItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                            </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content=" Receive Payment">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Payments">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Sales Receipt">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Manage Payment Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Payment Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Payment Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Sales Settings">
+                            <NavigationViewItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                            </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Sales Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Sales Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Sales Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Shipment Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Shipment Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Shipment Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
                     </NavigationViewItem.MenuItems>
-                    </NavigationViewItem>
-                    <NavigationViewItem Content="Sales">
-                        <NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE719;"/>
-                        </NavigationViewItem.Icon>
-                        <NavigationViewItem.MenuItems>
-                            <NavigationViewItem Content="Order List">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7BF;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Report">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Sales Type">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Shipment Type">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Payment Type">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                        </NavigationViewItem.MenuItems>
-                    </NavigationViewItem>
-                    <NavigationViewItem Content="Purchase">
-                        <NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC5B;"/>
-                        </NavigationViewItem.Icon>
-                        <NavigationViewItem.MenuItems>
-                            <NavigationViewItem Content="Order List">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7BF;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Report">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Purchase Type">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Invoice Type">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Bill Type">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                        </NavigationViewItem.MenuItems>
-                    </NavigationViewItem>
-                    <NavigationViewItem Content="Customer">
-                        <NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE716;"/>
-                        </NavigationViewItem.Icon>
-                        <NavigationViewItem.MenuItems>
-                            <NavigationViewItem Content="List">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA55;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Type">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                        </NavigationViewItem.MenuItems>
-                    </NavigationViewItem>
-                    <NavigationViewItem Content="Vendor">
-                        <NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE902;"/>
-                        </NavigationViewItem.Icon>
-                        <NavigationViewItem.MenuItems>
-                            <NavigationViewItem Content="List">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA55;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                            <NavigationViewItem Content="Type">
-                                <NavigationViewItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                </NavigationViewItem.Icon>
-                            </NavigationViewItem>
-                        </NavigationViewItem.MenuItems>
-                    </NavigationViewItem>
-                    <NavigationViewItem Content="Branch">
-                        <NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE731;"/>
-                        </NavigationViewItem.Icon>
-                    </NavigationViewItem>
-                    <NavigationViewItem Content="Warehouse">
-                        <NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC0B;"/>
-                        </NavigationViewItem.Icon>
-                    </NavigationViewItem>
-                    <NavigationViewItem Content="Cash Bank">
-                        <NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE825;"/>
-                        </NavigationViewItem.Icon>
-                    </NavigationViewItem>
-
-                <TextBlock Text="Payroll" Margin="16,10,0,4"
-                   FontWeight="SemiBold"
-                   FontSize="16"
-                   IsHitTestVisible="False"
-                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                <NavigationViewItem Content="Generate">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE895;"/>
-                    </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Attendance">
+                <NavigationViewItem Content="Purchasing">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEADF;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC5B;"/>
                     </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem Content="Department">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF003;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem Content="Employee">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEBDA;"/>
-                    </NavigationViewItem.Icon>
-
                     <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Content="Allowance">
+                        <NavigationViewItem Content="Orders">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7BF;"/>
                             </NavigationViewItem.Icon>
+
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Purchase Order">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Orders">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Approve/Cancel">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Import Orders">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Benefits">
+                        <NavigationViewItem Content="Bills/Vouchers">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
                             </NavigationViewItem.Icon>
+
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Bill">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Bills">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Pay Bill">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Bill Approval">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Print/Export">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Manage Bill Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Bill Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Bill Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Contribution">
+                        <NavigationViewItem Content="Vendors">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
                             </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Vendor">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Vendors">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Manage Vendor Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Vendor Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Vendor Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Deductions">
+                        <NavigationViewItem Content="Goods Receipt">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
                             </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New GRN (Goods Received Note)">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List GRN">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Print">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Leave">
+                        <NavigationViewItem Content="Purchasing Settings">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
                             </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Purchase Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Purchase Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Purchase Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Invoice Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Invoice Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Invoice Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Job Position">
+                <NavigationViewItem Content="Inventory">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEE57;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE716;"/>
                     </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Products/Services">
+                            <NavigationViewItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA55;"/>
+                            </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Product">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Products">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Adjust Stocks">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Manage Product Types">
+                                    <NavigationViewItem.MenuItems>
+                                        <NavigationViewItem Content="New Product Type">
+                                        </NavigationViewItem>
+                                        <NavigationViewItem Content="List Product Types">
+                                        </NavigationViewItem>
+                                    </NavigationViewItem.MenuItems>
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Stock Operations">
+                            <NavigationViewItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                            </NavigationViewItem.Icon>
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Stock-In">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Stock-Out">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Transfers">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Stock Monitoring">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Warehouses">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Warehouse">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Warehouses">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Branches">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Branche">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Branches">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Manage Units of Measure (UOM)">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New UOM">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List UOMs">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Inventory Settings">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Categories">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Valuation Methods">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                    </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Shift">
+                <NavigationViewItem Content="Banking/Finance">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE787;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE902;"/>
                     </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Cash/Bank">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Transaction">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Accounts">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Reconcile">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Import Bank Statement">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Bank Feeds">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Journal Entry">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Entry">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Entries">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Reverse/Correct Entry">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Chart of Accounts">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="View/Edit COA">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Import/Export">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Budgets">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Set Budget">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="View Budgets">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Financial Types">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Manage Payment">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Invoice">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Bill Types">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                    </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Tax">
+                <NavigationViewItem Content="Payroll">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF583;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE731;"/>
                     </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Employees">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Employee">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Employees">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Attendance">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Record/View Attendance">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Import Attendance">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Allowances/Benefits">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Allowance/Benefit">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List All">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Manage Benefit Types">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Deductions/Contributions">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="New Deduction">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List All">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Manage Contribution Types">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Payroll Run">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Process Payroll">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="List Runs">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Post to Ledger">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Reverse Payroll">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Payslips">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Generate/Print Payslips">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Email Payslips">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Tax">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Manage Tax Tables">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Tax Reports">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="HR Settings">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Departments">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Job Positions">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Shifts">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Leave Types">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Leave Management">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                    </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_ProductList" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.ProductListViewModel">
+                <NavigationViewItem Content="Projects">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC0B;"/>
                     </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="New Project">
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="List Projects">
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Allocate Resources">
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Assign Tasks/Subprojects">
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Project Reports">
+                        </NavigationViewItem>
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Reports">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE825;"/>
+                    </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Financial Reports">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Balance Sheet">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Income Statement">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Trial Balance">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Cash Flow">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Budgets vs. Actuals">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Audit Log">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Sales Reports">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Sales Reports">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Top Products">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Customer Statements">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="AR Aging">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Purchasing Reports">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Purchase Reports">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Vendor Statements">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="AP Aging">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Inventory Reports">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Inventory Valuation">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Stock Status">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Low/Out-of-Stock">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Movement History">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Payroll Reports">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Payroll Summaries">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Contribution/Tax Reports">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Employee Payslip Summary">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Project Reports">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Costing">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Progress">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Resource Utilization">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Export/Print">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Export All">
+                                </NavigationViewItem>
+                                <NavigationViewItem Content="Print All">
+                                </NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Admin/Settings">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE713;"/>
+                    </NavigationViewItem.Icon>
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Users">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Manage Users"></NavigationViewItem>
+                                <NavigationViewItem Content="Roles"></NavigationViewItem>
+                                <NavigationViewItem Content="Permissions"></NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Master Data">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Types"></NavigationViewItem>
+                                <NavigationViewItem Content="Units"></NavigationViewItem>
+                                <NavigationViewItem Content="Categories"></NavigationViewItem>
+                                <NavigationViewItem Content="Statuses"></NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="System Settings">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Preferences"></NavigationViewItem>
+                                <NavigationViewItem Content="Fiscal Period"></NavigationViewItem>
+                                <NavigationViewItem Content="Numbering"></NavigationViewItem>
+                                <NavigationViewItem Content="Backups"></NavigationViewItem>
+                                <NavigationViewItem Content="Data Import/Export"></NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Audit Logs">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="View System Logs"></NavigationViewItem>
+                                <NavigationViewItem Content="User Activity"></NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Period Management">
+                            <NavigationViewItem.MenuItems>
+                                <NavigationViewItem Content="Close/Open Fiscal Period"></NavigationViewItem>
+                                <NavigationViewItem Content="Period Locking"></NavigationViewItem>
+                            </NavigationViewItem.MenuItems>
+                        </NavigationViewItem>
+                    </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>

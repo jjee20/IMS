@@ -359,6 +359,79 @@ public partial class ExamTaken : SfForm
             );
 
         await _unitOfWork.SaveAsync(); 
+
+        if(_examTaken) await GeneratePerformanceReportAsync(examResult);
     }
+
+    private async Task GeneratePerformanceReportAsync(ExamResult examResult)
+    {
+        // Ensure exam with questions and choices loaded
+        var exam = examResult.Exam ?? await _unitOfWork.Exam.Value.GetAsync(
+            e => e.ExamId == examResult.ExamId,
+            includeProperties: "Questions.Choices"
+        );
+
+        // Defensive: load SelectedChoices with Questions and Choices if not loaded
+        var selectedChoices = examResult.SelectedChoices?.ToList()
+            ?? (await _unitOfWork.ExamResultChoice.Value.GetAllAsync(
+                    c => c.ExamResultId == examResult.ExamResultId, includeProperties: "ExamResult,Choice,Question.ExamTopic")).ToList();
+
+        // Group correct/wrong by area/category
+        Dictionary<string, int> correctByArea = new();
+        Dictionary<string, int> totalByArea = new();
+
+        foreach (var question in exam.Questions)
+        {
+            var area = question.ExamTopic.Category;
+            if (!correctByArea.ContainsKey(area)) correctByArea[area] = 0;
+            if (!totalByArea.ContainsKey(area)) totalByArea[area] = 0;
+            totalByArea[area]++;
+        }
+
+        foreach (var rc in selectedChoices)
+        {
+            var question = exam.Questions.FirstOrDefault(q => q.QuestionId == rc.QuestionId);
+            var area = question.ExamTopic.Category;
+            var choice = question?.Choices.FirstOrDefault(c => c.ChoiceId == rc.ChoiceId);
+
+            if (choice?.IsCorrect == true)
+                correctByArea[area]++;
+        }
+
+        // Find strong/weak areas
+        var areaAccuracies = correctByArea
+            .ToDictionary(
+                kvp => kvp.Key,
+                kvp => totalByArea[kvp.Key] > 0 ? (double)kvp.Value / totalByArea[kvp.Key] : 0
+            );
+
+        var strongAreas = areaAccuracies
+            .OrderByDescending(a => a.Value)
+            .Take(3) // top 2
+            .Select(a => a.Key)
+            .ToList();
+
+        var weakAreas = areaAccuracies
+            .OrderBy(a => a.Value)
+            .Take(3) // bottom 2
+            .Select(a => a.Key)
+            .ToList();
+
+        // Prepare the report
+        var report = new PerformanceReport
+        {
+            ExamineeId = examResult.ExamineeId,
+            ExamId = examResult.ExamId,
+            Score = examResult.Score,
+            TotalItems = examResult.TotalPoints,
+            StrongAreas = string.Join(", ", strongAreas),
+            WeakAreas = string.Join(", ", weakAreas),
+            ReportDate = DateTime.Now
+        };
+
+        await _unitOfWork.PerformanceReport.Value.AddAsync(report);
+        await _unitOfWork.SaveAsync();
+    }
+
 
 }

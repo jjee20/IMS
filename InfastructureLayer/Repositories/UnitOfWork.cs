@@ -28,6 +28,7 @@ namespace InfastructureLayer.DataAccess.Repositories
             _db = db;
 
             // Lazy Initialization
+            PerformanceReport = new Lazy<IPerformanceReportRepository>(() => new PerformanceReportRepository(_db));
             ExamResultChoice = new Lazy<IExamResultChoiceRepository>(() => new ExamResultChoiceRepository(_db));
             ExamResult = new Lazy<IExamResultRepository>(() => new ExamResultRepository(_db));
             Choice = new Lazy<IChoiceRepository>(() => new ChoiceRepository(_db));
@@ -93,6 +94,7 @@ namespace InfastructureLayer.DataAccess.Repositories
         }
 
         // Lazy Repository Properties
+            
         public Lazy<IExamResultChoiceRepository> ExamResultChoice { get; }
         public Lazy<IExamResultRepository> ExamResult { get; }
         public Lazy<IChoiceRepository> Choice { get; }
@@ -155,6 +157,8 @@ namespace InfastructureLayer.DataAccess.Repositories
         public Lazy<IEmployeeContributionRepository> EmployeeContribution { get; }
         public Lazy<IPayrollRepository> Payroll { get; }
         public Lazy<IReviewTopicRepository> ReviewTopic { get; }
+
+        public Lazy<IPerformanceReportRepository> PerformanceReport  { get;  }
 
         public IRepository<T> GetRepository<T>() where T : class
         {

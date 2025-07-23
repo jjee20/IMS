@@ -62,14 +62,12 @@ namespace PresentationLayer.Presenters.Account
         {
             var userId = Settings.Default.User_Id;
             var user = _unitOfWork.ApplicationUser.Value.Get(c => c.Id == userId, includeProperties: "Profile");
-            using (var accountInformation = new EditAccountInformationView(user, _unitOfWork))
+            using var accountInformation = new EditAccountInformationView(user, _unitOfWork);
+            if (accountInformation.ShowDialog() == DialogResult.OK)
             {
-                if(accountInformation.ShowDialog() == DialogResult.OK)
-                {
-                    LoadDetails();
-                }
-            } 
-            
+                LoadDetails();
+            }
+
         }
     }
 }

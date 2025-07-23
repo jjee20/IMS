@@ -25,11 +25,17 @@ namespace DomainLayer.Models.ThinkEE
         public int TotalItems { get; set; }
         public double Accuracy => TotalItems > 0 ? (double)Score / TotalItems : 0;
 
-        public string WeakAreas { get; set; } // e.g., "Power Systems, Machines"
-        public string StrongAreas { get; set; }
-
-        public ApplicationUser Examinee { get; set; }
-        public Exam Exam { get; set; }
+        public string WeakAreas { get; set; } = "";
+        public string StrongAreas { get; set; } = "";
+        public DateTime ReportDate { get; set; } = DateTime.Now;
+        public virtual ApplicationUser Examinee
+        {
+            get; set;
+        }
+        public virtual Exam Exam
+        {
+            get; set;
+        }
     }
 
 }

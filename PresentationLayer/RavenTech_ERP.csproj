@@ -79,6 +79,9 @@
     <Compile Update="Reports\Report.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="Views\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -423,6 +426,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Accounting\Payroll\PayrollReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\ProductStockInLogIndividualReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\ProductPullOutLogIndividualReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Inventory\ProductPullOutLogsReport.rdlc">
