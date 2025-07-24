@@ -22,11 +22,11 @@ namespace DomainLayer.Models.Accounting.Payroll
         public string ProductName { get; set; }
         public double Quantity { get; set; }
         public double Price { get; set; }
-        public double Amount { get; set; }
+        public double Amount => Quantity * Price;
         [Display(Name = "Disc %")]
         public double DiscountPercentage { get; set; }
-        public double DiscountAmount { get; set; }
-        public double SubTotal { get; set; }
+        public double DiscountAmount => Amount * (DiscountPercentage / 100);
+        public double SubTotal => Amount - DiscountAmount;
 
         public string? DeliveredBy { get; set; }
         public DateTime? DeliveredDate { get; set; }

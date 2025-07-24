@@ -63,7 +63,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                         ProductId = item.ProductId,
                         ProductName = item.Product.ProductName,
                         Quantity = item.StockQuantity,
-                        UnitCost = item.Product.DefaultBuyingPrice,
+                        UnitCost = item.UnitCost == 0 ? item.Product.DefaultBuyingPrice + (item.Product.ProductIncrements.Any() ? item.Product.ProductIncrements.Sum(c => c.Increment) : 0) : item.UnitCost,
                         Delete = Resources.delete
                     };
                     _entityViewModel.Add(productStockInLogLines);
@@ -101,7 +101,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             }
 
 
-            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
+            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue, includeProperties: "ProductIncrements");
 
             var productInLogLines = new ProductStockInLogLineViewModel()
             {
@@ -109,7 +109,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 ProductId = (int)txtProduct.SelectedValue,
                 ProductName = txtProduct.Text,
                 Quantity = Convert.ToDouble(txtQuantity.Text),
-                UnitCost = product.DefaultBuyingPrice,
+                UnitCost = product.DefaultBuyingPrice + (product.ProductIncrements.Any() ? product.ProductIncrements.Sum(c => c.Increment) : 0),
                 Delete = Resources.delete
             };
 
@@ -162,24 +162,17 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
         private async void btnSave_Click(object sender, EventArgs e)
         {
             UpdateEntityFromForm();
-
             if (_entity.ProductStockInLogId > 0)
             {
                 var result = MessageBox.Show("Are you sure you want to update the stock in logs?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    _unitOfWork.ProductStockInLogs.Value.Update(_entity);
 
-                    var oldLines = await _unitOfWork.ProductStockInLogLines.Value.GetAllAsync(c => c.ProductStockInLogId == _entity.ProductStockInLogId);
+                    var oldLines = await _unitOfWork.ProductStockInLogLines.Value.GetAllAsync(c => c.ProductStockInLogId == _entity.ProductStockInLogId, tracked: true);
                     _unitOfWork.ProductStockInLogLines.Value.RemoveRange(oldLines);
-
-                    // 3. Set correct ProjectId for each new line, then add all
-                    foreach (var line in _entity.ProductStockInLogLines)
-                    {
-                        line.ProductStockInLogId = _entity.ProductStockInLogId;
-                    }
-                    _unitOfWork.ProductStockInLogLines.Value.AddRange(_entity.ProductStockInLogLines);
-
+                    await _unitOfWork.SaveAsync();
+                    
+                    _unitOfWork.ProductStockInLogs.Value.UpdateWithChildren(_entity, p => p.ProductStockInLogLines, p => p.ProductStockInLogLinesId);
                     message = "Product stock-in updated successfully.";
                 }
             }
@@ -201,17 +194,21 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
         private void UpdateEntityFromForm()
         {
+            _entity = new ProductStockInLogs();
             _entity.Notes = txtNotes.Text;
             _entity.ProductStatus = (ProductStatus)txtStatus.SelectedValue;
             _entity.DeliveredDate = txtDeliveredDate.Value;
             _entity.DeliveredBy = txtDeliveredBy.Text;
             _entity.ReceivedDate = txtReceivedDate.Value;
             _entity.ReceivedBy = txtReceivedBy.Text;
+
             _entity.ProductStockInLogLines = _entityViewModel.Select(c => new ProductStockInLogLines
             {
+                ProductStockInLogId = _entity.ProductStockInLogId,
                 DateAdded = c.DateAdded,
                 ProductId = c.ProductId,
                 StockQuantity = c.Quantity,
+                UnitCost = c.UnitCost,
             }).ToList();
         }
     }

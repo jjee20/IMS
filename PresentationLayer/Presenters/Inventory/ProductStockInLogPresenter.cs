@@ -1,5 +1,8 @@
-﻿using DomainLayer.Models.Inventory;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using DomainLayer.Models.Inventory;
 using DomainLayer.ViewModels;
+using DomainLayer.ViewModels.Inventory;
 using DomainLayer.ViewModels.InventoryViewModels;
 using Microsoft.Reporting.WinForms;
 using PresentationLayer.Presenters.Commons;
@@ -13,8 +16,6 @@ using ServiceLayer.Services.CommonServices;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
-using System.Linq;
-using System.Threading.Tasks;
 using static ServiceLayer.Services.CommonServices.EventClasses;
 using static Unity.Storage.RegistrationSet;
 
@@ -40,6 +41,7 @@ namespace PresentationLayer.Presenters
             _view.MultipleDeleteEvent -= MultipleDelete;
             _view.PrintEvent -= Print;
             _view.RefreshEvent -= Refresh;
+            _view.IndividualPrintEvent -= IndividualPrint;
 
             _view.SearchEvent += Search;
             _view.AddEvent += AddNew;
@@ -48,6 +50,7 @@ namespace PresentationLayer.Presenters
             _view.MultipleDeleteEvent += MultipleDelete;
             _view.PrintEvent += Print;
             _view.RefreshEvent += Refresh;
+            _view.IndividualPrintEvent += IndividualPrint;
 
             //Load
 
@@ -56,6 +59,44 @@ namespace PresentationLayer.Presenters
             //Source Binding
         }
 
+        private void IndividualPrint(object sender, CellClickEventArgs e)
+        {
+            if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductStockInLogViewModel row)
+            {
+                var entity = _unitOfWork.ProductStockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId, includeProperties: "ProductStockInLogLines.Product.UnitOfMeasure");
+
+                var lines = entity.ProductStockInLogLines.Select(pl => new ProductStockInLogLinesViewModel
+                {
+                    DateAdded = pl.DateAdded.ToShortDateString(),
+                    Product = pl.Product.ProductName,
+                    Quantity = pl.StockQuantity,
+                    Unit = pl.Product.UnitOfMeasure.UnitOfMeasureName,
+                    Size = pl.Product.Size,
+                    Color = pl.Product.Color,
+                    UnitCost = pl.Product.DefaultBuyingPrice,
+                }).ToList();
+
+                if (entity != null)
+                {
+                    var reportFileName = "ProductStockInLogIndividualReport.rdlc";
+                    var reportDirectory = Path.Combine(Application.StartupPath, "Reports", "Inventory");
+                    var reportPath = Path.Combine(reportDirectory, reportFileName);
+                    var localReport = new LocalReport();
+                    var reportParameters = new List<ReportParameter>
+                    {
+                        new("DeliveredBy", entity.DeliveredBy ?? "N/A"),
+                        new("DeliveredDate", entity.DeliveredDate?.ToShortDateString() ?? "N/A"),
+                        new("ReceivedBy", entity.ReceivedBy ?? "N/A"),
+                        new("ReceivedDate", entity.ReceivedDate?.ToShortDateString() ?? "N/A")
+                    };
+
+                    var reportDataSource = new ReportDataSource("ProductStockInLogLines", lines);
+                    var reportView = new ReportView(reportPath, reportDataSource, localReport, reportParameters);
+                    reportView.ShowDialog();
+                }
+
+            }
+        }
         private void Refresh(object? sender, EventArgs e) => LoadAllProductStockInLogList();
 
         private void AddNew(object? sender, EventArgs e)
@@ -79,7 +120,7 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductStockInLogViewModel row)
             {
-                var entity = _unitOfWork.ProductStockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId, includeProperties: "ProductStockInLogLines.Product");
+                var entity = _unitOfWork.ProductStockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId, includeProperties: "ProductStockInLogLines.Product.ProductIncrements");
                 using (var form = new UpsertProductStockInLogView(_unitOfWork,entity))
                 {
                     form.Text = "Edit Product Stock-In Log";

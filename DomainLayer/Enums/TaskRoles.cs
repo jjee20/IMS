@@ -12,6 +12,7 @@ namespace DomainLayer.Enums
         Edit,
         Delete,
         View,
-        Override
+        Override,
+        Taker
     }
 }

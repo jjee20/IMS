@@ -41,62 +41,78 @@
             btnSave = new Syncfusion.WinForms.Controls.SfButton();
             txtVendorDONumber = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             txtVendorInvoiceNumber = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            materialCard1 = new MaterialSkin.Controls.MaterialCard();
             ((System.ComponentModel.ISupportInitialize)txtFullReceive).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtRemarks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtWarehouse).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtVendorDONumber).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtVendorInvoiceNumber).BeginInit();
+            materialCard1.SuspendLayout();
             SuspendLayout();
             // 
             // txtFullReceive
             // 
             txtFullReceive.AccessibilityEnabled = true;
+            txtFullReceive.BeforeTouchSize = new Size(395, 35);
             txtFullReceive.Checked = true;
             txtFullReceive.CheckState = CheckState.Checked;
-            txtFullReceive.Location = new Point(159, 338);
+            txtFullReceive.Dock = DockStyle.Top;
+            txtFullReceive.ImageCheckBoxSize = new Size(19, 19);
+            txtFullReceive.Location = new Point(14, 409);
+            txtFullReceive.Margin = new Padding(4, 5, 4, 5);
             txtFullReceive.Name = "txtFullReceive";
-            txtFullReceive.Size = new Size(150, 21);
-            txtFullReceive.TabIndex = 82;
+            txtFullReceive.Size = new Size(395, 35);
+            txtFullReceive.TabIndex = 5;
             txtFullReceive.Text = "Is Full Received?";
             // 
             // txtRemarks
             // 
-            txtRemarks.BeforeTouchSize = new Size(206, 82);
-            txtRemarks.Location = new Point(159, 234);
+            txtRemarks.BeforeTouchSize = new Size(523, 146);
+            txtRemarks.Dock = DockStyle.Top;
+            txtRemarks.Location = new Point(14, 263);
+            txtRemarks.Margin = new Padding(4, 5, 4, 5);
             txtRemarks.Multiline = true;
             txtRemarks.Name = "txtRemarks";
-            txtRemarks.Size = new Size(265, 89);
-            txtRemarks.TabIndex = 81;
+            txtRemarks.Size = new Size(523, 146);
+            txtRemarks.TabIndex = 4;
             // 
             // autoLabel5
             // 
-            autoLabel5.Location = new Point(50, 239);
+            autoLabel5.Dock = DockStyle.Top;
+            autoLabel5.Location = new Point(14, 238);
+            autoLabel5.Margin = new Padding(4, 0, 4, 0);
             autoLabel5.Name = "autoLabel5";
-            autoLabel5.Size = new Size(52, 15);
+            autoLabel5.Size = new Size(79, 25);
             autoLabel5.TabIndex = 80;
             autoLabel5.Text = "Remarks";
             // 
             // autoLabel4
             // 
-            autoLabel4.Location = new Point(50, 200);
+            autoLabel4.Dock = DockStyle.Top;
+            autoLabel4.Location = new Point(14, 182);
+            autoLabel4.Margin = new Padding(4, 0, 4, 0);
             autoLabel4.Name = "autoLabel4";
-            autoLabel4.Size = new Size(95, 15);
+            autoLabel4.Size = new Size(146, 25);
             autoLabel4.TabIndex = 79;
             autoLabel4.Text = "Vendor Invoice #";
             // 
             // autoLabel3
             // 
-            autoLabel3.Location = new Point(50, 162);
+            autoLabel3.Dock = DockStyle.Top;
+            autoLabel3.Location = new Point(14, 126);
+            autoLabel3.Margin = new Padding(4, 0, 4, 0);
             autoLabel3.Name = "autoLabel3";
-            autoLabel3.Size = new Size(80, 15);
+            autoLabel3.Size = new Size(125, 25);
             autoLabel3.TabIndex = 78;
             autoLabel3.Text = "Vendor D.O. #";
             // 
             // autoLabel2
             // 
-            autoLabel2.Location = new Point(50, 121);
+            autoLabel2.Dock = DockStyle.Top;
+            autoLabel2.Location = new Point(14, 70);
+            autoLabel2.Margin = new Padding(4, 0, 4, 0);
             autoLabel2.Name = "autoLabel2";
-            autoLabel2.Size = new Size(66, 15);
+            autoLabel2.Size = new Size(100, 25);
             autoLabel2.TabIndex = 77;
             autoLabel2.Text = "Warehouse";
             // 
@@ -104,88 +120,127 @@
             // 
             txtWarehouse.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtWarehouse.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
+            txtWarehouse.Dock = DockStyle.Top;
             txtWarehouse.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            txtWarehouse.Location = new Point(159, 116);
+            txtWarehouse.Location = new Point(14, 95);
+            txtWarehouse.Margin = new Padding(4, 5, 4, 5);
             txtWarehouse.Name = "txtWarehouse";
-            txtWarehouse.Size = new Size(265, 26);
+            txtWarehouse.Padding = new Padding(10, 0, 0, 0);
+            txtWarehouse.Size = new Size(523, 31);
             txtWarehouse.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
-            txtWarehouse.TabIndex = 76;
+            txtWarehouse.TabIndex = 1;
             txtWarehouse.TabStop = false;
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(50, 79);
+            autoLabel1.Dock = DockStyle.Top;
+            autoLabel1.Location = new Point(14, 14);
+            autoLabel1.Margin = new Padding(4, 0, 4, 0);
             autoLabel1.Name = "autoLabel1";
-            autoLabel1.Size = new Size(58, 15);
+            autoLabel1.Size = new Size(90, 25);
             autoLabel1.TabIndex = 75;
             autoLabel1.Text = "GRN Date";
             // 
             // txtGRNDate
             // 
             txtGRNDate.DateTimeIcon = null;
-            txtGRNDate.Location = new Point(159, 76);
+            txtGRNDate.DateTimePattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.Custom;
+            txtGRNDate.Dock = DockStyle.Top;
+            txtGRNDate.Format = "MMMM dd, yyyy";
+            txtGRNDate.Location = new Point(14, 39);
+            txtGRNDate.Margin = new Padding(4, 5, 4, 5);
             txtGRNDate.Name = "txtGRNDate";
-            txtGRNDate.Size = new Size(265, 23);
-            txtGRNDate.TabIndex = 74;
+            txtGRNDate.Size = new Size(523, 31);
+            txtGRNDate.TabIndex = 0;
             txtGRNDate.ToolTipText = "";
             // 
             // linkGRNs
             // 
             linkGRNs.AutoSize = true;
-            linkGRNs.Location = new Point(340, 340);
+            linkGRNs.Dock = DockStyle.Right;
+            linkGRNs.Location = new Point(409, 409);
+            linkGRNs.Margin = new Padding(4, 0, 4, 0);
             linkGRNs.Name = "linkGRNs";
-            linkGRNs.Size = new Size(84, 15);
-            linkGRNs.TabIndex = 73;
+            linkGRNs.Size = new Size(128, 25);
+            linkGRNs.TabIndex = 7;
             linkGRNs.TabStop = true;
             linkGRNs.Text = "Show GRN List";
             linkGRNs.LinkClicked += linkGRNs_LinkClicked;
             // 
             // btnSave
             // 
+            btnSave.BackColor = SystemColors.HotTrack;
+            btnSave.Dock = DockStyle.Bottom;
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
-            btnSave.Location = new Point(189, 381);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(14, 480);
+            btnSave.Margin = new Padding(4, 5, 4, 5);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(96, 28);
-            btnSave.TabIndex = 83;
+            btnSave.Size = new Size(523, 47);
+            btnSave.Style.BackColor = SystemColors.HotTrack;
+            btnSave.Style.ForeColor = Color.White;
+            btnSave.TabIndex = 6;
             btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnConfirm_Click;
             // 
             // txtVendorDONumber
             // 
-            txtVendorDONumber.BeforeTouchSize = new Size(206, 82);
-            txtVendorDONumber.Location = new Point(159, 156);
+            txtVendorDONumber.BeforeTouchSize = new Size(523, 146);
+            txtVendorDONumber.Dock = DockStyle.Top;
+            txtVendorDONumber.Location = new Point(14, 151);
+            txtVendorDONumber.Margin = new Padding(4, 5, 4, 5);
             txtVendorDONumber.Multiline = true;
             txtVendorDONumber.Name = "txtVendorDONumber";
-            txtVendorDONumber.Size = new Size(265, 26);
-            txtVendorDONumber.TabIndex = 84;
+            txtVendorDONumber.Size = new Size(523, 31);
+            txtVendorDONumber.TabIndex = 2;
             // 
             // txtVendorInvoiceNumber
             // 
-            txtVendorInvoiceNumber.BeforeTouchSize = new Size(206, 82);
-            txtVendorInvoiceNumber.Location = new Point(159, 195);
+            txtVendorInvoiceNumber.BeforeTouchSize = new Size(523, 146);
+            txtVendorInvoiceNumber.Dock = DockStyle.Top;
+            txtVendorInvoiceNumber.Location = new Point(14, 207);
+            txtVendorInvoiceNumber.Margin = new Padding(4, 5, 4, 5);
             txtVendorInvoiceNumber.Multiline = true;
             txtVendorInvoiceNumber.Name = "txtVendorInvoiceNumber";
-            txtVendorInvoiceNumber.Size = new Size(265, 26);
-            txtVendorInvoiceNumber.TabIndex = 85;
+            txtVendorInvoiceNumber.Size = new Size(523, 31);
+            txtVendorInvoiceNumber.TabIndex = 3;
+            // 
+            // materialCard1
+            // 
+            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(txtFullReceive);
+            materialCard1.Controls.Add(linkGRNs);
+            materialCard1.Controls.Add(btnSave);
+            materialCard1.Controls.Add(txtRemarks);
+            materialCard1.Controls.Add(autoLabel5);
+            materialCard1.Controls.Add(txtVendorInvoiceNumber);
+            materialCard1.Controls.Add(autoLabel4);
+            materialCard1.Controls.Add(txtVendorDONumber);
+            materialCard1.Controls.Add(autoLabel3);
+            materialCard1.Controls.Add(txtWarehouse);
+            materialCard1.Controls.Add(autoLabel2);
+            materialCard1.Controls.Add(txtGRNDate);
+            materialCard1.Controls.Add(autoLabel1);
+            materialCard1.Depth = 0;
+            materialCard1.Dock = DockStyle.Fill;
+            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard1.Location = new Point(2, 2);
+            materialCard1.Margin = new Padding(14);
+            materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard1.Name = "materialCard1";
+            materialCard1.Padding = new Padding(14);
+            materialCard1.Size = new Size(551, 541);
+            materialCard1.TabIndex = 86;
             // 
             // UpsertGoodsReceivedNoteView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(474, 463);
-            Controls.Add(txtVendorInvoiceNumber);
-            Controls.Add(txtVendorDONumber);
-            Controls.Add(btnSave);
-            Controls.Add(txtFullReceive);
-            Controls.Add(txtRemarks);
-            Controls.Add(autoLabel5);
-            Controls.Add(autoLabel4);
-            Controls.Add(autoLabel3);
-            Controls.Add(autoLabel2);
-            Controls.Add(txtWarehouse);
-            Controls.Add(autoLabel1);
-            Controls.Add(txtGRNDate);
-            Controls.Add(linkGRNs);
+            AcceptButton = btnSave;
+            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(555, 545);
+            Controls.Add(materialCard1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "UpsertGoodsReceivedNoteView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -197,8 +252,9 @@
             ((System.ComponentModel.ISupportInitialize)txtWarehouse).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtVendorDONumber).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtVendorInvoiceNumber).EndInit();
+            materialCard1.ResumeLayout(false);
+            materialCard1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -216,5 +272,6 @@
         private LinkLabel linkGRNs;
         private Syncfusion.WinForms.Controls.SfButton btnSave;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt txtVendorInvoiceNumber;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
     }
 }

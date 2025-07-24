@@ -11,5 +11,6 @@ public enum Departments
     Admin,
     Inventory,
     Payroll,
-    Guest
+    Guest,
+    Student
 }

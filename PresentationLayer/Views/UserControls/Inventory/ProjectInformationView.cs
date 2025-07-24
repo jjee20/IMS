@@ -40,8 +40,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadProjectInformation()
         {
-            double totalBudget = _projectVM.Budget;
-            double targetRevenue = _projectVM.Revenue;
+            var totalBudget = _projectVM.Budget;
+            var targetRevenue = _projectVM.Revenue;
 
             var startDate = !string.IsNullOrEmpty(_projectVM.StartDate) ? _projectVM.StartDate : "{Needs Updating}";
             var endDate = !string.IsNullOrEmpty(_projectVM.EndDate) ? _projectVM.EndDate : "{Needs Updating}";
@@ -60,23 +60,28 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                  var totalQty = group.Sum(pl => pl.Quantity);
                  var totalAmount = group.Sum(pl => pl.Price * pl.Quantity);
-                 var price = first.Price;
+                 var increment = first.Product.ProductIncrements.Any()
+                    ? first.Product.ProductIncrements.Sum(c => c.Increment)
+                    : 0;
+                 var sign = increment > 0 ? "+" : (increment < 0 ? "−" : ""); // Use Unicode minus for clarity
+                 var priceInformation = $"{first.Product.DefaultBuyingPrice:C2} ({sign}{Math.Abs(increment):C2})";
 
-                 var actualQty = _project.ProductPullOutLogs
+                 var pullOutLogs = _project.ProductPullOutLogs
                      .SelectMany(log => log.ProductPullOutLogLines)
-                     .Where(logLine => logLine.ProductId == first.ProductId)
-                     .Sum(logLine => (double?)logLine.StockQuantity) ?? 0;
+                     .Where(logLine => logLine.ProductId == first.ProductId);
+                 var actualQty = pullOutLogs.Sum(logLine => (double?)logLine.StockQuantity) ?? 0;
+                 var actualAmount = pullOutLogs.Sum(logLine => (double?)logLine.TotalCost) ?? 0;
 
                  return new ProjectLineProductViewModel
                  {
                      Name = first.ProductName,
                      UOM = first.Product?.UnitOfMeasure?.UnitOfMeasureName ?? "N/A",
                      Category = first.Product?.ProductType?.ProductTypeName ?? "N/A",
-                     Cost = price, // optional: could use weighted avg
+                     Cost = priceInformation, // optional: could use weighted avg
                      Qty = Math.Round(totalQty,2),
                      Amount = Math.Round(totalAmount,2),
                      ActualQty = Math.Round(actualQty,2),
-                     ActualAmount = Math.Round(actualQty * price,2)
+                     ActualAmount = Math.Round(actualAmount, 2)
                  };
              })
              .ToList();

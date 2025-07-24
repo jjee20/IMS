@@ -32,8 +32,6 @@ namespace PresentationLayer.Views.UserControls
         {
             var appUserRoles = AppUserHelper.TaskRoles(Settings.Default.Roles);
             btnAdd.Enabled = appUserRoles.Contains(TaskRoles.Add);
-            dgList.Columns["Edit"].Visible = appUserRoles.Contains(TaskRoles.Edit);
-            dgList.Columns["Delete"].Visible = appUserRoles.Contains(TaskRoles.Delete);
         }
 
         //Properties

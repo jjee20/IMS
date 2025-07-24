@@ -23,6 +23,7 @@ using RavenTech_ERP.Views.IViews.ThinkEE;
 using RavenTech_ERP.Views.UserControls.Account;
 using RavenTech_ERP.Views.UserControls.Accounting.Payroll;
 using RavenTech_ERP.Views.UserControls.Inventory;
+using RavenTech_ERP.Views.UserControls.ThinkEE;
 using RevenTech_ERP.Presenters.Accounting.Payroll;
 using RevenTech_ERP.Views.IViews.Accounting.Payroll;
 using ServiceLayer.Services.CommonServices;
@@ -35,6 +36,8 @@ namespace RavenTech_ERP.Presenters
     {
         private readonly IMainForm _mainForm; 
         private readonly IUnityContainer _container;
+        private ThinkEEDashboardPresenter? _thinkEEDashboardsPresenter;
+        private AvailableExamPresenter? _availableExamsPresenter;
         private ProjectDashboardPresenter? _projectDashboardPresenter;
         private ExamPresenter? _examPresenter;
         private ExamFormatPresenter? _examFormatPresenter;
@@ -88,6 +91,8 @@ namespace RavenTech_ERP.Presenters
             _mainForm = mainForm;
             _container = container;
 
+            _mainForm.ThinkEEDashboardEvent += ThinkEEDashboardsEvent;
+            _mainForm.AvailableExamEvent += AvailableExamsEvent;
             _mainForm.ProjectDashboardEvent += ProjectDashboardEvent;
             _mainForm.ExamEvent += ExamEvent;
             _mainForm.ExamFormatEvent += ExamFormatEvent;
@@ -146,6 +151,22 @@ namespace RavenTech_ERP.Presenters
                 _mainForm.ribbonControl.SelectedTab = _mainForm.PayrollTab;
                 AttendanceEvent(this, EventArgs.Empty);
             }
+        }
+
+        private void ThinkEEDashboardsEvent(object? sender, EventArgs e)
+        {
+            IThinkEEDashboardView view = ChildManager<ThinkEEDashboardView>.GetChildInstance((MainForm)_mainForm);
+            if (_thinkEEDashboardsPresenter == null || ((Form)view).IsDisposed)
+                _thinkEEDashboardsPresenter = new ThinkEEDashboardPresenter(view, _container.Resolve<IUnitOfWork>());
+            ((Form)view).BringToFront();
+        }
+
+        private void AvailableExamsEvent(object? sender, EventArgs e)
+        {
+            IAvailableExamView view = ChildManager<AvailableExamView>.GetChildInstance((MainForm)_mainForm);
+            if (_availableExamsPresenter == null || ((Form)view).IsDisposed)
+                _availableExamsPresenter = new AvailableExamPresenter(view, _container.Resolve<IUnitOfWork>());
+            ((Form)view).BringToFront();
         }
 
         private void ProjectDashboardEvent(object? sender, EventArgs e)

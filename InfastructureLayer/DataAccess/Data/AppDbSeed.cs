@@ -240,9 +240,9 @@ namespace InfastructureLayer.DataAccess.Data
                 {
                     ExamId = 1,
                     Title = "Electrical Circuits Mock Exam",
-                    Type = "Mock Board",
                     Date = new DateTime(2025, 6, 1),
-                    ExamFormatId = 1
+                    ExamFormatId = 1,
+                    ReviewTopicId = 1,
                 }
             );
 

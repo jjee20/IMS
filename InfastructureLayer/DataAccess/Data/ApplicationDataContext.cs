@@ -30,6 +30,8 @@ namespace InfastructureLayer.DataAccess.Data
 
             var connection = new SqlConnection(connectionString);
             optionsBuilder.UseSqlServer(connection);
+            
+            //optionsBuilder.UseSqlServer("Server=192.168.2.100,1433;Database=db_sercs;User Id=scs_admin;Password=pass@123;TrustServerCertificate=True;");
             //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
             optionsBuilder.ConfigureWarnings(w =>
             w.Ignore(RelationalEventId.PendingModelChangesWarning));
@@ -56,6 +58,7 @@ namespace InfastructureLayer.DataAccess.Data
         public DbSet<ExamResult> ExamResults { get; set; }
         public DbSet<PerformanceReport> PerformanceReports { get; set; }
         public DbSet<ReviewTopic> ReviewTopics { get; set; }
+        public DbSet<ExamResultChoice> ExamResultChoices { get; set; }
         #endregion
 
         #region Accounts
@@ -64,6 +67,7 @@ namespace InfastructureLayer.DataAccess.Data
         #endregion
 
         #region Inventory
+        public DbSet<ProductIncrements> ProductIncrements { get; set; }
         public DbSet<TargetGoals> TargetGoals { get; set; }
         public DbSet<Bill> Bill { get; set; }
 

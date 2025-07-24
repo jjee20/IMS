@@ -25,6 +25,8 @@ namespace DomainLayer.Models.Inventory
         public virtual Product Product { get; set; }
 
         public double StockQuantity { get; set; }
+        public double UnitCost { get; set; }
+        public double TotalCost => StockQuantity * UnitCost;
     }
 
 }

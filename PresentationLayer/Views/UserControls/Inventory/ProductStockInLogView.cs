@@ -74,6 +74,10 @@ namespace PresentationLayer.Views.UserControls
                         DeleteEvent?.Invoke(sender, e);
                     }
                 }
+                else if (e.DataColumn.GridColumn.MappingName == "Print")
+                {
+                    IndividualPrintEvent?.Invoke(sender, e);
+                }
             }
         }
         private void Me_KeyDown(object sender, KeyEventArgs e)
@@ -113,6 +117,7 @@ namespace PresentationLayer.Views.UserControls
             {
                 entity.Edit = Resources.edit; // Or any other image per row
                 entity.Delete = Resources.delete; // Or any other image per row
+                entity.Print = Resources.printer; // Or any other image per row
             }
 
             dgList.DataSource = dgPager.PagedSource;
@@ -128,6 +133,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler SearchEvent;
         public event CellClickEventHandler EditEvent;
         public event CellClickEventHandler DeleteEvent;
+        public event CellClickEventHandler IndividualPrintEvent;
         public event KeyEventHandler MultipleDeleteEvent;
         public event EventHandler PrintEvent;
     }

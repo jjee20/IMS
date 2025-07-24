@@ -40,7 +40,24 @@ namespace RavenTech_ERP.Views.UserControls.Account
                     _applicationUser.Email = txtEmail.Text.Trim();
 
                     _unitOfWork.ApplicationUser.Value.Update(_applicationUser);
-                    _unitOfWork.Save();
+
+                    if(_applicationUser.Profile != null)
+                    {
+                        _applicationUser.Profile.FirstName = txtFirstName.Text.Trim().ToUpper();
+                        _applicationUser.Profile.LastName = txtLastName.Text.Trim().ToUpper();
+                        _unitOfWork.UserProfile.Value.Update(_applicationUser.Profile);
+                    }
+                    else
+                    {
+                        _applicationUser.Profile = new UserProfile
+                        {
+                            FirstName = txtFirstName.Text.Trim().ToUpper(),
+                            LastName = txtLastName.Text.Trim().ToUpper()
+                        };
+                        _unitOfWork.UserProfile.Value.Add(_applicationUser.Profile);
+                    }
+
+                        _unitOfWork.Save();
 
                     MessageBox.Show("Account information updated successfully", "Update");
                 }

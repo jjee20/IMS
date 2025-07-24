@@ -1,26 +1,17 @@
-﻿using System;
-
-using AutoMapper;
-
-using InfastructureLayer.DataAccess.Data;
-using InfastructureLayer.DataAccess.Repositories;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 
 using RavenTechV2.Activation;
 using RavenTechV2.Contracts.Services;
 using RavenTechV2.Core.Contracts.Services;
+using RavenTechV2.Core.Data;
 using RavenTechV2.Core.Services;
 using RavenTechV2.Helpers;
 using RavenTechV2.Models;
 using RavenTechV2.Services;
 using RavenTechV2.ViewModels;
 using RavenTechV2.Views;
-
-using ServiceLayer.Services.CommonServices;
-using ServiceLayer.Services.IRepositories;
 
 namespace RavenTechV2;
 
@@ -62,10 +53,9 @@ public partial class App : Application
         ConfigureServices((context, services) =>
         {
             // Default Activation Handler
-            services.AddDbContext<ApplicationDataContext>();
+            services.AddDbContext<ErpDbContext>();
             services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
-            services.AddAutoMapper(typeof(MappingProfile));
-
+            services.AddAutoMapper(typeof(MappingHelper)); 
             // Other Activation Handlers
 
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@33302e302e303b33303bo5tfYXUT3HyPFQfOrSd9R2DFSPIIsg63ehiunIlJ0YQ=");
@@ -74,12 +64,14 @@ public partial class App : Application
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfService, UnitOfService>();
 
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>(); 
             services.AddSingleton<NotificationService>();
+            services.AddSingleton<IUserSessionService, UserSessionService>();
+
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
@@ -90,16 +82,8 @@ public partial class App : Application
             services.AddTransient<ProductListPage>();
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
-            services.AddTransient<ContentGridDetailViewModel>();
-            services.AddTransient<ContentGridDetailPage>();
-            services.AddTransient<ContentGridViewModel>();
-            services.AddTransient<ContentGridPage>();
-            services.AddTransient<DataGridViewModel>();
-            services.AddTransient<DataGridPage>();
-            services.AddTransient<ListDetailsViewModel>();
-            services.AddTransient<ListDetailsPage>();
-            services.AddTransient<MainViewModel>();
-            services.AddTransient<MainPage>();
+            services.AddTransient<DashboardViewModel>();
+            services.AddTransient<DashboardPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
             services.AddTransient<LoginPage>();

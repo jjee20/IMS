@@ -165,6 +165,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
             _entity.SalesOrderLines = _projectsLines.Select(c => new SalesOrderLine
             {
+                SalesOrderId = _entity.SalesOrderId,
                 ProductId = c.ProductId,
                 ProductName = c.ProductName,
                 Price = c.Price,
@@ -181,7 +182,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private async void buttonConfirm_Click_1(object sender, EventArgs e)
         {
-            UpdateEntityFromForm();
+                    UpdateEntityFromForm();
             if (string.IsNullOrWhiteSpace(txtSalesOrderName.Text))
             {
                 MessageBox.Show("Please enter a project name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -203,17 +204,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 var result = MessageBox.Show("Are you sure you want to update the project?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    _unitOfWork.SalesOrder.Value.Update(_entity);
 
-                    var oldLines = await _unitOfWork.SalesOrderLine.Value.GetAllAsync(c => c.SalesOrderId == _entity.SalesOrderId);
+                    var oldLines = await _unitOfWork.SalesOrderLine.Value.GetAllAsync(c => c.SalesOrderId == _entity.SalesOrderId, tracked: true);
                     _unitOfWork.SalesOrderLine.Value.RemoveRange(oldLines);
+                    await _unitOfWork.SaveAsync();
 
-                    // 3. Set correct ProjectId for each new line, then add all
-                    foreach (var line in _entity.SalesOrderLines)
-                    {
-                        line.SalesOrderLineId = _entity.SalesOrderId;
-                    }
-                    _unitOfWork.SalesOrderLine.Value.AddRange(_entity.SalesOrderLines);
+                    _unitOfWork.SalesOrder.Value.Update(_entity);
 
                     message = "SalesOrder updated successfully.";
                 }
@@ -361,7 +357,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                     return;
                 }
 
-                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == productId);
+                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == productId, includeProperties: "ProductIncrements");
                 if (product == null)
                 {
                     MessageBox.Show("Selected product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -370,7 +366,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                 productId = product.ProductId;
                 productName = product.ProductName;
-                price = product.DefaultSellingPrice;
+                price = product.DefaultSellingPrice + (product.ProductIncrements.Any() ? product.ProductIncrements.Sum(c => c.Increment) : 0);
 
                 if (_projectsLines.Any(c => c.ProductId == productId))
                 {

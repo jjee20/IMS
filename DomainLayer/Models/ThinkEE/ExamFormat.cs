@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,9 @@ namespace DomainLayer.Models.ThinkEE
 
         public string Description { get; set; }
 
-        public int DefaultDurationMinutes { get; set; } // Time-bound
+        public int DefaultDurationMinutes { get; set;} 
+        [NotMapped]
+        public string DurationText => $"Duration: {DefaultDurationMinutes} minutes";
 
         public ICollection<Exam> Exams { get; set; } = new List<Exam>();
     }

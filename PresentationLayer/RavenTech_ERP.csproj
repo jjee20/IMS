@@ -79,6 +79,9 @@
     <Compile Update="Reports\Report.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="Views\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,7 +181,13 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\HolidayView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Inventory\ProductIncrementView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\ProjectDashboardView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Inventory\Upserts\UpsertProductIncrementView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\ThinkEE\ExamView.cs">
@@ -423,6 +432,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Accounting\Payroll\PayrollReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\ProductIncrementReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\ProductStockInLogIndividualReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\Inventory\ProductPullOutLogIndividualReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Reports\Inventory\ProductPullOutLogsReport.rdlc">

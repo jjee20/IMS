@@ -105,6 +105,8 @@
             btnPayroll = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             toolStripButton10 = new ToolStripButton();
             btnThinkEE = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
+            btnThinkEEDashboard = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            toolStripButton39 = new ToolStripButton();
             btnReviewTopic = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             toolStripButton33 = new ToolStripButton();
             btnExamTopic = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
@@ -113,6 +115,8 @@
             toolStripButton35 = new ToolStripButton();
             btnExam = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             toolStripButton36 = new ToolStripButton();
+            btnAvailableExams = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
+            toolStripButton38 = new ToolStripButton();
             toolStripTabItem3 = new Syncfusion.Windows.Forms.Tools.ToolStripTabItem();
             btnProfile = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
             toolStripButton23 = new ToolStripButton();
@@ -173,10 +177,12 @@
             btnHoliday.SuspendLayout();
             btnPayroll.SuspendLayout();
             btnThinkEE.Panel.SuspendLayout();
+            btnThinkEEDashboard.SuspendLayout();
             btnReviewTopic.SuspendLayout();
             btnExamTopic.SuspendLayout();
             btnExamFormat.SuspendLayout();
             btnExam.SuspendLayout();
+            btnAvailableExams.SuspendLayout();
             toolStripTabItem3.Panel.SuspendLayout();
             btnProfile.SuspendLayout();
             btnRegisterAccount.SuspendLayout();
@@ -222,7 +228,7 @@
             ribbonControlMain.RibbonStyle = Syncfusion.Windows.Forms.Tools.RibbonStyle.Office2016;
             ribbonControlMain.RightToLeft = RightToLeft.No;
             ribbonControlMain.ScaleMenuButtonImage = false;
-            ribbonControlMain.SelectedTab = btnThinkEE;
+            ribbonControlMain.SelectedTab = btnPayrollMain;
             ribbonControlMain.ShowCaption = false;
             ribbonControlMain.ShowContextMenu = false;
             ribbonControlMain.ShowLauncher = false;
@@ -300,7 +306,7 @@
             toolStripButton22.Image = (Image)resources.GetObject("toolStripButton22.Image");
             toolStripButton22.ImageTransparentColor = Color.Magenta;
             toolStripButton22.Name = "toolStripButton22";
-            toolStripButton22.Size = new Size(97, 93);
+            toolStripButton22.Size = new Size(97, 57);
             toolStripButton22.Text = "Dashboard";
             toolStripButton22.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -327,7 +333,7 @@
             toolStripButton37.Image = (Image)resources.GetObject("toolStripButton37.Image");
             toolStripButton37.ImageTransparentColor = Color.Magenta;
             toolStripButton37.Name = "toolStripButton37";
-            toolStripButton37.Size = new Size(155, 93);
+            toolStripButton37.Size = new Size(155, 57);
             toolStripButton37.Text = "Project Dashboard";
             toolStripButton37.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -355,7 +361,7 @@
             toolStripButton30.Image = (Image)resources.GetObject("toolStripButton30.Image");
             toolStripButton30.ImageTransparentColor = Color.Magenta;
             toolStripButton30.Name = "toolStripButton30";
-            toolStripButton30.Size = new Size(144, 93);
+            toolStripButton30.Size = new Size(144, 57);
             toolStripButton30.Text = "Stock Monitoring";
             toolStripButton30.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -383,7 +389,7 @@
             toolStripButton31.Image = (Image)resources.GetObject("toolStripButton31.Image");
             toolStripButton31.ImageTransparentColor = Color.Magenta;
             toolStripButton31.Name = "toolStripButton31";
-            toolStripButton31.Size = new Size(109, 93);
+            toolStripButton31.Size = new Size(109, 57);
             toolStripButton31.Text = "Stock-In Log";
             toolStripButton31.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -410,7 +416,7 @@
             toolStripButton32.Image = (Image)resources.GetObject("toolStripButton32.Image");
             toolStripButton32.ImageTransparentColor = Color.Magenta;
             toolStripButton32.Name = "toolStripButton32";
-            toolStripButton32.Size = new Size(111, 93);
+            toolStripButton32.Size = new Size(111, 57);
             toolStripButton32.Text = "Pull-Out Log";
             toolStripButton32.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -441,7 +447,7 @@
             toolStripSplitButton1.Image = (Image)resources.GetObject("toolStripSplitButton1.Image");
             toolStripSplitButton1.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton1.Name = "toolStripSplitButton1";
-            toolStripSplitButton1.Size = new Size(151, 93);
+            toolStripSplitButton1.Size = new Size(151, 57);
             toolStripSplitButton1.Text = "Product/Service";
             toolStripSplitButton1.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -488,7 +494,7 @@
             toolStripSplitButton2.Image = (Image)resources.GetObject("toolStripSplitButton2.Image");
             toolStripSplitButton2.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton2.Name = "toolStripSplitButton2";
-            toolStripSplitButton2.Size = new Size(118, 93);
+            toolStripSplitButton2.Size = new Size(118, 57);
             toolStripSplitButton2.Text = "Sales Order";
             toolStripSplitButton2.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -543,7 +549,7 @@
             toolStripSplitButton3.Image = (Image)resources.GetObject("toolStripSplitButton3.Image");
             toolStripSplitButton3.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton3.Name = "toolStripSplitButton3";
-            toolStripSplitButton3.Size = new Size(149, 93);
+            toolStripSplitButton3.Size = new Size(149, 57);
             toolStripSplitButton3.Text = "Purchase Order";
             toolStripSplitButton3.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -626,7 +632,7 @@
             toolStripButton11.Image = (Image)resources.GetObject("toolStripButton11.Image");
             toolStripButton11.ImageTransparentColor = Color.Magenta;
             toolStripButton11.Name = "toolStripButton11";
-            toolStripButton11.Size = new Size(99, 93);
+            toolStripButton11.Size = new Size(99, 57);
             toolStripButton11.Text = "Warehouse";
             toolStripButton11.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -656,7 +662,7 @@
             toolStripSplitButton5.Image = (Image)resources.GetObject("toolStripSplitButton5.Image");
             toolStripSplitButton5.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton5.Name = "toolStripSplitButton5";
-            toolStripSplitButton5.Size = new Size(105, 93);
+            toolStripSplitButton5.Size = new Size(105, 57);
             toolStripSplitButton5.Text = "Customer";
             toolStripSplitButton5.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -1284,10 +1290,12 @@
             // 
             // ribbonControlMain.ribbonPanel3
             // 
+            btnThinkEE.Panel.Controls.Add(btnThinkEEDashboard);
             btnThinkEE.Panel.Controls.Add(btnReviewTopic);
             btnThinkEE.Panel.Controls.Add(btnExamTopic);
             btnThinkEE.Panel.Controls.Add(btnExamFormat);
             btnThinkEE.Panel.Controls.Add(btnExam);
+            btnThinkEE.Panel.Controls.Add(btnAvailableExams);
             btnThinkEE.Panel.Name = "ribbonPanel3";
             btnThinkEE.Panel.ScrollPosition = 0;
             btnThinkEE.Panel.TabIndex = 7;
@@ -1297,6 +1305,33 @@
             ribbonControlMain.TabGroups.SetTabGroup(btnThinkEE, null);
             btnThinkEE.Tag = "5";
             btnThinkEE.Text = "ThinkEE";
+            btnThinkEE.Click += btnThinkEEDashboard_Click;
+            // 
+            // btnThinkEEDashboard
+            // 
+            btnThinkEEDashboard.Dock = DockStyle.None;
+            btnThinkEEDashboard.Font = new Font("Segoe UI", 8.25F);
+            btnThinkEEDashboard.ForeColor = Color.MidnightBlue;
+            btnThinkEEDashboard.GripStyle = ToolStripGripStyle.Hidden;
+            btnThinkEEDashboard.Image = null;
+            btnThinkEEDashboard.ImageScalingSize = new Size(30, 30);
+            btnThinkEEDashboard.Items.AddRange(new ToolStripItem[] { toolStripButton39 });
+            btnThinkEEDashboard.Location = new Point(0, 1);
+            btnThinkEEDashboard.Name = "btnThinkEEDashboard";
+            btnThinkEEDashboard.Office12Mode = false;
+            btnThinkEEDashboard.Padding = new Padding(3, 0, 0, 0);
+            btnThinkEEDashboard.RightToLeft = RightToLeft.No;
+            btnThinkEEDashboard.Size = new Size(106, 99);
+            btnThinkEEDashboard.TabIndex = 8;
+            // 
+            // toolStripButton39
+            // 
+            toolStripButton39.Image = (Image)resources.GetObject("toolStripButton39.Image");
+            toolStripButton39.ImageTransparentColor = Color.Magenta;
+            toolStripButton39.Name = "toolStripButton39";
+            toolStripButton39.Size = new Size(97, 94);
+            toolStripButton39.Text = "Dashboard";
+            toolStripButton39.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
             // btnReviewTopic
             // 
@@ -1307,7 +1342,7 @@
             btnReviewTopic.Image = null;
             btnReviewTopic.ImageScalingSize = new Size(30, 30);
             btnReviewTopic.Items.AddRange(new ToolStripItem[] { toolStripButton33 });
-            btnReviewTopic.Location = new Point(0, 1);
+            btnReviewTopic.Location = new Point(108, 1);
             btnReviewTopic.Name = "btnReviewTopic";
             btnReviewTopic.Office12Mode = false;
             btnReviewTopic.Padding = new Padding(3, 0, 0, 0);
@@ -1334,7 +1369,7 @@
             btnExamTopic.Image = null;
             btnExamTopic.ImageScalingSize = new Size(30, 30);
             btnExamTopic.Items.AddRange(new ToolStripItem[] { toolStripButton34 });
-            btnExamTopic.Location = new Point(121, 1);
+            btnExamTopic.Location = new Point(229, 1);
             btnExamTopic.Name = "btnExamTopic";
             btnExamTopic.Office12Mode = false;
             btnExamTopic.Padding = new Padding(3, 0, 0, 0);
@@ -1361,7 +1396,7 @@
             btnExamFormat.Image = null;
             btnExamFormat.ImageScalingSize = new Size(30, 30);
             btnExamFormat.Items.AddRange(new ToolStripItem[] { toolStripButton35 });
-            btnExamFormat.Location = new Point(231, 1);
+            btnExamFormat.Location = new Point(339, 1);
             btnExamFormat.Name = "btnExamFormat";
             btnExamFormat.Office12Mode = false;
             btnExamFormat.Padding = new Padding(3, 0, 0, 0);
@@ -1388,7 +1423,7 @@
             btnExam.Image = null;
             btnExam.ImageScalingSize = new Size(30, 30);
             btnExam.Items.AddRange(new ToolStripItem[] { toolStripButton36 });
-            btnExam.Location = new Point(356, 1);
+            btnExam.Location = new Point(464, 1);
             btnExam.Name = "btnExam";
             btnExam.Office12Mode = false;
             btnExam.Padding = new Padding(3, 0, 0, 0);
@@ -1405,6 +1440,33 @@
             toolStripButton36.Size = new Size(55, 94);
             toolStripButton36.Text = "Exam";
             toolStripButton36.TextImageRelation = TextImageRelation.ImageAboveText;
+            // 
+            // btnAvailableExams
+            // 
+            btnAvailableExams.Dock = DockStyle.None;
+            btnAvailableExams.Font = new Font("Segoe UI", 8.25F);
+            btnAvailableExams.ForeColor = Color.MidnightBlue;
+            btnAvailableExams.GripStyle = ToolStripGripStyle.Hidden;
+            btnAvailableExams.Image = null;
+            btnAvailableExams.ImageScalingSize = new Size(30, 30);
+            btnAvailableExams.Items.AddRange(new ToolStripItem[] { toolStripButton38 });
+            btnAvailableExams.Location = new Point(530, 1);
+            btnAvailableExams.Name = "btnAvailableExams";
+            btnAvailableExams.Office12Mode = false;
+            btnAvailableExams.Padding = new Padding(3, 0, 0, 0);
+            btnAvailableExams.RightToLeft = RightToLeft.No;
+            btnAvailableExams.Size = new Size(144, 99);
+            btnAvailableExams.TabIndex = 6;
+            btnAvailableExams.Click += btnAvailableExam_Click;
+            // 
+            // toolStripButton38
+            // 
+            toolStripButton38.Image = (Image)resources.GetObject("toolStripButton38.Image");
+            toolStripButton38.ImageTransparentColor = Color.Magenta;
+            toolStripButton38.Name = "toolStripButton38";
+            toolStripButton38.Size = new Size(135, 94);
+            toolStripButton38.Text = "Available Exams";
+            toolStripButton38.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
             // toolStripTabItem3
             // 
@@ -1751,10 +1813,12 @@
             btnPayroll.ResumeLayout(false);
             btnThinkEE.Panel.ResumeLayout(false);
             btnThinkEE.Panel.PerformLayout();
+            btnThinkEEDashboard.ResumeLayout(false);
             btnReviewTopic.ResumeLayout(false);
             btnExamTopic.ResumeLayout(false);
             btnExamFormat.ResumeLayout(false);
             btnExam.ResumeLayout(false);
+            btnAvailableExams.ResumeLayout(false);
             toolStripTabItem3.Panel.ResumeLayout(false);
             toolStripTabItem3.Panel.PerformLayout();
             btnProfile.ResumeLayout(false);
@@ -1878,5 +1942,9 @@
         private ToolStripButton toolStripButton36;
         private Syncfusion.Windows.Forms.Tools.ToolStripEx btnProjectDashboard;
         private ToolStripButton toolStripButton37;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx btnAvailableExams;
+        private ToolStripButton toolStripButton38;
+        private Syncfusion.Windows.Forms.Tools.ToolStripEx btnThinkEEDashboard;
+        private ToolStripButton toolStripButton39;
     }
 }

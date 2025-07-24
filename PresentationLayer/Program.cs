@@ -3,6 +3,8 @@ using AutoMapper;
 using InfastructureLayer.DataAccess.Repositories;
 using PresentationLayer.Presenters.Account;
 using PresentationLayer.Views.IViews.Inventory;
+using RavenTech_ERP;
+using RavenTech_ERP.Views;
 using RavenTech_ERP.Views.UserControls.Account;
 using RavenTech_ERP.Views.UserControls.Inventory;
 using ServiceLayer.Services.CommonServices;
@@ -42,7 +44,7 @@ namespace PresentationLayer
             var presenter = new LoginPresenter(mainView, UnityC);
 
             Application.Run((Form)mainView);
-            //Application.Run(new UpsertProjectView());
+            //Application.Run(new MainView());
         }
 
     }

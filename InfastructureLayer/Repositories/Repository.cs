@@ -197,58 +197,87 @@ namespace InfastructureLayer.Repositories
         }
 
         public void UpdateWithChildren<TParent, TChild>(
-    TParent entity,
-    Expression<Func<TParent, IEnumerable<TChild>>> childrenSelector,
+    TParent parent,
+    Expression<Func<TParent, IEnumerable<TChild>>> childSelector,
     Func<TChild, object> keySelector
 )
     where TParent : class
     where TChild : class
         {
-            // Find primary key for parent
+            // === DETACH PREVIOUSLY TRACKED PARENT (if any) ===
             var keyName = _db.Model.FindEntityType(typeof(TParent))
-                .FindPrimaryKey().Properties.Select(x => x.Name).Single();
+                .FindPrimaryKey()
+                .Properties
+                .Select(x => x.Name)
+                .Single();
 
-            var keyValue = _db.Entry(entity).Property(keyName).CurrentValue;
+            var parentKeyValue = typeof(TParent).GetProperty(keyName)?.GetValue(parent);
 
-            // Load existing entity with children tracked
-            var dbSet = _db.Set<TParent>();
-            var parentInDb = dbSet
-                .Include(childrenSelector)
-                .FirstOrDefault(e => EF.Property<object>(e, keyName).Equals(keyValue));
+            var trackedParent = _db.ChangeTracker.Entries<TParent>()
+                .FirstOrDefault(e =>
+                    e.Property(keyName).CurrentValue != null &&
+                    e.Property(keyName).CurrentValue.Equals(parentKeyValue));
 
-            if (parentInDb == null)
-                throw new InvalidOperationException("Entity not found");
+            if (trackedParent != null && !ReferenceEquals(trackedParent.Entity, parent))
+                trackedParent.State = EntityState.Detached;
 
-            // Update scalar (simple) properties
-            _db.Entry(parentInDb).CurrentValues.SetValues(entity);
+            // === Attach the new parent for update ===
+            _db.Entry(parent).State = EntityState.Modified;
 
-            // Get children collections
-            var existingChildren = childrenSelector.Compile().Invoke(parentInDb).ToList();
-            var newChildren = childrenSelector.Compile().Invoke(entity).ToList();
+            // === Update children ===
+            var children = childSelector.Compile().Invoke(parent)?.ToList() ?? new List<TChild>();
+            var childSet = _db.Set<TChild>();
 
-            // 1. Remove deleted children
-            foreach (var existingChild in existingChildren)
+            // Try to find the parent key property on the child type (assumes FK property is "ParentId")
+            var parentIdProperty = typeof(TChild).GetProperties().FirstOrDefault(p => p.Name == keyName);
+            var parentId = parentKeyValue;
+
+            // === DETACH PREVIOUSLY TRACKED CHILDREN (if any) ===
+            if (parentIdProperty != null)
             {
-                if (!newChildren.Any(c => keySelector(c).Equals(keySelector(existingChild))))
-                    _db.Remove(existingChild);
+                var trackedChildren = _db.ChangeTracker.Entries<TChild>()
+                    .Where(e =>
+                        parentIdProperty.GetValue(e.Entity)?.Equals(parentId) == true)
+                    .ToList();
+
+                foreach (var entry in trackedChildren)
+                {
+                    // Only detach if not the same instance
+                    if (!children.Contains(entry.Entity))
+                        entry.State = EntityState.Detached;
+                }
             }
 
-            // 2. Add or update children
-            foreach (var child in newChildren)
+            // Get existing children (from context/local, could also use DB if necessary)
+            var dbChildren = childSet.Local
+                .Where(c => parentIdProperty != null && parentIdProperty.GetValue(c)?.Equals(parentId) == true)
+                .ToList();
+
+            // Add or update
+            foreach (var child in children)
             {
-                var existingChild = existingChildren.FirstOrDefault(c => keySelector(c).Equals(keySelector(child)));
-                if (existingChild != null)
-                {
-                    _db.Entry(existingChild).CurrentValues.SetValues(child); // Update
-                }
+                var key = keySelector(child);
+                var existing = dbChildren.FirstOrDefault(c => keySelector(c).Equals(key));
+
+                var idProperty = child.GetType().GetProperty("Id");
+                int idValue = idProperty != null ? (int)idProperty.GetValue(child) : 0;
+
+                if (existing == null || idValue == 0)
+                    _db.Entry(child).State = EntityState.Added;
                 else
-                {
-                    // Attach new child to parent
-                    existingChildren.Add(child);
-                }
+                    _db.Entry(child).State = EntityState.Modified;
             }
 
+            // Delete removed children
+            foreach (var dbChild in dbChildren)
+            {
+                if (!children.Any(c => keySelector(c).Equals(keySelector(dbChild))))
+                {
+                    _db.Entry(dbChild).State = EntityState.Deleted;
+                }
+            }
         }
+
 
         public void UpdateRange(IEnumerable<T> entities)
         {
@@ -256,6 +285,12 @@ namespace InfastructureLayer.Repositories
             {
                 Update(entity); // reuses safe single update
             }
+        }
+
+        public void UpdateWithChild(T entity)
+        {
+            _db.Entry(entity).State = EntityState.Modified;
+            _db.Update(entity);
         }
     }
 }

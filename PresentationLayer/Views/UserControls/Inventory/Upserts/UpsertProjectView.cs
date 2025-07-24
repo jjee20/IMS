@@ -91,12 +91,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
             _entity.ProjectLines = _projectsLines.Select(c => new ProjectLine
             {
+                ProjectId = _entity.ProjectId,
                 ProductId = c.ProductId,
                 ProductName = c.ProductName,
                 Price = c.Price,
                 Quantity = c.Quantity,
-                DiscountPercentage = c.DiscountPercentage,
-                SubTotal = c.SubTotal
+                DiscountPercentage = c.DiscountPercentage
             }).ToList();
         }
 
@@ -120,6 +120,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private async void buttonConfirm_Click(object sender, EventArgs e)
         {
             UpdateEntityFromForm();
+
             if (string.IsNullOrWhiteSpace(txtProjectName.Text))
             {
                 MessageBox.Show("Please enter a project name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -141,16 +142,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 var result = MessageBox.Show("Are you sure you want to update the project?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    _unitOfWork.Project.Value.Update(_entity);
-                    var oldProjectLines = await _unitOfWork.ProjectLine.Value.GetAllAsync(c => c.ProjectId == _entity.ProjectId);
+                   var oldProjectLines = await _unitOfWork.ProjectLine.Value.GetAllAsync(c => c.ProjectId == _entity.ProjectId, tracked: true);
                     _unitOfWork.ProjectLine.Value.RemoveRange(oldProjectLines);
+                    await _unitOfWork.SaveAsync();
 
-                    // 3. Set correct ProjectId for each new line, then add all
-                    foreach (var line in _entity.ProjectLines)
-                    {
-                        line.ProjectId = _entity.ProjectId;
-                    }
-                    _unitOfWork.ProjectLine.Value.AddRange(_entity.ProjectLines);
+                    _entity.ProjectLines.Clear();
+                    _unitOfWork.Project.Value.UpdateWithChildren(_entity, p => p.ProjectLines, pl => pl.ProjectLineId);
                     message = "Project updated successfully.";
                 }
             }
@@ -234,7 +231,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             }
             else
             {
-                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
+                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue, includeProperties: "ProductIncrements");
                 if (product == null)
                 {
                     MessageBox.Show("Selected product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -243,7 +240,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                 productId = product.ProductId;
                 productName = product.ProductName;
-                price = product.DefaultBuyingPrice;
+                price = product.DefaultBuyingPrice + (product.ProductIncrements.Any() ? product.ProductIncrements.Sum(c => c.Increment) : 0);
 
                 if (_projectsLines.Any(c => c.ProductId == productId))
                 {
@@ -252,9 +249,9 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 }
             }
 
-            double quantity = double.TryParse(txtProductQty.Text, out var qty) ? qty : 0.0;
-            double discountPercent = double.TryParse(txtProductDiscount.Text, out var disc) ? disc / 100 : 0.0;
-            double subTotal = (price * quantity) - (price * discountPercent);
+            var quantity = double.TryParse(txtProductQty.Text, out var qty) ? qty : 0.0;
+            var discountPercent = double.TryParse(txtProductDiscount.Text, out var disc) ? disc / 100 : 0.0;
+            var subTotal = (price * quantity) - (price * discountPercent);
 
             _projectsLines.Add(new ProjectLineViewModel
             {

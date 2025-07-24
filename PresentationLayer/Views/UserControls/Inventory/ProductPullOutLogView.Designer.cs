@@ -47,6 +47,7 @@ namespace PresentationLayer.Views.UserControls
             var gridDateTimeColumn2 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             var gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
             var gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
+            var gridImageColumn3 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
             panel2 = new Panel();
             btnPrint = new Guna2ImageButton();
             btnAdd = new Syncfusion.WinForms.Controls.SfButton();
@@ -351,6 +352,13 @@ namespace PresentationLayer.Views.UserControls
             gridImageColumn2.ShowFilterRowOptions = false;
             gridImageColumn2.ShowToolTip = true;
             gridImageColumn2.Width = 30D;
+            gridImageColumn3.AllowGrouping = false;
+            gridImageColumn3.AllowSorting = false;
+            gridImageColumn3.HeaderText = " ";
+            gridImageColumn3.MappingName = "Print";
+            gridImageColumn3.MaximumWidth = 30D;
+            gridImageColumn3.MinimumWidth = 30D;
+            gridImageColumn3.ShowToolTip = true;
             dgList.Columns.Add(gridTextColumn1);
             dgList.Columns.Add(gridTextColumn2);
             dgList.Columns.Add(gridTextColumn3);
@@ -362,6 +370,7 @@ namespace PresentationLayer.Views.UserControls
             dgList.Columns.Add(gridDateTimeColumn2);
             dgList.Columns.Add(gridImageColumn1);
             dgList.Columns.Add(gridImageColumn2);
+            dgList.Columns.Add(gridImageColumn3);
             dgList.Dock = DockStyle.Fill;
             dgList.FrozenColumnCount = 2;
             dgList.FrozenRowCount = 1;
@@ -374,10 +383,6 @@ namespace PresentationLayer.Views.UserControls
             dgList.ShowToolTip = true;
             dgList.Size = new Size(1304, 456);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
-            dgList.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
-            dgList.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
-            dgList.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
-            dgList.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
             dgList.TabIndex = 7;
             dgList.Text = "sfDataGrid1";
             dgList.CellClick += dgList_CellClick;
