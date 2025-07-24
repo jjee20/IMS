@@ -4,6 +4,7 @@ using InfastructureLayer.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfastructureLayer.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    partial class ApplicationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20250723024520_ProductIncrements")]
+    partial class ProductIncrements
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -683,11 +686,17 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectLineId"));
 
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
                     b.Property<string>("DeliveredBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeliveredDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("DiscountAmount")
+                        .HasColumnType("float");
 
                     b.Property<double>("DiscountPercentage")
                         .HasColumnType("float");
@@ -713,6 +722,9 @@ namespace InfastructureLayer.Migrations
 
                     b.Property<DateTime?>("ReceivedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("SubTotal")
+                        .HasColumnType("float");
 
                     b.HasKey("ProjectLineId");
 
@@ -879,14 +891,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65067cca-2b20-4058-b69e-0b46da3582c0",
+                            ConcurrencyStamp = "0fc24cca-4d49-4562-8dea-e9567c3840bc",
                             Department = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPER@ADMIN.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEI6qFHHqEeKah5X/yEwkFKPC3G6YpB7k3wjyueDK06Vv8OOfgCWjALG4Ek60j4HIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDju0NMsOf60p5kxQzMoyqEeDuAxtLPZv2tomJ4CueMGhP1PLZoKEd/Qslg6tPEbYw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3,4]",
@@ -897,14 +909,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "FB38CC93-2B1E-4444-9A48-396E4C28E190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f24e5b31-917c-4d28-b547-b6c3cbfe0152",
+                            ConcurrencyStamp = "6281b0d9-e4c7-4635-b0f2-668042512d07",
                             Department = 1,
                             Email = "inventory@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "INVENTORY@USER.COM",
                             NormalizedUserName = "inventory",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIrfcEy8MYKHIsgqkn4dn1ZOVpu34Wlm3jrPjjyIDvNSsOwKcEpDojQ5YpuJLCNFCQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENfBdcnuyz6ipLqFcQbbolBXNiO9/vdO33adxAzBjzSiJP1+I9RhYOUiPpbKK/EorA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -915,14 +927,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "6628DE62-AF21-4389-B612-623A1A17637C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "620ef739-df50-40d2-be11-8182dd5c7e6c",
+                            ConcurrencyStamp = "995d59ab-c8b3-4454-ad15-312ea045322f",
                             Department = 2,
                             Email = "payroll@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PAYROLL@USER.COM",
                             NormalizedUserName = "payroll",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC0knRAJ28P1sDDej/JC2+CmABNh9QR3A1aPb5fiazcIgw8Euu/r2Z+yJRqXkFmINQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBBpbP0heQLFB88MYpquSGVlQw6Z1uUiren99TWgEZBu4ddhcxKxJ6q0t8mqTCnYvw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -933,14 +945,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "2878BA2F-5B81-4BD3-A830-6733C6536AAF",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb2212d5-f86c-4b23-a1e0-f425a28ae9bf",
+                            ConcurrencyStamp = "03e33163-a99b-4d44-9139-7b08a6e4260f",
                             Department = 2,
                             Email = "guest@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@USER.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAIAAYagAAAAELoNvBeFBXimR9RhFB0QjhWVWat5CgBGrmAKWsNuBuDlDCp26cyCAOMPwnxeQTSs2Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE6tq6EgLpnRPySSEVcmn6OhObNF/u6XBdKDELDNNwI6H1pRUDRdhemMo0jbOPFMFA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[3]",
@@ -1471,9 +1483,6 @@ namespace InfastructureLayer.Migrations
                     b.Property<double>("StockQuantity")
                         .HasColumnType("float");
 
-                    b.Property<double>("UnitCost")
-                        .HasColumnType("float");
-
                     b.HasKey("ProductPullOutLogLinesId");
 
                     b.HasIndex("ProductId");
@@ -1543,9 +1552,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("StockQuantity")
-                        .HasColumnType("float");
-
-                    b.Property<double>("UnitCost")
                         .HasColumnType("float");
 
                     b.HasKey("ProductStockInLogLinesId");

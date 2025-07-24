@@ -96,8 +96,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 ProductName = c.ProductName,
                 Price = c.Price,
                 Quantity = c.Quantity,
-                DiscountPercentage = c.DiscountPercentage,
-                SubTotal = c.SubTotal
+                DiscountPercentage = c.DiscountPercentage
             }).ToList();
         }
 
@@ -120,6 +119,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private async void buttonConfirm_Click(object sender, EventArgs e)
         {
+            UpdateEntityFromForm();
+
             if (string.IsNullOrWhiteSpace(txtProjectName.Text))
             {
                 MessageBox.Show("Please enter a project name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -146,8 +147,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                     await _unitOfWork.SaveAsync();
 
                     _entity.ProjectLines.Clear();
-
-                    UpdateEntityFromForm();
                     _unitOfWork.Project.Value.UpdateWithChildren(_entity, p => p.ProjectLines, pl => pl.ProjectLineId);
                     message = "Project updated successfully.";
                 }
@@ -232,7 +231,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             }
             else
             {
-                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
+                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue, includeProperties: "ProductIncrements");
                 if (product == null)
                 {
                     MessageBox.Show("Selected product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -241,7 +240,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                 productId = product.ProductId;
                 productName = product.ProductName;
-                price = product.DefaultBuyingPrice;
+                price = product.DefaultBuyingPrice + (product.ProductIncrements.Any() ? product.ProductIncrements.Sum(c => c.Increment) : 0);
 
                 if (_projectsLines.Any(c => c.ProductId == productId))
                 {
@@ -250,9 +249,9 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 }
             }
 
-            double quantity = double.TryParse(txtProductQty.Text, out var qty) ? qty : 0.0;
-            double discountPercent = double.TryParse(txtProductDiscount.Text, out var disc) ? disc / 100 : 0.0;
-            double subTotal = (price * quantity) - (price * discountPercent);
+            var quantity = double.TryParse(txtProductQty.Text, out var qty) ? qty : 0.0;
+            var discountPercent = double.TryParse(txtProductDiscount.Text, out var disc) ? disc / 100 : 0.0;
+            var subTotal = (price * quantity) - (price * discountPercent);
 
             _projectsLines.Add(new ProjectLineViewModel
             {

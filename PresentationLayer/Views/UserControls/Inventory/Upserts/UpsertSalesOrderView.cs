@@ -357,7 +357,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                     return;
                 }
 
-                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == productId);
+                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == productId, includeProperties: "ProductIncrements");
                 if (product == null)
                 {
                     MessageBox.Show("Selected product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -366,7 +366,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                 productId = product.ProductId;
                 productName = product.ProductName;
-                price = product.DefaultSellingPrice;
+                price = product.DefaultSellingPrice + (product.ProductIncrements.Any() ? product.ProductIncrements.Sum(c => c.Increment) : 0);
 
                 if (_projectsLines.Any(c => c.ProductId == productId))
                 {

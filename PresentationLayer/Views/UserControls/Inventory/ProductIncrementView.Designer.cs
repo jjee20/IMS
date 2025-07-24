@@ -2,7 +2,7 @@
 
 namespace PresentationLayer.Views.UserControls
 {
-    partial class ProductView
+    partial class ProductIncrementView
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,29 +30,15 @@ namespace PresentationLayer.Views.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductView));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductIncrementView));
             var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             var gridTextColumn1 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            var gridTextColumn2 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            var gridTextColumn3 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            var gridTextColumn4 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            var gridTextColumn5 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            var gridTextColumn6 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            var gridTextColumn7 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            var gridTextColumn8 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
-            var gridTextColumn9 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
+            var gridDateTimeColumn1 = new Syncfusion.WinForms.DataGrid.GridDateTimeColumn();
             var gridNumericColumn1 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            var gridNumericColumn2 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            var gridNumericColumn3 = new Syncfusion.WinForms.DataGrid.GridNumericColumn();
-            var gridTextColumn10 = new Syncfusion.WinForms.DataGrid.GridTextColumn();
             var gridImageColumn1 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
             var gridImageColumn2 = new Syncfusion.WinForms.DataGrid.GridImageColumn();
-            var stackedHeaderRow1 = new Syncfusion.WinForms.DataGrid.StackedHeaderRow();
-            var stackedColumn1 = new Syncfusion.WinForms.DataGrid.StackedColumn();
-            var gridTableSummaryRow1 = new Syncfusion.WinForms.DataGrid.GridTableSummaryRow();
-            var gridSummaryColumn1 = new Syncfusion.WinForms.DataGrid.GridSummaryColumn();
             panel2 = new Panel();
             btnPrint = new Guna2ImageButton();
             btnAdd = new Syncfusion.WinForms.Controls.SfButton();
@@ -61,7 +47,7 @@ namespace PresentationLayer.Views.UserControls
             toolstripitemPDF = new Syncfusion.Windows.Forms.Tools.toolstripitem();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            lblTitle = new MaterialSkin.Controls.MaterialLabel();
             guna2Separator1 = new Guna2Separator();
             materialCard4 = new MaterialSkin.Controls.MaterialCard();
             panel1 = new Panel();
@@ -185,7 +171,7 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.BackColor = Color.White;
             tableLayoutPanel2.ColumnCount = 1;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(materialLabel1, 0, 0);
+            tableLayoutPanel2.Controls.Add(lblTitle, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(0, 0);
             tableLayoutPanel2.Margin = new Padding(0);
@@ -195,22 +181,22 @@ namespace PresentationLayer.Views.UserControls
             tableLayoutPanel2.Size = new Size(1346, 60);
             tableLayoutPanel2.TabIndex = 0;
             // 
-            // materialLabel1
+            // lblTitle
             // 
-            materialLabel1.Depth = 0;
-            materialLabel1.Dock = DockStyle.Left;
-            materialLabel1.Font = new Font("Roboto", 34F, FontStyle.Bold, GraphicsUnit.Pixel);
-            materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
-            materialLabel1.ForeColor = Color.FromArgb(255, 246, 233);
-            materialLabel1.ImageAlign = ContentAlignment.MiddleLeft;
-            materialLabel1.Location = new Point(4, 0);
-            materialLabel1.Margin = new Padding(4, 0, 4, 0);
-            materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(1336, 60);
-            materialLabel1.TabIndex = 3;
-            materialLabel1.Text = "Product Management";
-            materialLabel1.TextAlign = ContentAlignment.MiddleLeft;
+            lblTitle.Depth = 0;
+            lblTitle.Dock = DockStyle.Left;
+            lblTitle.Font = new Font("Roboto", 34F, FontStyle.Bold, GraphicsUnit.Pixel);
+            lblTitle.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
+            lblTitle.ForeColor = Color.FromArgb(255, 246, 233);
+            lblTitle.ImageAlign = ContentAlignment.MiddleLeft;
+            lblTitle.Location = new Point(4, 0);
+            lblTitle.Margin = new Padding(4, 0, 4, 0);
+            lblTitle.MouseState = MaterialSkin.MouseState.HOVER;
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(1336, 60);
+            lblTitle.TabIndex = 3;
+            lblTitle.Text = "Product Increment Management";
+            lblTitle.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // guna2Separator1
             // 
@@ -252,86 +238,26 @@ namespace PresentationLayer.Views.UserControls
             dgList.AccessibleName = "Table";
             dgList.AllowFiltering = true;
             dgList.AllowTriStateSorting = true;
-            dgList.AutoExpandGroups = true;
             dgList.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             gridTextColumn1.AllowFiltering = true;
             gridTextColumn1.HeaderText = "Id";
-            gridTextColumn1.MappingName = "ProductId";
+            gridTextColumn1.MappingName = "ProductIncrementId";
             gridTextColumn1.MaximumWidth = 100D;
             gridTextColumn1.MinimumWidth = 100D;
             gridTextColumn1.ShowToolTip = true;
             gridTextColumn1.Visible = false;
             gridTextColumn1.Width = 100D;
-            gridTextColumn2.AllowFiltering = true;
-            gridTextColumn2.AllowTextWrapping = true;
-            gridTextColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
-            gridTextColumn2.HeaderText = "Name";
-            gridTextColumn2.MappingName = "ProductName";
-            gridTextColumn2.ShowToolTip = true;
-            gridTextColumn3.AllowFiltering = true;
-            gridTextColumn3.AllowTextWrapping = true;
-            gridTextColumn3.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn3.HeaderText = "Description";
-            gridTextColumn3.MappingName = "Description";
-            gridTextColumn3.ShowToolTip = true;
-            gridTextColumn4.AllowFiltering = true;
-            gridTextColumn4.AllowTextWrapping = true;
-            gridTextColumn4.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn4.HeaderText = "Code";
-            gridTextColumn4.MappingName = "ProductCode";
-            gridTextColumn4.ShowToolTip = true;
-            gridTextColumn5.AllowFiltering = true;
-            gridTextColumn5.AllowTextWrapping = true;
-            gridTextColumn5.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn5.HeaderText = "Barcode";
-            gridTextColumn5.MappingName = "Barcode";
-            gridTextColumn5.ShowToolTip = true;
-            gridTextColumn6.AllowFiltering = true;
-            gridTextColumn6.AllowTextWrapping = true;
-            gridTextColumn6.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn6.HeaderText = "Brand";
-            gridTextColumn6.MappingName = "Brand";
-            gridTextColumn6.ShowToolTip = true;
-            gridTextColumn7.AllowFiltering = true;
-            gridTextColumn7.AllowTextWrapping = true;
-            gridTextColumn7.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn7.HeaderText = "Color";
-            gridTextColumn7.MappingName = "Color";
-            gridTextColumn7.ShowToolTip = true;
-            gridTextColumn8.AllowFiltering = true;
-            gridTextColumn8.AllowTextWrapping = true;
-            gridTextColumn8.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn8.HeaderText = "Size";
-            gridTextColumn8.MappingName = "Size";
-            gridTextColumn8.ShowToolTip = true;
-            gridTextColumn9.AllowFiltering = true;
-            gridTextColumn9.AllowTextWrapping = true;
-            gridTextColumn9.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn9.HeaderText = "UOM";
-            gridTextColumn9.MappingName = "UnitOfMeasure";
-            gridTextColumn9.ShowToolTip = true;
+            gridDateTimeColumn1.AllowFiltering = true;
+            gridDateTimeColumn1.Format = "MMMM dd,yyyy";
+            gridDateTimeColumn1.HeaderText = "Effectivity Date";
+            gridDateTimeColumn1.MappingName = "Date";
+            gridDateTimeColumn1.MaxDateTime = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            gridDateTimeColumn1.ShowToolTip = true;
             gridNumericColumn1.AllowFiltering = true;
             gridNumericColumn1.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Currency;
-            gridNumericColumn1.HeaderText = "Buying";
-            gridNumericColumn1.MappingName = "DefaultBuyingPrice";
+            gridNumericColumn1.HeaderText = "Increment Value";
+            gridNumericColumn1.MappingName = "Increment";
             gridNumericColumn1.ShowToolTip = true;
-            gridNumericColumn2.AllowFiltering = true;
-            gridNumericColumn2.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
-            gridNumericColumn2.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Currency;
-            gridNumericColumn2.HeaderText = "Increment";
-            gridNumericColumn2.MappingName = "IncrementPrice";
-            gridNumericColumn2.ShowToolTip = true;
-            gridNumericColumn3.AllowFiltering = true;
-            gridNumericColumn3.FormatMode = Syncfusion.WinForms.Input.Enums.FormatMode.Currency;
-            gridNumericColumn3.HeaderText = "Selling";
-            gridNumericColumn3.MappingName = "DefaultSellingPrice";
-            gridNumericColumn3.ShowToolTip = true;
-            gridTextColumn10.AllowFiltering = true;
-            gridTextColumn10.AllowTextWrapping = true;
-            gridTextColumn10.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.ColumnHeader;
-            gridTextColumn10.HeaderText = "Branch";
-            gridTextColumn10.MappingName = "Branch";
-            gridTextColumn10.ShowToolTip = true;
             gridImageColumn1.AllowEditing = false;
             gridImageColumn1.AllowGrouping = false;
             gridImageColumn1.AllowSorting = false;
@@ -360,18 +286,8 @@ namespace PresentationLayer.Views.UserControls
             gridImageColumn2.ShowToolTip = true;
             gridImageColumn2.Width = 30D;
             dgList.Columns.Add(gridTextColumn1);
-            dgList.Columns.Add(gridTextColumn2);
-            dgList.Columns.Add(gridTextColumn3);
-            dgList.Columns.Add(gridTextColumn4);
-            dgList.Columns.Add(gridTextColumn5);
-            dgList.Columns.Add(gridTextColumn6);
-            dgList.Columns.Add(gridTextColumn7);
-            dgList.Columns.Add(gridTextColumn8);
-            dgList.Columns.Add(gridTextColumn9);
+            dgList.Columns.Add(gridDateTimeColumn1);
             dgList.Columns.Add(gridNumericColumn1);
-            dgList.Columns.Add(gridNumericColumn2);
-            dgList.Columns.Add(gridNumericColumn3);
-            dgList.Columns.Add(gridTextColumn10);
             dgList.Columns.Add(gridImageColumn1);
             dgList.Columns.Add(gridImageColumn2);
             dgList.Dock = DockStyle.Fill;
@@ -385,20 +301,8 @@ namespace PresentationLayer.Views.UserControls
             dgList.ShowGroupDropArea = true;
             dgList.ShowToolTip = true;
             dgList.Size = new Size(1304, 456);
-            stackedHeaderRow1.Name = "StackedHeaderRow1";
-            stackedColumn1.ChildColumns = "DefaultSellingPrice,IncrementPrice,DefaultBuyingPrice";
-            stackedColumn1.HeaderText = "Price";
-            stackedHeaderRow1.StackedColumns.Add(stackedColumn1);
-            dgList.StackedHeaderRows.Add(stackedHeaderRow1);
             dgList.Style.BorderColor = Color.FromArgb(100, 100, 100);
             dgList.TabIndex = 7;
-            gridTableSummaryRow1.Name = "TableSummary";
-            gridSummaryColumn1.Format = "{Count}";
-            gridSummaryColumn1.MappingName = "ProductId";
-            gridSummaryColumn1.Name = "TotalProduct";
-            gridTableSummaryRow1.SummaryColumns.Add(gridSummaryColumn1);
-            gridTableSummaryRow1.Title = "Total Products: {TotalProduct}";
-            dgList.TableSummaryRows.Add(gridTableSummaryRow1);
             dgList.Text = "sfDataGrid1";
             dgList.CellClick += dgList_CellClick;
             // 
@@ -418,7 +322,7 @@ namespace PresentationLayer.Views.UserControls
             dgPager.TabIndex = 8;
             dgPager.Text = "sfDataPager1";
             // 
-            // ProductView
+            // ProductIncrementView
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
@@ -429,7 +333,9 @@ namespace PresentationLayer.Views.UserControls
             Controls.Add(tableLayoutPanel1);
             KeyPreview = true;
             Margin = new Padding(4);
-            Name = "ProductView";
+            Name = "ProductIncrementView";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             KeyDown += Me_KeyDown;
@@ -447,7 +353,6 @@ namespace PresentationLayer.Views.UserControls
         private Guna2TextBox txtSearch;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Guna2Separator guna2Separator1;
         private MaterialSkin.Controls.MaterialCard materialCard4;
         private Panel panel1;
@@ -457,5 +362,6 @@ namespace PresentationLayer.Views.UserControls
         private Syncfusion.Windows.Forms.Tools.toolstripitem toolstripitemExcel;
         private Syncfusion.Windows.Forms.Tools.toolstripitem toolstripitemPDF;
         private Guna2ImageButton btnPrint;
+        public MaterialSkin.Controls.MaterialLabel lblTitle;
     }
 }

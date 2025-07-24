@@ -120,7 +120,7 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductPullOutLogViewModel row)
             {
-                var entity = _unitOfWork.ProductPullOutLogs.Value.Get(c => c.ProductPullOutLogId == row.ProductPullOutLogId, includeProperties: "ProductPullOutLogLines.Product");
+                var entity = _unitOfWork.ProductPullOutLogs.Value.Get(c => c.ProductPullOutLogId == row.ProductPullOutLogId, includeProperties: "ProductPullOutLogLines.Product.ProductIncrements");
                 using (var form = new UpsertProductPullOutLogView(_unitOfWork,entity))
                 {
                     form.Text = "Edit Product Pull-Out Log";

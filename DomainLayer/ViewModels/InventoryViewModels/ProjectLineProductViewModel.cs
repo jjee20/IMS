@@ -11,7 +11,7 @@ public class ProjectLineProductViewModel
     public string Name { get; set; }
     public string UOM { get; set; }
     public string Category { get; set; }
-    public double Cost { get; set; }
+    public string Cost { get; set; }
     public double Qty { get; set; }
     public double ActualQty { get; set; }
     public double RemainingQty => Math.Round(Qty - ActualQty,2); 

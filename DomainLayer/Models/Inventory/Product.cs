@@ -53,5 +53,6 @@ namespace DomainLayer.Models.Inventory
 
         public IEnumerable<ProductStockInLogs> ProductStockInLogs { get; set; }
         public IEnumerable<ProductPullOutLogs> ProductPullOutLogs { get; set; }
+        public IEnumerable<ProductIncrements> ProductIncrements { get; set; }
     }
 }

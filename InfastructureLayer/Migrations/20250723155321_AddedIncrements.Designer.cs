@@ -4,6 +4,7 @@ using InfastructureLayer.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfastructureLayer.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    partial class ApplicationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20250723155321_AddedIncrements")]
+    partial class AddedIncrements
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -879,14 +882,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65067cca-2b20-4058-b69e-0b46da3582c0",
+                            ConcurrencyStamp = "3032a03e-7694-4e38-b90e-4d74fdde4cb1",
                             Department = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPER@ADMIN.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEI6qFHHqEeKah5X/yEwkFKPC3G6YpB7k3wjyueDK06Vv8OOfgCWjALG4Ek60j4HIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECcy0oj5oRc541ORuuP9GFGbCM6jn2JQFHQHgCkTSvs5oQnJ9R96z0tfURNGWsJpog==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3,4]",
@@ -897,14 +900,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "FB38CC93-2B1E-4444-9A48-396E4C28E190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f24e5b31-917c-4d28-b547-b6c3cbfe0152",
+                            ConcurrencyStamp = "d0e1666e-8bad-4e50-9727-0a28c1ae7071",
                             Department = 1,
                             Email = "inventory@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "INVENTORY@USER.COM",
                             NormalizedUserName = "inventory",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIrfcEy8MYKHIsgqkn4dn1ZOVpu34Wlm3jrPjjyIDvNSsOwKcEpDojQ5YpuJLCNFCQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELl1wBvVSPBhtixWrtZmm004gqtbnsVMwRexwhN9Jm/hItkDOOR6xisgvVd2gVWrxA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -915,14 +918,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "6628DE62-AF21-4389-B612-623A1A17637C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "620ef739-df50-40d2-be11-8182dd5c7e6c",
+                            ConcurrencyStamp = "db00081e-fe05-4dbf-b3d1-7b8b9f73eaa0",
                             Department = 2,
                             Email = "payroll@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PAYROLL@USER.COM",
                             NormalizedUserName = "payroll",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC0knRAJ28P1sDDej/JC2+CmABNh9QR3A1aPb5fiazcIgw8Euu/r2Z+yJRqXkFmINQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKI1WI65vKHFLdTQuzJZtqPU4VrnqM+7MzS70algeUnyae8Z8+GccSO7PxDE77TbBg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -933,14 +936,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "2878BA2F-5B81-4BD3-A830-6733C6536AAF",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb2212d5-f86c-4b23-a1e0-f425a28ae9bf",
+                            ConcurrencyStamp = "a50087da-5aac-4f79-ace9-c43ba25b7551",
                             Department = 2,
                             Email = "guest@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@USER.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAIAAYagAAAAELoNvBeFBXimR9RhFB0QjhWVWat5CgBGrmAKWsNuBuDlDCp26cyCAOMPwnxeQTSs2Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEFGvNBVEuGtoI8yLu4y3XNB+Wn8ntX+ReokftVLl3ZoVo3ylcdnev9m5fnPG0hWmQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[3]",
@@ -1471,9 +1474,6 @@ namespace InfastructureLayer.Migrations
                     b.Property<double>("StockQuantity")
                         .HasColumnType("float");
 
-                    b.Property<double>("UnitCost")
-                        .HasColumnType("float");
-
                     b.HasKey("ProductPullOutLogLinesId");
 
                     b.HasIndex("ProductId");
@@ -1543,9 +1543,6 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("StockQuantity")
-                        .HasColumnType("float");
-
-                    b.Property<double>("UnitCost")
                         .HasColumnType("float");
 
                     b.HasKey("ProductStockInLogLinesId");

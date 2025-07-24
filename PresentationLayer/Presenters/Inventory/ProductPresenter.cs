@@ -150,7 +150,7 @@ namespace PresentationLayer.Presenters
         
         private async void LoadAllProductList(bool emptyValue = false)
         {
-            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(await _unitOfWork.Product.Value.GetAllAsync(includeProperties: "UnitOfMeasure,Branch"));
+            ProductList = Program.Mapper.Map<IEnumerable<ProductViewModel>>(await _unitOfWork.Product.Value.GetAllAsync(includeProperties: "UnitOfMeasure,Branch,ProductIncrements"));
 
             if (!emptyValue) ProductList = ProductList.Where(c => c.ProductName.ToLower().Contains(_view.SearchValue.ToLower()));
             _view.SetProductListBindingSource(ProductList);

@@ -38,15 +38,18 @@
             txtVendorDONumber = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             txtVendorInvoiceNumber = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             autoLabel5 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            materialCard1 = new MaterialSkin.Controls.MaterialCard();
             btnSave = new Syncfusion.WinForms.Controls.SfButton();
             ((System.ComponentModel.ISupportInitialize)txtBillType).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtVendorDONumber).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtVendorInvoiceNumber).BeginInit();
+            materialCard1.SuspendLayout();
             SuspendLayout();
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(71, 98);
+            autoLabel1.Dock = DockStyle.Top;
+            autoLabel1.Location = new Point(14, 82);
             autoLabel1.Margin = new Padding(4, 0, 4, 0);
             autoLabel1.Name = "autoLabel1";
             autoLabel1.Size = new Size(76, 25);
@@ -56,26 +59,29 @@
             // txtDate
             // 
             txtDate.DateTimeIcon = null;
-            txtDate.Location = new Point(237, 86);
+            txtDate.Dock = DockStyle.Top;
+            txtDate.Location = new Point(14, 107);
             txtDate.Margin = new Padding(4, 5, 4, 5);
             txtDate.Name = "txtDate";
-            txtDate.Size = new Size(369, 42);
+            txtDate.Size = new Size(482, 42);
             txtDate.TabIndex = 71;
             txtDate.ToolTipText = "";
             // 
             // txtDueDate
             // 
             txtDueDate.DateTimeIcon = null;
-            txtDueDate.Location = new Point(237, 157);
+            txtDueDate.Dock = DockStyle.Top;
+            txtDueDate.Location = new Point(14, 174);
             txtDueDate.Margin = new Padding(4, 5, 4, 5);
             txtDueDate.Name = "txtDueDate";
-            txtDueDate.Size = new Size(369, 38);
+            txtDueDate.Size = new Size(482, 38);
             txtDueDate.TabIndex = 73;
             txtDueDate.ToolTipText = "";
             // 
             // autoLabel2
             // 
-            autoLabel2.Location = new Point(71, 165);
+            autoLabel2.Dock = DockStyle.Top;
+            autoLabel2.Location = new Point(14, 149);
             autoLabel2.Margin = new Padding(4, 0, 4, 0);
             autoLabel2.Name = "autoLabel2";
             autoLabel2.Size = new Size(113, 25);
@@ -86,19 +92,21 @@
             // 
             txtBillType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtBillType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
+            txtBillType.Dock = DockStyle.Top;
             txtBillType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            txtBillType.Location = new Point(237, 225);
+            txtBillType.Location = new Point(14, 39);
             txtBillType.Margin = new Padding(4, 5, 4, 5);
             txtBillType.Name = "txtBillType";
             txtBillType.Padding = new Padding(10, 0, 0, 0);
-            txtBillType.Size = new Size(369, 43);
+            txtBillType.Size = new Size(482, 43);
             txtBillType.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
             txtBillType.TabIndex = 74;
             txtBillType.TabStop = false;
             // 
             // autoLabel3
             // 
-            autoLabel3.Location = new Point(71, 233);
+            autoLabel3.Dock = DockStyle.Top;
+            autoLabel3.Location = new Point(14, 14);
             autoLabel3.Margin = new Padding(4, 0, 4, 0);
             autoLabel3.Name = "autoLabel3";
             autoLabel3.Size = new Size(76, 25);
@@ -107,7 +115,8 @@
             // 
             // autoLabel4
             // 
-            autoLabel4.Location = new Point(71, 307);
+            autoLabel4.Dock = DockStyle.Top;
+            autoLabel4.Location = new Point(14, 212);
             autoLabel4.Margin = new Padding(4, 0, 4, 0);
             autoLabel4.Name = "autoLabel4";
             autoLabel4.Size = new Size(125, 25);
@@ -116,58 +125,83 @@
             // 
             // txtVendorDONumber
             // 
-            txtVendorDONumber.BeforeTouchSize = new Size(367, 31);
-            txtVendorDONumber.Location = new Point(237, 302);
+            txtVendorDONumber.BeforeTouchSize = new Size(482, 31);
+            txtVendorDONumber.Dock = DockStyle.Top;
+            txtVendorDONumber.Location = new Point(14, 237);
             txtVendorDONumber.Margin = new Padding(4, 5, 4, 5);
             txtVendorDONumber.Name = "txtVendorDONumber";
-            txtVendorDONumber.Size = new Size(367, 31);
+            txtVendorDONumber.Size = new Size(482, 31);
             txtVendorDONumber.TabIndex = 77;
             // 
             // txtVendorInvoiceNumber
             // 
-            txtVendorInvoiceNumber.BeforeTouchSize = new Size(367, 31);
-            txtVendorInvoiceNumber.Location = new Point(237, 370);
+            txtVendorInvoiceNumber.BeforeTouchSize = new Size(482, 31);
+            txtVendorInvoiceNumber.Dock = DockStyle.Top;
+            txtVendorInvoiceNumber.Location = new Point(14, 293);
             txtVendorInvoiceNumber.Margin = new Padding(4, 5, 4, 5);
             txtVendorInvoiceNumber.Name = "txtVendorInvoiceNumber";
-            txtVendorInvoiceNumber.Size = new Size(367, 31);
+            txtVendorInvoiceNumber.Size = new Size(482, 31);
             txtVendorInvoiceNumber.TabIndex = 79;
             // 
             // autoLabel5
             // 
-            autoLabel5.Location = new Point(71, 375);
+            autoLabel5.Dock = DockStyle.Top;
+            autoLabel5.Location = new Point(14, 268);
             autoLabel5.Margin = new Padding(4, 0, 4, 0);
             autoLabel5.Name = "autoLabel5";
             autoLabel5.Size = new Size(146, 25);
             autoLabel5.TabIndex = 78;
             autoLabel5.Text = "Vendor Invoice #";
             // 
+            // materialCard1
+            // 
+            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(btnSave);
+            materialCard1.Controls.Add(txtVendorInvoiceNumber);
+            materialCard1.Controls.Add(autoLabel5);
+            materialCard1.Controls.Add(txtVendorDONumber);
+            materialCard1.Controls.Add(autoLabel4);
+            materialCard1.Controls.Add(txtDueDate);
+            materialCard1.Controls.Add(autoLabel2);
+            materialCard1.Controls.Add(txtDate);
+            materialCard1.Controls.Add(autoLabel1);
+            materialCard1.Controls.Add(txtBillType);
+            materialCard1.Controls.Add(autoLabel3);
+            materialCard1.Depth = 0;
+            materialCard1.Dock = DockStyle.Fill;
+            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard1.Location = new Point(2, 2);
+            materialCard1.Margin = new Padding(14);
+            materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard1.Name = "materialCard1";
+            materialCard1.Padding = new Padding(14);
+            materialCard1.Size = new Size(510, 470);
+            materialCard1.TabIndex = 81;
+            // 
             // btnSave
             // 
+            btnSave.BackColor = SystemColors.HotTrack;
+            btnSave.Dock = DockStyle.Bottom;
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
-            btnSave.Location = new Point(270, 468);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(14, 409);
             btnSave.Margin = new Padding(4, 5, 4, 5);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(137, 47);
+            btnSave.Size = new Size(482, 47);
+            btnSave.Style.BackColor = SystemColors.HotTrack;
+            btnSave.Style.ForeColor = Color.White;
             btnSave.TabIndex = 80;
             btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnConfirm_Click;
             // 
             // UpsertBillView
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(675, 577);
-            Controls.Add(btnSave);
-            Controls.Add(txtVendorInvoiceNumber);
-            Controls.Add(autoLabel5);
-            Controls.Add(txtVendorDONumber);
-            Controls.Add(autoLabel4);
-            Controls.Add(autoLabel3);
-            Controls.Add(txtBillType);
-            Controls.Add(txtDueDate);
-            Controls.Add(autoLabel2);
-            Controls.Add(txtDate);
-            Controls.Add(autoLabel1);
+            AcceptButton = btnSave;
+            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(514, 474);
+            Controls.Add(materialCard1);
             Margin = new Padding(4, 5, 4, 5);
             Name = "UpsertBillView";
             ShowIcon = false;
@@ -178,8 +212,9 @@
             ((System.ComponentModel.ISupportInitialize)txtBillType).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtVendorDONumber).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtVendorInvoiceNumber).EndInit();
+            materialCard1.ResumeLayout(false);
+            materialCard1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -193,6 +228,7 @@
         private Syncfusion.Windows.Forms.Tools.TextBoxExt txtVendorDONumber;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt txtVendorInvoiceNumber;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel5;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
         private Syncfusion.WinForms.Controls.SfButton btnSave;
     }
 }

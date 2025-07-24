@@ -22,6 +22,7 @@ namespace DomainLayer.ViewModels.Inventory
         [Display(Name = "UOM")]
         public string UnitOfMeasure { get; set; }
         public double DefaultBuyingPrice { get; set; } = 0.0;
+        public double IncrementPrice { get; set; } = 0.0;
         public double DefaultSellingPrice { get; set; } = 0.0;
         public string Branch { get; set; }
         public byte[] Edit { get; set; }

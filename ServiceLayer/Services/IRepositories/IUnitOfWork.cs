@@ -8,6 +8,7 @@ namespace ServiceLayer.Services.IRepositories
 {
     public interface IUnitOfWork
     {
+        Lazy<IProductIncrementRepository> ProductIncrement { get; }
         Lazy<IPerformanceReportRepository> PerformanceReport { get; }
         Lazy<IExamResultChoiceRepository> ExamResultChoice { get; }
         Lazy<IExamResultRepository> ExamResult { get; }

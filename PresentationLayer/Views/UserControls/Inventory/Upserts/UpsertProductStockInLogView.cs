@@ -63,7 +63,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                         ProductId = item.ProductId,
                         ProductName = item.Product.ProductName,
                         Quantity = item.StockQuantity,
-                        UnitCost = item.Product.DefaultBuyingPrice,
+                        UnitCost = item.UnitCost == 0 ? item.Product.DefaultBuyingPrice + (item.Product.ProductIncrements.Any() ? item.Product.ProductIncrements.Sum(c => c.Increment) : 0) : item.UnitCost,
                         Delete = Resources.delete
                     };
                     _entityViewModel.Add(productStockInLogLines);
@@ -101,7 +101,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             }
 
 
-            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
+            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue, includeProperties: "ProductIncrements");
 
             var productInLogLines = new ProductStockInLogLineViewModel()
             {
@@ -109,7 +109,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 ProductId = (int)txtProduct.SelectedValue,
                 ProductName = txtProduct.Text,
                 Quantity = Convert.ToDouble(txtQuantity.Text),
-                UnitCost = product.DefaultBuyingPrice,
+                UnitCost = product.DefaultBuyingPrice + (product.ProductIncrements.Any() ? product.ProductIncrements.Sum(c => c.Increment) : 0),
                 Delete = Resources.delete
             };
 
@@ -172,7 +172,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                     _unitOfWork.ProductStockInLogLines.Value.RemoveRange(oldLines);
                     await _unitOfWork.SaveAsync();
                     
-                    _unitOfWork.ProductStockInLogs.Value.Update(_entity);
+                    _unitOfWork.ProductStockInLogs.Value.UpdateWithChildren(_entity, p => p.ProductStockInLogLines, p => p.ProductStockInLogLinesId);
                     message = "Product stock-in updated successfully.";
                 }
             }
@@ -208,6 +208,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 DateAdded = c.DateAdded,
                 ProductId = c.ProductId,
                 StockQuantity = c.Quantity,
+                UnitCost = c.UnitCost,
             }).ToList();
         }
     }
