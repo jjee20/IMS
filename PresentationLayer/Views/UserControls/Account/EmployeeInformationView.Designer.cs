@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeInformationView));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeInformationView));
+            var customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            var dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            var dataGridViewCellStyle18 = new DataGridViewCellStyle();
             tabControlMain = new Guna.UI2.WinForms.Guna2TabControl();
             tabPage1 = new TabPage();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
@@ -144,11 +144,10 @@
             tabControlMain.Controls.Add(tabPage7);
             tabControlMain.Dock = DockStyle.Fill;
             tabControlMain.ItemSize = new Size(180, 40);
-            tabControlMain.Location = new Point(3, 3);
-            tabControlMain.Margin = new Padding(4, 4, 4, 4);
+            tabControlMain.Location = new Point(2, 2);
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1344, 723);
+            tabControlMain.Size = new Size(896, 482);
             tabControlMain.TabButtonHoverState.BorderColor = Color.Empty;
             tabControlMain.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             tabControlMain.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -172,11 +171,10 @@
             // tabPage1
             // 
             tabPage1.Controls.Add(materialCard1);
-            tabPage1.Location = new Point(4, 44);
-            tabPage1.Margin = new Padding(4, 4, 4, 4);
+            tabPage1.Location = new Point(4, 84);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(4, 4, 4, 4);
-            tabPage1.Size = new Size(1336, 675);
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(888, 394);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Basic Information";
             tabPage1.UseVisualStyleBackColor = true;
@@ -204,20 +202,19 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(4, 4);
-            materialCard1.Margin = new Padding(21, 21, 21, 21);
+            materialCard1.Location = new Point(3, 3);
+            materialCard1.Margin = new Padding(14);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(21, 21, 21, 21);
-            materialCard1.Size = new Size(1328, 667);
+            materialCard1.Padding = new Padding(14);
+            materialCard1.Size = new Size(882, 388);
             materialCard1.TabIndex = 0;
             // 
             // guna2Separator1
             // 
-            guna2Separator1.Location = new Point(150, 550);
-            guna2Separator1.Margin = new Padding(4, 4, 4, 4);
+            guna2Separator1.Location = new Point(0, 154);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(680, 24);
+            guna2Separator1.Size = new Size(280, 16);
             guna2Separator1.TabIndex = 32;
             // 
             // materialLabel1
@@ -225,8 +222,7 @@
             materialLabel1.AutoSize = true;
             materialLabel1.Depth = 0;
             materialLabel1.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel1.Location = new Point(150, 862);
-            materialLabel1.Margin = new Padding(4, 0, 4, 0);
+            materialLabel1.Location = new Point(33, 353);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
             materialLabel1.Size = new Size(62, 19);
@@ -238,8 +234,7 @@
             materialLabel2.AutoSize = true;
             materialLabel2.Depth = 0;
             materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel2.Location = new Point(153, 818);
-            materialLabel2.Margin = new Padding(4, 0, 4, 0);
+            materialLabel2.Location = new Point(35, 323);
             materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel2.Name = "materialLabel2";
             materialLabel2.Size = new Size(45, 19);
@@ -251,8 +246,7 @@
             materialLabel4.AutoSize = true;
             materialLabel4.Depth = 0;
             materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel4.Location = new Point(150, 772);
-            materialLabel4.Margin = new Padding(4, 0, 4, 0);
+            materialLabel4.Location = new Point(33, 293);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
             materialLabel4.Size = new Size(74, 19);
@@ -264,8 +258,7 @@
             materialLabel5.AutoSize = true;
             materialLabel5.Depth = 0;
             materialLabel5.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel5.Location = new Point(150, 728);
-            materialLabel5.Margin = new Padding(4, 0, 4, 0);
+            materialLabel5.Location = new Point(33, 263);
             materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel5.Name = "materialLabel5";
             materialLabel5.Size = new Size(55, 19);
@@ -277,8 +270,7 @@
             materialLabel6.AutoSize = true;
             materialLabel6.Depth = 0;
             materialLabel6.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel6.Location = new Point(150, 682);
-            materialLabel6.Margin = new Padding(4, 0, 4, 0);
+            materialLabel6.Location = new Point(33, 233);
             materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel6.Name = "materialLabel6";
             materialLabel6.Size = new Size(96, 19);
@@ -290,8 +282,7 @@
             materialLabel8.AutoSize = true;
             materialLabel8.Depth = 0;
             materialLabel8.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel8.Location = new Point(150, 638);
-            materialLabel8.Margin = new Padding(4, 0, 4, 0);
+            materialLabel8.Location = new Point(33, 203);
             materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel8.Name = "materialLabel8";
             materialLabel8.Size = new Size(47, 19);
@@ -303,8 +294,7 @@
             materialLabel9.AutoSize = true;
             materialLabel9.Depth = 0;
             materialLabel9.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel9.Location = new Point(150, 592);
-            materialLabel9.Margin = new Padding(4, 0, 4, 0);
+            materialLabel9.Location = new Point(33, 173);
             materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel9.Name = "materialLabel9";
             materialLabel9.Size = new Size(18, 19);
@@ -317,8 +307,7 @@
             txtAddress.Depth = 0;
             txtAddress.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtAddress.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtAddress.Location = new Point(346, 862);
-            txtAddress.Margin = new Padding(4, 0, 4, 0);
+            txtAddress.Location = new Point(164, 353);
             txtAddress.MouseState = MaterialSkin.MouseState.HOVER;
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(53, 17);
@@ -331,8 +320,7 @@
             txtEmail.Depth = 0;
             txtEmail.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtEmail.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtEmail.Location = new Point(350, 818);
-            txtEmail.Margin = new Padding(4, 0, 4, 0);
+            txtEmail.Location = new Point(166, 323);
             txtEmail.MouseState = MaterialSkin.MouseState.HOVER;
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(37, 17);
@@ -345,8 +333,7 @@
             txtContactNo.Depth = 0;
             txtContactNo.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtContactNo.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtContactNo.Location = new Point(346, 772);
-            txtContactNo.Margin = new Padding(4, 0, 4, 0);
+            txtContactNo.Location = new Point(164, 293);
             txtContactNo.MouseState = MaterialSkin.MouseState.HOVER;
             txtContactNo.Name = "txtContactNo";
             txtContactNo.Size = new Size(63, 17);
@@ -359,8 +346,7 @@
             txtGender.Depth = 0;
             txtGender.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtGender.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtGender.Location = new Point(346, 728);
-            txtGender.Margin = new Padding(4, 0, 4, 0);
+            txtGender.Location = new Point(164, 263);
             txtGender.MouseState = MaterialSkin.MouseState.HOVER;
             txtGender.Name = "txtGender";
             txtGender.Size = new Size(48, 17);
@@ -373,8 +359,7 @@
             txtDateOfBirth.Depth = 0;
             txtDateOfBirth.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtDateOfBirth.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtDateOfBirth.Location = new Point(346, 682);
-            txtDateOfBirth.Margin = new Padding(4, 0, 4, 0);
+            txtDateOfBirth.Location = new Point(164, 233);
             txtDateOfBirth.MouseState = MaterialSkin.MouseState.HOVER;
             txtDateOfBirth.Name = "txtDateOfBirth";
             txtDateOfBirth.Size = new Size(83, 17);
@@ -387,8 +372,7 @@
             txtName.Depth = 0;
             txtName.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtName.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtName.Location = new Point(346, 638);
-            txtName.Margin = new Padding(4, 0, 4, 0);
+            txtName.Location = new Point(164, 203);
             txtName.MouseState = MaterialSkin.MouseState.HOVER;
             txtName.Name = "txtName";
             txtName.Size = new Size(39, 17);
@@ -401,8 +385,7 @@
             txtId.Depth = 0;
             txtId.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtId.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtId.Location = new Point(346, 592);
-            txtId.Margin = new Padding(4, 0, 4, 0);
+            txtId.Location = new Point(164, 173);
             txtId.MouseState = MaterialSkin.MouseState.HOVER;
             txtId.Name = "txtId";
             txtId.Size = new Size(13, 17);
@@ -414,13 +397,12 @@
             guna2CirclePictureBox1.Anchor = AnchorStyles.None;
             guna2CirclePictureBox1.Image = (Image)resources.GetObject("guna2CirclePictureBox1.Image");
             guna2CirclePictureBox1.ImageRotate = 0F;
-            guna2CirclePictureBox1.Location = new Point(-104, -11);
-            guna2CirclePictureBox1.Margin = new Padding(4, 4, 4, 4);
+            guna2CirclePictureBox1.Location = new Point(52, 17);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            guna2CirclePictureBox1.Padding = new Padding(8, 8, 8, 8);
+            guna2CirclePictureBox1.Padding = new Padding(5);
             guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges1;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CirclePictureBox1.Size = new Size(501, 393);
+            guna2CirclePictureBox1.Size = new Size(158, 130);
             guna2CirclePictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             guna2CirclePictureBox1.TabIndex = 24;
             guna2CirclePictureBox1.TabStop = false;
@@ -449,12 +431,12 @@
             materialCard3.Controls.Add(materialCard11);
             materialCard3.Depth = 0;
             materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard3.Location = new Point(855, 112);
-            materialCard3.Margin = new Padding(21, 21, 21, 21);
+            materialCard3.Location = new Point(280, 14);
+            materialCard3.Margin = new Padding(14);
             materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard3.Name = "materialCard3";
-            materialCard3.Padding = new Padding(21, 21, 21, 21);
-            materialCard3.Size = new Size(993, 782);
+            materialCard3.Padding = new Padding(14);
+            materialCard3.Size = new Size(593, 365);
             materialCard3.TabIndex = 1;
             // 
             // materialLabel3
@@ -462,8 +444,7 @@
             materialLabel3.AutoSize = true;
             materialLabel3.Depth = 0;
             materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel3.Location = new Point(40, 500);
-            materialLabel3.Margin = new Padding(4, 0, 4, 0);
+            materialLabel3.Location = new Point(28, 269);
             materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel3.Name = "materialLabel3";
             materialLabel3.Size = new Size(78, 19);
@@ -475,8 +456,7 @@
             materialLabel7.AutoSize = true;
             materialLabel7.Depth = 0;
             materialLabel7.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel7.Location = new Point(42, 442);
-            materialLabel7.Margin = new Padding(4, 0, 4, 0);
+            materialLabel7.Location = new Point(28, 239);
             materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel7.Name = "materialLabel7";
             materialLabel7.Size = new Size(63, 19);
@@ -488,8 +468,7 @@
             materialLabel10.AutoSize = true;
             materialLabel10.Depth = 0;
             materialLabel10.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel10.Location = new Point(42, 386);
-            materialLabel10.Margin = new Padding(4, 0, 4, 0);
+            materialLabel10.Location = new Point(28, 209);
             materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel10.Name = "materialLabel10";
             materialLabel10.Size = new Size(77, 19);
@@ -501,8 +480,7 @@
             materialLabel11.AutoSize = true;
             materialLabel11.Depth = 0;
             materialLabel11.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel11.Location = new Point(42, 328);
-            materialLabel11.Margin = new Padding(4, 0, 4, 0);
+            materialLabel11.Location = new Point(28, 179);
             materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel11.Name = "materialLabel11";
             materialLabel11.Size = new Size(35, 19);
@@ -514,8 +492,7 @@
             materialLabel12.AutoSize = true;
             materialLabel12.Depth = 0;
             materialLabel12.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel12.Location = new Point(42, 272);
-            materialLabel12.Margin = new Padding(4, 0, 4, 0);
+            materialLabel12.Location = new Point(28, 149);
             materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel12.Name = "materialLabel12";
             materialLabel12.Size = new Size(80, 19);
@@ -527,8 +504,7 @@
             materialLabel13.AutoSize = true;
             materialLabel13.Depth = 0;
             materialLabel13.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel13.Location = new Point(42, 214);
-            materialLabel13.Margin = new Padding(4, 0, 4, 0);
+            materialLabel13.Location = new Point(28, 119);
             materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel13.Name = "materialLabel13";
             materialLabel13.Size = new Size(93, 19);
@@ -540,8 +516,7 @@
             materialLabel14.AutoSize = true;
             materialLabel14.Depth = 0;
             materialLabel14.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel14.Location = new Point(42, 158);
-            materialLabel14.Margin = new Padding(4, 0, 4, 0);
+            materialLabel14.Location = new Point(28, 89);
             materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel14.Name = "materialLabel14";
             materialLabel14.Size = new Size(39, 19);
@@ -553,8 +528,7 @@
             materialLabel15.AutoSize = true;
             materialLabel15.Depth = 0;
             materialLabel15.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel15.Location = new Point(42, 100);
-            materialLabel15.Margin = new Padding(4, 0, 4, 0);
+            materialLabel15.Location = new Point(28, 59);
             materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel15.Name = "materialLabel15";
             materialLabel15.Size = new Size(94, 19);
@@ -566,8 +540,7 @@
             materialLabel17.AutoSize = true;
             materialLabel17.Depth = 0;
             materialLabel17.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel17.Location = new Point(42, 44);
-            materialLabel17.Margin = new Padding(4, 0, 4, 0);
+            materialLabel17.Location = new Point(28, 29);
             materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel17.Name = "materialLabel17";
             materialLabel17.Size = new Size(88, 19);
@@ -580,8 +553,7 @@
             txtPhilHealth.Depth = 0;
             txtPhilHealth.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPhilHealth.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtPhilHealth.Location = new Point(320, 500);
-            txtPhilHealth.Margin = new Padding(4, 0, 4, 0);
+            txtPhilHealth.Location = new Point(214, 269);
             txtPhilHealth.MouseState = MaterialSkin.MouseState.HOVER;
             txtPhilHealth.Name = "txtPhilHealth";
             txtPhilHealth.Size = new Size(69, 17);
@@ -594,8 +566,7 @@
             txtPagibig.Depth = 0;
             txtPagibig.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtPagibig.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtPagibig.Location = new Point(321, 442);
-            txtPagibig.Margin = new Padding(4, 0, 4, 0);
+            txtPagibig.Location = new Point(214, 239);
             txtPagibig.MouseState = MaterialSkin.MouseState.HOVER;
             txtPagibig.Name = "txtPagibig";
             txtPagibig.Size = new Size(55, 17);
@@ -608,8 +579,7 @@
             txtSSSWISP.Depth = 0;
             txtSSSWISP.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSSSWISP.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtSSSWISP.Location = new Point(321, 386);
-            txtSSSWISP.Margin = new Padding(4, 0, 4, 0);
+            txtSSSWISP.Location = new Point(214, 209);
             txtSSSWISP.MouseState = MaterialSkin.MouseState.HOVER;
             txtSSSWISP.Name = "txtSSSWISP";
             txtSSSWISP.Size = new Size(63, 17);
@@ -622,8 +592,7 @@
             txtSSSS.Depth = 0;
             txtSSSS.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtSSSS.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtSSSS.Location = new Point(321, 328);
-            txtSSSS.Margin = new Padding(4, 0, 4, 0);
+            txtSSSS.Location = new Point(214, 179);
             txtSSSS.MouseState = MaterialSkin.MouseState.HOVER;
             txtSSSS.Name = "txtSSSS";
             txtSSSS.Size = new Size(25, 17);
@@ -636,8 +605,7 @@
             txtIsDeducted.Depth = 0;
             txtIsDeducted.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtIsDeducted.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtIsDeducted.Location = new Point(321, 272);
-            txtIsDeducted.Margin = new Padding(4, 0, 4, 0);
+            txtIsDeducted.Location = new Point(214, 149);
             txtIsDeducted.MouseState = MaterialSkin.MouseState.HOVER;
             txtIsDeducted.Name = "txtIsDeducted";
             txtIsDeducted.Size = new Size(69, 17);
@@ -650,8 +618,7 @@
             txtBasicSalary.Depth = 0;
             txtBasicSalary.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtBasicSalary.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtBasicSalary.Location = new Point(321, 214);
-            txtBasicSalary.Margin = new Padding(4, 0, 4, 0);
+            txtBasicSalary.Location = new Point(214, 119);
             txtBasicSalary.MouseState = MaterialSkin.MouseState.HOVER;
             txtBasicSalary.Name = "txtBasicSalary";
             txtBasicSalary.Size = new Size(79, 17);
@@ -664,8 +631,7 @@
             txtShift.Depth = 0;
             txtShift.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtShift.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtShift.Location = new Point(321, 158);
-            txtShift.Margin = new Padding(4, 0, 4, 0);
+            txtShift.Location = new Point(214, 89);
             txtShift.MouseState = MaterialSkin.MouseState.HOVER;
             txtShift.Name = "txtShift";
             txtShift.Size = new Size(31, 17);
@@ -678,8 +644,7 @@
             txtJobPosition.Depth = 0;
             txtJobPosition.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtJobPosition.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtJobPosition.Location = new Point(321, 100);
-            txtJobPosition.Margin = new Padding(4, 0, 4, 0);
+            txtJobPosition.Location = new Point(214, 59);
             txtJobPosition.MouseState = MaterialSkin.MouseState.HOVER;
             txtJobPosition.Name = "txtJobPosition";
             txtJobPosition.Size = new Size(81, 17);
@@ -692,8 +657,7 @@
             txtDepartment.Depth = 0;
             txtDepartment.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtDepartment.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtDepartment.Location = new Point(321, 44);
-            txtDepartment.Margin = new Padding(4, 0, 4, 0);
+            txtDepartment.Location = new Point(214, 29);
             txtDepartment.MouseState = MaterialSkin.MouseState.HOVER;
             txtDepartment.Name = "txtDepartment";
             txtDepartment.Size = new Size(77, 17);
@@ -708,12 +672,12 @@
             materialCard11.Depth = 0;
             materialCard11.Dock = DockStyle.Bottom;
             materialCard11.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard11.Location = new Point(21, 692);
-            materialCard11.Margin = new Padding(21, 21, 21, 21);
+            materialCard11.Location = new Point(14, 305);
+            materialCard11.Margin = new Padding(14);
             materialCard11.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard11.Name = "materialCard11";
-            materialCard11.Padding = new Padding(21, 21, 21, 21);
-            materialCard11.Size = new Size(951, 69);
+            materialCard11.Padding = new Padding(14);
+            materialCard11.Size = new Size(565, 46);
             materialCard11.TabIndex = 12;
             // 
             // txtLeaveCredits
@@ -723,8 +687,7 @@
             txtLeaveCredits.Dock = DockStyle.Right;
             txtLeaveCredits.Font = new Font("Roboto", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             txtLeaveCredits.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            txtLeaveCredits.Location = new Point(841, 21);
-            txtLeaveCredits.Margin = new Padding(4, 0, 4, 0);
+            txtLeaveCredits.Location = new Point(462, 14);
             txtLeaveCredits.MouseState = MaterialSkin.MouseState.HOVER;
             txtLeaveCredits.Name = "txtLeaveCredits";
             txtLeaveCredits.Size = new Size(89, 17);
@@ -737,8 +700,7 @@
             materialLabel16.Depth = 0;
             materialLabel16.Dock = DockStyle.Left;
             materialLabel16.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel16.Location = new Point(21, 21);
-            materialLabel16.Margin = new Padding(4, 0, 4, 0);
+            materialLabel16.Location = new Point(14, 14);
             materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel16.Name = "materialLabel16";
             materialLabel16.Size = new Size(100, 19);
@@ -748,10 +710,9 @@
             // tabPage6
             // 
             tabPage6.Controls.Add(materialCard22);
-            tabPage6.Location = new Point(4, 44);
-            tabPage6.Margin = new Padding(4, 4, 4, 4);
+            tabPage6.Location = new Point(4, 84);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(2011, 1040);
+            tabPage6.Size = new Size(888, 394);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "Attendances";
             tabPage6.UseVisualStyleBackColor = true;
@@ -764,11 +725,11 @@
             materialCard22.Dock = DockStyle.Fill;
             materialCard22.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard22.Location = new Point(0, 0);
-            materialCard22.Margin = new Padding(21, 21, 21, 21);
+            materialCard22.Margin = new Padding(14);
             materialCard22.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard22.Name = "materialCard22";
-            materialCard22.Padding = new Padding(21, 21, 21, 21);
-            materialCard22.Size = new Size(2011, 1040);
+            materialCard22.Padding = new Padding(14);
+            materialCard22.Size = new Size(888, 394);
             materialCard22.TabIndex = 0;
             // 
             // dgAttendances
@@ -795,13 +756,11 @@
             dgAttendances.DefaultCellStyle = dataGridViewCellStyle3;
             dgAttendances.Dock = DockStyle.Fill;
             dgAttendances.GridColor = Color.FromArgb(231, 229, 255);
-            dgAttendances.Location = new Point(21, 21);
-            dgAttendances.Margin = new Padding(4, 4, 4, 4);
+            dgAttendances.Location = new Point(14, 14);
             dgAttendances.Name = "dgAttendances";
             dgAttendances.RowHeadersVisible = false;
             dgAttendances.RowHeadersWidth = 62;
-            dgAttendances.RowTemplate.Height = 25;
-            dgAttendances.Size = new Size(1969, 998);
+            dgAttendances.Size = new Size(860, 366);
             dgAttendances.TabIndex = 1;
             dgAttendances.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgAttendances.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -828,11 +787,10 @@
             // tabPage2
             // 
             tabPage2.Controls.Add(materialCard21);
-            tabPage2.Location = new Point(4, 44);
-            tabPage2.Margin = new Padding(4, 4, 4, 4);
+            tabPage2.Location = new Point(4, 84);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(4, 4, 4, 4);
-            tabPage2.Size = new Size(2011, 1040);
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(888, 394);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Allowances";
             tabPage2.UseVisualStyleBackColor = true;
@@ -844,12 +802,12 @@
             materialCard21.Depth = 0;
             materialCard21.Dock = DockStyle.Fill;
             materialCard21.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard21.Location = new Point(4, 4);
-            materialCard21.Margin = new Padding(21, 21, 21, 21);
+            materialCard21.Location = new Point(3, 3);
+            materialCard21.Margin = new Padding(14);
             materialCard21.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard21.Name = "materialCard21";
-            materialCard21.Padding = new Padding(21, 21, 21, 21);
-            materialCard21.Size = new Size(2003, 1032);
+            materialCard21.Padding = new Padding(14);
+            materialCard21.Size = new Size(882, 388);
             materialCard21.TabIndex = 0;
             // 
             // dgAllowances
@@ -876,13 +834,11 @@
             dgAllowances.DefaultCellStyle = dataGridViewCellStyle6;
             dgAllowances.Dock = DockStyle.Fill;
             dgAllowances.GridColor = Color.FromArgb(231, 229, 255);
-            dgAllowances.Location = new Point(21, 21);
-            dgAllowances.Margin = new Padding(4, 4, 4, 4);
+            dgAllowances.Location = new Point(14, 14);
             dgAllowances.Name = "dgAllowances";
             dgAllowances.RowHeadersVisible = false;
             dgAllowances.RowHeadersWidth = 62;
-            dgAllowances.RowTemplate.Height = 25;
-            dgAllowances.Size = new Size(1961, 990);
+            dgAllowances.Size = new Size(854, 360);
             dgAllowances.TabIndex = 2;
             dgAllowances.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgAllowances.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -909,10 +865,9 @@
             // tabPage3
             // 
             tabPage3.Controls.Add(materialCard20);
-            tabPage3.Location = new Point(4, 44);
-            tabPage3.Margin = new Padding(4, 4, 4, 4);
+            tabPage3.Location = new Point(4, 84);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(2011, 1040);
+            tabPage3.Size = new Size(888, 394);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Bonuses";
             tabPage3.UseVisualStyleBackColor = true;
@@ -925,11 +880,11 @@
             materialCard20.Dock = DockStyle.Fill;
             materialCard20.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard20.Location = new Point(0, 0);
-            materialCard20.Margin = new Padding(21, 21, 21, 21);
+            materialCard20.Margin = new Padding(14);
             materialCard20.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard20.Name = "materialCard20";
-            materialCard20.Padding = new Padding(21, 21, 21, 21);
-            materialCard20.Size = new Size(2011, 1040);
+            materialCard20.Padding = new Padding(14);
+            materialCard20.Size = new Size(888, 394);
             materialCard20.TabIndex = 0;
             // 
             // dgBonuses
@@ -956,13 +911,11 @@
             dgBonuses.DefaultCellStyle = dataGridViewCellStyle9;
             dgBonuses.Dock = DockStyle.Fill;
             dgBonuses.GridColor = Color.FromArgb(231, 229, 255);
-            dgBonuses.Location = new Point(21, 21);
-            dgBonuses.Margin = new Padding(4, 4, 4, 4);
+            dgBonuses.Location = new Point(14, 14);
             dgBonuses.Name = "dgBonuses";
             dgBonuses.RowHeadersVisible = false;
             dgBonuses.RowHeadersWidth = 62;
-            dgBonuses.RowTemplate.Height = 25;
-            dgBonuses.Size = new Size(1969, 998);
+            dgBonuses.Size = new Size(860, 366);
             dgBonuses.TabIndex = 2;
             dgBonuses.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgBonuses.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -989,10 +942,9 @@
             // tabPage5
             // 
             tabPage5.Controls.Add(materialCard19);
-            tabPage5.Location = new Point(4, 44);
-            tabPage5.Margin = new Padding(4, 4, 4, 4);
+            tabPage5.Location = new Point(4, 84);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(2011, 1040);
+            tabPage5.Size = new Size(888, 394);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Benefits";
             tabPage5.UseVisualStyleBackColor = true;
@@ -1005,11 +957,11 @@
             materialCard19.Dock = DockStyle.Fill;
             materialCard19.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard19.Location = new Point(0, 0);
-            materialCard19.Margin = new Padding(21, 21, 21, 21);
+            materialCard19.Margin = new Padding(14);
             materialCard19.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard19.Name = "materialCard19";
-            materialCard19.Padding = new Padding(21, 21, 21, 21);
-            materialCard19.Size = new Size(2011, 1040);
+            materialCard19.Padding = new Padding(14);
+            materialCard19.Size = new Size(888, 394);
             materialCard19.TabIndex = 0;
             // 
             // dgBenefits
@@ -1036,13 +988,11 @@
             dgBenefits.DefaultCellStyle = dataGridViewCellStyle12;
             dgBenefits.Dock = DockStyle.Fill;
             dgBenefits.GridColor = Color.FromArgb(231, 229, 255);
-            dgBenefits.Location = new Point(21, 21);
-            dgBenefits.Margin = new Padding(4, 4, 4, 4);
+            dgBenefits.Location = new Point(14, 14);
             dgBenefits.Name = "dgBenefits";
             dgBenefits.RowHeadersVisible = false;
             dgBenefits.RowHeadersWidth = 62;
-            dgBenefits.RowTemplate.Height = 25;
-            dgBenefits.Size = new Size(1969, 998);
+            dgBenefits.Size = new Size(860, 366);
             dgBenefits.TabIndex = 2;
             dgBenefits.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgBenefits.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -1069,10 +1019,9 @@
             // tabPage4
             // 
             tabPage4.Controls.Add(materialCard18);
-            tabPage4.Location = new Point(4, 44);
-            tabPage4.Margin = new Padding(4, 4, 4, 4);
+            tabPage4.Location = new Point(4, 84);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(2011, 1040);
+            tabPage4.Size = new Size(888, 394);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Deductions";
             tabPage4.UseVisualStyleBackColor = true;
@@ -1085,11 +1034,11 @@
             materialCard18.Dock = DockStyle.Fill;
             materialCard18.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard18.Location = new Point(0, 0);
-            materialCard18.Margin = new Padding(21, 21, 21, 21);
+            materialCard18.Margin = new Padding(14);
             materialCard18.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard18.Name = "materialCard18";
-            materialCard18.Padding = new Padding(21, 21, 21, 21);
-            materialCard18.Size = new Size(2011, 1040);
+            materialCard18.Padding = new Padding(14);
+            materialCard18.Size = new Size(888, 394);
             materialCard18.TabIndex = 0;
             // 
             // dgDeductions
@@ -1116,13 +1065,11 @@
             dgDeductions.DefaultCellStyle = dataGridViewCellStyle15;
             dgDeductions.Dock = DockStyle.Fill;
             dgDeductions.GridColor = Color.FromArgb(231, 229, 255);
-            dgDeductions.Location = new Point(21, 21);
-            dgDeductions.Margin = new Padding(4, 4, 4, 4);
+            dgDeductions.Location = new Point(14, 14);
             dgDeductions.Name = "dgDeductions";
             dgDeductions.RowHeadersVisible = false;
             dgDeductions.RowHeadersWidth = 62;
-            dgDeductions.RowTemplate.Height = 25;
-            dgDeductions.Size = new Size(1969, 998);
+            dgDeductions.Size = new Size(860, 366);
             dgDeductions.TabIndex = 2;
             dgDeductions.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgDeductions.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -1149,10 +1096,9 @@
             // tabPage7
             // 
             tabPage7.Controls.Add(materialCard17);
-            tabPage7.Location = new Point(4, 44);
-            tabPage7.Margin = new Padding(4, 4, 4, 4);
+            tabPage7.Location = new Point(4, 84);
             tabPage7.Name = "tabPage7";
-            tabPage7.Size = new Size(2011, 1040);
+            tabPage7.Size = new Size(888, 394);
             tabPage7.TabIndex = 6;
             tabPage7.Text = "Leaves";
             tabPage7.UseVisualStyleBackColor = true;
@@ -1165,11 +1111,11 @@
             materialCard17.Dock = DockStyle.Fill;
             materialCard17.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard17.Location = new Point(0, 0);
-            materialCard17.Margin = new Padding(21, 21, 21, 21);
+            materialCard17.Margin = new Padding(14);
             materialCard17.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard17.Name = "materialCard17";
-            materialCard17.Padding = new Padding(21, 21, 21, 21);
-            materialCard17.Size = new Size(2011, 1040);
+            materialCard17.Padding = new Padding(14);
+            materialCard17.Size = new Size(888, 394);
             materialCard17.TabIndex = 0;
             // 
             // dgLeaves
@@ -1196,13 +1142,11 @@
             dgLeaves.DefaultCellStyle = dataGridViewCellStyle18;
             dgLeaves.Dock = DockStyle.Fill;
             dgLeaves.GridColor = Color.FromArgb(231, 229, 255);
-            dgLeaves.Location = new Point(21, 21);
-            dgLeaves.Margin = new Padding(4, 4, 4, 4);
+            dgLeaves.Location = new Point(14, 14);
             dgLeaves.Name = "dgLeaves";
             dgLeaves.RowHeadersVisible = false;
             dgLeaves.RowHeadersWidth = 62;
-            dgLeaves.RowTemplate.Height = 25;
-            dgLeaves.Size = new Size(1969, 998);
+            dgLeaves.Size = new Size(860, 366);
             dgLeaves.TabIndex = 2;
             dgLeaves.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgLeaves.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -1228,12 +1172,11 @@
             // 
             // EmployeeInformationView
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(1350, 729);
+            ClientSize = new Size(900, 486);
             Controls.Add(tabControlMain);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 4, 4, 4);
             Name = "EmployeeInformationView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

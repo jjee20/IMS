@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models.Inventory;
+using PresentationLayer.Views.UserControls;
 using RavenTech_ERP.Views.IViews;
 using ServiceLayer.Services.IRepositories;
 using Syncfusion.WinForms.Controls;
@@ -51,22 +52,22 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadEntityToForm()
         {
-            if(_entity != null)
+            if (_entity != null)
             {
 
-            txtName.Text = _entity.ProductName;
-            txtDescription.Text = _entity.Description;
-            txtBarcode.Text = _entity.Barcode;
-            txtProductCode.Text = _entity.ProductCode;
-            txtProductType.SelectedValue = _entity.ProductTypeId;
-            txtBranch.SelectedValue = _entity.BranchId;
-            txtBrand.Text = _entity.Brand;
-            txtColor.Text = _entity.Color;
-            txtSize.Text = _entity.Size;
-            txtReorderLevel.Text = _entity.ReorderLevel.ToString();
-            txtUOM.SelectedValue = _entity.UnitOfMeasureId;
-            txtDefaultBuyingPrice.Text = _entity.DefaultBuyingPrice.ToString();
-            txtDefaultSellingPrice.Text = _entity.DefaultSellingPrice.ToString();
+                txtName.Text = _entity.ProductName;
+                txtDescription.Text = _entity.Description;
+                txtBarcode.Text = _entity.Barcode;
+                txtProductCode.Text = _entity.ProductCode;
+                txtProductType.SelectedValue = _entity.ProductTypeId;
+                txtBranch.SelectedValue = _entity.BranchId;
+                txtBrand.Text = _entity.Brand;
+                txtColor.Text = _entity.Color;
+                txtSize.Text = _entity.Size;
+                txtReorderLevel.Text = _entity.ReorderLevel.ToString();
+                txtUOM.SelectedValue = _entity.UnitOfMeasureId;
+                txtDefaultBuyingPrice.Text = _entity.DefaultBuyingPrice.ToString();
+                txtDefaultSellingPrice.Text = _entity.DefaultSellingPrice.ToString();
             }
         }
 
@@ -86,8 +87,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Product added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -111,5 +112,19 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void ShowSuccess(string message) =>
             MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        private void btnProductIncrement_Click(object sender, EventArgs e)
+        {
+            using var form = new UpsertProductIncrementView(_unitOfWork, _entity.ProductId);
+            form.ShowDialog();
+        }
+
+        private void labelIncrements_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using var form = new ProductIncrementView(_unitOfWork, _entity.ProductId);
+            var productName = _entity.ProductName;
+            form.lblTitle.Text = $"List of Increments for {productName}";
+            form.ShowDialog();
+        }
     }
 }

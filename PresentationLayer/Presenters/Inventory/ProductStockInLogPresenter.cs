@@ -120,7 +120,7 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProductStockInLogViewModel row)
             {
-                var entity = _unitOfWork.ProductStockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId, includeProperties: "ProductStockInLogLines.Product");
+                var entity = _unitOfWork.ProductStockInLogs.Value.Get(c => c.ProductStockInLogId == row.ProductStockInLogId, includeProperties: "ProductStockInLogLines.Product.ProductIncrements");
                 using (var form = new UpsertProductStockInLogView(_unitOfWork,entity))
                 {
                     form.Text = "Edit Product Stock-In Log";

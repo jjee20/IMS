@@ -28,132 +28,175 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txtFirstName = new MaterialSkin.Controls.MaterialTextBox();
-            txtLastName = new MaterialSkin.Controls.MaterialTextBox();
-            txtEmail = new MaterialSkin.Controls.MaterialTextBox();
-            txtPhone = new MaterialSkin.Controls.MaterialTextBox();
-            btnSave = new MaterialSkin.Controls.MaterialButton();
+            components = new System.ComponentModel.Container();
+            materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            btnSave = new Syncfusion.WinForms.Controls.SfButton();
+            txtPhone = new Syncfusion.Windows.Forms.Tools.MaskedEditBox();
+            autoLabel4 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            txtEmail = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            autoLabel3 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            txtLastName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            autoLabel2 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            txtFirstName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            autoLabel1 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            materialCard1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtPhone).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtEmail).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtLastName).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtFirstName).BeginInit();
             SuspendLayout();
             // 
-            // txtFirstName
+            // materialCard1
             // 
-            txtFirstName.AnimateReadOnly = false;
-            txtFirstName.BorderStyle = BorderStyle.None;
-            txtFirstName.Depth = 0;
-            txtFirstName.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtFirstName.Hint = "First Name";
-            txtFirstName.LeadingIcon = null;
-            txtFirstName.Location = new Point(75, 77);
-            txtFirstName.MaxLength = 50;
-            txtFirstName.MouseState = MaterialSkin.MouseState.OUT;
-            txtFirstName.Multiline = false;
-            txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new Size(203, 50);
-            txtFirstName.TabIndex = 0;
-            txtFirstName.Text = "";
-            txtFirstName.TrailingIcon = null;
-            // 
-            // txtLastName
-            // 
-            txtLastName.AnimateReadOnly = false;
-            txtLastName.BorderStyle = BorderStyle.None;
-            txtLastName.Depth = 0;
-            txtLastName.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtLastName.Hint = "Last Name";
-            txtLastName.LeadingIcon = null;
-            txtLastName.Location = new Point(284, 77);
-            txtLastName.MaxLength = 50;
-            txtLastName.MouseState = MaterialSkin.MouseState.OUT;
-            txtLastName.Multiline = false;
-            txtLastName.Name = "txtLastName";
-            txtLastName.Size = new Size(203, 50);
-            txtLastName.TabIndex = 1;
-            txtLastName.Text = "";
-            txtLastName.TrailingIcon = null;
-            // 
-            // txtEmail
-            // 
-            txtEmail.AnimateReadOnly = false;
-            txtEmail.BorderStyle = BorderStyle.None;
-            txtEmail.Depth = 0;
-            txtEmail.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtEmail.Hint = "Email";
-            txtEmail.LeadingIcon = null;
-            txtEmail.Location = new Point(75, 151);
-            txtEmail.MaxLength = 50;
-            txtEmail.MouseState = MaterialSkin.MouseState.OUT;
-            txtEmail.Multiline = false;
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(412, 50);
-            txtEmail.TabIndex = 2;
-            txtEmail.Text = "";
-            txtEmail.TrailingIcon = null;
-            // 
-            // txtPhone
-            // 
-            txtPhone.AnimateReadOnly = false;
-            txtPhone.BorderStyle = BorderStyle.None;
-            txtPhone.Depth = 0;
-            txtPhone.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtPhone.Hint = "Phone Number";
-            txtPhone.LeadingIcon = null;
-            txtPhone.Location = new Point(75, 225);
-            txtPhone.MaxLength = 50;
-            txtPhone.MouseState = MaterialSkin.MouseState.OUT;
-            txtPhone.Multiline = false;
-            txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(412, 50);
-            txtPhone.TabIndex = 3;
-            txtPhone.Text = "";
-            txtPhone.TrailingIcon = null;
+            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(btnSave);
+            materialCard1.Controls.Add(txtPhone);
+            materialCard1.Controls.Add(autoLabel4);
+            materialCard1.Controls.Add(txtEmail);
+            materialCard1.Controls.Add(autoLabel3);
+            materialCard1.Controls.Add(txtLastName);
+            materialCard1.Controls.Add(autoLabel2);
+            materialCard1.Controls.Add(txtFirstName);
+            materialCard1.Controls.Add(autoLabel1);
+            materialCard1.Depth = 0;
+            materialCard1.Dock = DockStyle.Fill;
+            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard1.Location = new Point(2, 2);
+            materialCard1.Margin = new Padding(14);
+            materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard1.Name = "materialCard1";
+            materialCard1.Padding = new Padding(14);
+            materialCard1.Size = new Size(424, 246);
+            materialCard1.TabIndex = 14;
             // 
             // btnSave
             // 
-            btnSave.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnSave.Depth = 0;
-            btnSave.HighEmphasis = true;
-            btnSave.Icon = null;
-            btnSave.Location = new Point(219, 306);
-            btnSave.Margin = new Padding(4, 6, 4, 6);
-            btnSave.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSave.BackColor = SystemColors.HotTrack;
+            btnSave.Dock = DockStyle.Bottom;
+            btnSave.Font = new Font("Segoe UI Semibold", 9F);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(14, 204);
             btnSave.Name = "btnSave";
-            btnSave.NoAccentTextColor = Color.Empty;
-            btnSave.Size = new Size(129, 36);
-            btnSave.TabIndex = 4;
-            btnSave.Text = "save changes";
-            btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnSave.UseAccentColor = false;
-            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Size = new Size(396, 28);
+            btnSave.Style.BackColor = SystemColors.HotTrack;
+            btnSave.Style.ForeColor = Color.White;
+            btnSave.TabIndex = 22;
+            btnSave.Text = "Save Changes";
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
+            // 
+            // txtPhone
+            // 
+            txtPhone.AccessibilityEnabled = true;
+            txtPhone.BeforeTouchSize = new Size(396, 23);
+            txtPhone.Dock = DockStyle.Top;
+            txtPhone.Lines = new string[]
+    {
+    "(    )-(   )-(    )"
+    };
+            txtPhone.Location = new Point(14, 143);
+            txtPhone.Mask = "(####)-(###)-(####)";
+            txtPhone.MaxLength = 19;
+            txtPhone.Modified = false;
+            txtPhone.Name = "txtPhone";
+            txtPhone.Size = new Size(396, 23);
+            txtPhone.TabIndex = 21;
+            // 
+            // autoLabel4
+            // 
+            autoLabel4.Dock = DockStyle.Top;
+            autoLabel4.Location = new Point(14, 128);
+            autoLabel4.Name = "autoLabel4";
+            autoLabel4.Size = new Size(63, 15);
+            autoLabel4.TabIndex = 20;
+            autoLabel4.Text = "Phone No.";
+            // 
+            // txtEmail
+            // 
+            txtEmail.BeforeTouchSize = new Size(396, 23);
+            txtEmail.Dock = DockStyle.Top;
+            txtEmail.Location = new Point(14, 105);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(396, 23);
+            txtEmail.TabIndex = 19;
+            // 
+            // autoLabel3
+            // 
+            autoLabel3.Dock = DockStyle.Top;
+            autoLabel3.Location = new Point(14, 90);
+            autoLabel3.Name = "autoLabel3";
+            autoLabel3.Size = new Size(36, 15);
+            autoLabel3.TabIndex = 18;
+            autoLabel3.Text = "Email";
+            // 
+            // txtLastName
+            // 
+            txtLastName.BeforeTouchSize = new Size(396, 23);
+            txtLastName.Dock = DockStyle.Top;
+            txtLastName.Location = new Point(14, 67);
+            txtLastName.Name = "txtLastName";
+            txtLastName.Size = new Size(396, 23);
+            txtLastName.TabIndex = 17;
+            // 
+            // autoLabel2
+            // 
+            autoLabel2.Dock = DockStyle.Top;
+            autoLabel2.Location = new Point(14, 52);
+            autoLabel2.Name = "autoLabel2";
+            autoLabel2.Size = new Size(63, 15);
+            autoLabel2.TabIndex = 16;
+            autoLabel2.Text = "Last Name";
+            // 
+            // txtFirstName
+            // 
+            txtFirstName.BeforeTouchSize = new Size(396, 23);
+            txtFirstName.Dock = DockStyle.Top;
+            txtFirstName.Location = new Point(14, 29);
+            txtFirstName.Name = "txtFirstName";
+            txtFirstName.Size = new Size(396, 23);
+            txtFirstName.TabIndex = 15;
+            // 
+            // autoLabel1
+            // 
+            autoLabel1.Dock = DockStyle.Top;
+            autoLabel1.Location = new Point(14, 14);
+            autoLabel1.Name = "autoLabel1";
+            autoLabel1.Size = new Size(64, 15);
+            autoLabel1.TabIndex = 14;
+            autoLabel1.Text = "First Name";
             // 
             // EditAccountInformationView
             // 
-            AcceptButton = btnSave;
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(563, 419);
-            Controls.Add(btnSave);
-            Controls.Add(txtPhone);
-            Controls.Add(txtEmail);
-            Controls.Add(txtLastName);
-            Controls.Add(txtFirstName);
+            ClientSize = new Size(428, 250);
+            Controls.Add(materialCard1);
             Name = "EditAccountInformationView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Edit Account Information";
+            materialCard1.ResumeLayout(false);
+            materialCard1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtPhone).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtEmail).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtLastName).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtFirstName).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialTextBox txtFirstName;
-        private MaterialSkin.Controls.MaterialTextBox txtLastName;
-        private MaterialSkin.Controls.MaterialTextBox txtEmail;
-        private MaterialSkin.Controls.MaterialTextBox txtPhone;
-        private MaterialSkin.Controls.MaterialButton btnSave;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private Syncfusion.WinForms.Controls.SfButton btnSave;
+        private Syncfusion.Windows.Forms.Tools.MaskedEditBox txtPhone;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel4;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtEmail;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel3;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtLastName;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel2;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtFirstName;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel1;
     }
 }

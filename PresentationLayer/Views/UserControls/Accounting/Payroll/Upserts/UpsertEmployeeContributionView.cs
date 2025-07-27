@@ -65,8 +65,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Employee Contribution added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }

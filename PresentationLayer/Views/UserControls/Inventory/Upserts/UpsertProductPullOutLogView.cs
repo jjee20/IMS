@@ -69,11 +69,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 {
                     var productPullOutLogLines = new ProductPullOutLogLineViewModel
                     {
+                        ProductPullOutLogLinesId = item.ProductPullOutLogLinesId,
                         DateAdded = item.DateAdded,
                         ProductId = item.ProductId,
                         ProductName = item.Product.ProductName,
                         Quantity = item.StockQuantity,
-                        UnitCost = item.Product.DefaultBuyingPrice,
+                        UnitCost = item.UnitCost == 0 ? item.Product.DefaultBuyingPrice + (item.Product.ProductIncrements.Any() ? item.Product.ProductIncrements.Sum(c => c.Increment) : 0) : item.UnitCost,
                         Delete = Resources.delete
                     };
                     _entityViewModel.Add(productPullOutLogLines);
@@ -117,7 +118,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
             var productId = (int)txtProduct.SelectedValue;
 
-            // Get total stock-in quantity
+            // Get total pull-out quantity
             var productStockInQty = _unitOfWork.ProductStockInLogLines.Value
                 .GetAll(c => c.ProductId == productId)
                 .Sum(c => (int?)c.StockQuantity) ?? 0;
@@ -176,7 +177,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 return;
             }
 
-            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
+            var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue, includeProperties: "ProductIncrements");
 
             var productInLogLines = new ProductPullOutLogLineViewModel()
             {
@@ -184,7 +185,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 ProductId = (int)txtProduct.SelectedValue,
                 ProductName = txtProduct.Text,
                 Quantity = Convert.ToDouble(txtQuantity.Text),
-                UnitCost = product.DefaultBuyingPrice,
+                UnitCost = product.DefaultBuyingPrice + (product.ProductIncrements.Any() ? product.ProductIncrements.Sum(c => c.Increment) : 0),
                 Delete = Resources.delete
             };
 
@@ -207,8 +208,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
         private void ComputeTotal()
         {
-
-            txtTotal.Text = _entityViewModel.Sum(c => c.TotalCost).ToString("N2");
+            txtTotal.Text = _entityViewModel.Sum(c => c.TotalCost).ToString("C2");
         }
         private void dgList_CellClick(object sender, CellClickEventArgs e)
         {
@@ -241,16 +241,15 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                     UpdateEntityFromForm();
             if (_entity.ProductPullOutLogId > 0)
             {
-                var result = MessageBox.Show("Are you sure you want to update the stock in logs?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var result = MessageBox.Show("Are you sure you want to update the pull-out logs?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-
-                    var oldLines = await _unitOfWork.ProductPullOutLogLines.Value.GetAllAsync(c => c.ProductPullOutId == _entity.ProductPullOutLogId, tracked: true);
-                    _unitOfWork.ProductPullOutLogLines.Value.RemoveRange(oldLines);
-                    await _unitOfWork.SaveAsync();
-
-                    _unitOfWork.ProductPullOutLogs.Value.Update(_entity);
-                    message = "Product stock-in updated successfully.";
+                    _unitOfWork.ProductPullOutLogs.Value.UpdateWithChildren(_entity, p => p.ProductPullOutLogLines, p => p.ProductPullOutLogLinesId);
+                    message = "Product pull-out updated successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
             else
@@ -259,7 +258,11 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 if (result == DialogResult.Yes)
                 {
                     await _unitOfWork.ProductPullOutLogs.Value.AddAsync(_entity);
-                     message = "Product stock-in log added successfully.";
+                     message = "Product pull-out log added successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
 
@@ -279,18 +282,48 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             _entity.ReceivedBy = txtReceivedBy.Text;
             _entity.ProjectId = (int)txtProject.SelectedValue;
 
-            if(_entity.ProductPullOutLogLines == null)
+            if (_entity.ProductPullOutLogLines == null)
             {
                 _entity.ProductPullOutLogLines = new List<ProductPullOutLogLines>();
             }
 
-            _entity.ProductPullOutLogLines = _entityViewModel.Select(c => new ProductPullOutLogLines
+            foreach (var updatedLine in _entityViewModel)
             {
-                ProductPullOutId = _entity.ProductPullOutLogId,
-                DateAdded = c.DateAdded,
-                ProductId = c.ProductId,
-                StockQuantity = c.Quantity,
-            }).ToList();
+                var existing = _entity.ProductPullOutLogLines
+                    .FirstOrDefault(l => l.ProductPullOutLogLinesId == updatedLine.ProductPullOutLogLinesId);
+
+                if (existing != null)
+                {
+                    // Update existing
+                    existing.DateAdded = updatedLine.DateAdded;
+                    existing.ProductId = updatedLine.ProductId;
+                    existing.StockQuantity = updatedLine.Quantity;
+                    existing.UnitCost = updatedLine.UnitCost;
+                }
+                else
+                {
+                    // Add new
+                    _entity.ProductPullOutLogLines.Add(new ProductPullOutLogLines
+                    {
+                        ProductPullOutId = _entity.ProductPullOutLogId,
+                        DateAdded = updatedLine.DateAdded,
+                        ProductId = updatedLine.ProductId,
+                        StockQuantity = updatedLine.Quantity,
+                        UnitCost = updatedLine.UnitCost
+                    });
+                }
+            }
+
+            // Remove lines no longer in the view model
+            var toRemove = _entity.ProductPullOutLogLines
+                .Where(l => !_entityViewModel.Any(vm => vm.ProductPullOutLogLinesId == l.ProductPullOutLogLinesId))
+                .ToList();
+
+            foreach (var line in toRemove)
+            {
+                _entity.ProductPullOutLogLines.Remove(line);
+            }
         }
+
     }
 }

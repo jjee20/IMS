@@ -94,6 +94,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 {
                     var projectLine = new PurchaseOrderLineViewModel
                     {
+                        PurchaseOrderLineId = line.PurchaseOrderLineId,
                         ProductId = (int)line.ProductId,
                         ProductName = line.ProductName,
                         Price = line.Price,
@@ -121,6 +122,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.DeliveryDate = (DateTimeOffset)txtDeliveryDate.Value;
             _entity.PurchaseTypeId = (int)txtPurchaseType.SelectedValue;
             _entity.Remarks = txtRemarks.Text.Trim();
+
             _entity.Amount = double.TryParse(txtAmount.Text, out var amountValue) ? amountValue : 0.0;
             _entity.SubTotal = double.TryParse(txtSubtotal.Text, out var subtotalValue) ? subtotalValue : 0.0;
             _entity.Discount = double.TryParse(txtDiscount.Text, out var discountValue) ? discountValue : 0.0;
@@ -128,19 +130,53 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.Freight = double.TryParse(txtFreight.Text, out var freightValue) ? freightValue : 0.0;
             _entity.Total = double.TryParse(txtOverallTotal.Text, out var totalValue) ? totalValue : 0.0;
 
-            _entity.PurchaseOrderLines = _projectsLines.Select(c => new PurchaseOrderLine
+            // Update or add PurchaseOrderLines
+            foreach (var updatedLine in _projectsLines)
             {
-                PurchaseOrderId = _entity.PurchaseOrderId,
-                ProductId = c.ProductId,
-                ProductName = c.ProductName,
-                Price = c.Price,
-                Quantity = c.Quantity,
-                DiscountPercentage = c.DiscountPercentage,
-                SubTotal = c.SubTotal
-            }).ToList();
+                var existing = _entity.PurchaseOrderLines
+                    .FirstOrDefault(pol => pol.PurchaseOrderLineId == updatedLine.PurchaseOrderLineId);
 
+                if (existing != null)
+                {
+                    // Update existing line
+                    existing.ProductId = updatedLine.ProductId;
+                    existing.ProductName = updatedLine.ProductName;
+                    existing.Price = updatedLine.Price;
+                    existing.Quantity = updatedLine.Quantity;
+                    existing.DiscountPercentage = updatedLine.DiscountPercentage;
+                    existing.SubTotal = updatedLine.SubTotal;
+                }
+                else
+                {
+                    // Add new line
+                    _entity.PurchaseOrderLines.Add(new PurchaseOrderLine
+                    {
+                        PurchaseOrderId = _entity.PurchaseOrderId,
+                        ProductId = updatedLine.ProductId,
+                        ProductName = updatedLine.ProductName,
+                        Price = updatedLine.Price,
+                        Quantity = updatedLine.Quantity,
+                        DiscountPercentage = updatedLine.DiscountPercentage,
+                        SubTotal = updatedLine.SubTotal
+                    });
+                }
+            }
+
+            // Remove lines not in _projectsLines
+            var toRemove = _entity.PurchaseOrderLines
+                .Where(pol => !_projectsLines.Any(p => p.PurchaseOrderLineId == pol.PurchaseOrderLineId))
+                .ToList();
+
+            foreach (var line in toRemove)
+            {
+                _entity.PurchaseOrderLines.Remove(line);
+            }
+
+            // Optional: recalculate total from updated lines
             var total = _projectsLines.Sum(c => c.SubTotal);
+            _entity.SubTotal = total;
         }
+
 
         private void ShowSuccess(string message) =>
             MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -169,13 +205,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 var result = MessageBox.Show("Are you sure you want to update the project?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-
-                    var oldLines = await _unitOfWork.PurchaseOrderLine.Value.GetAllAsync(c => c.PurchaseOrderId == _entity.PurchaseOrderId, tracked: true);
-                    _unitOfWork.PurchaseOrderLine.Value.RemoveRange(oldLines);
-                    await _unitOfWork.SaveAsync();
-
-                    _unitOfWork.PurchaseOrder.Value.Update(_entity);
+                    _unitOfWork.PurchaseOrder.Value.UpdateWithChildren(_entity, c => c.PurchaseOrderLines, cd => cd.PurchaseOrderLineId);
                     message = "PurchaseOrder updated successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
             else
@@ -185,6 +220,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 {
                     await _unitOfWork.PurchaseOrder.Value.AddAsync(_entity);
                     message = "PurchaseOrder added successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
 
@@ -258,7 +297,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             }
             else
             {
-                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue);
+                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue, includeProperties: "ProductIncrements");
                 if (product == null)
                 {
                     MessageBox.Show("Selected product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -267,7 +306,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
                 productId = product.ProductId;
                 productName = product.ProductName;
-                price = product.DefaultSellingPrice;
+                price = product.DefaultSellingPrice + (product.ProductIncrements.Any() ? product.ProductIncrements.Sum(c => c.Increment) : 0);
 
                 if (_projectsLines.Any(c => c.ProductId == productId))
                 {

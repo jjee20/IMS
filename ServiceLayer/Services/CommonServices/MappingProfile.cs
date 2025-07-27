@@ -18,6 +18,8 @@ namespace ServiceLayer.Services.CommonServices
     {
         public MappingProfile() {
             #region Inventory
+            CreateMap<CustomerType, CustomerTypeViewModel>()
+                .ReverseMap();
             CreateMap<Department, DepartmentViewModel>()
                 .ReverseMap();
             CreateMap<BillType, BillTypeViewModel>()
@@ -39,6 +41,9 @@ namespace ServiceLayer.Services.CommonServices
             CreateMap<UnitOfMeasure, UnitOfMeasureViewModel>()
                 .ReverseMap();
             CreateMap<JobPosition, JobPositionViewModel>()
+                .ReverseMap();
+            CreateMap<ProductIncrements, ProductIncrementViewModel>()
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToLongDateString()))
                 .ReverseMap();
             CreateMap<ProductStockInLogs, ProductStockInLogViewModel>()
                 .ForMember(dest => dest.DeliveredDate, opt => opt.MapFrom(src => src.DeliveredDate.Value.ToLongDateString()))
@@ -115,6 +120,7 @@ namespace ServiceLayer.Services.CommonServices
                 .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.PaymentDate.Date.ToLongDateString()))
                 .ReverseMap();
             CreateMap<Product, ProductViewModel>()
+                .ForMember(dest => dest.IncrementPrice, opt => opt.MapFrom(src => src.ProductIncrements.Sum(c => c.Increment)))
                 .ForMember(dest => dest.UnitOfMeasure, opt => opt.MapFrom(src => src.UnitOfMeasure.UnitOfMeasureName))
                 .ForMember(dest => dest.Branch, opt => opt.MapFrom(src => src.Branch.BranchName ?? "{Needs Update}"))
                 .ReverseMap();

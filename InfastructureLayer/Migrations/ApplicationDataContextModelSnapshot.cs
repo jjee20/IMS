@@ -683,17 +683,11 @@ namespace InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectLineId"));
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
                     b.Property<string>("DeliveredBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeliveredDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<double>("DiscountAmount")
-                        .HasColumnType("float");
 
                     b.Property<double>("DiscountPercentage")
                         .HasColumnType("float");
@@ -719,9 +713,6 @@ namespace InfastructureLayer.Migrations
 
                     b.Property<DateTime?>("ReceivedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<double>("SubTotal")
-                        .HasColumnType("float");
 
                     b.HasKey("ProjectLineId");
 
@@ -888,14 +879,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "587A4D5B-33EB-469C-ADE6-EC9F95C651AD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c47f77ac-c4f6-4d18-a0f0-00914e993bfc",
+                            ConcurrencyStamp = "65067cca-2b20-4058-b69e-0b46da3582c0",
                             Department = 0,
                             Email = "super@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPER@ADMIN.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBRVfvsL8xP5erHsC/tPIsqF+N8PYXlQ5n82YBS19CCY4ZS4ljFQTo4qB631J+atLw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEI6qFHHqEeKah5X/yEwkFKPC3G6YpB7k3wjyueDK06Vv8OOfgCWjALG4Ek60j4HIw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3,4]",
@@ -906,14 +897,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "FB38CC93-2B1E-4444-9A48-396E4C28E190",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1238b037-31e2-4f0a-8de1-e49fdccd44b5",
+                            ConcurrencyStamp = "f24e5b31-917c-4d28-b547-b6c3cbfe0152",
                             Department = 1,
                             Email = "inventory@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "INVENTORY@USER.COM",
                             NormalizedUserName = "inventory",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAfjxgmX8VwR8ThjaqqoxjVyPALCwACPSVe2cAQnEEz2UUREfMrZShQsmmNaUtqXvw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIrfcEy8MYKHIsgqkn4dn1ZOVpu34Wlm3jrPjjyIDvNSsOwKcEpDojQ5YpuJLCNFCQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -924,14 +915,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "6628DE62-AF21-4389-B612-623A1A17637C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "24a418d5-d4fc-40a9-9ad3-980e91f2da5b",
+                            ConcurrencyStamp = "620ef739-df50-40d2-be11-8182dd5c7e6c",
                             Department = 2,
                             Email = "payroll@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PAYROLL@USER.COM",
                             NormalizedUserName = "payroll",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN2fo4QaTcD7pZ5fH8mODdAfDOFDFHiuWuqkB+xD/qgsFlKG5ZH7HM/QsxOE322T9Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC0knRAJ28P1sDDej/JC2+CmABNh9QR3A1aPb5fiazcIgw8Euu/r2Z+yJRqXkFmINQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[0,1,2,3]",
@@ -942,14 +933,14 @@ namespace InfastructureLayer.Migrations
                         {
                             Id = "2878BA2F-5B81-4BD3-A830-6733C6536AAF",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ba1b0f2-1ba5-44e8-a321-ce538e8acc3c",
+                            ConcurrencyStamp = "fb2212d5-f86c-4b23-a1e0-f425a28ae9bf",
                             Department = 2,
                             Email = "guest@user.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@USER.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGoqXxOONtdWWu79cXMwdblV1R4uHBx+ZG86y7FMzHo72IWEIYoN8voq2NHMmpzh6g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELoNvBeFBXimR9RhFB0QjhWVWat5CgBGrmAKWsNuBuDlDCp26cyCAOMPwnxeQTSs2Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TaskRoles = "[3]",
@@ -1433,6 +1424,30 @@ namespace InfastructureLayer.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Inventory.ProductIncrements", b =>
+                {
+                    b.Property<int>("ProductIncrementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductIncrementId"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Increment")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductIncrementId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductIncrements");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductPullOutLogLines", b =>
                 {
                     b.Property<int>("ProductPullOutLogLinesId")
@@ -1454,6 +1469,9 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("StockQuantity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("UnitCost")
                         .HasColumnType("float");
 
                     b.HasKey("ProductPullOutLogLinesId");
@@ -1525,6 +1543,9 @@ namespace InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("StockQuantity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("UnitCost")
                         .HasColumnType("float");
 
                     b.HasKey("ProductStockInLogLinesId");
@@ -3341,6 +3362,17 @@ namespace InfastructureLayer.Migrations
                     b.Navigation("UnitOfMeasure");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Inventory.ProductIncrements", b =>
+                {
+                    b.HasOne("DomainLayer.Models.Inventory.Product", "Product")
+                        .WithMany("ProductIncrements")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductPullOutLogLines", b =>
                 {
                     b.HasOne("DomainLayer.Models.Inventory.Product", "Product")
@@ -3761,6 +3793,8 @@ namespace InfastructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Product", b =>
                 {
+                    b.Navigation("ProductIncrements");
+
                     b.Navigation("ProductPullOutLogs");
 
                     b.Navigation("ProductStockInLogs");

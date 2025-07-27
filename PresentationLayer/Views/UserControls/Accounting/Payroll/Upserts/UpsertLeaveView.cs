@@ -89,8 +89,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Leave added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -100,8 +100,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.EmployeeId = (int)txtEmployee.SelectedValue;
             _entity.LeaveType = (LeaveType)txtLeaveType.SelectedValue;
             _entity.Status = (Status)txtLeaveType.SelectedValue;
-            _entity.StartDate = txtStartDate.Value;
-            _entity.EndDate = txtEndDate.Value;
+            _entity.StartDate = (DateTime)txtStartDate.Value;
+            _entity.EndDate = (DateTime)txtEndDate.Value;
             _entity.Other = txtOther.Text;
             _entity.Notes = txtNotes.Text;
         }

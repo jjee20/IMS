@@ -9,6 +9,7 @@ namespace DomainLayer.ViewModels.Inventory
 {
     public class ProductStockInLogLineViewModel
     {
+        public int ProductStockInLogLinesId { get; set; }
         public DateTime DateAdded { get; set; }
         public int ProductId { get; set; }
         public string ProductName { get; set; }

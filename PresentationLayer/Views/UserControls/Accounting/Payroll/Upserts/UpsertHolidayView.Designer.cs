@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpsertHolidayView));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(UpsertHolidayView));
             autoLabel1 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             txtName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             txtDescription = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
@@ -38,17 +37,18 @@
             autoLabel3 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             autoLabel4 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             txtHolidayType = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
-            txtDate = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
+            materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            txtDate = new Syncfusion.WinForms.Input.SfDateTimeEdit();
             ((System.ComponentModel.ISupportInitialize)txtName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtDescription).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtHolidayType).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)txtDate).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)txtDate.Calendar).BeginInit();
+            materialCard1.SuspendLayout();
             SuspendLayout();
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(98, 78);
+            autoLabel1.Dock = DockStyle.Top;
+            autoLabel1.Location = new Point(14, 60);
             autoLabel1.Name = "autoLabel1";
             autoLabel1.Size = new Size(39, 15);
             autoLabel1.TabIndex = 0;
@@ -56,23 +56,26 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(100, 23);
-            txtName.Location = new Point(180, 72);
+            txtName.BeforeTouchSize = new Size(240, 23);
+            txtName.Dock = DockStyle.Top;
+            txtName.Location = new Point(14, 75);
             txtName.Name = "txtName";
-            txtName.Size = new Size(206, 23);
+            txtName.Size = new Size(283, 23);
             txtName.TabIndex = 1;
             // 
             // txtDescription
             // 
-            txtDescription.BeforeTouchSize = new Size(100, 23);
-            txtDescription.Location = new Point(180, 183);
+            txtDescription.BeforeTouchSize = new Size(240, 23);
+            txtDescription.Dock = DockStyle.Top;
+            txtDescription.Location = new Point(14, 151);
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(206, 23);
+            txtDescription.Size = new Size(283, 23);
             txtDescription.TabIndex = 3;
             // 
             // autoLabel2
             // 
-            autoLabel2.Location = new Point(98, 186);
+            autoLabel2.Dock = DockStyle.Top;
+            autoLabel2.Location = new Point(14, 136);
             autoLabel2.Name = "autoLabel2";
             autoLabel2.Size = new Size(67, 15);
             autoLabel2.TabIndex = 2;
@@ -80,17 +83,24 @@
             // 
             // btnSave
             // 
+            btnSave.BackColor = SystemColors.HotTrack;
+            btnSave.Dock = DockStyle.Bottom;
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
-            btnSave.Location = new Point(194, 240);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(14, 207);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(96, 28);
+            btnSave.Size = new Size(283, 28);
+            btnSave.Style.BackColor = SystemColors.HotTrack;
+            btnSave.Style.ForeColor = Color.White;
             btnSave.TabIndex = 4;
             btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
             // autoLabel3
             // 
-            autoLabel3.Location = new Point(98, 113);
+            autoLabel3.Dock = DockStyle.Top;
+            autoLabel3.Location = new Point(14, 14);
             autoLabel3.Name = "autoLabel3";
             autoLabel3.Size = new Size(31, 15);
             autoLabel3.TabIndex = 5;
@@ -98,7 +108,8 @@
             // 
             // autoLabel4
             // 
-            autoLabel4.Location = new Point(98, 148);
+            autoLabel4.Dock = DockStyle.Top;
+            autoLabel4.Location = new Point(14, 98);
             autoLabel4.Name = "autoLabel4";
             autoLabel4.Size = new Size(31, 15);
             autoLabel4.TabIndex = 6;
@@ -107,75 +118,57 @@
             // txtHolidayType
             // 
             txtHolidayType.BackColor = Color.FromArgb(255, 255, 255);
+            txtHolidayType.Dock = DockStyle.Top;
             txtHolidayType.ForeColor = Color.FromArgb(68, 68, 68);
-            txtHolidayType.Height = 23;
-            txtHolidayType.Location = new Point(180, 110);
+            txtHolidayType.Height = 31;
+            txtHolidayType.Location = new Point(14, 29);
             txtHolidayType.Name = "txtHolidayType";
-            txtHolidayType.Size = new Size(206, 23);
+            txtHolidayType.Size = new Size(283, 31);
             txtHolidayType.TabIndex = 7;
             txtHolidayType.Text = "~Select~";
             txtHolidayType.TextBoxHeight = 23;
             txtHolidayType.ThemeName = "Office2016Colorful";
             // 
+            // materialCard1
+            // 
+            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(txtDescription);
+            materialCard1.Controls.Add(autoLabel2);
+            materialCard1.Controls.Add(txtDate);
+            materialCard1.Controls.Add(autoLabel4);
+            materialCard1.Controls.Add(txtName);
+            materialCard1.Controls.Add(autoLabel1);
+            materialCard1.Controls.Add(txtHolidayType);
+            materialCard1.Controls.Add(autoLabel3);
+            materialCard1.Controls.Add(btnSave);
+            materialCard1.Depth = 0;
+            materialCard1.Dock = DockStyle.Fill;
+            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard1.Location = new Point(2, 2);
+            materialCard1.Margin = new Padding(14);
+            materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard1.Name = "materialCard1";
+            materialCard1.Padding = new Padding(14);
+            materialCard1.Size = new Size(311, 249);
+            materialCard1.TabIndex = 9;
+            // 
             // txtDate
             // 
-            txtDate.BorderColor = Color.Empty;
-            // 
-            // 
-            // 
-            txtDate.Calendar.AllowMultipleSelection = false;
-            txtDate.Calendar.BottomHeight = 25;
-            txtDate.Calendar.DayNamesFont = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtDate.Calendar.DaysFont = new Font("Segoe UI", 9F);
-            txtDate.Calendar.Dock = DockStyle.Fill;
-            txtDate.Calendar.Font = new Font("Segoe UI", 9F);
-            txtDate.Calendar.ForeColor = SystemColors.ControlText;
-            txtDate.Calendar.HeaderFont = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtDate.Calendar.Location = new Point(0, 0);
-            txtDate.Calendar.MetroColor = Color.FromArgb(22, 165, 220);
-            txtDate.Calendar.Name = "monthCalendar";
-            txtDate.Calendar.Size = new Size(187, 174);
-            txtDate.Calendar.SizeToFit = true;
-            txtDate.Calendar.TabIndex = 0;
-            // 
-            // 
-            // 
-            txtDate.Calendar.NoneButton.AutoSize = true;
-            txtDate.Calendar.NoneButton.Location = new Point(115, 0);
-            txtDate.Calendar.NoneButton.Text = "None";
-            // 
-            // 
-            // 
-            txtDate.Calendar.TodayButton.AutoSize = true;
-            txtDate.Calendar.TodayButton.Location = new Point(0, 0);
-            txtDate.Calendar.TodayButton.Text = "Today";
-            txtDate.CalendarForeColor = SystemColors.ControlText;
-            txtDate.CalendarSize = new Size(189, 176);
-            txtDate.DropDownImage = null;
-            txtDate.Font = new Font("Segoe UI", 9F);
-            txtDate.Location = new Point(180, 148);
-            txtDate.MetroColor = Color.FromArgb(22, 165, 220);
-            txtDate.MinValue = new DateTime(0L);
+            txtDate.DateTimeIcon = null;
+            txtDate.Dock = DockStyle.Top;
+            txtDate.Location = new Point(14, 113);
             txtDate.Name = "txtDate";
-            txtDate.Size = new Size(206, 20);
+            txtDate.Size = new Size(283, 23);
             txtDate.TabIndex = 8;
-            txtDate.Value = new DateTime(2025, 4, 10, 22, 35, 0, 415);
+            txtDate.ToolTipText = "";
             // 
             // UpsertHolidayView
             // 
             AcceptButton = btnSave;
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(484, 341);
-            Controls.Add(txtDate);
-            Controls.Add(txtHolidayType);
-            Controls.Add(autoLabel4);
-            Controls.Add(autoLabel3);
-            Controls.Add(btnSave);
-            Controls.Add(txtDescription);
-            Controls.Add(autoLabel2);
-            Controls.Add(txtName);
-            Controls.Add(autoLabel1);
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(315, 253);
+            Controls.Add(materialCard1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "UpsertHolidayView";
             ShowIcon = false;
@@ -186,10 +179,9 @@
             ((System.ComponentModel.ISupportInitialize)txtName).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtDescription).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtHolidayType).EndInit();
-            ((System.ComponentModel.ISupportInitialize)txtDate.Calendar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)txtDate).EndInit();
+            materialCard1.ResumeLayout(false);
+            materialCard1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -202,6 +194,7 @@
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel3;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel4;
         private Syncfusion.Windows.Forms.Tools.ComboBoxAdv txtHolidayType;
-        private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv txtDate;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private Syncfusion.WinForms.Input.SfDateTimeEdit txtDate;
     }
 }

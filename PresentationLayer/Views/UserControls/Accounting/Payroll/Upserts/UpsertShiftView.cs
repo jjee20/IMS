@@ -56,8 +56,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Shift added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -65,8 +65,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         private void UpdateEntityFromForm()
         {
             _entity.RegularHours = Convert.ToDouble(txtRegularHours.Text);
-            _entity.StartTime = txtStartTime.Value.TimeOfDay;
-            _entity.EndTime = txtEndTime.Value.TimeOfDay;
+            _entity.StartTime = txtStartTime.Value.Value.TimeOfDay;
+            _entity.EndTime = txtEndTime.Value.Value.TimeOfDay;
             _entity.ShiftName = txtName.Text;
         }
 

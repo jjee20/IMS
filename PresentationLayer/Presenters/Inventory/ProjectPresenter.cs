@@ -60,7 +60,7 @@ namespace PresentationLayer.Presenters
         {
             if (e.DataRow?.RowType == RowType.DefaultRow && e.DataRow.RowData is ProjectViewModel row)
             {
-                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId, includeProperties: "ProjectLines.Product,ProjectLines.Product.UnitOfMeasure,ProjectLines.Product.ProductType,ProductPullOutLogs,ProductPullOutLogs.ProductPullOutLogLines");
+                var entity = _unitOfWork.Project.Value.Get(c => c.ProjectId == row.ProjectId, includeProperties: "ProjectLines.Product.ProductIncrements,ProjectLines.Product.UnitOfMeasure,ProjectLines.Product.ProductType,ProductPullOutLogs,ProductPullOutLogs.ProductPullOutLogLines");
                 using (var form = new ProjectInformationView(row, _unitOfWork, entity))
                 {
                     if (form.ShowDialog() == DialogResult.OK)
