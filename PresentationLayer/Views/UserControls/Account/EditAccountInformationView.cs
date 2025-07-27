@@ -24,43 +24,67 @@ namespace RavenTech_ERP.Views.UserControls.Account
             InitializeComponent();
             _unitOfWork = unitOfWork;
             _applicationUser = applicationUser;
+
+            LoadInformation();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void LoadInformation()
+        {
+            if(_applicationUser != null)
+            {
+                if(_applicationUser.Profile != null)
+                {
+                    txtFirstName.Text = _applicationUser.Profile.FirstName;
+                    txtLastName.Text = _applicationUser.Profile.LastName;
+                }
+                txtEmail.Text = _applicationUser.Email;
+                txtPhone.Text = _applicationUser.PhoneNumber;
+            }
+        }
+
+        private async void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
                 if (_applicationUser != null)
                 {
-                    if (_applicationUser.Profile == null) _applicationUser.Profile = new UserProfile();
+                    var existingProfile = _unitOfWork.UserProfile.Value.Get(
+                        c => c.ApplicationUserId == _applicationUser.Id,
+                        tracked: true
+                    );
 
-                    _applicationUser.Profile.FirstName = txtFirstName.Text.Trim().ToUpper();
-                    _applicationUser.Profile.LastName = txtLastName.Text.Trim().ToUpper();
-                    _applicationUser.PhoneNumber = txtPhone.Text.Trim();
-                    _applicationUser.Email = txtEmail.Text.Trim();
-
-                    _unitOfWork.ApplicationUser.Value.Update(_applicationUser);
-
-                    if(_applicationUser.Profile != null)
+                    if (existingProfile != null)
                     {
-                        _applicationUser.Profile.FirstName = txtFirstName.Text.Trim().ToUpper();
-                        _applicationUser.Profile.LastName = txtLastName.Text.Trim().ToUpper();
-                        _unitOfWork.UserProfile.Value.Update(_applicationUser.Profile);
+                        existingProfile.FirstName = txtFirstName.Text.Trim().ToUpper();
+                        existingProfile.LastName = txtLastName.Text.Trim().ToUpper();
+                        existingProfile.ApplicationUserId = _applicationUser.Id;
+                        _applicationUser.Profile = existingProfile;
                     }
                     else
                     {
-                        _applicationUser.Profile = new UserProfile
+                        var newProfile = new UserProfile
                         {
                             FirstName = txtFirstName.Text.Trim().ToUpper(),
-                            LastName = txtLastName.Text.Trim().ToUpper()
+                            LastName = txtLastName.Text.Trim().ToUpper(),
+                            ApplicationUserId = _applicationUser.Id
                         };
-                        _unitOfWork.UserProfile.Value.Add(_applicationUser.Profile);
+                        _applicationUser.Profile = newProfile;
                     }
 
-                        _unitOfWork.Save();
+                    _applicationUser.PhoneNumber = txtPhone.Text.Trim();
+                    _applicationUser.Email = txtEmail.Text.Trim();
+
+                    _unitOfWork.ApplicationUser.Value.UpdateWithChild(
+                        _applicationUser, c => c.Profile, cd => cd.UserProfileId);
+
+                    await _unitOfWork.SaveAsync();
 
                     MessageBox.Show("Account information updated successfully", "Update");
+
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
+
             }
             catch (Exception ex)
             {

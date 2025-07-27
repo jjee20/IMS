@@ -43,20 +43,18 @@
             // autoLabel1
             // 
             autoLabel1.Dock = DockStyle.Top;
-            autoLabel1.Location = new Point(14, 14);
-            autoLabel1.Margin = new Padding(4, 0, 4, 0);
+            autoLabel1.Location = new Point(9, 9);
             autoLabel1.Name = "autoLabel1";
-            autoLabel1.Size = new Size(49, 25);
+            autoLabel1.Size = new Size(31, 15);
             autoLabel1.TabIndex = 0;
             autoLabel1.Text = "Date";
             // 
             // autoLabel2
             // 
             autoLabel2.Dock = DockStyle.Top;
-            autoLabel2.Location = new Point(14, 80);
-            autoLabel2.Margin = new Padding(4, 0, 4, 0);
+            autoLabel2.Location = new Point(9, 51);
             autoLabel2.Name = "autoLabel2";
-            autoLabel2.Size = new Size(91, 25);
+            autoLabel2.Size = new Size(61, 15);
             autoLabel2.TabIndex = 2;
             autoLabel2.Text = "Increment";
             // 
@@ -66,10 +64,9 @@
             btnSave.Dock = DockStyle.Bottom;
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(14, 222);
-            btnSave.Margin = new Padding(4, 5, 4, 5);
+            btnSave.Location = new Point(9, 147);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(465, 47);
+            btnSave.Size = new Size(309, 31);
             btnSave.Style.BackColor = SystemColors.HotTrack;
             btnSave.Style.ForeColor = Color.White;
             btnSave.TabIndex = 4;
@@ -81,21 +78,23 @@
             // 
             txtDate.DateTimeIcon = null;
             txtDate.Dock = DockStyle.Top;
-            txtDate.Location = new Point(14, 39);
+            txtDate.Location = new Point(9, 24);
+            txtDate.Margin = new Padding(2);
             txtDate.Name = "txtDate";
-            txtDate.Size = new Size(465, 41);
+            txtDate.Size = new Size(309, 27);
             txtDate.TabIndex = 5;
             txtDate.ToolTipText = "";
             // 
             // txtIncrement
             // 
             txtIncrement.AccessibilityEnabled = true;
-            txtIncrement.BeforeTouchSize = new Size(465, 31);
+            txtIncrement.BeforeTouchSize = new Size(309, 23);
             txtIncrement.Dock = DockStyle.Top;
             txtIncrement.DoubleValue = 1D;
-            txtIncrement.Location = new Point(14, 105);
+            txtIncrement.Location = new Point(9, 66);
+            txtIncrement.Margin = new Padding(2);
             txtIncrement.Name = "txtIncrement";
-            txtIncrement.Size = new Size(465, 31);
+            txtIncrement.Size = new Size(309, 23);
             txtIncrement.TabIndex = 6;
             txtIncrement.Text = "1.00";
             // 
@@ -111,22 +110,21 @@
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
             materialCard1.Location = new Point(2, 2);
-            materialCard1.Margin = new Padding(14);
+            materialCard1.Margin = new Padding(9);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(493, 283);
+            materialCard1.Padding = new Padding(9);
+            materialCard1.Size = new Size(327, 187);
             materialCard1.TabIndex = 7;
             // 
             // UpsertProductIncrementView
             // 
             AcceptButton = btnSave;
-            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(497, 287);
+            ClientSize = new Size(331, 191);
             Controls.Add(materialCard1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
             Name = "UpsertProductIncrementView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

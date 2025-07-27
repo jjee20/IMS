@@ -57,6 +57,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
              .GroupBy(pl => pl.ProductId)
              .Select(group => {
                  var first = group.First(); // Representative line for shared product data
+                 var defaultBuyingPrice = first.Product?.DefaultBuyingPrice ?? 0;
 
                  var totalQty = group.Sum(pl => pl.Quantity);
                  var totalAmount = group.Sum(pl => pl.Price * pl.Quantity);
@@ -64,13 +65,15 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                     ? first.Product.ProductIncrements.Sum(c => c.Increment)
                     : 0;
                  var sign = increment > 0 ? "+" : (increment < 0 ? "−" : ""); // Use Unicode minus for clarity
-                 var priceInformation = $"{first.Product.DefaultBuyingPrice:C2} ({sign}{Math.Abs(increment):C2})";
+                 var priceInformation = $"{defaultBuyingPrice:C2} ({sign}{Math.Abs(increment):C2})";
 
                  var pullOutLogs = _project.ProductPullOutLogs
                      .SelectMany(log => log.ProductPullOutLogLines)
                      .Where(logLine => logLine.ProductId == first.ProductId);
                  var actualQty = pullOutLogs.Sum(logLine => (double?)logLine.StockQuantity) ?? 0;
                  var actualAmount = pullOutLogs.Sum(logLine => (double?)logLine.TotalCost) ?? 0;
+                 var actualAmountInformation = $"{defaultBuyingPrice * actualQty:C2} ({sign}{Math.Abs(increment * actualQty):C2})";
+
 
                  return new ProjectLineProductViewModel
                  {
@@ -81,7 +84,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                      Qty = Math.Round(totalQty,2),
                      Amount = Math.Round(totalAmount,2),
                      ActualQty = Math.Round(actualQty,2),
-                     ActualAmount = Math.Round(actualAmount, 2)
+                     ActualAmountValue = Math.Round(actualAmount,2),
+                     ActualAmount = actualAmountInformation,
                  };
              })
              .ToList();
@@ -95,7 +99,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             var payroll = PayrollHelper.CalculatePayroll(employees, contributions, _project, DateTime.Parse(startDate), DateTime.Parse(endDate), holidays.ToList());
 
             // Calculate payroll totals
-            var totalPurchase = projectLines.Sum(p => p.ActualAmount);
+            var totalPurchase = projectLines.Sum(p => p.ActualAmountValue);
             txtActualAmount.Text = $"₱{totalPurchase:N2}";
 
             var totalPayroll = payroll.Sum(p => p.NetPay);

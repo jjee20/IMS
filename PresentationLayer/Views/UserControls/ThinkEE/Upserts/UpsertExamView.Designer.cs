@@ -60,66 +60,69 @@
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(13, 44);
-            autoLabel1.Margin = new Padding(4, 0, 4, 0);
+            autoLabel1.Location = new Point(9, 24);
             autoLabel1.Name = "autoLabel1";
-            autoLabel1.Size = new Size(44, 25);
+            autoLabel1.Size = new Size(29, 15);
             autoLabel1.TabIndex = 0;
             autoLabel1.Text = "Title";
             // 
             // txtTitle
             // 
-            txtTitle.BeforeTouchSize = new Size(293, 31);
-            txtTitle.Location = new Point(65, 38);
-            txtTitle.Margin = new Padding(4, 5, 4, 5);
+            txtTitle.BeforeTouchSize = new Size(291, 23);
+            txtTitle.Location = new Point(46, 16);
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(293, 31);
+            txtTitle.Size = new Size(206, 23);
             txtTitle.TabIndex = 1;
             // 
             // autoLabel2
             // 
-            autoLabel2.Location = new Point(378, 44);
-            autoLabel2.Margin = new Padding(4, 0, 4, 0);
+            autoLabel2.Location = new Point(265, 24);
             autoLabel2.Name = "autoLabel2";
-            autoLabel2.Size = new Size(49, 25);
+            autoLabel2.Size = new Size(31, 15);
             autoLabel2.TabIndex = 2;
             autoLabel2.Text = "Date";
             // 
             // btnSave
             // 
+            btnSave.BackColor = SystemColors.HotTrack;
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
-            btnSave.Location = new Point(1196, 22);
-            btnSave.Margin = new Padding(4, 5, 4, 5);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(837, 17);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(137, 47);
+            btnSave.Size = new Size(96, 22);
+            btnSave.Style.BackColor = SystemColors.HotTrack;
+            btnSave.Style.ForeColor = Color.White;
             btnSave.TabIndex = 4;
             btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
             // autoLabel3
             // 
-            autoLabel3.Location = new Point(752, 44);
-            autoLabel3.Margin = new Padding(4, 0, 4, 0);
+            autoLabel3.Location = new Point(526, 24);
             autoLabel3.Name = "autoLabel3";
-            autoLabel3.Size = new Size(116, 25);
+            autoLabel3.Size = new Size(77, 15);
             autoLabel3.TabIndex = 5;
             autoLabel3.Text = "Exam Format";
             // 
             // txtDate
             // 
             txtDate.DateTimeIcon = null;
-            txtDate.Location = new Point(434, 36);
+            txtDate.Location = new Point(304, 19);
+            txtDate.Margin = new Padding(2, 2, 2, 2);
             txtDate.Name = "txtDate";
-            txtDate.Size = new Size(293, 33);
+            txtDate.Size = new Size(205, 20);
             txtDate.TabIndex = 8;
             txtDate.ToolTipText = "";
             // 
             // txtExamFormat
             // 
             txtExamFormat.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            txtExamFormat.Location = new Point(875, 33);
+            txtExamFormat.Location = new Point(612, 17);
+            txtExamFormat.Margin = new Padding(2, 2, 2, 2);
             txtExamFormat.Name = "txtExamFormat";
-            txtExamFormat.Size = new Size(293, 36);
+            txtExamFormat.Padding = new Padding(5, 0, 0, 0);
+            txtExamFormat.Size = new Size(205, 22);
             txtExamFormat.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
             txtExamFormat.TabIndex = 9;
             txtExamFormat.TabStop = false;
@@ -170,10 +173,11 @@
             dgList.Columns.Add(gridImageColumn1);
             dgList.Dock = DockStyle.Fill;
             dgList.Location = new Point(0, 0);
+            dgList.Margin = new Padding(2, 2, 2, 2);
             dgList.Name = "dgList";
             dgList.NewItemPlaceholderPosition = Syncfusion.Data.NewItemPlaceholderPosition.AtBeginning;
             dgList.PreviewRowHeight = 42;
-            dgList.Size = new Size(1346, 635);
+            dgList.Size = new Size(943, 381);
             stackedHeaderRow1.Name = "StackedHeaderRow1";
             stackedColumn1.ChildColumns = "Choice1,Choice2,Choice3,Choice4";
             stackedColumn1.HeaderText = "Choices";
@@ -199,9 +203,10 @@
             // 
             panel1.Controls.Add(dgList);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(2, 92);
+            panel1.Location = new Point(1, 55);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1346, 635);
+            panel1.Size = new Size(943, 381);
             panel1.TabIndex = 12;
             // 
             // panel2
@@ -214,21 +219,21 @@
             panel2.Controls.Add(btnSave);
             panel2.Controls.Add(autoLabel3);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(2, 2);
+            panel2.Location = new Point(1, 1);
+            panel2.Margin = new Padding(2, 2, 2, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1346, 90);
+            panel2.Size = new Size(943, 54);
             panel2.TabIndex = 13;
             // 
             // UpsertExamView
             // 
             AcceptButton = btnSave;
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1350, 729);
+            ClientSize = new Size(945, 437);
             Controls.Add(panel1);
             Controls.Add(panel2);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
             Name = "UpsertExamView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

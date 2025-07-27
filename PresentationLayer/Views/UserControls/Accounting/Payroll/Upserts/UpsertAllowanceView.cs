@@ -76,8 +76,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Allowance added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -86,8 +86,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         {
             _entity.EmployeeId = (int)txtEmployee.SelectedValue;
             _entity.AllowanceType = (DomainLayer.Enums.AllowanceType)txtAllowanceType.SelectedValue;
-            _entity.StartDate = txtStartDate.Value;
-            _entity.EndDate = txtEndDate.Value;
+            _entity.StartDate = (DateTime)txtStartDate.Value;
+            _entity.EndDate = (DateTime)txtEndDate.Value;
             _entity.Amount = !string.IsNullOrEmpty(txtAmount.Text) ? Convert.ToDouble(txtAmount.Text) : 0;
             _entity.Description = txtDescription.Text;
         }

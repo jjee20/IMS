@@ -51,10 +51,9 @@
             btnSave.Dock = DockStyle.Bottom;
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(14, 213);
-            btnSave.Margin = new Padding(4, 5, 4, 5);
+            btnSave.Location = new Point(9, 143);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(425, 47);
+            btnSave.Size = new Size(285, 31);
             btnSave.Style.BackColor = SystemColors.HotTrack;
             btnSave.Style.ForeColor = Color.White;
             btnSave.TabIndex = 3;
@@ -65,48 +64,44 @@
             // txtFullPayment
             // 
             txtFullPayment.AccessibilityEnabled = true;
-            txtFullPayment.BeforeTouchSize = new Size(265, 35);
+            txtFullPayment.BeforeTouchSize = new Size(178, 23);
             txtFullPayment.Checked = true;
             txtFullPayment.CheckState = CheckState.Checked;
             txtFullPayment.Dock = DockStyle.Top;
             txtFullPayment.ImageCheckBoxSize = new Size(19, 19);
-            txtFullPayment.Location = new Point(14, 126);
-            txtFullPayment.Margin = new Padding(4, 5, 4, 5);
+            txtFullPayment.Location = new Point(9, 83);
             txtFullPayment.Name = "txtFullPayment";
-            txtFullPayment.Size = new Size(265, 35);
+            txtFullPayment.Size = new Size(178, 23);
             txtFullPayment.TabIndex = 2;
             txtFullPayment.Text = "Full Payment?";
             // 
             // autoLabel3
             // 
             autoLabel3.Dock = DockStyle.Top;
-            autoLabel3.Location = new Point(14, 70);
-            autoLabel3.Margin = new Padding(4, 0, 4, 0);
+            autoLabel3.Location = new Point(9, 45);
             autoLabel3.Name = "autoLabel3";
-            autoLabel3.Size = new Size(77, 25);
+            autoLabel3.Size = new Size(51, 15);
             autoLabel3.TabIndex = 65;
             autoLabel3.Text = "Amount";
             // 
             // txtAmount
             // 
             txtAmount.AccessibilityEnabled = true;
-            txtAmount.BeforeTouchSize = new Size(425, 31);
+            txtAmount.BeforeTouchSize = new Size(285, 23);
             txtAmount.Dock = DockStyle.Top;
             txtAmount.DoubleValue = 1D;
-            txtAmount.Location = new Point(14, 95);
-            txtAmount.Margin = new Padding(4, 5, 4, 5);
+            txtAmount.Location = new Point(9, 60);
             txtAmount.Name = "txtAmount";
-            txtAmount.Size = new Size(425, 31);
+            txtAmount.Size = new Size(285, 23);
             txtAmount.TabIndex = 1;
             txtAmount.Text = "1.00";
             // 
             // autoLabel2
             // 
             autoLabel2.Dock = DockStyle.Top;
-            autoLabel2.Location = new Point(14, 14);
-            autoLabel2.Margin = new Padding(4, 0, 4, 0);
+            autoLabel2.Location = new Point(9, 9);
             autoLabel2.Name = "autoLabel2";
-            autoLabel2.Size = new Size(49, 25);
+            autoLabel2.Size = new Size(31, 15);
             autoLabel2.TabIndex = 63;
             autoLabel2.Text = "Type";
             // 
@@ -116,11 +111,9 @@
             txtPaymentType.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains;
             txtPaymentType.Dock = DockStyle.Top;
             txtPaymentType.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-            txtPaymentType.Location = new Point(14, 39);
-            txtPaymentType.Margin = new Padding(4, 5, 4, 5);
+            txtPaymentType.Location = new Point(9, 24);
             txtPaymentType.Name = "txtPaymentType";
-            txtPaymentType.Padding = new Padding(10, 0, 0, 0);
-            txtPaymentType.Size = new Size(425, 31);
+            txtPaymentType.Size = new Size(285, 21);
             txtPaymentType.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
             txtPaymentType.TabIndex = 0;
             txtPaymentType.TabStop = false;
@@ -128,19 +121,17 @@
             // txtPaymentDate
             // 
             txtPaymentDate.DateTimeIcon = null;
-            txtPaymentDate.Location = new Point(199, -39);
-            txtPaymentDate.Margin = new Padding(4, 5, 4, 5);
+            txtPaymentDate.Location = new Point(133, -26);
             txtPaymentDate.Name = "txtPaymentDate";
-            txtPaymentDate.Size = new Size(331, 38);
+            txtPaymentDate.Size = new Size(221, 25);
             txtPaymentDate.TabIndex = 61;
             txtPaymentDate.ToolTipText = "";
             // 
             // autoLabel1
             // 
-            autoLabel1.Location = new Point(43, -25);
-            autoLabel1.Margin = new Padding(4, 0, 4, 0);
+            autoLabel1.Location = new Point(29, -17);
             autoLabel1.Name = "autoLabel1";
-            autoLabel1.Size = new Size(49, 25);
+            autoLabel1.Size = new Size(31, 15);
             autoLabel1.TabIndex = 60;
             autoLabel1.Text = "Date";
             // 
@@ -148,10 +139,9 @@
             // 
             linkPaymentList.AutoSize = true;
             linkPaymentList.Dock = DockStyle.Right;
-            linkPaymentList.Location = new Point(279, 126);
-            linkPaymentList.Margin = new Padding(4, 0, 4, 0);
+            linkPaymentList.Location = new Point(187, 83);
             linkPaymentList.Name = "linkPaymentList";
-            linkPaymentList.Size = new Size(160, 25);
+            linkPaymentList.Size = new Size(107, 15);
             linkPaymentList.TabIndex = 4;
             linkPaymentList.TabStop = true;
             linkPaymentList.Text = "Show Payment List";
@@ -172,22 +162,21 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(2, 2);
-            materialCard1.Margin = new Padding(14);
+            materialCard1.Location = new Point(1, 1);
+            materialCard1.Margin = new Padding(9, 9, 9, 9);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(453, 274);
+            materialCard1.Padding = new Padding(9, 9, 9, 9);
+            materialCard1.Size = new Size(303, 183);
             materialCard1.TabIndex = 68;
             // 
             // UpsertPaymentReceiveView
             // 
             AcceptButton = btnSave;
-            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(457, 278);
+            ClientSize = new Size(305, 185);
             Controls.Add(materialCard1);
-            Margin = new Padding(4, 5, 4, 5);
             Name = "UpsertPaymentReceiveView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

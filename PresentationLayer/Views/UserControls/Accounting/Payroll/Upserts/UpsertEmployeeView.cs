@@ -42,7 +42,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private void LoadShifts()
         {
-            var entity = _unitOfWork.Shift.Value.GetAll(); 
+            var entity = _unitOfWork.Shift.Value.GetAll();
             txtShift.DataSource = entity.ToList();
             txtShift.DisplayMember = "ShiftName";
             txtShift.ValueMember = "ShiftId";
@@ -107,15 +107,15 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Employee added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
 
         private void UpdateEntityFromForm()
         {
-            _entity.DepartmentId= (int)txtDepartment.SelectedValue;
+            _entity.DepartmentId = (int)txtDepartment.SelectedValue;
             _entity.JobPositionId = (int)txtJobPosition.SelectedValue;
             _entity.ShiftId = (int)txtShift.SelectedValue;
             _entity.Gender = (Gender)txtGender.SelectedValue;
@@ -126,11 +126,11 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.Email = txtEmail.Text;
             _entity.FirstName = txtFirstName.Text;
             _entity.LastName = txtLastName.Text;
-            _entity.DateOfBirth = txtBirthDate.Value;
+            _entity.DateOfBirth = (DateTime)txtBirthDate.Value;
             _entity.isDeducted = txtIsDeducted.Checked;
             _entity.isActive = txtIsActive.Checked;
-            _entity.ContractStartDate = txtStartDate.Value;
-            _entity.ContractEndDate = txtEndDate.Value;
+            _entity.ContractStartDate = (DateTime)txtStartDate.Value;
+            _entity.ContractEndDate = (DateTime)txtEndDate.Value;
         }
 
         private void ShowSuccess(string message) =>

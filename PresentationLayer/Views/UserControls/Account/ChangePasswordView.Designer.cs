@@ -28,97 +28,125 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePasswordView));
-            txtOldPassword = new MaterialSkin.Controls.MaterialTextBox();
-            txtNewPassword = new MaterialSkin.Controls.MaterialTextBox();
-            txtConfirmNewPassword = new MaterialSkin.Controls.MaterialTextBox();
-            btnSave = new MaterialSkin.Controls.MaterialButton();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePasswordView));
+            materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            btnSave = new Syncfusion.WinForms.Controls.SfButton();
+            txtConfirmNewPassword = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            autoLabel3 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            txtNewPassword = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            autoLabel2 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            txtOldPassword = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            autoLabel1 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            materialCard1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtConfirmNewPassword).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtNewPassword).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtOldPassword).BeginInit();
             SuspendLayout();
             // 
-            // txtOldPassword
+            // materialCard1
             // 
-            txtOldPassword.AnimateReadOnly = false;
-            txtOldPassword.BorderStyle = BorderStyle.None;
-            txtOldPassword.Depth = 0;
-            txtOldPassword.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtOldPassword.Hint = "Old Password";
-            txtOldPassword.LeadingIcon = null;
-            txtOldPassword.Location = new Point(65, 88);
-            txtOldPassword.MaxLength = 50;
-            txtOldPassword.MouseState = MaterialSkin.MouseState.OUT;
-            txtOldPassword.Multiline = false;
-            txtOldPassword.Name = "txtOldPassword";
-            txtOldPassword.Size = new Size(338, 50);
-            txtOldPassword.TabIndex = 0;
-            txtOldPassword.Text = "";
-            txtOldPassword.TrailingIcon = null;
-            // 
-            // txtNewPassword
-            // 
-            txtNewPassword.AnimateReadOnly = false;
-            txtNewPassword.BorderStyle = BorderStyle.None;
-            txtNewPassword.Depth = 0;
-            txtNewPassword.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtNewPassword.Hint = "New Password";
-            txtNewPassword.LeadingIcon = null;
-            txtNewPassword.Location = new Point(65, 166);
-            txtNewPassword.MaxLength = 50;
-            txtNewPassword.MouseState = MaterialSkin.MouseState.OUT;
-            txtNewPassword.Multiline = false;
-            txtNewPassword.Name = "txtNewPassword";
-            txtNewPassword.Size = new Size(338, 50);
-            txtNewPassword.TabIndex = 1;
-            txtNewPassword.Text = "";
-            txtNewPassword.TrailingIcon = null;
-            // 
-            // txtConfirmNewPassword
-            // 
-            txtConfirmNewPassword.AnimateReadOnly = false;
-            txtConfirmNewPassword.BorderStyle = BorderStyle.None;
-            txtConfirmNewPassword.Depth = 0;
-            txtConfirmNewPassword.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtConfirmNewPassword.Hint = "Confirm New Password";
-            txtConfirmNewPassword.LeadingIcon = null;
-            txtConfirmNewPassword.Location = new Point(65, 244);
-            txtConfirmNewPassword.MaxLength = 50;
-            txtConfirmNewPassword.MouseState = MaterialSkin.MouseState.OUT;
-            txtConfirmNewPassword.Multiline = false;
-            txtConfirmNewPassword.Name = "txtConfirmNewPassword";
-            txtConfirmNewPassword.Size = new Size(338, 50);
-            txtConfirmNewPassword.TabIndex = 2;
-            txtConfirmNewPassword.Text = "";
-            txtConfirmNewPassword.TrailingIcon = null;
+            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(btnSave);
+            materialCard1.Controls.Add(txtConfirmNewPassword);
+            materialCard1.Controls.Add(autoLabel3);
+            materialCard1.Controls.Add(txtNewPassword);
+            materialCard1.Controls.Add(autoLabel2);
+            materialCard1.Controls.Add(txtOldPassword);
+            materialCard1.Controls.Add(autoLabel1);
+            materialCard1.Depth = 0;
+            materialCard1.Dock = DockStyle.Fill;
+            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard1.Location = new Point(2, 2);
+            materialCard1.Margin = new Padding(14);
+            materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard1.Name = "materialCard1";
+            materialCard1.Padding = new Padding(14);
+            materialCard1.Size = new Size(305, 215);
+            materialCard1.TabIndex = 0;
             // 
             // btnSave
             // 
-            btnSave.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnSave.Depth = 0;
-            btnSave.HighEmphasis = true;
-            btnSave.Icon = null;
-            btnSave.Location = new Point(170, 326);
-            btnSave.Margin = new Padding(4, 6, 4, 6);
-            btnSave.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSave.BackColor = SystemColors.HotTrack;
+            btnSave.Dock = DockStyle.Bottom;
+            btnSave.Font = new Font("Segoe UI Semibold", 9F);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(14, 173);
             btnSave.Name = "btnSave";
-            btnSave.NoAccentTextColor = Color.Empty;
-            btnSave.Size = new Size(129, 36);
-            btnSave.TabIndex = 3;
-            btnSave.Text = "save changes";
-            btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnSave.UseAccentColor = false;
-            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Size = new Size(277, 28);
+            btnSave.Style.BackColor = SystemColors.HotTrack;
+            btnSave.Style.ForeColor = Color.White;
+            btnSave.TabIndex = 17;
+            btnSave.Text = "Save Changes";
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
+            // 
+            // txtConfirmNewPassword
+            // 
+            txtConfirmNewPassword.BeforeTouchSize = new Size(396, 23);
+            txtConfirmNewPassword.Dock = DockStyle.Top;
+            txtConfirmNewPassword.Location = new Point(14, 105);
+            txtConfirmNewPassword.Name = "txtConfirmNewPassword";
+            txtConfirmNewPassword.PasswordChar = '●';
+            txtConfirmNewPassword.Size = new Size(277, 23);
+            txtConfirmNewPassword.TabIndex = 16;
+            txtConfirmNewPassword.Text = "textBoxExt3";
+            txtConfirmNewPassword.UseSystemPasswordChar = true;
+            // 
+            // autoLabel3
+            // 
+            autoLabel3.Dock = DockStyle.Top;
+            autoLabel3.Location = new Point(14, 90);
+            autoLabel3.Name = "autoLabel3";
+            autoLabel3.Size = new Size(131, 15);
+            autoLabel3.TabIndex = 13;
+            autoLabel3.Text = "Confirm New Password";
+            // 
+            // txtNewPassword
+            // 
+            txtNewPassword.BeforeTouchSize = new Size(396, 23);
+            txtNewPassword.Dock = DockStyle.Top;
+            txtNewPassword.Location = new Point(14, 67);
+            txtNewPassword.Name = "txtNewPassword";
+            txtNewPassword.PasswordChar = '●';
+            txtNewPassword.Size = new Size(277, 23);
+            txtNewPassword.TabIndex = 15;
+            txtNewPassword.Text = "textBoxExt2";
+            txtNewPassword.UseSystemPasswordChar = true;
+            // 
+            // autoLabel2
+            // 
+            autoLabel2.Dock = DockStyle.Top;
+            autoLabel2.Location = new Point(14, 52);
+            autoLabel2.Name = "autoLabel2";
+            autoLabel2.Size = new Size(84, 15);
+            autoLabel2.TabIndex = 12;
+            autoLabel2.Text = "New Password";
+            // 
+            // txtOldPassword
+            // 
+            txtOldPassword.BeforeTouchSize = new Size(396, 23);
+            txtOldPassword.Dock = DockStyle.Top;
+            txtOldPassword.Location = new Point(14, 29);
+            txtOldPassword.Name = "txtOldPassword";
+            txtOldPassword.Size = new Size(277, 23);
+            txtOldPassword.TabIndex = 14;
+            // 
+            // autoLabel1
+            // 
+            autoLabel1.Dock = DockStyle.Top;
+            autoLabel1.Location = new Point(14, 14);
+            autoLabel1.Name = "autoLabel1";
+            autoLabel1.Size = new Size(79, 15);
+            autoLabel1.TabIndex = 11;
+            autoLabel1.Text = "Old Password";
             // 
             // ChangePasswordView
             // 
             AcceptButton = btnSave;
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(468, 450);
-            Controls.Add(btnSave);
-            Controls.Add(txtConfirmNewPassword);
-            Controls.Add(txtNewPassword);
-            Controls.Add(txtOldPassword);
+            ClientSize = new Size(309, 219);
+            Controls.Add(materialCard1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ChangePasswordView";
             ShowIcon = false;
@@ -126,15 +154,23 @@
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
             Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             Text = "Change Password";
+            materialCard1.ResumeLayout(false);
+            materialCard1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtConfirmNewPassword).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtNewPassword).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtOldPassword).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialTextBox txtOldPassword;
-        private MaterialSkin.Controls.MaterialTextBox txtNewPassword;
-        private MaterialSkin.Controls.MaterialTextBox txtConfirmNewPassword;
-        private MaterialSkin.Controls.MaterialButton btnSave;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private Syncfusion.WinForms.Controls.SfButton btnSave;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtConfirmNewPassword;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel3;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtNewPassword;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel2;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtOldPassword;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel1;
     }
 }

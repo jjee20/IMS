@@ -18,6 +18,8 @@ namespace ServiceLayer.Services.CommonServices
     {
         public MappingProfile() {
             #region Inventory
+            CreateMap<CustomerType, CustomerTypeViewModel>()
+                .ReverseMap();
             CreateMap<Department, DepartmentViewModel>()
                 .ReverseMap();
             CreateMap<BillType, BillTypeViewModel>()

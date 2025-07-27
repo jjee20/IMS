@@ -76,8 +76,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Deduction added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -86,7 +86,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         {
             _entity.EmployeeId = (int)txtEmployee.SelectedValue;
             _entity.DeductionType = (DomainLayer.Enums.DeductionType)txtDeductionType.SelectedValue;
-            _entity.DateDeducted = txtDate.Value;
+            _entity.DateDeducted = (DateTime)txtDate.Value;
             _entity.Amount = !string.IsNullOrEmpty(txtAmount.Text) ? Convert.ToDouble(txtAmount.Text) : 0;
             _entity.Description = txtDescription.Text;
         }

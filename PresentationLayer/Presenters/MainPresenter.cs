@@ -16,6 +16,7 @@ using RavenTech_ERP.Presenters.Inventory;
 using RavenTech_ERP.Presenters.ThinkEE;
 using RavenTech_ERP.Properties;
 using RavenTech_ERP.Views.IViews;
+using RavenTech_ERP.Views.IViews.Account;
 using RavenTech_ERP.Views.IViews.Accounting;
 using RavenTech_ERP.Views.IViews.Accounting.Payroll;
 using RavenTech_ERP.Views.IViews.Inventory;
@@ -36,7 +37,7 @@ namespace RavenTech_ERP.Presenters
     {
         private readonly IMainForm _mainForm; 
         private readonly IUnityContainer _container;
-        private ThinkEEDashboardPresenter? _thinkEEDashboardsPresenter;
+        private ThinkEEDashboardPresenter? _thinkEEDashboardPresenter;
         private AvailableExamPresenter? _availableExamsPresenter;
         private ProjectDashboardPresenter? _projectDashboardPresenter;
         private ExamPresenter? _examPresenter;
@@ -49,7 +50,7 @@ namespace RavenTech_ERP.Presenters
         private CustomerTypePresenter? _customerTypePresenter;
         private CustomerPresenter? _customerPresenter;
         private PayrollPresenter? _payrollPresenter;
-        private RegisterPresenter? _registerPresenter;
+        private RegisterAccountPresenter? _registerPresenter;
         private ProfilePresenter? _profilePresenter;
         private ProductMonitoringPresenter? _productMonitoringPresenter;
         private DashboardPresenter? _dashboardPresenter;
@@ -156,8 +157,8 @@ namespace RavenTech_ERP.Presenters
         private void ThinkEEDashboardsEvent(object? sender, EventArgs e)
         {
             IThinkEEDashboardView view = ChildManager<ThinkEEDashboardView>.GetChildInstance((MainForm)_mainForm);
-            if (_thinkEEDashboardsPresenter == null || ((Form)view).IsDisposed)
-                _thinkEEDashboardsPresenter = new ThinkEEDashboardPresenter(view, _container.Resolve<IUnitOfWork>());
+            if (_thinkEEDashboardPresenter == null || ((Form)view).IsDisposed)
+                _thinkEEDashboardPresenter = new ThinkEEDashboardPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 
@@ -259,9 +260,9 @@ namespace RavenTech_ERP.Presenters
 
         private void RegisterAccountEvent(object? sender, EventArgs e)
         {
-            IRegisterView view = (IRegisterView)ChildManager<RegisterView>.GetChildInstance((MainForm)_mainForm);
+            IRegisterAccountView view = (IRegisterAccountView)ChildManager<RegisterAccountView>.GetChildInstance((MainForm)_mainForm);
             if (_registerPresenter == null || ((Form)view).IsDisposed)
-                _registerPresenter = new RegisterPresenter(view, _container.Resolve<IUnitOfWork>());
+                _registerPresenter = new RegisterAccountPresenter(view, _container.Resolve<IUnitOfWork>());
             ((Form)view).BringToFront();
         }
 

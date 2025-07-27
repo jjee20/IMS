@@ -15,5 +15,7 @@ namespace DomainLayer.ViewModels.AccountViewModels
         public string Email { get; set; }
         public string Username { get; set; }
         public string TaskRoles { get; set; }
+        public byte[] Edit { get; set; }
+        public byte[] Delete { get; set; }
     }
 }
