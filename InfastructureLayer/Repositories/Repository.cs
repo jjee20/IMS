@@ -213,10 +213,20 @@ namespace InfastructureLayer.Repositories
                 throw new InvalidOperationException("Could not find foreign key property on child entity.");
 
             // Now use a compiled lambda or manually filter after materialization
+            var propertyName = parentNavProp.Name; // ← Safe: always has a value
+            var propInfo = typeof(TChild).GetProperty(propertyName);
+
+            if (propInfo == null)
+                throw new InvalidOperationException($"Property '{propertyName}' not found on {typeof(TChild)}");
+
             var dbChildren = _db.Set<TChild>()
                 .AsNoTracking()
                 .ToList()
-                .Where(c => parentNavProp.PropertyInfo.GetValue(c)?.Equals(parentKeyValue) == true)
+                .Where(c =>
+                {
+                    var value = propInfo.GetValue(c);
+                    return value != null && value.Equals(parentKeyValue);
+                })
                 .ToList();
 
             var trackedChildren = _db.ChangeTracker.Entries<TChild>()

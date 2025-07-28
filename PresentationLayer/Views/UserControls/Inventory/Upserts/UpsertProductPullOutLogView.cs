@@ -305,7 +305,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                     // Add new
                     _entity.ProductPullOutLogLines.Add(new ProductPullOutLogLines
                     {
-                        ProductPullOutId = _entity.ProductPullOutLogId,
+                        ProductPullOutLogId = _entity.ProductPullOutLogId,
                         DateAdded = updatedLine.DateAdded,
                         ProductId = updatedLine.ProductId,
                         StockQuantity = updatedLine.Quantity,

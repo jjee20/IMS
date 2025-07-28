@@ -280,7 +280,7 @@
             // 
             // txtReceivedBy
             // 
-            txtReceivedBy.BeforeTouchSize = new Size(488, 23);
+            txtReceivedBy.BeforeTouchSize = new Size(280, 21);
             txtReceivedBy.Dock = DockStyle.Fill;
             txtReceivedBy.Location = new Point(73, 0);
             txtReceivedBy.Name = "txtReceivedBy";
@@ -331,7 +331,7 @@
             // 
             // txtDeliveredBy
             // 
-            txtDeliveredBy.BeforeTouchSize = new Size(488, 23);
+            txtDeliveredBy.BeforeTouchSize = new Size(280, 21);
             txtDeliveredBy.Dock = DockStyle.Fill;
             txtDeliveredBy.Location = new Point(72, 0);
             txtDeliveredBy.Name = "txtDeliveredBy";
@@ -391,7 +391,7 @@
             // 
             // txtNotes
             // 
-            txtNotes.BeforeTouchSize = new Size(488, 23);
+            txtNotes.BeforeTouchSize = new Size(280, 21);
             txtNotes.Dock = DockStyle.Left;
             txtNotes.Location = new Point(495, 18);
             txtNotes.Multiline = true;
@@ -444,6 +444,7 @@
             btnSave.TabIndex = 4;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
             // materialCard2
             // 
