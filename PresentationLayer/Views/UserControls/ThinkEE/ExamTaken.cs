@@ -325,20 +325,7 @@ public partial class ExamTaken : SfForm
         var examResult = _exam.ExamResults
             .FirstOrDefault(x => x.ExamineeId == Settings.Default.User_Id);
 
-        var oldChoices = await _unitOfWork.ExamResultChoice.Value
-           .GetAllAsync(c => c.ExamResultId == examResult.ExamResultId, includeProperties: "ExamResult", tracked: true);
-
-        if (oldChoices.Any())
-        {
-        _unitOfWork.ExamResultChoice.Value.RemoveRange(oldChoices);
-        await _unitOfWork.SaveAsync();
-        }
-
-        if (examResult.SelectedChoices == null)
-            examResult.SelectedChoices = new List<ExamResultChoice>();
-        else
-            examResult.SelectedChoices.Clear();
-
+        examResult.SelectedChoices ??= new List<ExamResultChoice>();
         examResult.ExamStatus = !_examTaken ? DomainLayer.Enums.ExamStatus.Ongoing : DomainLayer.Enums.ExamStatus.Taken;
         examResult.TotalPoints = _questions.Count;
         examResult.Score = correctCount;
@@ -348,12 +335,35 @@ public partial class ExamTaken : SfForm
         foreach (var kvp in _selectedChoices)
         {
             Choice selectedChoice = kvp.Value;
-            examResult.SelectedChoices.Add(new ExamResultChoice
+            // Try to find existing result choice for this question
+            var existingResultChoice = examResult.SelectedChoices
+                .FirstOrDefault(rc => rc.QuestionId == selectedChoice.QuestionId);
+
+            if (existingResultChoice != null)
             {
-                QuestionId = selectedChoice.QuestionId,
-                ChoiceId = selectedChoice.ChoiceId
-            });
+                // Update ChoiceId if different
+                if (existingResultChoice.ChoiceId != selectedChoice.ChoiceId)
+                    existingResultChoice.ChoiceId = selectedChoice.ChoiceId;
+            }
+            else
+            {
+                // Add as new if not exists
+                examResult.SelectedChoices.Add(new ExamResultChoice
+                {
+                    QuestionId = selectedChoice.QuestionId,
+                    ChoiceId = selectedChoice.ChoiceId
+                });
+            }
+
+            var toRemove = examResult.SelectedChoices
+                .Where(rc => rc.QuestionId == selectedChoice.QuestionId && rc.ChoiceId != selectedChoice.ChoiceId)
+                .ToList();
+            foreach (var removeChoice in toRemove)
+            {
+                examResult.SelectedChoices.Remove(removeChoice);
+            }    
         }
+
 
         _unitOfWork.ExamResult.Value.UpdateWithChildren(
             examResult,

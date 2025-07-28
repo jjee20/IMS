@@ -9,9 +9,9 @@ namespace DomainLayer.Models.Accounts
     public class ApplicationUser : IdentityUser
     {
         
-        public UserProfile Profile { get; set; }
+        public virtual UserProfile Profile { get; set; }
         public Departments Department { get; set; }
-        public IEnumerable<TaskRoles>? TaskRoles { get; set; }
+        public ICollection<TaskRoles>? TaskRoles { get; set; }
     }
 }
 

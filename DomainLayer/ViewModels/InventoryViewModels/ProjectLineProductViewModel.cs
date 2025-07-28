@@ -17,8 +17,9 @@ public class ProjectLineProductViewModel
     public double RemainingQty => Math.Round(Qty - ActualQty,2); 
     public double PercentageQty => Qty == 0 ? 0 : (ActualQty / Qty) * 100;
     public double Amount { get; set; }
-    public double ActualAmount { get; set; }
-    public double RemainingAmount => Math.Round(Amount - ActualAmount, 2); 
-    public double PercentageAmount => Amount == 0 ? 0 : (ActualAmount / Amount) * 100;
+    public double ActualAmountValue { get; set; }
+    public string ActualAmount { get; set; }
+    public double RemainingAmount => Math.Round(Amount - ActualAmountValue, 2);
+    public double PercentageAmount => Amount == 0 ? 0 : Math.Round((ActualAmountValue / Amount) * 100, 2);
 
 }

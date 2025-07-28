@@ -93,18 +93,18 @@ namespace RavenTech_ERP.Views.UserControls.Accounting.Payroll.Upserts
                 message = "Attendance added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
         private void UpdateEntityFromForm()
         {
             _entity.EmployeeId = (int)txtEmployee.SelectedValue;
-            _entity.Date = txtDate.Value;
+            _entity.Date = (DateTime)txtDate.Value;
             _entity.ProjectId = (int)txtProject.SelectedValue;
-            _entity.TimeIn = txtTimein.Value.TimeOfDay;
-            _entity.TimeOut = txtTimeout.Value.TimeOfDay;
+            _entity.TimeIn = txtTimein.Value.Value.TimeOfDay;
+            _entity.TimeOut = txtTimeout.Value.Value.TimeOfDay;
             _entity.HoursWorked = double.TryParse(txtHoursWorked.Text, out double hours) ? hours : 0;
             _entity.IsHalfDay = txtIsHalfDay.Checked;
             _entity.IsPresent = txtIsPresent.Checked;

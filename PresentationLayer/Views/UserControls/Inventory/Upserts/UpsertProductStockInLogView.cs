@@ -59,6 +59,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 {
                     var productStockInLogLines = new ProductStockInLogLineViewModel
                     {
+                        ProductStockInLogLinesId = item.ProductStockInLogLinesId,
                         DateAdded = item.DateAdded,
                         ProductId = item.ProductId,
                         ProductName = item.Product.ProductName,
@@ -167,13 +168,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 var result = MessageBox.Show("Are you sure you want to update the stock in logs?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-
-                    var oldLines = await _unitOfWork.ProductStockInLogLines.Value.GetAllAsync(c => c.ProductStockInLogId == _entity.ProductStockInLogId, tracked: true);
-                    _unitOfWork.ProductStockInLogLines.Value.RemoveRange(oldLines);
-                    await _unitOfWork.SaveAsync();
-                    
                     _unitOfWork.ProductStockInLogs.Value.UpdateWithChildren(_entity, p => p.ProductStockInLogLines, p => p.ProductStockInLogLinesId);
                     message = "Product stock-in updated successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
             else
@@ -183,6 +183,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 {
                     await _unitOfWork.ProductStockInLogs.Value.AddAsync(_entity);
                      message = "Product stock-in log added successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
 
@@ -194,7 +198,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
 
         private void UpdateEntityFromForm()
         {
-            _entity = new ProductStockInLogs();
+            // ✅ DO NOT overwrite _entity if updating
             _entity.Notes = txtNotes.Text;
             _entity.ProductStatus = (ProductStatus)txtStatus.SelectedValue;
             _entity.DeliveredDate = txtDeliveredDate.Value;
@@ -202,14 +206,44 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             _entity.ReceivedDate = txtReceivedDate.Value;
             _entity.ReceivedBy = txtReceivedBy.Text;
 
-            _entity.ProductStockInLogLines = _entityViewModel.Select(c => new ProductStockInLogLines
+            if (_entity.ProductStockInLogLines == null)
+                _entity.ProductStockInLogLines = new List<ProductStockInLogLines>();
+
+            foreach (var updated in _entityViewModel)
             {
-                ProductStockInLogId = _entity.ProductStockInLogId,
-                DateAdded = c.DateAdded,
-                ProductId = c.ProductId,
-                StockQuantity = c.Quantity,
-                UnitCost = c.UnitCost,
-            }).ToList();
+                var existing = _entity.ProductStockInLogLines
+                    .FirstOrDefault(l => l.ProductStockInLogLinesId == updated.ProductStockInLogLinesId);
+
+                if (existing != null)
+                {
+                    existing.DateAdded = updated.DateAdded;
+                    existing.ProductId = updated.ProductId;
+                    existing.StockQuantity = updated.Quantity;
+                    existing.UnitCost = updated.UnitCost;
+                }
+                else
+                {
+                    _entity.ProductStockInLogLines.Add(new ProductStockInLogLines
+                    {
+                        ProductStockInLogId = _entity.ProductStockInLogId,
+                        DateAdded = updated.DateAdded,
+                        ProductId = updated.ProductId,
+                        StockQuantity = updated.Quantity,
+                        UnitCost = updated.UnitCost
+                    });
+                }
+            }
+
+            // Remove deleted lines
+            var toRemove = _entity.ProductStockInLogLines
+                .Where(l => !_entityViewModel.Any(vm => vm.ProductStockInLogLinesId == l.ProductStockInLogLinesId))
+                .ToList();
+
+            foreach (var line in toRemove)
+            {
+                _entity.ProductStockInLogLines.Remove(line);
+            }
         }
+
     }
 }

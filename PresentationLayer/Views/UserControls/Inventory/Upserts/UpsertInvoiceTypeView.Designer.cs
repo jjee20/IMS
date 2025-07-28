@@ -43,40 +43,36 @@
             // autoLabel1
             // 
             autoLabel1.Dock = DockStyle.Top;
-            autoLabel1.Location = new Point(14, 14);
-            autoLabel1.Margin = new Padding(4, 0, 4, 0);
+            autoLabel1.Location = new Point(9, 9);
             autoLabel1.Name = "autoLabel1";
-            autoLabel1.Size = new Size(59, 25);
+            autoLabel1.Size = new Size(39, 15);
             autoLabel1.TabIndex = 0;
             autoLabel1.Text = "Name";
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(436, 31);
+            txtName.BeforeTouchSize = new Size(293, 23);
             txtName.Dock = DockStyle.Top;
-            txtName.Location = new Point(14, 39);
-            txtName.Margin = new Padding(4, 5, 4, 5);
+            txtName.Location = new Point(9, 24);
             txtName.Name = "txtName";
-            txtName.Size = new Size(436, 31);
+            txtName.Size = new Size(293, 23);
             txtName.TabIndex = 0;
             // 
             // txtDescription
             // 
-            txtDescription.BeforeTouchSize = new Size(436, 31);
+            txtDescription.BeforeTouchSize = new Size(293, 23);
             txtDescription.Dock = DockStyle.Top;
-            txtDescription.Location = new Point(14, 95);
-            txtDescription.Margin = new Padding(4, 5, 4, 5);
+            txtDescription.Location = new Point(9, 62);
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(436, 31);
+            txtDescription.Size = new Size(293, 23);
             txtDescription.TabIndex = 1;
             // 
             // autoLabel2
             // 
             autoLabel2.Dock = DockStyle.Top;
-            autoLabel2.Location = new Point(14, 70);
-            autoLabel2.Margin = new Padding(4, 0, 4, 0);
+            autoLabel2.Location = new Point(9, 47);
             autoLabel2.Name = "autoLabel2";
-            autoLabel2.Size = new Size(102, 25);
+            autoLabel2.Size = new Size(67, 15);
             autoLabel2.TabIndex = 2;
             autoLabel2.Text = "Description";
             // 
@@ -86,10 +82,9 @@
             btnSave.Dock = DockStyle.Bottom;
             btnSave.Font = new Font("Segoe UI Semibold", 9F);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(14, 199);
-            btnSave.Margin = new Padding(4, 5, 4, 5);
+            btnSave.Location = new Point(9, 135);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(436, 47);
+            btnSave.Size = new Size(293, 31);
             btnSave.Style.BackColor = SystemColors.HotTrack;
             btnSave.Style.ForeColor = Color.White;
             btnSave.TabIndex = 4;
@@ -108,23 +103,22 @@
             materialCard1.Depth = 0;
             materialCard1.Dock = DockStyle.Fill;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(3, 3);
-            materialCard1.Margin = new Padding(14);
+            materialCard1.Location = new Point(1, 1);
+            materialCard1.Margin = new Padding(9, 9, 9, 9);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(464, 260);
+            materialCard1.Padding = new Padding(9, 9, 9, 9);
+            materialCard1.Size = new Size(311, 175);
             materialCard1.TabIndex = 5;
             // 
             // UpsertInvoiceTypeView
             // 
             AcceptButton = btnSave;
-            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(470, 266);
+            ClientSize = new Size(313, 177);
             Controls.Add(materialCard1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
             Name = "UpsertInvoiceTypeView";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

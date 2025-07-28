@@ -58,20 +58,21 @@ partial class ExamTaken
         // tableLayoutPanel1
         // 
         tableLayoutPanel1.ColumnCount = 3;
-        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
+        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 35F));
         tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
+        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 35F));
         tableLayoutPanel1.Controls.Add(panel1, 1, 1);
         tableLayoutPanel1.Controls.Add(lblTimeRemaining, 1, 2);
         tableLayoutPanel1.Dock = DockStyle.Fill;
-        tableLayoutPanel1.Location = new Point(2, 2);
+        tableLayoutPanel1.Location = new Point(1, 1);
+        tableLayoutPanel1.Margin = new Padding(2, 2, 2, 2);
         tableLayoutPanel1.Name = "tableLayoutPanel1";
         tableLayoutPanel1.RowCount = 4;
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-        tableLayoutPanel1.Size = new Size(1346, 725);
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
+        tableLayoutPanel1.Size = new Size(943, 435);
         tableLayoutPanel1.TabIndex = 0;
         // 
         // panel1
@@ -79,10 +80,10 @@ partial class ExamTaken
         panel1.Controls.Add(panelQuestions);
         panel1.Controls.Add(tableLayoutPanel2);
         panel1.Dock = DockStyle.Fill;
-        panel1.Location = new Point(50, 50);
+        panel1.Location = new Point(35, 30);
         panel1.Margin = new Padding(0);
         panel1.Name = "panel1";
-        panel1.Size = new Size(1246, 595);
+        panel1.Size = new Size(873, 357);
         panel1.TabIndex = 0;
         // 
         // panelQuestions
@@ -91,7 +92,7 @@ partial class ExamTaken
         panelQuestions.Location = new Point(0, 0);
         panelQuestions.Margin = new Padding(0);
         panelQuestions.Name = "panelQuestions";
-        panelQuestions.Size = new Size(1246, 467);
+        panelQuestions.Size = new Size(873, 280);
         panelQuestions.TabIndex = 5;
         // 
         // tableLayoutPanel2
@@ -102,13 +103,14 @@ partial class ExamTaken
         tableLayoutPanel2.Controls.Add(lblProgress, 0, 2);
         tableLayoutPanel2.Controls.Add(tableLayoutPanel3, 0, 0);
         tableLayoutPanel2.Dock = DockStyle.Bottom;
-        tableLayoutPanel2.Location = new Point(0, 467);
+        tableLayoutPanel2.Location = new Point(0, 280);
+        tableLayoutPanel2.Margin = new Padding(2, 2, 2, 2);
         tableLayoutPanel2.Name = "tableLayoutPanel2";
         tableLayoutPanel2.RowCount = 3;
         tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
         tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
         tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-        tableLayoutPanel2.Size = new Size(1246, 128);
+        tableLayoutPanel2.Size = new Size(873, 77);
         tableLayoutPanel2.TabIndex = 4;
         // 
         // pBarPercentage
@@ -127,7 +129,8 @@ partial class ExamTaken
         pBarPercentage.ForegroundImage = null;
         pBarPercentage.GradientEndColor = Color.FromArgb(22, 165, 220);
         pBarPercentage.GradientStartColor = Color.FromArgb(22, 165, 220);
-        pBarPercentage.Location = new Point(3, 45);
+        pBarPercentage.Location = new Point(2, 27);
+        pBarPercentage.Margin = new Padding(2, 2, 2, 2);
         pBarPercentage.MultipleColors = new Color[]
 {
     Color.Empty
@@ -135,7 +138,7 @@ partial class ExamTaken
         pBarPercentage.Name = "pBarPercentage";
         pBarPercentage.ProgressStyle = Syncfusion.Windows.Forms.Tools.ProgressBarStyles.Metro;
         pBarPercentage.SegmentWidth = 12;
-        pBarPercentage.Size = new Size(1240, 36);
+        pBarPercentage.Size = new Size(869, 21);
         pBarPercentage.TabIndex = 8;
         pBarPercentage.ThemeName = "Metro";
         pBarPercentage.WaitingGradientWidth = 400;
@@ -143,9 +146,10 @@ partial class ExamTaken
         // lblProgress
         // 
         lblProgress.Dock = DockStyle.Fill;
-        lblProgress.Location = new Point(3, 84);
+        lblProgress.Location = new Point(2, 50);
+        lblProgress.Margin = new Padding(2, 0, 2, 0);
         lblProgress.Name = "lblProgress";
-        lblProgress.Size = new Size(1240, 44);
+        lblProgress.Size = new Size(869, 27);
         lblProgress.TabIndex = 9;
         lblProgress.Text = "1 out of 100";
         lblProgress.TextAlign = ContentAlignment.MiddleCenter;
@@ -154,15 +158,16 @@ partial class ExamTaken
         // 
         tableLayoutPanel3.ColumnCount = 3;
         tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 500F));
+        tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 350F));
         tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         tableLayoutPanel3.Controls.Add(panel3, 1, 0);
         tableLayoutPanel3.Dock = DockStyle.Fill;
-        tableLayoutPanel3.Location = new Point(3, 3);
+        tableLayoutPanel3.Location = new Point(2, 2);
+        tableLayoutPanel3.Margin = new Padding(2, 2, 2, 2);
         tableLayoutPanel3.Name = "tableLayoutPanel3";
         tableLayoutPanel3.RowCount = 1;
         tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableLayoutPanel3.Size = new Size(1240, 36);
+        tableLayoutPanel3.Size = new Size(869, 21);
         tableLayoutPanel3.TabIndex = 10;
         // 
         // panel3
@@ -173,10 +178,10 @@ partial class ExamTaken
         panel3.Controls.Add(btnNext);
         panel3.Controls.Add(btnPrevious);
         panel3.Dock = DockStyle.Fill;
-        panel3.Location = new Point(370, 0);
+        panel3.Location = new Point(259, 0);
         panel3.Margin = new Padding(0);
         panel3.Name = "panel3";
-        panel3.Size = new Size(500, 36);
+        panel3.Size = new Size(350, 21);
         panel3.TabIndex = 12;
         // 
         // txtQuestionNo
@@ -184,9 +189,11 @@ partial class ExamTaken
         txtQuestionNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         txtQuestionNo.Dock = DockStyle.Fill;
         txtQuestionNo.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
-        txtQuestionNo.Location = new Point(196, 0);
+        txtQuestionNo.Location = new Point(137, 0);
+        txtQuestionNo.Margin = new Padding(2, 2, 2, 2);
         txtQuestionNo.Name = "txtQuestionNo";
-        txtQuestionNo.Size = new Size(108, 36);
+        txtQuestionNo.Padding = new Padding(5, 0, 0, 0);
+        txtQuestionNo.Size = new Size(76, 21);
         txtQuestionNo.Style.TokenStyle.CloseButtonBackColor = Color.FromArgb(255, 255, 255);
         txtQuestionNo.TabIndex = 5;
         txtQuestionNo.TabStop = false;
@@ -196,9 +203,10 @@ partial class ExamTaken
         // 
         btnForward.Dock = DockStyle.Right;
         btnForward.Font = new Font("Segoe UI Semibold", 9F);
-        btnForward.Location = new Point(304, 0);
+        btnForward.Location = new Point(213, 0);
+        btnForward.Margin = new Padding(2, 2, 2, 2);
         btnForward.Name = "btnForward";
-        btnForward.Size = new Size(52, 36);
+        btnForward.Size = new Size(36, 21);
         btnForward.Style.Image = (Image)resources.GetObject("resource.Image");
         btnForward.TabIndex = 4;
         btnForward.Click += btnForward_Click;
@@ -207,9 +215,10 @@ partial class ExamTaken
         // 
         btnBackward.Dock = DockStyle.Left;
         btnBackward.Font = new Font("Segoe UI Semibold", 9F);
-        btnBackward.Location = new Point(144, 0);
+        btnBackward.Location = new Point(101, 0);
+        btnBackward.Margin = new Padding(2, 2, 2, 2);
         btnBackward.Name = "btnBackward";
-        btnBackward.Size = new Size(52, 36);
+        btnBackward.Size = new Size(36, 21);
         btnBackward.Style.Image = (Image)resources.GetObject("resource.Image1");
         btnBackward.TabIndex = 3;
         btnBackward.Click += btnBackward_Click;
@@ -220,9 +229,10 @@ partial class ExamTaken
         btnNext.Dock = DockStyle.Right;
         btnNext.Font = new Font("Segoe UI Semibold", 9F);
         btnNext.ForeColor = Color.Black;
-        btnNext.Location = new Point(356, 0);
+        btnNext.Location = new Point(249, 0);
+        btnNext.Margin = new Padding(2, 2, 2, 2);
         btnNext.Name = "btnNext";
-        btnNext.Size = new Size(144, 36);
+        btnNext.Size = new Size(101, 21);
         btnNext.Style.BackColor = Color.DodgerBlue;
         btnNext.Style.ForeColor = Color.Black;
         btnNext.TabIndex = 1;
@@ -237,8 +247,9 @@ partial class ExamTaken
         btnPrevious.Font = new Font("Segoe UI Semibold", 9F);
         btnPrevious.ForeColor = Color.White;
         btnPrevious.Location = new Point(0, 0);
+        btnPrevious.Margin = new Padding(2, 2, 2, 2);
         btnPrevious.Name = "btnPrevious";
-        btnPrevious.Size = new Size(144, 36);
+        btnPrevious.Size = new Size(101, 21);
         btnPrevious.Style.BackColor = Color.Teal;
         btnPrevious.Style.ForeColor = Color.White;
         btnPrevious.TabIndex = 0;
@@ -249,9 +260,11 @@ partial class ExamTaken
         // lblTimeRemaining
         // 
         lblTimeRemaining.Dock = DockStyle.Fill;
-        lblTimeRemaining.Location = new Point(53, 645);
+        lblTimeRemaining.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+        lblTimeRemaining.Location = new Point(37, 387);
+        lblTimeRemaining.Margin = new Padding(2, 0, 2, 0);
         lblTimeRemaining.Name = "lblTimeRemaining";
-        lblTimeRemaining.Size = new Size(1240, 40);
+        lblTimeRemaining.Size = new Size(869, 24);
         lblTimeRemaining.TabIndex = 10;
         lblTimeRemaining.Text = "Time Remaining";
         lblTimeRemaining.TextAlign = ContentAlignment.MiddleCenter;
@@ -269,11 +282,12 @@ partial class ExamTaken
         // 
         // ExamTaken
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1350, 729);
+        ClientSize = new Size(945, 437);
         Controls.Add(tableLayoutPanel1);
         Icon = (Icon)resources.GetObject("$this.Icon");
+        Margin = new Padding(2, 2, 2, 2);
         Name = "ExamTaken";
         StartPosition = FormStartPosition.CenterScreen;
         Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;

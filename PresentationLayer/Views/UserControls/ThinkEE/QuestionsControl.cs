@@ -80,6 +80,7 @@ public partial class QuestionsControl : UserControl
                 choiceButtons[i].Text = choicesList[i].Text;
                 //choiceButtons[i].Checked = choicesList[i].
                 choiceButtons[i].Visible = true;
+                choiceButtons[i].BackColor = SystemColors.Control;
             }
             else
             {
@@ -87,6 +88,27 @@ public partial class QuestionsControl : UserControl
                 choiceButtons[i].Visible = false;
             }
 
+        }
+    }
+
+    private void btnShowAnswer_Click(object sender, EventArgs e)
+    {
+        var correctChoice = _question.Choices.FirstOrDefault(c => c.IsCorrect);
+        if (correctChoice == null) return;
+
+        foreach (var btn in choiceButtons)
+        {
+            if (btn.Tag is Choice choice)
+            {
+                if (choice.ChoiceId == correctChoice.ChoiceId)
+                {
+                    btn.BackColor = Color.LightGreen; // ✅ Highlight correct answer
+                }
+                else
+                {
+                    btn.BackColor = SystemColors.Control; // Reset others
+                }
+            }
         }
     }
 }

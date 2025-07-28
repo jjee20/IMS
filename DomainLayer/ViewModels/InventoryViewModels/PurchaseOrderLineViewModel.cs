@@ -9,7 +9,7 @@ namespace DomainLayer.ViewModels.Inventory
 {
     public class PurchaseOrderLineViewModel
     {
-        [Display(Name = "Product Id")]
+        public int PurchaseOrderLineId { get; set; }
         public int ProductId { get; set; }
         [Display(Name = "Product Item")]
         public string ProductName { get; set; }

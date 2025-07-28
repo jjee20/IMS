@@ -48,8 +48,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Branch added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }

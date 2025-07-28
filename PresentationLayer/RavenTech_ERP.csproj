@@ -13,11 +13,27 @@
   </PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<DefineConstants>DEBUG</DefineConstants>
+		<IsPublishable>True</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<DefineConstants>RELEASE</DefineConstants>
+		<IsPublishable>True</IsPublishable>
 	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	  <IsPublishable>True</IsPublishable>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <IsPublishable>True</IsPublishable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Views\UserControls\Inventory\Lists\**" />
+	  <EmbeddedResource Remove="Views\UserControls\Inventory\Lists\**" />
+	  <None Remove="Views\UserControls\Inventory\Lists\**" />
+	</ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Views\UserControls\Inventory\DashboardViewOld.cs" />
@@ -148,9 +164,7 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertJobPositionView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertEmployeeView.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertEmployeeView.cs" />
     <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertEmployeeContributionView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,9 +183,6 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\Upserts\UpsertAllowanceView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\Account\RegisterView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\Accounting\Payroll\PayrollView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,10 +192,16 @@
     <Compile Update="Views\UserControls\Accounting\Payroll\HolidayView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\UserControls\Account\RegisterAccountView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\UserControls\Inventory\ProductIncrementView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\ProjectDashboardView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\Account\Upserts\UpsertRegisterAccountView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\UserControls\Inventory\Upserts\UpsertProductIncrementView.cs">
@@ -537,10 +554,6 @@
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SERCS.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\UserControls\Inventory\Lists\" />
   </ItemGroup>
 
 </Project>

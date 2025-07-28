@@ -62,8 +62,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Holiday added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -72,7 +72,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         {
             _entity.HolidayName = txtName.Text;
             _entity.HolidayType = (DomainLayer.Enums.HolidayType)txtHolidayType.SelectedValue;
-            _entity.EffectiveDate = txtDate.Value;
+            _entity.EffectiveDate = (DateTime)txtDate.Value;
             _entity.Description = txtDescription.Text;
         }
 

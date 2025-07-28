@@ -115,6 +115,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 {
                     var projectLine = new SalesOrderLineViewModel
                     {
+                        SalesOrderLineId = line.SalesOrderLineId,
                         ProductId = (int)line.ProductId,
                         ProductName = line.ProductName,
                         Price = line.Price,
@@ -143,6 +144,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.CustomerRefNumber = txtCustomerRefNumber.Text.Trim();
             _entity.SalesTypeId = (int)txtSalesType.SelectedValue;
             _entity.Remarks = txtRemarks.Text.Trim();
+
             _entity.Amount = double.TryParse(txtAmount.Text, out var amountValue) ? amountValue : 0.0;
             _entity.SubTotal = double.TryParse(txtSubtotal.Text, out var subtotalValue) ? subtotalValue : 0.0;
             _entity.Discount = double.TryParse(txtDiscount.Text, out var discountValue) ? discountValue : 0.0;
@@ -150,32 +152,66 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.Freight = double.TryParse(txtFreight.Text, out var freightValue) ? freightValue : 0.0;
             _entity.Total = double.TryParse(txtOverallTotal.Text, out var totalValue) ? totalValue : 0.0;
 
+            // Handle Shipment
             if (btnNoShipment.Checked)
             {
                 _entity.Shipment = null;
             }
             else
             {
-                _entity.Shipment = new Shipment
-                {
-                    ShipmentTypeId = (int)txtShipmentType.SelectedValue,
-                    WarehouseId = (int)txtWarehouse.SelectedValue
-                };
+                if (_entity.Shipment == null)
+                    _entity.Shipment = new Shipment();
+
+                _entity.Shipment.ShipmentTypeId = (int)txtShipmentType.SelectedValue;
+                _entity.Shipment.WarehouseId = (int)txtWarehouse.SelectedValue;
             }
 
-            _entity.SalesOrderLines = _projectsLines.Select(c => new SalesOrderLine
+            // === Update SalesOrderLines without replacing the collection ===
+            foreach (var updatedLine in _projectsLines)
             {
-                SalesOrderId = _entity.SalesOrderId,
-                ProductId = c.ProductId,
-                ProductName = c.ProductName,
-                Price = c.Price,
-                Quantity = c.Quantity,
-                DiscountPercentage = c.DiscountPercentage,
-                SubTotal = c.SubTotal
-            }).ToList();
+                var existing = _entity.SalesOrderLines
+                    .FirstOrDefault(sol => sol.SalesOrderLineId == updatedLine.SalesOrderLineId);
 
-            var total = _projectsLines.Sum(c => c.SubTotal);
+                if (existing != null)
+                {
+                    // Update existing
+                    existing.ProductId = updatedLine.ProductId;
+                    existing.ProductName = updatedLine.ProductName;
+                    existing.Price = updatedLine.Price;
+                    existing.Quantity = updatedLine.Quantity;
+                    existing.DiscountPercentage = updatedLine.DiscountPercentage;
+                    existing.SubTotal = updatedLine.SubTotal;
+                }
+                else
+                {
+                    // Add new
+                    _entity.SalesOrderLines.Add(new SalesOrderLine
+                    {
+                        SalesOrderId = _entity.SalesOrderId,
+                        ProductId = updatedLine.ProductId,
+                        ProductName = updatedLine.ProductName,
+                        Price = updatedLine.Price,
+                        Quantity = updatedLine.Quantity,
+                        DiscountPercentage = updatedLine.DiscountPercentage,
+                        SubTotal = updatedLine.SubTotal
+                    });
+                }
+            }
+
+            // Remove lines no longer in _projectsLines
+            var toRemove = _entity.SalesOrderLines
+                .Where(sol => !_projectsLines.Any(p => p.SalesOrderLineId == sol.SalesOrderLineId))
+                .ToList();
+
+            foreach (var line in toRemove)
+            {
+                _entity.SalesOrderLines.Remove(line);
+            }
+
+            // Recalculate total just in case
+            _entity.SubTotal = _projectsLines.Sum(c => c.SubTotal);
         }
+
 
         private void ShowSuccess(string message) =>
             MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -204,14 +240,13 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 var result = MessageBox.Show("Are you sure you want to update the project?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-
-                    var oldLines = await _unitOfWork.SalesOrderLine.Value.GetAllAsync(c => c.SalesOrderId == _entity.SalesOrderId, tracked: true);
-                    _unitOfWork.SalesOrderLine.Value.RemoveRange(oldLines);
-                    await _unitOfWork.SaveAsync();
-
-                    _unitOfWork.SalesOrder.Value.Update(_entity);
+                    _unitOfWork.SalesOrder.Value.UpdateWithChildren(_entity, c => c.SalesOrderLines, cd => cd.SalesOrderLineId);
 
                     message = "SalesOrder updated successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
             else
@@ -221,6 +256,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 {
                     await _unitOfWork.SalesOrder.Value.AddAsync(_entity);
                     message = "SalesOrder added successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
 

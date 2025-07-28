@@ -44,8 +44,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Unit Of Measure added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }

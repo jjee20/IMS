@@ -19,14 +19,20 @@ namespace ServiceLayer.Services.IRepositories
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool tracked = false);
         void Update(T entity);
 
-        void UpdateWithChild(T entity);
+        void UpdateWithChild<TChild>(
+        T entity,
+        Expression<Func<T, TChild>> childSelector,
+        Func<TChild, object> keySelector)
+        where TChild : class;
 
         void UpdateWithChildren<TParent, TChild>(
-         TParent parent,
-         Expression<Func<TParent, IEnumerable<TChild>>> childrenSelector,
-         Func<TChild, object> keySelector
-     )
-     where TParent : class
-     where TChild : class;
+       TParent parent,
+       Expression<Func<TParent, IEnumerable<TChild>>> childSelector,
+       Func<TChild, object> keySelector
+        )
+       where TParent : class
+       where TChild : class;
+
+        void DetachLocal(Func<T, bool> predicate);
     }
 }

@@ -37,19 +37,34 @@ namespace PresentationLayer.Views.UserControls
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string AppUserName { set => txtName.Text = value; }
+        public string AppUserName
+        {
+            set => txtName.Text = value;
+        }
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string UserName { set => txtUsername.Text = value; }
+        public string UserName
+        {
+            set => txtUsername.Text = value;
+        }
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string Email { set => txtEmail.Text = value; }
+        public string Email
+        {
+            set => txtEmail.Text = value;
+        }
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string Phone { set => txtPhone.Text = value; }
+        public string Phone
+        {
+            set => txtPhone.Text = value;
+        }
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string Department { set => txtDepartment.Text = value; }
+        public string Department
+        {
+            set => txtDepartment.Text = value;
+        }
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 

@@ -34,18 +34,21 @@ partial class ExamsControl
         lblTime = new Syncfusion.Windows.Forms.Tools.AutoLabel();
         lblStatus = new Syncfusion.Windows.Forms.Tools.AutoLabel();
         tableLayoutPanel1 = new TableLayoutPanel();
-        btnTake = new Syncfusion.WinForms.Controls.SfButton();
         lblScore = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+        btnTake = new Syncfusion.WinForms.Controls.SfButton();
         tableLayoutPanel1.SuspendLayout();
         SuspendLayout();
         // 
         // lblTitle
         // 
+        lblTitle.BackColor = Color.Navy;
         lblTitle.Dock = DockStyle.Fill;
         lblTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-        lblTitle.Location = new Point(3, 0);
+        lblTitle.ForeColor = Color.FromArgb(192, 255, 255);
+        lblTitle.Location = new Point(2, 0);
+        lblTitle.Margin = new Padding(2, 0, 2, 0);
         lblTitle.Name = "lblTitle";
-        lblTitle.Size = new Size(344, 42);
+        lblTitle.Size = new Size(241, 25);
         lblTitle.TabIndex = 0;
         lblTitle.Text = "Title";
         lblTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -53,9 +56,10 @@ partial class ExamsControl
         // lblType
         // 
         lblType.Dock = DockStyle.Fill;
-        lblType.Location = new Point(3, 42);
+        lblType.Location = new Point(2, 25);
+        lblType.Margin = new Padding(2, 0, 2, 0);
         lblType.Name = "lblType";
-        lblType.Size = new Size(344, 42);
+        lblType.Size = new Size(241, 25);
         lblType.TabIndex = 1;
         lblType.Text = "Type";
         lblType.TextAlign = ContentAlignment.MiddleCenter;
@@ -63,9 +67,10 @@ partial class ExamsControl
         // lblDate
         // 
         lblDate.Dock = DockStyle.Fill;
-        lblDate.Location = new Point(3, 84);
+        lblDate.Location = new Point(2, 50);
+        lblDate.Margin = new Padding(2, 0, 2, 0);
         lblDate.Name = "lblDate";
-        lblDate.Size = new Size(344, 30);
+        lblDate.Size = new Size(241, 18);
         lblDate.TabIndex = 2;
         lblDate.Text = "Date";
         lblDate.TextAlign = ContentAlignment.MiddleCenter;
@@ -73,9 +78,10 @@ partial class ExamsControl
         // lblTime
         // 
         lblTime.Dock = DockStyle.Fill;
-        lblTime.Location = new Point(3, 114);
+        lblTime.Location = new Point(2, 68);
+        lblTime.Margin = new Padding(2, 0, 2, 0);
         lblTime.Name = "lblTime";
-        lblTime.Size = new Size(344, 30);
+        lblTime.Size = new Size(241, 18);
         lblTime.TabIndex = 3;
         lblTime.Text = "Time";
         lblTime.TextAlign = ContentAlignment.MiddleCenter;
@@ -85,9 +91,10 @@ partial class ExamsControl
         lblStatus.Dock = DockStyle.Fill;
         lblStatus.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
         lblStatus.ForeColor = Color.FromArgb(0, 192, 192);
-        lblStatus.Location = new Point(3, 144);
+        lblStatus.Location = new Point(2, 86);
+        lblStatus.Margin = new Padding(2, 0, 2, 0);
         lblStatus.Name = "lblStatus";
-        lblStatus.Size = new Size(344, 30);
+        lblStatus.Size = new Size(241, 18);
         lblStatus.TabIndex = 4;
         lblStatus.Text = "Status";
         lblStatus.TextAlign = ContentAlignment.MiddleCenter;
@@ -106,6 +113,7 @@ partial class ExamsControl
         tableLayoutPanel1.Controls.Add(btnTake, 0, 6);
         tableLayoutPanel1.Dock = DockStyle.Fill;
         tableLayoutPanel1.Location = new Point(0, 0);
+        tableLayoutPanel1.Margin = new Padding(2, 2, 2, 2);
         tableLayoutPanel1.Name = "tableLayoutPanel1";
         tableLayoutPanel1.RowCount = 7;
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 17.0073032F));
@@ -115,40 +123,43 @@ partial class ExamsControl
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.2452564F));
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.2421942F));
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 17.0074348F));
-        tableLayoutPanel1.Size = new Size(350, 250);
+        tableLayoutPanel1.Size = new Size(245, 150);
         tableLayoutPanel1.TabIndex = 5;
+        // 
+        // lblScore
+        // 
+        lblScore.Dock = DockStyle.Fill;
+        lblScore.Location = new Point(2, 104);
+        lblScore.Margin = new Padding(2, 0, 2, 0);
+        lblScore.Name = "lblScore";
+        lblScore.Size = new Size(241, 18);
+        lblScore.TabIndex = 6;
+        lblScore.Text = "Score";
+        lblScore.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // btnTake
         // 
         btnTake.BackColor = Color.DodgerBlue;
         btnTake.Dock = DockStyle.Fill;
         btnTake.Font = new Font("Segoe UI Semibold", 9F);
-        btnTake.Location = new Point(3, 207);
+        btnTake.Location = new Point(2, 124);
+        btnTake.Margin = new Padding(2, 2, 2, 2);
         btnTake.Name = "btnTake";
-        btnTake.Size = new Size(344, 40);
+        btnTake.Size = new Size(241, 24);
         btnTake.Style.BackColor = Color.DodgerBlue;
         btnTake.TabIndex = 5;
         btnTake.Text = "Take";
         btnTake.UseVisualStyleBackColor = false;
         btnTake.Click += btnTake_Click;
         // 
-        // lblScore
-        // 
-        lblScore.Dock = DockStyle.Fill;
-        lblScore.Location = new Point(3, 174);
-        lblScore.Name = "lblScore";
-        lblScore.Size = new Size(344, 30);
-        lblScore.TabIndex = 6;
-        lblScore.Text = "Score";
-        lblScore.TextAlign = ContentAlignment.MiddleCenter;
-        // 
         // ExamsControl
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         Controls.Add(tableLayoutPanel1);
+        Margin = new Padding(2, 2, 2, 2);
         Name = "ExamsControl";
-        Size = new Size(350, 250);
+        Size = new Size(245, 150);
         tableLayoutPanel1.ResumeLayout(false);
         tableLayoutPanel1.PerformLayout();
         ResumeLayout(false);

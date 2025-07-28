@@ -13,7 +13,7 @@ namespace DomainLayer.Models.Inventory
     {
         [Key]
         public int ProductPullOutLogLinesId { get; set; }
-        public int ProductPullOutId { get; set; }
+        public int ProductPullOutLogId { get; set; }
 
         [ForeignKey("ProductPullOutLogId")]
         public virtual ProductPullOutLogs ProductPullOutLogs { get; set; }

@@ -61,6 +61,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 {
                     var projectLine = new ProjectLineViewModel
                     {
+                        ProjectLineId = line.ProjectLineId,
                         ProductId = (int)line.ProductId,
                         ProductName = line.ProductName,
                         Price = line.Price,
@@ -85,20 +86,50 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             _entity.Description = txtDescription.Text.Trim();
             _entity.StartDate = txtStartDate.Value;
             _entity.EndDate = txtEndDate.Value;
-
             _entity.Client = txtClient.Text.Trim();
             _entity.Budget = double.TryParse(txtBudget.Text, out var budget) ? budget : 0.0;
 
-            _entity.ProjectLines = _projectsLines.Select(c => new ProjectLine
+            // Map updates without replacing the collection
+            foreach (var updatedLine in _projectsLines)
             {
-                ProjectId = _entity.ProjectId,
-                ProductId = c.ProductId,
-                ProductName = c.ProductName,
-                Price = c.Price,
-                Quantity = c.Quantity,
-                DiscountPercentage = c.DiscountPercentage
-            }).ToList();
+                var existing = _entity.ProjectLines
+                    .FirstOrDefault(pl => pl.ProjectLineId == updatedLine.ProjectLineId);
+
+                if (existing != null)
+                {
+                    // Update existing tracked object
+                    existing.ProductId = updatedLine.ProductId;
+                    existing.ProductName = updatedLine.ProductName;
+                    existing.Price = updatedLine.Price;
+                    existing.Quantity = updatedLine.Quantity; // ✅ This should now persist
+                    existing.DiscountPercentage = updatedLine.DiscountPercentage;
+                }
+                else
+                {
+                    // It's a new line, add to the collection
+                    _entity.ProjectLines.Add(new ProjectLine
+                    {
+                        ProjectId = _entity.ProjectId,
+                        ProductId = updatedLine.ProductId,
+                        ProductName = updatedLine.ProductName,
+                        Price = updatedLine.Price,
+                        Quantity = updatedLine.Quantity,
+                        DiscountPercentage = updatedLine.DiscountPercentage
+                    });
+                }
+            }
+
+            // Optionally: Remove lines that are no longer in _projectsLines
+            var toRemove = _entity.ProjectLines
+                .Where(pl => !_projectsLines.Any(p => p.ProjectLineId == pl.ProjectLineId))
+                .ToList();
+
+            foreach (var line in toRemove)
+            {
+                _entity.ProjectLines.Remove(line);
+            }
         }
+
 
         private void ShowSuccess(string message) =>
             MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -142,11 +173,6 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 var result = MessageBox.Show("Are you sure you want to update the project?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                   var oldProjectLines = await _unitOfWork.ProjectLine.Value.GetAllAsync(c => c.ProjectId == _entity.ProjectId, tracked: true);
-                    _unitOfWork.ProjectLine.Value.RemoveRange(oldProjectLines);
-                    await _unitOfWork.SaveAsync();
-
-                    _entity.ProjectLines.Clear();
                     _unitOfWork.Project.Value.UpdateWithChildren(_entity, p => p.ProjectLines, pl => pl.ProjectLineId);
                     message = "Project updated successfully.";
                 }
@@ -199,7 +225,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             }
         }
 
-        private void btnProductAdd_Click(object sender, EventArgs e)
+        private async void btnProductAdd_Click(object sender, EventArgs e)
         {
             int productId;
             string productName;
@@ -231,7 +257,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
             }
             else
             {
-                var product = _unitOfWork.Product.Value.Get(c => c.ProductId == (int)txtProduct.SelectedValue, includeProperties: "ProductIncrements");
+                var product = await _unitOfWork.Product.Value.GetAsync(c => c.ProductId == (int)txtProduct.SelectedValue, includeProperties: "ProductIncrements");
                 if (product == null)
                 {
                     MessageBox.Show("Selected product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

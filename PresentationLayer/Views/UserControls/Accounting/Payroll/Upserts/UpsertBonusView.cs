@@ -76,8 +76,8 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
                 message = "Bonus added successfully.";
             }
 
-            ShowSuccess(message);
             await _unitOfWork.SaveAsync();
+            ShowSuccess(message);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -86,7 +86,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
         {
             _entity.EmployeeId = (int)txtEmployee.SelectedValue;
             _entity.BonusType = (DomainLayer.Enums.BonusType)txtBonusType.SelectedValue;
-            _entity.DateGranted = txtDate.Value;
+            _entity.DateGranted = (DateTime)txtDate.Value;
             _entity.Amount = !string.IsNullOrEmpty(txtAmount.Text) ? Convert.ToDouble(txtAmount.Text) : 0;
             _entity.Description = txtDescription.Text;
             _entity.IsOneTime = txtIsOneTime.Checked;

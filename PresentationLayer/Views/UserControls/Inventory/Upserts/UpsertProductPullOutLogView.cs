@@ -69,6 +69,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 {
                     var productPullOutLogLines = new ProductPullOutLogLineViewModel
                     {
+                        ProductPullOutLogLinesId = item.ProductPullOutLogLinesId,
                         DateAdded = item.DateAdded,
                         ProductId = item.ProductId,
                         ProductName = item.Product.ProductName,
@@ -243,13 +244,12 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 var result = MessageBox.Show("Are you sure you want to update the pull-out logs?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-
-                    var oldLines = await _unitOfWork.ProductPullOutLogLines.Value.GetAllAsync(c => c.ProductPullOutId == _entity.ProductPullOutLogId, tracked: true);
-                    _unitOfWork.ProductPullOutLogLines.Value.RemoveRange(oldLines);
-                    await _unitOfWork.SaveAsync();
-
                     _unitOfWork.ProductPullOutLogs.Value.UpdateWithChildren(_entity, p => p.ProductPullOutLogLines, p => p.ProductPullOutLogLinesId);
                     message = "Product pull-out updated successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
             else
@@ -259,6 +259,10 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
                 {
                     await _unitOfWork.ProductPullOutLogs.Value.AddAsync(_entity);
                      message = "Product pull-out log added successfully.";
+                }
+                else
+                {
+                    return;
                 }
             }
 
@@ -278,19 +282,48 @@ namespace RavenTech_ERP.Views.UserControls.Inventory.Upserts
             _entity.ReceivedBy = txtReceivedBy.Text;
             _entity.ProjectId = (int)txtProject.SelectedValue;
 
-            if(_entity.ProductPullOutLogLines == null)
+            if (_entity.ProductPullOutLogLines == null)
             {
                 _entity.ProductPullOutLogLines = new List<ProductPullOutLogLines>();
             }
 
-            _entity.ProductPullOutLogLines = _entityViewModel.Select(c => new ProductPullOutLogLines
+            foreach (var updatedLine in _entityViewModel)
             {
-                ProductPullOutId = _entity.ProductPullOutLogId,
-                DateAdded = c.DateAdded,
-                ProductId = c.ProductId,
-                StockQuantity = c.Quantity,
-                UnitCost = c.UnitCost,
-            }).ToList();
+                var existing = _entity.ProductPullOutLogLines
+                    .FirstOrDefault(l => l.ProductPullOutLogLinesId == updatedLine.ProductPullOutLogLinesId);
+
+                if (existing != null)
+                {
+                    // Update existing
+                    existing.DateAdded = updatedLine.DateAdded;
+                    existing.ProductId = updatedLine.ProductId;
+                    existing.StockQuantity = updatedLine.Quantity;
+                    existing.UnitCost = updatedLine.UnitCost;
+                }
+                else
+                {
+                    // Add new
+                    _entity.ProductPullOutLogLines.Add(new ProductPullOutLogLines
+                    {
+                        ProductPullOutLogId = _entity.ProductPullOutLogId,
+                        DateAdded = updatedLine.DateAdded,
+                        ProductId = updatedLine.ProductId,
+                        StockQuantity = updatedLine.Quantity,
+                        UnitCost = updatedLine.UnitCost
+                    });
+                }
+            }
+
+            // Remove lines no longer in the view model
+            var toRemove = _entity.ProductPullOutLogLines
+                .Where(l => !_entityViewModel.Any(vm => vm.ProductPullOutLogLinesId == l.ProductPullOutLogLinesId))
+                .ToList();
+
+            foreach (var line in toRemove)
+            {
+                _entity.ProductPullOutLogLines.Remove(line);
+            }
         }
+
     }
 }
