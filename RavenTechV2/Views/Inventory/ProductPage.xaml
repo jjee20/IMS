@@ -1,0 +1,191 @@
+﻿<Page
+    x:Class="RavenTechV2.Views.ProductPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls" 
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.DataGrid" 
+    xmlns:editors="using:Syncfusion.UI.Xaml.Editors"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContentArea">
+        <StackPanel>
+            <BreadcrumbBar x:Name="BreadcrumbBar1"
+               ItemsSource="{Binding BreadcrumbItems}" />
+
+            <Grid Margin="0,20,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Grid.Column="0"
+                    Content="Add"
+                    Command="{Binding AddCommand}"
+                    Background="DodgerBlue"
+                    Foreground="White"
+                    FontWeight="SemiBold"
+                    HorizontalAlignment="Left"
+                    Width="120"
+                    Height="36"
+                    BorderBrush="DodgerBlue"
+                    BorderThickness="1"
+                    CornerRadius="6" />
+
+                <!-- Search TextBox -->
+                <editors:SfAutoComplete
+                    Grid.Column="2"
+                    Margin="16,0,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Height="36"
+                    Width="230"
+                    PlaceholderText="Search here"
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding SearchSuggestions}"
+                    x:Name="SearchBox">
+                    <editors:SfAutoComplete.TrailingView>
+                        <Viewbox Height="16"
+                                     Width="16"
+                                 Margin="0,0,5,0">
+                            <SymbolIcon Symbol="Find" />
+                        </Viewbox>
+                    </editors:SfAutoComplete.TrailingView>
+                </editors:SfAutoComplete>
+
+                <!-- Print Button with icon -->
+                <SplitButton
+                    Grid.Column="3"
+                    Height="36" 
+                    Margin="8,0,0,0"
+                    Padding="0"
+                    Background="Transparent" BorderBrush="Transparent"
+                    ToolTipService.ToolTip="Print PDF"
+                    Command="{Binding PrintPdfCommand}">
+                    <FontIcon Glyph="&#xE749;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="Gray"/>
+                    <SplitButton.Flyout>
+                        <Flyout Placement="Bottom">
+                            <MenuFlyoutItem
+                                Text="Export Excel"
+                                Icon="Document"
+                                Command="{Binding PrintExcelCommand}"/>
+                        </Flyout>
+                    </SplitButton.Flyout>
+
+                </SplitButton>
+
+            </Grid>
+
+            <syncfusion:SfDataGrid x:Name="sfDataGrid"
+                  Height="Auto"
+                  Width="Auto"
+                  HorizontalAlignment="Stretch"
+                  AllowDraggingColumns="True"
+                  AllowSorting="True"
+                  AutoGenerateColumns="True"
+                  AllowEditing="True"
+                  SelectionMode="Multiple"
+                  AllowFiltering="True"
+                  ItemsSource="{Binding Pager.PageItems}"
+                  AllowGrouping="True"
+                  ColumnWidthMode="Auto"
+                  GridLinesVisibility="None"
+                  HeaderLinesVisibility="Both"
+                  ShowGroupDropArea="True">
+                <syncfusion:SfDataGrid.Columns>
+                    <!-- TODO: Replace column definitions to match real data. Consider adding Header values to Resources.resw. -->
+                    <syncfusion:GridTextColumn IsHidden="True" MappingName="ProductId" HeaderText="ID" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Star" TextWrapping="Wrap" MappingName="ProductName" HeaderText="Name" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="ProductCode" HeaderText="Code" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="Branch" HeaderText="Branch" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="ProductType" HeaderText="Type" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="Category" HeaderText="Category" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" TextWrapping="Wrap" MappingName="Description" HeaderText="Description" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="Brand" HeaderText="Brand" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="Color" HeaderText="Color" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="Size" HeaderText="Size" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="UnitOfMeasure" HeaderText="UOM" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="DefaultBuyPrice" HeaderText="Buying Price" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="DefaultSellPrice" HeaderText="Selling Price" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="ReorderLevel" HeaderText="Re-order Level" />
+                    <syncfusion:GridTextColumn ColumnWidthMode="Auto" MappingName="IsActive" HeaderText="Active?" />
+                    <syncfusion:GridTemplateColumn HeaderText="Actions">
+                        <syncfusion:GridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <!-- Edit Button (Blue) -->
+                                    <Button Click="EditButton_Click"
+                                        Tag="{Binding}"
+                                        ToolTipService.ToolTip="Edit"
+                                        Width="32" Height="32" 
+                                        Padding="0"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent">
+                                        <FontIcon Glyph="&#xE70F;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="DodgerBlue"/>
+                                    </Button>
+                                    <!-- Delete Icon Button -->
+                                    <Button Click="DeleteButton_Click"
+                                        Tag="{Binding}"
+                                        ToolTipService.ToolTip="Delete"
+                                        Width="32" Height="32"
+                                        Padding="0"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent">
+                                        <FontIcon Glyph="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="Crimson"/>
+                                    </Button>
+                                    <Button Click="DetailsButton_Click"
+                                        Tag="{Binding}"
+                                        ToolTipService.ToolTip="Print Details"
+                                        Width="32" Height="32"
+                                        Padding="0"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent">
+                                        <FontIcon Glyph="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="ForestGreen"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </syncfusion:GridTemplateColumn.CellTemplate>
+                    </syncfusion:GridTemplateColumn>
+                </syncfusion:SfDataGrid.Columns>
+
+                <syncfusion:SfDataGrid.DetailsViewDefinition>
+                    <syncfusion:GridViewDefinition RelationalColumn="SalesOrdersVM">
+                        <syncfusion:GridViewDefinition.DataGrid>
+                            <syncfusion:SfDataGrid AutoGenerateColumns="True"
+                                     x:Name="SalesOrdersGrid">
+                                <syncfusion:SfDataGrid.DetailsViewDefinition>
+                                    <syncfusion:GridViewDefinition RelationalColumn="SalesOrderLinesVM">
+                                        <syncfusion:GridViewDefinition.DataGrid>
+                                            <syncfusion:SfDataGrid x:Name="SalesOrderLinesGrid"
+                                                     AutoGenerateColumns="True"
+                                                     ColumnWidthMode="Auto"/>
+                                        </syncfusion:GridViewDefinition.DataGrid>
+                                    </syncfusion:GridViewDefinition>
+                                </syncfusion:SfDataGrid.DetailsViewDefinition>
+                            </syncfusion:SfDataGrid>
+                        </syncfusion:GridViewDefinition.DataGrid>
+                    </syncfusion:GridViewDefinition>
+
+                    <syncfusion:GridViewDefinition RelationalColumn="InvoicesVM">
+                        <syncfusion:GridViewDefinition.DataGrid>
+                            <syncfusion:SfDataGrid AutoGenerateColumns="True"
+                                     x:Name="InvoicesGrid"/>
+                        </syncfusion:GridViewDefinition.DataGrid>
+                    </syncfusion:GridViewDefinition>
+                </syncfusion:SfDataGrid.DetailsViewDefinition>
+
+            </syncfusion:SfDataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,8">
+                <Button Background="Transparent" Content="|&lt;" Command="{Binding FirstPageCommand}" />
+                <Button Background="Transparent" Content="&lt;" Command="{Binding PrevPageCommand}" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Pager.PageDisplay}" Margin="8,0"/>
+                <Button Background="Transparent" Content="&gt;" Command="{Binding NextPageCommand}" />
+                <Button Background="Transparent" Content="&gt;|" Command="{Binding LastPageCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

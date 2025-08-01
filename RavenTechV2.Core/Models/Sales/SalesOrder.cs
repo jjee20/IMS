@@ -15,11 +15,13 @@ public class SalesOrder
     [Required]
     public string SalesOrderNumber { get; set; }
     [Required]
-    public string CustomerId { get; set; }
+    public int CustomerId { get; set; }
     [ForeignKey("CustomerId")]
     public Customer Customer { get; set; }
     public DateTime OrderDate { get; set; }
     public DateTime? DeliveryDate { get; set; }
     public SalesOrderStatus Status { get; set; }
+    public SalesType SalesType { get; set; }  
+    public ShipmentType? ShipmentType { get; set; }
     public ICollection<SalesOrderLine> SalesOrderLines { get; set; }
 }

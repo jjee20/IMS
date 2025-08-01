@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Configuration;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 
@@ -42,10 +46,16 @@ public partial class App : Application
     public static WindowEx MainWindow { get; } = new MainWindow();
 
     public static UIElement? AppTitlebar { get; set; }
-
+    private readonly IConfiguration _configuration;
     public App()
     {
         InitializeComponent();
+        _configuration = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .Build();
 
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
@@ -53,24 +63,29 @@ public partial class App : Application
         ConfigureServices((context, services) =>
         {
             // Default Activation Handler
-            services.AddDbContext<ErpDbContext>();
+            services.AddDbContext<ErpDbContext>(options =>
+                options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
             services.AddAutoMapper(typeof(MappingHelper)); 
             // Other Activation Handlers
 
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@33302e302e303b33303bo5tfYXUT3HyPFQfOrSd9R2DFSPIIsg63ehiunIlJ0YQ=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(_configuration["Syncfusion:LicenseKey"]);
 
             // Services
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
             services.AddTransient<IUnitOfService, UnitOfService>();
+            services.AddSingleton<PrintReportService>();
+
+            services.AddSingleton<IDialogService, DialogService>();
+
 
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>(); 
-            services.AddSingleton<NotificationService>();
             services.AddSingleton<IUserSessionService, UserSessionService>();
+            services.AddSingleton<NotificationService>();
 
 
             // Core Services
@@ -78,8 +93,20 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
-            services.AddTransient<ProductListViewModel>();
-            services.AddTransient<ProductListPage>();
+            services.AddTransient<CategoryViewModel>();
+            services.AddTransient<CategoryPage>();
+            services.AddTransient<WarehouseViewModel>();
+            services.AddTransient<WarehousePage>();
+            services.AddTransient<UnitOfMeasureViewModel>();
+            services.AddTransient<UnitOfMeasurePage>();
+            services.AddTransient<BranchViewModel>();
+            services.AddTransient<BranchPage>();
+            services.AddTransient<VendorViewModel>();
+            services.AddTransient<VendorPage>();
+            services.AddTransient<CustomerViewModel>();
+            services.AddTransient<CustomerPage>();
+            services.AddTransient<ProductViewModel>();
+            services.AddTransient<ProductPage>();
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
             services.AddTransient<DashboardViewModel>();

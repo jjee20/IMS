@@ -410,9 +410,17 @@ namespace RavenTech_ERP
 
         }
 
+
+        public event EventHandler ContributionReportsEvent;
         private void btnContributionReports_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            ContributionReportsEvent?.Invoke(this, EventArgs.Empty);
+        }
 
+        public event EventHandler ProfileEvent;
+        private void btnProfile_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            ProfileEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }

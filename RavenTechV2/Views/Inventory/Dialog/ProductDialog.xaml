@@ -1,0 +1,59 @@
+<ContentDialog
+    x:Class="RavenTechV2.Views.ProductDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:editors="using:Syncfusion.UI.Xaml.Editors"
+    Title="{Binding DialogTitle, Mode=OneWay}"
+    PrimaryButtonText="Save"
+    IsPrimaryButtonEnabled="{Binding isFormValid}"
+    CloseButtonText="Cancel"
+    DefaultButton="Primary">
+
+    <Grid x:Name="ContentArea">
+        <StackPanel Spacing="12">
+            <TextBox Header="Name" Text="{Binding Product.ProductName, Mode=TwoWay}" />
+            <TextBox Header="Code" Text="{Binding Product.ProductCode, Mode=TwoWay}" />
+            <editors:SfComboBox 
+                    Header="Branch"
+                    ItemsSource="{Binding Branches}"
+                    SelectedItem="{Binding SelectedBranch, Mode=TwoWay}"
+                    DisplayMemberPath="Name"
+                    AutoAppendType="Text"
+                    IsEditable="False" />
+            <editors:SfComboBox 
+                    Header="Category"
+                    ItemsSource="{Binding Categories}"
+                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                    DisplayMemberPath="Name"
+                    AutoAppendType="Text"
+                    IsEditable="False" />
+            <editors:SfComboBox 
+                    Header="Type"
+                    ItemsSource="{Binding ProductTypes}"
+                    SelectedItem="{Binding SelectedProductType, Mode=TwoWay}"
+                    DisplayMemberPath="Name"
+                    AutoAppendType="Text"
+                    IsEditable="False" />
+            <TextBox Header="Descrption" TextWrapping="Wrap" 
+                     IsSpellCheckEnabled="True" SelectionHighlightColor="LightBlue"  
+                     Text="{Binding  Warehouse.Description, Mode=TwoWay}" />
+            <TextBox Header="Brand" Text="{Binding  Product.Brand, Mode=TwoWay}" />
+            <TextBox Header="Color" Text="{Binding  Product.Color, Mode=TwoWay}" />
+            <TextBox Header="Size" Text="{Binding  Product.Size, Mode=TwoWay}" />
+            <editors:SfComboBox 
+                Header="Unit of Measure (UOM)"
+                    ItemsSource="{Binding UOMs}"
+                    SelectedItem="{Binding SelectedUOM, Mode=TwoWay}"
+                    DisplayMemberPath="Name"
+                    AutoAppendType="Text"
+                    IsEditable="False" />
+            <TextBox Header="Buying Price" Text="{Binding  Product.DefaultBuyPrice, Mode=TwoWay}" />
+            <TextBox Header="Selling Price" Text="{Binding  Product.DefaultSellPrice, Mode=TwoWay}" />
+            <TextBox Header="Re-order Level" Text="{Binding  Product.ReorderLevel, Mode=TwoWay}" />
+            <TextBox Header="Active?" Text="{Binding  Product.IsActive, Mode=TwoWay}" />
+            
+        </StackPanel>
+    </Grid>
+</ContentDialog>

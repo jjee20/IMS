@@ -13,6 +13,7 @@ using RavenTechV2.Core.Models.Accounting;
 using RavenTechV2.Core.Models.AuditTrail;
 using RavenTechV2.Core.Models.Banking;
 using RavenTechV2.Core.Models.Inventory;
+using RavenTechV2.Core.Models.Inventory.ViewModels;
 using RavenTechV2.Core.Models.MasterData;
 using RavenTechV2.Core.Models.Payroll;
 using RavenTechV2.Core.Models.Projects;
@@ -31,9 +32,13 @@ public class ErpDbContext : IdentityDbContext<User, Role, string>
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_raventech;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-        options.ConfigureWarnings(w =>
-            w.Ignore(RelationalEventId.PendingModelChangesWarning));
+        //if (!options.IsConfigured)
+        //{
+        //    // Configure the DbContext to use SQL Server with a connection string
+        //    options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_raventech;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        //    options.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
+        //}
+        base.OnConfiguring(options);
     }
 
     // Accounting/Finance
@@ -56,6 +61,7 @@ public class ErpDbContext : IdentityDbContext<User, Role, string>
     public DbSet<PurchasePayment> PurchasePayments { get; set; }
 
     // Inventory
+    public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Stock> Stocks { get; set; }
     public DbSet<Warehouse> Warehouses { get; set; }

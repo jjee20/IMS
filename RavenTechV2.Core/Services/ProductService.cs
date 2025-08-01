@@ -1,5 +1,6 @@
 ﻿using RavenTechV2.Core.Data;
 using RavenTechV2.Core.Models.Inventory;
+using RavenTechV2.Core.Models.Inventory.ViewModels;
 
 namespace RavenTechV2.Core.Services;
 public class ProductService : Repository<Product>, IProductService

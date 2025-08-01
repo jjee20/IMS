@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RavenTechV2.Core.Enums;
 
 namespace RavenTechV2.Core.Models.Sales;
 public class SalesPayment
@@ -16,5 +17,10 @@ public class SalesPayment
     public Invoice Invoice { get; set; }
     public decimal Amount { get; set; }
     public DateTime PaymentDate { get; set; }
-    public string PaymentMethod { get; set; }
+    [Required]
+    public PaymentType PaymentType { get; set; } 
+    public string PaymentReference { get; set; }
+    public string Remarks { get; set; }
+    public PaymentStatus Status { get; set; }
+
 }

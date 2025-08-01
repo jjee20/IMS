@@ -13,7 +13,7 @@ public class Invoice
     [Key]
     public int InvoiceId { get; set; }
     public string InvoiceNumber { get; set; }
-    public string CustomerId { get; set; }
+    public int CustomerId { get; set; }
     [ForeignKey("CustomerId")]
     public Customer Customer { get; set; }
     public int? SalesOrderId { get; set; }
@@ -23,4 +23,12 @@ public class Invoice
     public DateTime InvoiceDate { get; set; }
     public DateTime DueDate { get; set; }
     public InvoiceStatus Status { get; set; }
+    public decimal TotalPaid { get; set; }
+
+    [NotMapped]
+    public decimal Balance => Amount - TotalPaid;
+
+    [NotMapped]
+    public bool IsOverpaid => TotalPaid > Amount;
+
 }

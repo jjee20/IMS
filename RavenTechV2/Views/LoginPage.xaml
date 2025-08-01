@@ -4,38 +4,58 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:RavenTechV2.ViewModels"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Core"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+    <Grid>
         <StackPanel
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Spacing="24"
-            Width="350">
+            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+            CornerRadius="12"
+            Width="500">
 
-            <TextBlock Text="Sign In" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,0,0,24"/>
+            <Image Source="/Assets/RavenTech.png" Width="250" Height="250" />
+            <StackPanel
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Spacing="24"
+                 Width="350">   
+                <TextBlock Text="Sign In" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,0,0,24"/>
 
-            <!-- Username -->
-            <StackPanel Spacing="4">
-                <TextBlock Text="Email or Username" Style="{ThemeResource CaptionTextBlockStyle}" />
-                <TextBox Text="{Binding Username, Mode=TwoWay}" PlaceholderText="Enter your email or username" />
+                <!-- Username -->
+                <StackPanel Spacing="4">
+                    <TextBlock Text="Email or Username" Style="{ThemeResource CaptionTextBlockStyle}" />
+                    <TextBox Text="{Binding Username, Mode=TwoWay}" PlaceholderText="Enter your email or username"  KeyDown="Input_KeyDown" />
+                </StackPanel>
+
+                <!-- Password -->
+                <StackPanel Spacing="4">
+                    <TextBlock Text="Password" Style="{ThemeResource CaptionTextBlockStyle}" />
+                    <PasswordBox x:Name="PasswordBox" PlaceholderText="Enter your password" PasswordChanged="PasswordBox_PasswordChanged"  KeyDown="Input_KeyDown"/>
+                </StackPanel>
+
+                <!-- Error Message -->
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap" />
+
+                <!-- Login Button -->
+                <Button HorizontalAlignment="Center" Width="350" Background="DodgerBlue"
+                        Command="{Binding LoginCommand}" Height="40" Margin="0,0,0,50">
+                    <Grid>
+                        <TextBlock Text="Login" 
+                           Foreground="White" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"
+                           FontWeight="SemiBold"
+                           FontSize="16"/>
+                        <ProgressRing 
+                            IsActive="{Binding IsBusy}" 
+                            Width="28" Height="28"
+                            HorizontalAlignment= "Right" 
+                            VerticalAlignment="Center"/>
+                    </Grid>
+                </Button>
             </StackPanel>
-
-            <!-- Password -->
-            <StackPanel Spacing="4">
-                <TextBlock Text="Password" Style="{ThemeResource CaptionTextBlockStyle}" />
-                <PasswordBox x:Name="PasswordBox" PlaceholderText="Enter your password" PasswordChanged="PasswordBox_PasswordChanged"/>
-            </StackPanel>
-
-            <!-- Error Message -->
-            <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap" />
-
-            <!-- Login Button -->
-            <Button Content="Login"
-                    Command="{Binding LoginCommand}" Height="40" Margin="0,12,0,0" />
-            <ProgressRing IsActive="{Binding IsBusy}" />
-
         </StackPanel>
     </Grid>
 </Page>

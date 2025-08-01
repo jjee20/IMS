@@ -3,22 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Xaml.Controls;
+using WinUIEx.Messaging;
 
 namespace RavenTechV2.Services;
-public class NotificationService
+public partial class NotificationService : ObservableObject
 {
-    public event Action<string, NotificationType>? NotificationRaised;
+    [ObservableProperty] private bool isOpen;
+    [ObservableProperty] private string? message;
+    [ObservableProperty] private InfoBarSeverity severity = InfoBarSeverity.Informational;
 
-    public void Show(string message, NotificationType type = NotificationType.Info)
+    public void Show(string msg, InfoBarSeverity severity = InfoBarSeverity.Informational, int milliseconds = 2000)
     {
-        NotificationRaised?.Invoke(message, type);
+        Message = msg;
+        Severity = severity;
+        IsOpen = true;
+        if (milliseconds > 0)
+            DismissAfter(milliseconds);
     }
-}
 
-public enum NotificationType
-{
-    Info,
-    Success,
-    Warning,
-    Error
+    private async void DismissAfter(int ms)
+    {
+        await Task.Delay(ms);
+        IsOpen = false;
+    }
 }

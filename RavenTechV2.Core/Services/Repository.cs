@@ -130,78 +130,92 @@ public class Repository<T> : IRepository<T> where T : class
     }
 
     public void UpdateWithChildren<TParent, TChild>(
-        TParent parent,
-        Expression<Func<TParent, IEnumerable<TChild>>> childSelector,
-        Func<TChild, object> keySelector
-        )
-        where TParent : class
-        where TChild : class
+   TParent parent,
+   Expression<Func<TParent, IEnumerable<TChild>>> childSelector,
+   Func<TChild, object> keySelector
+)
+   where TParent : class
+   where TChild : class
     {
         // === DETACH PREVIOUSLY TRACKED PARENT (if any) ===
-        var keyName = _db.Model.FindEntityType(typeof(TParent))
+        var parentKeyName = _db.Model.FindEntityType(typeof(TParent))
             .FindPrimaryKey()
             .Properties
             .Select(x => x.Name)
             .Single();
 
-        var parentKeyValue = typeof(TParent).GetProperty(keyName)?.GetValue(parent);
+        var parentKeyValue = typeof(TParent).GetProperty(parentKeyName)?.GetValue(parent);
 
         var trackedParent = _db.ChangeTracker.Entries<TParent>()
             .FirstOrDefault(e =>
-                e.Property(keyName).CurrentValue != null &&
-                e.Property(keyName).CurrentValue.Equals(parentKeyValue));
+                e.Property(parentKeyName).CurrentValue != null &&
+                e.Property(parentKeyName).CurrentValue.Equals(parentKeyValue));
 
         if (trackedParent != null && !ReferenceEquals(trackedParent.Entity, parent))
             trackedParent.State = EntityState.Detached;
 
-        // === Attach the new parent for update ===
         _db.Entry(parent).State = EntityState.Modified;
 
-        // === Update children ===
+        // === Prepare to sync children ===
         var children = childSelector.Compile().Invoke(parent)?.ToList() ?? new List<TChild>();
-        var childSet = _db.Set<TChild>();
 
-        // Try to find the parent key property on the child type (assumes FK property is "ParentId")
-        var parentIdProperty = typeof(TChild).GetProperties().FirstOrDefault(p => p.Name == keyName);
-        var parentId = parentKeyValue;
+        var childEntityType = _db.Model.FindEntityType(typeof(TChild));
+        var childKeyName = childEntityType.FindPrimaryKey().Properties.Select(p => p.Name).Single();
+        var parentNavProp = childEntityType.GetProperties().FirstOrDefault(p => p.Name == parentKeyName);
 
-        // === DETACH PREVIOUSLY TRACKED CHILDREN (if any) ===
-        if (parentIdProperty != null)
-        {
-            var trackedChildren = _db.ChangeTracker.Entries<TChild>()
-                .Where(e =>
-                    parentIdProperty.GetValue(e.Entity)?.Equals(parentId) == true)
-                .ToList();
+        if (parentNavProp == null)
+            throw new InvalidOperationException("Could not find foreign key property on child entity.");
 
-            foreach (var entry in trackedChildren)
+        // Now use a compiled lambda or manually filter after materialization
+        var propertyName = parentNavProp.Name; // ← Safe: always has a value
+        var propInfo = typeof(TChild).GetProperty(propertyName);
+
+        if (propInfo == null)
+            throw new InvalidOperationException($"Property '{propertyName}' not found on {typeof(TChild)}");
+
+        var dbChildren = _db.Set<TChild>()
+            .AsNoTracking()
+            .ToList()
+            .Where(c =>
             {
-                // Only detach if not the same instance
-                if (!children.Contains(entry.Entity))
-                    entry.State = EntityState.Detached;
-            }
-        }
-
-        // Get existing children (from context/local, could also use DB if necessary)
-        var dbChildren = childSet.Local
-            .Where(c => parentIdProperty != null && parentIdProperty.GetValue(c)?.Equals(parentId) == true)
+                var value = propInfo.GetValue(c);
+                return value != null && value.Equals(parentKeyValue);
+            })
             .ToList();
 
-        // Add or update
+        var trackedChildren = _db.ChangeTracker.Entries<TChild>()
+            .Select(e => e.Entity)
+            .Where(c => parentNavProp != null &&
+                        parentNavProp.PropertyInfo.GetValue(c)?.Equals(parentKeyValue) == true)
+            .ToList();
+
+        dbChildren.AddRange(trackedChildren.Where(c => !dbChildren.Any(x => keySelector(x).Equals(keySelector(c)))));
+
+        // === Sync logic ===
         foreach (var child in children)
         {
             var key = keySelector(child);
-            var existing = dbChildren.FirstOrDefault(c => keySelector(c).Equals(key));
+            var match = dbChildren.FirstOrDefault(c => keySelector(c).Equals(key));
 
-            var idProperty = child.GetType().GetProperty("Id");
-            int idValue = idProperty != null ? (int)idProperty.GetValue(child) : 0;
+            // Get actual PK value
+            var keyProp = typeof(TChild).GetProperty(childKeyName);
+            var keyVal = keyProp != null ? Convert.ToInt32(keyProp.GetValue(child)) : 0;
 
-            if (existing == null || idValue == 0)
+            if (match == null || keyVal == 0)
+            {
+                // New or unmatched — ensure PK = 0 for new records
+                if (keyProp != null && keyVal == 0)
+                    keyProp.SetValue(child, 0);
+
                 _db.Entry(child).State = EntityState.Added;
+            }
             else
+            {
                 _db.Entry(child).State = EntityState.Modified;
+            }
         }
 
-        // Delete removed children
+        // === Delete children missing from new list ===
         foreach (var dbChild in dbChildren)
         {
             if (!children.Any(c => keySelector(c).Equals(keySelector(dbChild))))
@@ -210,7 +224,6 @@ public class Repository<T> : IRepository<T> where T : class
             }
         }
     }
-
 
     public void UpdateRange(IEnumerable<T> entities)
     {
