@@ -1,0 +1,32 @@
+<ContentDialog
+    x:Class="RavenTechV2.Views.BranchDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:editors="using:Syncfusion.UI.Xaml.Editors"
+    Title="{Binding DialogTitle, Mode=OneWay}"
+    PrimaryButtonText="Save"
+    CloseButtonText="Cancel"
+    DefaultButton="Primary">
+
+    <Grid x:Name="ContentArea">
+        <StackPanel Spacing="12">
+            <TextBlock Text="Branch Name"/>
+            <TextBox Text="{Binding  Branch.Name, Mode=TwoWay}" />
+
+            <TextBlock Text="Email"/>
+            <TextBox Text="{Binding  Branch.Email, Mode=TwoWay}" />
+
+            <TextBlock Text="Phone"/>
+            <TextBox Text="{Binding  Branch.Phone, Mode=TwoWay}" />
+
+            <TextBlock Text="Address"/>
+            <TextBox TextWrapping="Wrap" IsSpellCheckEnabled="True"
+                SelectionHighlightColor="Green"  Text="{Binding  Branch.Address, Mode=TwoWay}" />
+
+            <TextBlock Text="Contact Person"/>
+            <TextBox Text="{Binding  Branch.ContactPerson, Mode=TwoWay}" />
+        </StackPanel>
+    </Grid>
+</ContentDialog>

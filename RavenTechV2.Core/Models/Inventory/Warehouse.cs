@@ -8,14 +8,10 @@ using System.Threading.Tasks;
 using RavenTechV2.Core.Models.MasterData;
 
 namespace RavenTechV2.Core.Models.Inventory;
-public class Warehouse
+public class WarehouseVM
 {
-    [Key]
     public int WarehouseId { get; set; }
-    [Required]
     public string Name { get; set; }
-    public int BranchId { get; set; }
-    [ForeignKey("BranchId")]
-    public Branch Branch { get; set; }
+    public string Branch { get; set; }
     public string Description { get; set; }
 }

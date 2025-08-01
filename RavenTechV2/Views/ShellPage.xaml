@@ -6,33 +6,86 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:RavenTechV2.Helpers"
     xmlns:behaviors="using:RavenTechV2.Behaviors"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:i="using:Microsoft.Xaml.Interactivity" xmlns:syncfusion="using:Syncfusion.UI.Xaml.Core"
     Loaded="OnLoaded">
 
     <Grid>
+
+        <InfoBar
+        x:Name="NotificationBar"
+        IsOpen="{Binding Notifier.IsOpen, Mode=OneWay}"
+        Message="{Binding Notifier.Message, Mode=OneWay}"
+        Severity="{Binding Notifier.Severity, Mode=OneWay}"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Bottom"
+        Margin="0,12,0,0"
+        Width="350"/>
+
         <Grid x:Name="AppTitleBar"
               Canvas.ZIndex="1"
-              Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
+              Height="48"
               IsHitTestVisible="True"
               VerticalAlignment="Top">
-            <Image Source="/Assets/WindowIcon.ico"
-                   HorizontalAlignment="Left"
-                   Width="16"
-                   Height="16" />
-            <TextBlock x:Name="AppTitleBarText"
-                       VerticalAlignment="Center"
-                       TextWrapping="NoWrap"
-                       Style="{StaticResource CaptionTextBlockStyle}"
-                       Margin="28,0,0,0"/>
 
-            <InfoBar
-            x:Name="GlobalInfoBar"
-            IsOpen="False"
-            Severity="Informational"
-            Message=""
-            Margin="20"
-            HorizontalAlignment="Center"
-            Width="400"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <!-- Icon -->
+                <ColumnDefinition Width="*"/>
+                <!-- Title & InfoBar -->
+                <ColumnDefinition Width="Auto"/>
+                <!-- Profile Button -->
+            </Grid.ColumnDefinitions>
+            <!-- App Icon -->
+            <Image Grid.Column="0"
+           Source="/Assets/RavenTech.ico"
+           HorizontalAlignment="Left"
+           Width="24"
+           Height="24" 
+                   Tapped ="Image_Tapped"
+           />
+
+            <!-- App Title and InfoBar -->
+            <StackPanel Grid.Column="1"
+                Orientation="Horizontal"
+                VerticalAlignment="Center">
+                <TextBlock
+                   VerticalAlignment="Center"
+                   TextWrapping="NoWrap"
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                           Text="RavenTech"
+                   Margin="8,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2"
+            Orientation="Horizontal"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Margin="0,0,145,0">
+
+                <syncfusion:SfAvatarView 
+        x:Name="AvatarControl"
+        ContentType="Initials" 
+        InitialsType="DoubleCharacter"
+        IsEnabled="True"
+        AvatarName="Alex Davis" 
+        AvatarShape="Circle"
+        AvatarSize="Small"
+        Visibility="Collapsed"
+        PointerPressed="AvatarControl_PointerPressed"/>
+
+                <!-- Hidden Button to Show MenuFlyout on Avatar Tap -->
+                <Button x:Name="HiddenFlyoutLauncher"
+            Visibility="Collapsed">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Personal"/>
+                            <MenuFlyoutItem Text="School"/>
+                            <MenuFlyoutSeparator/>
+                            <MenuFlyoutItem Text="Sign out"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </StackPanel>
         </Grid>
         <NavigationView
             x:Name="NavigationViewControl"
@@ -108,7 +161,7 @@
                         </NavigationViewItem>
                         <NavigationViewItem Content="Shipments/Delivery">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB48;"/>
                             </NavigationViewItem.Icon>
                             <NavigationViewItem.MenuItems>
                                 <NavigationViewItem Content="New Shipment">
@@ -119,66 +172,21 @@
                                 </NavigationViewItem>
                             </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Customers">
+                        <NavigationViewItem Content="Customers" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.CustomerViewModel">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE716;"/>
                             </NavigationViewItem.Icon>
-                            <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content="New Customer">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="List Customers">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="Manage Customer Types">
-                                    <NavigationViewItem.MenuItems>
-                                        <NavigationViewItem Content="New Customer Type">
-                                        </NavigationViewItem>
-                                        <NavigationViewItem Content="List Customer Types">
-                                        </NavigationViewItem>
-                                    </NavigationViewItem.MenuItems>
-                                </NavigationViewItem>
-                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
                         <NavigationViewItem Content="Payments">
                             <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC59;"/>
                             </NavigationViewItem.Icon>
                             <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content=" Receive Payment">
+                                <NavigationViewItem Content="Receive Payment">
                                 </NavigationViewItem>
                                 <NavigationViewItem Content="List Payments">
                                 </NavigationViewItem>
                                 <NavigationViewItem Content="Sales Receipt">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="Manage Payment Types">
-                                    <NavigationViewItem.MenuItems>
-                                        <NavigationViewItem Content="New Payment Type">
-                                        </NavigationViewItem>
-                                        <NavigationViewItem Content="List Payment Types">
-                                        </NavigationViewItem>
-                                    </NavigationViewItem.MenuItems>
-                                </NavigationViewItem>
-                            </NavigationViewItem.MenuItems>
-                        </NavigationViewItem>
-                        <NavigationViewItem Content="Sales Settings">
-                            <NavigationViewItem.Icon>
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                            </NavigationViewItem.Icon>
-                            <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content="Sales Types">
-                                    <NavigationViewItem.MenuItems>
-                                        <NavigationViewItem Content="New Sales Type">
-                                        </NavigationViewItem>
-                                        <NavigationViewItem Content="List Sales Types">
-                                        </NavigationViewItem>
-                                    </NavigationViewItem.MenuItems>
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="Shipment Types">
-                                    <NavigationViewItem.MenuItems>
-                                        <NavigationViewItem Content="New Shipment Type">
-                                        </NavigationViewItem>
-                                        <NavigationViewItem Content="List Shipment Types">
-                                        </NavigationViewItem>
-                                    </NavigationViewItem.MenuItems>
                                 </NavigationViewItem>
                             </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
@@ -231,24 +239,10 @@
                                 </NavigationViewItem>
                             </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Vendors">
+                        <NavigationViewItem Content="Vendors" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.VendorViewModel">
                             <NavigationViewItem.Icon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
                             </NavigationViewItem.Icon>
-                            <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content="New Vendor">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="List Vendors">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="Manage Vendor Types">
-                                    <NavigationViewItem.MenuItems>
-                                        <NavigationViewItem Content="New Vendor Type">
-                                        </NavigationViewItem>
-                                        <NavigationViewItem Content="List Vendor Types">
-                                        </NavigationViewItem>
-                                    </NavigationViewItem.MenuItems>
-                                </NavigationViewItem>
-                            </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
                         <NavigationViewItem Content="Goods Receipt">
                             <NavigationViewItem.Icon>
@@ -298,9 +292,7 @@
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA55;"/>
                             </NavigationViewItem.Icon>
                             <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content="New Product">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="List Products">
+                                <NavigationViewItem Content="List Products" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.ProductViewModel">
                                 </NavigationViewItem>
                                 <NavigationViewItem Content="Adjust Stocks">
                                 </NavigationViewItem>
@@ -329,34 +321,16 @@
                                 </NavigationViewItem>
                             </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Warehouses">
-                            <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content="New Warehouse">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="List Warehouses">
-                                </NavigationViewItem>
-                            </NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Warehouses" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.WarehouseViewModel">
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Branches">
-                            <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content="New Branche">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="List Branches">
-                                </NavigationViewItem>
-                            </NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Branches" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.BranchViewModel">
                         </NavigationViewItem>
-                        <NavigationViewItem Content="Manage Units of Measure (UOM)">
-                            <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content="New UOM">
-                                </NavigationViewItem>
-                                <NavigationViewItem Content="List UOMs">
-                                </NavigationViewItem>
-                            </NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Units of Measure (UOM)" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.UnitOfMeasureViewModel">
+                        </NavigationViewItem>
+                        <NavigationViewItem Content="Categories" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.CategoryViewModel">
                         </NavigationViewItem>
                         <NavigationViewItem Content="Inventory Settings">
                             <NavigationViewItem.MenuItems>
-                                <NavigationViewItem Content="Categories">
-                                </NavigationViewItem>
                                 <NavigationViewItem Content="Valuation Methods">
                                 </NavigationViewItem>
                             </NavigationViewItem.MenuItems>
@@ -649,6 +623,16 @@
                             </NavigationViewItem.MenuItems>
                         </NavigationViewItem>
                     </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Warehouse" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.WarehouseViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Category" helpers:NavigationHelper.NavigateTo="RavenTechV2.ViewModels.CategoryViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
+                    </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>

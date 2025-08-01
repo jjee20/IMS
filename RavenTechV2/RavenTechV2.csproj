@@ -15,6 +15,9 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\RvenTech_PNG.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Views\LoginPage.xaml" />
     <None Remove="Views\ProductFormDialogPage.xaml" />
   </ItemGroup>
@@ -28,12 +31,21 @@
     <PackageReference Include="CommunityToolkit.WinUI.UI.Animations" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
     <PackageReference Include="Syncfusion.Chart.WinUI" Version="30.1.37" />
     <PackageReference Include="Syncfusion.Core.WinUI" Version="30.1.37" />
     <PackageReference Include="Syncfusion.Grid.WinUI" Version="30.1.37" />
+    <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="30.1.42" />
+    <PackageReference Include="Syncfusion.XlsIO.Net.Core" Version="30.1.42" />
     <PackageReference Include="WinUIEx" Version="2.3.2" />
   </ItemGroup>
 
@@ -46,11 +58,41 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\Inventory\Dialog\ProductDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Inventory\Dialog\ProductDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Inventory\ProductPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Inventory\Dialog\CategoryDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Inventory\Dialog\CategoryDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Inventory\Dialog\WarehouseDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Inventory\Dialog\UnitOfMeasureDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Inventory\Dialog\BranchDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Inventory\Dialog\UnitOfMeasureDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ProductFormDialogPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Views\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\Sales\Dialog\VendorDetailsDialog.xaml">
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
 
@@ -60,7 +102,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Accounting\" />
-    <Folder Include="Views\Inventory\Dialog\" />
   </ItemGroup>
   
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

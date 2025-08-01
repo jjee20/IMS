@@ -174,6 +174,13 @@ namespace InfastructureLayer.Repositories
             _db.Entry(entity).State = EntityState.Modified;
         }
 
+        public void UpdateRange(IEnumerable<T> entities)
+        {
+            foreach (var entity in entities)
+            {
+                Update(entity); // reuses safe single update
+            }
+        }
 
         public void UpdateWithChildren<TParent, TChild>(
     TParent parent,
@@ -273,13 +280,6 @@ namespace InfastructureLayer.Repositories
 
 
 
-        public void UpdateRange(IEnumerable<T> entities)
-        {
-            foreach (var entity in entities)
-            {
-                Update(entity); // reuses safe single update
-            }
-        }
 
         public void UpdateWithChild<TChild>(
      T entity,

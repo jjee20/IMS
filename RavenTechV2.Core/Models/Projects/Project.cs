@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RavenTechV2.Core.Models.MasterData;
+using RavenTechV2.Core.Models.Inventory;
 using RavenTechV2.Core.Models.Payroll;
 
 namespace RavenTechV2.Core.Models.Projects;

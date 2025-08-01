@@ -15,7 +15,7 @@ public class PurchaseOrder
     [Required]
     public string PurchaseOrderNumber { get; set; }
     [Required]
-    public string VendorId { get; set; }
+    public int VendorId { get; set; }
     [ForeignKey("VendorId")]
     public Vendor Vendor { get; set; }
     public DateTime OrderDate { get; set; }

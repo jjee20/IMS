@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RavenTechV2.Core.Models.Inventory;
+using RavenTechV2.Core.Models.Inventory.ViewModels;
 
 namespace RavenTechV2.Core.Models.Sales;
 public class SalesOrderLine

@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace RavenTechV2.Core.Enums;
 public enum InvoiceStatus
 {
-    Draft, Issued, Paid, Overdue, Cancelled
+    Draft, Issued, Partial, Paid, Overdue, Cancelled
 }
 
