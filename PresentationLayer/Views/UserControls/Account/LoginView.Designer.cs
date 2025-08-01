@@ -211,7 +211,7 @@
             guna2PictureBox1.Name = "guna2PictureBox1";
             guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2PictureBox1.Size = new Size(356, 381);
-            guna2PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            guna2PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             guna2PictureBox1.TabIndex = 6;
             guna2PictureBox1.TabStop = false;
             // 
