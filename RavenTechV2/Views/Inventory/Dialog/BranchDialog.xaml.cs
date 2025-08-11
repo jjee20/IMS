@@ -25,7 +25,7 @@ public sealed partial class BranchDialog : ContentDialog
     }
 }
 
-public partial class BranchDialogViewModel : ObservableObject
+public partial class BranchDialogViewModel : ValidatableViewModel
 {
     [ObservableProperty]
     private Branch branch;

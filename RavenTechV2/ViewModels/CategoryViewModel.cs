@@ -132,12 +132,13 @@ public partial class CategoryViewModel : ObservableRecipient, INavigationAware
     public async void Add()
     {
         var entity = new Category();
+        var dialog = new CategoryDialog(entity);
         var result = await _dialogService.ShowDialogAsync(
-            () => new CategoryDialog(entity),
+            () => dialog,
             DialogXamlRoot);
-
         if (result)
         {
+            dialog.ViewModel.ToEntity(entity);
             await _unitOfService.Category.Value.AddAsync(entity);
             await _unitOfService.SaveChangesAsync();
             Notifier.Show($"Category '{entity.Name}' added successfully.", InfoBarSeverity.Success);
@@ -156,8 +157,8 @@ public partial class CategoryViewModel : ObservableRecipient, INavigationAware
             DialogXamlRoot);
         if (result)
         {
-            var updatedTopic = dialog.ViewModel.Category;
-            _unitOfService.Category.Value.Update(updatedTopic);
+            dialog.ViewModel.ToEntity(entity);
+            _unitOfService.Category.Value.Update(entity);
             await _unitOfService.SaveChangesAsync();
             await ReloadAsync();
             Notifier.Show($"Category '{entity.Name}' updated successfully.", InfoBarSeverity.Success);
