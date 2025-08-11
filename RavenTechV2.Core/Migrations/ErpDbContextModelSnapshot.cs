@@ -480,6 +480,55 @@ namespace RavenTechV2.Core.Migrations
                     b.ToTable("BankTransactions");
                 });
 
+            modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.Branch", b =>
+                {
+                    b.Property<int>("BranchId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BranchId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BranchId");
+
+                    b.ToTable("Branches");
+                });
+
+            modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -493,6 +542,9 @@ namespace RavenTechV2.Core.Migrations
 
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
@@ -516,8 +568,8 @@ namespace RavenTechV2.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
 
                     b.Property<int>("ReorderLevel")
                         .HasColumnType("int");
@@ -531,6 +583,8 @@ namespace RavenTechV2.Core.Migrations
                     b.HasKey("ProductId");
 
                     b.HasIndex("BranchId");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("UnitOfMeasureId");
 
@@ -601,7 +655,27 @@ namespace RavenTechV2.Core.Migrations
                     b.ToTable("StockMovements");
                 });
 
-            modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.Warehouse", b =>
+            modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.UnitOfMeasure", b =>
+                {
+                    b.Property<int>("UnitOfMeasureId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UnitOfMeasureId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Symbol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UnitOfMeasureId");
+
+                    b.ToTable("UnitOfMeasures");
+                });
+
+            modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.ViewModels.Warehouse", b =>
                 {
                     b.Property<int>("WarehouseId")
                         .ValueGeneratedOnAdd()
@@ -624,35 +698,6 @@ namespace RavenTechV2.Core.Migrations
                     b.HasIndex("BranchId");
 
                     b.ToTable("Warehouses");
-                });
-
-            modelBuilder.Entity("RavenTechV2.Core.Models.MasterData.Branch", b =>
-                {
-                    b.Property<int>("BranchId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BranchId"));
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactPerson")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BranchId");
-
-                    b.ToTable("Branches");
                 });
 
             modelBuilder.Entity("RavenTechV2.Core.Models.MasterData.Department", b =>
@@ -719,26 +764,6 @@ namespace RavenTechV2.Core.Migrations
                     b.HasKey("ShiftId");
 
                     b.ToTable("Shifts");
-                });
-
-            modelBuilder.Entity("RavenTechV2.Core.Models.MasterData.UnitOfMeasure", b =>
-                {
-                    b.Property<int>("UnitOfMeasureId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UnitOfMeasureId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Symbol")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UnitOfMeasureId");
-
-                    b.ToTable("UnitOfMeasures");
                 });
 
             modelBuilder.Entity("RavenTechV2.Core.Models.Payroll.Allowance", b =>
@@ -1114,8 +1139,11 @@ namespace RavenTechV2.Core.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("VendorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<decimal>("TotalPaid")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
 
                     b.HasKey("BillId");
 
@@ -1144,9 +1172,8 @@ namespace RavenTechV2.Core.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("VendorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
 
                     b.HasKey("PurchaseOrderId");
 
@@ -1204,8 +1231,17 @@ namespace RavenTechV2.Core.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethod")
+                    b.Property<string>("PaymentReference")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("PaymentId");
 
@@ -1216,8 +1252,11 @@ namespace RavenTechV2.Core.Migrations
 
             modelBuilder.Entity("RavenTechV2.Core.Models.Purchasing.Vendor", b =>
                 {
-                    b.Property<string>("VendorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("VendorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendorId"));
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -1232,8 +1271,8 @@ namespace RavenTechV2.Core.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("VendorId");
 
@@ -1242,8 +1281,11 @@ namespace RavenTechV2.Core.Migrations
 
             modelBuilder.Entity("RavenTechV2.Core.Models.Sales.Customer", b =>
                 {
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -1258,8 +1300,8 @@ namespace RavenTechV2.Core.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("CustomerId");
 
@@ -1277,8 +1319,8 @@ namespace RavenTechV2.Core.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
@@ -1294,6 +1336,9 @@ namespace RavenTechV2.Core.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPaid")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("InvoiceId");
 
@@ -1312,9 +1357,8 @@ namespace RavenTechV2.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalesOrderId"));
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DeliveryDate")
                         .HasColumnType("datetime2");
@@ -1325,6 +1369,12 @@ namespace RavenTechV2.Core.Migrations
                     b.Property<string>("SalesOrderNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SalesType")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ShipmentType")
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -1385,8 +1435,17 @@ namespace RavenTechV2.Core.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethod")
+                    b.Property<string>("PaymentReference")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("PaymentId");
 
@@ -1516,16 +1575,16 @@ namespace RavenTechV2.Core.Migrations
                         {
                             Id = "81E9241B-309F-48AA-A9BF-980E8929834F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0b71175b-c0a3-4cfc-a27e-dd96cfeb8985",
+                            ConcurrencyStamp = "95b99760-b070-44e8-8cbc-7554052fda00",
                             Email = "admin@erp.com",
                             EmailConfirmed = true,
                             FullName = "Administrator",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ERP.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGXU4wzwbrwi28DYHWZZAPFkazPvlx+80zp3lZJd5I7+pUPjKpa6WPNS5AxdMFKWHw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAgvRJOkFaoC6ppDhSAGiI5gBjBJZV0i6bcM8zzVfrvQncoagGaIBVj8mQ2vgdL8ig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1c3b3e1a-5201-49cd-93a8-61a93dbb62b5",
+                            SecurityStamp = "51463147-3b41-427c-a6cf-3132a9525b3f",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -1679,19 +1738,27 @@ namespace RavenTechV2.Core.Migrations
 
             modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.Product", b =>
                 {
-                    b.HasOne("RavenTechV2.Core.Models.MasterData.Branch", "Branch")
+                    b.HasOne("RavenTechV2.Core.Models.Inventory.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RavenTechV2.Core.Models.MasterData.UnitOfMeasure", "UnitOfMeasure")
+                    b.HasOne("RavenTechV2.Core.Models.Inventory.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RavenTechV2.Core.Models.Inventory.UnitOfMeasure", "UnitOfMeasure")
                         .WithMany()
                         .HasForeignKey("UnitOfMeasureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Branch");
+
+                    b.Navigation("Category");
 
                     b.Navigation("UnitOfMeasure");
                 });
@@ -1704,7 +1771,7 @@ namespace RavenTechV2.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RavenTechV2.Core.Models.Inventory.Warehouse", "Warehouse")
+                    b.HasOne("RavenTechV2.Core.Models.Inventory.ViewModels.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1723,7 +1790,7 @@ namespace RavenTechV2.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RavenTechV2.Core.Models.Inventory.Warehouse", "Warehouse")
+                    b.HasOne("RavenTechV2.Core.Models.Inventory.ViewModels.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1734,9 +1801,9 @@ namespace RavenTechV2.Core.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.Warehouse", b =>
+            modelBuilder.Entity("RavenTechV2.Core.Models.Inventory.ViewModels.Warehouse", b =>
                 {
-                    b.HasOne("RavenTechV2.Core.Models.MasterData.Branch", "Branch")
+                    b.HasOne("RavenTechV2.Core.Models.Inventory.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1837,7 +1904,7 @@ namespace RavenTechV2.Core.Migrations
 
             modelBuilder.Entity("RavenTechV2.Core.Models.Projects.Project", b =>
                 {
-                    b.HasOne("RavenTechV2.Core.Models.MasterData.Branch", "Branch")
+                    b.HasOne("RavenTechV2.Core.Models.Inventory.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId");
 
@@ -1888,7 +1955,9 @@ namespace RavenTechV2.Core.Migrations
 
                     b.HasOne("RavenTechV2.Core.Models.Purchasing.Vendor", "Vendor")
                         .WithMany("Bills")
-                        .HasForeignKey("VendorId");
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PurchaseOrder");
 
@@ -1940,7 +2009,9 @@ namespace RavenTechV2.Core.Migrations
                 {
                     b.HasOne("RavenTechV2.Core.Models.Sales.Customer", "Customer")
                         .WithMany("Invoices")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("RavenTechV2.Core.Models.Sales.SalesOrder", "SalesOrder")
                         .WithMany()

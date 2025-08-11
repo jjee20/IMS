@@ -177,4 +177,19 @@
   <data name="Shell_ProductList.Content" xml:space="preserve">
     <value>ProductList</value>
   </data>
+  <data name="Shell_Customer.Content" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="Shell_Vendor.Content" xml:space="preserve">
+    <value>Vendor</value>
+  </data>
+  <data name="Shell_UnitOfMeasure.Content" xml:space="preserve">
+    <value>UnitOfMeasure</value>
+  </data>
+  <data name="Shell_Warehouse.Content" xml:space="preserve">
+    <value>Warehouse</value>
+  </data>
+  <data name="Shell_Category.Content" xml:space="preserve">
+    <value>Category</value>
+  </data>
 </root>

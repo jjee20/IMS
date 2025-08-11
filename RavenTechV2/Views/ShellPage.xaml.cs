@@ -1,9 +1,12 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Diagnostics;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 
 using RavenTechV2.Contracts.Services;
+using RavenTechV2.Core.Models.Sales;
 using RavenTechV2.Helpers;
 using RavenTechV2.Services;
 using RavenTechV2.ViewModels;
@@ -25,63 +28,75 @@ public sealed partial class ShellPage : Page
         ViewModel = viewModel;
         InitializeComponent();
 
+        DataContext = ViewModel;
+
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
 
-        var notificationService = App.GetService<NotificationService>();
-        notificationService.NotificationRaised += OnNotificationRaised;
         // TODO: Set the title bar icon by updating /Assets/WindowIcon.ico.
         // A custom title bar is required for full window theme and Mica support.
         // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
-        AppTitleBarText.Text = "AppDisplayName".GetLocalized();
+        //AppTitleBarText.Text = "AppDisplayName".GetLocalized();
     }
-    private async void OnNotificationRaised(string message, NotificationType type)
+    private void Image_Tapped(object sender, TappedRoutedEventArgs e)
     {
-        DispatcherQueue.TryEnqueue(() =>
+        Debug.WriteLine("Image tapped!");
+    }
+    private void AvatarControl_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        if (e.GetCurrentPoint(AvatarControl).Properties.IsLeftButtonPressed)
         {
-            GlobalInfoBar.Message = message;
-            GlobalInfoBar.IsOpen = true;
-            GlobalInfoBar.Severity = type switch
-            {
-                NotificationType.Success => InfoBarSeverity.Success,
-                NotificationType.Warning => InfoBarSeverity.Warning,
-                NotificationType.Error => InfoBarSeverity.Error,
-                _ => InfoBarSeverity.Informational
-            };
-        });
-
-        // Auto-close after 3 seconds (optional)
-        await Task.Delay(3000);
-        DispatcherQueue.TryEnqueue(() =>
-        {
-            GlobalInfoBar.IsOpen = false;
-        });
+            FlyoutBase.GetAttachedFlyout(HiddenFlyoutLauncher)?.ShowAt(AvatarControl);
+        }
     }
     private async void NavigationViewControl_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
     {
-        if (args.InvokedItemContainer is NavigationViewItem nvi && nvi.Tag as string == "Logout")
+        if (args.InvokedItemContainer is NavigationViewItem nvi)
         {
-            var dialog = new ContentDialog
-            {
-                Title = "Confirm Logout",
-                Content = "Are you sure you want to log out?",
-                PrimaryButtonText = "Logout",
-                CloseButtonText = "Cancel",
-                XamlRoot = this.XamlRoot
-            };
-            var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                ViewModel.LogoutCommand.Execute(null);
+            var tag = nvi.Tag as string;
 
-                App.MainWindow.Content = new LoginPage();
+            if (tag == "Logout")
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "Confirm Logout",
+                    Content = "Are you sure you want to log out?",
+                    PrimaryButtonText = "Logout",
+                    CloseButtonText = "Cancel",
+                    XamlRoot = this.XamlRoot
+                };
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    ViewModel.LogoutCommand.Execute(null);
+                    App.MainWindow.Content = new LoginPage();
+                }
+                return;
             }
-            return;
+
+            if (tag == "NewCustomer")
+            {
+                //var newCustomer = new Customer();
+                //var customerDialog = new CustomerDialog(newCustomer)
+                //{
+                //    XamlRoot = this.XamlRoot
+                //};
+
+                //var result = await customerDialog.ShowAsync();
+                //if (result == ContentDialogResult.Primary)
+                //{
+                //    // Optional: if using ViewModel
+                //    await ViewModel.AddNewCustomerAsync(newCustomer);
+                //}
+
+                //return;
+            }
         }
     }
+
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
@@ -93,7 +108,8 @@ public sealed partial class ShellPage : Page
 
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
-        App.AppTitlebar = AppTitleBarText as UIElement;
+        ViewModel.DialogXamlRoot = this.XamlRoot;
+        //App.AppTitlebar = AppTitleBarText as UIElement;
     }
 
     private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)

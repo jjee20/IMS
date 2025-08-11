@@ -13,7 +13,7 @@ public class Bill
     [Key]
     public int BillId { get; set; }
     public string BillNumber { get; set; }
-    public string VendorId { get; set; }
+    public int VendorId { get; set; }
     [ForeignKey("VendorId")]
     public Vendor Vendor { get; set; }
     public int? PurchaseOrderId { get; set; }
@@ -23,4 +23,11 @@ public class Bill
     public DateTime BillDate { get; set; }
     public DateTime DueDate { get; set; }
     public BillStatus Status { get; set; }
+    public decimal TotalPaid { get; set; }
+
+    [NotMapped]
+    public decimal Balance => Amount - TotalPaid;
+
+    [NotMapped]
+    public bool IsOverpaid => TotalPaid > Amount;
 }

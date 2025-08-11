@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RavenTechV2.Core.Enums;
+using RavenTechV2.Core.Models.Inventory.ViewModels;
 
 namespace RavenTechV2.Core.Models.Inventory;
 public class StockMovement

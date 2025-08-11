@@ -16,7 +16,13 @@ public class PageService : IPageService
     {
         Configure<DashboardViewModel, DashboardPage>();
         Configure<SettingsViewModel, SettingsPage>();
-        Configure<ProductListViewModel, ProductListPage>();
+        Configure<ProductViewModel, ProductPage>();
+        Configure<CustomerViewModel, CustomerPage>();
+        Configure<VendorViewModel, VendorPage>();
+        Configure<BranchViewModel, BranchPage>();
+        Configure<UnitOfMeasureViewModel, UnitOfMeasurePage>();
+        Configure<WarehouseViewModel, WarehousePage>();
+        Configure<CategoryViewModel, CategoryPage>();
     }
 
     public Type GetPageType(string key)

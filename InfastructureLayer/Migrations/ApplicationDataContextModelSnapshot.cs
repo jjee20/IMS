@@ -17,7 +17,7 @@ namespace InfastructureLayer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -40,7 +40,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("DepartmentId");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Allowance", b =>
@@ -74,7 +74,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Allowances");
+                    b.ToTable("Allowances", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Attendance", b =>
@@ -115,7 +115,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendances", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.AuditLog", b =>
@@ -143,7 +143,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("AuditLogId");
 
-                    b.ToTable("AuditLogs");
+                    b.ToTable("AuditLogs", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Benefit", b =>
@@ -171,7 +171,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Benefits");
+                    b.ToTable("Benefits", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Bonus", b =>
@@ -206,7 +206,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Bonuses");
+                    b.ToTable("Bonuses", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Contribution", b =>
@@ -237,7 +237,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("ContributionId");
 
-                    b.ToTable("Contributions");
+                    b.ToTable("Contributions", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Deduction", b =>
@@ -268,7 +268,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Deductions");
+                    b.ToTable("Deductions", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.EmployeeContribution", b =>
@@ -299,7 +299,7 @@ namespace InfastructureLayer.Migrations
                     b.HasIndex("EmployeeId")
                         .IsUnique();
 
-                    b.ToTable("EmployeeContributions");
+                    b.ToTable("EmployeeContributions", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Holiday", b =>
@@ -325,7 +325,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("HolidayId");
 
-                    b.ToTable("Holidays");
+                    b.ToTable("Holidays", (string)null);
 
                     b.HasData(
                         new
@@ -500,7 +500,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("JobPositionId");
 
-                    b.ToTable("JobPositions");
+                    b.ToTable("JobPositions", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Leave", b =>
@@ -538,7 +538,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Leaves");
+                    b.ToTable("Leaves", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Payroll", b =>
@@ -604,7 +604,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Payrolls");
+                    b.ToTable("Payrolls", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.PerformanceReview", b =>
@@ -636,7 +636,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("PerformanceReviews");
+                    b.ToTable("PerformanceReviews", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Project", b =>
@@ -672,7 +672,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("ProjectId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.ProjectLine", b =>
@@ -720,7 +720,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectLines");
+                    b.ToTable("ProjectLines", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Shift", b =>
@@ -749,7 +749,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("ShiftId");
 
-                    b.ToTable("Shifts");
+                    b.ToTable("Shifts", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.Tax", b =>
@@ -771,7 +771,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("TaxId");
 
-                    b.ToTable("Taxes");
+                    b.ToTable("Taxes", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounting.Payroll.ThirteenthMonth", b =>
@@ -801,7 +801,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("ThirteenthMonths");
+                    b.ToTable("ThirteenthMonths", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounts.ApplicationUser", b =>
@@ -984,7 +984,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("CustomerTypeId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customer", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Accounts.CustomerType", b =>
@@ -1005,7 +1005,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("CustomerTypeId");
 
-                    b.ToTable("CustomerType");
+                    b.ToTable("CustomerType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Bill", b =>
@@ -1047,7 +1047,7 @@ namespace InfastructureLayer.Migrations
                     b.HasIndex("PurchaseOrderId")
                         .IsUnique();
 
-                    b.ToTable("Bill");
+                    b.ToTable("Bill", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.BillType", b =>
@@ -1068,7 +1068,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("BillTypeId");
 
-                    b.ToTable("BillType");
+                    b.ToTable("BillType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Branch", b =>
@@ -1105,7 +1105,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("BranchId");
 
-                    b.ToTable("Branch");
+                    b.ToTable("Branch", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.CashBank", b =>
@@ -1126,7 +1126,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("CashBankId");
 
-                    b.ToTable("CashBank");
+                    b.ToTable("CashBank", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.GoodsReceivedNote", b =>
@@ -1171,7 +1171,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("GoodsReceivedNote");
+                    b.ToTable("GoodsReceivedNote", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Invoice", b =>
@@ -1205,7 +1205,7 @@ namespace InfastructureLayer.Migrations
                     b.HasIndex("SalesOrderId")
                         .IsUnique();
 
-                    b.ToTable("Invoice");
+                    b.ToTable("Invoice", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.InvoiceType", b =>
@@ -1226,7 +1226,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("InvoiceTypeId");
 
-                    b.ToTable("InvoiceType");
+                    b.ToTable("InvoiceType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.NumberSequence", b =>
@@ -1254,7 +1254,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("NumberSequenceId");
 
-                    b.ToTable("NumberSequence");
+                    b.ToTable("NumberSequence", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PaymentReceive", b =>
@@ -1290,7 +1290,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("SalesOrderId");
 
-                    b.ToTable("PaymentReceive");
+                    b.ToTable("PaymentReceive", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PaymentType", b =>
@@ -1311,7 +1311,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("PaymentTypeId");
 
-                    b.ToTable("PaymentType");
+                    b.ToTable("PaymentType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PaymentVoucher", b =>
@@ -1356,7 +1356,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("PurchaseOrderId");
 
-                    b.ToTable("PaymentVoucher");
+                    b.ToTable("PaymentVoucher", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Product", b =>
@@ -1421,7 +1421,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("UnitOfMeasureId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductIncrements", b =>
@@ -1445,7 +1445,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductIncrements");
+                    b.ToTable("ProductIncrements", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductPullOutLogLines", b =>
@@ -1480,7 +1480,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ProductPullOutLogId");
 
-                    b.ToTable("ProductPullOutLogLines");
+                    b.ToTable("ProductPullOutLogLines", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductPullOutLogs", b =>
@@ -1522,7 +1522,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProductPullOutLogs");
+                    b.ToTable("ProductPullOutLogs", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductStockInLogLines", b =>
@@ -1554,7 +1554,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ProductStockInLogId");
 
-                    b.ToTable("ProductStockInLogLines");
+                    b.ToTable("ProductStockInLogLines", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductStockInLogs", b =>
@@ -1591,7 +1591,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductStockInLogs");
+                    b.ToTable("ProductStockInLogs", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.ProductType", b =>
@@ -1612,7 +1612,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("ProductTypeId");
 
-                    b.ToTable("ProductType");
+                    b.ToTable("ProductType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PurchaseOrder", b =>
@@ -1672,7 +1672,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("VendorId");
 
-                    b.ToTable("PurchaseOrder");
+                    b.ToTable("PurchaseOrder", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PurchaseOrderLine", b =>
@@ -1717,7 +1717,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("PurchaseOrderId");
 
-                    b.ToTable("PurchaseOrderLine");
+                    b.ToTable("PurchaseOrderLine", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.PurchaseType", b =>
@@ -1738,7 +1738,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("PurchaseTypeId");
 
-                    b.ToTable("PurchaseType");
+                    b.ToTable("PurchaseType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.SalesOrder", b =>
@@ -1802,7 +1802,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("SalesTypeId");
 
-                    b.ToTable("SalesOrder");
+                    b.ToTable("SalesOrder", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.SalesOrderLine", b =>
@@ -1847,7 +1847,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("SalesOrderId");
 
-                    b.ToTable("SalesOrderLine");
+                    b.ToTable("SalesOrderLine", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.SalesType", b =>
@@ -1868,7 +1868,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("SalesTypeId");
 
-                    b.ToTable("SalesType");
+                    b.ToTable("SalesType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Shipment", b =>
@@ -1907,7 +1907,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("Shipment");
+                    b.ToTable("Shipment", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.ShipmentType", b =>
@@ -1928,7 +1928,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("ShipmentTypeId");
 
-                    b.ToTable("ShipmentType");
+                    b.ToTable("ShipmentType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.TargetGoals", b =>
@@ -1950,7 +1950,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("TargetGoalsId");
 
-                    b.ToTable("TargetGoals");
+                    b.ToTable("TargetGoals", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.UnitOfMeasure", b =>
@@ -1971,7 +1971,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("UnitOfMeasureId");
 
-                    b.ToTable("UnitOfMeasure");
+                    b.ToTable("UnitOfMeasure", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.UserProfile", b =>
@@ -2003,7 +2003,7 @@ namespace InfastructureLayer.Migrations
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.ToTable("UserProfile");
+                    b.ToTable("UserProfile", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Vendor", b =>
@@ -2041,7 +2041,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("VendorTypeId");
 
-                    b.ToTable("Vendor");
+                    b.ToTable("Vendor", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.VendorType", b =>
@@ -2062,7 +2062,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("VendorTypeId");
 
-                    b.ToTable("VendorType");
+                    b.ToTable("VendorType", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Inventory.Warehouse", b =>
@@ -2088,7 +2088,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.ToTable("Warehouse");
+                    b.ToTable("Warehouse", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.Choice", b =>
@@ -2113,7 +2113,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Choices");
+                    b.ToTable("Choices", (string)null);
 
                     b.HasData(
                         new
@@ -2195,7 +2195,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("ExamFormatId");
 
-                    b.ToTable("ExamFormats");
+                    b.ToTable("ExamFormats", (string)null);
 
                     b.HasData(
                         new
@@ -2264,7 +2264,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ExamineeId");
 
-                    b.ToTable("ExamResults");
+                    b.ToTable("ExamResults", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamResultChoice", b =>
@@ -2292,7 +2292,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("ExamResultChoices");
+                    b.ToTable("ExamResultChoices", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.ExamTopic", b =>
@@ -2318,7 +2318,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ReviewTopicId");
 
-                    b.ToTable("ExamTopics");
+                    b.ToTable("ExamTopics", (string)null);
 
                     b.HasData(
                         new
@@ -2718,7 +2718,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ExamineeId");
 
-                    b.ToTable("PerformanceReports");
+                    b.ToTable("PerformanceReports", (string)null);
                 });
 
             modelBuilder.Entity("DomainLayer.Models.ThinkEE.Question", b =>
@@ -2748,7 +2748,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ExamTopicId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
 
                     b.HasData(
                         new
@@ -2787,7 +2787,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasKey("ReviewTopicId");
 
-                    b.ToTable("ReviewTopics");
+                    b.ToTable("ReviewTopics", (string)null);
 
                     b.HasData(
                         new
@@ -2873,7 +2873,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ShiftId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -3073,7 +3073,7 @@ namespace InfastructureLayer.Migrations
 
                     b.HasIndex("ReviewTopicId");
 
-                    b.ToTable("Exams");
+                    b.ToTable("Exams", (string)null);
 
                     b.HasData(
                         new

@@ -22,7 +22,6 @@ namespace InfastructureLayer.DataAccess.Data
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Fetch the corresponding connection string
             string environment = ConfigurationManager.AppSettings["Environment"];
 
             // Fetch the corresponding connection string
@@ -30,7 +29,7 @@ namespace InfastructureLayer.DataAccess.Data
 
             var connection = new SqlConnection(connectionString);
             optionsBuilder.UseSqlServer(connection);
-            
+
             //optionsBuilder.UseSqlServer("Server=192.168.2.100,1433;Database=db_sercs;User Id=scs_admin;Password=pass@123;TrustServerCertificate=True;");
             //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_sercs;Integrated Security=True;TrustServerCertificate=True;");
             optionsBuilder.ConfigureWarnings(w =>

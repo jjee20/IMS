@@ -47,12 +47,7 @@ namespace RavenTech_ERP.Views.UserControls.Inventory
 
         private async void LoadEntityToForm()
         {
-            string id = null;
-            if (_entity != null || _unitOfWork.ApplicationUser?.Value != null)
-            {
-                id = _entity.Id;
-            }
-            if (id != null)
+            if (_entity != null && !string.IsNullOrEmpty(_entity.Id))
             {
                 txtEmail.Text = _entity.Email;
                 txtPassword.Visible = false;

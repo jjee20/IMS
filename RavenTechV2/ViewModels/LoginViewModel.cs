@@ -34,14 +34,14 @@ public partial class LoginViewModel : ObservableRecipient
     private UIElement? _shell = null;
     private readonly IUnitOfService _unitOfService;
     private readonly PasswordHasher<User> _passwordHasher = new(); 
-    private readonly NotificationService _notificationService;
     private readonly IUserSessionService _userSessionService;
+    public NotificationService Notifier;
 
-    public LoginViewModel(NotificationService notificationService, IUserSessionService userSessionService)
+    public LoginViewModel(IUserSessionService userSessionService)
     {
         LoginCommand = new AsyncRelayCommand(OnLogin);
         _unitOfService = App.GetService<IUnitOfService>();
-        _notificationService = notificationService;
+        Notifier = App.GetService<NotificationService>();
         _userSessionService = userSessionService;
     }
 
@@ -57,7 +57,7 @@ public partial class LoginViewModel : ObservableRecipient
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
                 ErrorMessage = "Please enter both username and password.";
-                _notificationService.Show(ErrorMessage, NotificationType.Error);
+                //_notificationService.Show(ErrorMessage, NotificationType.Error);
                 IsBusy = false;
                 return;
             }
@@ -67,7 +67,7 @@ public partial class LoginViewModel : ObservableRecipient
             if (user == null)
             {
                 ErrorMessage = "User not found. Please try again.";
-                _notificationService.Show(ErrorMessage, NotificationType.Error);
+                //_notificationService.Show(ErrorMessage, NotificationType.Error);
                 IsBusy = false;
                 return;
             }
@@ -85,20 +85,20 @@ public partial class LoginViewModel : ObservableRecipient
 
                 
                 _userSessionService.SetUser(user, roles);
-                _notificationService.Show($"Login Successful, welcome {user.UserName}!", NotificationType.Success);
+                Notifier.Show($"Login Successful, welcome {user.UserName}!", InfoBarSeverity.Success);
                 _shell = App.GetService<ShellPage>();
                 App.MainWindow.Content = _shell ?? new Frame();
             }
             else
             {
                 ErrorMessage = "Invalid credentials. Please try again.";
-                _notificationService.Show(ErrorMessage, NotificationType.Error);
+               // _notificationService.Show(ErrorMessage, NotificationType.Error);
                 IsBusy = false;
             }
         }
         catch (Exception ex)
         {
-            ErrorMessage = ex.ToString();
+            Notifier.Show(ex.ToString(), InfoBarSeverity.Error);
             IsBusy = false;
         }
     }

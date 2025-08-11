@@ -247,6 +247,7 @@
             ribbonControlMain.Header.AddMainItem(toolStripTabItem11);
             ribbonControlMain.LauncherStyle = Syncfusion.Windows.Forms.Tools.LauncherStyle.Metro;
             ribbonControlMain.Location = new Point(2, 2);
+            ribbonControlMain.Margin = new Padding(2);
             ribbonControlMain.MenuButtonAutoSize = true;
             ribbonControlMain.MenuButtonFont = new Font("Segoe UI", 10F);
             ribbonControlMain.MenuButtonText = "Menu";
@@ -258,7 +259,6 @@
             // 
             // ribbonControlMain.OfficeMenu
             // 
-            ribbonControlMain.OfficeMenu.ImageScalingSize = new Size(24, 24);
             ribbonControlMain.OfficeMenu.Name = "OfficeMenu";
             ribbonControlMain.OfficeMenu.Size = new Size(12, 65);
             ribbonControlMain.QuickPanelImageLayout = PictureBoxSizeMode.AutoSize;
@@ -267,14 +267,14 @@
             ribbonControlMain.RibbonStyle = Syncfusion.Windows.Forms.Tools.RibbonStyle.Office2016;
             ribbonControlMain.RightToLeft = RightToLeft.No;
             ribbonControlMain.ScaleMenuButtonImage = false;
-            ribbonControlMain.SelectedTab = btnThinkEE;
+            ribbonControlMain.SelectedTab = toolStripTabItem10;
             ribbonControlMain.ShowCaption = false;
             ribbonControlMain.ShowContextMenu = false;
             ribbonControlMain.ShowLauncher = false;
             ribbonControlMain.ShowMinimizeButton = false;
             ribbonControlMain.ShowQuickItemsDropDownButton = false;
             ribbonControlMain.ShowRibbonDisplayOptionButton = false;
-            ribbonControlMain.Size = new Size(1346, 161);
+            ribbonControlMain.Size = new Size(896, 107);
             ribbonControlMain.SystemText.QuickAccessDialogDropDownName = "Start menu";
             ribbonControlMain.SystemText.RenameDisplayLabelText = "&Display Name:";
             ribbonControlMain.TabIndex = 0;
@@ -292,12 +292,14 @@
             toolStripTabItem12.Panel.Controls.Add(btnDashboardHome);
             toolStripTabItem12.Panel.Controls.Add(toolStripEx1);
             toolStripTabItem12.Panel.Controls.Add(toolStripEx2);
+            toolStripTabItem12.Panel.Margin = new Padding(3, 0, 3, 0);
             toolStripTabItem12.Panel.Name = "ribbonPanel1";
+            toolStripTabItem12.Panel.Padding = new Padding(0, 1, 23, 0);
             toolStripTabItem12.Panel.ScrollPosition = 0;
             toolStripTabItem12.Panel.TabIndex = 15;
             toolStripTabItem12.Panel.Text = "Dashboard";
             toolStripTabItem12.Position = 0;
-            toolStripTabItem12.Size = new Size(99, 29);
+            toolStripTabItem12.Size = new Size(80, 25);
             ribbonControlMain.TabGroups.SetTabGroup(toolStripTabItem12, null);
             toolStripTabItem12.Tag = "12";
             toolStripTabItem12.Text = "Dashboard";
@@ -316,7 +318,7 @@
             btnDashboardHome.Office12Mode = false;
             btnDashboardHome.Padding = new Padding(3, 0, 0, 0);
             btnDashboardHome.RightToLeft = RightToLeft.No;
-            btnDashboardHome.Size = new Size(93, 83);
+            btnDashboardHome.Size = new Size(16, 46);
             btnDashboardHome.TabIndex = 1;
             btnDashboardHome.Click += btnDashboardHome_Click;
             // 
@@ -325,7 +327,7 @@
             toolStripButton40.Image = (Image)resources.GetObject("toolStripButton40.Image");
             toolStripButton40.ImageTransparentColor = Color.Magenta;
             toolStripButton40.Name = "toolStripButton40";
-            toolStripButton40.Size = new Size(84, 78);
+            toolStripButton40.Size = new Size(65, 43);
             toolStripButton40.Text = "Home";
             // 
             // toolStripEx1
@@ -336,12 +338,12 @@
             toolStripEx1.GripStyle = ToolStripGripStyle.Hidden;
             toolStripEx1.Image = null;
             toolStripEx1.ImageScalingSize = new Size(24, 24);
-            toolStripEx1.Location = new Point(95, 1);
+            toolStripEx1.Location = new Point(0, 1);
             toolStripEx1.Name = "toolStripEx1";
             toolStripEx1.Office12Mode = false;
             toolStripEx1.Padding = new Padding(3, 0, 0, 0);
             toolStripEx1.RightToLeft = RightToLeft.No;
-            toolStripEx1.Size = new Size(106, 83);
+            toolStripEx1.Size = new Size(16, 46);
             toolStripEx1.TabIndex = 3;
             // 
             // toolStripEx2
@@ -352,12 +354,12 @@
             toolStripEx2.GripStyle = ToolStripGripStyle.Hidden;
             toolStripEx2.Image = null;
             toolStripEx2.ImageScalingSize = new Size(24, 24);
-            toolStripEx2.Location = new Point(203, 1);
+            toolStripEx2.Location = new Point(0, 1);
             toolStripEx2.Name = "toolStripEx2";
             toolStripEx2.Office12Mode = false;
             toolStripEx2.Padding = new Padding(3, 0, 0, 0);
             toolStripEx2.RightToLeft = RightToLeft.No;
-            toolStripEx2.Size = new Size(106, 83);
+            toolStripEx2.Size = new Size(16, 46);
             toolStripEx2.TabIndex = 4;
             // 
             // toolStripTabItem6
@@ -370,12 +372,14 @@
             toolStripTabItem6.Panel.Controls.Add(btnInvoices);
             toolStripTabItem6.Panel.Controls.Add(btnCustomers);
             toolStripTabItem6.Panel.Controls.Add(btnPayments);
+            toolStripTabItem6.Panel.Margin = new Padding(3, 0, 3, 0);
             toolStripTabItem6.Panel.Name = "ribbonPanel2";
+            toolStripTabItem6.Panel.Padding = new Padding(0, 1, 23, 0);
             toolStripTabItem6.Panel.ScrollPosition = 0;
             toolStripTabItem6.Panel.TabIndex = 9;
             toolStripTabItem6.Panel.Text = "Sales";
             toolStripTabItem6.Position = 1;
-            toolStripTabItem6.Size = new Size(54, 29);
+            toolStripTabItem6.Size = new Size(49, 25);
             ribbonControlMain.TabGroups.SetTabGroup(toolStripTabItem6, null);
             toolStripTabItem6.Tag = "6";
             toolStripTabItem6.Text = "Sales";
@@ -394,7 +398,7 @@
             btnSalesOrders.Office12Mode = false;
             btnSalesOrders.Padding = new Padding(3, 0, 0, 0);
             btnSalesOrders.RightToLeft = RightToLeft.No;
-            btnSalesOrders.Size = new Size(69, 83);
+            btnSalesOrders.Size = new Size(13, 46);
             btnSalesOrders.TabIndex = 1;
             btnSalesOrders.ItemClicked += btnSalesOrders_ItemClicked;
             // 
@@ -404,20 +408,20 @@
             toolStripSplitButton4.Image = (Image)resources.GetObject("toolStripSplitButton4.Image");
             toolStripSplitButton4.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton4.Name = "toolStripSplitButton4";
-            toolStripSplitButton4.Size = new Size(106, 78);
+            toolStripSplitButton4.Size = new Size(82, 43);
             toolStripSplitButton4.Text = "Orders";
             // 
             // btnNewSalesOrder
             // 
             btnNewSalesOrder.Name = "btnNewSalesOrder";
-            btnNewSalesOrder.Size = new Size(236, 34);
+            btnNewSalesOrder.Size = new Size(159, 22);
             btnNewSalesOrder.Text = "New Sales Order";
             btnNewSalesOrder.DropDownItemClicked += btnNewSalesOrder_DropDownItemClicked;
             // 
             // btnApproveOrCancel
             // 
             btnApproveOrCancel.Name = "btnApproveOrCancel";
-            btnApproveOrCancel.Size = new Size(236, 34);
+            btnApproveOrCancel.Size = new Size(159, 22);
             btnApproveOrCancel.Text = "Approve/Cancel";
             btnApproveOrCancel.DropDownItemClicked += btnApproveOrCancel_DropDownItemClicked;
             // 
@@ -430,12 +434,12 @@
             btnInvoices.Image = null;
             btnInvoices.ImageScalingSize = new Size(24, 24);
             btnInvoices.Items.AddRange(new ToolStripItem[] { toolStripSplitButton8 });
-            btnInvoices.Location = new Point(71, 1);
+            btnInvoices.Location = new Point(15, 1);
             btnInvoices.Name = "toolStripEx9";
             btnInvoices.Office12Mode = false;
             btnInvoices.Padding = new Padding(3, 0, 0, 0);
             btnInvoices.RightToLeft = RightToLeft.No;
-            btnInvoices.Size = new Size(69, 83);
+            btnInvoices.Size = new Size(13, 46);
             btnInvoices.TabIndex = 2;
             btnInvoices.ItemClicked += btnInvoices_ItemClicked;
             // 
@@ -445,20 +449,20 @@
             toolStripSplitButton8.Image = (Image)resources.GetObject("toolStripSplitButton8.Image");
             toolStripSplitButton8.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton8.Name = "toolStripSplitButton8";
-            toolStripSplitButton8.Size = new Size(116, 78);
+            toolStripSplitButton8.Size = new Size(88, 43);
             toolStripSplitButton8.Text = "Invoices";
             // 
             // btnNewInvoice
             // 
             btnNewInvoice.Name = "btnNewInvoice";
-            btnNewInvoice.Size = new Size(203, 34);
+            btnNewInvoice.Size = new Size(136, 22);
             btnNewInvoice.Text = "New Invoice";
             btnNewInvoice.DropDownItemClicked += btnNewInvoice_DropDownItemClicked;
             // 
             // btnPrintOrEmail
             // 
             btnPrintOrEmail.Name = "btnPrintOrEmail";
-            btnPrintOrEmail.Size = new Size(203, 34);
+            btnPrintOrEmail.Size = new Size(136, 22);
             btnPrintOrEmail.Text = "Print/Email";
             btnPrintOrEmail.DropDownItemClicked += btnPrintOrEmail_DropDownItemClicked;
             // 
@@ -471,12 +475,12 @@
             btnCustomers.Image = null;
             btnCustomers.ImageScalingSize = new Size(24, 24);
             btnCustomers.Items.AddRange(new ToolStripItem[] { toolStripSplitButton9 });
-            btnCustomers.Location = new Point(142, 1);
+            btnCustomers.Location = new Point(30, 1);
             btnCustomers.Name = "toolStripEx10";
             btnCustomers.Office12Mode = false;
             btnCustomers.Padding = new Padding(3, 0, 0, 0);
             btnCustomers.RightToLeft = RightToLeft.No;
-            btnCustomers.Size = new Size(69, 83);
+            btnCustomers.Size = new Size(13, 46);
             btnCustomers.TabIndex = 3;
             btnCustomers.ItemClicked += btnCustomers_ItemClicked;
             // 
@@ -486,13 +490,13 @@
             toolStripSplitButton9.Image = (Image)resources.GetObject("toolStripSplitButton9.Image");
             toolStripSplitButton9.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton9.Name = "toolStripSplitButton9";
-            toolStripSplitButton9.Size = new Size(136, 78);
+            toolStripSplitButton9.Size = new Size(101, 43);
             toolStripSplitButton9.Text = "Customers";
             // 
             // btnNewCustomer
             // 
             btnNewCustomer.Name = "btnNewCustomer";
-            btnNewCustomer.Size = new Size(223, 34);
+            btnNewCustomer.Size = new Size(149, 22);
             btnNewCustomer.Text = "New Customer";
             btnNewCustomer.DropDownItemClicked += btnNewCustomer_DropDownItemClicked;
             // 
@@ -505,12 +509,12 @@
             btnPayments.Image = null;
             btnPayments.ImageScalingSize = new Size(24, 24);
             btnPayments.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
-            btnPayments.Location = new Point(213, 1);
+            btnPayments.Location = new Point(45, 1);
             btnPayments.Name = "toolStripEx10";
             btnPayments.Office12Mode = false;
             btnPayments.Padding = new Padding(3, 0, 0, 0);
             btnPayments.RightToLeft = RightToLeft.No;
-            btnPayments.Size = new Size(69, 83);
+            btnPayments.Size = new Size(13, 46);
             btnPayments.TabIndex = 4;
             btnPayments.ItemClicked += btnPayments_ItemClicked;
             // 
@@ -520,20 +524,20 @@
             toolStripDropDownButton1.Image = (Image)resources.GetObject("toolStripDropDownButton1.Image");
             toolStripDropDownButton1.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            toolStripDropDownButton1.Size = new Size(125, 78);
+            toolStripDropDownButton1.Size = new Size(92, 43);
             toolStripDropDownButton1.Text = "Payments";
             // 
             // btnReceivePayment
             // 
             btnReceivePayment.Name = "btnReceivePayment";
-            btnReceivePayment.Size = new Size(238, 34);
+            btnReceivePayment.Size = new Size(158, 22);
             btnReceivePayment.Text = "Receive Payment";
             btnReceivePayment.DropDownItemClicked += btnReceivePayment_DropDownItemClicked;
             // 
             // btnSalesReceipt
             // 
             btnSalesReceipt.Name = "btnSalesReceipt";
-            btnSalesReceipt.Size = new Size(238, 34);
+            btnSalesReceipt.Size = new Size(158, 22);
             btnSalesReceipt.Text = "Sales Receipt";
             btnSalesReceipt.DropDownItemClicked += btnSalesReceipt_DropDownItemClicked;
             // 
@@ -546,12 +550,14 @@
             toolStripTabItem7.Panel.Controls.Add(btnPurchaseOrders);
             toolStripTabItem7.Panel.Controls.Add(btnBillsOrVouchers);
             toolStripTabItem7.Panel.Controls.Add(btnVendors);
+            toolStripTabItem7.Panel.Margin = new Padding(3, 0, 3, 0);
             toolStripTabItem7.Panel.Name = "ribbonPanel3";
+            toolStripTabItem7.Panel.Padding = new Padding(0, 1, 23, 0);
             toolStripTabItem7.Panel.ScrollPosition = 0;
             toolStripTabItem7.Panel.TabIndex = 10;
             toolStripTabItem7.Panel.Text = "Purchasing";
             toolStripTabItem7.Position = 2;
-            toolStripTabItem7.Size = new Size(100, 29);
+            toolStripTabItem7.Size = new Size(80, 25);
             ribbonControlMain.TabGroups.SetTabGroup(toolStripTabItem7, null);
             toolStripTabItem7.Tag = "7";
             toolStripTabItem7.Text = "Purchasing";
@@ -570,7 +576,7 @@
             btnPurchaseOrders.Office12Mode = false;
             btnPurchaseOrders.Padding = new Padding(3, 0, 0, 0);
             btnPurchaseOrders.RightToLeft = RightToLeft.No;
-            btnPurchaseOrders.Size = new Size(69, 83);
+            btnPurchaseOrders.Size = new Size(13, 46);
             btnPurchaseOrders.TabIndex = 1;
             btnPurchaseOrders.ItemClicked += btnPurchaseOrders_ItemClicked;
             // 
@@ -580,13 +586,13 @@
             toolStripSplitButton10.Image = (Image)resources.GetObject("toolStripSplitButton10.Image");
             toolStripSplitButton10.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton10.Name = "toolStripSplitButton10";
-            toolStripSplitButton10.Size = new Size(106, 28);
+            toolStripSplitButton10.Size = new Size(82, 43);
             toolStripSplitButton10.Text = "Orders";
             // 
             // btnNewPurchaseOrder
             // 
             btnNewPurchaseOrder.Name = "btnNewPurchaseOrder";
-            btnNewPurchaseOrder.Size = new Size(267, 34);
+            btnNewPurchaseOrder.Size = new Size(179, 22);
             btnNewPurchaseOrder.Text = "New Purchase Order";
             btnNewPurchaseOrder.DropDownItemClicked += btnNewPurchaseOrder_DropDownItemClicked;
             // 
@@ -599,12 +605,12 @@
             btnBillsOrVouchers.Image = null;
             btnBillsOrVouchers.ImageScalingSize = new Size(24, 24);
             btnBillsOrVouchers.Items.AddRange(new ToolStripItem[] { toolStripSplitButton11 });
-            btnBillsOrVouchers.Location = new Point(71, 1);
+            btnBillsOrVouchers.Location = new Point(15, 1);
             btnBillsOrVouchers.Name = "toolStripEx13";
             btnBillsOrVouchers.Office12Mode = false;
             btnBillsOrVouchers.Padding = new Padding(3, 0, 0, 0);
             btnBillsOrVouchers.RightToLeft = RightToLeft.No;
-            btnBillsOrVouchers.Size = new Size(69, 83);
+            btnBillsOrVouchers.Size = new Size(13, 46);
             btnBillsOrVouchers.TabIndex = 2;
             btnBillsOrVouchers.ItemClicked += btnBillsOrVouchers_ItemClicked;
             // 
@@ -614,20 +620,20 @@
             toolStripSplitButton11.Image = (Image)resources.GetObject("toolStripSplitButton11.Image");
             toolStripSplitButton11.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton11.Name = "toolStripSplitButton11";
-            toolStripSplitButton11.Size = new Size(161, 28);
+            toolStripSplitButton11.Size = new Size(118, 43);
             toolStripSplitButton11.Text = "Bills/Vouchers";
             // 
             // btnNewBill
             // 
             btnNewBill.Name = "btnNewBill";
-            btnNewBill.Size = new Size(171, 34);
+            btnNewBill.Size = new Size(115, 22);
             btnNewBill.Text = "New Bill";
             btnNewBill.DropDownItemClicked += btnNewBill_DropDownItemClicked;
             // 
             // btnPayBill
             // 
             btnPayBill.Name = "btnPayBill";
-            btnPayBill.Size = new Size(171, 34);
+            btnPayBill.Size = new Size(115, 22);
             btnPayBill.Text = "Pay Bill";
             btnPayBill.DropDownItemClicked += btnPayBill_DropDownItemClicked;
             // 
@@ -640,12 +646,12 @@
             btnVendors.Image = null;
             btnVendors.ImageScalingSize = new Size(24, 24);
             btnVendors.Items.AddRange(new ToolStripItem[] { toolStripSplitButton12 });
-            btnVendors.Location = new Point(142, 1);
+            btnVendors.Location = new Point(30, 1);
             btnVendors.Name = "toolStripEx13";
             btnVendors.Office12Mode = false;
             btnVendors.Padding = new Padding(3, 0, 0, 0);
             btnVendors.RightToLeft = RightToLeft.No;
-            btnVendors.Size = new Size(69, 83);
+            btnVendors.Size = new Size(13, 46);
             btnVendors.TabIndex = 3;
             btnVendors.ItemClicked += btnVendors_ItemClicked;
             // 
@@ -655,13 +661,13 @@
             toolStripSplitButton12.Image = (Image)resources.GetObject("toolStripSplitButton12.Image");
             toolStripSplitButton12.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton12.Name = "toolStripSplitButton12";
-            toolStripSplitButton12.Size = new Size(117, 78);
+            toolStripSplitButton12.Size = new Size(89, 43);
             toolStripSplitButton12.Text = "Vendors";
             // 
             // btnNewVendor
             // 
             btnNewVendor.Name = "btnNewVendor";
-            btnNewVendor.Size = new Size(204, 34);
+            btnNewVendor.Size = new Size(137, 22);
             btnNewVendor.Text = "New Vendor";
             btnNewVendor.DropDownItemClicked += btnNewVendor_DropDownItemClicked;
             // 
@@ -677,13 +683,14 @@
             btnInventory.Panel.Controls.Add(btnWarehouses);
             btnInventory.Panel.Controls.Add(btnBranches);
             btnInventory.Panel.Controls.Add(btnUnits);
+            btnInventory.Panel.Margin = new Padding(3, 0, 3, 0);
             btnInventory.Panel.Name = "ribbonPanel4";
-            btnInventory.Panel.Padding = new Padding(0, 2, 42, 0);
+            btnInventory.Panel.Padding = new Padding(0, 1, 28, 0);
             btnInventory.Panel.ScrollPosition = 0;
             btnInventory.Panel.TabIndex = 5;
             btnInventory.Panel.Text = "Inventory";
             btnInventory.Position = 3;
-            btnInventory.Size = new Size(88, 29);
+            btnInventory.Size = new Size(73, 25);
             ribbonControlMain.TabGroups.SetTabGroup(btnInventory, null);
             btnInventory.Tag = "5";
             btnInventory.Text = "Inventory";
@@ -697,12 +704,12 @@
             btnProducts.Image = null;
             btnProducts.ImageScalingSize = new Size(24, 24);
             btnProducts.Items.AddRange(new ToolStripItem[] { toolStripSplitButton1 });
-            btnProducts.Location = new Point(0, 2);
+            btnProducts.Location = new Point(0, 1);
             btnProducts.Name = "toolStripEx14";
             btnProducts.Office12Mode = false;
             btnProducts.Padding = new Padding(3, 0, 0, 0);
             btnProducts.RightToLeft = RightToLeft.No;
-            btnProducts.Size = new Size(198, 82);
+            btnProducts.Size = new Size(13, 46);
             btnProducts.TabIndex = 0;
             btnProducts.ItemClicked += btnProducts_ItemClicked;
             // 
@@ -712,20 +719,20 @@
             toolStripSplitButton1.Image = (Image)resources.GetObject("toolStripSplitButton1.Image");
             toolStripSplitButton1.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton1.Name = "toolStripSplitButton1";
-            toolStripSplitButton1.Size = new Size(189, 77);
+            toolStripSplitButton1.Size = new Size(136, 43);
             toolStripSplitButton1.Text = "Products/Services";
             // 
             // btnNewProduct
             // 
             btnNewProduct.Name = "btnNewProduct";
-            btnNewProduct.Size = new Size(209, 34);
+            btnNewProduct.Size = new Size(140, 22);
             btnNewProduct.Text = "New Product";
             btnNewProduct.DropDownItemClicked += btnNewProduct_DropDownItemClicked;
             // 
             // btnAdjustStock
             // 
             btnAdjustStock.Name = "btnAdjustStock";
-            btnAdjustStock.Size = new Size(209, 34);
+            btnAdjustStock.Size = new Size(140, 22);
             btnAdjustStock.Text = "Adjust Stock";
             btnAdjustStock.DropDownItemClicked += btnAdjustStock_DropDownItemClicked;
             // 
@@ -738,12 +745,12 @@
             btnStockOperations.Image = null;
             btnStockOperations.ImageScalingSize = new Size(24, 24);
             btnStockOperations.Items.AddRange(new ToolStripItem[] { toolStripSplitButton2 });
-            btnStockOperations.Location = new Point(200, 2);
+            btnStockOperations.Location = new Point(15, 1);
             btnStockOperations.Name = "toolStripEx15";
             btnStockOperations.Office12Mode = false;
             btnStockOperations.Padding = new Padding(3, 0, 0, 0);
             btnStockOperations.RightToLeft = RightToLeft.No;
-            btnStockOperations.Size = new Size(193, 82);
+            btnStockOperations.Size = new Size(13, 46);
             btnStockOperations.TabIndex = 1;
             btnStockOperations.ItemClicked += btnStockOperations_ItemClicked;
             // 
@@ -753,27 +760,27 @@
             toolStripSplitButton2.Image = (Image)resources.GetObject("toolStripSplitButton2.Image");
             toolStripSplitButton2.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton2.Name = "toolStripSplitButton2";
-            toolStripSplitButton2.Size = new Size(184, 77);
+            toolStripSplitButton2.Size = new Size(136, 43);
             toolStripSplitButton2.Text = "Stock Operations";
             // 
             // btnStockIn
             // 
             btnStockIn.Name = "btnStockIn";
-            btnStockIn.Size = new Size(186, 34);
+            btnStockIn.Size = new Size(126, 22);
             btnStockIn.Text = "Stock-In";
             btnStockIn.DropDownItemClicked += btnStockIn_DropDownItemClicked;
             // 
             // btnStockOut
             // 
             btnStockOut.Name = "btnStockOut";
-            btnStockOut.Size = new Size(186, 34);
+            btnStockOut.Size = new Size(126, 22);
             btnStockOut.Text = "Stock-Out";
             btnStockOut.DropDownItemClicked += btnStockOut_DropDownItemClicked;
             // 
             // btnTransfers
             // 
             btnTransfers.Name = "btnTransfers";
-            btnTransfers.Size = new Size(186, 34);
+            btnTransfers.Size = new Size(126, 22);
             btnTransfers.Text = "Transfers";
             btnTransfers.DropDownItemClicked += btnTransfers_DropDownItemClicked;
             // 
@@ -786,12 +793,12 @@
             btnWarehouses.Image = null;
             btnWarehouses.ImageScalingSize = new Size(24, 24);
             btnWarehouses.Items.AddRange(new ToolStripItem[] { toolStripSplitButton3 });
-            btnWarehouses.Location = new Point(395, 2);
+            btnWarehouses.Location = new Point(30, 1);
             btnWarehouses.Name = "toolStripEx16";
             btnWarehouses.Office12Mode = false;
             btnWarehouses.Padding = new Padding(3, 0, 0, 0);
             btnWarehouses.RightToLeft = RightToLeft.No;
-            btnWarehouses.Size = new Size(156, 82);
+            btnWarehouses.Size = new Size(13, 46);
             btnWarehouses.TabIndex = 2;
             btnWarehouses.ItemClicked += btnWarehouses_ItemClicked;
             // 
@@ -801,13 +808,13 @@
             toolStripSplitButton3.Image = (Image)resources.GetObject("toolStripSplitButton3.Image");
             toolStripSplitButton3.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton3.Name = "toolStripSplitButton3";
-            toolStripSplitButton3.Size = new Size(147, 77);
+            toolStripSplitButton3.Size = new Size(111, 43);
             toolStripSplitButton3.Text = "Warehouses";
             // 
             // btnNewWarehouse
             // 
             btnNewWarehouse.Name = "btnNewWarehouse";
-            btnNewWarehouse.Size = new Size(234, 34);
+            btnNewWarehouse.Size = new Size(159, 22);
             btnNewWarehouse.Text = "New Warehouse";
             btnNewWarehouse.DropDownItemClicked += btnNewWarehouse_DropDownItemClicked;
             // 
@@ -820,12 +827,12 @@
             btnBranches.Image = null;
             btnBranches.ImageScalingSize = new Size(24, 24);
             btnBranches.Items.AddRange(new ToolStripItem[] { toolStripSplitButton5 });
-            btnBranches.Location = new Point(553, 2);
+            btnBranches.Location = new Point(45, 1);
             btnBranches.Name = "toolStripEx17";
             btnBranches.Office12Mode = false;
             btnBranches.Padding = new Padding(3, 0, 0, 0);
             btnBranches.RightToLeft = RightToLeft.No;
-            btnBranches.Size = new Size(133, 82);
+            btnBranches.Size = new Size(13, 46);
             btnBranches.TabIndex = 3;
             btnBranches.ItemClicked += btnBranches_ItemClicked;
             // 
@@ -835,13 +842,13 @@
             toolStripSplitButton5.Image = (Image)resources.GetObject("toolStripSplitButton5.Image");
             toolStripSplitButton5.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton5.Name = "toolStripSplitButton5";
-            toolStripSplitButton5.Size = new Size(124, 77);
+            toolStripSplitButton5.Size = new Size(93, 43);
             toolStripSplitButton5.Text = "Branches";
             // 
             // btnNewBranch
             // 
             btnNewBranch.Name = "btnNewBranch";
-            btnNewBranch.Size = new Size(202, 34);
+            btnNewBranch.Size = new Size(135, 22);
             btnNewBranch.Text = "New Branch";
             btnNewBranch.DropDownItemClicked += btnNewBranch_DropDownItemClicked;
             // 
@@ -854,12 +861,12 @@
             btnUnits.Image = null;
             btnUnits.ImageScalingSize = new Size(24, 24);
             btnUnits.Items.AddRange(new ToolStripItem[] { toolStripSplitButton6 });
-            btnUnits.Location = new Point(688, 2);
+            btnUnits.Location = new Point(60, 1);
             btnUnits.Name = "toolStripEx18";
             btnUnits.Office12Mode = false;
             btnUnits.Padding = new Padding(3, 0, 0, 0);
             btnUnits.RightToLeft = RightToLeft.No;
-            btnUnits.Size = new Size(103, 82);
+            btnUnits.Size = new Size(13, 46);
             btnUnits.TabIndex = 4;
             btnUnits.ItemClicked += btnUnits_ItemClicked;
             // 
@@ -869,13 +876,13 @@
             toolStripSplitButton6.Image = (Image)resources.GetObject("toolStripSplitButton6.Image");
             toolStripSplitButton6.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton6.Name = "toolStripSplitButton6";
-            toolStripSplitButton6.Size = new Size(94, 77);
+            toolStripSplitButton6.Size = new Size(74, 43);
             toolStripSplitButton6.Text = "Units";
             // 
             // btnNewUnit
             // 
             btnNewUnit.Name = "btnNewUnit";
-            btnNewUnit.Size = new Size(181, 34);
+            btnNewUnit.Size = new Size(122, 22);
             btnNewUnit.Text = "New Unit";
             btnNewUnit.DropDownItemClicked += btnNewUnit_DropDownItemClicked;
             // 
@@ -889,12 +896,14 @@
             toolStripTabItem8.Panel.Controls.Add(btnJournalEntry);
             toolStripTabItem8.Panel.Controls.Add(btnChartOfAccounts);
             toolStripTabItem8.Panel.Controls.Add(btnBudgets);
+            toolStripTabItem8.Panel.Margin = new Padding(3, 0, 3, 0);
             toolStripTabItem8.Panel.Name = "ribbonPanel5";
+            toolStripTabItem8.Panel.Padding = new Padding(0, 1, 23, 0);
             toolStripTabItem8.Panel.ScrollPosition = 0;
             toolStripTabItem8.Panel.TabIndex = 11;
             toolStripTabItem8.Panel.Text = "Banking/Finance";
             toolStripTabItem8.Position = 4;
-            toolStripTabItem8.Size = new Size(142, 29);
+            toolStripTabItem8.Size = new Size(109, 25);
             ribbonControlMain.TabGroups.SetTabGroup(toolStripTabItem8, null);
             toolStripTabItem8.Tag = "8";
             toolStripTabItem8.Text = "Banking/Finance";
@@ -913,7 +922,7 @@
             btnCashOrBank.Office12Mode = false;
             btnCashOrBank.Padding = new Padding(3, 0, 0, 0);
             btnCashOrBank.RightToLeft = RightToLeft.No;
-            btnCashOrBank.Size = new Size(145, 83);
+            btnCashOrBank.Size = new Size(13, 46);
             btnCashOrBank.TabIndex = 1;
             btnCashOrBank.ItemClicked += btnCashOrBank_ItemClicked;
             // 
@@ -923,20 +932,20 @@
             toolStripSplitButton13.Image = (Image)resources.GetObject("toolStripSplitButton13.Image");
             toolStripSplitButton13.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton13.Name = "toolStripSplitButton13";
-            toolStripSplitButton13.Size = new Size(136, 78);
+            toolStripSplitButton13.Size = new Size(101, 43);
             toolStripSplitButton13.Text = "Cash/Bank";
             // 
             // btnNewTransaction
             // 
             btnNewTransaction.Name = "btnNewTransaction";
-            btnNewTransaction.Size = new Size(236, 34);
+            btnNewTransaction.Size = new Size(159, 22);
             btnNewTransaction.Text = "New Transaction";
             btnNewTransaction.DropDownItemClicked += btnNewTransaction_DropDownItemClicked;
             // 
             // btnReconcile
             // 
             btnReconcile.Name = "btnReconcile";
-            btnReconcile.Size = new Size(236, 34);
+            btnReconcile.Size = new Size(159, 22);
             btnReconcile.Text = "Reconcile";
             btnReconcile.DropDownItemClicked += btnReconcile_DropDownItemClicked;
             // 
@@ -949,12 +958,12 @@
             btnJournalEntry.Image = null;
             btnJournalEntry.ImageScalingSize = new Size(24, 24);
             btnJournalEntry.Items.AddRange(new ToolStripItem[] { toolStripSplitButton14 });
-            btnJournalEntry.Location = new Point(147, 1);
+            btnJournalEntry.Location = new Point(15, 1);
             btnJournalEntry.Name = "toolStripEx21";
             btnJournalEntry.Office12Mode = false;
             btnJournalEntry.Padding = new Padding(3, 0, 0, 0);
             btnJournalEntry.RightToLeft = RightToLeft.No;
-            btnJournalEntry.Size = new Size(163, 83);
+            btnJournalEntry.Size = new Size(13, 46);
             btnJournalEntry.TabIndex = 2;
             btnJournalEntry.ItemClicked += btnJournalEntry_ItemClicked;
             // 
@@ -964,13 +973,13 @@
             toolStripSplitButton14.Image = (Image)resources.GetObject("toolStripSplitButton14.Image");
             toolStripSplitButton14.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton14.Name = "toolStripSplitButton14";
-            toolStripSplitButton14.Size = new Size(154, 78);
+            toolStripSplitButton14.Size = new Size(114, 43);
             toolStripSplitButton14.Text = "Journal Entry";
             // 
             // btnNewEntry
             // 
             btnNewEntry.Name = "btnNewEntry";
-            btnNewEntry.Size = new Size(188, 34);
+            btnNewEntry.Size = new Size(126, 22);
             btnNewEntry.Text = "New Entry";
             btnNewEntry.DropDownItemClicked += btnNewEntry_DropDownItemClicked;
             // 
@@ -983,12 +992,12 @@
             btnChartOfAccounts.Image = null;
             btnChartOfAccounts.ImageScalingSize = new Size(24, 24);
             btnChartOfAccounts.Items.AddRange(new ToolStripItem[] { toolStripSplitButton15 });
-            btnChartOfAccounts.Location = new Point(312, 1);
+            btnChartOfAccounts.Location = new Point(30, 1);
             btnChartOfAccounts.Name = "toolStripEx22";
             btnChartOfAccounts.Office12Mode = false;
             btnChartOfAccounts.Padding = new Padding(3, 0, 0, 0);
             btnChartOfAccounts.RightToLeft = RightToLeft.No;
-            btnChartOfAccounts.Size = new Size(201, 83);
+            btnChartOfAccounts.Size = new Size(13, 46);
             btnChartOfAccounts.TabIndex = 3;
             btnChartOfAccounts.ItemClicked += btnChartOfAccounts_ItemClicked;
             // 
@@ -998,13 +1007,13 @@
             toolStripSplitButton15.Image = (Image)resources.GetObject("toolStripSplitButton15.Image");
             toolStripSplitButton15.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton15.Name = "toolStripSplitButton15";
-            toolStripSplitButton15.Size = new Size(192, 78);
+            toolStripSplitButton15.Size = new Size(139, 43);
             toolStripSplitButton15.Text = "Chart of Accounts";
             // 
             // btnNewAccount
             // 
             btnNewAccount.Name = "btnNewAccount";
-            btnNewAccount.Size = new Size(212, 34);
+            btnNewAccount.Size = new Size(142, 22);
             btnNewAccount.Text = "New Account";
             btnNewAccount.DropDownItemClicked += btnNewAccount_DropDownItemClicked;
             // 
@@ -1017,12 +1026,12 @@
             btnBudgets.Image = null;
             btnBudgets.ImageScalingSize = new Size(24, 24);
             btnBudgets.Items.AddRange(new ToolStripItem[] { toolStripSplitButton16 });
-            btnBudgets.Location = new Point(515, 1);
+            btnBudgets.Location = new Point(45, 1);
             btnBudgets.Name = "toolStripEx22";
             btnBudgets.Office12Mode = false;
             btnBudgets.Padding = new Padding(3, 0, 0, 0);
             btnBudgets.RightToLeft = RightToLeft.No;
-            btnBudgets.Size = new Size(126, 83);
+            btnBudgets.Size = new Size(13, 46);
             btnBudgets.TabIndex = 4;
             btnBudgets.ItemClicked += btnBudgets_ItemClicked;
             // 
@@ -1032,13 +1041,13 @@
             toolStripSplitButton16.Image = (Image)resources.GetObject("toolStripSplitButton16.Image");
             toolStripSplitButton16.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton16.Name = "toolStripSplitButton16";
-            toolStripSplitButton16.Size = new Size(117, 78);
+            toolStripSplitButton16.Size = new Size(89, 43);
             toolStripSplitButton16.Text = "Budgets";
             // 
             // btnNewBudget
             // 
             btnNewBudget.Name = "btnNewBudget";
-            btnNewBudget.Size = new Size(204, 34);
+            btnNewBudget.Size = new Size(137, 22);
             btnNewBudget.Text = "New Budget";
             btnNewBudget.DropDownItemClicked += btnNewBudget_DropDownItemClicked;
             // 
@@ -1057,14 +1066,12 @@
             btnPayrollMain.Panel.Controls.Add(btnPaylips);
             btnPayrollMain.Panel.Controls.Add(btnTax);
             btnPayrollMain.Panel.Font = new Font("Microsoft Sans Serif", 8.25F);
-            btnPayrollMain.Panel.Margin = new Padding(6, 0, 6, 0);
             btnPayrollMain.Panel.Name = "ribbonPanel6";
-            btnPayrollMain.Panel.Padding = new Padding(0, 2, 52, 0);
             btnPayrollMain.Panel.ScrollPosition = 0;
             btnPayrollMain.Panel.TabIndex = 4;
             btnPayrollMain.Panel.Text = "Payroll";
             btnPayrollMain.Position = 5;
-            btnPayrollMain.Size = new Size(66, 29);
+            btnPayrollMain.Size = new Size(59, 25);
             ribbonControlMain.TabGroups.SetTabGroup(btnPayrollMain, null);
             btnPayrollMain.Tag = "3";
             btnPayrollMain.Text = "Payroll";
@@ -1078,12 +1085,12 @@
             btnEmployees.Image = null;
             btnEmployees.ImageScalingSize = new Size(24, 24);
             btnEmployees.Items.AddRange(new ToolStripItem[] { toolStripSplitButton17 });
-            btnEmployees.Location = new Point(0, 2);
+            btnEmployees.Location = new Point(0, 1);
             btnEmployees.Name = "toolStripEx23";
             btnEmployees.Office12Mode = false;
             btnEmployees.Padding = new Padding(3, 0, 0, 0);
             btnEmployees.RightToLeft = RightToLeft.No;
-            btnEmployees.Size = new Size(145, 82);
+            btnEmployees.Size = new Size(13, 46);
             btnEmployees.TabIndex = 0;
             btnEmployees.ItemClicked += btnEmployees_ItemClicked;
             // 
@@ -1093,13 +1100,13 @@
             toolStripSplitButton17.Image = (Image)resources.GetObject("toolStripSplitButton17.Image");
             toolStripSplitButton17.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton17.Name = "toolStripSplitButton17";
-            toolStripSplitButton17.Size = new Size(136, 77);
+            toolStripSplitButton17.Size = new Size(101, 43);
             toolStripSplitButton17.Text = "Employees";
             // 
             // btnNewEmployee
             // 
             btnNewEmployee.Name = "btnNewEmployee";
-            btnNewEmployee.Size = new Size(223, 34);
+            btnNewEmployee.Size = new Size(149, 22);
             btnNewEmployee.Text = "New Employee";
             btnNewEmployee.DropDownItemClicked += btnNewEmployee_DropDownItemClicked;
             // 
@@ -1112,12 +1119,12 @@
             btnAttendance.Image = null;
             btnAttendance.ImageScalingSize = new Size(24, 24);
             btnAttendance.Items.AddRange(new ToolStripItem[] { toolStripSplitButton18 });
-            btnAttendance.Location = new Point(147, 2);
+            btnAttendance.Location = new Point(15, 1);
             btnAttendance.Name = "toolStripEx24";
             btnAttendance.Office12Mode = false;
             btnAttendance.Padding = new Padding(3, 0, 0, 0);
             btnAttendance.RightToLeft = RightToLeft.No;
-            btnAttendance.Size = new Size(152, 82);
+            btnAttendance.Size = new Size(13, 46);
             btnAttendance.TabIndex = 1;
             btnAttendance.ItemClicked += btnAttendance_ItemClicked;
             // 
@@ -1127,13 +1134,13 @@
             toolStripSplitButton18.Image = (Image)resources.GetObject("toolStripSplitButton18.Image");
             toolStripSplitButton18.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton18.Name = "toolStripSplitButton18";
-            toolStripSplitButton18.Size = new Size(143, 77);
+            toolStripSplitButton18.Size = new Size(106, 43);
             toolStripSplitButton18.Text = "Attendance";
             // 
             // btnAddNewAttendance
             // 
             btnAddNewAttendance.Name = "btnAddNewAttendance";
-            btnAddNewAttendance.Size = new Size(273, 34);
+            btnAddNewAttendance.Size = new Size(183, 22);
             btnAddNewAttendance.Text = "Add New Attendance";
             btnAddNewAttendance.DropDownItemClicked += btnAddNewAttendance_DropDownItemClicked;
             // 
@@ -1146,12 +1153,12 @@
             btnAllowancesOrBenefits.Image = null;
             btnAllowancesOrBenefits.ImageScalingSize = new Size(24, 24);
             btnAllowancesOrBenefits.Items.AddRange(new ToolStripItem[] { toolStripSplitButton19 });
-            btnAllowancesOrBenefits.Location = new Point(301, 2);
+            btnAllowancesOrBenefits.Location = new Point(30, 1);
             btnAllowancesOrBenefits.Name = "toolStripEx25";
             btnAllowancesOrBenefits.Office12Mode = false;
             btnAllowancesOrBenefits.Padding = new Padding(3, 0, 0, 0);
             btnAllowancesOrBenefits.RightToLeft = RightToLeft.No;
-            btnAllowancesOrBenefits.Size = new Size(215, 82);
+            btnAllowancesOrBenefits.Size = new Size(13, 46);
             btnAllowancesOrBenefits.TabIndex = 2;
             btnAllowancesOrBenefits.ItemClicked += btnAllowancesOrBenefits_ItemClicked;
             // 
@@ -1161,13 +1168,13 @@
             toolStripSplitButton19.Image = (Image)resources.GetObject("toolStripSplitButton19.Image");
             toolStripSplitButton19.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton19.Name = "toolStripSplitButton19";
-            toolStripSplitButton19.Size = new Size(206, 77);
+            toolStripSplitButton19.Size = new Size(150, 43);
             toolStripSplitButton19.Text = "Allowances/Benefits";
             // 
             // btnNewAllowanceOrBenefit
             // 
             btnNewAllowanceOrBenefit.Name = "btnNewAllowanceOrBenefit";
-            btnNewAllowanceOrBenefit.Size = new Size(286, 34);
+            btnNewAllowanceOrBenefit.Size = new Size(193, 22);
             btnNewAllowanceOrBenefit.Text = "New Allowance/Benefit";
             btnNewAllowanceOrBenefit.DropDownItemClicked += btnNewAllowanceOrBenefit_DropDownItemClicked;
             // 
@@ -1180,12 +1187,12 @@
             btnDeductionsOrContributions.Image = null;
             btnDeductionsOrContributions.ImageScalingSize = new Size(24, 24);
             btnDeductionsOrContributions.Items.AddRange(new ToolStripItem[] { toolStripSplitButton20 });
-            btnDeductionsOrContributions.Location = new Point(518, 2);
+            btnDeductionsOrContributions.Location = new Point(45, 1);
             btnDeductionsOrContributions.Name = "toolStripEx26";
             btnDeductionsOrContributions.Office12Mode = false;
             btnDeductionsOrContributions.Padding = new Padding(3, 0, 0, 0);
             btnDeductionsOrContributions.RightToLeft = RightToLeft.No;
-            btnDeductionsOrContributions.Size = new Size(261, 82);
+            btnDeductionsOrContributions.Size = new Size(13, 46);
             btnDeductionsOrContributions.TabIndex = 3;
             btnDeductionsOrContributions.ItemClicked += btnDeductionsOrContributions_ItemClicked;
             // 
@@ -1195,13 +1202,13 @@
             toolStripSplitButton20.Image = (Image)resources.GetObject("toolStripSplitButton20.Image");
             toolStripSplitButton20.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton20.Name = "toolStripSplitButton20";
-            toolStripSplitButton20.Size = new Size(252, 77);
+            toolStripSplitButton20.Size = new Size(182, 43);
             toolStripSplitButton20.Text = "Deductions/Contributions";
             // 
             // btnNewDeduction
             // 
             btnNewDeduction.Name = "btnNewDeduction";
-            btnNewDeduction.Size = new Size(228, 34);
+            btnNewDeduction.Size = new Size(154, 22);
             btnNewDeduction.Text = "New Deduction";
             btnNewDeduction.DropDownItemClicked += btnNewDeduction_DropDownItemClicked;
             // 
@@ -1214,12 +1221,12 @@
             btnPayrollRun.Image = null;
             btnPayrollRun.ImageScalingSize = new Size(24, 24);
             btnPayrollRun.Items.AddRange(new ToolStripItem[] { toolStripSplitButton21 });
-            btnPayrollRun.Location = new Point(781, 2);
+            btnPayrollRun.Location = new Point(60, 1);
             btnPayrollRun.Name = "toolStripEx27";
             btnPayrollRun.Office12Mode = false;
             btnPayrollRun.Padding = new Padding(3, 0, 0, 0);
             btnPayrollRun.RightToLeft = RightToLeft.No;
-            btnPayrollRun.Size = new Size(149, 82);
+            btnPayrollRun.Size = new Size(13, 46);
             btnPayrollRun.TabIndex = 4;
             btnPayrollRun.ItemClicked += btnPayrollRun_ItemClicked;
             // 
@@ -1229,20 +1236,20 @@
             toolStripSplitButton21.Image = (Image)resources.GetObject("toolStripSplitButton21.Image");
             toolStripSplitButton21.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton21.Name = "toolStripSplitButton21";
-            toolStripSplitButton21.Size = new Size(140, 77);
+            toolStripSplitButton21.Size = new Size(105, 43);
             toolStripSplitButton21.Text = "Payroll Run";
             // 
             // btnProcessPayroll
             // 
             btnProcessPayroll.Name = "btnProcessPayroll";
-            btnProcessPayroll.Size = new Size(222, 34);
+            btnProcessPayroll.Size = new Size(149, 22);
             btnProcessPayroll.Text = "Process Payroll";
             btnProcessPayroll.DropDownItemClicked += btnProcessPayroll_DropDownItemClicked;
             // 
             // btnPostToLedger
             // 
             btnPostToLedger.Name = "btnPostToLedger";
-            btnPostToLedger.Size = new Size(222, 34);
+            btnPostToLedger.Size = new Size(149, 22);
             btnPostToLedger.Text = "Post to Ledger";
             btnPostToLedger.DropDownItemClicked += btnPostToLedger_DropDownItemClicked;
             // 
@@ -1255,12 +1262,12 @@
             btnPaylips.Image = null;
             btnPaylips.ImageScalingSize = new Size(24, 24);
             btnPaylips.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton2 });
-            btnPaylips.Location = new Point(932, 2);
+            btnPaylips.Location = new Point(75, 1);
             btnPaylips.Name = "toolStripEx28";
             btnPaylips.Office12Mode = false;
             btnPaylips.Padding = new Padding(3, 0, 0, 0);
             btnPaylips.RightToLeft = RightToLeft.No;
-            btnPaylips.Size = new Size(119, 82);
+            btnPaylips.Size = new Size(13, 46);
             btnPaylips.TabIndex = 5;
             btnPaylips.ItemClicked += btnPaylips_ItemClicked;
             // 
@@ -1270,13 +1277,13 @@
             toolStripDropDownButton2.Image = (Image)resources.GetObject("toolStripDropDownButton2.Image");
             toolStripDropDownButton2.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            toolStripDropDownButton2.Size = new Size(110, 77);
+            toolStripDropDownButton2.Size = new Size(84, 43);
             toolStripDropDownButton2.Text = "Payslips";
             // 
             // btnGenerateOrPrintPayslips
             // 
             btnGenerateOrPrintPayslips.Name = "btnGenerateOrPrintPayslips";
-            btnGenerateOrPrintPayslips.Size = new Size(286, 34);
+            btnGenerateOrPrintPayslips.Size = new Size(192, 22);
             btnGenerateOrPrintPayslips.Text = "Generate/Print Payslips";
             btnGenerateOrPrintPayslips.DropDownItemClicked += btnGenerateOrPrintPayslips_DropDownItemClicked;
             // 
@@ -1289,12 +1296,12 @@
             btnTax.Image = null;
             btnTax.ImageScalingSize = new Size(24, 24);
             btnTax.Items.AddRange(new ToolStripItem[] { toolStripSplitButton22 });
-            btnTax.Location = new Point(1053, 2);
+            btnTax.Location = new Point(90, 1);
             btnTax.Name = "toolStripEx29";
             btnTax.Office12Mode = false;
             btnTax.Padding = new Padding(3, 0, 0, 0);
             btnTax.RightToLeft = RightToLeft.No;
-            btnTax.Size = new Size(88, 82);
+            btnTax.Size = new Size(13, 46);
             btnTax.TabIndex = 6;
             btnTax.ItemClicked += btnTax_ItemClicked;
             // 
@@ -1304,13 +1311,13 @@
             toolStripSplitButton22.Image = (Image)resources.GetObject("toolStripSplitButton22.Image");
             toolStripSplitButton22.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton22.Name = "toolStripSplitButton22";
-            toolStripSplitButton22.Size = new Size(79, 77);
+            toolStripSplitButton22.Size = new Size(63, 43);
             toolStripSplitButton22.Text = "Tax";
             // 
             // btnNewTax
             // 
             btnNewTax.Name = "btnNewTax";
-            btnNewTax.Size = new Size(173, 34);
+            btnNewTax.Size = new Size(116, 22);
             btnNewTax.Text = "New Tax";
             btnNewTax.DropDownItemClicked += btnNewTax_DropDownItemClicked;
             // 
@@ -1322,12 +1329,14 @@
             // 
             toolStripTabItem9.Panel.Controls.Add(btnProjectDashboard);
             toolStripTabItem9.Panel.Controls.Add(btnProjects);
+            toolStripTabItem9.Panel.Margin = new Padding(3, 0, 3, 0);
             toolStripTabItem9.Panel.Name = "ribbonPanel7";
+            toolStripTabItem9.Panel.Padding = new Padding(0, 1, 23, 0);
             toolStripTabItem9.Panel.ScrollPosition = 0;
             toolStripTabItem9.Panel.TabIndex = 12;
             toolStripTabItem9.Panel.Text = "Projects";
             toolStripTabItem9.Position = 6;
-            toolStripTabItem9.Size = new Size(76, 29);
+            toolStripTabItem9.Size = new Size(63, 25);
             ribbonControlMain.TabGroups.SetTabGroup(toolStripTabItem9, null);
             toolStripTabItem9.Tag = "9";
             toolStripTabItem9.Text = "Projects";
@@ -1346,7 +1355,7 @@
             btnProjectDashboard.Office12Mode = false;
             btnProjectDashboard.Padding = new Padding(3, 0, 0, 0);
             btnProjectDashboard.RightToLeft = RightToLeft.No;
-            btnProjectDashboard.Size = new Size(130, 83);
+            btnProjectDashboard.Size = new Size(13, 46);
             btnProjectDashboard.TabIndex = 3;
             btnProjectDashboard.ItemClicked += btnProjectDashboard_ItemClicked;
             // 
@@ -1355,7 +1364,7 @@
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(121, 78);
+            toolStripButton1.Size = new Size(92, 43);
             toolStripButton1.Text = "Dashboard";
             // 
             // btnProjects
@@ -1367,12 +1376,12 @@
             btnProjects.Image = null;
             btnProjects.ImageScalingSize = new Size(24, 24);
             btnProjects.Items.AddRange(new ToolStripItem[] { toolStripSplitButton23 });
-            btnProjects.Location = new Point(132, 1);
+            btnProjects.Location = new Point(15, 1);
             btnProjects.Name = "toolStripEx30";
             btnProjects.Office12Mode = false;
             btnProjects.Padding = new Padding(3, 0, 0, 0);
             btnProjects.RightToLeft = RightToLeft.No;
-            btnProjects.Size = new Size(124, 83);
+            btnProjects.Size = new Size(13, 46);
             btnProjects.TabIndex = 1;
             btnProjects.ItemClicked += btnProjects_ItemClicked;
             // 
@@ -1382,13 +1391,13 @@
             toolStripSplitButton23.Image = (Image)resources.GetObject("toolStripSplitButton23.Image");
             toolStripSplitButton23.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton23.Name = "toolStripSplitButton23";
-            toolStripSplitButton23.Size = new Size(115, 78);
+            toolStripSplitButton23.Size = new Size(87, 43);
             toolStripSplitButton23.Text = "Projects";
             // 
             // btnNewProject
             // 
             btnNewProject.Name = "btnNewProject";
-            btnNewProject.Size = new Size(202, 34);
+            btnNewProject.Size = new Size(135, 22);
             btnNewProject.Text = "New Project";
             btnNewProject.DropDownItemClicked += btnNewProject_DropDownItemClicked;
             // 
@@ -1403,12 +1412,14 @@
             toolStripTabItem10.Panel.Controls.Add(btnPurchasingReport);
             toolStripTabItem10.Panel.Controls.Add(btnInventoryReport);
             toolStripTabItem10.Panel.Controls.Add(btnPayrollReport);
+            toolStripTabItem10.Panel.Margin = new Padding(3, 0, 3, 0);
             toolStripTabItem10.Panel.Name = "ribbonPanel8";
+            toolStripTabItem10.Panel.Padding = new Padding(0, 1, 23, 0);
             toolStripTabItem10.Panel.ScrollPosition = 0;
             toolStripTabItem10.Panel.TabIndex = 13;
             toolStripTabItem10.Panel.Text = "Reports";
             toolStripTabItem10.Position = 7;
-            toolStripTabItem10.Size = new Size(74, 29);
+            toolStripTabItem10.Size = new Size(63, 25);
             ribbonControlMain.TabGroups.SetTabGroup(toolStripTabItem10, null);
             toolStripTabItem10.Tag = "10";
             toolStripTabItem10.Text = "Reports";
@@ -1427,7 +1438,7 @@
             btnFinancialReport.Office12Mode = false;
             btnFinancialReport.Padding = new Padding(3, 0, 0, 0);
             btnFinancialReport.RightToLeft = RightToLeft.No;
-            btnFinancialReport.Size = new Size(127, 83);
+            btnFinancialReport.Size = new Size(99, 46);
             btnFinancialReport.TabIndex = 1;
             // 
             // toolStripDropDownButton3
@@ -1436,27 +1447,27 @@
             toolStripDropDownButton3.Image = (Image)resources.GetObject("toolStripDropDownButton3.Image");
             toolStripDropDownButton3.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton3.Name = "toolStripDropDownButton3";
-            toolStripDropDownButton3.Size = new Size(118, 78);
+            toolStripDropDownButton3.Size = new Size(90, 43);
             toolStripDropDownButton3.Text = "Financial";
             // 
             // btnBalanceSheet
             // 
             btnBalanceSheet.Name = "btnBalanceSheet";
-            btnBalanceSheet.Size = new Size(250, 34);
+            btnBalanceSheet.Size = new Size(166, 22);
             btnBalanceSheet.Text = "Balance Sheet";
             btnBalanceSheet.DropDownItemClicked += btnBalanceSheet_DropDownItemClicked;
             // 
             // btnIncomeStatement
             // 
             btnIncomeStatement.Name = "btnIncomeStatement";
-            btnIncomeStatement.Size = new Size(250, 34);
+            btnIncomeStatement.Size = new Size(166, 22);
             btnIncomeStatement.Text = "Income Statement";
             btnIncomeStatement.DropDownItemClicked += btnIncomeStatement_DropDownItemClicked;
             // 
             // btnTrialBalance
             // 
             btnTrialBalance.Name = "btnTrialBalance";
-            btnTrialBalance.Size = new Size(250, 34);
+            btnTrialBalance.Size = new Size(166, 22);
             btnTrialBalance.Text = "Trial Balance";
             btnTrialBalance.DropDownItemClicked += btnTrialBalance_DropDownItemClicked;
             // 
@@ -1469,12 +1480,12 @@
             btnSalesReport.Image = null;
             btnSalesReport.ImageScalingSize = new Size(24, 24);
             btnSalesReport.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton4 });
-            btnSalesReport.Location = new Point(129, 1);
+            btnSalesReport.Location = new Point(101, 1);
             btnSalesReport.Name = "toolStripEx32";
             btnSalesReport.Office12Mode = false;
             btnSalesReport.Padding = new Padding(3, 0, 0, 0);
             btnSalesReport.RightToLeft = RightToLeft.No;
-            btnSalesReport.Size = new Size(99, 83);
+            btnSalesReport.Size = new Size(79, 46);
             btnSalesReport.TabIndex = 2;
             // 
             // toolStripDropDownButton4
@@ -1483,27 +1494,27 @@
             toolStripDropDownButton4.Image = (Image)resources.GetObject("toolStripDropDownButton4.Image");
             toolStripDropDownButton4.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton4.Name = "toolStripDropDownButton4";
-            toolStripDropDownButton4.Size = new Size(90, 78);
+            toolStripDropDownButton4.Size = new Size(70, 43);
             toolStripDropDownButton4.Text = "Sales";
             // 
             // btnSalesReports
             // 
             btnSalesReports.Name = "btnSalesReports";
-            btnSalesReports.Size = new Size(274, 34);
+            btnSalesReports.Size = new Size(183, 22);
             btnSalesReports.Text = "Sales Reports";
             btnSalesReports.DropDownItemClicked += btnSalesReports_DropDownItemClicked;
             // 
             // btnTopProducts
             // 
             btnTopProducts.Name = "btnTopProducts";
-            btnTopProducts.Size = new Size(274, 34);
+            btnTopProducts.Size = new Size(183, 22);
             btnTopProducts.Text = "Top Products";
             btnTopProducts.DropDownItemClicked += btnTopProducts_DropDownItemClicked;
             // 
             // btnCustomerStatements
             // 
             btnCustomerStatements.Name = "btnCustomerStatements";
-            btnCustomerStatements.Size = new Size(274, 34);
+            btnCustomerStatements.Size = new Size(183, 22);
             btnCustomerStatements.Text = "Customer Statements";
             btnCustomerStatements.DropDownItemClicked += btnCustomerStatements_DropDownItemClicked;
             // 
@@ -1516,12 +1527,12 @@
             btnPurchasingReport.Image = null;
             btnPurchasingReport.ImageScalingSize = new Size(24, 24);
             btnPurchasingReport.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton5 });
-            btnPurchasingReport.Location = new Point(230, 1);
+            btnPurchasingReport.Location = new Point(182, 1);
             btnPurchasingReport.Name = "toolStripEx33";
             btnPurchasingReport.Office12Mode = false;
             btnPurchasingReport.Padding = new Padding(3, 0, 0, 0);
             btnPurchasingReport.RightToLeft = RightToLeft.No;
-            btnPurchasingReport.Size = new Size(145, 83);
+            btnPurchasingReport.Size = new Size(110, 46);
             btnPurchasingReport.TabIndex = 3;
             // 
             // toolStripDropDownButton5
@@ -1530,20 +1541,20 @@
             toolStripDropDownButton5.Image = (Image)resources.GetObject("toolStripDropDownButton5.Image");
             toolStripDropDownButton5.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton5.Name = "toolStripDropDownButton5";
-            toolStripDropDownButton5.Size = new Size(136, 78);
+            toolStripDropDownButton5.Size = new Size(101, 43);
             toolStripDropDownButton5.Text = "Purchasing";
             // 
             // btnPurchaseReports
             // 
             btnPurchaseReports.Name = "btnPurchaseReports";
-            btnPurchaseReports.Size = new Size(255, 34);
+            btnPurchaseReports.Size = new Size(171, 22);
             btnPurchaseReports.Text = "Purchase Reports";
             btnPurchaseReports.DropDownItemClicked += btnPurchaseReports_DropDownItemClicked;
             // 
             // btnVendorStatements
             // 
             btnVendorStatements.Name = "btnVendorStatements";
-            btnVendorStatements.Size = new Size(255, 34);
+            btnVendorStatements.Size = new Size(171, 22);
             btnVendorStatements.Text = "Vendor Statements";
             btnVendorStatements.DropDownItemClicked += btnVendorStatements_DropDownItemClicked;
             // 
@@ -1556,12 +1567,12 @@
             btnInventoryReport.Image = null;
             btnInventoryReport.ImageScalingSize = new Size(24, 24);
             btnInventoryReport.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton6 });
-            btnInventoryReport.Location = new Point(377, 1);
+            btnInventoryReport.Location = new Point(294, 1);
             btnInventoryReport.Name = "toolStripEx34";
             btnInventoryReport.Office12Mode = false;
             btnInventoryReport.Padding = new Padding(3, 0, 0, 0);
             btnInventoryReport.RightToLeft = RightToLeft.No;
-            btnInventoryReport.Size = new Size(133, 83);
+            btnInventoryReport.Size = new Size(101, 46);
             btnInventoryReport.TabIndex = 4;
             // 
             // toolStripDropDownButton6
@@ -1570,20 +1581,20 @@
             toolStripDropDownButton6.Image = (Image)resources.GetObject("toolStripDropDownButton6.Image");
             toolStripDropDownButton6.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton6.Name = "toolStripDropDownButton6";
-            toolStripDropDownButton6.Size = new Size(124, 78);
+            toolStripDropDownButton6.Size = new Size(92, 43);
             toolStripDropDownButton6.Text = "Inventory";
             // 
             // btnInventoryValuation
             // 
             btnInventoryValuation.Name = "btnInventoryValuation";
-            btnInventoryValuation.Size = new Size(259, 34);
+            btnInventoryValuation.Size = new Size(174, 22);
             btnInventoryValuation.Text = "Inventory Valuation";
             btnInventoryValuation.DropDownItemClicked += btnInventoryValuation_DropDownItemClicked;
             // 
             // btnStockReports
             // 
             btnStockReports.Name = "btnStockReports";
-            btnStockReports.Size = new Size(259, 34);
+            btnStockReports.Size = new Size(174, 22);
             btnStockReports.Text = "Stock Reports";
             btnStockReports.DropDownItemClicked += btnStockReports_DropDownItemClicked;
             // 
@@ -1596,12 +1607,12 @@
             btnPayrollReport.Image = null;
             btnPayrollReport.ImageScalingSize = new Size(24, 24);
             btnPayrollReport.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton7 });
-            btnPayrollReport.Location = new Point(512, 1);
+            btnPayrollReport.Location = new Point(397, 1);
             btnPayrollReport.Name = "toolStripEx35";
             btnPayrollReport.Office12Mode = false;
             btnPayrollReport.Padding = new Padding(3, 0, 0, 0);
             btnPayrollReport.RightToLeft = RightToLeft.No;
-            btnPayrollReport.Size = new Size(111, 83);
+            btnPayrollReport.Size = new Size(87, 46);
             btnPayrollReport.TabIndex = 5;
             // 
             // toolStripDropDownButton7
@@ -1610,20 +1621,20 @@
             toolStripDropDownButton7.Image = (Image)resources.GetObject("toolStripDropDownButton7.Image");
             toolStripDropDownButton7.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton7.Name = "toolStripDropDownButton7";
-            toolStripDropDownButton7.Size = new Size(102, 78);
+            toolStripDropDownButton7.Size = new Size(78, 43);
             toolStripDropDownButton7.Text = "Payroll";
             // 
             // btnPayrollSummaries
             // 
             btnPayrollSummaries.Name = "btnPayrollSummaries";
-            btnPayrollSummaries.Size = new Size(270, 34);
+            btnPayrollSummaries.Size = new Size(184, 22);
             btnPayrollSummaries.Text = "Payroll Summaries";
             btnPayrollSummaries.DropDownItemClicked += btnPayrollSummaries_DropDownItemClicked;
             // 
             // btnContributionReports
             // 
             btnContributionReports.Name = "btnContributionReports";
-            btnContributionReports.Size = new Size(270, 34);
+            btnContributionReports.Size = new Size(184, 22);
             btnContributionReports.Text = "Contribution Reports";
             btnContributionReports.DropDownItemClicked += btnContributionReports_DropDownItemClicked;
             // 
@@ -1639,12 +1650,14 @@
             btnThinkEE.Panel.Controls.Add(btnExamFormat);
             btnThinkEE.Panel.Controls.Add(btnExam);
             btnThinkEE.Panel.Controls.Add(btnAvailableExams);
+            btnThinkEE.Panel.Margin = new Padding(3, 0, 3, 0);
             btnThinkEE.Panel.Name = "ribbonPanel9";
+            btnThinkEE.Panel.Padding = new Padding(0, 1, 23, 0);
             btnThinkEE.Panel.ScrollPosition = 0;
             btnThinkEE.Panel.TabIndex = 7;
             btnThinkEE.Panel.Text = "Review Center";
             btnThinkEE.Position = 8;
-            btnThinkEE.Size = new Size(124, 29);
+            btnThinkEE.Size = new Size(96, 25);
             ribbonControlMain.TabGroups.SetTabGroup(btnThinkEE, null);
             btnThinkEE.Tag = "5";
             btnThinkEE.Text = "Review Center";
@@ -1664,7 +1677,7 @@
             btnThinkEEDashboard.Office12Mode = false;
             btnThinkEEDashboard.Padding = new Padding(3, 0, 0, 0);
             btnThinkEEDashboard.RightToLeft = RightToLeft.No;
-            btnThinkEEDashboard.Size = new Size(136, 83);
+            btnThinkEEDashboard.Size = new Size(13, 46);
             btnThinkEEDashboard.TabIndex = 8;
             // 
             // toolStripButton39
@@ -1672,7 +1685,7 @@
             toolStripButton39.Image = (Image)resources.GetObject("toolStripButton39.Image");
             toolStripButton39.ImageTransparentColor = Color.Magenta;
             toolStripButton39.Name = "toolStripButton39";
-            toolStripButton39.Size = new Size(127, 78);
+            toolStripButton39.Size = new Size(98, 43);
             toolStripButton39.Text = "Dashboard";
             // 
             // btnReviewTopic
@@ -1684,12 +1697,12 @@
             btnReviewTopic.Image = null;
             btnReviewTopic.ImageScalingSize = new Size(30, 30);
             btnReviewTopic.Items.AddRange(new ToolStripItem[] { toolStripButton33 });
-            btnReviewTopic.Location = new Point(138, 1);
+            btnReviewTopic.Location = new Point(15, 1);
             btnReviewTopic.Name = "btnReviewTopic";
             btnReviewTopic.Office12Mode = false;
             btnReviewTopic.Padding = new Padding(3, 0, 0, 0);
             btnReviewTopic.RightToLeft = RightToLeft.No;
-            btnReviewTopic.Size = new Size(149, 83);
+            btnReviewTopic.Size = new Size(13, 46);
             btnReviewTopic.TabIndex = 1;
             btnReviewTopic.Click += btnReviewTopic_Click;
             // 
@@ -1698,7 +1711,7 @@
             toolStripButton33.Image = (Image)resources.GetObject("toolStripButton33.Image");
             toolStripButton33.ImageTransparentColor = Color.Magenta;
             toolStripButton33.Name = "toolStripButton33";
-            toolStripButton33.Size = new Size(140, 78);
+            toolStripButton33.Size = new Size(107, 43);
             toolStripButton33.Text = "Review Topic";
             // 
             // btnExamTopic
@@ -1710,12 +1723,12 @@
             btnExamTopic.Image = null;
             btnExamTopic.ImageScalingSize = new Size(30, 30);
             btnExamTopic.Items.AddRange(new ToolStripItem[] { toolStripButton34 });
-            btnExamTopic.Location = new Point(289, 1);
+            btnExamTopic.Location = new Point(30, 1);
             btnExamTopic.Name = "btnExamTopic";
             btnExamTopic.Office12Mode = false;
             btnExamTopic.Padding = new Padding(3, 0, 0, 0);
             btnExamTopic.RightToLeft = RightToLeft.No;
-            btnExamTopic.Size = new Size(138, 83);
+            btnExamTopic.Size = new Size(13, 46);
             btnExamTopic.TabIndex = 2;
             btnExamTopic.Click += btnExamTopic_Click;
             // 
@@ -1724,7 +1737,7 @@
             toolStripButton34.Image = (Image)resources.GetObject("toolStripButton34.Image");
             toolStripButton34.ImageTransparentColor = Color.Magenta;
             toolStripButton34.Name = "toolStripButton34";
-            toolStripButton34.Size = new Size(129, 78);
+            toolStripButton34.Size = new Size(97, 43);
             toolStripButton34.Text = "Exam Topic";
             // 
             // btnExamFormat
@@ -1736,12 +1749,12 @@
             btnExamFormat.Image = null;
             btnExamFormat.ImageScalingSize = new Size(30, 30);
             btnExamFormat.Items.AddRange(new ToolStripItem[] { toolStripButton35 });
-            btnExamFormat.Location = new Point(429, 1);
+            btnExamFormat.Location = new Point(45, 1);
             btnExamFormat.Name = "btnExamFormat";
             btnExamFormat.Office12Mode = false;
             btnExamFormat.Padding = new Padding(3, 0, 0, 0);
             btnExamFormat.RightToLeft = RightToLeft.No;
-            btnExamFormat.Size = new Size(153, 83);
+            btnExamFormat.Size = new Size(13, 46);
             btnExamFormat.TabIndex = 3;
             btnExamFormat.Click += btnExamFormat_Click;
             // 
@@ -1750,7 +1763,7 @@
             toolStripButton35.Image = (Image)resources.GetObject("toolStripButton35.Image");
             toolStripButton35.ImageTransparentColor = Color.Magenta;
             toolStripButton35.Name = "toolStripButton35";
-            toolStripButton35.Size = new Size(144, 78);
+            toolStripButton35.Size = new Size(106, 43);
             toolStripButton35.Text = "Exam Format";
             // 
             // btnExam
@@ -1762,12 +1775,12 @@
             btnExam.Image = null;
             btnExam.ImageScalingSize = new Size(30, 30);
             btnExam.Items.AddRange(new ToolStripItem[] { toolStripButton36 });
-            btnExam.Location = new Point(584, 1);
+            btnExam.Location = new Point(60, 1);
             btnExam.Name = "btnExam";
             btnExam.Office12Mode = false;
             btnExam.Padding = new Padding(3, 0, 0, 0);
             btnExam.RightToLeft = RightToLeft.No;
-            btnExam.Size = new Size(94, 83);
+            btnExam.Size = new Size(13, 46);
             btnExam.TabIndex = 4;
             btnExam.Click += btnExam_Click;
             // 
@@ -1776,7 +1789,7 @@
             toolStripButton36.Image = (Image)resources.GetObject("toolStripButton36.Image");
             toolStripButton36.ImageTransparentColor = Color.Magenta;
             toolStripButton36.Name = "toolStripButton36";
-            toolStripButton36.Size = new Size(85, 78);
+            toolStripButton36.Size = new Size(67, 43);
             toolStripButton36.Text = "Exam";
             // 
             // btnAvailableExams
@@ -1788,12 +1801,12 @@
             btnAvailableExams.Image = null;
             btnAvailableExams.ImageScalingSize = new Size(30, 30);
             btnAvailableExams.Items.AddRange(new ToolStripItem[] { toolStripButton38 });
-            btnAvailableExams.Location = new Point(680, 1);
+            btnAvailableExams.Location = new Point(75, 1);
             btnAvailableExams.Name = "btnAvailableExams";
             btnAvailableExams.Office12Mode = false;
             btnAvailableExams.Padding = new Padding(3, 0, 0, 0);
             btnAvailableExams.RightToLeft = RightToLeft.No;
-            btnAvailableExams.Size = new Size(174, 83);
+            btnAvailableExams.Size = new Size(13, 46);
             btnAvailableExams.TabIndex = 6;
             btnAvailableExams.Click += btnAvailableExam_Click;
             // 
@@ -1802,7 +1815,7 @@
             toolStripButton38.Image = (Image)resources.GetObject("toolStripButton38.Image");
             toolStripButton38.ImageTransparentColor = Color.Magenta;
             toolStripButton38.Name = "toolStripButton38";
-            toolStripButton38.Size = new Size(165, 78);
+            toolStripButton38.Size = new Size(121, 43);
             toolStripButton38.Text = "Available Exams";
             // 
             // toolStripTabItem3
@@ -1815,14 +1828,12 @@
             // 
             toolStripTabItem3.Panel.Controls.Add(btnProfile);
             toolStripTabItem3.Panel.Controls.Add(btnRegisterAccount);
-            toolStripTabItem3.Panel.Margin = new Padding(6, 0, 6, 0);
             toolStripTabItem3.Panel.Name = "ribbonPanel10";
-            toolStripTabItem3.Panel.Padding = new Padding(0, 2, 52, 0);
             toolStripTabItem3.Panel.ScrollPosition = 0;
             toolStripTabItem3.Panel.TabIndex = 6;
             toolStripTabItem3.Panel.Text = "Accounts";
             toolStripTabItem3.Position = 9;
-            toolStripTabItem3.Size = new Size(86, 29);
+            toolStripTabItem3.Size = new Size(70, 25);
             ribbonControlMain.TabGroups.SetTabGroup(toolStripTabItem3, null);
             toolStripTabItem3.Tag = "3";
             toolStripTabItem3.Text = "Accounts";
@@ -1837,14 +1848,14 @@
             btnProfile.Image = null;
             btnProfile.ImageScalingSize = new Size(30, 30);
             btnProfile.Items.AddRange(new ToolStripItem[] { toolStripButton23 });
-            btnProfile.Location = new Point(0, 2);
-            btnProfile.Margin = new Padding(2, 0, 2, 0);
+            btnProfile.Location = new Point(0, 1);
             btnProfile.Name = "btnProfile";
             btnProfile.Office12Mode = false;
             btnProfile.Padding = new Padding(3, 0, 0, 0);
             btnProfile.RightToLeft = RightToLeft.No;
-            btnProfile.Size = new Size(78, 82);
+            btnProfile.Size = new Size(83, 46);
             btnProfile.TabIndex = 1;
+            btnProfile.ItemClicked += btnProfile_ItemClicked;
             btnProfile.Click += btnProfile_Click;
             // 
             // toolStripButton23
@@ -1852,7 +1863,7 @@
             toolStripButton23.Image = (Image)resources.GetObject("toolStripButton23.Image");
             toolStripButton23.ImageTransparentColor = Color.Magenta;
             toolStripButton23.Name = "toolStripButton23";
-            toolStripButton23.Size = new Size(92, 34);
+            toolStripButton23.Size = new Size(74, 43);
             toolStripButton23.Text = "Profile";
             // 
             // btnRegisterAccount
@@ -1865,13 +1876,12 @@
             btnRegisterAccount.Image = null;
             btnRegisterAccount.ImageScalingSize = new Size(30, 30);
             btnRegisterAccount.Items.AddRange(new ToolStripItem[] { toolStripButton21 });
-            btnRegisterAccount.Location = new Point(80, 2);
-            btnRegisterAccount.Margin = new Padding(2, 0, 2, 0);
+            btnRegisterAccount.Location = new Point(85, 1);
             btnRegisterAccount.Name = "btnRegisterAccount";
             btnRegisterAccount.Office12Mode = false;
             btnRegisterAccount.Padding = new Padding(3, 0, 0, 0);
             btnRegisterAccount.RightToLeft = RightToLeft.No;
-            btnRegisterAccount.Size = new Size(78, 82);
+            btnRegisterAccount.Size = new Size(137, 46);
             btnRegisterAccount.TabIndex = 3;
             btnRegisterAccount.Click += btnRegisterAccount_Click;
             // 
@@ -1880,7 +1890,7 @@
             toolStripButton21.Image = (Image)resources.GetObject("toolStripButton21.Image");
             toolStripButton21.ImageTransparentColor = Color.Magenta;
             toolStripButton21.Name = "toolStripButton21";
-            toolStripButton21.Size = new Size(173, 77);
+            toolStripButton21.Size = new Size(128, 43);
             toolStripButton21.Text = "Register Account";
             // 
             // toolStripTabItem11
@@ -1890,12 +1900,14 @@
             // 
             // ribbonControlMain.ribbonPanel11
             // 
+            toolStripTabItem11.Panel.Margin = new Padding(3, 0, 3, 0);
             toolStripTabItem11.Panel.Name = "ribbonPanel11";
+            toolStripTabItem11.Panel.Padding = new Padding(0, 1, 23, 0);
             toolStripTabItem11.Panel.ScrollPosition = 0;
             toolStripTabItem11.Panel.TabIndex = 14;
             toolStripTabItem11.Panel.Text = "Admin/Settings";
             toolStripTabItem11.Position = 10;
-            toolStripTabItem11.Size = new Size(134, 29);
+            toolStripTabItem11.Size = new Size(102, 25);
             ribbonControlMain.TabGroups.SetTabGroup(toolStripTabItem11, null);
             toolStripTabItem11.Tag = "11";
             toolStripTabItem11.Text = "Admin/Settings";
@@ -1925,7 +1937,7 @@
             // editInformationToolStripMenuItem
             // 
             editInformationToolStripMenuItem.Name = "editInformationToolStripMenuItem";
-            editInformationToolStripMenuItem.Size = new Size(243, 34);
+            editInformationToolStripMenuItem.Size = new Size(160, 22);
             editInformationToolStripMenuItem.Text = "Edit Information";
             // 
             // stockMonitoringToolStripMenuItem
@@ -1997,12 +2009,13 @@
             // 
             // MainView
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(1350, 729);
+            ClientSize = new Size(900, 486);
             Controls.Add(ribbonControlMain);
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
+            Margin = new Padding(2);
             Name = "MainView";
             StartPosition = FormStartPosition.CenterScreen;
             Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;

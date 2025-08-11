@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RavenTechV2.Core.Models.MasterData;
+using RavenTechV2.Core.Enums;
 
 namespace RavenTechV2.Core.Models.Inventory;
 public class Product
@@ -16,7 +16,10 @@ public class Product
     public string ProductName { get; set; }
     public string ProductCode { get; set; }
     public string Description { get; set; }
-    public string ProductType { get; set; }
+    public ProductType ProductType { get; set; }
+    public int CategoryId { get; set; }
+    [ForeignKey("CategoryId")]
+    public Category Category { get; set; }
     public string Brand { get; set; }
     public string Color { get; set; }
     public string Size { get; set; }
@@ -29,5 +32,5 @@ public class Product
     public int BranchId { get; set; }
     [ForeignKey("BranchId")]
     public Branch Branch { get; set; }
-    public bool IsActive { get; set; }
+    public bool IsActive { get; set; } = true;
 }
