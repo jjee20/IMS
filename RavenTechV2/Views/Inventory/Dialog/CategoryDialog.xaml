@@ -8,15 +8,16 @@
     Title="{Binding DialogTitle, Mode=OneWay}"
     PrimaryButtonText="Save"
     CloseButtonText="Cancel"
+    IsPrimaryButtonEnabled="{Binding IsFormValid}"
     DefaultButton="Primary">
 
     <Grid x:Name="ContentArea">
         <StackPanel Spacing="12">
-            <TextBlock Text="Name"/>
-            <TextBox Text="{Binding  Category.Name, Mode=TwoWay}" />
+            <TextBox Header="Name*" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Foreground="Red" Text="{Binding NameError}" />
 
-            <TextBlock Text="Description"/>
-            <TextBox Text="{Binding  Category.Description, Mode=TwoWay}" />
+            <TextBox Header="Description" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Foreground="Red" Text="{Binding DescriptionError}" />
         </StackPanel>
     </Grid>
 </ContentDialog>

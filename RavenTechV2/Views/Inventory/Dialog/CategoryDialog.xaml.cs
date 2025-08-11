@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using RavenTechV2.Core.Enums;
 using RavenTechV2.Core.Models.Inventory;
+using RavenTechV2.Core.Models.Inventory.ViewModels;
 using RavenTechV2.Core.Models.Sales;
 using RavenTechV2.Helpers;
 
@@ -25,17 +27,50 @@ public sealed partial class CategoryDialog : ContentDialog
     }
 }
 
-public partial class CategoryDialogViewModel : ObservableObject
+public partial class CategoryDialogViewModel : ValidatableViewModel
 {
     [ObservableProperty]
-    private Category category;
+    public int categoryId;
+    [ObservableProperty]
+    [Required(ErrorMessage = "Category name is required.")]
+    private string name;
+    public string NameError => GetError(nameof(Name));
 
     [ObservableProperty]
-    private string dialogTitle; 
+    public string description;
+    public string DescriptionError => GetError(nameof(Description));
+
+    [ObservableProperty]
+    private string dialogTitle;
+
+    [ObservableProperty]
+    private bool isFormValid;
 
     public CategoryDialogViewModel(Category entity, string title)
     {
-        Category = entity;
-        DialogTitle = title;
+        CategoryId = entity.CategoryId;
+        Name = entity.Name;
+        Description = entity.Description;
+    }
+
+    public void ToEntity(Category entity)
+    {
+        entity.CategoryId = CategoryId;
+        entity.Name = Name;
+        entity.Description = Description;
+    }
+
+    partial void OnNameChanged(string value)
+    {
+        ValidateAllProperties();
+        IsFormValid = !HasErrors;
+        OnPropertyChanged(nameof(NameError));
+    }
+
+    partial void OnDescriptionChanged(string value)
+    {
+        ValidateAllProperties();
+        IsFormValid = !HasErrors;
+        OnPropertyChanged(nameof(DescriptionError));
     }
 }
